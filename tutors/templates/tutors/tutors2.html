@@ -1,0 +1,269 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block head_title %}All Tutors{% endblock %}
+{% block head_style %}
+
+{% endblock %}
+
+{% block body_content %}
+  <!-- AVR Spacer Section -->
+  <section id="spacer-avr" class="section"></section><!-- End Spacer Title -->
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Portfolio</h2>
+      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+    </div><!-- End Section Title -->
+
+    <div class="container-fluid">
+
+      <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+          <li data-filter="*" class="filter-active">All</li>
+          <li data-filter=".filter-app">App</li>
+          <li data-filter=".filter-product">Product</li>
+          <li data-filter=".filter-branding">Branding</li>
+          <li data-filter=".filter-books">Books</li>
+        </ul><!-- End Portfolio Filters -->
+
+        <div class="row g-0 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/app-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/app-1.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/product-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/product-1.jpg' %}" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/branding-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/branding-1.jpg' %}" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/books-1.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/books-1.jpg' %}" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/app-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/app-2.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/product-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/product-2.jpg' %}" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/branding-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/branding-2.jpg' %}" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/books-2.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/books-2.jpg' %}" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/app-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/app-3.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/product-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/product-3.jpg' %}" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/branding-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/branding-3.jpg' %}" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+          <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+            <div class="portfolio-content h-100">
+              <img src="{% static 'tutors/assets/img/portfolio/books-3.jpg' %}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <a href="{% static 'tutors/assets/img/portfolio/books-3.jpg' %}" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+            </div>
+          </div><!-- End Portfolio Item -->
+
+        </div><!-- End Portfolio Container -->
+
+      </div>
+
+    </div>
+
+  </section><!-- /Portfolio Section -->
+
+  <!-- Recent Posts Section -->
+  <section id="recent-posts" class="recent-posts section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Recent Blog Posts</h2>
+      <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <article>
+
+            <div class="post-img">
+              <img src="{% static 'tutors/assets/img/blog/blog-1.jpg' %}" alt="" class="img-fluid">
+            </div>
+
+            <p class="post-category">Politics</p>
+
+            <h2 class="title">
+              <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+            </h2>
+
+            <div class="d-flex align-items-center">
+              <img src="{% static 'tutors/assets/img/blog/blog-author.jpg' %}" alt="" class="img-fluid post-author-img flex-shrink-0">
+              <div class="post-meta">
+                <p class="post-author">Maria Doe</p>
+                <p class="post-date">
+                  <time datetime="2022-01-01">Jan 1, 2022</time>
+                </p>
+              </div>
+            </div>
+
+          </article>
+        </div><!-- End post list item -->
+
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <article>
+
+            <div class="post-img">
+              <img src="{% static 'tutors/assets/img/blog/blog-2.jpg' %}" alt="" class="img-fluid">
+            </div>
+
+            <p class="post-category">Sports</p>
+
+            <h2 class="title">
+              <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+            </h2>
+
+            <div class="d-flex align-items-center">
+              <img src="{% static 'tutors/assets/img/blog/blog-author-2.jpg' %}" alt="" class="img-fluid post-author-img flex-shrink-0">
+              <div class="post-meta">
+                <p class="post-author">Allisa Mayer</p>
+                <p class="post-date">
+                  <time datetime="2022-01-01">Jun 5, 2022</time>
+                </p>
+              </div>
+            </div>
+
+          </article>
+        </div><!-- End post list item -->
+
+        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <article>
+
+            <div class="post-img">
+              <img src="{% static 'tutors/assets/img/blog/blog-3.jpg' %}" alt="" class="img-fluid">
+            </div>
+
+            <p class="post-category">Entertainment</p>
+
+            <h2 class="title">
+              <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
+            </h2>
+
+            <div class="d-flex align-items-center">
+              <img src="{% static 'tutors/assets/img/blog/blog-author-3.jpg' %}" alt="" class="img-fluid post-author-img flex-shrink-0">
+              <div class="post-meta">
+                <p class="post-author">Mark Dower</p>
+                <p class="post-date">
+                  <time datetime="2022-01-01">Jun 22, 2022</time>
+                </p>
+              </div>
+            </div>
+
+          </article>
+        </div><!-- End post list item -->
+
+      </div><!-- End recent posts list -->
+
+    </div>
+
+  </section><!-- /Recent Posts Section -->
+
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'tutors/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+<script src="{% static 'tutors/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+{% endblock %}
