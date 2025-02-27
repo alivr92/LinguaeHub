@@ -27,7 +27,10 @@ SECRET_KEY = 'django-insecure-r(meyat0u(pv51#$+w=e!+ed9c4)0qph6&zp&qig6%i9i4$hs!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -39,9 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ckeditor',
     'pages',
-    'tutors',
+    'app_accounts',
+    'app_pages',
+    'ap2_tutor',
+    'ap2_student',
+    'ap2_meeting',
+    'app_temp',
+    # 'app_admin',
+    # 'app_staff',
+    # 'ckeditor',
+
 ]
 
 MIDDLEWARE = [
@@ -68,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # 'app_pages.context_processors.site_info',  # site info
             ],
         },
     },
@@ -79,10 +91,21 @@ WSGI_APPLICATION = 'LinguaeHub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'linguaehub_db2',
+        'USER': 'postgres',
+        'PASSWORD': '6361834875',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -123,6 +146,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

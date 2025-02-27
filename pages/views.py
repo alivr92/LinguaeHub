@@ -11,12 +11,12 @@ def home(request):
         'address_line1': 'A108 Adam Street',
         'address_line2': 'Dresden, Saxony 535022',
     }
-    return render(request, 'pages/home.html', context)
+    return render(request, 'app_pages/home.html', context)
 
 
-def teachers(request):
+def instructors(request):
     context = {}
-    return render(request, 'pages/teachers.html', context)
+    return render(request, 'tutors/instructor-list.html', context)
 
 
 def about(request):
@@ -37,3 +37,8 @@ def services(request):
 def blog(request):
     context = {}
     return render(request, 'pages/blog.html', context)
+
+
+def dashboard(request):
+    context = {}
+    return render(request, 'app_pages/dashboard/admin-dashboard.html', context)

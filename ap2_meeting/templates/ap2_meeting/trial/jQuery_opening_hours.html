@@ -1,0 +1,128 @@
+﻿{#<html>#}
+{#<head>#}
+{#  <meta charset="utf-8">#}
+{#	<title>jQuery Opening Hours (UI Sliders)</title>#}
+{#	<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">#}
+{#  <script src="https://code.jquery.com/jquery-1.9.1.js"></script>#}
+{#  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>#}
+{#</head>#}
+<section>
+  <div class="container">
+    <h1>jQuery Opening Hours</h1>
+    <br>
+
+    <div class="range-head">
+      <div class="range-values">
+        <span class="r-0">0:00</span>
+        <span class="r-3">3:00</span>
+        <span class="r-6">6:00</span>
+        <span class="r-9">9:00</span>
+        <span class="r-12">12:00</span>
+        <span class="r-15">15:00</span>
+        <span class="r-18">18:00</span>
+        <span class="r-21">21:00</span>
+        <span class="r-24">24:00</span>
+      </div>
+    </div>
+
+    <div class="range-day" id="range-day-1" data-day="1">
+      <input type="checkbox" name="day-1" id="day-1" value="1" class="range-checkbox" checked>
+      <label for="day-1" class="range-label">Monday:</label>
+      <div id="range-slider-1" class="range-slider"></div>
+      <span id="range-time-1" class="range-time"></span>
+    </div>
+
+    <div class="range-day" id="range-day-2" data-day="2">
+      <input type="checkbox" name="day-2" id="day-2" value="1" class="range-checkbox" checked>
+      <label for="day-2" class="range-label">Tuesday:</label>
+      <div id="range-slider-2" class="range-slider"></div>
+      <span id="range-time-2" class="range-time"></span>
+    </div>
+
+    <div class="range-day" id="range-day-3" data-day="3">
+      <input type="checkbox" name="day-3" id="day-3" value="1" class="range-checkbox" checked>
+      <label for="day-3" class="range-label">Wednesday:</label>
+      <div id="range-slider-3" class="range-slider"></div>
+      <span id="range-time-3" class="range-time"></span>
+    </div>
+
+    <div class="range-day" id="range-day-4" data-day="4">
+      <input type="checkbox" name="day-4" id="day-4" value="1" class="range-checkbox" checked>
+      <label for="day-4" class="range-label">Thursday‎:</label>
+      <div id="range-slider-4" class="range-slider"></div>
+      <span id="range-time-4" class="range-time"></span>
+    </div>
+
+    <div class="range-day" id="range-day-5" data-day="5">
+      <input type="checkbox" name="day-5" id="day-5" value="1" class="range-checkbox" checked>
+      <label for="day-5" class="range-label">Friday:</label>
+      <div id="range-slider-5" class="range-slider"></div>
+      <span id="range-time-5" class="range-time"></span>
+    </div>
+
+    <div class="range-day" id="range-day-6" data-day="6">
+      <input type="checkbox" name="day-6" id="day-6" value="1" class="range-checkbox" checked>
+      <label for="day-6" class="range-label">Saturday:</label>
+      <div id="range-slider-6" class="range-slider"></div>
+      <span id="range-time-6" class="range-time"></span>
+    </div>
+
+    <div class="range-day" id="range-day-7" data-day="7">
+      <input type="checkbox" name="day-7" id="day-7" value="1" class="range-checkbox">
+      <label for="day-7" class="range-label">Sunday:</label>
+      <div id="range-slider-7" class="range-slider"></div>
+      <span id="range-time-7" class="range-time"></span>
+    </div>
+
+    <br style="clear:both">
+
+  </div>
+  <div class="container">
+    <table id="schedule">
+      <thead>
+      <tr>
+        <th>Day</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>8:30</td>
+        <td>24:00</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>4:00</td>
+        <td>24:00</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>6:30</td>
+        <td>18:00</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>15:00</td>
+        <td>24:00</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>0:00</td>
+        <td>24:00</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>0:00</td>
+        <td>24:00</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Closed</td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

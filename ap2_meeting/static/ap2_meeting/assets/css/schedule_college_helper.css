@@ -1,0 +1,204 @@
+.schedule {
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px 30px;
+  background-color: #FFFAE8;
+  display: inline-block;
+}
+
+.schedule-header {
+  width: 100%;
+  max-width: 1080px;
+  margin: auto;
+  position: relative;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #D8E5F1;
+  margin-bottom: 10px;
+}
+
+.schedule-main {
+  width: 100%;
+  max-width: 1080px;
+  margin: auto;
+  overflow-x: scroll;
+  display: inline-flex;
+  --header-color: #C1D4F1;
+  --primary-color: #E2E2E2;
+  --secondary-color: white;
+}
+
+/* Schedule-Pane CSS */
+.schedule-pane {
+  --width: 150px;
+  width: var(--width);
+  margin-left: 5px;
+}
+
+.pane-time {
+  --width: 90px;
+  --primary-color: #C1D4F1;
+  --secondary-color: #E9EDF2;
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+.pane-weekend {
+  --width:100px;
+}
+
+.pane-header {
+  position: relative;
+  height: 41px;
+  width: var(--width);
+  border-radius: 10px;
+  background-color: var(--header-color);
+  margin-bottom: 10px;
+}
+
+.times {
+  width: var(--width);
+  height: 584px;
+  display: flex;
+  flex-direction: column;
+}
+
+.times > div:nth-of-type(odd) {
+  background: var(--primary-color);
+}
+
+.times > div:nth-of-type(even) {
+  background: var(--secondary-color);
+}
+
+.times > div:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.times > div:last-child {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.time-block {
+  position: relative;
+  flex-grow: 1;
+}
+
+.text {
+  height: 100%;
+  width: 100%;
+  top: 10px;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+}
+
+.entry-block, .course-block{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  left: -1px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+/*100% -> 30min*/
+
+/* new stuff: */
+.lower-half {
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px 30px;
+  background-color: #FFFAE8;
+}
+.header {
+  background-color: #C1D4F1;
+  height: 50px;
+  margin: 20px 10px 0px;
+  padding-top: 13px;
+}
+.body {
+  background-color: #E9EDF2;
+  height: 310px;
+  margin: 0px 15px 20px;
+  padding: 5px 15px;
+}
+.schedule-body {
+  background-color: #E9EDF2;
+  height: 690px;
+  margin: 0px 15px 20px;
+  padding: 5px 15px;
+}
+.courses {
+  overflow-y: scroll;
+  background-color: #E9EDF2;
+  height: 600px;
+  padding: 3px 10px;
+}
+.schedule-combinations {
+  padding: 25px;
+}
+.search-bar {
+  position: relative;
+  width: 100%;
+  padding: 0px 15px;
+  margin-bottom: 10px;
+}
+.search-results {
+  overflow-y: scroll;
+  background-color: #E9EDF2;
+  padding: 3px 10px;
+  height: 230px;
+}
+.search-result {
+  background-color: #C1D4F1;
+  margin: 9px 0px;
+  height: 50px;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+}
+.course {
+  background-color: #C1D4F1;
+  margin: 9px 0px;
+  height: 50px;
+  position: relative;
+  width: 100%;
+  padding: 10px;
+}
+.search-icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  margin: 10px;
+}
+.trash-icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  margin: 10px;
+}
+.disable-icon {
+  position: absolute;
+  top: 0px;
+  right: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 10px;
+}
+.disable-icon:hover {
+  transform: rotate(45deg);
+}
+.add-icon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  margin: 10px;
+}
+#search-bar {
+  border: none;
+  margin: 0px;
+}
+
