@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'lucasvpr.pythonanywhere.com',
 ]
 
 
@@ -98,6 +99,18 @@ WSGI_APPLICATION = 'LinguaeHub.wsgi.application'
 #     }
 # }
 
+# MySQL DB settings for pythonanywhere.com
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'lucasvpr$lingoDB',
+#         'USER': 'lucasvpr',
+#         'PASSWORD': '63631834875pythonanaywhere',
+#         'HOST': 'lucasvpr.mysql.pythonanywhere-services.com',
+#         'PORT': '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -144,7 +157,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
 MEDIA_URL = '/media/'

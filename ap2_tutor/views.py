@@ -31,7 +31,7 @@ class TutorListView(ListView):
         # Apply filters based on request parameters
         gender = self.request.GET.get('gender')
         if gender:
-            queryset = queryset.filter(language_levels__iexact=gender)
+            queryset = queryset.filter(Q(profile__gender__iexact=gender))
 
         keySearch = self.request.GET.get('keySearch')
         if keySearch:
