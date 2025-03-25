@@ -97,7 +97,7 @@ class Student3(models.Model):
 #         super().save(*args, **kwargs)
 #
 #     def get_absolute_url(self):
-#         return reverse('app_accounts:dt_edit_profile', kwargs={'pk': self.pk})
+#         return reverse('app_accounts:dt_edit', kwargs={'pk': self.pk})
 
 class Tutor3(models.Model):
     profile = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name='tutor3_profile', limit_choices_to={'user_type': 'tutor'}, unique=True)

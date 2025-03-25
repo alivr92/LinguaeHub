@@ -1,0 +1,222 @@
+{% extends 'app_admin/dashboard/da_base.html' %}
+{% load static %}
+{% load my_custom_filters %}
+
+{% block admin_main_content %}
+    <!-- Page main content START -->
+    <div class="page-content-wrapper border">
+
+        <!-- Title -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1 class="h3 mb-0">Contact Us Requests</h1>
+            </div>
+        </div>
+
+        <!-- All review table START -->
+        <div class="card card-body bg-transparent pb-0 border mb-4">
+
+            <!-- Table START -->
+            <div class="table-responsive border-0">
+                <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                    <!-- Table head -->
+                    <thead>
+                    <tr>
+                        <th scope="col" class="border-0 rounded-start">#</th>
+                        <th scope="col" class="border-0">Full Name</th>
+                        <th scope="col" class="border-0">Phone</th>
+                        <th scope="col" class="border-0">Email</th>
+                        <th scope="col" class="border-0">Message</th>
+                        <th scope="col" class="border-0">Date</th>
+                        <th scope="col" class="border-0">Is Read</th>
+                        <th scope="col" class="border-0 rounded-end">Action</th>
+                    </tr>
+                    </thead>
+
+                    <!-- Table body START -->
+                    <tbody>
+                    {% for contact in contactus_list %}
+                        <!-- Table row -->
+                        <tr>
+                            <!-- Table data -->
+                            <td>{{ forloop.counter|stringformat:"02d" }}</td>
+{#                            <td>{{ forloop.counter|add:{{ (current_page|add:-1)|floatformat:0|mul:items_per_page }}|add:0 }}</td>#}
+
+                            <!-- Table data -->
+                            <td>
+                                <div class="d-flex align-items-center position-relative">
+{#                                    <!-- Image -->#}
+{#                                    <div class="avatar avatar-xs mb-2 mb-md-0">#}
+{#                                        <img src="{{ contact.student.profile.photo.url }}" class="rounded-circle" alt="">#}
+{#                                    </div>#}
+                                    <div class="mb-0 ms-2">
+                                        <!-- Title -->
+                                        <h6 class="mb-0"><a href="#"
+                                                            class="stretched-link">{{ contact.name }}</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- Table data -->
+                            <td>
+                                <h6 class="table-responsive-title mb-0"><a href="#">{{ contact.phone }}</a></h6>
+                            </td>
+
+                            <!-- Table data -->
+                            <td>
+                                <h6 class="table-responsive-title mb-0"><a href="#">{{ contact.email }}</a></h6>
+                            </td>
+
+<!-- Table data -->
+                            <td>
+                                <h6 class="table-responsive-title mb-0"><a href="#">{{ contact.message|slice:":7" }}</a></h6>
+                            </td>
+                            <td>
+                                <h6 class="table-responsive-title mb-0"><a href="#">{{ contact.create_date|timesince }}</a></h6>
+                            </td>
+
+                            <!-- Table data -->
+                            <td>
+                                <div class="form-check form-switch form-check-md">
+                                    <input class="form-check-input" type="checkbox" id="checkPrivacy1" {% if contact.is_read %}checked{% endif %}>
+                                </div>
+                            </td>
+
+                            <!-- Table data -->
+                            <td>
+                                <a href="#" class="btn btn-success-soft btn-round me-1 mb-1 mb-md-0"
+                                   data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                                   data-bs-original-title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <button class="btn btn-danger-soft btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="" data-bs-original-title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                <a href="#" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal"
+                                   data-bs-target="#viewReview-{{ contact.id }}">View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <!-- Table body END -->
+                </table>
+            </div>
+            <!-- Table END -->
+
+            <!-- Card footer START -->
+            <div class="card-footer bg-transparent px-0">
+                <!-- Pagination START -->
+                <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+                    <!-- Content -->
+                    <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }}
+                        to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
+
+                    <!-- Pagination START -->
+                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?page={{ page_obj.previous_page_number }}"
+                                                                  tabindex="-1"><i
+                                            class="fas fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"
+                                                                           tabindex="-1"><i
+                                            class="fas fa-angle-left" style="color: #d3d3d3;"></i></a></li>
+                                {% endif %}
+
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                        {% if p == page_obj.number %}
+                                            <li class="page-item mb-0 active"><a class="page-link"
+                                                                                 href="#">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item mb-0"><a class="page-link"
+                                                                          href="?page={{ p }}">{{ p }}</a></li>
+                                        {% endif %}
+                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                        <li class="page-item mb-0"><a class="page-link"
+                                                                      href="?page={{ p }}">{{ p }}</a>
+                                        </li>
+                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                        <li class="page-item mb-0 disabled"><a class="page-link"
+                                                                               href="#">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?page={{ page_obj.next_page_number }}"><i
+                                            class="fas fa-angle-right"></i></a></li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i
+                                            class="fas fa-angle-right"
+                                            style="color: #d3d3d3;"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                    <!-- Pagination END -->
+
+
+                </div>
+                <!-- Pagination END -->
+            </div>
+            <!-- Card footer END -->
+        </div>
+        <!-- All review table END -->
+
+    </div>
+    <!-- Page main content END -->
+{% endblock %}
+
+{% block admin_popup_modals %}
+    {% for contact in contactus_list %}
+    <!-- Popup modal for reviwe START -->
+    <div class="modal fade" id="viewReview-{{ contact.id }}" tabindex="-1" aria-labelledby="viewReviewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal header -->
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-white" id="viewReviewLabel">Message</h5>
+                    <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                            aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="d-md-flex">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-md me-4 flex-shrink-0">
+                            <img class="avatar-img rounded-circle" src="{% static 'assets/images/avatar/09.jpg' %}"
+                                 alt="avatar">
+                        </div>
+                        <!-- Text -->
+                        <div>
+                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
+                                <h5 class="me-3 mb-0">{{ contact.name }}</h5>
+                                <p class="small mb-2">{{ contact.phone }}</p>
+                            </div>
+                            <!-- Info -->
+                            <p class="small mb-2">{{ contact.create_date|timesince }}</p>
+                            <p class="small mb-2">{{ contact.email }}</p>
+                            <p class="mb-2">{{ contact.message }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup modal for reviwe END -->
+    {% endfor %}
+{% endblock %}

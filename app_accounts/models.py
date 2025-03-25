@@ -4,6 +4,7 @@ from django.utils import timezone
 
 USER_TYPES = [('student', 'Student'), ('tutor', 'Tutor'), ('admin', 'Admin'), ('staff', 'Staff')]
 COUNTRY_CHOICES = [
+    ('', 'Choose a country'),
     ('Afghanistan', 'Afghanistan'),
     ('Albania', 'Albania'),
     ('Algeria', 'Algeria'),
@@ -201,6 +202,7 @@ COUNTRY_CHOICES = [
     ('Zimbabwe', 'Zimbabwe')
 ]
 LANGUAGE_CHOICES = [
+    ('', 'Select your native language'),
     ('Persian', 'Persian'),
     ('English', 'English'),
     ('Dutch', 'Dutch'),
@@ -218,6 +220,7 @@ LANGUAGE_CHOICES = [
 ]
 GENDER_CHOICES = [('female', 'Female'), ('male', 'Male'), ('transgender', 'Transgender')]
 
+
 class Language(models.Model):
     name = models.CharField(max_length=20, choices=LANGUAGE_CHOICES, unique=True)
 
@@ -228,7 +231,7 @@ class Language(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES, blank=True, null=True, default='male')
-    phone = models.CharField(max_length=20, blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
     country = models.CharField(max_length=100, choices=COUNTRY_CHOICES, default='Unknown')
     photo = models.ImageField(upload_to='photos/profiles/', blank=True, null=True, default='photos/default.png')
     user_type = models.CharField(max_length=20, choices=USER_TYPES, default='student',
@@ -237,7 +240,8 @@ class UserProfile(models.Model):
     lang_native = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='Unknown')
     lang_speak = models.ManyToManyField(Language, blank=True)
     bio = models.TextField(max_length=350, blank=True)
-    availability = models.BooleanField(max_length=2, blank=True, default=True)
+    availability = models.BooleanField(blank=True, default=True)
+    is_vip = models.BooleanField(blank=False, default=False)
     rating = models.FloatField(default=0.0)
     reviews_count = models.IntegerField(default=0)
     url_facebook = models.URLField(max_length=150, blank=True)

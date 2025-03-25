@@ -1,5 +1,6 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block head_title %}User Sign Up{% endblock %}
 
@@ -49,79 +50,96 @@
                 <p class="lead mb-4">Nice to see you! Please Sign up with your account.</p>
 
                 {% include 'includes/messages.html' %}
+{#                {% if form.errors %}#}
+{#                  <div class="alert alert-danger">#}
+{#                    <ul>#}
+{#                      {% for field, errors in form.errors.items %}#}
+{#                        <li>#}
+{#                          {% if field == '__all__' %}#}
+{#                            <strong>Form Error:</strong>#}
+{#                          {% else %}#}
+{#                            <strong>{{ form[field].label }}:</strong>#}
+{#                          {% endif %}#}
+{#                          <ul>#}
+{#                            {% for error in errors %}#}
+{#                              <li>{{ error }}</li>#}
+{#                            {% endfor %}#}
+{#                          </ul>#}
+{#                        </li>#}
+{#                      {% endfor %}#}
+{#                    </ul>#}
+{#                  </div>#}
+{#                {% endif %}#}
+
                 <!-- Form START -->
                 <form action="{% url 'accounts:sign_up' %}" method="POST">
                   {% csrf_token %}
-                  <!-- First name -->
-                  <div class="mb-4">
-                    <label for="exampleInputEmail1" class="form-label">First Name *</label>
-                    <div class="input-group input-group-lg">
-                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
-                        class="bi bi-person-fill"></i></span>
-                      <input required name="first_name" type="text" class="form-control border-1 bg-light rounded ps-1"
-                             placeholder="First Name" id="exampleInputFirstName">
-                    </div>
-                  </div>
-                  <!-- Last name -->
-                  <div class="mb-4">
-                    <label for="exampleInputEmail1" class="form-label">Last Name</label>
-                    <div class="input-group input-group-lg">
-                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
-                        class="bi bi-person-lines-fill"></i></span>
-                      <input name="last_name" type="text" class="form-control border-1 bg-light rounded ps-1"
-                             placeholder="Last Name" id="exampleInputFullName">
-                    </div>
-                  </div>
-                  <!-- Username -->
+{#                  {{ form.as_p }}#}
+{#                  <!-- Username -->#}
                   <div class="mb-4">
                     <label for="exampleInputEmail1" class="form-label">Username *</label>
                     <div class="input-group input-group-lg">
                       <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
                         class="bi bi-person-badge"></i></span>
-                      <input required name="username" type="text" class="form-control border-1 bg-light rounded ps-1"
-                             placeholder="Username" id="exampleInputUserName">
+                      {{ form.username}}
+{#                      {% for error in form.username.errors %}#}
+{#                        <div class="alert alert-danger">{{ error }}</div>#}
+{#                      {% endfor %}#}
+{#                      <input required name="username" type="text" class="form-control border-1 bg-light rounded ps-1"#}
+{#                             placeholder="Username" id="exampleInputUserName">#}
                     </div>
                   </div>
-                  <!-- Email -->
+{#                  <!-- Email -->#}
                   <div class="mb-4">
                     <label for="exampleInputEmail1" class="form-label">Email address *</label>
                     <div class="input-group input-group-lg">
                       <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
                         class="bi bi-envelope-fill"></i></span>
-                      <input required name="email" type="email" class="form-control border-1 bg-light rounded ps-1"
-                             placeholder="E-mail" id="exampleInputEmail1">
+                      {{ form.email }}
+                      {% for error in form.email.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                      {% endfor %}
+{#                      <input required name="email" type="email" class="form-control border-1 bg-light rounded ps-1"#}
+{#                             placeholder="E-mail" id="exampleInputEmail1">#}
                     </div>
                   </div>
-                  <!-- Password -->
+{#                  <!-- Password -->#}
                   <div class="mb-4">
                     <label for="inputPassword5" class="form-label">Password *</label>
                     <div class="input-group input-group-lg">
                       <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
                         class="fas fa-lock"></i></span>
-                      <input required name="password" type="password"
-                             class="form-control border-1 bg-light rounded ps-1" placeholder="*********"
-                             id="inputPassword5">
+                      {{ form.password }}
+                      {% for error in form.password.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                      {% endfor %}
+{#                      <input required name="password" type="password"#}
+{#                             class="form-control border-1 bg-light rounded ps-1" placeholder="*********" id="inputPassword5">#}
                     </div>
                   </div>
-                  <!-- Password Confirm -->
+{#                  <!-- Password Confirm -->#}
                   <div class="mb-4">
                     <label for="inputPassword6" class="form-label">Confirm Password *</label>
                     <div class="input-group input-group-lg">
                       <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
                         class="fas fa-lock"></i></span>
-                      <input required name="password_confirm" type="password"
-                             class="form-control border-1 bg-light rounded ps-1" placeholder="*********"
-                             id="inputPassword6">
+                      {{ form.password_confirm }}
+                      {% for error in form.password_confirm.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                      {% endfor %}
+{#                      <input required name="password_confirm" type="password"#}
+{#                             class="form-control border-1 bg-light rounded ps-1" placeholder="*********"#}
+{#                             id="inputPassword6">#}
                     </div>
                   </div>
-                  <!-- Check box -->
-                  <div class="mb-4">
-                    <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="checkbox-1">
-                      <label class="form-check-label" for="checkbox-1">By signing up, you agree to the<a href="#"> terms
-                        of service</a></label>
-                    </div>
-                  </div>
+{#                  <!-- Check box -->#}
+{#                  <div class="mb-4">#}
+{#                    <div class="form-check">#}
+{#                      <input type="checkbox" class="form-check-input" id="checkbox-1">#}
+{#                      <label class="form-check-label" for="checkbox-1">By signing up, you agree to the<a href="#"> terms#}
+{#                        of service</a></label>#}
+{#                    </div>#}
+{#                  </div>#}
                   <!-- Button -->
                   <div class="align-items-center mt-0">
                     <div class="d-grid">
@@ -147,6 +165,19 @@
                   <div class="col-xxl-6 d-grid">
                     <a href="#" class="btn bg-facebook mb-0"><i class="fab fa-fw fa-facebook-f me-2"></i>Signup with
                       Facebook</a>
+                  </div>
+                </div>
+
+              <!-- Register as Tutor button -->
+                <div class="row">
+                  <!-- Divider with text -->
+                  <div class="position-relative my-4">
+                    <hr>
+                    <p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">Or</p>
+                  </div>
+                  <!-- Social btn -->
+                  <div class="col-xxl-12 d-grid">
+                    <a href="{% url 'app_pages:become_tutor' %}" class="btn btn-success mb-2 mb-xxl-0"><i class="fas fa-user-tie text-white me-2"></i>Register as a Tutor</a>
                   </div>
                 </div>
 

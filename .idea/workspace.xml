@@ -2,11 +2,258 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm&quot;">
-      <change afterPath="$PROJECT_DIR$/db.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_bookmark.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_course_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_delete_account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_payment_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_quiz.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_setting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_subscription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_student/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_delete_account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_earning.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_manage_course.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_payout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_quiz.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_review.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_reviews_CHANGE.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_setting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/management/commands/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/management/commands/populate_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_contact_us.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_course_category.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_course_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_course_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_earning.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_review.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_student_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_admin/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_content_filler/context_processors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_content_filler/templatetags/CF_filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_content_filler/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/admin/change_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/become-tutor.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/blog-grid.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/coming-soon.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/faq.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/help-center.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_staff/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_staff/templates/app_staff/dashboard/dstf_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_staff/templates/app_staff/dashboard/dstf_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_staff/templates/app_staff/dashboard/includes/dstf_sidebar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_staff/templates/app_staff/dashboard/includes/dstf_topbar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_staff/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/quill-converter/convert.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/static/payments/pay_main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/cart.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/checkout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/checkout2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/pay_error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/pay_success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/payment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/templates/payments/payment_status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/payments/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/LinguaeHub.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LinguaeHub.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinguaeHub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinguaeHub/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_manual.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_manual.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_vtable.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_vtable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_student/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_student/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_student/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templatetags/my_custom_filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templatetags/my_custom_filters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/includes/dashboard_footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/includes/dashboard_footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/staff/dstf_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_staff/templates/app_staff/dashboard/dstf_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_banner.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_banner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_class_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_class_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_class_list_2.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_class_list_2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_course_resume.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_course_resume.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/student/ds_sidebar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/superuser/da_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/superuser/da_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/superuser/da_setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_setting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/superuser/includes/da_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/superuser/includes/da_topbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_topbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_banner.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_banner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_edit.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_settings.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_sidebar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/dt_student_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/tutor/instructor-studentlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_studentlist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/context_processors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/dashboard/admin-dashboard.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_staff/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_staff/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_temp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_temp/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/AUTHORS.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/entry_points.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip-24.3.1.dist-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/build_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/build_env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/base_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/base_command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/cmdoptions.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/cmdoptions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/index_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/index_command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/progress_bars.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/cli/progress_bars.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/commands/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/commands/cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/commands/install.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/commands/install.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/commands/show.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/commands/show.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/configuration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/index/package_finder.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/index/package_finder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/metadata/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/metadata/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/metadata/_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/metadata/_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/metadata/importlib/_dists.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/metadata/importlib/_dists.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/models/link.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/models/link.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/network/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/network/cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/network/session.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/network/session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/operations/build/metadata_editable.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/operations/build/metadata_editable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/operations/freeze.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/operations/freeze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/pyproject.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/pyproject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/req/req_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/req/req_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/req/req_install.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/req/req_install.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/resolution/resolvelib/factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/resolution/resolvelib/factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/self_outdated_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/self_outdated_check.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/encoding.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/misc.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/misc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/packaging.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/packaging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/unpacking.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_internal/utils/unpacking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/caches/file_cache.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/caches/file_cache.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/filewrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/filewrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/heuristics.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/cachecontrol/heuristics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/codec.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/codec.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/compat.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/compat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/core.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/idnadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/idnadata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/intranges.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/intranges.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/package_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/package_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/uts46data.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/idna/uts46data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/msgpack/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/msgpack/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/msgpack/ext.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/msgpack/ext.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/msgpack/fallback.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/msgpack/fallback.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/_elffile.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/_elffile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/_manylinux.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/_manylinux.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/markers.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/markers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/metadata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/specifiers.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/specifiers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/tags.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/tags.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/version.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/packaging/version.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/android.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/android.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/macos.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/macos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/unix.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/unix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/version.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/platformdirs/version.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_compat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_impl.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_impl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_in_process/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_in_process/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/requests/certs.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/requests/certs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/_inspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/_inspect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/_null_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/_null_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/_win32_console.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/_win32_console.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/align.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/align.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/ansi.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/ansi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/cells.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/cells.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/color.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/color.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/console.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/console.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/default_styles.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/default_styles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/filesize.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/filesize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/highlighter.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/highlighter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/live.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/live.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/padding.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/padding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/panel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/pretty.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/pretty.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/progress.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/progress.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/progress_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/progress_bar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/prompt.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/prompt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/segment.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/segment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/spinner.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/spinner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/style.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/style.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/syntax.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/syntax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/table.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/text.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/theme.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/theme.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/traceback.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/traceback.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/rich/tree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/tomli/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/tomli/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/tomli/_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/tomli/_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/tomli/_re.py" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/tomli/_re.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/vendor.txt" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/pip/_vendor/vendor.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Scripts/pip.exe" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Scripts/pip.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Scripts/pip3.8.exe" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Scripts/pip3.8.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/envLinguaeHub/Scripts/pip3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/envLinguaeHub/Scripts/pip3.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,22 +279,268 @@
   <component name="FavoritesManager">
     <favorites_list name="LinguaeHub" />
   </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ap2_student/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="768">
+              <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sign_up.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="181" column="22" selection-start-line="181" selection-start-column="22" selection-end-line="181" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_accounts/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1992">
+              <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#64#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ap2_meeting/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1584">
+              <caret line="75" column="66" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
+        <option value="JavaScript File" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>_list</find>
+      <find>rate</find>
+      <find>times</find>
+      <find>time</find>
+      <find>Reply</find>
+      <find>Session</find>
+      <find>Discou</find>
+      <find>review</find>
+      <find>discount</find>
+      <find>Address</find>
+      <find>Most Selling Courses</find>
+      <find>tabs-5</find>
+      <find>rating</find>
+      <find>Quill</find>
+      <find>Start</find>
+      <find>Tutor</find>
+      <find>quill-display-about-us</find>
+      <find>skill_leve</find>
+      <find>_level.all</find>
+      <find>wishlist</find>
+      <find>Conta</find>
+      <find>News</find>
+      <find>Email</find>
+      <find>education theme, built specifically for the education centers which is dedicated to teaching and involve learn</find>
+      <find>email</find>
+      <find>Limit</find>
+      <find>drib</find>
+      <find>My C</find>
+      <find>Feedba</find>
+      <find>sign_up2</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>href=&quot;{% static 'assets</replace>
+      <replace>.css' %}&quot;</replace>
+      <replace>.png' %}&quot;</replace>
+      <replace>student</replace>
+      <replace>/</replace>
+      <replace>src=&quot;{% static 'assets/</replace>
+      <replace>Tutor</replace>
+      <replace>.jpg' %}&quot;</replace>
+      <replace>staff</replace>
+      <replace>dstf_</replace>
+      <replace>DSTF</replace>
+      <replace>.svg' %}&quot;</replace>
+      <replace>*</replace>
+      <replace>r_tutor</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app_pages/urls.py" />
+        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_contact_us.html" />
+        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_sidebar.html" />
+        <option value="$PROJECT_DIR$/ap_content_filler/apps.py" />
+        <option value="$PROJECT_DIR$/app_content_filler/apps.py" />
+        <option value="$PROJECT_DIR$/app_pages/context_processors.py" />
+        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_setting.html" />
+        <option value="$PROJECT_DIR$/app_admin/forms.py" />
+        <option value="$PROJECT_DIR$/app_admin/urls.py" />
+        <option value="$PROJECT_DIR$/app_admin/views.py" />
+        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_review.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/admin.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/forms.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templatetags/my_custom_filters.py" />
+        <option value="$PROJECT_DIR$/app_content_filler/context_processors.py" />
+        <option value="$PROJECT_DIR$/app_content_filler/models.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_review.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/views.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_home.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html" />
+        <option value="$PROJECT_DIR$/app_pages/admin.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/admin/change_form.html" />
+        <option value="$PROJECT_DIR$/app_content_filler/templatetags/__init__.py" />
+        <option value="$PROJECT_DIR$/app_content_filler/templatetags/my_filters.py" />
+        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
+        <option value="$PROJECT_DIR$/node_modules/quill-converter/convert.js" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
+        <option value="$PROJECT_DIR$/app_pages/forms.py" />
+        <option value="$PROJECT_DIR$/app_pages/views.py" />
+        <option value="$PROJECT_DIR$/app_pages/models.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
+        <option value="$PROJECT_DIR$/ap2_student/models.py" />
+        <option value="$PROJECT_DIR$/ap2_student/urls.py" />
+        <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_subscription.html" />
+        <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" />
+        <option value="$PROJECT_DIR$/app_content_filler/admin.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" />
+        <option value="$PROJECT_DIR$/ap2_student/views.py" />
+        <option value="$PROJECT_DIR$/ap2_meeting/models.py" />
+        <option value="$PROJECT_DIR$/ap2_meeting/admin.py" />
+        <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_class_list.html" />
+        <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" />
+        <option value="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up2.html" />
+        <option value="$PROJECT_DIR$/app_accounts/views.py" />
+        <option value="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" />
+      </list>
+    </option>
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="LinguaeHub/invalid/Django" />
+    </ignored-facets>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1358" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="916" />
+  </component>
   <component name="ProjectId" id="2rLzinPis4j3vtVuEjOiqWScWiW" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_accounts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_accounts" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_accounts" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_accounts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -61,25 +554,37 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myProject1" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="preferences.toDoOptions" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\static\ap2_meeting\client\js" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\static\ap2_meeting\client\css" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\templates\ap2_meeting\trial" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\templates\ap2_meeting\dashboard_schedule" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\static\ap2_meeting\dashboard_schedule\js" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\static\ap2_meeting" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\templates" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_meeting\templates\ap2_meeting\dashboard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_accounts\templates\app_accounts\dashboard\tutor" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler\templatetags" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_admin\templates\app_admin\dashboard" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard\includes" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\dashboard\includes" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_staff\templates\app_staff" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_staff\templates\dashboard" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_admin\templates\app_admin\dashboard" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="LinguaeHub" type="Python.DjangoServer" factoryName="Django server">
@@ -103,7 +608,6 @@
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
-      <method v="2" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -163,7 +667,15 @@
       <workItem from="1739865432929" duration="30456000" />
       <workItem from="1739907090196" duration="151956000" />
       <workItem from="1740659536548" duration="21347000" />
-      <workItem from="1740739085096" duration="6918000" />
+      <workItem from="1740739085096" duration="10710000" />
+      <workItem from="1740826518900" duration="601000" />
+      <workItem from="1740827280647" duration="35000" />
+      <workItem from="1740827333316" duration="3000" />
+      <workItem from="1740828760481" duration="76000" />
+      <workItem from="1740829024293" duration="12000" />
+      <workItem from="1740832048714" duration="10000" />
+      <workItem from="1740849368575" duration="774000" />
+      <workItem from="1740850171353" duration="488000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Commit by Pycharm&quot;">
       <created>1736508809268</created>
@@ -175,11 +687,42 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="ToolWindowManager">
+    <frame x="1358" y="-8" width="1616" height="916" extended-state="6" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.23625" side_tool="true" weight="0.32917705" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" visible="true" weight="0.659601" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.185" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32917705" />
+    </layout>
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="&quot;Commit by Pycharm&quot;" />
     <option name="LAST_COMMIT_MESSAGE" value="&quot;Commit by Pycharm&quot;" />
   </component>
@@ -192,19 +735,19 @@
       <screen x="1366" y="0" width="1600" height="900" />
     </state>
     <state x="1791" y="40" key="CommitChangelistDialog2/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1740688493036" />
-    <state x="1945" y="191" key="FileChooserDialogImpl" timestamp="1736585577526">
+    <state x="1945" y="191" key="FileChooserDialogImpl" timestamp="1740833535643">
       <screen x="1366" y="0" width="1600" height="900" />
     </state>
-    <state x="1945" y="191" key="FileChooserDialogImpl/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1736585577526" />
-    <state x="1667" y="81" key="SettingsEditor" timestamp="1737443896721">
+    <state x="1945" y="191" key="FileChooserDialogImpl/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1740833535643" />
+    <state x="1667" y="81" key="SettingsEditor" timestamp="1740834829702">
       <screen x="1366" y="0" width="1600" height="900" />
     </state>
-    <state x="1667" y="81" key="SettingsEditor/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1737443896721" />
-    <state x="1861" y="272" width="609" height="451" key="com.intellij.ide.util.TipDialog" timestamp="1740739088529">
+    <state x="1667" y="81" key="SettingsEditor/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1740834829702" />
+    <state x="1861" y="272" width="609" height="451" key="com.intellij.ide.util.TipDialog" timestamp="1740833074322">
       <screen x="1366" y="0" width="1600" height="900" />
     </state>
     <state x="423" y="223" key="com.intellij.ide.util.TipDialog/0.0.1366.738/1366.0.1600.900@0.0.1366.738" timestamp="1737830343771" />
-    <state x="1861" y="272" width="609" height="451" key="com.intellij.ide.util.TipDialog/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1740739088529" />
+    <state x="1861" y="272" width="609" height="451" key="com.intellij.ide.util.TipDialog/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1740833074322" />
     <state x="1863" y="182" width="891" height="536" key="find.popup" timestamp="1739004623854">
       <screen x="1366" y="0" width="1600" height="900" />
     </state>
@@ -213,5 +756,382 @@
       <screen x="1366" y="0" width="1600" height="900" />
     </state>
     <state x="1829" y="190" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1600.900@1366.0.1600.900" timestamp="1738879395654" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_review.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="633" column="22" selection-start-line="633" selection-start-column="22" selection-end-line="633" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="79" lean-forward="true" selection-start-line="13" selection-start-column="79" selection-end-line="13" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templatetags/my_custom_filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="55" column="36" selection-start-line="55" selection-start-column="36" selection-end-line="55" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django/views/generic/detail.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="105" column="13" selection-start-line="105" selection-start-column="13" selection-end-line="105" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_review.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="53" column="85" selection-start-line="53" selection-start-column="85" selection-end-line="53" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="197" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1082">
+          <caret line="207" lean-forward="true" selection-start-line="207" selection-end-line="207" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="734" column="90" selection-start-line="734" selection-start-column="90" selection-end-line="734" selection-end-column="90" />
+          <folding>
+            <element signature="e#2549#3428#0#HTML" />
+            <element signature="e#11763#11782#0#HTML" expanded="true" />
+            <element signature="e#18651#18670#0#HTML" expanded="true" />
+            <element signature="e#33988#38837#0#HTML" />
+            <element signature="e#40371#47371#0#HTML" />
+            <element signature="e#48406#49633#0#HTML" />
+            <element signature="e#76592#94062#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django_quill/fields.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django_quill/forms.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="877" column="2" selection-start-line="877" selection-start-column="2" selection-end-line="877" selection-end-column="76" />
+          <folding>
+            <element signature="e#24903#32556#0#HTML" />
+            <element signature="e#26506#32527#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/admin/change_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="60" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_content_filler/context_processors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="61" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="10" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_content_filler/templatetags/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/templatetags/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/templatetags/meeting_custom_filters.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_content_filler/templatetags/CF_filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/quill-converter/convert.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/templatetags/custom_filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
+          <folding>
+            <element signature="e#312#336#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="131" column="7" lean-forward="true" selection-start-line="131" selection-start-column="7" selection-end-line="131" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_bookmark.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="18" column="163" selection-start-line="18" selection-start-column="163" selection-end-line="18" selection-end-column="163" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="10" column="72" selection-start-line="10" selection-start-column="72" selection-end-line="10" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_setting.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="34" lean-forward="true" selection-end-line="8" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_subscription.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="91" column="18" lean-forward="true" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/agb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="768" column="81" selection-start-line="768" selection-start-column="81" selection-end-line="768" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="274" column="30" lean-forward="true" selection-start-line="274" selection-start-column="30" selection-end-line="274" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="161" column="70" lean-forward="true" selection-start-line="161" selection-start-column="70" selection-end-line="161" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="120" column="40" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_content_filler/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-759">
+          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_content_filler/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="107" selection-start-line="16" selection-start-column="107" selection-end-line="16" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="231" column="78" selection-start-line="231" selection-start-column="78" selection-end-line="231" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="59" column="32" lean-forward="true" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1584">
+          <caret line="75" column="66" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="22" column="124" lean-forward="true" selection-start-line="22" selection-start-column="104" selection-end-line="22" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="155" column="25" lean-forward="true" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="156" column="111" selection-start-line="156" selection-start-column="111" selection-end-line="156" selection-end-column="111" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_class_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="147" column="72" lean-forward="true" selection-start-line="147" selection-start-column="72" selection-end-line="147" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_student/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1992">
+          <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="181" column="22" selection-start-line="181" selection-start-column="22" selection-end-line="181" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

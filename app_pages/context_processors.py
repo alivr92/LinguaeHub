@@ -1,8 +1,8 @@
-from app_pages.models import ContentFiller
+from app_pages.models import ContentFiller, ContactUs
 
 
-def site_info(request):
-    filler1 = ContentFiller.objects.get(data_title='Site Info')
+def counters(request):
     return {
-        'site_info': filler1,
+        'range': range(1, 6),  # for rating stars
+        'contact_us_unread': ContactUs.objects.filter(is_read=False).count(),  # to show in admin sidebar
     }

@@ -1,7 +1,7 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
 {% load my_custom_filters %}
-{% block head_title %}Instructor List{% endblock %}
+{% block head_title %}Tutor List{% endblock %}
 {% block head_style_plugins %}
   <!-- Plugins CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
@@ -20,13 +20,13 @@
         <div class="row">
           <div class="col-12">
             <div class="bg-dark p-4 text-center rounded-3">
-              <h1 class="text-white m-0">Instructors list</h1>
+              <h1 class="text-white m-0">Tutor list</h1>
               <!-- Breadcrumb -->
               <div class="d-flex justify-content-center">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb breadcrumb-dark breadcrumb-dots mb-0">
                     <li class="breadcrumb-item"><a href="{% url 'app_pages:home' %}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">instructor list</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tutor list</li>
                   </ol>
                 </nav>
               </div>
@@ -492,7 +492,7 @@
                 </div>
                 <!-- Button -->
                 <div class="col-lg-5 text-lg-end">
-                  <a href="#" class="btn btn-dark mb-0">Start Teaching today</a>
+                  <a href="{% url 'app_pages:become_tutor' %}" class="btn btn-dark mb-0">Start Teaching today</a>
                 </div>
               </div>
             </div>

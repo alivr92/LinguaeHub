@@ -12,9 +12,9 @@ class UserProfileAdmin(admin.ModelAdmin):
         return format_html("<img src='{}' style='width:40px; border-radius:20%;'> ".format(object.photo.url))
     thumbnail.short_description = 'Photo'
 
-    list_display = ('id', 'user', 'thumbnail', 'user_full_name', 'country', 'lang_native', 'rating', 'user_type')
+    list_display = ('id', 'user', 'thumbnail', 'user_full_name', 'country', 'lang_native', 'rating', 'user_type', 'is_vip')
     list_display_links = ('user', 'thumbnail', )
-    list_filter = ('user_type', 'gender', 'rating', 'country', )
+    list_filter = ('user_type', 'gender', 'rating', 'is_vip', 'country')
     search_fields = ('user__username', 'country', 'lang_native', 'user_type')
 
 

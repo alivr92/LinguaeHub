@@ -24,11 +24,11 @@ class SessionAdminForm(forms.ModelForm):
 
 class SessionAdmin(admin.ModelAdmin):
     form = SessionAdminForm
-    list_display = ('id', 'subject', 'session_type', 'tutor', 'get_students', 'students_timezone', 'start_session_utc',
+    list_display = ('id', 'subject', 'session_type', 'appointment_id', 'tutor', 'get_students', 'students_timezone', 'start_session_utc',
                     'end_session_utc', 'status')
     list_display_links = ('subject',)
     list_filter = ('subject', 'session_type', 'tutor', 'students', 'start_session_utc', 'status')
-    search_fields = ('subject', 'tutor__profile__user__username', 'students__profile__user__username',)
+    search_fields = ('subject', 'appointment_id', 'tutor__profile__user__username', 'students__profile__user__username',)
 
     def get_students(self, obj):
         return ", ".join([stu.profile.user.username for stu in obj.students.all()])
@@ -53,10 +53,27 @@ class AppointmentSettingAdmin(admin.ModelAdmin):
     list_display = ('id', 'tutor', 'provider_timezone', 'session_length', 'week_start', 'session_type')
 
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('student', 'tutor', 'session_appointment_id', 'session_subject', 'rate_tutor', 'rate_session', 'status', 'is_published')
+    list_editable = ('is_published', 'status', )
+    list_filter = ('tutor', 'student', 'session', 'rate_tutor', 'status', 'is_published')
+    search_fields = ('session_appointment_id', )
+
+    def session_subject(self, obj):
+        return obj.session.subject if obj.session else "No Session"
+
+    session_subject.short_description = 'Session Subject'
+
+    def session_appointment_id(self, obj):
+            return obj.session.appointment_id if obj.session else "No Session"
+
+    session_appointment_id.short_description = 'Session ID'
+
+
 admin.site.register(Session, SessionAdmin)
 admin.site.register(Availability, AvailabilityAdmin)
 admin.site.register(AppointmentSetting, AppointmentSettingAdmin)
-admin.site.register(Review)
+admin.site.register(Review, ReviewAdmin)
 
 #
 # class SessionAdminForm(forms.ModelForm):

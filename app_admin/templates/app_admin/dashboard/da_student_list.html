@@ -1,0 +1,342 @@
+{% extends 'app_admin/dashboard/da_base.html' %}
+{% load static %}
+
+
+{% block head_style_plugins %}
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+    {% endblock %}
+
+
+{% block admin_main_content %}
+	<!-- Page main content START -->
+	<div class="page-content-wrapper border">
+
+		<!-- Title -->
+		<div class="row">
+			<div class="col-12">
+				<h1 class="h3 mb-2 mb-sm-0">Students</h1>
+			</div>
+		</div>
+
+		<div class="card bg-transparent">
+
+			<!-- Card header START -->
+			<div class="card-header bg-transparent border-bottom px-0">
+				<!-- Search and select START -->
+				<div class="row g-3 align-items-center justify-content-between">
+
+					<!-- Search bar -->
+					<div class="col-md-8">
+						<form class="rounded position-relative">
+							<input class="form-control bg-transparent" type="search" placeholder="Search" aria-label="Search">
+							<button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
+								<i class="fas fa-search fs-6 "></i>
+							</button>
+						</form>
+					</div>
+
+					<!-- Tab button -->
+					<div class="col-md-3">
+						<!-- Tabs START -->
+						<ul class="list-inline mb-0 nav nav-pills nav-pill-dark-soft border-0 justify-content-end" id="pills-tab" role="tablist">
+							<!-- Grid tab -->
+							<li class="nav-item">
+{#								<a href="#nav-preview-tab-1" class="nav-link mb-0 me-2 active" data-bs-toggle="tab">#}
+ <a href="#nav-grid-tab-1" class="nav-link mb-0 me-2 {% if request.GET.tab == 'grid' or not request.GET.tab %}active{% endif %}" data-bs-toggle="tab" data-tab="grid">
+									<i class="fas fa-fw fa-th-large"></i>
+								</a>
+							</li>
+							<!-- List tab -->
+							<li class="nav-item">
+{#								<a href="#nav-html-tab-1" class="nav-link mb-0" data-bs-toggle="tab">#}
+ <a href="#nav-list-tab-1" class="nav-link mb-0 {% if request.GET.tab == 'list' %}active{% endif %}" data-bs-toggle="tab" data-tab="list">
+                                    <i class="fas fa-fw fa-list-ul"></i>
+								</a>
+							</li>
+						</ul>
+						<!-- Tabs end -->
+					</div>
+				</div>
+				<!-- Search and select END -->
+			</div>
+			<!-- Card header END -->
+
+			<!-- Card body START -->
+			<div class="card-body px-0">
+
+				<!-- Tabs content START -->
+				<div class="tab-content">
+
+					<!-- Tabs Grid content item START -->
+{#					<div class="tab-pane fade show active" id="nav-preview-tab-1">#}
+					<div class="tab-pane fade {% if request.GET.tab == 'grid' or not request.GET.tab %}show active{% endif %}" id="nav-grid-tab-1">
+						<div class="row g-4">
+{% for student in student_list %}
+							<!-- Card item START -->
+							<div class="col-md-6 col-xxl-4">
+								<div class="card bg-transparent border h-100">
+									<!-- Card header -->
+									<div class="card-header bg-transparent border-bottom d-flex justify-content-between">
+										<div class="d-sm-flex align-items-center">
+											<!-- Avatar -->
+											<div class="avatar avatar-md flex-shrink-0">
+												<img class="avatar-img rounded-circle" src="{{ student.profile.photo.url }}" alt="avatar">
+											</div>
+											<!-- Info -->
+											<div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
+												<h5 class="mb-0"><a href="#">{{ student.profile.user.first_name }} {{ student.profile.user.last_name }}</a></h5>
+												<span class="text-body small"><i class="fas fa-fw fa-map-marker-alt me-1 mt-1"></i>{{ student.profile.country }}</span>
+											</div>
+										</div>
+
+										<!-- Edit dropdown -->
+										<div class="dropdown text-end">
+											<a href="#" class="btn btn-sm btn-light btn-round small mb-0" role="button" id="dropdownShare2" data-bs-toggle="dropdown" aria-expanded="false">
+												<i class="bi bi-three-dots fa-fw"></i>
+											</a>
+											<!-- dropdown button -->
+											<ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded" aria-labelledby="dropdownShare2">
+												<li><a class="dropdown-item" href="#"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit</a></li>
+												<li><a class="dropdown-item" href="#"><i class="bi bi-trash fa-fw me-2"></i>Remove</a></li>
+											</ul>
+										</div>
+									</div>
+
+									<div class="card-body">
+										<!-- Payments -->
+										<div class="d-flex justify-content-between align-items-center mb-3">
+											<div class="d-flex align-items-center">
+												<div class="icon-md bg-success bg-opacity-10 text-success rounded-circle flex-shrink-0"><i class="bi bi-currency-dollar fa-fw"></i></div>
+												<h6 class="mb-0 ms-2 fw-light">Payments</h6>
+											</div>
+											<span class="mb-0 fw-bold">$6,205</span>
+										</div>
+
+										<!-- Total courses -->
+										<div class="d-flex justify-content-between align-items-center mb-3">
+											<div class="d-flex align-items-center">
+												<div class="icon-md bg-purple bg-opacity-10 text-purple rounded-circle flex-shrink-0"><i class="fas fa-book fa-fw"></i></div>
+												<h6 class="mb-0 ms-2 fw-light">Total Course</h6>
+											</div>
+											<span class="mb-0 fw-bold">21</span>
+										</div>
+
+										<!-- Progress -->
+										<div class="overflow-hidden">
+											<h6 class="mb-0">85%</h6>
+											<div class="progress progress-sm bg-primary bg-opacity-10">
+												<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<!-- Card footer -->
+									<div class="card-footer bg-transparent border-top">
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<!-- Rating star -->
+											<h6 class="mb-2 mb-sm-0">
+												<i class="bi bi-calendar fa-fw text-orange me-2"></i><span class="text-body">Join at:</span> {{ student.profile.create_date|date }}
+											</h6>
+											<!-- Buttons -->
+											<div class="text-end text-primary-hover">
+												<a href="#" class="btn btn-link text-body p-0 mb-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Message" aria-label="Message">
+													<i class="bi bi-envelope-fill"></i>
+												</a>
+												<a href="#" class="btn btn-link text-body p-0 mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Block" aria-label="Block">
+													<i class="fas fa-ban"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Card item END -->
+{% endfor %}
+						</div>
+					</div>
+					<!-- Tabs content item END -->
+
+					<!-- Tabs content item START -->
+					<div class="tab-pane fade {% if request.GET.tab == 'list' %}show active{% endif %}" id="nav-list-tab-1">
+						<div class="table-responsive border-0">
+							<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+								<!-- Table head -->
+								<thead>
+									<tr>
+										<th scope="col" class="border-0 rounded-start">Student name</th>
+										<th scope="col" class="border-0">Join date</th>
+										<th scope="col" class="border-0">Progress</th>
+										<th scope="col" class="border-0">Courses</th>
+										<th scope="col" class="border-0">Payments</th>
+										<th scope="col" class="border-0 rounded-end">Action</th>
+									</tr>
+								</thead>
+
+								<!-- Table body START -->
+								<tbody>
+{% for student in student_list %}
+									<!-- Table row -->
+									<tr>
+										<!-- Table data -->
+										<td>
+											<div class="d-flex align-items-center position-relative">
+												<!-- Image -->
+												<div class="avatar avatar-md">
+													<img src="{{ student.profile.photo.url }}" class="rounded-circle" alt="">
+												</div>
+												<div class="mb-0 ms-3">
+													<!-- Title -->
+													<h6 class="mb-0"><a href="#" class="stretched-link">{{ student.profile.user.first_name }} {{ student.profile.user.last_name }}</a></h6>
+													<span class="text-body small"><i class="fas fa-fw fa-map-marker-alt me-1 mt-1"></i>{{ student.profile.country }}</span>
+												</div>
+											</div>
+										</td>
+
+										<!-- Table data -->
+										<td>{{ student.profile.create_date|date }}</td>
+
+										<!-- Table data -->
+										<td class="text-center text-sm-start">
+											<div class="overflow-hidden">
+												<h6 class="mb-0">85%</h6>
+												<div class="progress progress-sm bg-primary bg-opacity-10">
+													<div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+													</div>
+												</div>
+											</div>
+										</td>
+
+										<!-- Table data -->
+										<td>21</td>
+
+										<!-- Table data -->
+										<td>$6,205</td>
+
+										<!-- Table data -->
+										<td>
+											<a href="#" class="btn btn-light btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+												<i class="bi bi-eye"></i>
+											</a>
+											<a href="#" class="btn btn-light btn-round me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Message">
+												<i class="bi bi-envelope"></i>
+											</a>
+											<button class="btn btn-light btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Block">
+												<i class="fas fa-ban"></i>
+											</button>
+										</td>
+									</tr>
+{% endfor %}
+
+								</tbody>
+								<!-- Table body END -->
+							</table>
+						</div>
+					</div>
+					<!-- Tabs content item END -->
+
+				</div>
+				<!-- Tabs content END -->
+			</div>
+			<!-- Card body END -->
+
+			<!-- Card footer START -->
+			<div class="card-footer bg-transparent pt-0 px-0">
+				 <!-- Pagination START -->
+                <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+                    <!-- Content -->
+                    <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }}
+                        to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
+
+                    <!-- Pagination START -->
+                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?page={{ page_obj.previous_page_number }}&tab={{ request.GET.tab|default:'grid' }}"
+                                                                  tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i
+                                            class="fas fa-angle-left" style="color: #d3d3d3;"></i></a></li>
+                                {% endif %}
+
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                        {% if p == page_obj.number %}
+                                            <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item mb-0"><a class="page-link"
+                                                                          href="?page={{ p }}">{{ p }}</a></li>
+                                        {% endif %}
+                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                        <li class="page-item mb-0"><a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                                        </li>
+                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                        <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?page={{ page_obj.next_page_number }}&tab={{ request.GET.tab|default:'grid' }}"><i
+                                            class="fas fa-angle-right"></i></a></li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i
+                                            class="fas fa-angle-right"
+                                            style="color: #d3d3d3;"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                    <!-- Pagination END -->
+
+
+                </div>
+                <!-- Pagination END -->
+			</div>
+			<!-- Card footer END -->
+		</div>
+	</div>
+	<!-- Page main content END -->
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js' %}"></script>
+{% endblock %}
+{% block my_scripts %}
+   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get all tab links
+        const tabLinks = document.querySelectorAll('.nav-link[data-bs-toggle="tab"]');
+
+        // Add click event listeners to tab links
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+
+                // Get the tab parameter from the data-tab attribute
+                const tab = this.getAttribute('data-tab');
+
+                // Update the URL with the selected tab
+                const url = new URL(window.location);
+                url.searchParams.set('tab', tab);
+                window.history.pushState({}, '', url);
+
+                // Manually show the selected tab content
+                const tabPane = document.querySelector(this.getAttribute('href'));
+                new bootstrap.Tab(tabPane).show();
+            });
+        });
+    });
+</script>
+{% endblock%}

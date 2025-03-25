@@ -22,8 +22,15 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_pages.urls')),
-    path('tutors/', include('ap2_tutor.urls', namespace='Instructors')),
+    path('myadmin/', include('app_admin.urls', namespace='my_admin')),
+    path('staff/', include('app_staff.urls', namespace='staff')),
+    path('tutor/', include('ap2_tutor.urls', namespace='Instructors')),
+    path('student/', include('ap2_student.urls', namespace='student')),
     path('accounts/', include('app_accounts.urls', namespace='accounts')),
     path('schedule/', include('ap2_meeting.urls', namespace='schedule')),
+    path('payments/', include('payments.urls', namespace='payments')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

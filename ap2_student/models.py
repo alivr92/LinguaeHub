@@ -1,5 +1,10 @@
 from django.db import models
 
+NOTIFICATION_TYPE = [
+    ('appointment_scheduled', 'Appointment Scheduled'),
+    ('appointment_cancelled', 'Appointment Cancelled'),
+]
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -21,3 +26,27 @@ class Student(models.Model):
         return self.profile.user.username
 
 
+# Client Notification
+class CNotification(models.Model):
+    client = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True, blank=True)
+    appointment = models.ForeignKey('ap2_meeting.Session', on_delete=models.CASCADE, null=True, blank=True,
+                                    related_name='student_appointment_notification')
+    type = models.CharField(max_length=50, choices=NOTIFICATION_TYPE)
+    seen = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Notification'
+
+    def __str__(self):
+        return f'Student: {self.client.profile.user.first_name} {self.client.profile.user.last_name} Notification'
+
+
+class WishList(models.Model):
+    student = models.ForeignKey('Student', on_delete=models.CASCADE, related_name='wishlist')
+    tutor = models.ForeignKey('ap2_tutor.Tutor', on_delete=models.CASCADE, related_name='wishlisted_by')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('student', 'tutor')  # Prevent duplicates
+        ordering = ['created_at']

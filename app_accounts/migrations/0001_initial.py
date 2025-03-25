@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('user_type', models.CharField(choices=[('student', 'Student'), ('tutor', 'Tutor'), ('admin', 'Admin'), ('staff', 'Staff')], default='student', max_length=20)),
                 ('title', models.CharField(blank=True, max_length=100)),
                 ('lang_native', models.CharField(choices=[('Persian', 'Persian'), ('English', 'English'), ('Dutch', 'Dutch'), ('Spanish', 'Spanish'), ('French', 'French'), ('Chinese', 'Chinese'), ('Italian', 'Italian'), ('Turkish', 'Turkish'), ('Swedish', 'Swedish'), ('Korean', 'Korean'), ('Russian', 'Russian'), ('Japanese', 'Japanese'), ('Ukranian', 'Ukranian'), ('Arabic', 'Arabic')], default='Unknown', max_length=100)),
-                ('bio', ckeditor.fields.RichTextField(blank=True)),
+                ('bio', models.TextField(blank=True)),
                 ('availability', models.BooleanField(blank=True, default=True, max_length=2)),
                 ('rating', models.FloatField(default=0.0)),
                 ('reviews_count', models.IntegerField(default=0)),

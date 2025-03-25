@@ -1,0 +1,44 @@
+<!-- Left sidebar START -->
+<div class="col-xl-3">
+  <!-- Responsive offcanvas body START -->
+  <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+    <!-- Offcanvas header -->
+    <div class="offcanvas-header bg-light">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">My profile</h5>
+      <button  type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+    </div>
+    <!-- Offcanvas body -->
+    <div class="offcanvas-body p-3 p-xl-0">
+      <div class="bg-dark border rounded-3 pb-0 p-3 w-100">
+        <!-- Dashboard menu -->
+        <div class="list-group list-group-dark list-group-borderless collapse-list">
+          <a class="list-group-item {% if 'panel' in request.path %}active{% endif %}" href="{% url 'tutor:dt_home' %}"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+          <a class="list-group-item {% if 'manage-course' in request.path %}active{% endif %}" href="{% url 'tutor:dt_manage_course' %}"><i class="bi bi-basket fa-fw me-2"></i>My Courses</a>
+          <!-- Collapse menu -->
+          <a class="list-group-item  {% if 'appointments' in request.path %}active{% endif %}" data-bs-toggle="collapse" href="#collapseauthentication" role="button" aria-expanded="false" aria-controls="collapseauthentication">
+            <i class="bi bi-calendar4-week fa-fw me-2"></i>Appointments
+          </a>
+          <!-- Submenu -->
+          <ul class="nav collapse flex-column pb-3 {% if 'appointments' in request.path %}show{% endif %}" id="collapseauthentication" data-bs-parent="#navbar-sidebar">
+            <li class="nav-item"> <a class="nav-link {% if 'manual' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments' %}"><i class="far fa-fw fa-edit me-2"></i>  Manual Add</a></li>
+            <li class="nav-item"> <a class="nav-link {% if 'edit' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments_edit' %}"><i class="far fa-fw fa-edit me-2"></i>  Edit Table</a></li>
+            <li class="nav-item"> <a class="nav-link {% if 'table' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments_vtable' %}#vtable"><i class="bi bi-calendar-week fa-fw me-2"></i> Visual Table</a></li>
+            <li class="nav-item"> <a class="nav-link {% if 'settings' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments_settings' %}"><i class="bi bi-speedometer fa-fw me-2"></i> Settings</a></li>
+          </ul>
+          <a class="list-group-item {% if 'quiz' in request.path %}active{% endif %}" href="{% url 'tutor:dt_quiz' %}"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
+          <a class="list-group-item {% if 'earning' in request.path %}active{% endif %}" href="{% url 'tutor:dt_earning' %}"><i class="bi bi-graph-up fa-fw me-2"></i>Earnings</a>
+          <a class="list-group-item {% if 'student-list' in request.path %}active{% endif %}" href="{% url 'tutor:dt_student_list' %}"><i class="bi bi-people fa-fw me-2"></i>Students</a>
+          <a class="list-group-item {% if 'order' in request.path %}active{% endif %}" href="{% url 'tutor:dt_order' %}"><i class="bi bi-folder-check fa-fw me-2"></i>Orders</a>
+          <a class="list-group-item {% if 'review' in request.path %}active{% endif %}" href="{% url 'tutor:dt_reviews' %}"><i class="bi bi-star fa-fw me-2"></i>Reviews</a>
+          <a class="list-group-item {% if 'edit-profile' in request.path %}active{% endif %}" href="{% url 'tutor:dt_edit' user.profile.tutor_profile.pk %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
+          <a class="list-group-item {% if 'payout' in request.path %}active{% endif %}" href="{% url 'tutor:dt_payout' %}"><i class="bi bi-wallet2 fa-fw me-2"></i>Payouts</a>
+          <a class="list-group-item {% if 'setting' in request.path %}active{% endif %}" href="{% url 'tutor:dt_setting' %}"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
+          <a class="list-group-item {% if 'delete-account' in request.path %}active{% endif %}" href="{% url 'tutor:dt_delete_account' user.profile.tutor_profile.pk %}"><i class="bi bi-trash fa-fw me-2"></i>Delete Profile</a>
+          <a class="list-group-item text-danger bg-danger-soft-hover" href="{% url 'accounts:sign_out' %}"><i class="fas fa-sign-out-alt fa-fw   me-2"></i>Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Responsive offcanvas body END -->
+</div>
+<!-- Left sidebar END -->

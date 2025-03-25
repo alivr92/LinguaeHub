@@ -1,6 +1,7 @@
 import pytz
 from django.db import models
 from django.db.models import Avg
+from shortuuid.django_fields import ShortUUIDField
 
 from django.contrib.auth.models import User
 from ap2_tutor.models import Tutor
@@ -13,6 +14,7 @@ SESSION_STATUS_CHOICES = [
     ("confirmed", "Confirmed"),
     ("finished", "Finished"),
     ("cancelled", "Cancelled"),
+    ("scheduled", "Scheduled"),
     ("rescheduled", "Rescheduled"),
     ("partially_attended", "Partially Attended"),
 ]
@@ -22,8 +24,9 @@ SESSION_LENGTH = [('1', '30 min'), ('2', '1 Hour'), ('3', '90 min'), ('4', '2 Ho
 SESSION_TYPES = [('private', 'Private'), ('group', 'Group'), ('trial', 'Trial')]
 TIMEZONE_CHOICES = zip(pytz.all_timezones, pytz.all_timezones)
 AVAILABLE_STATUS_CHOICES = [('free', 'Free'), ('booked', 'Booked'), ('reserving', 'Reserving')]
-REVIEW_STATUS_CHOICES = [('pending', 'Pending'), ('published', 'Published')]
+REVIEW_STATUS_CHOICES = [('pending', 'Pending'), ('published', 'Published'), ('archived', 'Archived')]
 RATING = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
+
 
 class AppointmentSetting(models.Model):
     tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="appointment_settings", unique=True)
@@ -50,11 +53,13 @@ class Availability(models.Model):
 
 
 class Session(models.Model):
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="sessions", default=None, blank=False)
-    students = models.ManyToManyField(Student, related_name="sessions", blank=False)
+    appointment_id = ShortUUIDField(length=6, max_length=10, alphabet="1234567890", default=None, blank=True)
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="tutor_sessions", default=None, blank=False)
+    students = models.ManyToManyField(Student, related_name="students_sessions", blank=False)
+    # reviews = models.ManyToManyField('ap2_meeting.Review', related_name="reviews_sessions", blank=True)
     subject = models.CharField(max_length=100, blank=False)
-    session_type = models.CharField(max_length=10, choices=[('private', 'Private'), ('group', 'Group')],
-                                    default='private', blank=False)
+    session_type = models.CharField(max_length=10, choices=SESSION_TYPES, default='private', blank=False)
+    cost = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, )
     start_session_utc = models.DateTimeField(default=timezone.now)
     end_session_utc = models.DateTimeField(default=timezone.now)
     status = models.CharField(max_length=20, choices=SESSION_STATUS_CHOICES, default='pending')
@@ -68,7 +73,7 @@ class Session(models.Model):
                                        related_name='rescheduled_sessions')
 
     def __str__(self):
-        return f"{self.subject} session with {self.tutor.profile.user.username} at {self.start_session_utc}"
+        return f"{self.subject} session , ID: {self.appointment_id} by {self.tutor.profile.user.username} at {self.start_session_utc} - cost: {self.cost}"
 
     def clean(self):
         super().clean()
@@ -108,15 +113,19 @@ class Session(models.Model):
 
 
 class Review(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="reviews")
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="reviews")
-    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="reviews", null=True, blank=True,)  # ForeignKey for flexibility
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student_reviews")
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="tutor_reviews")
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name="reviews", null=True,
+                                blank=True, )  # ForeignKey for flexibility
     # session = models.ForeignKey('Session', on_delete=models.CASCADE, related_name="reviews")
     rate_tutor = models.IntegerField(choices=RATING, null=True, blank=False)
     rate_session = models.IntegerField(choices=RATING, null=True, blank=False)
+    like_count = models.PositiveIntegerField(null=True, blank=True, default=0)
+    dislike_count = models.PositiveIntegerField(null=True, blank=True, default=0)
     message = models.TextField(blank=True, max_length=300)
-    create_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='free')
+    is_published = models.BooleanField(default=False)
+    create_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(default=timezone.now, blank=True)
 
     def __str__(self):
@@ -124,3 +133,11 @@ class Review(models.Model):
 
     class Meta:
         unique_together = ('student', 'session')  # Ensure a student can only review a session once
+
+    def save(self, *args, **kwargs):
+        # Automatically update status to 'published' if 'is_published' is True
+        if self.is_published:
+            self.status = 'published'
+        else:
+            self.status = 'pending'
+        super().save(*args, **kwargs)

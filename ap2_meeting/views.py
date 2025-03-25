@@ -62,6 +62,7 @@ def parse_date_time(date_str):
             continue
     raise ValueError(f"Time data '{date_str}' does not match any known format")
 
+
 def parse_date(date_str):
     """
     Parses a date string into a datetime object using a list of predefined formats.
@@ -83,6 +84,7 @@ def parse_date(date_str):
         except ValueError:
             continue
     raise ValueError(f"date '{date_str}' does not match any known format")
+
 
 # save available tutor times
 @csrf_exempt
@@ -109,7 +111,8 @@ def save_available_tutor_times(request):
                 deletableTimeSlots = data.get('DeletableTimeSlots', [])
                 print(f'deletableTimeSlots: {deletableTimeSlots}')
                 if not (available_sessions or deletableTimeSlots):
-                    return JsonResponse({'status': 'error', 'message': 'No available sessions provided. No for delete!'})
+                    return JsonResponse(
+                        {'status': 'error', 'message': 'No available sessions provided. No for delete!'})
 
                 # Bulk delete all ids which are in deletableTimeSlots list!
                 Availability.objects.filter(id__in=deletableTimeSlots).delete()
@@ -118,13 +121,15 @@ def save_available_tutor_times(request):
                 for avail_s in available_sessions:
                     # Validate required fields
                     if not all(key in avail_s for key in ['startTime', 'endTime', 'timezone', 'tutorId']):
-                        return JsonResponse({'status': 'error', 'message': 'Missing required fields in available session.'})
+                        return JsonResponse(
+                            {'status': 'error', 'message': 'Missing required fields in available session.'})
 
                     if not (logged_in_tutor_id == int(avail_s.get('tutorId'))):
                         # Debugging lines (DELETE BEFORE LAUNCH) -------------------------------------
                         s_tutor_obj = get_object_or_404(Tutor, id=int(avail_s.get('tutorId')))
                         logged_in_tutor_obj = get_object_or_404(Tutor, id=logged_in_tutor_id)
-                        print(f'Session Tutor: {s_tutor_obj.profile.user.first_name}, {s_tutor_obj.profile.user.last_name}')
+                        print(
+                            f'Session Tutor: {s_tutor_obj.profile.user.first_name}, {s_tutor_obj.profile.user.last_name}')
                         print(
                             f'Logged in Tutor: {logged_in_tutor_obj.profile.user.first_name}, {logged_in_tutor_obj.profile.user.last_name}')
                         messages.error(request, "You just authorized to define your available times. Not more!")
@@ -157,7 +162,8 @@ def save_available_tutor_times(request):
 
                         print(
                             f'Start Avail Time (Local): {start_avail_time_local}, End Session (Local): {end_avail_time_local}')
-                        print(f'Start Avail Time (UTC): {start_avail_time_utc}, End Session (UTC): {end_avail_time_utc}')
+                        print(
+                            f'Start Avail Time (UTC): {start_avail_time_utc}, End Session (UTC): {end_avail_time_utc}')
 
                         # Create Availability object
                         availability = Availability(
@@ -560,6 +566,7 @@ class DAppointments(LoginRequiredMixin, TemplateView):
         context['tutor_id'] = tutor_profile.id
         return context
 
+
 class DAppointments_BACKUP(LoginRequiredMixin, TemplateView):
     template_name = 'ap2_meeting/dashboard/d_appointments_manual.html'
 
@@ -599,6 +606,8 @@ class DAppointments_BACKUP(LoginRequiredMixin, TemplateView):
         context['tutor_id'] = tutor_profile.id
 
         return context
+
+
 def navigate_week_BACKUP(request, direction):
     week_offset = {
         'next': 7,
@@ -609,8 +618,6 @@ def navigate_week_BACKUP(request, direction):
     start_date_str = request.GET.get('start_date', datetime.today().strftime('%m/%d/%Y'))
     start_date = datetime.strptime(start_date_str, '%m/%d/%Y') + timedelta(days=week_offset)
     return redirect(f'/schedule/dashboard/appointments/manual/?start_date={start_date.strftime("%m/%d/%Y")}')
-
-
 
 
 class DAppointmentsVTable(LoginRequiredMixin, TemplateView):
