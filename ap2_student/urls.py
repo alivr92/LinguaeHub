@@ -19,5 +19,5 @@ urlpatterns = [
     path('dashboard/setting/', views.DSSetting.as_view(), name='ds_setting'),
     path('dashboard/delete-account/<int:pk>/', views.DSDeleteAccount.as_view(), name='ds_delete_account'),
 
-    path('/wishlist/toggle/', views.toggle_wishlist, name='toggle_wishlist'),
+    # path('wishlist/toggle/', views.toggle_wishlist, name='toggle_wishlist'),
 ]
