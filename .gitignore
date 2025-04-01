@@ -139,6 +139,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+envLinguaeHub/
+LingoEnv/
+
+
+
 
 # Spyder project settings
 .spyderproject
