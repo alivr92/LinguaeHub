@@ -123,7 +123,7 @@ WSGI_APPLICATION = 'LinguaeHub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'linguaehub_db2',
+        'NAME': 'lingo_db',
         'USER': 'postgres',
         'PASSWORD': '6361834875',
         'HOST': 'localhost',
@@ -188,6 +188,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'victorvr.dev@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '891846129@LiDUOLiNGO DEV')
+EMAIL_USE_TLS = True
 
 # Stripe settings
 STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY',

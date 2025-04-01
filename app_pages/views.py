@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.auth.models import User
 from ap2_tutor.models import Tutor
 from ap2_student.models import Student
 from ap2_meeting.models import Session, Review
@@ -42,6 +45,22 @@ class ContactUs(FormView):
     success_url = reverse_lazy('app_pages:contact_us')
 
     def form_valid(self, form):
+        fullname = self.request.POST.get('fullname')
+        phone = self.request.POST.get('phone')
+        email = self.request.POST.get('email')
+        message = self.request.POST.get('message')
+
+        admin_info = User.objects.get(is_superuser=True)
+        admin_email = admin_info.email
+
+        send_mail(
+            f"Subject: New message from:{fullname}, Email:{email}, Phone: {phone} " ,
+            f"message: {message}",
+            settings.EMAIL_HOST_USER,
+            [admin_email],
+            fail_silently=False,
+        )
+
         form.save()  # Save the form data to the database
         messages.success(self.request, 'We received your message. We will get back to you soon.')
         return super().form_valid(form)
