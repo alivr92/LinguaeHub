@@ -53,8 +53,10 @@ class ContactUs(FormView):
         admin_info = User.objects.get(is_superuser=True)
         admin_email = admin_info.email
 
+        # print('settings.EMAIL_HOST_USER: ', settings.EMAIL_HOST_USER)
+        # print('settings.EMAIL_HOST_USER: ', settings.EMAIL_HOST_PASSWORD)
         send_mail(
-            f"Subject: New message from:{fullname}, Email:{email}, Phone: {phone} " ,
+            f"Subject: New message from:{fullname}, Email:{email}, Phone: {phone} ",
             f"message: {message}",
             settings.EMAIL_HOST_USER,
             [admin_email],

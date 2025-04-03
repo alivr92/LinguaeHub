@@ -2,7 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm&quot;">
+      <change afterPath="$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/static/app_pages/css/templatemo-edu-meeting.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/videos/bridge.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/videos/city_night1.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/videos/city_night2.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/videos/class.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/videos/course-video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/videos/london.mp4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinguaeHub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,7 +48,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="284">
+              <caret line="196" column="54" selection-start-line="196" selection-start-column="54" selection-end-line="196" selection-end-column="54" />
               <folding>
                 <element signature="e#312#336#0" expanded="true" />
                 <element signature="e#5558#10708#0" />
@@ -46,15 +58,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_pages/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="160">
+              <caret line="71" column="47" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
               <folding>
+                <element signature="e#0#45#0" expanded="true" />
                 <element signature="e#441#1563#0" />
                 <element signature="e#1597#1635#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="39" column="58" lean-forward="true" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
+              <folding>
+                <element signature="e#924#8215#0#HTML" />
+                <element signature="e#1034#8193#0#HTML" />
+                <element signature="e#8289#16473#0#HTML" />
+                <element signature="e#8392#16464#0#HTML" />
+                <element signature="e#16547#16947#0#HTML" />
+                <element signature="e#16617#16925#0#HTML" />
+                <element signature="e#39746#40654#0#HTML" />
+                <element signature="e#40717#41582#0#HTML" />
+                <element signature="e#41645#42523#0#HTML" />
+                <element signature="e#42586#43463#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pages_style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="18" selection-start-line="18" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -64,18 +107,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="HTML File" />
         <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>review</find>
-      <find>discount</find>
-      <find>Address</find>
       <find>Most Selling Courses</find>
       <find>tabs-5</find>
       <find>rating</find>
@@ -103,6 +143,9 @@
       <find>content_type</find>
       <find>&quot;content_type&quot;: 39</find>
       <find>env</find>
+      <find>video-overlay header-text</find>
+      <find>.jpg</find>
+      <find>dark</find>
     </findStrings>
     <replaceStrings>
       <replace>href=&quot;{% static 'assets</replace>
@@ -127,8 +170,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ap_content_filler/apps.py" />
-        <option value="$PROJECT_DIR$/app_content_filler/apps.py" />
         <option value="$PROJECT_DIR$/app_pages/context_processors.py" />
         <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_setting.html" />
         <option value="$PROJECT_DIR$/app_admin/forms.py" />
@@ -161,7 +202,6 @@
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" />
         <option value="$PROJECT_DIR$/app_content_filler/admin.py" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" />
         <option value="$PROJECT_DIR$/ap2_student/views.py" />
@@ -176,8 +216,11 @@
         <option value="$PROJECT_DIR$/ap2_student/urls.py" />
         <option value="$PROJECT_DIR$/db1.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
         <option value="$PROJECT_DIR$/app_pages/views.py" />
+        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
+        <option value="$PROJECT_DIR$/app_pages/static/app_pages/css/templatemo-edu-meeting.css" />
+        <option value="$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" />
       </list>
     </option>
   </component>
@@ -228,7 +271,64 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="videos" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -253,19 +353,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler\templatetags" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_admin\templates\app_admin\dashboard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard\includes" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\dashboard\includes" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_staff\templates\app_staff" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_staff\templates\dashboard" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_admin\templates\app_admin\dashboard" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\static\assets\videos" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\static\app_pages\css" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler\templatetags" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -383,7 +483,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1616" height="916" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.23625" side_tool="true" weight="0.32917705" />
@@ -391,8 +490,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" visible="true" weight="0.3416459" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.185" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" weight="0.3416459" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.185" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -458,51 +557,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="151" column="8" selection-start-line="151" selection-start-column="8" selection-end-line="197" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1082">
-          <caret line="207" lean-forward="true" selection-start-line="207" selection-end-line="207" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="734" column="90" selection-start-line="734" selection-start-column="90" selection-end-line="734" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django_quill/fields.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django_quill/forms.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="877" column="2" selection-start-line="877" selection-start-column="2" selection-end-line="877" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/admin/change_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="6" column="60" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_content_filler/context_processors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -746,27 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="127" column="19" lean-forward="true" selection-start-line="127" selection-start-column="19" selection-end-line="127" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="126" column="54" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1685" column="17" selection-start-line="1685" selection-start-column="17" selection-end-line="1685" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ap2_student/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="888">
@@ -777,9 +810,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/environs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="370" column="8" selection-start-line="370" selection-start-column="8" selection-end-line="370" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="284">
+          <caret line="196" column="54" selection-start-line="196" selection-start-column="54" selection-end-line="196" selection-end-column="54" />
           <folding>
             <element signature="e#312#336#0" expanded="true" />
             <element signature="e#5558#10708#0" />
@@ -787,13 +831,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="134" column="6" selection-start-line="134" selection-start-column="6" selection-end-line="134" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app_pages/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        <state relative-caret-position="160">
+          <caret line="71" column="47" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
           <folding>
+            <element signature="e#0#45#0" expanded="true" />
             <element signature="e#441#1563#0" />
             <element signature="e#1597#1635#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/edu-meeting/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="19" column="72" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="72" />
+          <folding>
+            <element signature="n#ul#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#ul#0;n#nav#0;n#div#0;n#div#0;n#div#0;n#header#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/static/app_pages/css/templatemo-edu-meeting.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="690" selection-start-line="690" selection-end-line="690" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/sectional.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3399">
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="24" column="76" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/staticfiles/assets/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="2609" column="1" lean-forward="true" selection-start-line="2609" selection-start-column="1" selection-end-line="2609" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="18" selection-start-line="18" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="39" column="58" lean-forward="true" selection-start-line="39" selection-start-column="58" selection-end-line="39" selection-end-column="58" />
+          <folding>
+            <element signature="e#924#8215#0#HTML" />
+            <element signature="e#1034#8193#0#HTML" />
+            <element signature="e#8289#16473#0#HTML" />
+            <element signature="e#8392#16464#0#HTML" />
+            <element signature="e#16547#16947#0#HTML" />
+            <element signature="e#16617#16925#0#HTML" />
+            <element signature="e#39746#40654#0#HTML" />
+            <element signature="e#40717#41582#0#HTML" />
+            <element signature="e#41645#42523#0#HTML" />
+            <element signature="e#42586#43463#0#HTML" />
           </folding>
         </state>
       </provider>
