@@ -192,16 +192,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'victorvr.dev@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD',
-                                'ktuo hnnf eewx qzih')
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 
 # Stripe settings
-STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY',
-                             default='pk_test_51R1v3dRcG1a2N3sXWKm6zAGYJplNq0sxto5PC1Pak8VG4u9hv6Ee9nbS5U27tyi5JgXpAuhfBx9rLcIm1LIUhBOG001HHKFe4g')
-STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY',
-                        default='sk_test_51R1v3dRcG1a2N3sXSM5UJgh1gytUWQGk1uOkdaiFaFL5NA8JqYwqSQ7Z5rCfWxq86NfABM3XFnxXgL2vtgtCS4rT00KQy5aFpI')
+STRIPE_PUBLISHABLE_KEY = env.str('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = env.str('STRIPE_SECRET_KEY')
 
 stripe.api_version = '2020-08-27'
 stripe.api_key = STRIPE_SECRET_KEY
