@@ -18,8 +18,8 @@ class CFTextAdmin(admin.ModelAdmin):
 
 @admin.register(CFRichText)
 class CFRichTextAdmin(admin.ModelAdmin):
-    list_display = ('key', 'value')
-    search_fields = ('key', 'value')
+    list_display = ('key', )
+    search_fields = ('key',)
 
 
 @admin.register(CFEmail)

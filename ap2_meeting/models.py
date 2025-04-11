@@ -29,7 +29,7 @@ RATING = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
 
 
 class AppointmentSetting(models.Model):
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name="appointment_settings", unique=True)
+    tutor = models.OneToOneField(Tutor, on_delete=models.CASCADE, related_name="appointment_settings")
     provider_timezone = models.CharField(max_length=50, choices=TIMEZONE_CHOICES, default="UTC")
     session_length = models.CharField(max_length=10, choices=SESSION_LENGTH, default="2")
     week_start = models.CharField(max_length=10, choices=WEEK_DAYS, default="0")

@@ -11,22 +11,22 @@ def home(request):
         'address_line1': 'A108 Adam Street',
         'address_line2': 'Dresden, Saxony 535022',
     }
-    return render(request, 'app_pages/home.html', context)
+    return render(request, 'pages/home.html', context)
 
 
 def instructors(request):
     context = {}
-    return render(request, 'tutors/instructor-list.html', context)
+    return render(request, 'ap2_tutor/tutor_list.html', context)
 
 
 def about(request):
     context = {}
-    return render(request, 'pages/about.html', context)
+    return render(request, 'app_pages/about.html', context)
 
 
 def contact(request):
     context = {}
-    return render(request, 'pages/contact.html', context)
+    return render(request, 'app_pages/contact-us.html', context)
 
 
 def services(request):

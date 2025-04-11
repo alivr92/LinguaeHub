@@ -27,6 +27,7 @@ class PageAdminForm(forms.ModelForm):
         model = Page
         fields = '__all__'
 
+
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     form = PageAdminForm

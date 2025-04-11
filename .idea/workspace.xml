@@ -2,16 +2,163 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm&quot;">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/static/app_blog/css/blog_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/templates/app_blog/blog_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/templates/app_blog/blog_detail2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/templates/app_blog/blog_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/templates/app_blog/posts_search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/templatetags/wp_filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_blog/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/static/img/group.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/static/img/private.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/static/img/self_study.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/includes/topbar.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Ali.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Ali.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinguaeHub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/videos/bridge.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/videos/city_night1.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/videos/city_night2.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/videos/class.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/videos/course-video.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/videos/london.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LinguaeHub/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_content_filler/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_content_filler/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/static/app_pages/css/templatemo-edu-meeting.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/blog-grid.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/css/avr_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/css/avr_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/css/iLanding.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/about-2.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/about-2.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/about-5.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/about-5.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/apple-touch-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/apple-touch-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/avatar-1.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/avatar-1.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/avatar-2.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/avatar-2.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/avatar-3.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/avatar-3.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/avatar-4.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/avatar-4.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/avatar-5.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/avatar-5.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-3.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-4.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-5.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-6.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-7.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/clients/client-8.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/clients/client-8.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/favicon.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/favicon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/features-illustration-1.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/features-illustration-1.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/features-illustration-2.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/features-illustration-2.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/features-illustration-3.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/features-illustration-3.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/illustration-1.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/illustration-1.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/phone-app-screen.webp" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/phone-app-screen.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/services.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/services.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/testimonials/testimonials-1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/testimonials/testimonials-1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/testimonials/testimonials-2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/testimonials/testimonials-2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/testimonials/testimonials-3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/testimonials/testimonials-3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/img/testimonials/testimonials-4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/img/testimonials/testimonials-4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/scss/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/scss/Readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/aos/aos.cjs.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/aos/aos.cjs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/aos/aos.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/aos/aos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/aos/aos.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/aos/aos.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/aos/aos.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/aos/aos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/aos/aos.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/aos/aos.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap-icons/bootstrap-icons.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap-icons/bootstrap-icons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap-icons/bootstrap-icons.json" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap-icons/bootstrap-icons.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap-icons/bootstrap-icons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap-icons/bootstrap-icons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap-icons/fonts/bootstrap-icons.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-grid.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-reboot.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap-utilities.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.rtl.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.rtl.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/bootstrap.rtl.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/bootstrap.rtl.min.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/css/prb.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/css/prb.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.bundle.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.bundle.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.esm.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.esm.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.esm.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.esm.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.esm.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.esm.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/bootstrap/js/bootstrap.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/bootstrap/js/bootstrap.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/glightbox/css/glightbox.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/glightbox/css/glightbox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/glightbox/css/glightbox.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/glightbox/css/glightbox.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/glightbox/js/glightbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/glightbox/js/glightbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/glightbox/js/glightbox.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/glightbox/js/glightbox.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/php-email-form/validate.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/php-email-form/validate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/purecounter/purecounter_vanilla.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/purecounter/purecounter_vanilla.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/purecounter/purecounter_vanilla.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/purecounter/purecounter_vanilla.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/swiper/swiper-bundle.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/swiper/swiper-bundle.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/swiper/swiper-bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/swiper/swiper-bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/vendor/swiper/swiper-bundle.min.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/static/app_pages/iLanding/assets/vendor/swiper/swiper-bundle.min.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/videos/bridge.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/static/pages/assets/videos/course-video.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/templates/pages/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/templates/pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/templates/pages/includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/templates/pages/includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/includes/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/templates/pages/includes/topbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_blog/context_processors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/templates/pages/includes/video-bg.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/video-bg.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/pages/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/02.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/03.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/04.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/05.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/06.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/06.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/07.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/07.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/08.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/08.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/09.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/09.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/10.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/11.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/12.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/13.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/13.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/14.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/14.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/15.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/16.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/16.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/17.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/17.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/event/18.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/event/18.jpg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,75 +189,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="348" lean-forward="true" selection-start-line="348" selection-end-line="348" />
+            <state relative-caret-position="4992">
+              <caret line="212" column="58" selection-start-line="212" selection-start-column="14" selection-end-line="212" selection-end-column="58" />
               <folding>
                 <element signature="e#312#336#0" expanded="true" />
-                <element signature="e#5821#10971#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.env">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_pages/views.py">
+        <entry file="file://$PROJECT_DIR$/app_blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="706">
-              <caret line="71" column="47" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
+            <state relative-caret-position="96">
+              <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home.html">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ap2_meeting/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
-              <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+            <state relative-caret-position="175">
+              <caret line="31" column="101" lean-forward="true" selection-start-line="31" selection-start-column="101" selection-end-line="31" selection-end-column="101" />
               <folding>
-                <element signature="e#924#8215#0#HTML" />
-                <element signature="e#1034#8193#0#HTML" />
-                <element signature="e#8289#16473#0#HTML" />
-                <element signature="e#8392#16464#0#HTML" />
-                <element signature="e#16547#16947#0#HTML" />
-                <element signature="e#16617#16925#0#HTML" />
-                <element signature="e#39746#40654#0#HTML" />
-                <element signature="e#40717#41582#0#HTML" />
-                <element signature="e#41645#42523#0#HTML" />
-                <element signature="e#42586#43463#0#HTML" />
+                <element signature="e#0#11#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pages_style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_content_filler/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="18" selection-start-line="18" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
+            <state relative-caret-position="127">
+              <caret line="21" column="27" lean-forward="true" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_blog/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+            <state relative-caret-position="312">
+              <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blog_detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_blog/templates/app_blog/blog_detail.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="285" column="96" selection-start-line="285" selection-start-column="96" selection-end-line="285" selection-end-column="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_blog/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="15" selection-start-line="4" selection-end-line="15" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,44 +276,44 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Start</find>
-      <find>Tutor</find>
-      <find>quill-display-about-us</find>
-      <find>skill_leve</find>
-      <find>_level.all</find>
-      <find>wishlist</find>
-      <find>Conta</find>
-      <find>News</find>
-      <find>Email</find>
-      <find>education theme, built specifically for the education centers which is dedicated to teaching and involve learn</find>
-      <find>email</find>
-      <find>Limit</find>
-      <find>drib</find>
-      <find>My C</find>
-      <find>Feedba</find>
-      <find>sign_up2</find>
-      <find>contenttypes.</find>
-      <find>contenttypes.contenttype</find>
-      <find>app_accounts</find>
-      <find>39</find>
-      <find>content_type</find>
-      <find>&quot;content_type&quot;: 39</find>
-      <find>env</find>
-      <find>video-overlay header-text</find>
-      <find>.jpg</find>
-      <find>dark</find>
-      <find>stat</find>
-      <find>settings</find>
-      <find>.env</find>
-      <find>static</find>
+      <find>figure</find>
+      <find>post.author</find>
+      <find>posts_by_tag</find>
+      <find>post.image</find>
+      <find>Comments</find>
+      <find>comment</find>
+      <find>submit_comment</find>
+      <find>slug_url_kwarg</find>
+      <find>wp_api_url</find>
+      <find>_fetch_related_by_any_term</find>
+      <find>_process_related_posts</find>
+      <find>_process_post</find>
+      <find>featured_image</find>
+      <find>related_posts</find>
+      <find>fetching YARPP related posts</find>
+      <find>'_embed':</find>
+      <find>print(f&quot;</find>
+      <find>post-detail</find>
+      <find>img</find>
+      <find>tag</find>
+      <find>min</find>
+      <find>Pagingatio</find>
+      <find>266</find>
+      <find>{% if request.GET %}{{ request.GET.urlencode }}&amp;{% endif %}</find>
+      <find>.jpg&quot;</find>
+      <find>src=&quot;assets/</find>
+      <find>require</find>
+      <find>post.title</find>
+      <find>posts</find>
+      <find>user.pro</find>
     </findStrings>
     <replaceStrings>
       <replace>href=&quot;{% static 'assets</replace>
@@ -166,15 +321,19 @@
       <replace>.png' %}&quot;</replace>
       <replace>student</replace>
       <replace>/</replace>
-      <replace>src=&quot;{% static 'assets/</replace>
       <replace>Tutor</replace>
-      <replace>.jpg' %}&quot;</replace>
       <replace>staff</replace>
       <replace>dstf_</replace>
       <replace>DSTF</replace>
       <replace>.svg' %}&quot;</replace>
       <replace>*</replace>
       <replace>r_tutor</replace>
+      <replace>app_pages/iLanding/assets/</replace>
+      <replace>bg-cat-</replace>
+      <replace>{{ CFChar.site_name }}</replace>
+      <replace># {% if request.GET %}{{ request.GET.urlencode }}&amp;{% endif %}</replace>
+      <replace>.jpg' %}&quot;</replace>
+      <replace>src=&quot;{% static 'assets/</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -183,41 +342,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_setting.html" />
-        <option value="$PROJECT_DIR$/app_admin/forms.py" />
-        <option value="$PROJECT_DIR$/app_admin/urls.py" />
-        <option value="$PROJECT_DIR$/app_admin/views.py" />
-        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_review.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/admin.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/forms.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templatetags/my_custom_filters.py" />
-        <option value="$PROJECT_DIR$/app_content_filler/context_processors.py" />
-        <option value="$PROJECT_DIR$/app_content_filler/models.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_review.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/views.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_home.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html" />
-        <option value="$PROJECT_DIR$/app_pages/admin.py" />
-        <option value="$PROJECT_DIR$/app_pages/templates/admin/change_form.html" />
-        <option value="$PROJECT_DIR$/app_content_filler/templatetags/__init__.py" />
-        <option value="$PROJECT_DIR$/app_content_filler/templatetags/my_filters.py" />
-        <option value="$PROJECT_DIR$/node_modules/quill-converter/convert.js" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
-        <option value="$PROJECT_DIR$/app_pages/forms.py" />
-        <option value="$PROJECT_DIR$/app_pages/models.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
-        <option value="$PROJECT_DIR$/ap2_student/models.py" />
-        <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_subscription.html" />
-        <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" />
-        <option value="$PROJECT_DIR$/app_content_filler/admin.py" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" />
         <option value="$PROJECT_DIR$/ap2_student/views.py" />
-        <option value="$PROJECT_DIR$/ap2_meeting/models.py" />
         <option value="$PROJECT_DIR$/ap2_meeting/admin.py" />
         <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_class_list.html" />
         <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" />
@@ -227,13 +354,45 @@
         <option value="$PROJECT_DIR$/app_accounts/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/ap2_student/urls.py" />
         <option value="$PROJECT_DIR$/db1.json" />
-        <option value="$PROJECT_DIR$/app_pages/views.py" />
         <option value="$PROJECT_DIR$/app_pages/static/app_pages/css/templatemo-edu-meeting.css" />
-        <option value="$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/pages/urls.py" />
+        <option value="$PROJECT_DIR$/pages/templates/pages/includes/navbar.html" />
+        <option value="$PROJECT_DIR$/pages/views.py" />
+        <option value="$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html" />
+        <option value="$PROJECT_DIR$/pages/templates/pages/includes/video-bg.html" />
+        <option value="$PROJECT_DIR$/pages/templates/pages/home.html" />
+        <option value="$PROJECT_DIR$/pages/templates/pages/base.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/base.html" />
+        <option value="$PROJECT_DIR$/LinguaeHub/urls.py" />
+        <option value="$PROJECT_DIR$/app_pages/urls.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html" />
+        <option value="$PROJECT_DIR$/app_pages/views.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
+        <option value="$PROJECT_DIR$/app_blog/templatetags/__init__.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/home.html" />
+        <option value="$PROJECT_DIR$/app_blog/templates/app_blog/blog-grid.html" />
+        <option value="$PROJECT_DIR$/app_blog/static/app_blog/css/blog_style.css" />
+        <option value="$PROJECT_DIR$/app_blog/templatetags/wp_filters.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/video-bg.html" />
+        <option value="$PROJECT_DIR$/app_blog/context_processors.py" />
         <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
+        <option value="$PROJECT_DIR$/app_blog/templates/app_blog/blog_grid.html" />
+        <option value="$PROJECT_DIR$/app_blog/templates/app_blog/blog_home.html" />
+        <option value="$PROJECT_DIR$/app_pages/admin.py" />
+        <option value="$PROJECT_DIR$/app_blog/models.py" />
+        <option value="$PROJECT_DIR$/app_blog/urls.py" />
+        <option value="$PROJECT_DIR$/app_blog/forms.py" />
+        <option value="$PROJECT_DIR$/app_blog/admin.py" />
+        <option value="$PROJECT_DIR$/app_blog/views.py" />
+        <option value="$PROJECT_DIR$/app_blog/templates/app_blog/blog_detail.html" />
+        <option value="$PROJECT_DIR$/ap2_meeting/models.py" />
+        <option value="$PROJECT_DIR$/app_content_filler/admin.py" />
       </list>
     </option>
   </component>
@@ -254,8 +413,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1284" />
-    <option name="y" value="-14" />
+    <option name="x" value="1358" />
+    <option name="y" value="-8" />
     <option name="width" value="1616" />
     <option name="height" value="916" />
   </component>
@@ -268,6 +427,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -278,7 +438,66 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_blog" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_blog" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_blog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_content_filler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="payments" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
@@ -294,26 +513,14 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="staticfiles" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -328,24 +535,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="GitIgnore" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myProject1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Proj_Anki" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard\includes" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\dashboard\includes" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_staff\templates\app_staff" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_staff\templates\dashboard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_admin\templates\app_admin\dashboard" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_blog\templates\app_blog" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\static\app_pages\iLanding" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages\iLanding" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages\includes" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_blog" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_blog\templates\app_blog" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\static\img" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages\includes" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\static\assets\videos" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\static\app_pages\css" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_student\templates\ap2_student\dashboard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler\templatetags" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_content_filler" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -463,6 +670,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1616" height="916" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.23625" side_tool="true" weight="0.32917705" />
@@ -470,7 +678,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" visible="true" weight="0.56857854" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" visible="true" weight="0.28054863" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.185" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
@@ -484,7 +692,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32917705" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5885287" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,344 +741,397 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app_content_filler/context_processors.py">
+    <entry file="file://$PROJECT_DIR$/pages/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/models.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="61" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="10" selection-end-column="82" />
+        <state relative-caret-position="144">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/admin.py">
+    <entry file="file://$PROJECT_DIR$/pages/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1656">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="15" lean-forward="true" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinguaeHub/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+          <folding>
+            <element signature="e#648#680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
-          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_content_filler/templatetags/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/templatetags/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/templatetags/meeting_custom_filters.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_content_filler/templatetags/CF_filters.py">
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/includes/navbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        <state relative-caret-position="336">
+          <caret line="14" column="40" lean-forward="true" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/quill-converter/convert.js" />
-    <entry file="file://$PROJECT_DIR$/app_accounts/templatetags/custom_filters.py">
+    <entry file="file://$PROJECT_DIR$/app_pages/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        <state relative-caret-position="126">
+          <caret line="10" column="64" selection-start-line="10" selection-start-column="64" selection-end-line="10" selection-end-column="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/forms.py">
+    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django/urls/resolvers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_bookmark.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="18" column="163" selection-start-line="18" selection-start-column="163" selection-end-line="18" selection-end-column="163" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_setting.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="34" lean-forward="true" selection-end-line="8" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_subscription.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="91" column="18" lean-forward="true" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/agb.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="768" column="81" selection-start-line="768" selection-start-column="81" selection-end-line="768" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/about.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="274" column="30" lean-forward="true" selection-start-line="274" selection-start-column="30" selection-end-line="274" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="120" column="40" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_content_filler/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-759">
-          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_content_filler/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="107" selection-start-line="16" selection-start-column="107" selection-end-line="16" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="231" column="78" selection-start-line="231" selection-start-column="78" selection-end-line="231" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/views.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="59" column="32" lean-forward="true" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1584">
-          <caret line="75" column="66" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="66" />
+        <state relative-caret-position="379">
+          <caret line="697" selection-start-line="697" selection-end-line="697" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="22" column="124" lean-forward="true" selection-start-line="22" selection-start-column="104" selection-end-line="22" selection-end-column="124" />
+        <state relative-caret-position="165">
+          <caret line="36" column="78" selection-start-line="36" selection-start-column="78" selection-end-line="36" selection-end-column="78" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html">
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="155" column="25" lean-forward="true" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
+        <state relative-caret-position="451">
+          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="156" column="111" selection-start-line="156" selection-start-column="111" selection-end-line="156" selection-end-column="111" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_class_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="147" column="72" lean-forward="true" selection-start-line="147" selection-start-column="72" selection-end-line="147" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1992">
-          <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0001_initial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/urls.py">
+    <entry file="file://$PROJECT_DIR$/app_blog/templatetags/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/urls.py">
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/iLanding/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+        <state relative-caret-position="212">
+          <caret line="406" column="61" selection-start-line="406" selection-start-column="61" selection-end-line="406" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db1.json">
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236016">
-          <caret line="9834" column="44" selection-start-line="9834" selection-start-column="44" selection-end-line="9834" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/shortuuid/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="888">
-          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/edu-meeting/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" column="72" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/static/app_pages/css/templatemo-edu-meeting.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="690" selection-start-line="690" selection-end-line="690" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/sectional.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3399">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="24" column="76" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/staticfiles/assets/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="2609" column="1" lean-forward="true" selection-start-line="2609" selection-start-column="1" selection-end-line="2609" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/static/app_pages/css/pages_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" selection-start-line="18" selection-start-column="2" selection-end-line="20" selection-end-column="3" />
+        <state relative-caret-position="360">
+          <caret line="15" column="41" lean-forward="true" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+        <state relative-caret-position="299">
+          <caret line="46" column="47" lean-forward="true" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/staticfiles/assets/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="8074" column="2" selection-start-line="8074" selection-start-column="2" selection-end-line="8075" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="122" column="14" lean-forward="true" selection-start-line="117" selection-end-line="122" selection-end-column="14" />
           <folding>
-            <element signature="e#924#8215#0#HTML" />
-            <element signature="e#1034#8193#0#HTML" />
-            <element signature="e#8289#16473#0#HTML" />
-            <element signature="e#8392#16464#0#HTML" />
-            <element signature="e#16547#16947#0#HTML" />
-            <element signature="e#16617#16925#0#HTML" />
-            <element signature="e#39746#40654#0#HTML" />
-            <element signature="e#40717#41582#0#HTML" />
-            <element signature="e#41645#42523#0#HTML" />
-            <element signature="e#42586#43463#0#HTML" />
+            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/app_blog/templatetags/wp_filters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
+        <state relative-caret-position="394">
+          <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/environs/__init__.py">
+    <entry file="file://$PROJECT_DIR$/app_blog/static/app_blog/css/blog_style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="384" column="8" selection-start-line="384" selection-start-column="8" selection-end-line="384" selection-end-column="8" />
+        <state relative-caret-position="120">
+          <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/video-bg.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="63" selection-start-line="13" selection-start-column="63" selection-end-line="13" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/templates/app_blog/blog_detail2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payments/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/context_processors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="683">
+          <caret line="124" lean-forward="true" selection-start-line="119" selection-start-column="7" selection-end-line="124" />
+          <folding>
+            <element signature="e#0#64#0" expanded="true" />
+            <element signature="e#1541#3833#0" />
+            <element signature="e#5810#6149#0" />
+            <element signature="e#6318#6657#0" />
+            <element signature="e#6716#6885#0" />
+            <element signature="e#6944#7392#0" />
+            <element signature="e#7551#7700#0" />
+            <element signature="e#7752#7906#0" />
+            <element signature="e#7959#8114#0" />
+            <element signature="e#8172#8558#0" />
+            <element signature="e#8612#9005#0" />
+            <element signature="e#9059#10376#0" />
+            <element signature="e#10445#13623#0" />
+            <element signature="e#14424#14675#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/templates/app_blog/posts_search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="47" lean-forward="true" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="1176" column="56" selection-start-line="1176" selection-start-column="42" selection-end-line="1176" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="408" column="8" selection-start-line="408" selection-start-column="8" selection-end-line="445" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/forms.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/templates/app_blog/blog_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_pages/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="71" column="47" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-48">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        <state>
+          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/blog-detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="663" column="40" lean-forward="true" selection-start-line="611" selection-start-column="20" selection-end-line="663" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-909">
+          <caret line="140" column="24" selection-start-line="140" selection-start-column="24" selection-end-line="140" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="30" column="74" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="348" lean-forward="true" selection-start-line="348" selection-end-line="348" />
+        <state relative-caret-position="4992">
+          <caret line="212" column="58" selection-start-line="212" selection-start-column="14" selection-end-line="212" selection-end-column="58" />
           <folding>
             <element signature="e#312#336#0" expanded="true" />
-            <element signature="e#5821#10971#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django/contrib/auth/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="388" column="6" selection-start-line="388" selection-start-column="6" selection-end-line="388" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="137" column="93" lean-forward="true" selection-start-line="137" selection-start-column="71" selection-end-line="137" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="14" column="67" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="231" column="32" selection-start-line="231" selection-start-column="32" selection-end-line="231" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#258#369#0" />
+            <element signature="e#386#1039#0" />
+            <element signature="e#1120#1223#0" />
+            <element signature="e#1262#1479#0" />
+            <element signature="e#1513#1636#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/templates/app_blog/blog_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="285" column="96" selection-start-line="285" selection-start-column="96" selection-end-line="285" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_blog/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" selection-start-line="4" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="31" column="101" lean-forward="true" selection-start-line="31" selection-start-column="101" selection-end-line="31" selection-end-column="101" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_content_filler/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="21" column="27" lean-forward="true" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

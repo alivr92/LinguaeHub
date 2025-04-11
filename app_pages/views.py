@@ -13,6 +13,10 @@ from django.utils.timezone import now, timedelta
 from django.db.models import Q
 
 
+class Home2(TemplateView):
+    template_name = 'app_pages/iLanding/home.html'
+
+
 class Home(TemplateView):
     template_name = 'app_pages/home.html'
 
@@ -70,10 +74,6 @@ class ContactUs(FormView):
     def form_invalid(self, form):
         messages.error(self.request, 'There is an error in sending message! please check your fields')
         return self.render_to_response(self.get_context_data(form=form))
-
-
-class Blog(TemplateView):
-    template_name = 'app_pages/blog-grid.html'
 
 
 class FAQ(TemplateView):

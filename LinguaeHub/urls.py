@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_pages.urls')),
+    path('pages/', include('pages.urls')),
     path('myadmin/', include('app_admin.urls', namespace='my_admin')),
     path('staff/', include('app_staff.urls', namespace='staff')),
     path('tutor/', include('ap2_tutor.urls', namespace='Instructors')),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('accounts/', include('app_accounts.urls', namespace='accounts')),
     path('schedule/', include('ap2_meeting.urls', namespace='schedule')),
     path('payments/', include('payments.urls', namespace='payments')),
+    path('blog/', include('app_blog.urls', namespace='blog')),
 
 ]
 

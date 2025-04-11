@@ -52,16 +52,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_quill',
-    'pages',
+    # 'pages',
+    'app_content_filler',
     'app_accounts',
     'app_pages',
-    'app_content_filler',
+    'app_blog',
     'ap2_tutor',
     'ap2_student',
     'ap2_meeting',
     'app_admin',
     'app_staff',
     'payments',
+
 
 ]
 
@@ -91,6 +93,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'app_content_filler.context_processors.content_filler',  # Content Filler
                 'app_content_filler.context_processors.counters',  # counters
+                'app_blog.context_processors.popular_tags',  # WP Popular TAGs
             ],
         },
     },
@@ -205,6 +208,17 @@ stripe.api_key = STRIPE_SECRET_KEY
 
 # PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID')
 # PAYPAL_SECRET_KEY = env('PAYPAL_SECRET_KEY')
+
+# Wordpress  API Start ------------------------------------------------------------------
+WP_API_URL = 'http://localhost/Amin-Academy/wp-json/wp/v2/'
+WP_API_URL_POSTS = WP_API_URL + 'posts'
+WP_API_URL_TAGS = WP_API_URL + 'tags'
+WP_API_URL_COMMENTS = WP_API_URL + 'comments'
+WP_API_URL_CATEGORIES = WP_API_URL + 'categories'
+
+# Related (e.g. GET https://example.com/wp-json/yarpp/v1/related/123)
+WP_API_URL_RELATED = 'http://localhost/Amin-Academy/wp-json/yarpp/v1/related/'
+# Wordpress  API End --------------------------------------------------------------------
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
