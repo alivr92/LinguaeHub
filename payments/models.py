@@ -15,7 +15,7 @@ class Bill(models.Model):
     tax = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     status = models.CharField(max_length=10, choices=[('paid', 'Paid'), ('unpaid', 'Unpaid')], default='unpaid')
-    bill_id = ShortUUIDField(length=6, max_length=10, alphabet="1234567890")
+    bill_id = ShortUUIDField(length=6, max_length=10, alphabet="1234567890", unique=True)
     # date = models.DateTimeField(default=timezone.now)
     date = models.DateTimeField(auto_now_add=True)
 

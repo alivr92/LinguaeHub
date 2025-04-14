@@ -8,7 +8,7 @@ from django.core.cache import cache
 from django.conf import settings
 import math
 from django.http import JsonResponse
-from .models import Comment
+from .models import Comment, Post, Tag, Category
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from types import SimpleNamespace
 from django.contrib.auth.models import User
@@ -190,7 +190,7 @@ class PostDetail(DetailView, FormView):
         context['related_posts'] = self._get_yarpp_related_posts(post['id'], limit=4)
         # context['comments'] = fetch_comments(post['id'])
         context['comments'] = Comment.objects.filter(wp_post_id=post['id'], is_published=True).order_by("-create_date")
-
+        # context['djangoPosts'] = Post.objects.all()
         return context
 
     def _get_yarpp_related_posts(self, post_id, limit=4):

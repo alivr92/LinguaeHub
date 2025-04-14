@@ -62,7 +62,7 @@ class SignUpView2(View):
             return redirect('accounts:sign_in')
 
 
-class UserSignUpView(CreateView):
+class SignUpStudent(CreateView):
     model = User
     form_class = UserRegistrationForm
     template_name = 'app_accounts/sign_up.html'
@@ -73,6 +73,27 @@ class UserSignUpView(CreateView):
         user.set_password(form.cleaned_data['password'])
         user.save()
         messages.success(self.request, "Congratulations! You registered successfully. Now login for the first time!")
+        login(self.request, user)
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        for error in form.errors.values():
+            messages.error(self.request, str(error))
+        return self.render_to_response(self.get_context_data(form=form))
+
+
+class SignUpTutor(CreateView):
+    model = User
+    form_class = UserRegistrationForm
+    template_name = 'app_accounts/sign_up_tutor.html'
+    success_url = reverse_lazy('accounts:dashboard')
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        messages.success(self.request,
+                         "Congratulations! You registered successfully. Now confirm your email address and then login to your dashboard!")
         login(self.request, user)
         return super().form_valid(form)
 

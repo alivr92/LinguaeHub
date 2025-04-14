@@ -7,7 +7,8 @@ urlpatterns = [
     # AUTH
     # path('sign-in/', views.sign_in, name='sign_in'),
     path('sign-in/', views.SignInView.as_view(), name='sign_in'),
-    path('sign-up/', views.UserSignUpView.as_view(), name='sign_up'),
+    path('sign-up/', views.SignUpStudent.as_view(), name='sign_up'),
+    path('sign-up-tutor/', views.SignUpTutor.as_view(), name='sign_up_tutor'),
     path('sign-out/', views.sign_out, name='sign_out'),
 
     # ---------------------- DASHBOARD
