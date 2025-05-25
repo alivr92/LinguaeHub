@@ -43,6 +43,7 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'jazzmin',
+    'django_extensions',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_quill',
-    # 'pages',
     'app_content_filler',
     'app_accounts',
     'app_pages',
@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'ap2_meeting',
     'app_admin',
     'app_staff',
-    'payments',
+    # 'payments',
 
 
 ]
@@ -93,7 +93,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'app_content_filler.context_processors.content_filler',  # Content Filler
                 'app_content_filler.context_processors.counters',  # counters
-                'app_blog.context_processors.popular_tags',  # WP Popular TAGs
+                # 'app_blog.context_processors.popular_tags',  # WP Popular TAGs
             ],
         },
     },
@@ -128,7 +128,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'lingo_db',
         'USER': 'postgres',
-        'PASSWORD': '6361834875',
+        'PASSWORD': env.str('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -166,12 +166,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'  # URL for accessing files in the browser
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # Where files are stored on disk
 
 LOGIN_URL = '/accounts/sign-in/'
 LOGIN_REDIRECT_URL = '/'
@@ -195,9 +195,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')  # noreply@Lingocept.com
 EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
+# admin of site who wants to notify about submissions or requests or any other changes in site
+EMAIL_ADMIN_USER = env.str('EMAIL_ADMIN_USER')
+EMAIL_SUPPORT = env.str('EMAIL_SUPPORT')  # to inform people to know how contact us!
+
+SITE_NAME = 'Lingocept'
 
 # Stripe settings
 STRIPE_PUBLISHABLE_KEY = env.str('STRIPE_PUBLISHABLE_KEY')
@@ -205,6 +210,10 @@ STRIPE_SECRET_KEY = env.str('STRIPE_SECRET_KEY')
 
 stripe.api_version = '2020-08-27'
 stripe.api_key = STRIPE_SECRET_KEY
+
+# celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
 
 # PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID')
 # PAYPAL_SECRET_KEY = env('PAYPAL_SECRET_KEY')

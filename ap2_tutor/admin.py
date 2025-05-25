@@ -1,8 +1,24 @@
 from django.contrib import admin
-from ap2_tutor.models import Tutor, Skill, SkillLevel, PNotification
+from ap2_tutor.models import Tutor, PNotification, ProviderApplication
 from django.utils.html import format_html
 
 
+@admin.register(ProviderApplication)
+class ProviderApplicationAdmin(admin.ModelAdmin):
+    def thumbnail(self, object):
+        return format_html(
+            "<img src='{}' style='width:40px; height:40px; border-radius:20%;'> ".format(object.photo.url))
+
+    thumbnail.short_description = 'Photo'
+    list_display = ['id', 'first_name', 'last_name', 'thumbnail', 'email', 'phone', 'lang_native', 'status',
+                    'date_submitted']
+    list_display_links = ['first_name', ]
+    list_filter = ['first_name', 'last_name', 'lang_native', 'status', 'date_submitted']
+    search_fields = ['first_name', 'last_name', 'email', 'phone', 'lang_native', 'status', 'date_submitted']
+    list_editable = ['status', ]
+
+
+@admin.register(Tutor)
 class TutorAdmin(admin.ModelAdmin):
 
     def thumbnail(self, object):
@@ -11,26 +27,15 @@ class TutorAdmin(admin.ModelAdmin):
     thumbnail.short_description = 'Photo'
 
     list_display = (
-    'id', 'profile', 'thumbnail', 'cost_trial', 'cost_hourly', 'discount', 'discount_deadline', 'session_count',)
+        'id', 'profile', 'thumbnail', 'cost_trial', 'cost_hourly', 'discount', 'discount_deadline', 'session_count',)
     list_display_links = ('profile', 'thumbnail',)
-    list_editable = ('discount', 'discount_deadline',)
+    list_editable = ('discount',)
     list_filter = ('cost_trial', 'cost_hourly',)
     search_fields = ('profile', 'profile__user__first_name', 'profile__user__last_name')
-
-
-class SkillAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-
-
-class SkillLevelAdmin(admin.ModelAdmin):
-    ordering = ('name',)
 
 
 class PNotificationAdmin(admin.ModelAdmin):
     list_display = ('provider', 'appointment', 'type', 'seen', 'date')
 
 
-admin.site.register(Tutor, TutorAdmin)
-admin.site.register(Skill, SkillAdmin)
-admin.site.register(SkillLevel, SkillLevelAdmin)
 admin.site.register(PNotification, PNotificationAdmin)

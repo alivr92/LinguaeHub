@@ -3,376 +3,1019 @@
 
 
 {% block head_style_plugins %}
-        <!-- Plugins CSS -->
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
-    {% endblock %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/glightbox/css/glightbox.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+{% endblock %}
+{% block popup_style %}
+    <style>
+        .skill-select {
+            min-width: 150px;
+        }
+
+        .level-select {
+            min-width: 100px;
+        }
+
+        .remove-skill {
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+{% endblock %}
 
 {% block admin_main_content %}
-	<!-- Page main content START -->
-	<div class="page-content-wrapper border">
+    <!-- Page main content START -->
+    <div class="page-content-wrapper border">
 
-		<!-- Title -->
-		<div class="row mb-3">
-			<div class="col-12">
-				<h1 class="h3 mb-2 mb-sm-0">Tutor Requests</h1>
-			</div>
-		</div>
+        <!-- Title -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1 class="h3 mb-2 mb-sm-0">Tutor Requests</h1>
+            </div>
+        </div>
 
-		<!-- Main card START -->
-		<div class="card bg-transparent border">
+        <!-- Main card START -->
+        <div class="card bg-transparent border">
 
-			<!-- Card header START -->
-			<div class="card-header bg-light border-bottom">
-				<!-- Search and select START -->
-				<div class="row g-3 align-items-center justify-content-between">
+            <!-- Card header START -->
+            <div class="card-header bg-light border-bottom">
+                <!-- Search and select START -->
+                {#                <div class="row g-3 align-items-center justify-content-between">#}
+                <form class="row g-3 align-items-center d-flex ">
+                    <!-- Search bar -->
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 rounded position-relative mb-1">
+                        <input class="form-control bg-body" type="search" placeholder="Search"
+                               name="search" value="{% if current_search %}{{ current_search }}{% endif %}">
+                        {#                            <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"#}
+                        {#                                    type="submit">#}
+                        {#                                <i class="fas fa-search fs-6 "></i>#}
+                        {#                            </button>#}
+                    </div>
 
-					<!-- Search bar -->
-					<div class="col-md-8">
-						<form class="rounded position-relative">
-							<input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
-							<button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset" type="submit">
-								<i class="fas fa-search fs-6 "></i>
-							</button>
-						</form>
-					</div>
+                    <!-- Status option -->
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 mb-1">
+                        <!-- Sort by Status -->
+                        <select name="status" class="form-select js-choice border-0 z-index-9 bg-transparent"
+                                aria-label=".form-select-sm">
+                            <option value="">Status</option>
+                            <option value="all">All Statuses</option>
+                            {% for value, label in status_choices %}
+                                <option value="{{ value }}" {% if current_status == value %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-					<!-- Select option -->
-					<div class="col-md-3">
-						<!-- Short by filter -->
-						<form>
-							<select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm">
-								<option value="">Sort by</option>
-								<option>Newest</option>
-								<option>Oldest</option>
-								<option>Accepted</option>
-								<option>Rejected</option>
-							</select>
-						</form>
-					</div>
-				</div>
-				<!-- Search and select END -->
-			</div>
-			<!-- Card header END -->
+                    <!-- Ordering option -->
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 mb-1">
+                        <select name="order" class="form-select js-choice border-0 z-index-9 bg-transparent"
+                                aria-label=".form-select-sm">
+                            <option value="">Order by</option>
+                            <option value="newest" {% if current_order == value %}selected{% endif %}>Newest
+                            </option>
+                            <option value="oldest" {% if current_order == value %}selected{% endif %}>Oldest
+                            </option>
+                        </select>
 
-			<!-- Card body START -->
-			<div class="card-body">
-				<!-- Tutor request table START -->
-				<div class="table-responsive border-0">
-					<table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                    </div>
 
-						<!-- Table head -->
-						<thead>
-							<tr>
-								<th scope="col" class="border-0 rounded-start">Tutor name</th>
-								<th scope="col" class="border-0">Subject</th>
-								<th scope="col" class="border-0">Requested Date</th>
-								<th scope="col" class="border-0 rounded-end">Action</th>
-							</tr>
-						</thead>
+                    <!-- Button Group -->
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 ">
+                        <div class="row g-2 py-1">
+                            <!-- Filter button -->
+                            <div class="col-md-6 col-12 col-sm-6 ">
+                                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                            </div>
 
-						<!-- Table body START -->
-						<tbody>
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/09.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Lori Stevens</a></h6>
-										</div>
-									</div>
-								</td>
+                            <!-- Reset button -->
+                            <div class="col-md-6 col-12 col-sm-6">
+                                <a href="?" class="btn btn-secondary w-100">Reset</a>
+                            </div>
+                        </div>
+                    </div>
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">HTML, css, bootstrap</h6>
-								</td>
+                </form>
+                <!-- Search and select END -->
 
-								<!-- Table data -->
-								<td>22 Oct 2021</td>
 
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-success-soft me-1 mb-1 mb-lg-0">Accept</a>
-									<a href="#" class="btn btn-secondary-soft me-1 mb-1 mb-lg-0">Reject</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
+                <!-- Search and Filter Form  AIIIIIIIIIIIIIIIIII-->
+                {#                <form method="get" class="mb-4">#}
+                {##}
+                {##}
+                {##}
+                {##}
+                {#                </form>#}
 
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/01.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Carolyn Ortiz</a></h6>
-										</div>
-									</div>
-								</td>
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">Photoshop, Figma, Adobe XD</h6>
-								</td>
+            </div>
+            <!-- Card header END -->
 
-								<!-- Table data -->
-								<td>06 Sep 2021</td>
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Tutor request table START -->
+                <div class="table-responsive border-0">
+                    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
 
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-success-soft me-1 mb-1 mb-lg-0">Accept</a>
-									<a href="#" class="btn btn-secondary-soft me-1 mb-1 mb-lg-0">Reject</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
+                        <!-- Table head -->
+                        <thead>
+                        <tr>
+                            <th scope="col" class="border-0 rounded-start">Tutor name</th>
+                            <th scope="col" class="border-0 ">Info</th>
+                            <th scope="col" class="border-0 ">CV</th>
+                            <th scope="col" class="border-0 ">Video</th>
+                            <th scope="col" class="border-0">Teaching Skills</th>
+                            <th scope="col" class="border-0">Requested Date</th>
+                            <th scope="col" class="border-0">Status</th>
+                            <th scope="col" class="border-0 rounded-end">Action</th>
+                        </tr>
+                        </thead>
 
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Dennis Barrett</a></h6>
-										</div>
-									</div>
-								</td>
+                        <!-- Table body START -->
+                        <tbody>
+                        {% for applicant in applicants %}
+                            <!-- Table row -->
+                            <tr>
+                                <!-- Table data -->
+                                <td>
+                                    <div class="d-flex align-items-center position-relative">
+                                        <!-- Image -->
+                                        <div class="avatar avatar-md">
+                                            <img src="{{ applicant.photo.url }}" class="rounded-circle"
+                                                 style="min-width: 48px; max-width: 48px; min-height: 48px; max-height: 48px;"
+                                                 alt="">
+                                        </div>
+                                        <div class="mb-0 ms-2">
+                                            <!-- Title -->
+                                            <h6 class="mb-0"><a href="#"
+                                                                class="stretched-link " data-bs-toggle="modal"
+                                                                data-bs-target="#appDetail-{{ applicant.id }}">{{ applicant.first_name }} {{ applicant.last_name }}</a>
+                                            </h6>
+                                        </div>
+                                    </div>
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">Javascript, Java</h6>
-								</td>
+                                </td>
+                                <!-- Full Applicant Profile -->
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-primary-soft"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#appDetail-{{ applicant.id }}">
+                                        View
+                                    </a>
 
-								<!-- Table data -->
-								<td>21 Jan 2021</td>
+                                </td>
+                                <td>
+                                    <!-- CV -->
+                                    {% if applicant.resume %}
+                                        <a href="{{ applicant.resume.url }}"
+                                           class="btn btn-primary-soft btn-round me-1 mb-1 "
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i
+                                                class="bi bi-download"></i></a>
+                                    {% else %}
+                                        <span class="p-2"> NA</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <!-- Video -->
+                                    {% if applicant.user.profile.tutor_profile.video_intro %}
+                                        <a data-glightbox data-gallery="office-tour"
+                                           href="{{ applicant.user.profile.tutor_profile.video_intro.url }}"
+                                           class="btn btn-round btn-primary-soft  overflow-visible "
+                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                           title="Introduction Video">
+                                            <i class="fas fa-play"></i>
+                                        </a>
+                                    {% else %}
+                                        <span class="p-2"> NA</span>
+                                    {% endif %}
+                                </td>
+                                <!-- Table data -->
+                                <td class="text-center text-sm-start">
+                                    <h6 class="mb-0">
+                                        {% for skill in applicant.skills.all %}
+                                            {{ skill }},
+                                        {% endfor %}
+                                    </h6>
+                                </td>
 
-								<!-- Table data -->
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-success me-1 mb-1 mb-md-0 disabled">Accepted</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
+                                <!-- Table data -->
+                                <td>{{ applicant.date_submitted|date }}</td>
 
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/04.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Billy Vasquez</a></h6>
-										</div>
-									</div>
-								</td>
+                                <!-- Table data -->
+                                <td>
+                                    <!-- Status Badge -->
+                                    <span class="badge bg-opacity-15 bg-{% if applicant.status == 'pending' %}warning text-warning
+                                                                        {% elif applicant.status == 'invited' %}info text-info
+                                                                        {% elif applicant.status == 'registered' %}primary text-primary
+                                                                        {% elif applicant.status == 'completed_profile' %}info text-info
+                                                                        {% elif applicant.status == 'scheduled' %}primary text-primary
+                                                                        {% elif applicant.status == 'decision' %}secondary text-secondary
+                                                                        {% elif applicant.status == 'accepted' %}success text-success
+                                                                        {% elif applicant.status == 'rejected' %}danger text-danger{% endif %} me-2 mb-1">
+                                    {{ applicant.get_status_display }}</span>
+                                </td>
+                                <!-- Table data -->
+                                <td>
+                                    <div class="d-flex align-items-center">
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">Maths, Chemistry</h6>
-								</td>
 
-								<!-- Table data -->
-								<td>25 Dec 2020</td>
+                                        {#                    <a href="#" class="btn btn-success-soft me-1 mb-1 mb-lg-0">Accept</a>#}
+                                        {#                    <a href="#" class="btn btn-secondary-soft me-1 mb-1 mb-lg-0">Reject</a>#}
+                                        {#                    <a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail-{{ applicant.id }}">View App</a>#}
 
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-secondary me-1 mb-1 mb-md-0 disabled">Rejected</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
+                                        <!-- Action Buttons -->
+                                        <div class="btn-group btn-group-sm">
+                                            {% if applicant.status == 'pending' %}
+                                                <button class="btn btn-danger-soft set-status"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="rejected">
+                                                    Reject
+                                                </button>
+                                                <button class="btn btn-success-soft set-status"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="invited">
+                                                    Invite
+                                                </button>
+                                            {% elif applicant.status == 'scheduled' %}
+                                                <div class="video-link-wrapper">
+                                                    {% if not applicant.interview_session.is_sent_link %}
+                                                        <div class="row w-100 gx-2 align-items-center">
+                                                            <div class="col-8">
+                                                                <input class="form-control form-control-sm session-link-input mt-0 mb-1"
+                                                                       type="url"
+                                                                       placeholder="Paste meeting link"
+                                                                       required/>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <button class="btn btn-sm btn-primary-soft w-100 set-link"
+                                                                        data-applicant-id="{{ applicant.id }}"
+                                                                        data-session-id="{{ applicant.interview_session.id }}">
+                                                                    Set Link
+                                                                </button>
+                                                            </div>
+                                                        </div>
 
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/05.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Jacqueline Miller</a></h6>
-										</div>
-									</div>
-								</td>
+                                                    {% else %}
+                                                        <button class="btn btn-sm btn-warning-soft change-link"
+                                                                data-applicant-id="{{ applicant.id }}"
+                                                                data-session-id="{{ applicant.interview_session.id }}"
+                                                                data-link-url="{{ applicant.interview_session.video_call_link }}">
+                                                            Change link
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            {% elif applicant.status == 'decision' %}
+                                                <button class="btn btn-danger-soft"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#decision-reject-{{ applicant.id }}"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="rejected">
+                                                    Reject
+                                                </button>
+                                                <button class="btn btn-success-soft"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#decision-accept-{{ applicant.id }}"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="accepted">
+                                                    Accept
+                                                </button>
+                                            {% elif applicant.status == 'rejected' %}
+                                                <button class="btn btn-success-soft set-status"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="invited">
+                                                    Invite
+                                                </button>
+                                            {% elif applicant.status == 'invited' or applicant.status == 'registered' or applicant.status == 'accepted' %}
+                                                <!-- just waiting for registration-->
+                                                {#                                                 <button class="btn btn-success-soft set-status disabled"#}
+                                                {#                                                        data-applicant-id="{{ applicant.id }}"#}
+                                                {#                                                        data-status="waiting">#}
+                                                {#                                                    No Action#}
+                                                {#                                                </button>#}
+                                            {% endif %}
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">Python, Angular, React Native</h6>
-								</td>
+                                        </div>
+                                    </div>
+                                </td>
 
-								<!-- Table data -->
-								<td>05 June 2020</td>
 
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-success me-1 mb-1 mb-md-0 disabled">Accepted</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
+                            </tr>
+                        {% endfor %}
 
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/06.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Amanda Reed</a></h6>
-										</div>
-									</div>
-								</td>
+                        <!-- Table row -->
+                        {#                        <tr>#}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td>#}
+                        {#                                <div class="d-flex align-items-center position-relative">#}
+                        {#                                    <!-- Image -->#}
+                        {#                                    <div class="avatar avatar-md">#}
+                        {#                                        <img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle"#}
+                        {#                                             alt="">#}
+                        {#                                    </div>#}
+                        {#                                    <div class="mb-0 ms-2">#}
+                        {#                                        <!-- Title -->#}
+                        {#                                        <h6 class="mb-0"><a href="#" class="stretched-link">Dennis Barrett</a></h6>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </td>#}
+                        {##}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td class="text-center text-sm-start">#}
+                        {#                                <h6 class="mb-0">Javascript, Java</h6>#}
+                        {#                            </td>#}
+                        {##}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td>21 Jan 2021</td>#}
+                        {#                            <td>21 Jan 2021</td>#}
+                        {##}
+                        {#                            <!-- Table data -->#}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td>#}
+                        {#                                <a href="#" class="btn btn-success me-1 mb-1 mb-md-0 disabled">Accepted</a>#}
+                        {#                                <a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal"#}
+                        {#                                   data-bs-target="#appDetail-{{ applicant.id }}">View App</a>#}
+                        {#                            </td>#}
+                        {#                        </tr>#}
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">After effect, Premiere pro</h6>
-								</td>
 
-								<!-- Table data -->
-								<td>14 Feb 2020</td>
+                        </tbody>
+                        <!-- Table body END -->
+                    </table>
+                </div>
+                <!-- Tutor request table END -->
+            </div>
+            <!-- Card body END -->
 
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-success me-1 mb-1 mb-md-0 disabled">Accepted</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
+            <!-- Card footer START -->
+            <div class="card-footer bg-transparent pt-0">
 
-							<!-- Table row -->
-							<tr>
-								<!-- Table data -->
-								<td>
-									<div class="d-flex align-items-center position-relative">
-										<!-- Image -->
-										<div class="avatar avatar-md">
-											<img src="{% static 'assets/images/avatar/07.jpg' %}" class="rounded-circle" alt="">
-										</div>
-										<div class="mb-0 ms-2">
-											<!-- Title -->
-											<h6 class="mb-0"><a href="#" class="stretched-link">Samuel Bishop</a></h6>
-										</div>
-									</div>
-								</td>
+                <!-- Pagination START -->
+                <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+                    <!-- Content -->
+                    <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }}
+                        to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
+                    <!-- Pagination -->
+                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?{% if current_search %}search={{ current_search }}&{% endif %}{% if current_status %}status={{ current_status }}&{% endif %}{% if current_order %}order={{ current_order }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                                                                  tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i
+                                            class="fas fa-angle-left" style="color: #d3d3d3;"></i></a></li>
+                                {% endif %}
 
-								<!-- Table data -->
-								<td class="text-center text-sm-start">
-									<h6 class="mb-0">PHP, WordPress, Shopify</h6>
-								</td>
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                        {% if p == page_obj.number %}
+                                            <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item mb-0"><a class="page-link"
+                                                                          href="?{% if current_search %}search={{ current_search }}&{% endif %}{% if current_status %}status={{ current_status }}&{% endif %}{% if current_order %}order={{ current_order }}&{% endif %}page={{ p }}">{{ p }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                        <li class="page-item mb-0"><a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                                        </li>
+                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                        <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
 
-								<!-- Table data -->
-								<td>06 Jan 2020</td>
+                                {% if page_obj.has_next %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_search %}search={{ current_search }}&{% endif %}{% if current_order %}order={{ current_order }}&{% endif %}page={{ page_obj.next_page_number }}"><i
+                                            class="fas fa-angle-right"></i></a></li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i
+                                            class="fas fa-angle-right"
+                                            style="color: #d3d3d3;"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                </div>
+                <!-- Pagination END -->
 
-								<!-- Table data -->
-								<td>
-									<a href="#" class="btn btn-secondary me-1 mb-1 mb-md-0 disabled">Rejected</a>
-									<a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail">View App</a>
-								</td>
-							</tr>
 
-						</tbody>
-						<!-- Table body END -->
-					</table>
-				</div>
-				<!-- Tutor request table END -->
-			</div>
-			<!-- Card body END -->
-
-			<!-- Card footer START -->
-			<div class="card-footer bg-transparent pt-0">
-				<!-- Pagination START -->
-				<div class="d-sm-flex justify-content-sm-between align-items-sm-center">
-					<!-- Content -->
-					<p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-					<!-- Pagination -->
-					<nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-						<ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-							<li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-							<li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-							<li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-						</ul>
-					</nav>
-				</div>
-				<!-- Pagination END -->
-			</div>
-			<!-- Card footer END -->
-		</div>
-		<!-- Main card END -->
-	</div>
-	<!-- Page main content END -->
+            </div>
+            <!-- Card footer END -->
+        </div>
+        <!-- Main card END -->
+    </div>
+    <!-- Page main content END -->
 {% endblock %}
 
 {% block admin_popup_modals %}
-<!-- Modal START -->
-<div class="modal fade" id="appDetail" tabindex="-1" aria-labelledby="appDetaillabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered modal-lg">
-		<div class="modal-content">
-			
-			<!-- Modal header -->
-			<div class="modal-header bg-dark">
-				<h5 class="modal-title text-white" id="appDetaillabel">Applicant details</h5>
-				<button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-			</div>
+    {% for applicant in applicants %}
+        <!-- Modal START (View Application)-->
+        <div class="modal fade" id="appDetail-{{ applicant.id }}" tabindex="-1" aria-labelledby="appDetaillabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
 
-			<!-- Modal body -->
-			<div class="modal-body p-5">
-				<!-- Name -->
-				<span class="small">Applicant Name:</span>
-				<h6 class="mb-3">Jacqueline Miller</h6>
+                    <!-- Modal header -->
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title text-white" id="appDetaillabel">Applicant details</h5>
+                        <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                                aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                    </div>
 
-				<!-- Email -->
-				<span class="small">Applicant Email id:</span>
-				<h6 class="mb-3">example@gmail.com</h6>
+                    <!-- Modal body -->
+                    <div class="modal-body p-5">
+                        <div class="d-lg-flex">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-md me-4 flex-shrink-0">
+                                <img class="avatar-img rounded-circle" src="{{ applicant.photo.url }}"
+                                     alt="avatar">
+                            </div>
+                            <div class="me-4 flex-shrink-0 mx-3">
+                                <!-- Name -->
+                                <span class="small">Name:</span>
+                                <h6 class="mb-3">{{ applicant.first_name }} {{ applicant.last_name }}</h6>
+                            </div>
 
-				<!-- Phone number -->
-				<span class="small">Applicant Phone number:</span>
-				<h6 class="mb-3">+123 456 789 10</h6>
+                            <div class="me-4 flex-shrink-0 mx-3">
+                                <!-- Email -->
+                                <span class="small">Email:</span>
+                                <h6 class="mb-3">{{ applicant.email }}</h6>
 
-				<!-- Summary -->
-				<span class="small">Summary:</span>
-				<p class="text-dark mb-2">We focus a great deal on the understanding of behavioral psychology and influence triggers which are crucial for becoming a well rounded Digital Marketer. We understand that theory is important to build a solid foundation, we understand that theory alone isn’t going to get the job done so that’s why this course is packed with practical hands-on examples that you can follow step by step.</p>
-				<p class="text-dark mb-0">As it so contrasted oh estimating instrument. Size like body someone had. Are conduct viewing boy minutes warrant the expense? Tolerably behavior may admit daughters offending her ask own. Praise effect wishes change way and any wanted. Lively use looked latter regard had. Do he it part more last in.</p>
-			</div>
+                            </div>
+                            <div class="me-4 flex-shrink-0 mx-3">
 
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>   
-<!-- Modal END -->
+                                <!-- Phone number -->
+                                <span class="small">Phone number:</span>
+                                <h6 class="mb-3">{{ applicant.phone }}</h6>
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <span class="small mt-5">Summary:</span>
+                        <p class="text-dark mb-2">
+                            {{ applicant.bio }}
+                        </p>
+
+
+                        <div class="d-md-flex mr-3 my-4">
+                            <!-- Resume -->
+                            <span class="small ">Resume:</span>
+                            <h6 class="mx-3">
+                                {% if applicant.resume %}
+                                    <a href="{{ applicant.resume.url }}"
+                                       class="btn btn-primary-soft btn-round me-1 mb-1 mb-md-0"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i
+                                            class="bi bi-download"></i></a>
+                                {% else %}
+                                    NA
+                                {% endif %}
+                            </h6>
+                        </div>
+                        <table class="table" id="skillsTable_inModal">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Skill</th>
+                                <th>Certificate</th>
+                                <th>Video</th>
+                                <th>Level</th>
+                                <th>Status</th>
+                                <th>Certified</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <!-- Existing skills -->
+                            {% for uSkill in applicant.user.user_skill.all %}
+                                <tr class="m-0 p-0">
+                                    <td>{{ uSkill.skill }}</td>
+                                    <td>
+                                        <!-- CV -->
+                                        {% if uSkill.certificate %}
+                                            <a href="{{ uSkill.certificate.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               target="_blank"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Download"><i
+                                                    class="bi bi-download"></i></a>
+                                        {% else %}
+                                            <span class="p-2"> NA</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if uSkill.video %}
+                                            <!-- Video button -->
+                                            <a data-glightbox data-gallery="office-tour"
+                                               href="{{ uSkill.video.url }}"
+                                               class="btn btn-round btn-primary-soft overflow-visible"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Skill Video">
+                                                <i class="fas fa-play"></i>
+                                            </a>
+                                        {% else %}
+                                            <span class="p-2"> NA</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ uSkill.level }}</td>
+                                    <td><span class="badge bg-opacity-15 bg-{% if uSkill.status == 'rejected' %}danger text-danger
+                                    {% elif uSkill.status == 'pending' %}warning text-warning
+                                    {% elif uSkill.status == 'approved' %}success text-success
+                                    {% elif uSkill.status == 'need_interview' %}primary text-primary
+                                    {% endif %}
+">{{ uSkill.status }}</span></td>
+                                    <td>{% if uSkill.is_certified %}<span class="text-success">✅</span>{% else %}
+                                        N/A{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+
+                    <!-- Modal footer ORIGINAL -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal END -->
+
+
+        <!-- Popup modal: (ACCEPT) and UNLOCK applicant skill level -->
+        <div class="modal fade" id="decision-accept-{{ applicant.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Skill
+                            Approval: {{ applicant.first_name }} {{ applicant.last_name }}</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="acceptForm-{{ applicant.id }}" class="acceptForm" method="POST"
+                              action="{% url 'my_admin:update_applicant_status' applicant.id %}">
+
+                            {% csrf_token %}
+                            <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
+                            <input type="hidden" name="status" value="accepted">
+
+                            <div class="alert alert-info mb-3">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Enable skills and set the maximum teaching level for each (A1-C2)
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table" id="skillsTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Skill</th>
+                                        <th>Certificate</th>
+                                        <th>Video</th>
+                                        <th>Level</th>
+                                        <th>Badge</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <!-- Existing skills -->
+                                    {% for uSkill in applicant.user.user_skill.all %}
+                                        <tr>
+                                            <td class="col-3 col-md-3 ">{{ uSkill.skill }}</td>
+                                            <td class="col-1 col-md-1 ">
+                                                <!-- CV -->
+                                                {% if uSkill.certificate %}
+                                                    <a href="{{ uSkill.certificate.url }}"
+                                                       class="btn btn-primary-soft btn-round me-1 mb-1 "
+                                                       target="_blank"
+                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                       title="Download"><i
+                                                            class="bi bi-download"></i></a>
+                                                {% else %}
+                                                    <span class="p-2"> NA</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-1 col-md-1 ">
+                                                {% if uSkill.video %}
+                                                    <!-- Video button -->
+                                                    {#                            <div class="d-flex align-items-center justify-content-center py-2 ms-0 ms-sm-4">#}
+                                                    <a data-glightbox data-gallery="office-tour"
+                                                       href="{{ uSkill.video.url }}"
+                                                       class="btn btn-round btn-primary-soft overflow-visible"
+                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                       title="Skill Video">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <span class="p-2"> NA</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-3 col-md-3 ">
+                                                <select class="form-select level-select"
+                                                        name="skill_level_{{ uSkill.id }}"
+                                                        {% if uSkill.level %}data-initial-value="{{ uSkill.level.name }}"{% endif %}
+                                                        required>
+                                                    {% for level in LEVEL_CHOICES %}
+                                                        <option value="{{ level.0 }}"
+                                                                {% if uSkill.level.name == level.0 %}selected{% endif %}>{{ level.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td class="col-2 col-md-2 ">
+                                                <!-- Check box -->
+                                                <div class="col-1 col-md-1 d-flex justify-content-between">
+                                                    <div class="form-check">
+                                                        <input
+                                                                class="form-check-input badge-select"
+                                                                name="skill_badge_{{ uSkill.id }}"
+                                                                type="checkbox"
+                                                                value="true"
+                                                                {% if uSkill.is_certified %}checked{% endif %}
+                                                        >
+                                                        <label class="form-check-label"
+                                                               for="exampleCheck1">Certified</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="col-3 col-md-3 ">
+                                                <select class="form-select status-select "
+                                                        name="skill_status_{{ uSkill.id }}"
+                                                        {% if uSkill.status %}data-initial-value="{{ uSkill.status }}"{% endif %}
+                                                        required>
+                                                    {% for status in SKILL_STATUS_CHOICES %}
+                                                        <option value="{{ status.0 }}"
+                                                                {% if uSkill.status == status.0 %}selected{% endif %}>{{ status.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label">Interviewer Notes</label>
+                                <textarea class="form-control" name="reviewer_comment" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" form="acceptForm-{{ applicant.id }}" class="btn btn-success">
+                            <i class="bi bi-check-circle me-1"></i> Approve Tutor
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popup modal: (ACCEPT) and UNLOCK applicant skill level END -->
+
+        <!-- Popup modal: (REJECT) START -->
+        <div class="modal fade" id="decision-reject-{{ applicant.id }}" tabindex="-1" aria-labelledby="decisionLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title text-white" id="decisionLabel">Interviewer Decision</h5>
+                        <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                                aria-label="Close">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form id="rejectForm-{{ applicant.id }}" class="row text-start g-3 rejectForm" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
+                            <input type="hidden" name="status" value="rejected">
+
+                            <!-- label -->
+                            <div class="col-12 text-center">
+                                <label class="form-label"><h4>Leave a comment here</h4></label>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <textarea class="form-control" id="reject-comment" name="reviewer_comment"
+                                          placeholder="Your review"
+                                          rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end">
+                        <button type="submit" form="rejectForm-{{ applicant.id }}" class="btn btn-danger my-0">Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popup modal: (REJECT) END -->
+
+    {% endfor %}
+
+
+
 {% endblock %}
+
 
 {% block scripts_vendors %}
     <!-- Vendors -->
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
     <script src="{% static 'assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
+
 {% endblock %}
+{% block my_scripts %}
+
+{% endblock %}
+
+
+<script>
+    // ----------------------  Control Action Buttons ----------------------
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('#just Loaded!');
+
+        // Status change handler for all action buttons
+        document.querySelectorAll('.set-status').forEach(button => {
+            button.addEventListener('click', function () {
+                const applicantId = this.dataset.applicantId;
+                const newStatus = this.dataset.status;
+
+                // Find the closest table row (tr) ancestor of the clicked button
+                const row = this.closest('tr');
+
+                // Find the status badge within this row
+                const badge = row.querySelector('.badge');
+
+                // Show loading state (optional)
+                this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+                fetch(`/myadmin/update-applicant-status/${applicantId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: `status=${encodeURIComponent(newStatus)}`
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            // Update badge text
+                            badge.textContent = data.new_status;
+
+                            // Update badge color
+                            badge.className = `badge bg-${
+                                newStatus === 'pending' ? 'warning' :
+                                    newStatus === 'registered' ? 'primary' :
+                                        newStatus === 'scheduled' ? 'secondary' :
+                                            newStatus === 'accepted' ? 'success' :
+                                                newStatus === 'rejected' ? 'danger' : 'info'
+                                } me-2`;
+
+                            // Reset button text
+                            this.innerHTML = newStatus === 'accepted' ? 'Accepted' :
+                                newStatus === 'rejected' ? 'Rejected' : 'Invited';
+
+                            // Disable all action buttons for this applicant
+                            row.querySelectorAll('.set-status').forEach(btn => {
+                                btn.disabled = true;
+                            });
+
+                            // Show success toast
+                            const toast = new bootstrap.Toast(document.getElementById('statusToast'));
+                            document.getElementById('toastMessage').textContent =
+                                `Status updated to ${data.new_status}`;
+                            toast.show();
+                        } else {
+                            throw new Error(data.error || 'Failed to update status');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Reset button text
+                        this.innerHTML = `${
+                            newStatus === 'accepted' ? 'Accept' :
+                                newStatus === 'rejected' ? 'Reject' : 'Invite'
+                            }`;
+                        alert('Error updating status: ' + error.message);
+                    });
+            });
+        });
+
+
+        // Handle acceptForm submission
+        // Initialize modals
+        document.querySelectorAll('.acceptForm').forEach(form => {
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const submitButton = form.querySelector('[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+
+                try {
+                    // Show loading state
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+
+                    const formData = new FormData(this);
+
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest', // For detecting AJAX requests in Django
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        // Success - you might want to close the modal or refresh the page
+                        if (data.success) {
+                            location.reload(); // Or handle success differently
+                        } else {
+                            alert(data.message || 'An error occurred');
+                        }
+                    } else {
+                        alert(data.message || 'An error occurred');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while submitting the form');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                }
+            });
+        });
+
+
+        // Handle rejectForm submission
+        document.querySelectorAll('form.rejectForm').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const applicantId = formData.get('applicant_id');
+                const status = formData.get('status');
+                const interviewerComment = formData.get('reviewer_comment');
+
+                const submitBtn = document.querySelector(`button[form="${form.id}"]`);
+                const originalBtnText = submitBtn.innerHTML;
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...
+    `;
+
+                fetch(`/myadmin/update-applicant-status/${applicantId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        status: status,
+                        reviewer_comment: interviewerComment,
+                    })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Optional: update status badge or reload page
+                            alert('Decision saved successfully!');
+                            window.location.reload(); // or smarter DOM update
+                        } else {
+                            alert(data.error || 'Failed to update decision.');
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert('Error submitting decision.');
+                    });
+            });
+        });
+
+
+        //  ----------------------  Set Online Meeting url ----------------------
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // ✅ Universal click handler (event delegation)
+        document.addEventListener('click', function (e) {
+            const target = e.target;
+
+            // 🔹 Handle "Change Link" button
+            if (target.classList.contains('change-link')) {
+                e.preventDefault();
+                const wrapper = target.closest('.video-link-wrapper');
+                const applicantId = target.dataset.applicantId;
+                const sessionId = target.dataset.sessionId;
+                const linkUrl = target.dataset.linkUrl;
+
+                wrapper.innerHTML = `
+  <div class="row w-100 gx-2 align-items-center">
+    <div class="col-8">
+      <input class="form-control form-control-sm session-link-input mt-0 mb-1"
+             type="url"
+             placeholder="Paste meeting link"
+             value="${linkUrl}"
+             required />
+    </div>
+    <div class="col-4">
+      <button class="btn btn-sm btn-primary-soft w-100 set-link"
+              data-applicant-id="${applicantId}"
+              data-session-id="${sessionId}">
+        Set Link
+      </button>
+    </div>
+  </div>
+`;
+
+
+            }
+
+            // 🔹 Handle "Set Link" button
+            if (target.classList.contains('set-link')) {
+                e.preventDefault();
+                const wrapper = target.closest('.video-link-wrapper');
+                const input = wrapper.querySelector('.session-link-input');
+                const sessionId = target.dataset.sessionId;
+                const applicantId = target.dataset.applicantId;
+                const link = input.value.trim();
+
+                if (!link || !link.startsWith('http')) {
+                    alert('Please enter a valid link (must start with http)');
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                fetch(`/myadmin/set-video-call-link/${sessionId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({session_link: link})
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Video link saved successfully!');
+                            input.classList.remove('is-invalid');
+                            input.classList.add('is-valid');
+
+                            wrapper.innerHTML = `
+            <button class="btn btn-sm btn-warning-soft change-link"
+                    data-applicant-id="${applicantId}"
+                    data-session-id="${sessionId}"
+                    data-link-url="${link || ''}">
+              Change link
+            </button>`;
+                        } else {
+                            input.classList.add('is-invalid');
+                            alert(data.error || 'Something went wrong');
+                        }
+                    })
+                    .catch(err => {
+                        alert('Error occurred while saving the link.');
+                        console.error(err);
+                    });
+            }
+        });
+
+    });
+</script>

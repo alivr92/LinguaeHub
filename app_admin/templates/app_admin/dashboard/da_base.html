@@ -72,27 +72,31 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'assets/images/logo1.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/logo_white_gold.png' %}">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
 
     <!-- Include Bootstrap CSS -->
-{#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">#}
+    {#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">#}
 
     {% block head_style_plugins %}
         <!-- Plugins CSS -->
         <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/apexcharts/css/apexcharts.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
     {% endblock %}
 
 
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    {% block popup_style %}{% endblock %}
+    {% block my_style %}{% endblock %}
 
 </head>
 
@@ -112,6 +116,11 @@
         {% block admin_topbar %}
             {% include 'app_admin/dashboard/includes/da_topbar.html' %}
         {% endblock %}
+
+        <div class="container mt-3">
+            {% include 'includes/messages.html' %}
+            {% block embed_messages %}{% endblock %}
+        </div>
 
         {% block admin_main_content %}{% endblock %}
 
@@ -137,10 +146,12 @@
     <script src="{% static 'assets/vendor/apexcharts/js/apexcharts.min.js' %}"></script>
     <script src="{% static 'assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js' %}"></script>
 {% endblock %}
-{% block my_scripts %}{% endblock %}
+
 <!-- Template Functions -->
 <script src="{% static 'assets/js/functions.js' %}"></script>
 <script src="{% static 'assets/js/avr.js' %}"></script>
+{% block embed_script %}{% endblock %}
+{% block my_scripts %}{% endblock %}
 
 </body>
 </html>

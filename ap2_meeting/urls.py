@@ -4,8 +4,8 @@ from ap2_meeting import views
 app_name = 'meeting'
 
 urlpatterns = [
-    path('reserve-sessions/', views.reservation_single_student, name='reservation_single_student'),
-    path('save-available-tutor-times/', views.save_available_tutor_times, name='save_available_tutor_times'),
+    path('reserve-sessions/', views.reservation_single_client, name='reservation_single_client'),
+    path('save-available-provider-times/', views.save_available_provider_times, name='save_available_provider_times'),
     # path('save-availability/', views.save_availability, name='save_availability'),
 
     # path('reserve-group-class/', views.reserve_sessions_multi_students, name='reserve_sessions_multi_students'),

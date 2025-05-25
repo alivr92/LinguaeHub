@@ -1,20 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
-from django.contrib import messages, auth
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView, FormView
-import json
 from django.http import JsonResponse
-from .models import Session, Availability, AppointmentSetting
-from ap2_tutor.models import Tutor
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import TemplateView, ListView, FormView
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from datetime import datetime, timedelta
 import pytz  # For time zone handling (Python Time Zone)
 from django.core.exceptions import PermissionDenied
+from django.conf import settings
+from django.urls import reverse_lazy, reverse
+from django.contrib import messages, auth
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+import json
+from ap2_tutor.models import Tutor, ProviderApplication
+from utils.pages import error_page
+from .models import Session, Availability, AppointmentSetting
 from .forms import SessionForm, AppointmentSettingForm
+from utils.email import send_dual_email, notification_email_to_admin
+from utils.converters import utc_to_local, local_to_utc
+from utils.mixins import RoleRequiredMixin, ActivationRequiredMixin
 import logging
-from django.utils.dateparse import parse_datetime
 
 logger = logging.getLogger(__name__)
 
@@ -86,19 +92,21 @@ def parse_date(date_str):
     raise ValueError(f"date '{date_str}' does not match any known format")
 
 
-# save available tutor times
+# CHECKED PROVIDER
+# save available provider times
 @csrf_exempt
-def save_available_tutor_times(request):
+def save_available_provider_times(request):
     if not request.user.is_authenticated:
         messages.error(request, "Sorry, You have no access to this page without login! Please sign in first.")
         return redirect('accounts:sign_in')
 
     # Ensure the logged-in TUTOR's profile is retrieved
-    if not request.user.profile.tutor_profile:
-        messages.error(request, "Sorry, You should be a tutor to have access to this page! ")
+    if request.user.profile.user_type not in ['admin', 'tutor', 'interviewer']:
+        messages.error(request, "Sorry, You have no access to this page! ")
         return redirect('accounts:sign_out')
     else:
-        logged_in_tutor_id = request.user.profile.tutor_profile.pk
+        # logged_in_tutor_id = request.user.profile.tutor_profile.pk
+        logged_in_user_id = request.user.pk
         # TEST INDENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if request.method == 'POST':
             try:
@@ -120,32 +128,33 @@ def save_available_tutor_times(request):
                 avails_to_create = []
                 for avail_s in available_sessions:
                     # Validate required fields
-                    if not all(key in avail_s for key in ['startTime', 'endTime', 'timezone', 'tutorId']):
+                    if not all(key in avail_s for key in ['startTime', 'endTime', 'timezone', 'providerUId']):
                         return JsonResponse(
                             {'status': 'error', 'message': 'Missing required fields in available session.'})
 
-                    if not (logged_in_tutor_id == int(avail_s.get('tutorId'))):
+                    if not (logged_in_user_id == int(avail_s.get('providerUId'))):
                         # Debugging lines (DELETE BEFORE LAUNCH) -------------------------------------
-                        s_tutor_obj = get_object_or_404(Tutor, id=int(avail_s.get('tutorId')))
-                        logged_in_tutor_obj = get_object_or_404(Tutor, id=logged_in_tutor_id)
-                        print(
-                            f'Session Tutor: {s_tutor_obj.profile.user.first_name}, {s_tutor_obj.profile.user.last_name}')
-                        print(
-                            f'Logged in Tutor: {logged_in_tutor_obj.profile.user.first_name}, {logged_in_tutor_obj.profile.user.last_name}')
+                        # s_tutor_obj = get_object_or_404(Tutor, id=int(avail_s.get('providerUId')))
+                        # s_user_obj = get_object_or_404(User, id=int(avail_s.get('providerUId')))
+                        # logged_in_tutor_obj = get_object_or_404(Tutor, id=logged_in_user_id)
+                        # print(f'Session Tutor: {s_tutor_obj.profile.user.first_name}, {s_tutor_obj.profile.user.last_name}')
+                        # print(f'Logged in Tutor: {logged_in_tutor_obj.profile.user.first_name}, {logged_in_tutor_obj.profile.user.last_name}')
                         messages.error(request, "You just authorized to define your available times. Not more!")
                         return redirect('accounts:sign_out')
-                    avail_tutor_obj = get_object_or_404(Tutor, id=int(avail_s.get('tutorId')))
+                    # avail_tutor_obj = get_object_or_404(Tutor, id=int(avail_s.get('providerUId')))
+                    avail_user_obj = get_object_or_404(User, id=int(avail_s.get('providerUId')))
 
                     start_time_str = avail_s.get('startTime', '')
                     end_time_str = avail_s.get('endTime', '')
                     #  CHECK WHY UTC ????????????????????????????????????????????????????????????????????????????
-                    tutor_timezone = avail_s.get('timezone', 'UTC')  # Get the tutor's time zone from the frontend
+                    # tutor_timezone = avail_s.get('timezone', 'UTC')  # Get the tutor's time zone from the frontend
+                    provider_timezone = avail_s.get('timezone', 'UTC')  # Get the provider's time zone from the frontend
 
                     # Validate timezone
                     try:
-                        local_tz = pytz.timezone(tutor_timezone)
+                        local_tz = pytz.timezone(provider_timezone)
                     except pytz.UnknownTimeZoneError:
-                        return JsonResponse({'status': 'error', 'message': f'Invalid timezone: {tutor_timezone}'})
+                        return JsonResponse({'status': 'error', 'message': f'Invalid timezone: {provider_timezone}'})
 
                     # Parse and convert times
                     try:
@@ -160,17 +169,15 @@ def save_available_tutor_times(request):
                         start_avail_time_utc = start_avail_time_local.astimezone(pytz.UTC)
                         end_avail_time_utc = end_avail_time_local.astimezone(pytz.UTC)
 
-                        print(
-                            f'Start Avail Time (Local): {start_avail_time_local}, End Session (Local): {end_avail_time_local}')
-                        print(
-                            f'Start Avail Time (UTC): {start_avail_time_utc}, End Session (UTC): {end_avail_time_utc}')
+                        # print(f'Start Avail Time (Local): {start_avail_time_local}, End Session (Local): {end_avail_time_local}')
+                        # print(f'Start Avail Time (UTC): {start_avail_time_utc}, End Session (UTC): {end_avail_time_utc}')
 
                         # Create Availability object
                         availability = Availability(
-                            tutor=avail_tutor_obj,
+                            # tutor=avail_tutor_obj,
+                            user=avail_user_obj,
                             start_time_utc=start_avail_time_utc,
                             end_time_utc=end_avail_time_utc,
-                            tutor_timezone=tutor_timezone,
                             status='free',
                             is_available=True,
                         )
@@ -190,41 +197,48 @@ def save_available_tutor_times(request):
             return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
 
-# save student reserved sessions
-def reservation_single_student(request):
+# save client (student -> client) reserved sessions
+def reservation_single_client_MAIN(request):
     if request.method == 'POST':
         try:
             # Decode JSON data from request body
             raw_data = request.body.decode('utf-8')
             data = json.loads(raw_data)
-            print(f'Decoded JSON data: {data}')
+            # print(f'Decoded JSON data: {data}')
 
             periods = data.get('periods', [])
             if not periods:
                 return JsonResponse({'status': 'error', 'message': 'No periods provided.'})
 
-            # Ensure the logged-in student's profile is retrieved
-            student_profile = request.user.profile.student_profile
+            # Ensure the logged-in client is student or tutor (in interview process) is retrieved
+            if request.user.profile.user_type in ['student', 'tutor']:
+                client = request.user
+            else:
+                return JsonResponse({'status': 'error', 'message': 'You are not in defined client types!'})
 
             sessions_to_create = []
             for period in periods:
                 # Validate required fields
-                if not all(key in period for key in ['startTime', 'endTime', 'timezone', 'tutorId']):
+                if not all(key in period for key in
+                           ['subject', 'session_type', 'startTime', 'endTime', 'timezone', 'providerUId']):
                     return JsonResponse({'status': 'error', 'message': 'Missing required fields in period.'})
 
-                tutor_id = period.get('tutorId')
-                tutor_obj = get_object_or_404(Tutor, id=tutor_id)
-                print(f'Tutor: {tutor_obj.profile.user.first_name}, {tutor_obj.profile.user.last_name}')
+                providerUId = period.get('providerUId')
+                # tutor_obj = get_object_or_404(Tutor, id=providerUId)
+                provider_user_obj = get_object_or_404(User, id=providerUId)
+                print(f'Provider: {provider_user_obj.first_name}, {provider_user_obj.last_name}')
 
+                subject = period.get('subject', '')
+                session_type = period.get('session_type', '')
                 start_time_str = period.get('startTime', '')
                 end_time_str = period.get('endTime', '')
-                student_timezone = period.get('timezone', 'UTC')  # Get the user's time zone from the frontend
+                client_timezone = period.get('timezone', 'UTC')  # Get the user's time zone from the frontend
 
                 # Validate timezone
                 try:
-                    local_tz = pytz.timezone(student_timezone)
+                    local_tz = pytz.timezone(client_timezone)
                 except pytz.UnknownTimeZoneError:
-                    return JsonResponse({'status': 'error', 'message': f'Invalid timezone: {student_timezone}'})
+                    return JsonResponse({'status': 'error', 'message': f'Invalid timezone: {client_timezone}'})
 
                 # Parse and convert times
                 try:
@@ -238,27 +252,34 @@ def reservation_single_student(request):
                     start_session_utc = start_session_local.astimezone(pytz.UTC)
                     end_session_utc = end_session_local.astimezone(pytz.UTC)
 
-                    print(f'Start Session (Local): {start_session_local}, End Session (Local): {end_session_local}')
-                    print(f'Start Session (UTC): {start_session_utc}, End Session (UTC): {end_session_utc}')
-
                     # Create session object
                     session = Session(
-                        subject='Piano Class (Test)',
-                        session_type='private',
-                        tutor=tutor_obj,
+                        subject=subject,
+                        session_type=session_type,
+                        provider=provider_user_obj,
                         start_session_utc=start_session_utc,
                         end_session_utc=end_session_utc,
-                        students_timezone=student_timezone,
                         status='pending',
                     )
                     sessions_to_create.append(session)
                 except ValueError as e:
                     return JsonResponse({'status': 'error', 'message': f'Error parsing dates: {e}'})
 
-            # Bulk create sessions
-            created_sessions = Session.objects.bulk_create(sessions_to_create)
-            for session in created_sessions:
-                session.students.add(student_profile)
+            for session in sessions_to_create:
+                # by manually save each session we call session.generate_unique_appointment_id() for appointment_id
+                session.save()
+                session.clients.add(client)
+
+                # Bulk create sessions
+                # created_sessions = Session.objects.bulk_create(sessions_to_create)
+                # for session in created_sessions:
+                #     session.clients.add(client)
+                if session.session_type == 'interview':
+                    applicant = ProviderApplication.objects.get(user=client)
+                    applicant.status = 'scheduled'
+                    applicant.save()
+                    # handle sending email and related notifications
+                    # interview_submit(request, session, client, start_session_local,  client_timezone, provider_user_obj)
 
             return JsonResponse({'status': 'success', 'message': 'Sessions reserved successfully.'})
         except Exception as e:
@@ -267,15 +288,86 @@ def reservation_single_student(request):
         return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
 
-# Tutor in dashboard save his/her free times (periods)
+def reservation_single_client(request):
+    if request.method == 'POST':
+        try:
+            # Decode JSON data from request body
+            raw_data = request.body.decode('utf-8')
+            data = json.loads(raw_data)
+
+            periods = data.get('periods', [])
+            if not periods:
+                return JsonResponse({'status': 'error', 'message': 'No periods provided.'})
+
+            # Ensure the logged-in client is student or tutor (in interview process) is retrieved
+            if request.user.profile.user_type in ['student', 'tutor']:
+                client = request.user
+            else:
+                return JsonResponse({'status': 'error', 'message': 'You are not in defined client types!'})
+
+            sessions_to_create = []
+            for period in periods:
+                # Validate required fields
+                if not all(key in period for key in
+                           ['subject', 'session_type', 'startTime', 'endTime', 'timezone', 'providerUId']):
+                    return JsonResponse({'status': 'error', 'message': 'Missing required fields in period.'})
+
+                providerUId = period.get('providerUId')
+                provider_user_obj = get_object_or_404(User, id=providerUId)
+
+                subject = period.get('subject', '')
+                session_type = period.get('session_type', '')
+                start_time_str = period.get('startTime', '')
+                end_time_str = period.get('endTime', '')
+                client_timezone = period.get('timezone', 'UTC')
+
+                try:
+                    # Use the modular function to convert to UTC
+                    start_session_utc = local_to_utc(date_str=start_time_str, date_format='%m/%d/%Y %H:%M',
+                                                     timezone_str=client_timezone)
+                    end_session_utc = local_to_utc(date_str=end_time_str, date_format='%m/%d/%Y %H:%M',
+                                                   timezone_str=client_timezone)
+
+                    # Create session object
+                    session = Session(
+                        subject=subject,
+                        session_type=session_type,
+                        provider=provider_user_obj,
+                        start_session_utc=start_session_utc,
+                        end_session_utc=end_session_utc,
+                        status='pending',
+                    )
+                    sessions_to_create.append(session)
+                except pytz.UnknownTimeZoneError:
+                    return JsonResponse({'status': 'error', 'message': f'Invalid timezone: {client_timezone}'})
+                except ValueError as e:
+                    return JsonResponse({'status': 'error', 'message': f'Error parsing dates: {e}'})
+
+            for session in sessions_to_create:
+                session.save()
+                session.clients.add(client)
+
+                if session.session_type == 'interview':
+                    applicant = ProviderApplication.objects.get(user=client)
+                    applicant.status = 'scheduled'
+                    applicant.timezone = client_timezone  # set applicant timezone
+                    applicant.save()
+
+                    interview_submit(request, session, client, start_time_str, client_timezone, provider_user_obj)
+
+            return JsonResponse({'status': 'success', 'message': 'Sessions reserved successfully.'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Invalid request method.'})
 
 
-# Fetch Tutor's Booked Sessions
+# Fetch Provider's Booked Sessions
 def get_booked_sessions(request):
-    tutor_id = request.GET.get('tutorId')
+    providerUId = request.GET.get('providerUId')
     start_date_str = request.GET.get('startDate')
 
-    if not tutor_id or not start_date_str:
+    if not providerUId or not start_date_str:
         return JsonResponse({'status': 'error', 'message': 'Missing parameters'}, status=400)
 
     try:
@@ -286,38 +378,37 @@ def get_booked_sessions(request):
         # Calculate the end date (7 days later)
         end_date = start_date + timezone.timedelta(days=7)
 
-        # Fetch booked sessions data for the tutor within the date range
+        # Fetch booked sessions data for the provider within the date range
         sessions = Session.objects.filter(
-            tutor_id=tutor_id,
+            provider_id=providerUId,
             start_session_utc__gte=start_date,
             end_session_utc__lte=end_date,
-        ).values('start_session_utc', 'end_session_utc', 'tutor_timezone', 'status')
+        ).values('start_session_utc', 'end_session_utc', 'status')
 
         # Convert datetime objects to local time strings for JSON serialization
         booked_sessions_list = [
             {
                 'start_session_utc': booked['start_session_utc'].isoformat(),
                 'end_session_utc': booked['end_session_utc'].isoformat(),
-                'tutor_timezone': booked['tutor_timezone'],
                 'status': booked['status'],
             }
             for booked in sessions
         ]
 
-        print(f"Start Date: {start_date}, End Date: {end_date}")
-        print(f"Availability Data: {booked_sessions_list}")
+        # print(f"Start Date: {start_date}, End Date: {end_date}")
+        # print(f"Availability Data: {booked_sessions_list}")
 
         return JsonResponse({'status': 'success', 'booked_sessions': booked_sessions_list})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 
-# Fetch Tutor free times (periods) to show on Schedule table
+# Fetch Provider (Tutor) free times (periods) to show on Schedule table
 def get_availability(request):
-    tutor_id = request.GET.get('tutorId')
+    providerUId = request.GET.get('providerUId')
     start_date_str = request.GET.get('startDate')
 
-    if not tutor_id or not start_date_str:
+    if not providerUId or not start_date_str:
         return JsonResponse({'status': 'error', 'message': 'Missing parameters'}, status=400)
 
     try:
@@ -328,13 +419,13 @@ def get_availability(request):
         # Calculate the end date (7 days later)
         end_date = start_date + timezone.timedelta(days=7)
 
-        # Fetch availability data for the tutor within the date range
+        # Fetch availability data for the provider (tutor) within the date range
         availability = Availability.objects.filter(
-            tutor_id=tutor_id,
+            user_id=providerUId,
             start_time_utc__gte=start_date,
             end_time_utc__lte=end_date,
             is_available=True
-        ).values('id', 'start_time_utc', 'end_time_utc', 'tutor_timezone')
+        ).values('id', 'start_time_utc', 'end_time_utc')
 
         # Convert datetime objects to local time strings for JSON serialization
         availability_list = [
@@ -342,72 +433,17 @@ def get_availability(request):
                 'availId': avail['id'],  # pk or id of availability record
                 'start_time_utc': avail['start_time_utc'].isoformat(),
                 'end_time_utc': avail['end_time_utc'].isoformat(),
-                'tutor_timezone': avail['tutor_timezone'],
+                # 'provider_timezone': avail['timezone'],
             }
             for avail in availability
         ]
 
-        print(f"Start Date: {start_date}, End Date: {end_date}")
-        print(f"Availability Data: {availability_list}")
+        # print(f"Start Date: {start_date}, End Date: {end_date}")
+        # print(f"Availability Data: {availability_list}")
 
         return JsonResponse({'status': 'success', 'availability': availability_list})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-
-
-def get_availability11(request):
-    tutor_id = request.GET.get('tutorId')
-    start_date_str = request.GET.get('startDate')
-
-    if not tutor_id or not start_date_str:
-        return JsonResponse({'status': 'error', 'message': 'Missing parameters'}, status=400)
-
-    try:
-        # Parse the start date and make it timezone-aware
-        start_date = timezone.datetime.strptime(start_date_str, '%Y-%m-%d').date()
-        start_date = timezone.make_aware(timezone.datetime.combine(start_date, timezone.datetime.min.time()),
-                                         timezone.get_current_timezone())
-        # Calculate the end date (7 days later)
-        end_date = start_date + timezone.timedelta(days=7)
-
-        # Fetch availability data for the tutor within the date range
-        availability = Availability.objects.filter(
-            tutor_id=tutor_id,
-            start_time_utc__gte=start_date,
-            end_time_utc__lt=end_date,
-            is_available=True
-        ).values('start_time', 'end_time')
-
-        # Convert datetime objects to local time strings for JSON serialization
-        availability_list = [
-            {
-                'start_time': timezone.localtime(avail['start_time']).isoformat(),
-                'end_time': timezone.localtime(avail['end_time']).isoformat(),
-            }
-            for avail in availability
-        ]
-
-        return JsonResponse({'status': 'success', 'availability': availability_list})
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
-
-
-# def update_session2(request, session_id):
-#     session = get_object_or_404(Session, id=session_id)
-#
-#     # Check if the logged-in user is the tutor for this session
-#     if request.user != session.tutor.profile.user:
-#         raise PermissionDenied("You can only modify your own sessions.")
-#
-#     if request.method == 'POST':
-#         form = SessionForm(request.POST, instance=session)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('session_detail', session_id=session.id)
-#     else:
-#         form = SessionForm(instance=session)
-#
-#     return render(request, 'update_session.html', {'form': form})
 
 
 def update_session(request, session_id):
@@ -449,68 +485,16 @@ def reschedule_session(request, session_id):
     return render(request, 'reschedule_session.html')
 
 
-def update_session1(request, session_id):
-    # session_id must be the pk in the Session table
-    session = Session.objects.get(id=session_id)
-
-    # Check if the logged-in user is the tutor for this session
-    if request.user != session.tutor.profile.user:
-        raise PermissionDenied("You do not have permission to modify this session.")
-
-    # Proceed with updating the session
-    # if request.method == 'POST':
-    #     session.rescheduled_start = new_start_time
-    #     session.rescheduled_by = request.user  # The user who initiated the rescheduling
-    #     session.is_rescheduled = True
-    #     session.rescheduled_at = timezone.now()
-    #     session.save()
-    #     form = SessionForm(request.POST, instance=session)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('session_detail', session_id=session.id)
-    # else:
-    #     form = SessionForm(instance=session)
-    #
-    # return render(request, 'update_session.html', {'form': form})
-
-
 def dashboard(request):
     return render(request, 'dashboard.html')
 
 
-class SuccessSubmitView(TemplateView):
+class SuccessSubmitView(LoginRequiredMixin, TemplateView):
     template_name = 'ap2_meeting/success_submit.html'
 
 
-# class DAppointments(LoginRequiredMixin, TemplateView):
-#     template_name = 'ap2_meeting/dashboard/d_appointments_manual.html'
-#
-#     def generate_weekdays(self, start_date):
-#         days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-#         weekdays = []
-#         for i in range(7):
-#             current_date = start_date + timedelta(days=i)
-#             weekdays.append({
-#                 'day': days_of_week[current_date.weekday()],
-#                 'date': current_date.strftime('%m/%d/%Y'),
-#                 'abbr_day': days_of_week[current_date.weekday()][:3].upper(),
-#                 'current_date': current_date
-#             })
-#         return weekdays
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         start_day = self.request.GET.get('start_day', 'Sunday')  # Default to Sunday if not specified
-#         today = datetime.today()
-#         days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-#         start_day_index = days_of_week.index(start_day)
-#         start_date = today - timedelta(days=(today.weekday() - start_day_index) % 7)
-#         context['weekdays'] = self.generate_weekdays(start_date)
-#         context['today'] = today
-#         return context
-
-
-class DAppointmentsEdit(LoginRequiredMixin, ListView):
+class DAppointmentsEdit(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, ListView):
+    allowed_roles = ['tutor', 'admin', ]
     model = Availability
     template_name = 'ap2_meeting/dashboard/d_appointments_edit.html'
     # ordering = ['-profile__create_date']
@@ -521,49 +505,38 @@ class DAppointmentsEdit(LoginRequiredMixin, ListView):
         return Availability.objects.filter(tutor__profile__user=self.request.user).order_by('-start_time_utc')
 
 
-class DAppointmentsEdit1_DELETE(LoginRequiredMixin, TemplateView):
-    template_name = 'ap2_meeting/dashboard/d_appointments_edit.html'
-
-    def generate_weekdays(self, start_date):
-        days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        weekdays = []
-        for i in range(7):
-            current_date = start_date + timedelta(days=i)
-            weekdays.append({
-                'day': days_of_week[current_date.weekday()],
-                'date': current_date.strftime('%m/%d/%Y'),
-                'abbr_day': days_of_week[current_date.weekday()][:3].upper(),
-                'current_date': current_date
-            })
-        return weekdays
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        start_day = self.request.GET.get('start_day', 'Sunday')  # Default to Sunday if not specified
-        today = datetime.today()
-        days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-        start_day_index = days_of_week.index(start_day)
-        start_date = today - timedelta(days=(today.weekday() - start_day_index) % 7)
-        context['weekdays'] = self.generate_weekdays(start_date)
-        context['today'] = today
-        return context
-
-
-# from dateutil.parser import parse as parse_date
-
-class DAppointments(LoginRequiredMixin, TemplateView):
+class DAppointments(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
+    allowed_roles = ['tutor', 'admin']
     template_name = 'ap2_meeting/dashboard/d_appointments_manual.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.profile.user_type not in ['tutor', 'admin', 'interviewer']:
+            err_title = f"Access Denied"
+            err_msg = f"Sorry! You have no access to scheduling system!"
+            messages.error(self.request, err_msg)
+            return error_page(request, err_title, err_msg, 403)
+
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        tutor_profile = self.request.user.profile.tutor_profile
-        appointment_settings = AppointmentSetting.objects.get(tutor=tutor_profile)
-        provider_timezone = appointment_settings.provider_timezone
-        tz = pytz.timezone(provider_timezone) if provider_timezone else pytz.UTC
-        # Ensure today is a timezone-aware date object
+
+        try:
+            # Get the appointment settings for the current user
+            appointment_settings = AppointmentSetting.objects.get(user=self.request.user)
+            timezone = appointment_settings.timezone
+        except AppointmentSetting.DoesNotExist:
+            timezone = None  # Default to None if not found
+
+        # Handle timezone for date objects
+        tz = pytz.timezone(timezone) if timezone else pytz.UTC
         context['today'] = datetime.now(tz).date()
-        # Generate weekdays with timezone-aware dates
-        context['tutor_id'] = tutor_profile.id
+        context['providerUId'] = self.request.user.id
+
+        # Validate tutor profile existence to avoid errors
+        if hasattr(self.request.user.profile, 'tutor_profile'):
+            context['provider_id'] = self.request.user.profile.tutor_profile.id
+
         return context
 
 
@@ -620,11 +593,13 @@ def navigate_week_BACKUP(request, direction):
     return redirect(f'/schedule/dashboard/appointments/manual/?start_date={start_date.strftime("%m/%d/%Y")}')
 
 
-class DAppointmentsVTable(LoginRequiredMixin, TemplateView):
+class DAppointmentsVTable(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
+    allowed_roles = ['tutor', 'admin', ]
     template_name = 'ap2_meeting/dashboard/d_appointments_vtable.html'
 
 
-class DAppointmentsSettings(LoginRequiredMixin, FormView):
+class DAppointmentsSettings(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, FormView):
+    allowed_roles = ['tutor', 'admin', ]
     template_name = 'ap2_meeting/dashboard/d_appointments_settings.html'
     form_class = AppointmentSettingForm
     success_url = reverse_lazy('meeting:d_appointments_settings')
@@ -642,17 +617,18 @@ class DAppointmentsSettings(LoginRequiredMixin, FormView):
         kwargs = super().get_form_kwargs()
         try:
             # Fetch or create the tutor's appointment settings instance
-            tutor = self.request.user.profile.tutor_profile
-            appointment_setting, created = AppointmentSetting.objects.get_or_create(tutor=tutor)
+            # tutor = self.request.user.profile.tutor_profile
+            appointment_setting, created = AppointmentSetting.objects.get_or_create(user=self.request.user)
             kwargs['instance'] = appointment_setting
             print(f"Passed instance: {appointment_setting}")
         except Tutor.DoesNotExist:
-            print("Tutor instance does not exist.")
+            print("Provider instance does not exist.")
         return kwargs
 
     def form_valid(self, form):
         appointment_setting = form.save(commit=False)
-        appointment_setting.tutor = self.request.user.profile.tutor_profile
+        # appointment_setting.tutor = self.request.user.profile.tutor_profile
+        appointment_setting.user = self.request.user
         appointment_setting.save()
         messages.success(self.request, "Your appointment settings have been saved successfully!")
         return super().form_valid(form)
@@ -664,11 +640,12 @@ class DAppointmentsSettings(LoginRequiredMixin, FormView):
 
 
 def fetch_appointment_settings(request):
-    tutor = request.user.profile.tutor_profile
+    # tutor = request.user.profile.tutor_profile
     try:
-        appointment_settings = AppointmentSetting.objects.get(tutor=tutor)
+        # appointment_settings = AppointmentSetting.objects.get(tutor=tutor)
+        appointment_settings = AppointmentSetting.objects.get(user=request.user)
         data = {
-            'provider_timezone': appointment_settings.provider_timezone,
+            'user_timezone': appointment_settings.timezone,
             'session_length': appointment_settings.session_length,
             'week_start': appointment_settings.week_start,
             'class_type': appointment_settings.session_type
@@ -676,3 +653,33 @@ def fetch_appointment_settings(request):
         return JsonResponse(data)
     except AppointmentSetting.DoesNotExist:
         return JsonResponse({'error': 'Appointment settings not found'}, status=404)
+
+
+def interview_submit(request, session, client, start_session_local, client_timezone, provider):
+    # utc_to_local(session.start_session_utc, client_timezone)
+    # send email to applicant
+    subject = f"🎯 Dear {client.first_name} {client.last_name}, You've scheduled your interview session."
+    to_email = [client.email]
+    template_name = 'emails/interview/success_after_schedule'
+    # example:  2025-05-02 09:30:00+03:30
+    local_datetime = utc_to_local(session.start_session_utc, client_timezone)
+    local_date = local_datetime.date()
+    local_time = local_datetime.time()
+    context = {
+        'full_name': f"{client.first_name} {client.last_name}",
+        'scheduled_at': f"{local_date} at {local_time} ",
+        'start_session_local': f"{start_session_local} at {local_time} ",
+        'client_timezone': client_timezone,
+        'dashboard_uri': request.build_absolute_uri(reverse('tutor:dt_wizard')),
+        'site_name': settings.SITE_NAME,
+    }
+    print(f"scheduled_at: {context['scheduled_at']}")
+    send_dual_email(subject, template_name, context, to_email)
+
+    # send email to Admin
+    notify_subject = f"🔔 New Interview scheduled by {client.first_name} {client.last_name}"
+    notification_email_to_admin(notify_subject, 'emails/admin/interview_notify_scheduled', context)
+
+    # send Notification to applicant
+
+    # send Notification to Admin

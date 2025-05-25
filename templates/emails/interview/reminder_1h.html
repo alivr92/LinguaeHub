@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interview Reminder</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+    <tr>
+      <td style="padding: 30px;">
+        <h2 style="color: #333;">⏰ Interview Reminder</h2>
+        <p style="font-size: 16px; color: #444;">
+          Hi {{ full_name }},
+        </p>
+        <p style="font-size: 16px; color: #444;">
+          This is a friendly reminder that your scheduled interview with <strong>{{ site_name }}</strong> is set to begin in approximately <strong>1 hour</strong>.
+        </p>
+        <p style="font-size: 16px; color: #444;">
+          Please ensure you're ready and join the session a few minutes early to avoid any technical delays.
+        </p>
+        <p style="font-size: 16px; color: #444;">
+          <strong>Date & Time:</strong><br>
+          {{ session_start_time }} ({{ timezone }})
+        </p>
+        <p style="font-size: 16px; color: #444;">
+          <strong>Meeting Link:</strong><br>
+          <a href="{{ video_call_link }}" style="color: #007bff;">Join Interview</a>
+        </p>
+        <hr style="margin: 20px 0;">
+        <p style="font-size: 14px; color: #888;">
+          If you have any questions or encounter issues, feel free to reach out to us before the meeting time.
+        </p>
+        <p style="font-size: 16px; color: #444;">Best of luck!<br><strong>{{ site_name }} Team</strong></p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

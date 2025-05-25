@@ -12,11 +12,13 @@ from ap2_meeting.models import Session, Review
 from .forms import CombinedProfileForm
 from django.http import JsonResponse
 from django.utils import timezone
+from utils.mixins import RoleRequiredMixin, ActivationRequiredMixin, VIPRequiredMixin
 from datetime import timedelta
 
 
 # DASHBOARD STUDENT ---------------------------------------------------------------------------------------------
-class DSHome(LoginRequiredMixin, TemplateView):
+class DSHome(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_home.html'
 
     def get_context_data(self, **kwargs):
@@ -24,11 +26,13 @@ class DSHome(LoginRequiredMixin, TemplateView):
         return context
 
 
-class DSSubscription(LoginRequiredMixin, TemplateView):
+class DSSubscription(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin,TemplateView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_subscription.html'
 
 
-class DSClassList(LoginRequiredMixin, ListView):
+class DSClassList(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, ListView):
+    allowed_roles = ['student']
     model = Session
     template_name = 'ap2_student/dashboard/ds_class_list.html'
     paginate_by = 6
@@ -117,7 +121,8 @@ class DSClassList(LoginRequiredMixin, ListView):
 #         review.save()
 
 
-class DSCourseResume(LoginRequiredMixin, TemplateView):
+class DSCourseResume(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_course_resume.html'
 
     def get_context_data(self, **kwargs):
@@ -125,17 +130,20 @@ class DSCourseResume(LoginRequiredMixin, TemplateView):
         return context
 
 
-class DSQuiz(LoginRequiredMixin, TemplateView):
+class DSQuiz(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_quiz.html'
 
 
-class DSPaymentInfo(LoginRequiredMixin, ListView):
+class DSPaymentInfo(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, ListView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_payment_info.html'
     model = Tutor  # Must change to Order Payments !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     paginate_by = 5
 
 
-class DSBookmark(LoginRequiredMixin, ListView):
+class DSBookmark(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, ListView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_bookmark.html'
     model = Tutor  # Must change to Order Payments !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     paginate_by = 5
@@ -156,7 +164,8 @@ def toggle_wishlist(request):
 
 
 # Tutor must change to student! ???????????????????????????????????????????
-class DSEdit(LoginRequiredMixin, View):
+class DSEdit(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, View):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_edit.html'
     success_url = reverse_lazy('student:ds_home')
 
@@ -193,7 +202,8 @@ class DSEdit(LoginRequiredMixin, View):
         return render(request, self.template_name, {'form': form})
 
 
-class DSSetting(LoginRequiredMixin, TemplateView):
+class DSSetting(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_setting.html'
 
     def get_context_data(self, **kwargs):
@@ -202,6 +212,7 @@ class DSSetting(LoginRequiredMixin, TemplateView):
         return context
 
 
-class DSDeleteAccount(LoginRequiredMixin, DeleteView):
+class DSDeleteAccount(LoginRequiredMixin,RoleRequiredMixin, ActivationRequiredMixin, DeleteView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/ds_delete_account.html'
     model = Student  # Must CHECK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

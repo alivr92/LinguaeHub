@@ -1,0 +1,25 @@
+Subject: Welcome to {{ site_name }}, {{ full_name }}!
+
+Dear {{ full_name }},
+
+We are pleased to inform you that your application has been reviewed and approved. You are now officially an active tutor on {{ site_name }}.
+
+The following skills have been approved and added to your profile:
+
+{% for uSkill in approved_uSkills %}
+- {{ uSkill.skill }} (Level: {{ uSkill.level }}) — Certified: {% if uSkill.is_certified %}Yes{% else %}No{% endif %}
+{% endfor %}
+
+{% if reviewer_comment %}
+Reviewer’s Note:
+“{{ reviewer_comment }}”
+{% endif %}
+
+You can now access your tutor dashboard and begin engaging with the platform:
+
+Dashboard: {{ dashboard_uri }}
+
+Should you have any questions or require assistance, we’re here to help.
+
+Warm regards,
+The {{ site_name }} Team

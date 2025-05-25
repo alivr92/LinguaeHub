@@ -138,7 +138,7 @@
                     <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }}
                         to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
 
-                    <!-- Pagination START -->
+                    <!-- Pagination  -->
                     <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
                         {% if page_obj.has_other_pages %}
                             <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
@@ -187,9 +187,6 @@
                             </ul>
                         {% endif %}
                     </nav>
-                    <!-- Pagination END -->
-
-
                 </div>
                 <!-- Pagination END -->
             </div>

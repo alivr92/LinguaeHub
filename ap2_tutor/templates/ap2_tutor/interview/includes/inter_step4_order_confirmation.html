@@ -1,0 +1,42 @@
+<div class="card shadow-sm p-4 confirmation-card text-center bg-opacity-10 bg-purple">
+    {#                            <div class="mb-3">#}
+    {#                                <div class="confirmation-icon text-primary">👀 📝 ⚠️⏳ 🗓️📌✅</div>#}
+    {#                                <p class="text-muted">⚠ Please review your booking details before confirming.</p>#}
+    {#                            </div>#}
+
+
+    <!-- OrderConfirmation Tables-->
+    <div class="text-start mt-4">
+        <h5 class="mb-3">Interview Details:</h5>
+        <div id="OrderGeneralInfo" class="col-12"></div>
+        <hr>
+        <div class="row g-12 align-items-center d-flex ">
+            <div id="SessionsTable" class="">
+                <!-- Tables will be injected here -->
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>You have not selected any sessions
+                        yet! go
+                        to previous step and choose the best match time for
+                        yourself!</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {#                            <div class="mt-4">#}
+    {#                                <a href="/" class="btn btn-primary">Back to Dashboard</a>#}
+    {#                            </div>#}
+</div>
+
+<div class="row g-4">
+    <!-- Step 4 button -->
+    <div class="d-md-flex justify-content-between align-items-start mt-4">
+        <button class="btn btn-secondary prev-btn mb-2 mb-md-0">Previous</button>
+        <div class="text-md-end">
+            <a id="btnFinalSubmit" href="#"
+               class="btn btn-success mb-2 mb-sm-0">Submit</a>
+            <p class="mb-0 small mt-1">Once you click "Submit", your interview session
+                will be scheduled and your request will confirm.</p>
+        </div>
+    </div>
+</div>

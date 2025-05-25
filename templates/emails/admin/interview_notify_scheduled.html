@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Applicant Ready for Interview</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin: 0 auto; max-width: 600px; background-color: #ffffff; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <tr>
+      <td style="padding: 20px 30px;">
+        <h2 style="color: #333333;">New Applicant Ready for Interview</h2>
+
+        <p style="font-size: 16px; color: #555555;">
+          Dear Admin,
+        </p>
+
+        <p style="font-size: 16px; color: #555555;">
+          The applicant <strong>{{ full_name }}</strong> has successfully completed all pre-interview requirements on <strong>{{ site_name }}</strong> and scheduled their interview session.
+        </p>
+
+        <p style="font-size: 16px; color: #555555;">
+          Please review their profile and prepare accordingly.
+        </p>
+
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="{{ admin_dashboard_url }}" style="background-color: #007bff; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-size: 16px;">
+            View Applicant Details
+          </a>
+        </div>
+
+        <p style="font-size: 14px; color: #888888;">
+          This notification was generated automatically. Please ensure all internal interview preparations are completed.
+        </p>
+
+        <p style="font-size: 16px; color: #555555;">Thank you,<br><strong>{{ site_name }} System</strong></p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -84,10 +84,6 @@ class AGB(TemplateView):
     template_name = 'app_pages/agb.html'
 
 
-class BecomeTutor(TemplateView):
-    template_name = 'app_pages/become-tutor.html'
-
-
 class HelpCenter(TemplateView):
     template_name = 'app_pages/help-center.html'
 

@@ -1,9 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from app_accounts.models import UserProfile, Language, LANGUAGE_CHOICES, GENDER_CHOICES, COUNTRY_CHOICES
-from ap2_tutor.models import Tutor, Skill, SkillLevel
-from app_content_filler.models import (CFChar, CFText, CFURL, CFBoolean, CFImage, CFFloat, CFDecimal, CFFile,
-                                       CFDateTime, CFInteger, CFEmail)
+from app_accounts.models import Skill, Level, LEVEL_CHOICES
 
 
 class CombinedProfileForm(forms.Form):
@@ -19,10 +17,12 @@ class CombinedProfileForm(forms.Form):
     username = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'User name',
+        'required': 'required',
     }))
     email = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Email',
+        'required': 'required',
     }))
 
     # UserProfile fields
@@ -38,6 +38,7 @@ class CombinedProfileForm(forms.Form):
         'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
         'data-search-enabled': 'false',
         'placeholder': 'Gender',
+        'required': 'required',
     }))
     photo = forms.ImageField(required=False)
     delete_photo = forms.BooleanField(required=False, initial=False)
@@ -59,6 +60,7 @@ class CombinedProfileForm(forms.Form):
         'aria-label': '.form-select-sm',
         'data-search-enabled': 'true',
         'data-remove-item-button': 'true',
+        'required': 'required',
     }))
 
     # Language fields
@@ -72,6 +74,7 @@ class CombinedProfileForm(forms.Form):
             'data-max-item-count': 4,
             'data-remove-item-button': 'true',
             'placeholder': 'Select language',
+            'required': 'required',
         })
     )
 
@@ -133,6 +136,66 @@ class CombinedProfileForm(forms.Form):
 
         return user_instance, profile
 
+
+class InterviewAcceptForm1(forms.Form):
+    def __init__(self, *args, **kwargs):
+        prefix = kwargs.pop('prefix', '')
+        super().__init__(*args, **kwargs)
+        self.prefix = prefix
+
+    skills = forms.ModelMultipleChoiceField(
+        queryset=Skill.objects.all(),
+        required=True,
+        widget=forms.SelectMultiple(attrs={
+            'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+            'multiple': 'multiple',
+            'aria-label': '.form-select-sm',
+            'data-max-item-count': 6,
+            'data-remove-item-button': 'true',
+            'required': 'required',
+        }))
+
+
+    skill_level = forms.ChoiceField(choices=LEVEL_CHOICES, required=True, initial='', widget=forms.Select(attrs={
+        'class': 'form-select js-choice border-1 z-index-9 bg-transparent',
+        'aria-label': '.form-select-sm',
+        'data-search-enabled': 'true',
+        'data-remove-item-button': 'true',
+        'placeholder': 'CEFR Level',
+        'required': 'required',
+    }))
+
+    # skill_level = forms.ModelMultipleChoiceField(
+    #     queryset=Level.objects.all(),
+    #     required=False,
+    #     widget=forms.SelectMultiple(attrs={
+    #         'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+    #         # 'multiple': 'multiple',
+    #         'aria-label': '.form-select-sm',
+    #         'data-max-item-count': 1,
+    #         'data-remove-item-button': 'true',
+    #         'required': 'required',
+    #     })
+    # )
+
+
+class InterviewAcceptForm(forms.Form):
+    skills = forms.ModelMultipleChoiceField(
+        queryset=Skill.objects.none(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-select'}),
+        required=False
+    )
+    skill_level = forms.ChoiceField(
+        choices=LEVEL_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-select'}),
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        prefix = kwargs.pop('prefix', '')
+        super().__init__(*args, **kwargs)
+        self.fields['skills'].queryset = Skill.objects.all()
+        self.prefix = prefix
 
 # class SiteSettingsForm(forms.ModelForm):
 #     class Meta:

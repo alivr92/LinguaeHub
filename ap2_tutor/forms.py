@@ -1,26 +1,120 @@
 from django import forms
+from django.core.exceptions import ValidationError
+import os
 from django.contrib.auth.models import User
-from app_accounts.models import UserProfile, Language, LANGUAGE_CHOICES, GENDER_CHOICES, COUNTRY_CHOICES
-from ap2_tutor.models import Tutor, Skill, SkillLevel
+from app_accounts.models import (UserProfile, Language, Skill, Level, UserSkill,
+                                 LANGUAGE_CHOICES, GENDER_CHOICES, COUNTRY_CHOICES, LEVEL_CHOICES, SKILL_CHOICES)
+from ap2_tutor.models import ProviderApplication, Tutor
 
 
-class CombinedProfileForm(forms.Form):
-    # User fields
-    first_name = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
+class ProviderApplicationForm(forms.ModelForm):
+    class Meta:
+        model = ProviderApplication
+        fields = ['first_name', 'last_name', 'email', 'phone', 'photo', 'resume', 'bio', 'lang_native', 'skills']
+        help_texts = {
+            'skills': "Select up to 2 primary teaching skills",
+            'resume': "PDF, DOCX (max 1MB)",
+        }
+
+    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'First name',
     }))
-    last_name = forms.CharField(max_length=50, required=False, widget=forms.TextInput(attrs={
+    last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Last name',
+    }))
+    email = forms.EmailField(max_length=100, required=True, widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Email',
+        'required': 'required',
+    }))
+    phone = forms.CharField(max_length=30, required=True,
+                            # validators=[RegexValidator(
+                            #     regex=r'^\+?[0-9]{8,15}$',
+                            #     message="Enter a valid phone number (8-15 digits, + optional)"
+                            # )],
+                            widget=forms.TextInput(attrs={
+                                'class': 'form-control',
+                                'placeholder': 'Phone',
+                                'required': 'required',
+                            }))
+    photo = forms.ImageField(required=False)
+    resume = forms.FileField(required=False, widget=forms.FileInput(attrs={
+        'class': 'form-control',
+    }))
+    bio = forms.CharField(max_length=500, required=True, widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'spellcheck': "false",
+        'rows': 3,
+        'required': 'required',
+    }))
+    lang_native = forms.ChoiceField(choices=LANGUAGE_CHOICES, required=True, initial='', widget=forms.Select(attrs={
+        'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+        'aria-label': '.form-select-sm',
+        'data-search-enabled': 'true',
+        'data-remove-item-button': 'true',
+        'required': 'required',
+    }))
+    skills = forms.ModelMultipleChoiceField(
+        queryset=Skill.objects.all(),
+        required=True,
+        widget=forms.SelectMultiple(attrs={
+            'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+            'multiple': 'multiple',
+            'aria-label': '.form-select-sm',
+            'data-max-item-count': 5,
+            'data-remove-item-button': 'true',
+            'required': 'required',
+        }))
+
+    def clean_photo(self):
+        photo = self.cleaned_data.get('photo')
+        if photo and photo.size > 1 * 1024 * 1024:  # 5MB limit
+            raise forms.ValidationError("Max image size is 1MB")
+        return photo
+
+    def clean_resume(self):
+        resume = self.cleaned_data.get('resume')
+        if resume:
+            # Check file extension
+            valid_extensions = ['.pdf', '.doc', '.docx']
+            extension = os.path.splitext(resume.name)[1].lower()
+            if extension not in valid_extensions:
+                raise ValidationError(
+                    'Unsupported file format. Allowed: PDF, DOC, DOCX'
+                )
+
+            # Check file size (5MB limit)
+            if resume.size > 1 * 1024 * 1024:
+                raise ValidationError(
+                    'File too large. Max size is 1MB.'
+                )
+        return resume
+
+
+# Profile Setup Form
+class CombinedProfileForm(forms.Form):
+    # User fields
+    first_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'First name',
+        'required': 'required',
+    }))
+    last_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Last name',
+        'required': 'required',
     }))
     username = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'User name',
+        'required': 'required',
     }))
-    email = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
+    email = forms.EmailField(max_length=50, required=True, widget=forms.EmailInput(attrs={
         'class': 'form-control',
         'placeholder': 'Email',
+        'required': 'required',
     }))
 
     # UserProfile fields
@@ -28,35 +122,41 @@ class CombinedProfileForm(forms.Form):
         'class': 'form-control',
         'placeholder': 'Title',
     }))
-    phone = forms.CharField(max_length=20, required=False, widget=forms.TextInput(attrs={
+    phone = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Phone',
+        'required': 'required',
     }))
     gender = forms.ChoiceField(choices=GENDER_CHOICES, required=True, initial='male', widget=forms.Select(attrs={
         'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
         'data-search-enabled': 'false',
         'placeholder': 'Gender',
+        'required': 'required',
     }))
     photo = forms.ImageField(required=False)
     delete_photo = forms.BooleanField(required=False, initial=False)
-    bio = forms.CharField(max_length=350, required=False, widget=forms.Textarea(attrs={
+    bio = forms.CharField(max_length=500, required=False, widget=forms.Textarea(attrs={
         'class': 'form-control',
-        'rows': 3,
+        'rows': 5,
     }))
-    availability = forms.BooleanField(required=False, initial=True)
+
     country = forms.ChoiceField(choices=COUNTRY_CHOICES, required=True, initial='', widget=forms.Select(attrs={
         'class': 'form-select js-choice border-1 z-index-9 bg-transparent',
         'aria-label': '.form-select-sm',
         'data-search-enabled': 'true',
         'data-remove-item-button': 'true',
         'placeholder': 'Location',
-        'required': 'required',  # Add the required attribute
+        'required': 'required',
     }))
+
+    #
+    availability = forms.BooleanField(required=False, initial=True)
     lang_native = forms.ChoiceField(choices=LANGUAGE_CHOICES, required=True, initial='', widget=forms.Select(attrs={
         'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
         'aria-label': '.form-select-sm',
         'data-search-enabled': 'true',
         'data-remove-item-button': 'true',
+        'required': 'required',
     }))
 
     # Language fields
@@ -70,6 +170,7 @@ class CombinedProfileForm(forms.Form):
             'data-max-item-count': 4,
             'data-remove-item-button': 'true',
             'placeholder': 'Select language',
+            'required': 'required',
         })
     )
 
@@ -78,6 +179,10 @@ class CombinedProfileForm(forms.Form):
         'type': 'text',
         'class': 'form-control',
         'placeholder': 'Introduction Video URL',
+    }))
+    video_intro = forms.FileField(required=True, widget=forms.FileInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Upload Introduction Video',
     }))
     cost_trial = forms.DecimalField(max_digits=10, decimal_places=2, initial=0.00, widget=forms.NumberInput(attrs={
         'class': 'form-control',
@@ -92,46 +197,49 @@ class CombinedProfileForm(forms.Form):
         'min': '0',
     }))
 
-    discount = forms.DecimalField(max_digits=4, decimal_places=0, initial=0.00, widget=forms.NumberInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Discount',
-        'step': '1',
-        'min': '0',
-        'max': '100',
-    }))
+    discount = forms.DecimalField(max_digits=4, decimal_places=0, initial=0.00, required=False,
+                                  widget=forms.NumberInput(attrs={
+                                      'class': 'form-control',
+                                      'placeholder': 'Discount',
+                                      'step': '1',
+                                      'min': '0',
+                                      'max': '100',
+                                  }))
 
-    discount_deadline = forms.DateTimeField(widget=forms.DateTimeInput(attrs={
+    discount_deadline = forms.DateTimeField(required=False, widget=forms.DateTimeInput(attrs={
         'class': 'form-control',
         'type': 'datetime-local',
     }))
 
-    skills = forms.ModelMultipleChoiceField(
-        queryset=Skill.objects.all(),
-        required=False,
-        widget=forms.SelectMultiple(attrs={
-            'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
-            'multiple': 'multiple',
-            'aria-label': '.form-select-sm',
-            'data-max-item-count': 5,
-            'data-remove-item-button': 'true',
-        }))
-    skill_level = forms.ModelMultipleChoiceField(
-        queryset=SkillLevel.objects.all(),
-        required=False,
-        widget=forms.SelectMultiple(attrs={
-            'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
-            'multiple': 'multiple',
-            'aria-label': '.form-select-sm',
-            'data-max-item-count': 6,
-            'data-remove-item-button': 'true',
+    # skills = forms.ModelMultipleChoiceField(
+    #     queryset=Skill.objects.all(),
+    #     required=True,
+    #     widget=forms.SelectMultiple(attrs={
+    #         'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+    #         'multiple': 'multiple',
+    #         'aria-label': '.form-select-sm',
+    #         'data-max-item-count': 5,
+    #         'data-remove-item-button': 'true',
+    #         'required': 'required',
+    #     }))
 
-        })
-    )
+    # skill_level = forms.ModelMultipleChoiceField(
+    #     queryset=Level.objects.all(),
+    #     required=False,
+    #     widget=forms.SelectMultiple(attrs={
+    #         'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+    #         'multiple': 'multiple',
+    #         'aria-label': '.form-select-sm',
+    #         'data-max-item-count': 6,
+    #         'data-remove-item-button': 'true',
+    #
+    #     })
+    # )
 
     def __init__(self, *args, **kwargs):
         # Extract instance data for User, UserProfile, and Tutor
         self.user_instance = kwargs.pop('user_instance', None)
-        self.user_profile_instance = kwargs.pop('user_profile_instance', None)
+        self.profile_instance = kwargs.pop('profile_instance', None)
         self.tutor_instance = kwargs.pop('tutor_instance', None)
 
         # Call super().__init__() first to initialize self.fields
@@ -143,20 +251,20 @@ class CombinedProfileForm(forms.Form):
             for field in user_fields:
                 self.fields[field].initial = getattr(self.user_instance, field)
 
-        if self.user_profile_instance:
+        if self.profile_instance:
             # Populate UserProfile fields
             profile_fields = ['gender', 'phone', 'country', 'photo', 'title', 'bio', 'availability', 'lang_native']
             for field in profile_fields:
-                self.fields[field].initial = getattr(self.user_profile_instance, field)
-            self.fields['lang_speak'].initial = self.user_profile_instance.lang_speak.all()
+                self.fields[field].initial = getattr(self.profile_instance, field)
+            self.fields['lang_speak'].initial = self.profile_instance.lang_speak.all()
 
         if self.tutor_instance:
             # Populate Tutor fields
             tutor_fields = ['video_url', 'cost_trial', 'cost_hourly', 'discount', 'discount_deadline']
             for field in tutor_fields:
                 self.fields[field].initial = getattr(self.tutor_instance, field)
-            self.fields['skills'].initial = self.tutor_instance.skills.all()
-            self.fields['skill_level'].initial = self.tutor_instance.skill_level.all()
+            # self.fields['skills'].initial = self.tutor_instance.skills.all()
+            # self.fields['skill_level'].initial = self.tutor_instance.skill_level.all()
 
     def save(self, user):
         # Update or create User
@@ -202,11 +310,153 @@ class CombinedProfileForm(forms.Form):
         tutor, created = Tutor.objects.update_or_create(profile=profile, defaults=tutor_data)
 
         # Handle many-to-many fields
-        tutor.skills.set(self.cleaned_data['skills'])
-        tutor.skill_level.set(self.cleaned_data['skill_level'])
+        # tutor.skills.set(self.cleaned_data['skills'])
+        # tutor.skill_level.set(self.cleaned_data['skill_level'])
         profile.lang_speak.set(self.cleaned_data['lang_speak'])
 
         return user_instance, profile, tutor
+
+
+# Teaching Skills & Certifications Form
+class UserSkillForm(forms.ModelForm):
+    class Meta:
+        model = UserSkill
+        fields = ['skill', 'level', 'certificate']
+        widgets = {
+            'certificate': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': '.pdf,.doc,.docx,.png,.jpg,.jpeg',
+            }),
+            'skill': forms.Select(attrs={
+                'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+                'aria-label': '.form-select-sm',
+                'data-search-enabled': 'true',
+                'data-remove-item-button': 'true',
+                'required': 'required',
+            }),
+            'level': forms.Select(attrs={
+                'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+                'aria-label': '.form-select-sm',
+                'data-search-enabled': 'false',
+                'data-remove-item-button': 'true',
+                'required': 'required',
+            }),
+
+        }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.user:
+            instance.user = self.user
+        if commit:
+            instance.save()
+        return instance
+
+
+# Teaching Skills & Video upload field Form
+class CombinedSkillForm(forms.Form):
+    # Fields from UserSkill model
+    skill = forms.ModelChoiceField(queryset=Skill.objects.all(), required=True, widget=forms.Select(attrs={
+        'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+        'aria-label': '.form-select-sm',
+        'data-search-enabled': 'true',
+        'data-remove-item-button': 'true',
+        'required': 'required',
+    }))
+    level = forms.ModelChoiceField(
+        queryset=Level.objects.all(),
+        required=True,
+        widget=forms.Select(attrs={
+            'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+            'aria-label': '.form-select-sm',
+            'data-search-enabled': 'true',
+            'data-remove-item-button': 'true',
+            'required': 'required',
+        }),
+        empty_label="Select Level"
+    )
+    certificate = forms.FileField(required=False, widget=forms.FileInput(attrs={
+        'accept': '.pdf,.doc,.docx,.png,.jpg,.jpeg',
+        'class': 'form-control'
+    }))
+
+    # Fields from Tutor model
+    video_intro = forms.FileField(required=True, widget=forms.FileInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Upload Introduction Video',
+        'required': 'required',
+    }))
+
+    def __init__(self, *args, user=None, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+        if user and hasattr(user, 'tutor'):
+            self.fields['video_intro'].initial = user.profile.tutor_profile.video_intro
+
+    def save(self):
+        # Save UserSkill
+        user_skill = UserSkill(
+            user=self.user,
+            skill=self.cleaned_data['skill'],
+            level=self.cleaned_data['level'],
+            certificate=self.cleaned_data['certificate']
+        )
+        user_skill.save()
+
+        # Save Tutor
+        tutor = self.user.profile.tutor_profile
+        tutor.video_intro = self.cleaned_data['video_intro']
+        tutor.save()
+
+        return user_skill, tutor
+
+
+
+
+class CombinedSkillForm2(forms.Form):
+    skill = forms.ModelChoiceField(
+        queryset=Skill.objects.all(),
+        required=True,
+        widget=forms.Select(attrs={
+            'class': 'form-select form-select-sm',
+            'data-placeholder': 'Select a skill'
+        })
+    )
+
+    level = forms.ModelChoiceField(
+        queryset=Level.objects.all(),
+        required=True,
+        widget=forms.Select(attrs={
+            'class': 'form-select form-select-sm',
+            'data-placeholder': 'Select level'
+        })
+    )
+
+    certificate = forms.FileField(
+        required=False,
+        widget=forms.FileInput(attrs={
+            'class': 'form-control form-control-sm',
+            'accept': '.pdf,.doc,.docx,.png,.jpg,.jpeg'
+        })
+    )
+
+    video_intro = forms.FileField(
+        required=True,
+        widget=forms.FileInput(attrs={
+            'class': 'form-control',
+            'accept': 'video/*'
+        })
+    )
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.user = user
+        # Optimize querysets
+        self.fields['skill'].queryset = Skill.objects.active()
+        self.fields['level'].queryset = Level.objects.all()
+
+        if user and hasattr(user, 'tutor'):
+            self.fields['video_intro'].initial = user.tutor.video_intro
 
 
 class SocialURLForm_GOOD(forms.Form):
@@ -239,16 +489,16 @@ class SocialURLForm_GOOD(forms.Form):
 
     def __init__(self, *args, **kwargs):
         # Extract instance data for User, UserProfile, and Tutor
-        self.user_profile_instance = kwargs.pop('user_profile_instance', None)
+        self.profile_instance = kwargs.pop('profile_instance', None)
 
         # Call super().__init__() first to initialize self.fields
         super().__init__(*args, **kwargs)
 
-        if self.user_profile_instance:
+        if self.profile_instance:
             # Populate UserProfile fields
             profile_fields = ['url_facebook', 'url_insta', 'url_twitter', 'url_linkedin', 'url_youtube']
             for field in profile_fields:
-                self.fields[field].initial = getattr(self.user_profile_instance, field)
+                self.fields[field].initial = getattr(self.profile_instance, field)
 
     def save(self, user):
         # Update or create UserProfile
@@ -295,16 +545,16 @@ class SocialURLForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         # Extract instance data for User, UserProfile, and Tutor
-        self.user_profile_instance = kwargs.pop('user_profile_instance', None)
+        self.profile_instance = kwargs.pop('profile_instance', None)
 
         # Call super().__init__() first to initialize self.fields
         super().__init__(*args, **kwargs)
 
-        if self.user_profile_instance:
+        if self.profile_instance:
             # Populate UserProfile fields
             profile_fields = ['url_facebook', 'url_insta', 'url_twitter', 'url_linkedin', 'url_youtube']
             for field in profile_fields:
-                self.fields[field].initial = getattr(self.user_profile_instance, field)
+                self.fields[field].initial = getattr(self.profile_instance, field)
 
     def save(self, user):
         # Update or create UserProfile

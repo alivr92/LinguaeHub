@@ -1,0 +1,121 @@
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+        <!-- Video Intro Field (Outside Table) -->
+        <div class="mb-4">
+            <label class="form-label">Introduction Video * <i
+                    class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                    title="{{ CFChar.tooltip_video_intro }}"></i></label>
+            <input type="file"
+                   id="applicant_video_intro"
+                   class="form-control"
+                   name="video_intro"
+                   placeholder="Upload Introduction Video"
+                   required
+                   {% if form.video_intro.value %}data-initial-file="{{ form.video_intro.value }}"{% endif %}>
+        </div>
+
+        <!-- Skills Table -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle" id="skills-table">
+                <thead class="table-primary ">
+
+                <tr>
+                    <th style="width: 25%">Teaching Skill * <i
+                            class="bi bi-info-circle text-primary"
+                            data-bs-toggle="tooltip"
+                            title="{{ CFChar.tooltip_teaching_skill }}"></i></th>
+                    <th style="width: 25%">Skill Level * <i
+                            class="bi bi-info-circle text-primary"
+                            data-bs-toggle="tooltip"
+                            title="{{ CFChar.tooltip_skill_level }}"></i></th>
+                    <th style="width: 20%">Video * <i
+                            class="bi bi-info-circle text-primary"
+                            data-bs-toggle="tooltip"
+                            title="{{ CFChar.tooltip_video_intro }}"></i></th>
+                    <th style="width: 25%">Certificate (Optional) <i
+                            class="bi bi-info-circle text-primary"
+                            data-bs-toggle="tooltip"
+                            title="{{ CFChar.tooltip_certificate }}"></i></th>
+                    <th style="width: 5%">Action</th>
+                </tr>
+                </thead>
+                <tbody id="skills-container">
+                <!-- Initial row will be added by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Skill limitation reached -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div id="skillLimitAlert" class="alert alert-warning py-2 mb-0 d-none ">
+                Maximum skills reached
+            </div>
+            <button type="button" id="btnAddSkill"
+                    class="btn btn-outline-primary  ms-auto">
+                <i class="bi bi-plus-circle me-2"></i>Add Skill
+            </button>
+        </div>
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" id="btnSubmitSkills" class="btn btn-success px-4">
+                <i class="bi bi-save me-2"></i>Save Skills
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden template for new rows -->
+<template id="skill-row-template">
+    <tr class="skill-row">
+        <td>
+            <select class="form-select js-choice border-0 z-index-9 bg-transparent"
+                    name="skill"
+                    id="template_skill"
+                    aria-label=".form-select-sm"
+                    data-search-enabled="true"
+                    data-remove-item-button="true"
+                    required>
+                {% for skill in skills %}
+                    <option class="align-content-start"
+                            value="{{ skill.id }}">{{ skill }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td>
+            <select class="form-select js-choice border-0 z-index-9 bg-transparent"
+                    name="level"
+                    id="template_skill_level"
+                    aria-label=".form-select-sm"
+                    data-search-enabled="true"
+                    data-remove-item-button="true"
+                    required>
+                <option value="">Select Level</option>
+                {% for level in levels %}
+                    <option value="{{ level.id }}">{{ level }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td>
+            {#                                            <i class="far fa-fw fa-edit"></i>#}
+            <input type="file"
+                   id="template_skill_video"
+                   class="form-control"
+                   name="skill_video"
+                   accept=".mp4">
+        </td>
+        <td>
+            <div class="input-group">
+                <input type="file"
+                       id="template_skill_certificate"
+                       class="form-control"
+                       name="certificate"
+                       accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+                {#                <span class="input-group-text">.pdf, .png</span>#}
+            </div>
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-sm btn-outline-danger remove-skill">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+    </tr>
+</template>

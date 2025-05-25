@@ -1,0 +1,371 @@
+{#                        <div class="container my-4">#}
+{##}
+{#                            <!-- Section Heading -->#}
+{#                            <div class="mb-4">#}
+{#                                <h4 class="fw-bold">Step 4: Review and Submit Your Application</h4>#}
+{#                                <p class="text-muted">Please review the information below. If you'd like to make any#}
+{#                                    changes, use the <strong>Previous</strong> button.</p>#}
+{#                            </div>#}
+{##}
+{#                            <!-- Profile Summary -->#}
+{#                            <div class="card mb-4">#}
+{#                                <div class="card-header bg-light">#}
+{#                                    <h5 class="mb-0">Personal Profile Summary</h5>#}
+{#                                </div>#}
+{#                                <div class="card-body">#}
+{#                                    <div class="row mb-3">#}
+{#                                        <div class="col-auto">#}
+{#                                            <img src="{{ form.photo.value.url }}" class="rounded-circle border shadow"#}
+{#                                                 width="100" height="100" alt="Profile Picture">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="row">#}
+{#                                        <div class="col-md-6"><strong>Full#}
+{#                                            Name:</strong> {{ form.first_name.value }} {{ form.last_name.value }}</div>#}
+{#                                        <div class="col-md-6"><strong>Gender:</strong> {{ form.gender.value }}</div>#}
+{#                                        <div class="col-md-6"><strong>Title:</strong> {{ form.title.value|default:"—" }}#}
+{#                                        </div>#}
+{#                                        <div class="col-md-6">#}
+{#                                            <strong>Username:</strong> {{ CFChar.site_name }}@{{ form.username.value }}#}
+{#                                        </div>#}
+{#                                        <div class="col-md-6"><strong>Email:</strong> {{ form.email.value }}</div>#}
+{#                                        <div class="col-md-6"><strong>Phone:</strong> {{ form.phone.value|default:"—" }}#}
+{#                                        </div>#}
+{#                                        <div class="col-md-6"><strong>Country:</strong> {{ form.country.value }}</div>#}
+{#                                        <div class="col-md-6"><strong>Native#}
+{#                                            Language:</strong> {{ form.lang_native.value }}</div>#}
+{#                                        <div class="col-md-6"><strong>Spoken#}
+{#                                            Languages:</strong> {{ form.lang_speak.value|join:", " }}</div>#}
+{#                                        <div class="col-md-6"><strong>Hourly Rate:</strong>#}
+{#                                            ${{ form.cost_hourly.value }}</div>#}
+{#                                        <div class="col-md-6"><strong>Trial Rate:</strong> ${{ form.cost_trial.value }}#}
+{#                                        </div>#}
+{#                                        {% if form.discount.value %}#}
+{#                                            <div class="col-md-6"><strong>Discount:</strong> {{ form.discount.value }}%#}
+{#                                                (Until {{ form.discount_deadline.value }})#}
+{#                                            </div>#}
+{#                                        {% endif %}#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="mt-4">#}
+{#                                        <strong>Bio:</strong>#}
+{#                                        <div class="border rounded p-3 bg-light">{{ form.bio.value }}</div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <!-- Skills Summary -->#}
+{#                            <div class="card mb-4">#}
+{#                                <div class="card-header bg-light">#}
+{#                                    <h5 class="mb-0">Teaching Skills Overview</h5>#}
+{#                                </div>#}
+{#                                <div class="card-body">#}
+{#                                    <div class="table-responsive">#}
+{#                                        <table class="table table-bordered table-hover align-middle mb-0">#}
+{#                                            <thead class="table-light">#}
+{#                                            <tr>#}
+{#                                                <th>Skill</th>#}
+{#                                                <th>Level</th>#}
+{#                                                <th>Intro Video</th>#}
+{#                                                <th>Certificate</th>#}
+{#                                            </tr>#}
+{#                                            </thead>#}
+{#                                            <tbody>#}
+{#                                            {% for skill in submitted_skills %}#}
+{#                                                <tr>#}
+{#                                                    <td>{{ skill.name }}</td>#}
+{#                                                    <td>{{ skill.level }}</td>#}
+{#                                                    <td>#}
+{#                                                        {% if skill.video %}#}
+{#                                                            <a href="{{ skill.video.url }}"#}
+{#                                                               class="btn btn-sm btn-outline-primary" target="_blank">Preview</a>#}
+{#                                                        {% else %}#}
+{#                                                            <span class="text-muted">—</span>#}
+{#                                                        {% endif %}#}
+{#                                                    </td>#}
+{#                                                    <td>#}
+{#                                                        {% if skill.certificate %}#}
+{#                                                            <a href="{{ skill.certificate.url }}"#}
+{#                                                               class="btn btn-sm btn-outline-secondary" target="_blank">View</a>#}
+{#                                                        {% else %}#}
+{#                                                            <span class="text-muted">—</span>#}
+{#                                                        {% endif %}#}
+{#                                                    </td>#}
+{#                                                </tr>#}
+{#                                            {% endfor %}#}
+{#                                            </tbody>#}
+{#                                        </table>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <!-- Submission Notice -->#}
+{#                            <div class="alert alert-info mb-4" role="alert">#}
+{#                                <strong>Note:</strong> Your application will only be submitted once you click <strong>"Submit#}
+{#                                Application"</strong>. You can go back to revise any information.#}
+{#                            </div>#}
+{##}
+{#                            <!-- Action Buttons -->#}
+{#                            <div class="d-flex justify-content-between">#}
+{#                                <button type="button" class="btn btn-secondary" onclick="goBack()">← Previous</button>#}
+{#                                <button type="submit" class="btn btn-success px-4">#}
+{#                                    <i class="bi bi-check-circle me-2"></i>Submit Application#}
+{#                                </button>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+
+<!-- Content -->
+<div class="container my-5">
+
+    <!-- Page Heading -->
+    <div class="mb-5">
+        <h4 class="fw-bold">Step 4: Review and Submit Your Application</h4>
+        <p class="text-muted">Carefully review your information. Use the
+            <strong>Previous</strong> button to make changes.</p>
+    </div>
+
+    <!-- 👤 Profile Photo and Identity -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">👤 Profile & Identity</h5>
+        </div>
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-4 flex-wrap mb-4">
+                <img src="{{ form.photo.value.url }}" class="rounded-circle border shadow-sm"
+                     width="100" height="100" alt="Profile Picture">
+                <div>
+                    <h5 class="mb-1">{{ form.first_name.value }} {{ form.last_name.value }}</h5>
+                    <p class="mb-0 text-muted">{{ CFChar.site_name }}@{{ form.username.value }}</p>
+                </div>
+            </div>
+
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Gender:</strong> {{ form.gender.value }}</div>
+                <div class="col-md-6"><strong>Title:</strong> {{ form.title.value|default:"—" }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✉️ Contact Information -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">✉️ Contact Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Email:</strong> {{ form.email.value }}</div>
+                <div class="col-md-6"><strong>Phone:</strong> {{ form.phone.value|default:"—" }}
+                </div>
+                <div class="col-md-6"><strong>Country:</strong> {{ form.country.value }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 Language Proficiency -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">🌐 Language Proficiency</h5>
+        </div>
+        <div class="card-body">
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Native
+                    Language:</strong> {{ form.lang_native.value }}</div>
+                <div class="col-md-6"><strong>Spoken
+                    Languages:</strong> {{ form.lang_speak.value|join:", " }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 💰 Pricing Details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">💰 Pricing & Availability</h5>
+        </div>
+        <div class="card-body">
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Hourly Rate:</strong>
+                    ${{ form.cost_hourly.value }}</div>
+                <div class="col-md-6"><strong>Trial Rate:</strong> ${{ form.cost_trial.value }}
+                </div>
+                {% if form.discount.value %}
+                    <div class="col-md-6">
+                        <strong>Discount:</strong> {{ form.discount.value }}%
+                        <small class="text-muted">(until {{ form.discount_deadline.value }})
+                        </small>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 📝 Bio -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">📝 Tutor Bio</h5>
+        </div>
+        <div class="card-body">
+            <div class="border rounded p-3 bg-light text-break">{{ form.bio.value }}</div>
+        </div>
+    </div>
+
+    <!-- 📚 Teaching Skills Overview -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">📚 Teaching Skills Overview</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {#                                        <table class="table table-bordered table-hover align-middle mb-0">#}
+                {#                                            <thead class="table-light">#}
+                {#                                            <tr>#}
+                {#                                                <th>Skill</th>#}
+                {#                                                <th>Level</th>#}
+                {#                                                <th>Intro Video</th>#}
+                {#                                                <th>Certificate</th>#}
+                {#                                            </tr>#}
+                {#                                            </thead>#}
+                {#                                                <tbody id="review-skills-container">#}
+                {#                                                <!-- Initial row will be added by JavaScript -->#}
+                {#                                                </tbody>#}
+                {#                                            <tbody>#}
+                {#                                            {% for skill in submitted_skills %}#}
+                {#                                                <tr>#}
+                {#                                                    <td>{{ skill.name }}</td>#}
+                {#                                                    <td>{{ skill.level }}</td>#}
+                {#                                                    <td>#}
+                {#                                                        {% if skill.video %}#}
+                {#                                                            <a href="{{ skill.video.url }}"#}
+                {#                                                               class="btn btn-sm btn-outline-primary" target="_blank">#}
+                {#                                                                <i class="bi bi-play-circle me-1"></i>Preview#}
+                {#                                                            </a>#}
+                {#                                                        {% else %}#}
+                {#                                                            <span class="text-muted">—</span>#}
+                {#                                                        {% endif %}#}
+                {#                                                    </td>#}
+                {#                                                    <td>#}
+                {#                                                        {% if skill.certificate %}#}
+                {#                                                            <a href="{{ skill.certificate.url }}"#}
+                {#                                                               class="btn btn-sm btn-outline-secondary" target="_blank">#}
+                {#                                                                <i class="bi bi-file-earmark-text me-1"></i>View#}
+                {#                                                            </a>#}
+                {#                                                        {% else %}#}
+                {#                                                            <span class="text-muted">—</span>#}
+                {#                                                        {% endif %}#}
+                {#                                                    </td>#}
+                {#                                                </tr>#}
+                {#                                            {% endfor %}#}
+                {#                                            </tbody>#}
+                {#                                        </table>#}
+
+                <table class="table" id="skillsTable_review">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Skill</th>
+                        <th>Level</th>
+                        <th>Certificate</th>
+                        <th>Video</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!-- Existing skills -->
+                    {% for uSkill in user.user_skill.all %}
+                        <tr class="m-0 p-0">
+                            <td>{{ uSkill.skill }}</td>
+                            <td>{{ uSkill.level }}</td>
+                            <td>
+                                <!-- Certificate -->
+                                {% if uSkill.certificate %}
+                                    <a href="{{ uSkill.certificate.url }}"
+                                       class="btn btn-primary-soft btn-round"
+                                       target="_blank"
+                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                       title="Download"><i
+                                            class="bi bi-download"></i></a>
+                                {% else %}
+                                    <span class="p-2"> NA</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <!-- Video button -->
+                                {% if uSkill.video %}
+                                    <a data-glightbox data-gallery="office-tour"
+                                       href="{{ uSkill.video.url }}"
+                                       class="btn btn-round btn-primary-soft overflow-visible"
+                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                       title="Skill Video">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                {% else %}
+                                    <span class="p-2"> NA</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 📢 Submission Note -->
+    <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+        <i class="bi bi-info-circle-fill"></i>
+        <div>
+            <strong>Note:</strong> Your application will only be submitted once you click
+            <strong>"Submit Application"</strong>.
+        </div>
+    </div>
+
+    <!-- 🚀 Action Buttons -->
+    <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary" onclick="goBack()">
+            <i class="bi bi-arrow-left me-1"></i>Previous
+        </button>
+        <button type="submit" class="btn btn-success px-4">
+            <i class="bi bi-check-circle me-2"></i>Submit Application
+        </button>
+    </div>
+
+</div>
+
+
+<template id="review-row-template">
+    <tr class="skill-row">
+        <td>
+            <div class="" name="skill" id="review_skill"></div>
+        </td>
+        <td>
+            <div class="" name="level" id="review_skill_level"></div>
+        </td>
+        <td>
+            <input type="file"
+                   id="template_skill_video"
+                   class="form-control"
+                   name="skill_video"
+                   accept=".mp4">
+        </td>
+        <td>
+            <div class="input-group">
+                <input type="file"
+                       id="template_skill_certificate"
+                       class="form-control"
+                       name="certificate"
+                       accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+                {#                <span class="input-group-text">.pdf, .png</span>#}
+            </div>
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-sm btn-outline-danger remove-skill">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+    </tr>
+</template>

@@ -354,6 +354,7 @@ class PostDetail(DetailView, FormView):
                 'email': self.request.user.email,
             }
         return kwargs
+
     def form_valid(self, form):
         wp_post_id = self.request.POST.get('wp_post_id')
         name = self.request.POST.get('name')
@@ -414,12 +415,16 @@ def send_feedback_email(name, wp_post_id, email, message, admin_email):
     # Send the email
     email_message.send(fail_silently=False)
 
+
 # Blog Comments handled by django -------------------------------------------------------------
 def fetch_comments(post_id):
     comments = Comment.objects.filter(wp_post_id=post_id).order_by("-create_date")
-    comments_data = [{"user": c.user, "name": str(c.name), "message": c.message, "create_date": c.create_date, "is_published": c.is_published} for c in comments]
+    comments_data = [{"user": c.user, "name": str(c.name), "message": c.message, "create_date": c.create_date,
+                      "is_published": c.is_published} for c in comments]
     # return JsonResponse(comments_data, safe=False)
     return comments_data
+
+
 # .
 # .
 # .
@@ -453,7 +458,7 @@ def submit_comment_WP(request, slug):
         # Send to WordPress
         try:
             response = requests.post(
-                'http://localhost/Amin-Academy/wp-json/wp/v2/comments',
+                settings.WP_API_URL_COMMENTS,
                 data=comment_data,
                 auth=('your_wp_username', 'your_wp_application_password')  # Requires application password
             )
@@ -467,6 +472,8 @@ def submit_comment_WP(request, slug):
             messages.error(request, f'Error submitting comment: {str(e)}')
 
     return redirect('post_detail', slug=slug)
+
+
 def posts_by_tag(request, tag_id):
     posts_response = requests.get(
         settings.WP_API_URL + 'posts',
@@ -482,8 +489,6 @@ def posts_by_tag(request, tag_id):
         'posts': posts,
         'tag': next((t for t in request.all_tags if t['id'] == tag_id), None)
     })
-
-
 
 
 # .
@@ -503,6 +508,8 @@ def get_all_tags(self):
     except requests.RequestException:
         return {}
     return {}
+
+
 def get_all_categories(self):
     """Get all terms (categories) with their IDs and names"""
     terms_url = settings.WP_API_URL_CATEGORIES
@@ -513,12 +520,16 @@ def get_all_categories(self):
     except requests.RequestException:
         return {}
     return {}
+
+
 def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.all_tags = self.get_all_tags()
     print(f"all_tags: {self.all_tags}")
     self.all_categories = self.get_all_categories()
     print(f"all_categories: {self.all_categories}")
+
+
 def _get_term_ids(self, post, taxonomy):
     """Get IDs for tags or categories"""
     # Try direct IDs first
@@ -539,6 +550,8 @@ def _get_term_ids(self, post, taxonomy):
             return [t['id'] for t in term_group]
 
     return []
+
+
 # -------------------------------------------- initialization End ---------------------------------------------
 def _get_related_posts(self, post):
     if not post.get('id'):
@@ -603,11 +616,15 @@ def _get_related_posts(self, post):
             pass
 
     return []
+
+
 def _get_post_tag_ids(self, post):
     """Extract tag IDs from a post object"""
     if isinstance(post.get('tags', [])[0], int):
         return post['tags']
     return [tag['id'] for tag in post.get('tags', []) if isinstance(tag, dict)]
+
+
 def _fetch_related_by_any_term(self, taxonomy, term_ids, base_params):
     """Find posts that share ANY of the specified terms"""
     try:
@@ -641,6 +658,8 @@ def _fetch_related_by_any_term(self, taxonomy, term_ids, base_params):
     except requests.RequestException as e:
         print(f"Error fetching related by {taxonomy}: {str(e)}")
     return None
+
+
 def _fetch_related_by_taxonomy(self, taxonomy, ids, base_params):
     """Helper method to fetch posts by taxonomy"""
     try:
@@ -661,5 +680,3 @@ def _fetch_related_by_taxonomy(self, taxonomy, ids, base_params):
     except requests.RequestException as e:
         print(f"Error fetching related posts by {taxonomy}: {str(e)}")
     return None
-
-

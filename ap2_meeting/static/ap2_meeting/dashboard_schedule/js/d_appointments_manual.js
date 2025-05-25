@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnNextWeek = document.getElementById('next-week');
   const btnFreeWeek = document.getElementById('freeWeek');
   const btnSubmitTimes = document.getElementById('submitTimes');
-  const tutorId = document.getElementById('tutor_id').value;
+  // const tutorId = document.getElementById('tutor_id').value;
+  const providerUId = document.getElementById('providerUId').value;
   const previousTimeSlots = {}; // Object to store previous time slots for each day
   let userTimezone;
   let weekDayDates = [];
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const data = await response.json();
       startDayOfWeek = data.week_start;
       sessionLength = parseInt(data.session_length);
-      userTimezone = data.provider_timezone;
+      userTimezone = data.user_timezone;
       class_type = data.class_type;
       console.log("Fetched data:", data);
     } catch (error) {
@@ -353,7 +354,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Add the slot to newTimeSlots array
     const timeSlot = {
       tsId: tsId,
-      tutorId: tutorId, // Tutor ID
+      providerUId: providerUId, // Tutor ID -> Provider User ID
       timezone: userTimezone, // User's timezone
       day: day, // this use just for remove slots
       startTime: `${weekDayDate} ${startTime}`,
@@ -489,7 +490,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // Add the slot to newTimeSlots array
       const timeSlot = {
         tsId: 'newTS_Full', // Unique ID for the full-day slot
-        tutorId: tutorId, // Tutor ID
+        providerUId: providerUId, // Tutor ID
         timezone: userTimezone, // User's timezone
         day: day, // Day of the week
         startTime: `${weekDayDate} 00:00`,
@@ -559,7 +560,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (tsId.startsWith('newTS_')) {
           const timeSlot = {
             tsId: tsId, // Generate a unique ID if needed
-            tutorId: tutorId, // Tutor ID
+            providerUId: providerUId, // Tutor ID
             timezone: userTimezone, // User's timezone
             day: day, // Day of the week
             startTime: `${date} ${startTime}`, // Adjust format as needed
@@ -675,7 +676,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Function to submit time slots via AJAX
   function submitTimes() {
     // AJAX request to submit time slots
-    const url = `/schedule/save-available-tutor-times/`;
+    const url = `/schedule/save-available-provider-times/`;
     fetch(url, {
       method: 'POST',
       headers: {
@@ -759,7 +760,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Function to display available time slots in the accordion
   async function showAvailableTimeSlots(startDate) {
     console.log('showAvailableTimeSlots CALLED.');
-    const url = `/schedule/get-availability/?tutorId=${tutorId}&startDate=${startDate.toISOString().split('T')[0]}`;
+    const url = `/schedule/get-availability/?providerUId=${providerUId}&startDate=${startDate.toISOString().split('T')[0]}`;
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch availability data');
@@ -786,7 +787,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const startTimeUTC = availability.start_time_utc;
         const endTimeUTC = availability.end_time_utc;
 
-        // Convert UTC times to the tutor's time zone
+        // Convert UTC times to the provider's time zone
         const startTime = new Date(convertUTCToLocal(startTimeUTC, userTimezone));
         const endTime = new Date(convertUTCToLocal(endTimeUTC, userTimezone));
 
@@ -959,7 +960,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               // Add the slot to allTimeSlots
               const timeSlot = {
                 tsId: tsId, // TimeSlot ID
-                tutorId: tutorId, // Tutor ID
+                providerUId: providerUId, // Tutor ID -> Provider User ID
                 timezone: userTimezone, // User's timezone
                 day: day,
                 startTime: `${weekDayDate} ${startTime}`,

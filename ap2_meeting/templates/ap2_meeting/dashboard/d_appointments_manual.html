@@ -83,7 +83,8 @@
 
           <!-- Extra options -->
           <div class="form-check form-check-md my-4">
-            <input type="hidden" id="tutor_id" value="{{ tutor_id }}">
+{#            <input type="hidden" id="tutor_id" value="{{ tutor_id }}">#}
+            <input type="hidden" id="providerUId" value="{{ providerUId }}">
             <input class="form-check-input" type="checkbox" value="" id="freeWeek">
             <label class="form-check-label" for="freeWeek">Free all week days</label>
           </div>
@@ -161,5 +162,3 @@
     <script src="{% static 'ap2_meeting/dashboard_schedule/js/d_appointments_manual.js' %}"></script>
   {% endif %}
 {% endblock %}
-
-{% block my_scripts %}{% endblock %}

@@ -1,0 +1,10 @@
+<!-- ====== Schedule START ---------------------------->
+{% if user.is_authenticated %}
+    {% include 'ap2_meeting/client_table.html' %}
+{% else %}
+    <div class="container" style="background-color: greenyellow">
+        <p>You need to login first to see the schedule table to
+            reserve your sessions!</p>
+    </div>
+{% endif %}
+<!-- ====== Schedule END ------------------------------>

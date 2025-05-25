@@ -7,7 +7,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .forms import PaymentForm
-from .models import Bill
+# from .models import Bill
 from ap2_tutor.models import PNotification
 from ap2_student.models import CNotification
 import logging

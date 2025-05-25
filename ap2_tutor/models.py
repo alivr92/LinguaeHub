@@ -1,71 +1,33 @@
 from django.db import models
 from django.db.models import Avg
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator, FileExtensionValidator
+from django.contrib.auth.models import User
+from .validators import validate_max_size
+from ap2_meeting.models import TIMEZONE_CHOICES
 from django.urls import reverse
 from django.utils import timezone
+from app_accounts.models import LANGUAGE_CHOICES
 
-# from ap2_meeting.models import Review
-
-LEVEL_CHOICES = [
-    ('A1', 'A1'),
-    ('A2', 'A2'),
-    ('B1', 'B1'),
-    ('B2', 'B2'),
-    ('C1', 'C1'),
-    ('C2', 'C2'),
-]
-SKILL_CHOICES = [
-    ('Persian', 'Teaching Persian'),
-    ('English', 'Teaching English'),
-    ('German', 'Teaching German'),
-    ('Spanish', 'Teaching Spanish'),
-    ('French', 'Teaching French'),
-    ('Chinese', 'Teaching Chinese'),
-    ('Italian', 'Teaching Italian'),
-    ('Turkish', 'Teaching Turkish'),
-    ('Swedish', 'Teaching Swedish'),
-    ('Korean', 'Teaching Korean'),
-    ('Hindi', 'Teaching Hindi'),
-    ('Russian', 'Teaching Russian'),
-    ('Japanese', 'Teaching Japanese'),
-    ('Ukrainian', 'Teaching Ukrainian'),
-    ('Arabic', 'Teaching Arabic'),
-    ('Math', 'Teaching Math'),
-    ('Physics', 'Teaching Physics'),
-    ('Piano', 'Teaching Piano'),
-]
 RATING = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
 NOTIFICATION_TYPE = [
     ('new_appointment', 'New Appointment'),
     ('appointment_cancelled', 'Appointment Cancelled'),
 ]
-
-
-class SkillLevel(models.Model):
-    name = models.CharField(max_length=2, choices=LEVEL_CHOICES, unique=True)
-
-    class Meta:
-        ordering = ['name']  # Ensure skill levels are ordered alphabetically
-
-    def __str__(self):
-        return self.name
-
-
-class Skill(models.Model):
-    name = models.CharField(max_length=20, choices=SKILL_CHOICES, unique=True)
-
-    def __str__(self):
-        return self.name
+ALLOWED_EXTENSIONS_VIDEO = ['mp4', 'ts', 'avi', 'mpeg']
 
 
 class Tutor(models.Model):
     profile = models.OneToOneField('app_accounts.UserProfile', on_delete=models.CASCADE, related_name='tutor_profile',
-                                   limit_choices_to={'user_type': 'tutor'}, unique=True,
-                                   )
+                                   limit_choices_to={'user_type': 'tutor'}, unique=True, )
     video_url = models.URLField(blank=True)  # Store the URL of the video hosted on a third-party platform
-    # video_intro = models.FileField(upload_to='videos/%Y/%m/%d/', blank=True)  # Allow video uploads
-    skills = models.ManyToManyField(Skill, blank=True)
-    skill_level = models.ManyToManyField(SkillLevel)
+    video_intro = models.FileField(
+        upload_to='videos/%Y/%m/%d/',
+        # upload_to=lambda instance, filename: f"videos/{instance.user.username}_video.{filename.split('.')[-1]}",
+        blank=True,
+        validators=[
+            FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS_VIDEO),  # Allowed formats
+            # validate_max_size(2 * 1024 * 1024)  # 2MB limit
+        ], )  # Allow video uploads
     cost_trial = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     cost_hourly = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     session_count = models.IntegerField(default=0)
@@ -124,3 +86,53 @@ class PNotification(models.Model):
     def __str__(self):
         return f'Tutor: {self.provider.profile.user.first_name} {self.provider.profile.user.last_name} Notification'
 
+
+class ProviderApplication(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('invited', 'Invited'),
+        ('registered', 'Registered'),
+        ('completed_profile', 'Completed Profile'),
+        ('added_skills', 'Added Skills'),
+        ('scheduled', 'Scheduled'),
+        ('decision', 'Decision'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True,
+                                related_name='provider_application')
+    photo = models.ImageField(upload_to='applicants/photos/%Y/%m/%d/', blank=True, null=True,
+                              default='photos/default.png', validators=[
+            FileExtensionValidator(allowed_extensions=['jpg', 'png', 'svg']),  # Allowed formats
+            # validate_max_size(2 * 1024 * 1024)  # 2MB limit
+        ], )
+    resume = models.FileField(upload_to='applicants/resume/%Y/%m/%d/', null=True, blank=True, validators=[
+        FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx']),  # Allowed formats
+        # validate_max_size(2 * 1024 * 1024)  # 2MB limit
+    ], )
+    first_name = models.CharField(max_length=50, blank=False, null=False, default='NA')
+    last_name = models.CharField(max_length=50, blank=False, null=False, default='NA')
+    email = models.EmailField(blank=False, null=False, unique=False)
+    phone = models.CharField(max_length=50, blank=False, null=False)
+    lang_native = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='Unknown')
+    skills = models.ManyToManyField('app_accounts.Skill', blank=False)
+    bio = models.TextField(max_length=500, blank=False)
+    reviewer_comment = models.TextField(max_length=500, blank=True)
+    video_url = models.URLField(null=True, blank=True)
+    timezone = models.CharField(max_length=50, choices=TIMEZONE_CHOICES, default="UTC")
+    location_ip = models.CharField(max_length=50, blank=True, null=True, )
+    date_submitted = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    invitation_token = models.CharField(max_length=100, blank=True, null=True, unique=True)
+    token_expiry = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.status}"
+
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(
+    #             fields=['email'],
+    #             name='unique_applicant_email'
+    #         )
+    #     ]

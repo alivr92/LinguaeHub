@@ -44,7 +44,8 @@
 <form id="schedule-form" action="#" method="post">
   {% csrf_token %}
   {% if 'dashboard' in request.path %}
-    <input type="hidden" id="tutor_id" value="{{ request.user.profile.tutor_profile.pk }}">
+{#    <input type="hidden" id="tutor_id" value="{{ request.user.profile.tutor_profile.pk }}">#}
+    <input type="hidden" id="providerUId" value="{{ request.user.pk }}">
   {% else %}
     <input type="hidden" id="tutor_id" value="{{ tutor_single.id }}">
   {% endif %}

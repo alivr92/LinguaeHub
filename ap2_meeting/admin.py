@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ap2_meeting.models import Session, Availability, AppointmentSetting, Review
+from ap2_meeting.models import Session, Availability, AppointmentSetting, Review, InterviewSessionInfo
 from django import forms
 from django.core.exceptions import ValidationError
 
@@ -11,12 +11,12 @@ class SessionAdminForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        students = cleaned_data.get('students')
+        clients = cleaned_data.get('clients')
         session_type = cleaned_data.get('session_type')
 
-        if session_type == 'private' and students and len(students) > 1:
+        if session_type == 'private' and clients and len(clients) > 1:
             raise ValidationError('A Private session can only have one student.')
-        if session_type == 'group' and students and len(students) < 2:
+        if session_type == 'group' and clients and len(clients) < 2:
             raise ValidationError('A Group session needs at least two students or more!')
 
         return cleaned_data
@@ -24,16 +24,18 @@ class SessionAdminForm(forms.ModelForm):
 
 class SessionAdmin(admin.ModelAdmin):
     form = SessionAdminForm
-    list_display = ('id', 'subject', 'session_type', 'appointment_id', 'tutor', 'get_students', 'students_timezone', 'start_session_utc',
-                    'end_session_utc', 'status')
+    list_display = ('id', 'subject', 'appointment_id', 'session_type', 'provider', 'get_clients',
+                    'start_session_utc', 'end_session_utc', 'status')
     list_display_links = ('subject',)
-    list_filter = ('subject', 'session_type', 'tutor', 'students', 'start_session_utc', 'status')
-    search_fields = ('subject', 'appointment_id', 'tutor__profile__user__username', 'students__profile__user__username',)
+    list_filter = ('subject', 'session_type', 'provider', 'clients', 'start_session_utc', 'status')
+    search_fields = ('subject', 'appointment_id', 'provider__profile__user__username',
+                     'clients__profile__user__username',)
 
-    def get_students(self, obj):
-        return ", ".join([stu.profile.user.username for stu in obj.students.all()])
+    # get_students
+    def get_clients(self, obj):
+        return ", ".join([client.profile.user.username for client in obj.clients.all()])
 
-    get_students.short_description = 'Students'
+    get_clients.short_description = 'Clients'
 
     def save_model(self, request, obj, form, change):
         # Save the main object first, so it gets an ID
@@ -43,20 +45,21 @@ class SessionAdmin(admin.ModelAdmin):
 
 
 class AvailabilityAdmin(admin.ModelAdmin):
-    list_display = ('id', 'tutor', 'tutor_timezone', 'start_time_utc', 'end_time_utc', 'status', 'is_available')
-    list_display_links = ('tutor',)
-    list_filter = ('tutor', 'status')
-    search_fields = ('id', 'tutor_timezone', 'start_time_utc', 'end_time_utc',)
+    list_display = ('id', 'user', 'start_time_utc', 'end_time_utc', 'status', 'is_available')
+    list_display_links = ('user',)
+    list_filter = ('user', 'status')
+    search_fields = ('id', 'start_time_utc', 'end_time_utc',)
 
 
 class AppointmentSettingAdmin(admin.ModelAdmin):
-    list_display = ('id', 'tutor', 'provider_timezone', 'session_length', 'week_start', 'session_type')
+    list_display = ('id', 'user', 'timezone', 'session_length', 'week_start', 'session_type')
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('student', 'tutor', 'session_appointment_id', 'session_subject', 'rate_tutor', 'rate_session', 'status', 'is_published')
+    list_display = ('client', 'provider', 'session_appointment_id', 'session_subject', 'rate_provider', 'rate_session',
+                    'status', 'is_published')
     list_editable = ('is_published', 'status', )
-    list_filter = ('tutor', 'student', 'session', 'rate_tutor', 'status', 'is_published')
+    list_filter = ('provider', 'client', 'session', 'rate_provider', 'status', 'is_published')
     search_fields = ('session_appointment_id', )
 
     def session_subject(self, obj):
@@ -75,7 +78,15 @@ admin.site.register(Availability, AvailabilityAdmin)
 admin.site.register(AppointmentSetting, AppointmentSettingAdmin)
 admin.site.register(Review, ReviewAdmin)
 
-#
+
+@admin.register(InterviewSessionInfo)
+class InterviewSessionInfoAdmin(admin.ModelAdmin):
+    list_display = ['session', 'get_session_appointment_id', 'interviewer_notes', 'candidate_experience']
+
+    @admin.display(description='Session UID')
+    def get_session_appointment_id(self, obj):
+        return obj.session.appointment_id
+
 # class SessionAdminForm(forms.ModelForm):
 #     class Meta:
 #         model = Session

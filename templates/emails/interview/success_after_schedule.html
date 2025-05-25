@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview Scheduled</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+<table width="100%" cellpadding="0" cellspacing="0"
+       style="margin: 0 auto; max-width: 600px; background-color: #ffffff; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <tr>
+        <td style="padding: 20px 30px;">
+            <h2 style="color: #333333;">Congratulations, {{ full_name }}! 🎉</h2>
+            <p style="font-size: 16px; color: #555555;">
+                You've successfully completed all the required steps on <strong>{{ site_name }}</strong>.
+            </p>
+            <p style="font-size: 16px; color: #555555;">
+                Your interview session has been officially scheduled at <span
+                    style="color: #0000ee">{{ scheduled_at }}</span>, in your local time <span
+                    style="color: #00d69f">({{ client_timezone }}). </span>
+                This is an important opportunity to showcase your skills and experience.
+            </p>
+            <p style="font-size: 16px; color: #555555;">
+                Please make sure to review your booking details carefully and prepare yourself ahead of time.
+            </p>
+            <p style="font-size: 16px; color: #555555;">
+                Note: You'll receive the video call link 1 hour before the session starts.
+            </p>
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ dashboard_uri }}"
+                   style="background-color: #28a745; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 5px; font-size: 16px;">
+                    View My Interview Details
+                </a>
+            </div>
+            <p style="font-size: 14px; color: #888888;">
+                If you have any questions or need to make changes, please contact our support team in advance.
+            </p>
+            <p style="font-size: 16px; color: #555555;">We're excited to meet you!</p>
+            <p style="font-size: 16px; color: #555555;">Best wishes,<br><strong>{{ site_name }} Team</strong></p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

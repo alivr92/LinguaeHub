@@ -1,0 +1,19 @@
+Congratulations, {{ full_name }}! 🎉
+
+You've successfully completed all the required steps on {{ site_name }}.
+
+Your interview session has been officially scheduled at {{scheduled_at}}!
+This is an important opportunity to showcase your skills and experience.
+
+Please review your booking details carefully and make sure to prepare ahead of time.
+
+You can view your interview details here:
+{{ dashboard_url }}
+
+Note: You'll receive the video call link 1 hour before the session starts.
+If you have any questions or need changes, feel free to contact our support team.
+
+We're excited to meet you!
+
+Best wishes,
+{{ site_name }} Team
