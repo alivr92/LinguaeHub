@@ -2,100 +2,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{% block head_title %}{% endblock %}</title>
+    <title>{% block head_title %}{% endblock %}</title>
 
-  <!-- Meta Tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="author" content="{{ CFChar.site_name }}">
-  <meta name="description" content="{{ CFChar.site_name }} - LMS, Tutors and students Hub">
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="{{ CFChar.site_name }}">
+    <meta name="description" content="{{ CFChar.site_name }} - LMS, Tutors and students Hub">
 
-  <!-- Dark mode -->
-  <script>
-    const storedTheme = localStorage.getItem('theme')
+    <!-- Dark mode -->
+    <script>
+        const storedTheme = localStorage.getItem('theme')
 
-    const getPreferredTheme = () => {
-      if (storedTheme) {
-        return storedTheme
-      }
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light'
-    }
-
-    const setTheme = function (theme) {
-      if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.setAttribute('data-bs-theme', 'dark')
-      } else {
-        document.documentElement.setAttribute('data-bs-theme', theme)
-      }
-    }
-
-    setTheme(getPreferredTheme())
-
-    window.addEventListener('DOMContentLoaded', () => {
-      var el = document.querySelector('.theme-icon-active');
-      if(el != 'undefined' && el != null) {
-        const showActiveTheme = theme => {
-          const activeThemeIcon = document.querySelector('.theme-icon-active use')
-          const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-          const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
-
-          document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-            element.classList.remove('active')
-          })
-
-          btnToActive.classList.add('active')
-          activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+        const getPreferredTheme = () => {
+            if (storedTheme) {
+                return storedTheme
+            }
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light'
         }
 
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-          if (storedTheme !== 'light' || storedTheme !== 'dark') {
-            setTheme(getPreferredTheme())
-          }
+        const setTheme = function (theme) {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-bs-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        window.addEventListener('DOMContentLoaded', () => {
+            var el = document.querySelector('.theme-icon-active');
+            if (el != 'undefined' && el != null) {
+                const showActiveTheme = theme => {
+                    const activeThemeIcon = document.querySelector('.theme-icon-active use')
+                    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+                    const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+                    document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                        element.classList.remove('active')
+                    })
+
+                    btnToActive.classList.add('active')
+                    activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+                }
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    if (storedTheme !== 'light' || storedTheme !== 'dark') {
+                        setTheme(getPreferredTheme())
+                    }
+                })
+
+                showActiveTheme(getPreferredTheme())
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            localStorage.setItem('theme', theme)
+                            setTheme(theme)
+                            showActiveTheme(theme)
+                        })
+                    })
+
+            }
         })
 
-        showActiveTheme(getPreferredTheme())
+    </script>
 
-        document.querySelectorAll('[data-bs-theme-value]')
-          .forEach(toggle => {
-            toggle.addEventListener('click', () => {
-              const theme = toggle.getAttribute('data-bs-theme-value')
-              localStorage.setItem('theme', theme)
-              setTheme(theme)
-              showActiveTheme(theme)
-            })
-          })
+    <!-- Favicon -->
+    {#  <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">#}
+    <link rel="shortcut icon" href="{% static 'assets/images/logo1.png' %}">
 
-      }
-    })
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
 
-  </script>
-
-  <!-- Favicon -->
-{#  <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">#}
-  <link rel="shortcut icon" href="{% static 'assets/images/logo1.png' %}">
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
-
-  {% block head_style_plugins %}
-      <!-- Plugins CSS -->
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
-  {% endblock %}
+    {% block head_style_plugins %}
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
+{#        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">#}
+    {% endblock %}
 
 
-  <!-- Include Bootstrap CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Theme CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
 
-  {% block head_style %}{% endblock %}
-  {% block embed_style %}{% endblock %}
-  {% block my_style %}{% endblock %}
-  {% block head_script %}{% endblock %}
+    {% block head_style %}{% endblock %}
+    {% block embed_style %}{% endblock %}
+    {% block my_style %}{% endblock %}
+    {% block head_script %}{% endblock %}
 
 </head>
 <body>
@@ -123,9 +125,10 @@
 <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
 {% block scripts_vendors %}
-<!-- Vendors -->
-<script src="{% static 'assets/vendor/tiny-slider/tiny-slider.js' %}"></script>
-<script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/tiny-slider/tiny-slider.js' %}"></script>
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+{#    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>#}
 {% endblock %}
 
 <!-- Template Functions -->

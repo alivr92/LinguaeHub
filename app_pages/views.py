@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView, DetailView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -78,6 +78,7 @@ class ContactUs(FormView):
 
 class FAQ(TemplateView):
     template_name = 'app_pages/faq.html'
+
 
 
 class AGB(TemplateView):

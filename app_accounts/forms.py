@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from app_accounts.models import UserEducation
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -66,3 +67,45 @@ class UserRegistrationForm(forms.ModelForm):
             self.fields['email'].initial = self.applicant.email
             self.fields['email'].widget.attrs['readonly'] = True
             self.fields['email'].help_text = "Cannot be changed (set by your invitation)"
+
+
+class UserEducationForm(forms.ModelForm):
+    class Meta:
+        model = UserEducation
+        fields = ['degree', 'field_of_study', 'institution', 'graduation_year', 'document']
+        widgets = {
+            'degree': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'e.g. B.Sc, M.Sc., Ph.D., ... ',
+            }),
+            'field_of_study': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Field of study',
+            }),
+            'institution': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Institution',
+            }),
+            'graduation_year': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Graduation year',
+                'min': 1900,
+                'max': 2100,
+            }),
+            'document': forms.FileInput(attrs={
+                'class': 'form-control',
+                'accept': '.pdf,.doc,.docx,.png,.jpg,.jpeg',
+            }),
+        }
+
+    def __init__(self, *args, user=None, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.user:
+            instance.user = self.user
+        if commit:
+            instance.save()
+        return instance

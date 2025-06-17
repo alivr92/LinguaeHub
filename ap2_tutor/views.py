@@ -1,9 +1,12 @@
+import traceback
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponseForbidden
+import json
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, TemplateView, ListView, DetailView, DeleteView, FormView
+from django.views.generic import View, TemplateView, ListView, DetailView, DeleteView, FormView, UpdateView
 from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.utils import timezone
@@ -18,12 +21,16 @@ from django.db.models import Count, Q
 
 from decimal import Decimal
 
-from utils.email import send_dual_email, notification_email_to_admin
+# -----------------------custom utils ---------------------------
+from utils.email import send_dual_email, notification_email_to_admin, notification_formatted_email
 from utils.converters import utc_to_local
+from utils.decorators import ownership_required
+
 from ap2_meeting.models import Review, Session
-from ap2_tutor.models import ProviderApplication, Tutor
+from ap2_tutor.models import ProviderApplication, Tutor, TeachingCategory, SubTeachingCategory
 from app_accounts.models import UserProfile, Level, Skill, UserSkill
-from .forms import ProviderApplicationForm, CombinedProfileForm, UserSkillForm, CombinedSkillForm
+from .forms import ProviderApplicationForm, CombinedProfileForm, ProfileBasicForm, CombinedSkillForm
+from app_accounts.forms import UserEducationForm
 from ap2_meeting.forms import AppointmentSettingForm
 
 s_gender = UserProfile.objects.values_list('gender', flat=True).distinct()
@@ -78,6 +85,9 @@ class BecomeTutor(FormView):
         notify_subject = f"New Tutor Request from {full_name}"
         notification_email_to_admin(notify_subject, 'emails/admin/notify_admin', context)
 
+        # notify_subject2 = f"{full_name} has sent his/her application."
+        # notification_formatted_email(notify_subject2, 'emails/notification/notif_with_attachment', context, photo,
+        #                              resume_file)
         form.save()
         messages.success(self.request, "We received your application, please check your email (inbox, spam) "
                                        "in next 24 hours for invitation link")
@@ -86,63 +96,6 @@ class BecomeTutor(FormView):
     def form_invalid(self, form):
         messages.error(self.request, 'There is an error in sending message! please check the form fields')
         return self.render_to_response(self.get_context_data(form=form))
-
-
-# this works well for attaching photo and resume to email
-def send_formatted_email(full_name, email, phone, bio, photo, resume_file, admin_email):
-    # Define the subject, body, and other details
-    subject = f"{full_name} has sent his/her application."
-
-    # HTML content
-    html_content = f"""
-        <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #f9f9f9; margin: 0; padding: 20px;">
-                <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 20px;">
-                    <h2 style="color: #4CAF50; text-align: center;">New Tutor Application</h2>
-                    <p style="font-size: 16px; color: #333;">Dear Admin,</p>
-                    <p style="font-size: 16px; color: #333;">A new tutor application has been submitted. Here are the details:</p>
-                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; color: #555;">Full Name:</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{full_name}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; color: #555;">Email:</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{email}</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; color: #555;">Phone:</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{phone}</td>
-                        </tr>
-                    </table>
-                    <p style="font-size: 16px; color: #333;"><strong>Bio:</strong></p>
-                    <p style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; color: #333;">{bio}</p>
-                    <p style="font-size: 16px; color: #333;">The applicant has also provided a photo and resume for your review. They are attached to this email.</p>
-                    <p style="font-size: 16px; color: #333;">Best regards,<br>Your LMS Team</p>
-                </div>
-            </body>
-        </html>
-        """
-
-    # Set up the email
-    email_message = EmailMessage(
-        subject,
-        html_content,  # Message content
-        settings.EMAIL_HOST_USER,  # From email
-        [admin_email]  # To email
-    )
-
-    # Specify that the content is HTML
-    email_message.content_subtype = 'html'
-
-    # Attach the photo and resume files
-    if photo:
-        email_message.attach(photo.name, photo.read(), photo.content_type)
-    if resume_file:
-        email_message.attach(resume_file.name, resume_file.read(), resume_file.content_type)
-
-    # Send the email
-    email_message.send(fail_silently=False)
 
 
 class TutorListView(ListView):
@@ -216,7 +169,7 @@ class TutorDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['reviews'] = Review.objects.filter(provider=tutor.profile.user, is_published=True).order_by(
             '-create_date')
-        context['discounted_price'] = calculate_discounted_price(tutor.cost_hourly, tutor.discount)
+        context['discounted_price'] = self._calculate_discounted_price(tutor.cost_hourly, tutor.discount)
 
         if tutor.discount != 0:  # Check if discount is available
             context['is_deadline_set'] = bool(tutor.discount_deadline)
@@ -250,9 +203,8 @@ class TutorDetailView(DetailView):
 
         return context
 
-
-def calculate_discounted_price(original_price, discount):
-    return original_price * (1 - Decimal(discount) / 100)
+    def _calculate_discounted_price(self, original_price, discount):
+        return original_price * (1 - Decimal(discount) / 100)
 
 
 class TutorReserveView(DetailView):
@@ -356,7 +308,7 @@ class DTEditProfile(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMix
         tutor = Tutor.objects.get(profile=user_profile)
 
         context = {
-            'form': CombinedProfileForm(
+            'profile_form': CombinedProfileForm(
                 user_instance=user,
                 profile_instance=user_profile,
                 tutor_instance=tutor
@@ -391,10 +343,78 @@ class DTEditProfile(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMix
         return render(request, self.template_name, context)
 
 
-class DTWizard(DTEditProfile, RoleRequiredMixin):
+# ==================================== WIZARD start ====================================
+# ====================================
+class BasicProfile(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, View):
+    allowed_roles = ['tutor']
+    template_name = 'ap2_tutor/dashboard/dt_edit.html'
+    success_url = reverse_lazy('tutor:dt_home')
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        user_profile = UserProfile.objects.get(user=user)
+        tutor = Tutor.objects.get(profile=user_profile)
+
+        context = {
+            'profile_basic_form': ProfileBasicForm(
+                user_instance=user,
+                profile_instance=user_profile,
+                tutor_instance=tutor
+            ),
+            'tutor': tutor,
+        }
+        context.update(kwargs)  # Add any additional kwargs to context
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user_profile = UserProfile.objects.get(user=user)
+        tutor = Tutor.objects.get(profile=user_profile)
+
+        form = ProfileBasicForm(
+            request.POST, request.FILES,
+            user_instance=user,
+            profile_instance=user_profile,
+            tutor_instance=tutor
+        )
+
+        # Extra security check - compare submitted email with current email
+        submitted_email = request.POST.get('email')
+        if submitted_email and submitted_email != user.email:
+            messages.error(request, 'Security violation: Email modification detected')
+            return redirect(self.success_url)
+
+        if form.is_valid():
+            form.save(user)
+            messages.success(request, 'Your changes saved successfully.')
+            return redirect(self.success_url)
+
+        context = self.get_context_data(form=form)
+        return render(request, self.template_name, context)
+
+
+class DTWizard(BasicProfile, RoleRequiredMixin):
     allowed_roles = ['tutor']
     need_activation = False
     template_name = 'ap2_tutor/wizard/dt_wizard.html'
+
+    # success_url = reverse_lazy('tutor:dt_wizard')
+
+    def get_success_url(self, current_step):
+        """Determine next URL based on current step"""
+        # Map steps to their corresponding URLs
+        step_urls = {
+            2: reverse_lazy('tutor:dt_wizard_step3'),
+            3: reverse_lazy('tutor:dt_wizard_step4'),
+            4: reverse_lazy('tutor:dt_wizard_step5'),
+            5: reverse_lazy('tutor:dt_wizard_step6'),
+            6: reverse_lazy('tutor:dt_home')
+        }
+        return step_urls.get(current_step, reverse_lazy('tutor:dt_wizard'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -402,97 +422,289 @@ class DTWizard(DTEditProfile, RoleRequiredMixin):
 
         current_step = self._get_step(user)
         context['current_step'] = current_step
-        # Add UserSkillForm to context
-        # context['skillForm'] = UserSkillForm(user=user)  # Pass user to the form
-        context['skillForm'] = CombinedSkillForm(user=user)  # Pass user to the form
-        context['AppointmentSettingForm'] = AppointmentSettingForm()
 
-        # Get existing skills for display
-        context['existing_skills'] = UserSkill.objects.filter(user=user)
-        context['skills'] = Skill.objects.all()
-        context['levels'] = Level.objects.all()
-        context['applicantUId'] = user.id
+        # Decision(6), Accepted(7), Rejected(8)
+        if current_step > 5 and user.provider_application.reviewer_comment:
+            context['reviewer_comment'] = user.provider_application.reviewer_comment
+        else:
+            context['reviewer_comment'] = ''
+
+        # Add forms and data based on current step
+        try:
+            user_profile = UserProfile.objects.get(user=user)
+            tutor = Tutor.objects.get(profile=user_profile)
+
+            # Basic profile form is needed in multiple steps
+            context['profile_basic_form'] = ProfileBasicForm(
+                user_instance=user,
+                profile_instance=user_profile,
+                tutor_instance=tutor
+            )
+            context['applicantUId'] = user.id
+            context['isVIP'] = user.profile.is_vip
+            context['maxSkills'] = 5 if user.profile.is_vip else 3
+            context['skills'] = Skill.objects.all()
+            context['levels'] = Level.objects.all()
+            context['skillForm'] = CombinedSkillForm(user=user)  # Pass user to the form
+            # Get existing skills for display in step 3
+            context['existing_skills'] = UserSkill.objects.filter(user=user)
+            context['education_form'] = UserEducationForm(user=user)
+            context['user_education'] = user.education.all() if hasattr(user, 'education') else None
+
+        except (UserProfile.DoesNotExist, Tutor.DoesNotExist):
+            # Handle case where profile doesn't exist
+            messages.error(self.request, 'Profile not found. Please contact support.')
 
         return context
 
-    def _get_step(self, user):
-        """This helper method returns stepper step (a number between 0 to 8) based on applicant status"""
-        # stepper steps: (1.Primitive submit (Done), 2.Complete Profile, 3.Schedule interview, 4.Review and submit)
-        applicant_status = ProviderApplication.objects.get(user=user).status
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+        submitted_step = int(request.POST.get('step', 2))
+        db_step = self._get_step(request.user)
 
-        status_step_mapping = {
-            'pending': 0,
-            'invited': 0,  # 1
-            'registered': 2,  # go to step 2 (complete profile) in stepper
-            'completed_profile': 3,  # go to step 4 (teaching skills) in stepper
-            'completed_skills': 4,  # go to step 5 (decision) in stepper
-            'decision': 5,  # just show a page that you have completed interview, wait for interviewer decision
-            'accepted': 6,  # go to Tutor dashboard
-            'rejected': 7,  # Block user access to panel or just an ERROR PAGE!
+        # Map steps to their handlers
+        handlers = {
+            2: self.handle_profile_form,
+            3: self.handle_skills_form,
+            4: self.handle_education_form,
+            5: self.handle_review_step,
+            6: self.handle_result_step
         }
 
-        return status_step_mapping.get(applicant_status, 0)  # default to 0 if not found
+        handler = handlers.get(submitted_step)
+        if handler:
+            return handler(request, action)
 
-    def post(self, request, *args, **kwargs):
-        # Determine which form was submitted
-        if 'submit_profile' in request.POST:
-            return self.handle_profile_form(request)
-        elif 'submit_skills' in request.POST:
-            return self.handle_skills_form(request)
-        return redirect(self.success_url)
+        # return redirect(self.get_success_url(step))
 
-    def handle_profile_form(self, request):
+        return JsonResponse({
+            'success': False,
+            'errors': {'__all__': 'Invalid step'}
+        }, status=400)
+
+    def handle_profile_form(self, request, action):
         user = request.user
-        user_profile = UserProfile.objects.get(user=user)
-        tutor = Tutor.objects.get(profile=user_profile)
+        try:
+            user_profile = UserProfile.objects.get(user=user)
+            tutor = Tutor.objects.get(profile=user_profile)
 
-        form = CombinedProfileForm(
-            request.POST, request.FILES,
-            user_instance=user,
-            profile_instance=user_profile,
-            tutor_instance=tutor
-        )
+            form = ProfileBasicForm(
+                request.POST,
+                request.FILES,
+                user_instance=user,
+                profile_instance=user_profile,
+                tutor_instance=tutor
+            )
 
-        if form.is_valid():
-            form.save(user)
-            # Update application status to 'completed_profile'
-            application = ProviderApplication.objects.get(user=user)
-            application.status = 'completed_profile'
-            application.save()
+            if form.is_valid():
+                form.save(user)
+                messages.success(request, 'Profile information saved successfully!')
+                if action == 'next':
+                    # Update application status
+                    application = ProviderApplication.objects.get(user=user)
+                    application.status = 'completed_profile'
+                    application.save()
+                    # return redirect(self.get_success_url(step))
 
-            messages.success(request, 'Profile information saved successfully!')
-            return redirect('tutor:dt_wizard')
+                # For save action, stay on same page
+                # return redirect(request.path)
+                # return redirect('tutor:dt_wizard')
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Profile saved successfully!',
+                    'next_step': self._get_step(user) if action == 'next' else None
+                })
 
-        context = self.get_context_data(form=form)
-        return render(request, self.template_name, context)
+            # context = self.get_context_data(form=form)
+            # return render(request, self.template_name, context)
+            return JsonResponse({
+                'success': False,
+                'errors': form.errors
+            })
 
-    def handle_skills_form(self, request):
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'errors': {'__all__': str(e)}
+            }, status=500)
+
+    def handle_skills_form(self, request, action):
         user = request.user
-        form = UserSkillForm(request.POST, request.FILES, user=user)
+        try:
+            # Handle video intro
+            video_intro = request.FILES.get('video_intro')
+            if video_intro:
+                tutor = user.profile.tutor_profile
+                tutor.video_intro = video_intro
+                tutor.save()
 
-        if form.is_valid():
-            skill = form.save(commit=False)
-            skill.user = user
-            skill.save()
+            # Handle skills
+            skills = request.POST.getlist('skills[]')
+            levels = request.POST.getlist('levels[]')
+            videos = request.FILES.getlist('videos[]')
+            certificates = request.FILES.getlist('certificates[]')
 
-            # Update application status to 'completed_skills'
+            # Validate maximum skills
+            max_skills = 5 if user.profile.is_vip else 3
+            if len(skills) > max_skills:
+                return JsonResponse({
+                    'success': False,
+                    'errors': {'__all__': f'Maximum {max_skills} skills allowed'}
+                }, status=400)
+
+            # Save skills
+            for i, (skill_id, level_id) in enumerate(zip(skills, levels)):
+                skill = Skill.objects.get(id=skill_id)
+                level = Level.objects.get(id=level_id)
+
+                # Update existing or create new
+                user_skill, created = UserSkill.objects.update_or_create(
+                    user=user,
+                    skill=skill,
+                    defaults={
+                        'level': level,
+                        'video': videos[i] if i < len(videos) else None,
+                        'certificate': certificates[i] if i < len(certificates) else None,
+                        'status': 'pending'
+                    }
+                )
+
+            if action == 'next':
+                # Update application status
+                application = ProviderApplication.objects.get(user=user)
+                application.status = 'added_skills'
+                application.save()
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Skills saved successfully!',
+                'next_step': self._get_step(user) if action == 'next' else None
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'errors': {'__all__': str(e)}
+            }, status=500)
+
+    def handle_education_form(self, request, action):
+        user = request.user
+        try:
+            form = UserEducationForm(request.POST, request.FILES, user=user)
+
+            if form.is_valid():
+                education = form.save(commit=False)
+                education.user = user
+                education.save()
+
+                if action == 'next':
+                    # Update application status
+                    application = ProviderApplication.objects.get(user=user)
+                    application.status = 'added_edu'
+                    application.save()
+
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Education saved successfully!',
+                    'next_step': self._get_step(user) if action == 'next' else None
+                })
+
+            return JsonResponse({
+                'success': False,
+                'errors': form.errors
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'errors': {'__all__': str(e)}
+            }, status=500)
+
+    def handle_review_step(self, request, action):
+        user = request.user
+        try:
+            if action == 'next':
+                # Update application status to decision
+                application = ProviderApplication.objects.get(user=user)
+                application.status = 'decision'
+                application.save()
+
+                # Send notification emails
+                self.send_submission_notifications(user)
+
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Application submitted successfully! We will review it shortly.',
+                    'next_step': self._get_step(user)
+                })
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Review saved'
+            })
+
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'errors': {'__all__': str(e)}
+            }, status=500)
+
+    def handle_result_step(self, request, action):
+        return
+
+    def send_submission_notifications(self, user):
+        """Send notification emails to applicant and admin"""
+        try:
             application = ProviderApplication.objects.get(user=user)
-            application.status = 'completed_skills'
-            application.save()
 
-            messages.success(request, 'Skill information saved successfully!')
-            return redirect('tutor:dt_wizard')
+            # Email to applicant
+            subject = f"🎉 Application Submitted Successfully - {settings.SITE_NAME}"
+            template_name = 'emails/tutor/application_submitted'
+            context = {
+                'full_name': f"{user.first_name} {user.last_name}",
+                'site_name': settings.SITE_NAME
+            }
+            send_dual_email(subject, template_name, context, [user.email])
 
-        context = self.get_context_data(skillForm=form)
-        return render(request, self.template_name, context)
+            # Notification to admin
+            notify_subject = f"New Tutor Application Submitted - {user.get_full_name()}"
+            notification_email_to_admin(notify_subject, 'emails/admin/new_tutor_application', context)
+
+        except Exception as e:
+            # Log error but don't stop the process
+            print(f"Error sending notification emails: {str(e)}")
+
+    def _get_step(self, user):
+        """Helper method to determine current step based on application status"""
+        try:
+            applicant_status = ProviderApplication.objects.get(user=user).status
+
+            status_step_mapping = {
+                'pending': 0,
+                'invited': 0,
+                'registered': 2,  # -- Go to: Basic Profile
+                'completed_profile': 3,  # -- Go to: Teaching Skills
+                'added_skills': 4,  # -- Go to: Education Step
+                'added_edu': 5,  # -- Go to: Review Step
+                'decision': 6,  # Waiting for decision
+                'accepted': 7,  # Approved  -- Action Button: go to dashboard
+                'rejected': 8,  # Declined  -- Block user access to panel or just show ERROR PAGE!
+
+            }
+
+            return status_step_mapping.get(applicant_status, 0)
+        except ProviderApplication.DoesNotExist:
+            return 0  # Default to start
 
 
+# ------------------------ WIZARD Functions
+# Similarly implement steps 5 and 6
 @login_required
-def get_existed_skills(request):
+def get_existed_skills_BACKUP_KEEP_IT(request):
     # Get and validate user ID parameter
     applicantUId = request.GET.get('applicantUId')
     if not applicantUId or not applicantUId.isdigit():
-        return JsonResponse({'status': 'error', 'message': 'Invalid user ID format'},status=400)
+        return JsonResponse({'status': 'error', 'message': 'Invalid user ID format'}, status=400)
 
     try:
         # Check if user exists
@@ -504,7 +716,8 @@ def get_existed_skills(request):
         # applicant user MUST be same as logged in user
         # Verify authorization (user can only access their own data)
         if applicantUser != request.user:
-            return JsonResponse({'status': 'error', 'message': 'Forbidden Access: You can only access your own data'}, status=403)
+            return JsonResponse({'status': 'error', 'message': 'Forbidden Access: You can only access your own data'},
+                                status=403)
 
         # Check if user has a profile
         if not hasattr(applicantUser, 'profile'):
@@ -543,7 +756,47 @@ def get_existed_skills(request):
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 
-def save_skills(request):
+@ownership_required(lookup_field='id', lookup_url_kwarg='applicantUId', id_param='applicantUId')
+def get_existed_skills(request):
+    # Your existing logic (simplified since ownership is checked by decorator)
+    user_profile = request.user.profile
+
+    # Get user skills
+    existed_uSkills = UserSkill.objects.filter(user=request.user).values(
+        'id', 'skill', 'skill__name', 'level', 'level__name',
+        'certificate', 'video', 'status'
+    )
+    # Get tutor data safely
+    tutor = Tutor.objects.filter(profile=user_profile).first()
+    video_intro = tutor.video_intro.url if (tutor and tutor.video_intro) else None
+
+    existed_uSkill_list = [
+        {
+            'uSkillId': uSkill['id'],
+            'skill': uSkill['skill'],  # ID
+            'skillName': uSkill['skill__name'],  # Name for display
+            'level': uSkill['level'],  # ID
+            'levelName': uSkill['level__name'],  # Name for display
+            'certificate': uSkill['certificate'],
+            'video': uSkill['video'],
+            'status': uSkill['status'],
+        }
+        for uSkill in existed_uSkills
+    ]
+
+    tutor = Tutor.objects.filter(profile=user_profile).first()
+    video_intro = tutor.video_intro.url if (tutor and tutor.video_intro) else None
+
+    return JsonResponse({
+        'status': 'success',
+        # 'existed_uSkill_list': existed_uSkill_list,
+        # 'existed_uSkill_list': list(existed_uSkills),
+        'existed_uSkill_list': existed_uSkill_list,
+        'video_intro': video_intro,
+    })
+
+
+def save_skills_main(request):
     video_allowed_extensions = ['mp4', 'ts']
     certificate_allowed_extensions = ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg']
     if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -551,12 +804,33 @@ def save_skills(request):
             # Get current user and tutor profile
             user = request.user
             tutor = user.profile.tutor_profile
+            existed_video = tutor.video_intro  # Initialize existed_video
 
             # Process video intro
             video_intro = request.FILES.get('video_intro')
+
+            # Validate video intro
+            if not video_intro and not existed_video:
+                return JsonResponse({'error': 'Introduction video is required'}, status=400)
+
+            # Only validate extension if new file was uploaded
             if video_intro:
+                if not validate_file_extension(video_intro.name, video_allowed_extensions):
+                    return JsonResponse(
+                        {'error': f'Invalid video format. Only {video_allowed_extensions} allowed.'},
+                        status=400
+                    )
                 tutor.video_intro = video_intro
                 tutor.save()
+
+            # Process removed skills first
+            removed_skills = request.POST.getlist('removed_skills')
+            if removed_skills:
+                UserSkill.objects.filter(
+                    id__in=removed_skills,
+                    user=user
+                ).delete()
+                print(f"Deleted {len(removed_skills)} skills")
 
             # Process skills data
             skills = request.POST.getlist('skills')
@@ -575,13 +849,9 @@ def save_skills(request):
             if len(skills) > MAX_SKILLS or len(levels) > MAX_SKILLS or len(skill_videos) > MAX_SKILLS:
                 return JsonResponse({'error': f'Maximum {MAX_SKILLS} skills allowed'}, status=400)
 
-            # Validate video intro
-            if not video_intro:
-                return JsonResponse({'error': 'Introduction video is required'}, status=400)
-
-            if not validate_file_extension(video_intro.name, video_allowed_extensions):
-                return JsonResponse({'error': f'Invalid video format. Only {video_allowed_extensions} allowed.'},
-                                    status=400)
+            # if not validate_file_extension(video_intro.name, video_allowed_extensions):
+            #     return JsonResponse({'error': f'Invalid video format. Only {video_allowed_extensions} allowed.'},
+            #                         status=400)
 
             # Validate each skill
             for i, (skill_id, level_id) in enumerate(zip(skills, levels)):
@@ -637,7 +907,7 @@ def save_skills(request):
 
                     # Additional processing if needed
                     applicant = ProviderApplication.objects.get(user=user)
-                    applicant.status = 'decision'  # after added skills we need to decide
+                    applicant.status = 'added_skills'  # after added skills we need to add Edu!
                     applicant.save()
                     print(f'applicant status updated! {applicant.status}')
 
@@ -648,13 +918,13 @@ def save_skills(request):
             # Process data (same as before)
             # ... your save logic ...
 
-            # return JsonResponse({'success': True})
             return JsonResponse({
                 'success': True,
                 'message': f'Successfully saved {len(saved_skills)} skills',
                 'saved_skills': saved_skills,
                 'video_intro_url': tutor.video_intro.url if tutor.video_intro else None
             })
+
 
         except Exception as e:
             print(f'Ah... error500')
@@ -664,65 +934,237 @@ def save_skills(request):
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
 
 
+# @ownership_required(lookup_field='id', lookup_url_kwarg='applicantUId', id_param='applicantUId')
+def save_skills(request):
+    if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        try:
+            user = request.user
+            tutor = user.profile.tutor_profile
+            video_extensions = ['mp4', 'ts']
+            cert_extensions = ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg']
+
+            # Debug logging
+            print("Received FILES:", list(request.FILES.keys()))
+            print("Received POST data:", {
+                k: v for k, v in request.POST.items()
+                if not k.startswith('csrf') and not k.endswith('[]')
+            })
+
+            # Parse tracking data
+            videos_new = json.loads(request.POST.get('videos_new', '[]'))
+            videos_changed = json.loads(request.POST.get('videos_changed', '[]'))
+            videos_removed = json.loads(request.POST.get('videos_removed', '[]'))
+            certs_new = json.loads(request.POST.get('certs_new', '[]'))
+            certs_changed = json.loads(request.POST.get('certs_changed', '[]'))
+            certs_removed = json.loads(request.POST.get('certs_removed', '[]'))
+            skills_removed = json.loads(request.POST.get('skills_removed', '[]'))
+            skills_new = json.loads(request.POST.get('skills_new', '[]'))
+            intro_video_action = request.POST.get('intro_video_action', 'unchanged')
+
+            # Get all skill data
+            skills = request.POST.getlist('skills[]')
+            levels = request.POST.getlist('levels[]')
+            skill_ids = request.POST.getlist('skill_ids[]')
+
+            # Validate skill limit
+            MAX_SKILLS = 5 if user.profile.is_vip else 3
+            if len(skills) > MAX_SKILLS:
+                return JsonResponse({'error': f'Max {MAX_SKILLS} skills allowed'}, status=400)
+
+            # ===== 1. PROCESS REMOVALS FIRST =====
+            # Remove complete skills and their files
+            if skills_removed:
+                skills_to_delete = UserSkill.objects.filter(id__in=skills_removed, user=user)
+                for skill in skills_to_delete:
+                    if skill.video:
+                        skill.video.delete(save=False)
+                    if skill.certificate:
+                        skill.certificate.delete(save=False)
+                skills_to_delete.delete()
+
+            # Remove specific videos
+            for uSkillId in videos_removed:
+                try:
+                    skill = UserSkill.objects.get(id=uSkillId, user=user)
+                    if skill.video:
+                        skill.video.delete(save=False)
+                        skill.video = None
+                        skill.save()
+                except UserSkill.DoesNotExist:
+                    continue
+
+            # Remove specific certificates
+            for uSkillId in certs_removed:
+                try:
+                    skill = UserSkill.objects.get(id=uSkillId, user=user)
+                    if skill.certificate:
+                        skill.certificate.delete(save=False)
+                        skill.certificate = None
+                        skill.save()
+                except UserSkill.DoesNotExist:
+                    continue
+
+            # ===== 2. PROCESS NEW SKILLS =====
+            saved_skills = []
+            for i in range(len(skills)):
+                skill_id = skill_ids[i] if i < len(skill_ids) else None
+
+                # Skip if not a new skill
+                if not skill_id or str(skill_id) not in skills_new:
+                    continue
+
+                try:
+                    skill_obj = Skill.objects.get(id=skills[i])
+                    level_obj = Level.objects.get(id=levels[i])
+
+                    # Create new skill
+                    user_skill = UserSkill.objects.create(
+                        user=user,
+                        skill=skill_obj,
+                        level=level_obj,
+                        status='pending'
+                    )
+                    saved_skills.append(user_skill.id)
+
+                    # Handle video file for new skill
+                    video_key = f'new_skill_videos_{skill_id}'
+                    if video_key in request.FILES:
+                        video_file = request.FILES[video_key]
+                        if validate_file_extension(video_file.name, video_extensions):
+                            user_skill.video = video_file
+
+                    # Handle certificate file for new skill
+                    cert_key = f'new_skill_certs_{skill_id}'
+                    if cert_key in request.FILES:
+                        cert_file = request.FILES[cert_key]
+                        if validate_file_extension(cert_file.name, cert_extensions):
+                            user_skill.certificate = cert_file
+
+                    user_skill.save()
+
+                except (Skill.DoesNotExist, Level.DoesNotExist) as e:
+                    print(f"Error creating new skill: {e}")
+                    continue
+
+            # ===== 3. PROCESS EXISTING SKILLS =====
+            for i in range(len(skills)):
+                skill_id = skill_ids[i] if i < len(skill_ids) else None
+
+                # Skip if this is a new skill (already processed) or no skill_id
+                if not skill_id or str(skill_id) in skills_new:
+                    continue
+
+                try:
+                    skill_obj = Skill.objects.get(id=skills[i])
+                    level_obj = Level.objects.get(id=levels[i])
+                    user_skill = UserSkill.objects.get(id=skill_id, user=user)
+
+                    # Update skill data
+                    user_skill.skill = skill_obj
+                    user_skill.level = level_obj
+                    user_skill.status = 'pending'
+
+                    # Handle changed video
+                    if str(skill_id) in videos_changed:
+                        video_key = f'skill_videos_{skill_id}'
+                        if video_key in request.FILES:
+                            video_file = request.FILES[video_key]
+                            if validate_file_extension(video_file.name, video_extensions):
+                                if user_skill.video:
+                                    user_skill.video.delete(save=False)
+                                user_skill.video = video_file
+
+                    # Handle new video upload
+                    elif str(skill_id) in videos_new:
+                        video_key = f'skill_videos_{skill_id}'
+                        if video_key in request.FILES:
+                            video_file = request.FILES[video_key]
+                            if validate_file_extension(video_file.name, video_extensions):
+                                if user_skill.video:
+                                    user_skill.video.delete(save=False)
+                                user_skill.video = video_file
+
+                    # Handle changed certificate
+                    if str(skill_id) in certs_changed:
+                        cert_key = f'certificates_{skill_id}'
+                        if cert_key in request.FILES:
+                            cert_file = request.FILES[cert_key]
+                            if validate_file_extension(cert_file.name, cert_extensions):
+                                if user_skill.certificate:
+                                    user_skill.certificate.delete(save=False)
+                                user_skill.certificate = cert_file
+
+                    # Handle new certificate upload
+                    elif str(skill_id) in certs_new:
+                        cert_key = f'certificates_{skill_id}'
+                        if cert_key in request.FILES:
+                            cert_file = request.FILES[cert_key]
+                            if validate_file_extension(cert_file.name, cert_extensions):
+                                if user_skill.certificate:
+                                    user_skill.certificate.delete(save=False)
+                                user_skill.certificate = cert_file
+
+                    user_skill.save()
+                    saved_skills.append(user_skill.id)
+
+                except (Skill.DoesNotExist, Level.DoesNotExist, UserSkill.DoesNotExist) as e:
+                    print(f"Error updating skill: {e}")
+                    continue
+
+            # ===== 4. PROCESS INTRO VIDEO =====
+            if intro_video_action == 'uploaded' and 'video_intro' in request.FILES:
+                video_file = request.FILES['video_intro']
+                if validate_file_extension(video_file.name, video_extensions):
+                    if tutor.video_intro:
+                        tutor.video_intro.delete(save=False)
+                    tutor.video_intro = video_file
+                    tutor.save()
+            elif intro_video_action == 'removed' and tutor.video_intro:
+                tutor.video_intro.delete(save=False)
+                tutor.video_intro = None
+                tutor.save()
+
+            # Update application status
+            ProviderApplication.objects.filter(user=user).update(status='added_skills')
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Skills updated successfully',
+                'saved_skills': saved_skills,
+                'video_intro_url': tutor.video_intro.url if tutor.video_intro else None,
+                'stats': {
+                    'skills_total': len(skills),
+                    'skills_new': len(skills_new),
+                    'skills_removed': len(skills_removed),
+                    'videos_new': len(videos_new),
+                    'videos_changed': len(videos_changed),
+                    'videos_removed': len(videos_removed),
+                    'certs_new': len(certs_new),
+                    'certs_changed': len(certs_changed),
+                    'certs_removed': len(certs_removed),
+                    'intro_video_action': intro_video_action
+                }
+            })
+
+        except Exception as e:
+            print(f"Error in save_skills: {str(e)}")
+            return JsonResponse({
+                'success': False,
+                'error': str(e),
+                'traceback': traceback.format_exc() if settings.DEBUG else None
+            }, status=500)
+
+    return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+
+
 def validate_file_extension(filename, allowed_extensions):
     extension = filename.split('.')[-1].lower()
     return extension in allowed_extensions
 
 
-class DTWizard_1(DTEditProfile, RoleRequiredMixin):
-    allowed_roles = ['tutor']
-    need_activation = False
-    check_profile_activation = False  # No need to activation for interview (temp!!!)
-    template_name = 'ap2_tutor/wizard/dt_wizard.html'
-    success_url = reverse_lazy('tutor:dt_wizard')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context['interviewerUId'] = User.objects.get(is_superuser=True).id
-        user = self.request.user  # Get current user
-        current_step = self._get_step(user)
-        context['current_step'] = current_step
-        # context['skillForm'] = UserSkillForm
-
-        if current_step >= 5:  # Decision(6), Accepted(7), Rejected(8)
-            context['reviewer_comment'] = user.provider_application.interviewer_comment
-        else:
-            context['reviewer_comment'] = ''
-        user_profile = UserProfile.objects.filter(user__username='lucas').first()
-        context['interviewerUId'] = user_profile.id
-        context['subject'] = 'French Interview by Amin'
-        context['session_cost'] = 100  # just for test | we get this from Tutor profile later
-        context['currency'] = '€'  # € : alt + 0128
-        context['session_type'] = 'interview'
-        context['vat'] = 30
-        context['discount'] = 10
-
-        # context['providerSessionPeriod'] = user_profile.user.appointment_settings.session_length
-        # context['maxSelectableSessions'] = 5  # for test !
-        return context
-
-    def _get_step(self, user):
-        """This helper method returns stepper step (a number between 0 to 8) based on applicant status"""
-        # stepper steps: (1.Primitive submit (Done), 2.Complete Profile, 3.Schedule interview, 4.Review and submit)
-        applicant_status = ProviderApplication.objects.get(user=user).status
-
-        status_step_mapping = {
-            'pending': 0,
-            'invited': 0,  # 1
-            'registered': 2,  # go to step 2 (complete profile) in stepper
-            'completed_profile': 3,  # go to step 4 (teaching skills) in stepper
-            'completed_skills': 4,  # go to step 5 (decision) in stepper
-            'decision': 5,  # just show a page that you have completed interview, wait for interviewer decision
-            'accepted': 6,  # go to Tutor dashboard
-            'rejected': 7,  # Block user access to panel or just an ERROR PAGE!
-        }
-
-        return status_step_mapping.get(applicant_status, 0)  # default to 0 if not found
-
-
 @require_POST
 @csrf_exempt
-def submit_form_profile(request):
+def submit_form_profile_MAIN(request):
     user = request.user
     try:
         user_profile = UserProfile.objects.get(user=user)
@@ -733,7 +1175,7 @@ def submit_form_profile(request):
             'errors': {'__all__': 'User profile not found'}
         }, status=400)
 
-    form = CombinedProfileForm(
+    form = ProfileBasicForm(
         request.POST,
         request.FILES,
         user_instance=user,
@@ -742,17 +1184,21 @@ def submit_form_profile(request):
     )
 
     if form.is_valid():
+        form.cleaned_data['email'] = user.email
         try:
             form.save(user)
             # change applicant status to complete_profile
             applicant = ProviderApplication.objects.get(user=user)
             applicant.status = 'completed_profile'
             applicant.save()
+            print(f'Im in form_valid!')
             return JsonResponse({
                 'success': True,
                 'message': 'Profile updated successfully'
             })
+
         except Exception as e:
+            print(f'Im form this error!!')
             return JsonResponse({
                 'success': False,
                 'errors': {'__all__': str(e)}
@@ -763,10 +1209,82 @@ def submit_form_profile(request):
     for field in form.errors:
         errors[field] = form.errors[field][0]
 
+    print(f'Finally!!')
     return JsonResponse({
         'success': False,
         'errors': errors
     }, status=400)
+
+
+@require_POST
+@csrf_exempt
+def submit_form_profile(request):
+    user = request.user
+    try:
+        user_profile = UserProfile.objects.get(user=user)
+        tutor = Tutor.objects.get(profile=user_profile)
+    except (UserProfile.DoesNotExist, Tutor.DoesNotExist) as e:
+        print(f"Profile lookup error: {str(e)}")  # Debug logging
+        return JsonResponse({
+            'success': False,
+            'errors': {'__all__': 'User profile not found'}
+        }, status=400)
+
+    form = ProfileBasicForm(
+        request.POST,
+        request.FILES,
+        user_instance=user,
+        profile_instance=user_profile,
+        # tutor_instance=tutor
+    )
+
+    if form.is_valid():
+        try:
+            # Debug: Print cleaned data before saving
+            print(f"Form cleaned data: {form.cleaned_data}")
+
+            # Save the form
+            # saved_user, saved_profile, saved_tutor = form.save(user)
+            saved_user, saved_profile = form.save(user)
+
+            # Debug: Print saved objects
+            print(f"Saved user: {saved_user}")
+            print(f"Saved profile: {saved_profile}")
+            # print(f"Saved tutor: {saved_tutor}")
+
+            # Update applicant status
+            applicant = ProviderApplication.objects.get(user=user)
+            applicant.status = 'completed_profile'
+            applicant.save()
+
+            return JsonResponse({
+                'success': True,
+                'message': 'Profile updated successfully'
+            })
+
+        except Exception as e:
+            # Get the complete traceback
+            import traceback
+            error_trace = traceback.format_exc()
+            print(f"Error during save: {str(e)}\n{error_trace}")  # Detailed error logging
+
+            return JsonResponse({
+                'success': False,
+                'errors': {'__all__': str(e)},
+                'traceback': error_trace  # Include in development only
+            }, status=400)
+    else:
+        # Print form errors for debugging
+        print(f"Form errors: {form.errors}")
+
+        errors = {}
+        for field in form.errors:
+            errors[field] = form.errors[field][0]
+
+        return JsonResponse({
+            'success': False,
+            'errors': errors
+        }, status=400)
 
 
 @require_POST
@@ -818,6 +1336,63 @@ def submit_form_skill(request):
     }, status=400)
 
 
+def get_categories1(request):
+    categories = TeachingCategory.objects.prefetch_related("sub_teaching_categories").all()
+    data = [
+        {
+            "category": category.name,
+            "subcategories": [{"id": sub.id, "name": sub.name} for sub in category.sub_teaching_categories.all()]
+        }
+        for category in categories
+    ]
+
+    return JsonResponse({"categories": data})
+
+
+
+# Current --------------------------------------------------------------------------------------
+def get_categories(request):
+    categories = TeachingCategory.objects.prefetch_related("sub_teaching_categories").all()
+    data = [
+        {
+            "category": category.name,
+            "subcategories": [
+                {"id": sub.id, "name": sub.name}
+                for sub in category.sub_teaching_categories.all()
+            ]
+        }
+        for category in categories
+    ]
+    return JsonResponse({"categories": data})
+
+def get_subcategories(request):
+    category_name = request.GET.get('category')
+    if not category_name:
+        return JsonResponse({"subcategories": []})
+
+    try:
+        category = TeachingCategory.objects.get(name=category_name)
+        subcategories = category.sub_teaching_categories.all().values('id', 'name')
+        return JsonResponse({"subcategories": list(subcategories)})
+    except TeachingCategory.DoesNotExist:
+        return JsonResponse({"subcategories": []})
+
+
+def get_category_for_subcategories(request):
+    subcategory_ids = request.GET.get('ids', '').split(',')
+    if not subcategory_ids:
+        return JsonResponse({"category": None})
+
+    try:
+        # Get the first subcategory to find its parent category
+        subcategory = SubTeachingCategory.objects.filter(id__in=subcategory_ids).first()
+        if subcategory:
+            return JsonResponse({"category": subcategory.teaching_category.name})
+        return JsonResponse({"category": None})
+    except Exception:
+        return JsonResponse({"category": None})
+
+
 class SuccessSubmit(TemplateView, RoleRequiredMixin):
     allowed_roles = ['tutor']
     template_name = 'ap2_meeting/success_submit.html'  # change and adapt this to dashboard panel of Tutor
@@ -847,6 +1422,9 @@ class SuccessSubmit(TemplateView, RoleRequiredMixin):
     # send Notification to them
 
 
+# ====================================
+# ==================================== WIZARD end ===================================
+
 class DTSetting(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredMixin, TemplateView):
     allowed_roles = ['tutor']
     template_name = 'ap2_tutor/dashboard/dt_setting.html'
@@ -863,12 +1441,13 @@ class DTDeleteAccount(LoginRequiredMixin, RoleRequiredMixin, ActivationRequiredM
     model = Tutor  # Must CHECK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-class DInterview(DTEditProfile, RoleRequiredMixin):
+# --------------------------------- Archived ---------------------------------
+class DTInterview(BasicProfile, RoleRequiredMixin):
     allowed_roles = ['tutor']
     need_activation = False
     check_profile_activation = False  # No need to activation for interview (temp!!!)
-    template_name = 'ap2_tutor/interview/dt_wizard.html'
-    success_url = reverse_lazy('tutor:dt_wizard')
+    template_name = 'ap2_tutor/interview/dt_interview.html'
+    success_url = reverse_lazy('tutor:dt_interview')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -895,11 +1474,11 @@ class DInterview(DTEditProfile, RoleRequiredMixin):
                 context['video_call_link'] = session.video_call_link
 
         if current_step >= 6:  # Decision(6), Accepted(7), Rejected(8)
-            context['interviewer_comment'] = user.provider_application.interviewer_comment
+            context['reviewer_comment'] = user.provider_application.reviewer_comment
         else:
-            context['interviewer_comment'] = ''
+            context['reviewer_comment'] = ''
         user_profile = UserProfile.objects.filter(user__username='lucas').first()
-        context['interviewerUId'] = user_profile.id
+        context['reviewerUId'] = user_profile.id
         context['subject'] = 'French Interview by Amin'
         context['session_cost'] = 100  # just for test | we get this from Tutor profile later
         context['currency'] = '€'  # € : alt + 0128

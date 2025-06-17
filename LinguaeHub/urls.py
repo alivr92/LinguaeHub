@@ -30,6 +30,7 @@ urlpatterns = [
     path('schedule/', include('ap2_meeting.urls', namespace='schedule')),
     # path('payments/', include('payments.urls', namespace='payments')),
     path('blog/', include('app_blog.urls', namespace='blog')),
+    path('shop/', include('app_shop.urls', namespace='shop')),
 
 ]
 

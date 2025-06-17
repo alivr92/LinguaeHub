@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'app_accounts',
     'app_pages',
     'app_blog',
+    'app_shop',
     'ap2_tutor',
     'ap2_student',
     'ap2_meeting',

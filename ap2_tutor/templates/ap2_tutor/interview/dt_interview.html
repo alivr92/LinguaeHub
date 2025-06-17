@@ -1,4 +1,4 @@
-{% extends 'ap2_tutor/interview/../wizard/dt_wizard_base.html' %}
+{% extends 'ap2_tutor/interview/includes/dt_interview_base.html' %}
 {% load static %}
 {% load tz %}
 {% load custom_filters %}
@@ -20,103 +20,9 @@
 {% endblock %}
 {% block embed_style %}
     <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/client/css/reservation.css' %}">
-    <style>
-        .confirmation-card {
-        {#max-width: 600px;#} margin: 80px auto;
-            border-radius: 10px;
-        }
-
-        .confirmation-icon {
-            font-size: 60px;
-            color: #28a745;
-        }
-
-        /* Fix spacing in stepper */
-        .bs-stepper-content .content {
-            padding-top: 0;
-            margin-top: 0;
-        }
-
-        .bs-stepper-content .content h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .bs-stepper-content .content hr {
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Review section styles */
-        .confirmation-card {
-            margin-top: 1rem;
-            border-radius: 0.5rem;
-        }
-
-        /* step 6 final decision */
-        .application-status-card {
-            border-left: 6px solid transparent;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .status-accepted {
-            border-color: #28a745;
-        }
-
-        .status-rejected {
-            border-color: #dc3545;
-        }
-
-        .status-review {
-            border-color: #6f42c1;
-        }
-
-        .status-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-icon {
-            font-size: 2rem;
-        }
-
-    </style>
+        <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/stepper.css' %}">
 {% endblock %}
-
-{% block my_style %}
-    <style>
-        #steppertrigger1 {
-            pointer-events: none;
-            cursor: default;
-            color: white;
-        }
-
-        .bs-stepper-circle.completed-step {
-            background-color: #28a745 !important;
-        {#background-color: #198754 !important; //bootstrap success green color #}
-        }
-
-        .completed-step {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .is-invalid {
-            border-color: #dc3545;
-        }
-
-        .invalid-feedback {
-            color: #dc3545;
-            font-size: 0.875em;
-            margin-top: 0.25rem;
-        }
-    </style>
-{% endblock %}
-
+{#{% block my_style %}{% endblock %}#}
 {% block dashboard_main_content %}
     <!-- =======================
     Steps START -->
@@ -282,18 +188,17 @@
 
                             <!-- Session selection container -->
                             <div id="sessionSelectionContainer">
-                                {% include 'ap2_meeting/client_table.html' %}
+                                {% include 'ap2_meeting/interview_table.html' %}
                             </div>
-
                             <!-- Step 3 button -->
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-secondary prev-btn mb-0">Previous</button>
+                                <button class="btn btn-secondary btn-prev mb-0">Previous</button>
                                 {#                                <button class="btn btn-primary next-btn mb-0">Next</button>#}
                                 {#                                <button class="btn btn-primary mb-0"  aria-label="Submit and continue">Next</button>#}
                                 {#                                <button type="button" class="btn btn-primary next-btn" id="btnNextSchedule"#}
                                 {#                                        aria-label="Submit and continue">Next#}
                                 {#                                </button>#}
-                                <a id="btnNextSchedule" href="#" class="btn btn-primary ">Next</a>
+                                <a id="btnNextSchedule" href="#" class="btn btn-next btn-primary ">Next</a>
                             </div>
                         </div>
                     </div>
@@ -329,9 +234,6 @@
                         {% include 'ap2_tutor/interview/includes/inter_step6_result.html' %}
                     </div>
                     <!-- Step 6 content END -->
-
-
-                    {#                            </form>#}
                 </div>
             </div>
             <!-- Card body END -->
@@ -365,5 +267,5 @@
 
 {% block my_scripts %}
     <script src="{% static 'assets/js/avr_set_profile_photo.js' %}"></script>
-    <script src="{% static 'ap2_tutor/assets/js/interview_stepper.js' %}"></script>
+    <script src="{% static 'ap2_tutor/assets/js/interview/interview_stepper.js' %}"></script>
 {% endblock %}

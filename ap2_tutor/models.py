@@ -7,6 +7,7 @@ from ap2_meeting.models import TIMEZONE_CHOICES
 from django.urls import reverse
 from django.utils import timezone
 from app_accounts.models import LANGUAGE_CHOICES
+from django.conf import settings
 
 RATING = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
 NOTIFICATION_TYPE = [
@@ -14,6 +15,146 @@ NOTIFICATION_TYPE = [
     ('appointment_cancelled', 'Appointment Cancelled'),
 ]
 ALLOWED_EXTENSIONS_VIDEO = ['mp4', 'ts', 'avi', 'mpeg']
+# STATUS_INTERVIEW = [
+#         ('pending', 'Pending'),
+#         ('invited', 'Invited'),
+#         ('registered', 'Registered'),
+#         ('completed_profile', 'Completed Profile'),
+#         ('added_skills', 'Added Skills'),
+#         ('scheduled', 'Scheduled'),
+#         ('decision', 'Decision'),
+#         ('accepted', 'Accepted'),
+#         ('rejected', 'Rejected'),
+#     ]
+STATUS_WIZARD = [
+    ('pending', 'Pending'),
+    ('invited', 'Invited'),
+    ('registered', 'Registered'),
+    ('completed_profile', 'Completed Profile'),
+    ('added_skills', 'Added Skills'),
+    ('added_edu', 'Added Education'),
+    ('decision', 'Decision'),
+    ('accepted', 'Accepted'),
+    ('rejected', 'Rejected'),
+]
+
+TEACHING_CERTIFICATES = [
+    # 🇬🇧 English Language Proficiency
+    ('toefl', 'TOEFL'),
+    ('ielts', 'IELTS'),
+    ('cambridge_a2', 'Cambridge English A2 Key'),
+    ('cambridge_b1', 'Cambridge English B1 Preliminary'),
+    ('cambridge_b2', 'Cambridge English B2 First'),
+    ('cambridge_c1', 'Cambridge English C1 Advanced'),
+    ('cambridge_c2', 'Cambridge English C2 Proficiency'),
+    ('pte_academic', 'PTE Academic'),
+    ('duolingo', 'Duolingo English Test'),
+    ('toeic', 'TOEIC'),
+    ('oxford', 'Oxford Test of English'),
+    ('trinity_gese', 'Trinity College London GESE'),
+    ('trinity_ise', 'Trinity College London ISE'),
+    ('michigan_met', 'Michigan Tests MET'),
+    ('michigan_ecce', 'Michigan Tests ECCE'),
+    ('michigan_ecpe', 'Michigan Tests ECPE'),
+
+    # 🇫🇷 French Language Proficiency
+    ('delf_dalf', 'DELF / DALF'),
+    ('tcf', 'TCF'),
+    ('tef', 'TEF'),
+    ('dfp', 'DFP'),
+
+    # 🇪🇸 Spanish Language Proficiency
+    ('dele', 'DELE'),
+    ('siele', 'SIELE'),
+    ('celu', 'CELU'),
+
+    # 🇩🇪 German Language Proficiency
+    ('goethe', 'Goethe-Zertifikat'),
+    ('testdaf', 'TestDaF'),
+    ('telc_deutsch', 'telc Deutsch'),
+    ('dsh', 'DSH'),
+    ('osd', 'ÖSD'),
+
+    # 🇮🇹 Italian Language Proficiency
+    ('celi', 'CELI'),
+    ('cils', 'CILS'),
+    ('plida', 'PLIDA'),
+    ('ail', 'AIL'),
+
+    # 🇵🇹 Portuguese Language Proficiency
+    ('caple', 'CAPLE'),
+    ('celpe_bras', 'CELPE-Bras'),
+
+    # 🇷🇺 Russian Language Proficiency
+    ('torfl', 'TORFL'),
+
+    # 🇳🇱 Dutch Language Proficiency
+    ('cnavt', 'CNaVT'),
+    ('nt2', 'NT2'),
+
+    # 🇸🇪 Swedish Language Proficiency
+    ('tisus', 'TISUS'),
+    ('sfi', 'SFI tests'),
+
+    # 🇫🇮 Finnish Language Proficiency
+    ('yki', 'YKI'),
+
+    # 🇳🇴 Norwegian Language Proficiency
+    ('norskprove', 'Norskprøve'),
+    ('bergenstest', 'Bergenstest'),
+
+    # 🇩🇰 Danish Language Proficiency
+    ('prove_dansk_1_2_3', 'Prøve i Dansk 1, 2, 3'),
+    ('studieproven', 'Studieprøven'),
+
+    # 🇮🇸 Icelandic Language Proficiency
+    ('islandic_test', 'Íslenskupróf fyrir útlendinga'),
+
+    # 🇵🇱 Polish Language Proficiency
+    ('polish_certificate', 'Państwowy Egzamin Certyfikatowy z Języka Polskiego'),
+
+    # 🇬🇷 Greek Language Proficiency
+    ('greek_certificate', 'ΚΠγ'),
+
+    # 🇨🇿 Czech Language Proficiency
+    ('czech_cce', 'CCE'),
+    ('czech_cce_foreigners', 'CCE – Czech for Foreigners'),
+
+    # 🇭🇺 Hungarian Language Proficiency
+    ('hungarian_ecl', 'ECL Hungarian'),
+    ('hungarian_origo', 'Origó'),
+
+    # 🇷🇴 Romanian Language Proficiency
+    ('romanian_ecl', 'ECL Romanian'),
+    ('romanian_certificate', 'Romanian Language Proficiency Certificate'),
+
+    # 🇧🇬 Bulgarian Language Proficiency
+    ('bulgarian_certificate', 'Bulgarian Language Proficiency Exam'),
+]
+TEACHING_YEARS = [
+    (0, 'Less than 1 year'),
+    (1, '1-2 years'),
+    (2, '3-5 years'),
+    (3, '6-10 years'),
+    (4, 'More than 10 years')
+]
+
+
+class TeachingCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+# Detailed Teaching Categories
+class SubTeachingCategory(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    teaching_category = models.ForeignKey(TeachingCategory, on_delete=models.CASCADE,
+                                          related_name="sub_teaching_categories")
+
+    def __str__(self):
+        return f"{self.teaching_category.name} → {self.name}"
 
 
 class Tutor(models.Model):
@@ -33,6 +174,8 @@ class Tutor(models.Model):
     session_count = models.IntegerField(default=0)
     student_count = models.IntegerField(default=0)
     course_count = models.IntegerField(default=0)
+    years_experience = models.PositiveSmallIntegerField(null=True, blank=True, choices=TEACHING_YEARS)
+    teaching_categories = models.ManyToManyField(SubTeachingCategory, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)  # Use auto_now_add
     # rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
     # create_date = models.DateTimeField(default=datetime.now) # Use auto_now_add
@@ -71,34 +214,7 @@ class Tutor(models.Model):
         return True  # No deadline means the discount is always active
 
 
-# Provider Notification
-class PNotification(models.Model):
-    provider = models.ForeignKey(Tutor, on_delete=models.SET_NULL, null=True, blank=True)
-    appointment = models.ForeignKey('ap2_meeting.Session', on_delete=models.CASCADE, null=True, blank=True,
-                                    related_name='tutor_appointment_notification')
-    type = models.CharField(max_length=50, choices=NOTIFICATION_TYPE)
-    seen = models.BooleanField(default=False)
-    date = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name_plural = 'Notification'
-
-    def __str__(self):
-        return f'Tutor: {self.provider.profile.user.first_name} {self.provider.profile.user.last_name} Notification'
-
-
 class ProviderApplication(models.Model):
-    STATUS_CHOICES = [
-        ('pending', 'Pending'),
-        ('invited', 'Invited'),
-        ('registered', 'Registered'),
-        ('completed_profile', 'Completed Profile'),
-        ('added_skills', 'Added Skills'),
-        ('scheduled', 'Scheduled'),
-        ('decision', 'Decision'),
-        ('accepted', 'Accepted'),
-        ('rejected', 'Rejected'),
-    ]
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True,
                                 related_name='provider_application')
     photo = models.ImageField(upload_to='applicants/photos/%Y/%m/%d/', blank=True, null=True,
@@ -122,7 +238,7 @@ class ProviderApplication(models.Model):
     timezone = models.CharField(max_length=50, choices=TIMEZONE_CHOICES, default="UTC")
     location_ip = models.CharField(max_length=50, blank=True, null=True, )
     date_submitted = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=20, choices=STATUS_WIZARD, default='pending')
     invitation_token = models.CharField(max_length=100, blank=True, null=True, unique=True)
     token_expiry = models.DateTimeField(blank=True, null=True)
 
@@ -136,3 +252,89 @@ class ProviderApplication(models.Model):
     #             name='unique_applicant_email'
     #         )
     #     ]
+
+
+# Provider Notification
+class PNotification(models.Model):
+    provider = models.ForeignKey(Tutor, on_delete=models.SET_NULL, null=True, blank=True)
+    appointment = models.ForeignKey('ap2_meeting.Session', on_delete=models.CASCADE, null=True, blank=True,
+                                    related_name='tutor_appointment_notification')
+    type = models.CharField(max_length=50, choices=NOTIFICATION_TYPE)
+    seen = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Notification'
+
+    def __str__(self):
+        return f'Tutor: {self.provider.profile.user.first_name} {self.provider.profile.user.last_name} Notification'
+
+
+# ---------------------------------------------------------------------
+
+
+class DegreeLevel(models.Model):
+    """Predefined degree levels (BA, BSc, MA, MSc, PhD, etc.)"""
+    name = models.CharField(max_length=50)
+    order = models.PositiveSmallIntegerField(help_text="For sorting purposes")
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+
+class Education(models.Model):
+    """Tutor's formal education entries"""
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='educations')
+    degree = models.ForeignKey(DegreeLevel, on_delete=models.PROTECT)
+    field_of_study = models.CharField(max_length=100)
+    institution = models.CharField(max_length=150)
+    start_year = models.PositiveIntegerField(
+        validators=[MinValueValidator(1950), MaxValueValidator(2100)],
+        null=True,
+        blank=True
+    )
+    end_year = models.PositiveIntegerField(
+        validators=[MinValueValidator(1950), MaxValueValidator(2100)]
+    )
+    description = models.TextField(blank=True)
+    diploma = models.FileField(
+        upload_to='educations/diplomas/',
+        null=True,
+        blank=True,
+        help_text="Upload diploma or certificate"
+    )
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-end_year']
+        verbose_name_plural = 'Education Entries'
+
+    def __str__(self):
+        return f"{self.degree} in {self.field_of_study} at {self.institution}"
+
+
+class TeachingCertificate(models.Model):
+    """Tutor's teaching certifications (TEFL, TESOL, etc.)"""
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='certificates')
+    name = models.CharField(max_length=100, choices=TEACHING_CERTIFICATES, blank=False)
+    issuing_organization = models.CharField(max_length=150)
+    completion_date = models.DateField()
+    certificate_file = models.FileField(
+        upload_to='educations/certificates/',
+        null=True,
+        blank=True
+    )
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-completion_date']
+
+    def __str__(self):
+        return f"{self.name} from {self.issuing_organization}"

@@ -92,16 +92,16 @@
 
 
     {% block embed_style %}{% endblock %}
-    {% block embed_script_inHead %}{% endblock %}
     {% block my_style %}{% endblock %}
+    {% block embed_script_inHead %}{% endblock %}
 </head>
 
 <body>
 <!-- Pre loader -->
 <div class="preloader">
-	<div class="preloader-item">
-		<div class="spinner-grow text-primary"></div>
-	</div>
+    <div class="preloader-item">
+        <div class="spinner-grow text-primary"></div>
+    </div>
 </div>
 {% include 'app_pages/includes/header.html' %}
 
@@ -119,9 +119,9 @@
     <section class="pt-0">
         <div class="container">
             <div class="row">
-{#                {% if user.profile.is_active %}#}
-{#                    {% include 'ap2_tutor/dashboard/includes/dt_sidebar.html' %}#}
-{#                {% endif %}#}
+                {#                {% if user.profile.is_active %}#}
+                {#                    {% include 'ap2_tutor/dashboard/includes/dt_sidebar.html' %}#}
+                {#                {% endif %}#}
                 {% block embed_messages2 %}{% endblock %}
                 {% block dashboard_main_content %}{% endblock %}
             </div><!-- Row END -->
@@ -153,7 +153,7 @@
 <!-- Include jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>#}
 <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
 

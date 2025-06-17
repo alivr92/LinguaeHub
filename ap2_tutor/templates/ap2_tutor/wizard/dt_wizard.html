@@ -19,132 +19,14 @@
     {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">#}
 {% endblock %}
 {% block embed_style %}
-    <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/client/css/reservation.css' %}">
-    <style>
-        .confirmation-card {
-        {#max-width: 600px;#} margin: 80px auto;
-            border-radius: 10px;
-        }
-        .confirmation-icon {
-            font-size: 60px;
-            color: #28a745;
-        }
-
-        /* Fix spacing in stepper */
-        .bs-stepper-content .content {
-            padding-top: 0;
-            margin-top: 0;
-        }
-
-        .bs-stepper-content .content h4 {
-            margin-bottom: 0.5rem;
-        }
-
-        .bs-stepper-content .content hr {
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Review section styles */
-        .confirmation-card {
-            margin-top: 1rem;
-            border-radius: 0.5rem;
-        }
-
-        /* step 6 final decision */
-        .application-status-card {
-            border-left: 6px solid transparent;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .status-accepted {
-            border-color: #28a745;
-        }
-
-        .status-rejected {
-            border-color: #dc3545;
-        }
-
-        .status-review {
-            border-color: #6f42c1;
-        }
-
-        .status-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-icon {
-            font-size: 2rem;
-        }
-
-    </style>
+{#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/client/css/reservation.css' %}">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/stepper.css' %}">
 {% endblock %}
-
-{% block my_style %}
-    <style>
-        #steppertrigger1 {
-            pointer-events: none;
-            cursor: default;
-            color: white;
-        }
-
-        .bs-stepper-circle.completed-step {
-            background-color: #28a745 !important;
-        {#background-color: #198754 !important; //bootstrap success green color #}
-        }
-
-        .completed-step {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .is-invalid {
-            border-color: #dc3545;
-        }
-
-        .invalid-feedback {
-            color: #dc3545;
-            font-size: 0.875em;
-            margin-top: 0.25rem;
-        }
-
-        /*step 3: teaching skills | overflow dropdown boxes */
-        /* Fix dropdown overflow */
-        .table-responsive {
-            overflow: visible !important;
-        }
-
-        #skills-table {
-            position: relative;
-        }
-
-        .choices__list--dropdown {
-            position: absolute !important;
-            z-index: 9999 !important;
-            width: auto !important;
-            min-width: 100% !important;
-        }
-
-        .choices__list--dropdown .choices__list {
-            max-height: 300px;
-            overflow-y: auto !important;
-            text-align: left !important;
-        }
-
-        {#.choices__list--dropdown .choices__item {#}
-        {#    text-align: left !important;#}
-        {# }#}
-
-
-    </style>
-
+{% block embed_script_inHead %}
+     {#    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>#}
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
 {% endblock %}
+{% block my_style %}{% endblock %}
 
 {% block dashboard_main_content %}
     <!-- =======================
@@ -170,7 +52,9 @@
 
     <input type="hidden" id="currentStep" value="{{ current_step }}">
     <input type="hidden" id="applicantUId" value="{{ applicantUId }}">
+    <input type="hidden" id="isVIP" value="{{ isVIP }}">
     <p>Current Step: {{ current_step }}</p>
+    <p>isVIP: {{ isVIP }}</p>
 
 
     <div class="card bg-transparent border rounded-3 mb-5">
@@ -184,10 +68,10 @@
                         <div class="d-grid text-center align-items-center">
                             <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
                                     id="steppertrigger1" aria-controls="step-1">
-                                        <span class="bs-stepper-circle completed-step bg-success text-white d-flex justify-content-center align-items-center">
+                                        <span class="bs-stepper-circle completed-step  text-white d-flex justify-content-center align-items-center">
                                             <i class="bi bi-check" style="font-size: 2rem;"></i></span>
                             </button>
-                            <h6 class="bs-stepper-label d-none d-md-block">Primitive application</h6>
+                            <h6 class="bs-stepper-label d-none d-md-block">Primitive Request</h6>
                         </div>
                     </div>
                     <div class="line"></div>
@@ -200,7 +84,7 @@
                                     id="steppertrigger2" aria-controls="step-2">
                                 <span class="bs-stepper-circle">2</span>
                             </button>
-                            <h6 class="bs-stepper-label d-none d-md-block">Profile Setup</h6>
+                            <h6 class="bs-stepper-label d-none d-md-block">Basic Profile</h6>
                         </div>
                     </div>
                     <div class="line"></div>
@@ -224,7 +108,7 @@
                                     id="steppertrigger4" aria-controls="step-4">
                                 <span class="bs-stepper-circle">4</span>
                             </button>
-                            <h6 class="bs-stepper-label d-none d-md-block">Review and Submit</h6>
+                            <h6 class="bs-stepper-label d-none d-md-block">Education</h6>
                         </div>
                     </div>
                     <div class="line"></div>
@@ -235,6 +119,18 @@
                             <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
                                     id="steppertrigger5" aria-controls="step-5">
                                 <span class="bs-stepper-circle">5</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Review and Submit</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 6 -->
+                    <div class="step" data-target="#step-6">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger6" aria-controls="step-6">
+                                <span class="bs-stepper-circle">6</span>
                             </button>
                             <h6 class="bs-stepper-label d-none d-md-block">Result</h6>
                         </div>
@@ -252,7 +148,7 @@
                     <!-- Step 1 content START -->
                     <div id="step-1" role="tabpanel" class="content fade" aria-labelledby="steppertrigger1">
                         <!-- Title -->
-                        <h4>Primitive application</h4>
+                        <h4>Primitive Request</h4>
                         <hr> <!-- Divider -->
 
                         <!-- Basic information START -->
@@ -260,7 +156,6 @@
                             <p class="d-flex justify-content-center align-items-center">
                                 <span class="bs-stepper-circle completed-step bg-success text-white d-flex justify-content-center align-items-center">
                                             <i class="bi bi-check" style="font-size: 2rem;"></i></span></p>
-
                             <p class="text-center">
                                 You have accepted in primitive submission, keep going and complete your profile.
                             </p>
@@ -276,8 +171,8 @@
                     <!-- Step 2 content START -->
                     <div id="step-2" role="tabpanel" class="content fade" aria-labelledby="steppertrigger2">
                         <!-- Title -->
-                        <h4><i class="bi bi-person-circle text-primary"></i> Full personal & public details</h4>
-                        <hr> <!-- Divider -->
+{#                        <h4><i class="bi bi-person-circle text-primary"></i> Full personal & public details</h4>#}
+{#                        <hr> <!-- Divider -->#}
                         <div class="row">
                             <div class="col-12 col-xl-12">
                                 {% include 'ap2_tutor/wizard/includes/w_step2_basic_profile.html' %}
@@ -289,53 +184,45 @@
                     <!-- Step 3 content Teaching Skill START -->
                     <div id="step-3" role="tabpanel" class="content fade" aria-labelledby="steppertrigger3">
                         <!-- Title -->
-                        <h4><i class="bi bi-globe text-primary"></i> Select skills, upload certificate/video</h4>
-                        <hr> <!-- Divider -->
-                        <div class="row">
-
-                            <!-- Session selection container -->
-                            <div class="col-12 col-xl-12">
-                                <div class="alert alert-info m-2">
-                                    <i class="bi bi-info-circle me-2"></i>
-                                    Enable skills and set the maximum teaching level for each (A1-C2)
-                                </div>
-                                <!-- Content -->
-                                {% include 'ap2_tutor/wizard/includes/w_step3_skills.html' %}
-
-                                <!-- Step 3 button -->
-                                <div class="d-flex justify-content-between">
-                                    <button class="btn btn-secondary prev-btn mb-0">Previous</button>
-                                    {#                                                    <button class="btn btn-primary next-btn mb-0">Next</button>#}
-                                    {#                                                    <button class="btn btn-primary mb-0"  aria-label="Submit and continue">Next</button>#}
-                                    <button type="submit" id="btnSubmitSkills"
-                                            class="btn btn-primary mb-0"
-                                            aria-label="Submit and continue">Next
-                                    </button>
-                                    {#                                                    <a id="btnNextSchedule" href="#" class="btn btn-primary ">Next</a>#}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Step 3 content Teaching Skill END -->
+{#                        <h4><i class="bi bi-globe text-primary"></i> Select skills, upload certificate/video</h4>#}
+{#                        <hr> <!-- Divider -->#}
+                        <!-- Content -->
+{#                        {% include 'ap2_tutor/wizard/includes/w_step3_skills.html' %}#}
+                        {% include 'ap2_tutor/wizard/includes/w_step3_skills_mixed.html' %}
+{#                        {% include 'ap2_tutor/wizard/includes/step3_deepseek.html' %}#}
                     </div>
+                    <!-- Step 3 content END -->
 
-                    <!-- Step 4: Review & Submit -->
+                    <!-- Step 4: Education -->
                     <div id="step-4" role="tabpanel" class="content fade" aria-labelledby="steppertrigger4">
                         <!-- Title -->
-                        <h4><i class="bi bi-clipboard-check text-primary"></i>Final confirmation</h4>
-                        <hr> <!-- Divider -->
+{#                        <h4 class="fw-bold"><i class="bi bi-clipboard-check text-primary"></i>Education Qulifications#}
+{#                        </h4>#}
+{#                        <hr> <!-- Divider -->#}
                         <!-- Content -->
-                        {% include 'ap2_tutor/wizard/includes/w_step4_review.html' %}
+                        {% include 'ap2_tutor/wizard/includes/w_step4_education.html' %}
                     </div>
 
-                    <!-- Step 5 content START -->
+                    <!-- Step 5: Review & Submit -->
                     <div id="step-5" role="tabpanel" class="content fade" aria-labelledby="steppertrigger5">
+                        <!-- Title -->
+{#                        <h4 class="fw-bold"><i class="bi bi-clipboard-check text-primary"></i>Final confirmation (Review#}
+{#                            and Submit Your Application)</h4>#}
+{#                        <hr> <!-- Divider -->#}
+                        <!-- Content -->
+{#                        {% include 'ap2_tutor/wizard/includes/w_step5_review.html' %}#}
+                        {% include 'ap2_tutor/wizard/includes/step5_deepseek.html' %}
+                    </div>
+
+                    <!-- Step 6 content START -->
+                    <div id="step-6" role="tabpanel" class="content fade" aria-labelledby="steppertrigger6">
                         <!-- Title -->
                         <h4><i class="bi bi-bar-chart-line text-primary"></i> Application Status</h4>
                         <hr> <!-- Divider -->
                         <!-- Content -->
-                        {% include 'ap2_tutor/wizard/includes/w_step5_result.html' %}
+                        {% include 'ap2_tutor/wizard/includes/w_step6_result.html' %}
                     </div>
-                    <!-- Step 5 content END -->
+                    <!-- Step 6 content END -->
                 </div>
                 <!-- Card body END -->
             </div>
@@ -349,7 +236,7 @@
 {% block dt_modal %}
     {#    {% include 'ap2_meeting/client/client_modals.html' %}#}
 
-    <!-- Modal for PDF -->
+    <!-- Modal for PDF  ????-->
     <div class="modal fade" id="certModal{{ skill.id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
@@ -365,13 +252,95 @@
         </div>
     </div>
 
+    <!-- Video Guidelines Modal -->
+<div class="modal fade" id="videoGuidelinesModal" tabindex="-1" aria-labelledby="videoGuidelinesModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoGuidelinesModalLabel"><i class="bi bi-camera-video me-2"></i>Video
+                    Guidelines</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info bg-light border-0">
+                    <div class="d-flex">
+                        <i class="bi bi-lightbulb-fill text-warning me-3 mt-1"></i>
+                        <div>
+                            <p class="mb-1"><strong>Great introduction videos get more students</strong></p>
+                            <p class="mb-0">Follow these tips to create an effective video.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Do:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Introduce yourself and your teaching experience</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Speak clearly in each language you teach</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Show your personality and teaching style</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Keep it between 1-3 minutes</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-x-circle-fill text-danger me-2"></i>Don't:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Read from a script (be natural)</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Include background noise or distractions</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Upload low-quality or blurry videos</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Exceed 100MB file size</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h6 class="fw-bold"><i class="bi bi-film me-2"></i>Technical Requirements:</h6>
+                    <ul class="list-inline">
+                        <li class="list-inline-item badge bg-light text-dark me-2">MP4 format</li>
+                        <li class="list-inline-item badge bg-light text-dark me-2">Max 100MB</li>
+                        <li class="list-inline-item badge bg-light text-dark me-2">16:9 aspect ratio</li>
+                        <li class="list-inline-item badge bg-light text-dark">720p resolution or higher</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
 
 {% block scripts_vendors %}
     <!-- Vendors -->
-    {#    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>#}
-    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+
     <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
     <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
     <script src="{% static 'assets/vendor/quill/js/quill.min.js' %}"></script>
@@ -380,50 +349,11 @@
 {% endblock %}
 {% block my_scripts %}
     <script src="{% static 'assets/js/avr_set_profile_photo.js' %}"></script>
-    <script src="{% static 'assets/js/avr.js' %}"></script>
-    {#    <script src="{% static 'ap2_tutor/assets/js/wizard_stepper.js' %}"></script>#}
-    <script src="{% static 'ap2_tutor/assets/js/skill_adder.js' %}"></script>
-
-
-    <script type="module">
-        // ----------------------  Control Action Buttons ----------------------
-        {#document.addEventListener('DOMContentLoaded', function () {#}
-        {#    console.log('#just Loaded!');#}
-        {#    // Add new skill row#}
-        {#    addBtn.addEventListener('click', function () {#}
-        {#        const currentRows = table.querySelectorAll('tbody tr:not(#newSkillRow)');#}
-        {#        if (currentRows.length >= 5) {#}
-        {#            const alert = modal.querySelector('#skillLimitAlert');#}
-        {#            if (alert) alert.classList.remove('d-none');#}
-        {#            return;#}
-        {#        }#}
-        {##}
-        {#        const newRow = modal.querySelector('#newSkillRow').cloneNode(true);#}
-        {#        newRow.style.display = '';#}
-        {#        newRow.removeAttribute('id');#}
-        {##}
-        {#        // Enable all elements#}
-        {#        newRow.querySelectorAll('input, select').forEach(el => {#}
-        {#            el.disabled = false;#}
-        {#        });#}
-        {##}
-        {#        // Add toggle functionality to new row#}
-        {#        const toggle = newRow.querySelector('.form-check-input');#}
-        {#        if (toggle) {#}
-        {#            toggle.addEventListener('change', function () {#}
-        {#                const select = newRow.querySelector('.level-select');#}
-        {#                if (select) {#}
-        {#                    select.disabled = !this.checked;#}
-        {#                    if (!this.checked) select.value = '';#}
-        {#                }#}
-        {#            });#}
-        {#        }#}
-        {##}
-        {#        table.querySelector('tbody').appendChild(newRow);#}
-        {#        updateAddButton();#}
-        {#    });#}
-        {##}
-        {##}
-        {# });#}
-    </script>
+    <script src="{% static 'assets/js/avr.js' %}" type="module"></script>
+    <!------------------------ Wizard Stepper Scripts ------------------------>
+    <script src="{% static 'ap2_tutor/assets/js/wizard/wizard.js' %}" type="module"></script>
+{#    <script src="{% static 'ap2_tutor/assets/js/wizard/step3_skills.js' %}" type="module"></script>#}
+    <script src="{% static 'ap2_tutor/assets/js/wizard/step3_skills_new.js' %}" type="module"></script>
+    <script src="{% static 'ap2_tutor/assets/js/wizard/step4_edu.js' %}" type="module"></script>
+{#    <script src="{% static 'ap2_tutor/assets/js/wizard/step5_review.js' %}" type="module"></script>#}
 {% endblock %}

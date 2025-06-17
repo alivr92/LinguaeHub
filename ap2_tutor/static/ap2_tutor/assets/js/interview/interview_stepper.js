@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // --------------------------------------------
+    // | Step 1: Done (Primitive application)     |
+    // | Step 2: Basic Profile                    |
+    // | Step -: Teaching Skill ( -- Not set --)  |
+    // | Step -: Education      ( -- Not set --)  |
+    // | Step 3: Schedule                         |
+    // | Step 4: Review and submit                |
+    // | Step 5: Result (Decision)                |
+    // | Step 6: Accepted (Approved)              |
+    // | Step 7: Rejected (Declined)              |
+    // --------------------------------------------
+
+
     // Initialize the stepper
     const stepperElement = document.querySelector('.bs-stepper');
     const stepper = new Stepper(stepperElement, {
@@ -48,18 +61,16 @@ document.addEventListener('DOMContentLoaded', function () {
         // }
 
         if (stepValue === 6 || stepValue === 7) {
-            stepValue = 5;
+            stepValue = 5; // keep in step 6 : "Result"
             completedSteps.add(6);
             updateStepVisuals();
         }
-
 
         // Hide all content divs
         document.querySelectorAll('.bs-stepper-content .content').forEach(content => {
             content.classList.remove('active', 'show', 'd-block');
             content.style.display = 'none';
         });
-
 
         // Mark previous steps as completed by for loop
         for (let i = 1; i <= stepValue; i++) {
@@ -325,21 +336,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Navigation button handlers
-    document.addEventListener('click', function (e) {
-        // Next button handler
-        if (e.target.classList.contains('next-btn')) {
-            e.preventDefault();
-            goToStep(currentStep + 1);
-        }
+    // document.addEventListener('click', function (e) {
+    //     // Next button handler
+    //     if (e.target.classList.contains('btn-next')) {
+    //         e.preventDefault();
+    //         console.log('btn-next clicked!');
+    //         goToStep(currentStep + 1);
+    //     }
+    //
+    //     // Previous button handler
+    //     if (e.target.classList.contains('btn-prev')) {
+    //         e.preventDefault();
+    //         console.log('btn-prev clicked!');
+    //         goToStep(currentStep - 1);
+    //     }
+    // });
 
-        // Previous button handler
-        if (e.target.classList.contains('prev-btn')) {
-            e.preventDefault();
-            goToStep(currentStep - 1);
-        }
-    });
-
-    // Fix the space between title and content
+    // Fix the space between title and content ---------CHECK ?!!!
     function fixContentSpacing() {
         document.querySelectorAll('.content').forEach(content => {
             const title = content.querySelector('h4');
@@ -475,8 +488,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //-------------------------------------------------------------------------------------------------
 
     // Initialize everything
-    // initializeToStep2();
     initializeStepper();
     disableHeaderNavigation();
-    fixContentSpacing();
+    // fixContentSpacing();
 });

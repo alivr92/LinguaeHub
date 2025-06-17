@@ -83,3 +83,21 @@ function showBootstrapAlert(message, type = 'info', timeOut, btnCross = true) {
     }
 
 }
+
+export function showBootstrapAlert2(message, type = 'success', duration = 3000) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
+    alertDiv.style.zIndex = '1050';
+    alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+    document.body.appendChild(alertDiv);
+
+    if (duration) {
+        setTimeout(() => {
+            alertDiv.remove();
+        }, duration);
+    }
+}

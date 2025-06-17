@@ -1,5 +1,6 @@
 from django.contrib import admin
-from ap2_tutor.models import Tutor, PNotification, ProviderApplication
+from ap2_tutor.models import (Tutor, PNotification, ProviderApplication, DegreeLevel, Education, TeachingCertificate,
+                              TeachingCategory, SubTeachingCategory, )
 from django.utils.html import format_html
 
 
@@ -39,3 +40,25 @@ class PNotificationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PNotification, PNotificationAdmin)
+
+
+# @admin.register(DegreeLevel)
+
+@admin.register(TeachingCategory)
+class TeachingCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(SubTeachingCategory)
+class SubTeachingCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'teaching_category')
+
+
+@admin.register(TeachingCertificate)
+class TeachingCertificateAdmin(admin.ModelAdmin):
+    list_display = ('tutor', 'name', 'issuing_organization', 'is_verified',)
+
+
+@admin.register(Education)
+class EducationAdmin(admin.ModelAdmin):
+    list_display = ('tutor', 'degree', 'field_of_study', 'institution', 'start_year', 'end_year', 'is_verified')

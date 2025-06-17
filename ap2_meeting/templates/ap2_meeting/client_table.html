@@ -96,7 +96,7 @@
     {% if 'dashboard' in request.path %}
         <input type="hidden" id="providerUId" value="{{ request.user.pk }}">
     {% elif 'interview' in request.path %}
-        <input type="hidden" id="providerUId" value="{{ interviewerUId }}">
+        <input type="hidden" id="providerUId" value="{{ reviewerUId }}">
         <input type="hidden" id="isInterview" value="True">
     {% else %}
         <input type="hidden" id="providerUId" value="{{ tutor_single.id }}">

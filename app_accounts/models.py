@@ -512,7 +512,8 @@ class Skill(models.Model):
         ordering = ['category__name', 'name']
 
     def __str__(self):
-        return f"{self.category.name} – {self.get_name_display()}"
+        # return f"{self.category.name} – {self.get_name_display()}"
+        return f"{self.get_name_display()}"
 
 
 class Level(models.Model):
@@ -550,7 +551,7 @@ class UserSkill(models.Model):
     is_certified = models.BooleanField(default=False)
     is_notified = models.BooleanField(default=False)
     status = models.CharField(max_length=20, choices=SKILL_STATUS_CHOICES, default='pending')
-    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='verifyed_by',
+    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='skill_verifyed_by',
                                     null=True, blank=True, )
     verified_at = models.DateTimeField(null=True, blank=True)
     needs_interview = models.BooleanField(default=False)
@@ -576,6 +577,36 @@ class UserSpecialization(models.Model):
 
     def __str__(self):
         return f'{self.user.username} - {self.specialization.name}'
+
+
+class UserEducation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='educations')
+    degree = models.CharField(max_length=100)  # e.g., BA, BSc, MA, PhD
+    field_of_study = models.CharField(max_length=100)  # e.g., Linguistics, English
+    institution = models.CharField(max_length=200)
+    graduation_year = models.PositiveIntegerField(
+        validators=[MinValueValidator(1900), MaxValueValidator(timezone.now().year)])
+    document = models.FileField(
+        upload_to='applicants/education/%Y/%m/%d/',
+        null=True,
+        blank=True,
+        validators=[FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS_CERTIFICATE)],
+    )
+    is_certified = models.BooleanField(default=False)
+    is_notified = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=SKILL_STATUS_CHOICES, default='pending')
+    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='edu_verifyed_by',
+                                    null=True, blank=True, )
+    verified_at = models.DateTimeField(null=True, blank=True)
+    needs_interview = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-graduation_year']
+        verbose_name = 'Education Record'
+        verbose_name_plural = 'Education Records'
+
+    def __str__(self):
+        return f"{self.user.username} – {self.degree} in {self.field_of_study} ({self.graduation_year})"
 
 
 class UserProfile(models.Model):

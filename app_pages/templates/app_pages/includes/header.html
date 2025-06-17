@@ -35,7 +35,6 @@
                 <ul class="navbar-nav navbar-nav-scroll me-auto">
 
 
-
                 </ul>
                 <!-- Nav Main menu END -->
 
@@ -94,6 +93,17 @@
                                     class="nav-link"
                                 {% endif %}
                                     href="{% url 'blog:home' %}" id="menu-tutor" aria-expanded="false">Blog</a>
+                    </li>
+
+                    <!-- Nav item Shop-->
+                    <li class="nav-item">
+                        <a
+                                {% if 'product' in request.path %}
+                                    class="nav-link active text-primary"
+                                {% else %}
+                                    class="nav-link"
+                                {% endif %}
+                                    href="{% url 'shop:products' %}" id="menu-shop" aria-expanded="false">Shop</a>
                     </li>
 
                     <!-- Nav item 5 Account -->
@@ -259,8 +269,105 @@
                     </div>
                 </div>
                 <!-- Nav Search END -->
+
+
             </div>
             <!-- Main navbar END -->
+
+            {% if 'shop' in request.path %}
+                <!-- Cart dropdown START -->
+                <div class="me-2 me-md-3 dropdown">
+                    <!-- Cart button -->
+                    <a class="btn btn-light btn-round mb-0" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false" data-bs-auto-close="outside">
+                        <i class="bi bi-cart3 fa-fw"></i>
+                    </a>
+                    <!-- badge -->
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-dark mt-xl-2 ms-n1">2
+					<span class="visually-hidden">unread messages</span>
+				</span>
+
+                    <!-- Cart dropdown menu START -->
+                    <div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0">
+                        <div class="card bg-transparent">
+                            <div class="card-header bg-transparent border-bottom py-4">
+                                <h5 class="m-0">Cart items</h5>
+                            </div>
+                            <div class="card-body p-0">
+
+                                <!-- Cart item START -->
+                                <div class="row p-3 g-2">
+                                    <!-- Image -->
+                                    <div class="col-3">
+                                        <img class="rounded-2" src="{% static 'assets/images/book/02.jpg' %}"
+                                             alt="avatar">
+                                    </div>
+
+                                    <div class="col-9">
+                                        <!-- Title -->
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="m-0">Angular 4 Tutorial in audio (Compact Disk)</h6>
+                                            <a href="#" class="small text-primary-hover"><i class="bi bi-x-lg"></i></a>
+                                        </div>
+                                        <!-- Select item -->
+                                        <form class="choices-sm pt-2 col-4">
+                                            <select class="form-select js-choice border-0 bg-transparent"
+                                                    data-search-enabled="false">
+                                                <option>1</option>
+                                                <option selected>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Cart item END -->
+
+                                <!-- Divider -->
+                                <hr class="m-0">
+
+                                <!-- Cart item START -->
+                                <div class="row p-3 g-2">
+                                    <!-- Image -->
+                                    <div class="col-3">
+                                        <img class="rounded-2" src="{% static 'assets/images/book/04.jpg' %}"
+                                             alt="avatar">
+                                    </div>
+
+                                    <div class="col-9">
+                                        <!-- Title -->
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="m-0">The Principles of Beautiful Graphics Design (Paperback)</h6>
+                                            <a href="#" class="small text-primary-hover"><i class="bi bi-x-lg"></i></a>
+                                        </div>
+                                        <!-- Select item -->
+                                        <form class="choices-sm pt-2 col-4">
+                                            <select class="form-select js-choice border-0 bg-transparent"
+                                                    data-search-enabled="false">
+                                                <option selected>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Cart item END -->
+
+                            </div>
+                            <!-- Button -->
+                            <div class="card-footer bg-transparent border-top py-3 text-center d-flex justify-content-between position-relative">
+                                <a href="#" class="btn btn-sm btn-light mb-0">View Cart</a>
+                                <a href="#" class="btn btn-sm btn-success mb-0">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cart dropdown menu END -->
+                </div>
+                <!-- Cart dropdown END -->
+            {% endif %}
 
             <!-- Profile START -->
             {% if user.is_authenticated %}

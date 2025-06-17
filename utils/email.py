@@ -60,7 +60,7 @@ def notification_email_to_admin(subject, template_name, context, from_email=None
 
 
 # CHECK_BEFORE_RELEASE
-def send_invitation_email_DELETE(full_name, to_email):
+def invitation_email_DELETE(full_name, to_email):
     # Define the subject, body, and other details
     subject = f"Congratulation {full_name}, your application has been accepted."
 
@@ -110,6 +110,46 @@ def send_invitation_email_DELETE(full_name, to_email):
 
     # Specify that the content is HTML
     email_message.content_subtype = 'html'
+
+    # Send the email
+    email_message.send(fail_silently=False)
+
+
+def notification_formatted_email(subject, template_name, context, photo, resume_file, from_email=None, to_email=None):
+    """
+       Send email with HTML and attached files (photo and file).
+
+       Args:
+           subject (str): Subject of the email
+           template_name (str): Base name of the template (e.g., 'emails/tutor_accepted')
+           context (dict): Context to render in both templates
+           from_email (str): Optional; defaults to settings.EMAIL_HOST_USER
+           to_email (str or list): Recipient email(s)
+           photo (file): file of attached photo
+           resume_file (file): file of attached resume
+    """
+
+    from_email = from_email or settings.EMAIL_HOST_USER
+    to_email = to_email or settings.EMAIL_ADMIN_USER
+
+    html_content = render_to_string(f'{template_name}.html', context)
+
+    # Set up the email
+    email_message = EmailMessage(
+        subject,
+        html_content,  # Message content
+        from_email,  # From email
+        [to_email]  # To email
+    )
+
+    # Specify that the content is HTML
+    email_message.content_subtype = 'html'
+
+    # Attach the photo and resume files
+    if photo:
+        email_message.attach(photo.name, photo.read(), photo.content_type)
+    if resume_file:
+        email_message.attach(resume_file.name, resume_file.read(), resume_file.content_type)
 
     # Send the email
     email_message.send(fail_silently=False)

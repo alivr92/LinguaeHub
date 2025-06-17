@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 import pytz
 from app_accounts.models import UserProfile
 from ap2_meeting.models import Review, AppointmentSetting, Session
-from ap2_tutor.models import Tutor, ProviderApplication
+from ap2_tutor.models import Tutor, ProviderApplication, STATUS_WIZARD
 from ap2_student.models import Student
 from app_pages.models import ContactUs
 from app_accounts.models import Level, UserSkill, Skill, LEVEL_CHOICES, SKILL_STATUS_CHOICES
@@ -224,7 +224,8 @@ class DAProviderRequest(LoginRequiredMixin, RoleRequiredMixin, ListView):
         context['current_search'] = self.search_query
 
         # Add all status choices for the filter dropdown
-        context['status_choices'] = ProviderApplication.STATUS_CHOICES
+        # context['status_choices'] = ProviderApplication.STATUS_CHOICES
+        context['status_choices'] = STATUS_WIZARD
         context['all_skills'] = Skill.objects.all()
         context['LEVEL_CHOICES'] = LEVEL_CHOICES
         context['SKILL_STATUS_CHOICES'] = SKILL_STATUS_CHOICES

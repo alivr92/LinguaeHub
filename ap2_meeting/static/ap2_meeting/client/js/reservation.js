@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const tableHead = document.querySelector('#schedule-table thead tr');
     const tableBody = document.querySelector('#schedule-table tbody');
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
     const btnSubmit = document.getElementById('btnSubmit');
     const clearButton = document.getElementById('clear-button');
     // const tutorId = document.getElementById('tutor_id').value;
@@ -63,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userTimezone = timezoneSelect.value;
         generateTableHeader(startDate);
         generateTableBody();
-        showBootstrapAlert(`Note: Calendar is showing based on ${userTimezone} time zone.`, 'primary', 5000);
+        showBootstrapAlert(`Note: Calendar is showing based on ${userTimezone} time zone.`, 'info', 5000);
     });
 
     // Helper function to convert UTC time to local time

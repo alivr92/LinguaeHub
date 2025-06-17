@@ -5,204 +5,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm&quot;">
-      <change afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/client/client_modals.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/client/client_reserve.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/client_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/provider/p_manual.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/provider/p_manual_popup.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/interview_stepper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard_stepper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_interview_ARCHIVED.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step2_basic_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step4_order_confirmation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step6_result.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_banner.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_review.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_result.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/validators.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/interview/da_interview.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/logo_black2_gold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/js/avr_set_profile_photo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/admin/interview_notify_scheduled.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/admin/interview_notify_scheduled.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/admin/notify_admin.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/admin/notify_admin.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/DEL_primitive_invitation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/DEL_primitive_invitation.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/decision/final_accept.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/decision/final_accept.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/decision/final_reject.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/decision/final_reject.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/decision/update_skills.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/decision/update_skills.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/primitive_invitation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/primitive_invitation.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/reminder_10m.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/reminder_10m.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/reminder_1h.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/reminder_1h.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/success_after_schedule.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/success_after_schedule.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/tutor_request_pending.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/interview/tutor_request_pending.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pages/errors/error.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pages/errors/error2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pages/errors/error_404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/converters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/email.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/mixins.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/pages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup2_ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_new.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard_cursor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/dt_interview_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step3_deepseek.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step5_deepseek.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills_mixed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_education.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/templates/app_shop/cart.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/templates/app_shop/checkout.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/templates/app_shop/shop-product-detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/templates/app_shop/shop.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/emails/notification/notif_with_attachment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/decorators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinguaeHub/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinguaeHub/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LinguaeHub/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0002_auto_20250129_1313.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0003_auto_20250129_2041.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0004_session_status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0005_auto_20250131_1625.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0006_auto_20250202_2050.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0007_auto_20250202_2100.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0008_rename_user_timezone_session_students_timezone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0009_auto_20250202_2114.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0010_auto_20250202_2122.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0011_alter_availability_tutor_timezone.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0012_availability_status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0013_alter_availability_status.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0014_auto_20250216_2034.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0015_auto_20250216_2038.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0016_alter_appointmentsettings_tutor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0017_rename_appointmentsettings_appointmentsetting.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0018_alter_appointmentsetting_session_length.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0019_alter_appointmentsetting_session_length.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0020_alter_appointmentsetting_session_type.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0021_session_rating.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0022_auto_20250225_0120.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0023_alter_review_session.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0024_alter_review_session.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0025_auto_20250225_1749.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0026_auto_20250225_1845.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0027_auto_20250226_1337.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0028_auto_20250310_2353.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0029_review_is_published.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0030_auto_20250322_0329.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0031_auto_20250324_1929.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0032_session_reviews.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0033_auto_20250410_2014.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/migrations/0034_alter_appointmentsetting_tutor.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments_manual.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments_manual.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_manual.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_manual.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/success_submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/success_submit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/table1.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/interview_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_meeting/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/migrations/0002_notification.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/migrations/0003_alter_notification_type.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/migrations/0004_auto_20250311_2236.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/migrations/0005_wishlist.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/client_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/client_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/interview_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/interview_table.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0002_tutor_rating.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0003_alter_tutor_rating.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0004_auto_20250227_2149.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0005_auto_20250303_2238.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0006_notification.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0007_alter_notification_type.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0008_auto_20250311_2236.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0009_tutor_discount.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0010_auto_20250321_2351.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0011_alter_skilllevel_options.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_student_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_banner.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_banner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/includes/dt_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/interview_stepper.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/interview/interview_stepper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder_backup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard_stepper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_interview_ARCHIVED.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_interview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step2_basic_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step2_basic_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step6_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step6_result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_review.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_review.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step6_result.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0002_alter_userprofile_last_modified.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0003_alter_userprofile_bio.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0004_userprofile_gender.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0005_alter_userprofile_availability.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0006_auto_20250305_1805.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/migrations/0007_alter_userprofile_phone.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app_accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/forgot-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up_tutor.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up_tutor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_review.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_review.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_topbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/includes/da_topbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_blog/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_blog/migrations/0002_auto_20250410_2231.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_blog/migrations/0003_category_post_tag.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_blog/migrations/0004_post_excerpt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_blog/migrations/0005_alter_post_excerpt.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_blog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_content_filler/context_processors.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_content_filler/context_processors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_content_filler/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_content_filler/migrations/0002_cfrichtext.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/become-tutor.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_staff/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/LinguaeHub/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/migrations/0002_auto_20250311_0127.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/migrations/0003_alter_bill_date.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/migrations/0004_alter_bill_client.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/migrations/0005_alter_bill_bill_id.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/payments/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/payments/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/payments/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_Lingocept_01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_Lingocept_02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_Lingocept_03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/3by4/01.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/01.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/02.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/03.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/04.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/05.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/06.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/06.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/book/07.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/book/07.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/assets/js/avr.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/avr.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/mixins.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/mixins.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -233,17 +99,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dt_wizard.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html">
+      <file leaf-file-name="become-tutor.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="281" column="52" selection-start-line="281" selection-start-column="52" selection-end-line="281" selection-end-column="52" />
+            <state relative-caret-position="192">
+              <caret line="8" column="96" selection-start-line="8" selection-start-column="96" selection-end-line="8" selection-end-column="96" />
               <folding>
-                <element signature="e#1375#2678#0#HTML" />
-                <element signature="e#2695#2715#0#DjangoTemplate" />
-                <element signature="e#4326#5454#0#HTML" />
-                <element signature="e#5811#9584#0#HTML" />
-                <element signature="e#9906#11215#0#HTML" />
+                <element signature="e#749#773#0#DjangoTemplate" />
               </folding>
             </state>
           </provider>
@@ -256,65 +118,45 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>uSkill</find>
-      <find>Accepted</find>
-      <find>success</find>
-      <find>step</find>
-      <find>skills-tab</find>
-      <find>remove-skill</find>
-      <find>skills-table</find>
-      <find>container</find>
-      <find>fetch</find>
-      <find>skill-row-template</find>
-      <find>applicant</find>
-      <find>dt_wizard</find>
-      <find>template_skill</find>
-      <find>video_intro</find>
-      <find>newRow</find>
-      <find>applicant_video_intro</find>
-      <find>decision</find>
-      <find>interviewer_comment</find>
-      <find>in</find>
-      <find>review</find>
-      <find>skill</find>
-      <find>Skill Leve</find>
-      <find>current_step</find>
-      <find>step-4</find>
-      <find>skills-container</find>
-      <find>review-row-template</find>
-      <find>Certified</find>
-      <find>step-3</find>
-      <find>videoDisplay</find>
-      <find>videoInput</find>
+      <find>createSkillCard</find>
+      <find>choices__list</find>
+      <find>choices__list--dropdown</find>
+      <find>choices</find>
+      <find>.choices__list--dropdown</find>
+      <find>Select Level</find>
+      <find>.skill-card:hover</find>
+      <find>modal</find>
+      <find>showExistingVideo</find>
+      <find>videoIntro</find>
+      <find>showExist</find>
+      <find>showExis</find>
+      <find>skill-card</find>
+      <find>Video</find>
+      <find>Select prof</find>
+      <find>search</find>
+      <find>Gener</find>
+      <find>url</find>
+      <find>SubTeachingCategory</find>
+      <find>te</find>
+      <find>remove</find>
+      <find>init</find>
+      <find>teachingCategoriesSelect</find>
+      <find>choices.min.js</find>
+      <find>&quot;</find>
+      <find>DetailView</find>
+      <find>src=&quot;assets/</find>
+      <find>payment</find>
+      <find>assets</find>
+      <find>.svg&quot;</find>
     </findStrings>
     <replaceStrings>
-      <replace>{{ CFChar.site_name }}</replace>
-      <replace># {% if request.GET %}{{ request.GET.urlencode }}&amp;{% endif %}</replace>
-      <replace>.jpg' %}&quot;</replace>
-      <replace>src=&quot;{% static 'assets/</replace>
-      <replace>applications</replace>
-      <replace>pr_id</replace>
-      <replace>'first_name','last_name',</replace>
-      <replace>applicants</replace>
-      <replace>providerId</replace>
-      <replace>provider_id</replace>
-      <replace>providerUId</replace>
-      <replace>s_user_obj</replace>
-      <replace>btnNext-schedule</replace>
-      <replace>decisionLabel</replace>
-      <replace>decisionForm</replace>
-      <replace>rejectForm</replace>
-      <replace>acceptForm</replace>
-      <replace>RoleRequiredMixin, ActivationRequiredMixin,</replace>
-      <replace>Level</replace>
-      <replace>_stepper</replace>
       <replace>dt_wizard</replace>
       <replace>.svg' %}&quot;</replace>
       <replace>5</replace>
@@ -325,6 +167,26 @@
       <replace>5000);</replace>
       <replace>reviewer_comment</replace>
       <replace>certificateDisplay</replace>
+      <replace>profile_form</replace>
+      <replace>profile_form.</replace>
+      <replace>profile_basic_form.</replace>
+      <replace>educationForm.</replace>
+      <replace>class=&quot;mt-5&quot;</replace>
+      <replace>{{ profile_form.</replace>
+      <replace>error in profile_form.</replace>
+      <replace>{{ profile_basic_form.</replace>
+      <replace>error in profile_basic_form.</replace>
+      <replace>hasExistingVideo</replace>
+      <replace>label_video_intro</replace>
+      <replace>validateStep3_v2</replace>
+      <replace>showBootstrapAlert2</replace>
+      <replace>'.skill-card'</replace>
+      <replace>'skill-card'</replace>
+      <replace>cardId</replace>
+      <replace>'skill-card-template'</replace>
+      <replace>card</replace>
+      <replace>src=&quot;{% static 'assets/</replace>
+      <replace>.jpg' %}&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -333,57 +195,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app_accounts/templates/app_accounts/forgot-password.html" />
-        <option value="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up_tutor.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/wizard_edit_profile.html" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/DEL_primitive_invitation.html" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/primitive_invitation.html" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/primitive_invitation.txt" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard_stepper.js" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_reserve.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_wizard.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/wizard_profile.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/wizard_skill.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_form_skill.html" />
-        <option value="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments_manual.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step6_result.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step6_result.html" />
+        <option value="$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/client_table.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_interview.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step2_basic_profile.html" />
         <option value="$PROJECT_DIR$/ap2_tutor/forms.py" />
-        <option value="$PROJECT_DIR$/static/assets/js/avr.js" />
-        <option value="$PROJECT_DIR$/utils/pages.py" />
-        <option value="$PROJECT_DIR$/utils/mixins.py" />
-        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home.html" />
-        <option value="$PROJECT_DIR$/app_accounts/views.py" />
-        <option value="$PROJECT_DIR$/app_admin/urls.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/urls.py" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/decision/update_skills.html" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/decision/update_skills.txt" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/decision/final_accept.html" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/decision/final_accept.txt" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/decision/final_reject.html" />
-        <option value="$PROJECT_DIR$/templates/emails/interview/decision/final_reject.txt" />
-        <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
-        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/interview_stepper.js" />
+        <option value="$PROJECT_DIR$/templates/emails/notification/notif_with_attachment.html" />
+        <option value="$PROJECT_DIR$/utils/email.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard_stepper.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/step2_BasicProfile.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/step2_basic_profile.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step2_basic_profile.js" />
         <option value="$PROJECT_DIR$/app_admin/views.py" />
-        <option value="$PROJECT_DIR$/app_accounts/migrations/0004_auto_20250522_0011.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" />
+        <option value="$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup2_ui.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step3_deepseek.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_review.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step5_deepseek.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills.js" />
+        <option value="$PROJECT_DIR$/static/assets/js/avr.js" />
         <option value="$PROJECT_DIR$/app_accounts/admin.py" />
         <option value="$PROJECT_DIR$/app_accounts/models.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/views.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder.js" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_form_profile.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_2.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_result.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_form_skill2.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills_mixed.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_new.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/admin.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/urls.py" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard.js" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_review.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step6_result.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step5.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step4_order_confirmation.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_interview_ARCHIVED.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_education.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/views.py" />
+        <option value="$PROJECT_DIR$/app_pages/urls.py" />
+        <option value="$PROJECT_DIR$/app_pages/views.py" />
+        <option value="$PROJECT_DIR$/LinguaeHub/urls.py" />
+        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
+        <option value="$PROJECT_DIR$/app_shop/templates/app_shop/shop.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
+        <option value="$PROJECT_DIR$/app_shop/templates/app_shop/shop-product-detail.html" />
+        <option value="$PROJECT_DIR$/app_shop/urls.py" />
+        <option value="$PROJECT_DIR$/app_shop/templates/app_shop/cart.html" />
+        <option value="$PROJECT_DIR$/app_shop/views.py" />
       </list>
     </option>
   </component>
@@ -435,88 +297,60 @@
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
+              <item name="app_shop" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_shop" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_shop" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_shop" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="interview" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="interview" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="wizard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="wizard" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -541,19 +375,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_shop\templates\app_shop" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_pages\templates\app_pages" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\static\ap2_tutor\assets\js\wizard" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\wizard\includes" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\static\ap2_tutor\assets\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\app_shop\templates\app_shop" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\static\ap2_tutor\assets\js\interview" />
+      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\static\ap2_tutor\assets\js\wizard" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\templates\pages\errors" />
       <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\wizard\includes" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\wizard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\templates\emails\interview" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\static\ap2_tutor\assets" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\interview\includes" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\wizard\includes" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\wizard" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\static\ap2_tutor\assets\js" />
-      <recent name="F:\dev\workspace\web\Django_Practices\LinguaeHub\ap2_tutor\templates\ap2_tutor\interview" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -667,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1736508809268</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="&quot;Commit by Pycharm&quot;">
+      <created>1748160330241</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748160330241</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -680,8 +521,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49501246" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" weight="0.3117207" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.206875" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.76375" weight="0.35660848" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.175625" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -766,239 +607,316 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="19" />
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0001_initial.py">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step6_result.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="96" column="25" selection-start-line="96" selection-start-column="25" selection-end-line="96" selection-end-column="25" />
+        <state relative-caret-position="178">
+          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up_tutor.html">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard_cursor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="135" column="85" selection-start-line="135" selection-start-column="85" selection-end-line="135" selection-end-column="85" />
+        <state relative-caret-position="2757">
+          <caret line="131" column="30" lean-forward="true" selection-start-line="131" selection-start-column="30" selection-end-line="131" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/templates/ap2_meeting/dashboard/d_appointments_manual.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html">
+    <entry file="file://$PROJECT_DIR$/media/applicants/photos/2025/05/18/09.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1076">
-          <caret line="121" column="38" lean-forward="true" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+        <state relative-caret-position="1277">
+          <caret line="227" column="49" lean-forward="true" selection-start-line="227" selection-start-column="49" selection-end-line="227" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
-          <caret line="3293" column="4" selection-start-line="3293" selection-start-column="4" selection-end-line="3293" selection-end-column="4" />
+          <caret line="15909" column="17" selection-start-line="15909" selection-start-column="17" selection-end-line="15909" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="202" selection-start-line="202" selection-end-line="202" />
+        <state relative-caret-position="24">
+          <caret line="1096" column="5" lean-forward="true" selection-start-line="1096" selection-start-column="5" selection-end-line="1096" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/primitive_invitation.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/urls.py">
+    <entry file="file://$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/dashboard_schedule/js/d_appointments_manual.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="29" selection-start-line="29" selection-end-line="30" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="269">
+          <caret line="529" column="34" selection-start-line="529" selection-start-column="22" selection-end-line="529" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/admin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/admin/notify_admin.html">
+    <entry file="file://$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="19" column="12" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="19" selection-end-column="12" />
+        <state relative-caret-position="242">
+          <caret line="659" column="79" selection-start-line="659" selection-start-column="79" selection-end-line="659" selection-end-column="79" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/client/js/reservation.js">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup2_ui.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18240">
-          <caret line="760" selection-start-line="760" selection-end-line="812" />
+        <state relative-caret-position="8208">
+          <caret line="342" column="9" selection-start-line="342" selection-start-column="9" selection-end-line="342" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/views.py">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_review.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="114" column="37" selection-start-line="114" selection-start-column="37" selection-end-line="114" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="264">
+          <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/views.py">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9216">
-          <caret line="406" selection-start-line="406" selection-end-line="446" />
-          <folding>
-            <element signature="e#19546#21340#0" />
-          </folding>
+        <state relative-caret-position="12936">
+          <caret line="539" column="3" selection-start-line="539" selection-start-column="3" selection-end-line="539" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/urls.py">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="13" column="47" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+        <state>
+          <caret selection-end-line="195" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/decision/final_reject.txt">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step5_deepseek.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="1028">
+          <caret line="823" column="8" selection-start-line="823" selection-start-column="8" selection-end-line="823" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/decision/update_skills.txt">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step3_deepseek.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="438">
+          <caret line="157" column="25" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/decision/final_accept.txt">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="24">
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/models.py">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3528">
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-360" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/decision/update_skills.html">
+    <entry file="file://$PROJECT_DIR$/static/assets/js/avr.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/decision/final_accept.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="121" column="34" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="119" column="10" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0007_alter_skill_category.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0006_alter_skill_category.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0005_alter_skill_category.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0004_auto_20250522_0011.py" />
-    <entry file="file://$PROJECT_DIR$/app_accounts/migrations/0003_userskill_is_notified.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/interview/decision/final_reject.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11808">
-          <caret line="497" column="91" selection-start-line="497" selection-start-column="91" selection-end-line="497" selection-end-column="91" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#587#720#0" />
-          </folding>
+        <state relative-caret-position="188">
+          <caret line="86" column="3" selection-start-line="86" selection-start-column="3" selection-end-line="86" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_accounts/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="41" selection-start-line="28" selection-end-line="41" />
+        <state relative-caret-position="312">
+          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills_mixed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4344">
+          <caret line="181" column="22" selection-start-line="181" selection-start-column="22" selection-end-line="181" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="506" column="26" lean-forward="true" selection-start-line="506" selection-start-column="26" selection-end-line="506" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_meeting/static/ap2_meeting/assets/css/agenda.css">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="20" lean-forward="true" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        <state relative-caret-position="624">
+          <caret line="68" column="11" lean-forward="true" selection-start-line="58" selection-start-column="4" selection-end-line="68" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="102" selection-start-line="102" selection-start-column="2" selection-end-line="106" selection-end-column="8" />
+        <state relative-caret-position="444">
+          <caret line="150" column="25" selection-start-line="150" selection-start-column="6" selection-end-line="150" selection-end-column="25" />
           <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" />
-            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#1413#4168#0" />
+            <element signature="e#4186#4339#0" />
+            <element signature="e#4112#6285#0" />
+            <element signature="e#6351#6997#0" />
+            <element signature="e#8638#9370#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_blog/templates/app_blog/blog_home.html">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="25" selection-start-column="25" selection-end-column="25" />
+        <state relative-caret-position="706">
+          <caret line="266" column="1" selection-start-line="266" selection-start-column="1" selection-end-line="266" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1111">
+          <caret line="462" column="17" lean-forward="true" selection-start-line="462" selection-start-column="17" selection-end-line="462" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
+            <element signature="e#15503#16161#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="1167" selection-start-line="1167" selection-end-line="1189" />
+          <folding>
+            <element signature="e#23672#24943#0" />
+            <element signature="e#42855#43681#0" />
+            <element signature="e#43739#44112#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="100" selection-start-line="100" selection-end-line="100" />
+        <state relative-caret-position="1992">
+          <caret line="155" column="64" selection-start-line="155" selection-start-column="64" selection-end-line="155" selection-end-column="64" />
           <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="25" column="68" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="634">
+          <caret line="308" column="11" selection-start-line="308" selection-start-column="11" selection-end-line="308" selection-end-column="11" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#12586#14180#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_education.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="186" column="29" selection-start-line="186" selection-start-column="29" selection-end-line="186" selection-end-column="29" />
+          <folding>
+            <element signature="n#template#0;n#!!top" />
+            <element signature="n#template#1;n#!!top" />
+            <element signature="n#script#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/tutor_list.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="63" column="16" lean-forward="true" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinguaeHub/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_shop/templates/app_shop/shop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13056">
+          <caret line="544" selection-start-line="544" selection-end-line="545" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/shop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="457" column="38" lean-forward="true" selection-start-line="371" selection-start-column="12" selection-end-line="457" selection-end-column="38" />
+          <folding>
+            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
+            <element signature="n#a#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#button#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#li#2;n#ul#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#li#4;n#ul#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="27" column="47" selection-start-line="27" selection-end-line="28" />
+        <state>
+          <caret selection-end-line="5" selection-end-column="15" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -1007,153 +925,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6840">
-          <caret line="525" column="26" selection-start-line="525" selection-start-column="17" selection-end-line="525" selection-end-column="26" />
+        <state relative-caret-position="1610">
+          <caret line="160" column="21" selection-start-line="160" selection-start-column="11" selection-end-line="160" selection-end-column="21" />
           <folding>
-            <element signature="e#0#64#0" expanded="true" />
-            <element signature="e#2286#4280#0" />
-            <element signature="e#4434#7315#0" />
-            <element signature="e#7353#9615#0" />
-            <element signature="e#9657#11879#0" />
-            <element signature="e#15698#17167#0" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html">
+    <entry file="file://$PROJECT_DIR$/app_pages/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="492" lean-forward="true" selection-start-line="492" selection-end-line="492" />
+        <state relative-caret-position="216">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/views.py">
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="370" selection-start-line="370" selection-end-line="370" />
+          <folding>
+            <element signature="n#li#4;n#ul#1;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" />
+            <element signature="n#li#5;n#ul#1;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" />
+            <element signature="n#div#1;n#div#0;n#nav#0;n#header#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
-          <caret line="343" selection-start-line="343" selection-end-line="343" />
+          <caret line="1" selection-start-line="1" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="89" lean-forward="true" selection-start-line="82" selection-start-column="4" selection-end-line="89" />
           <folding>
-            <element signature="e#0#30#0" expanded="true" />
+            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_form_skill2.html">
+    <entry file="file://$PROJECT_DIR$/app_shop/templates/app_shop/cart22.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_form_skill.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_review.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="370" column="11" selection-start-line="370" selection-start-column="11" selection-end-line="370" selection-end-column="11" />
+        <state relative-caret-position="264">
+          <caret line="11" lean-forward="true" selection-start-line="3" selection-end-line="11" />
           <folding>
-            <element signature="e#11134#26908#0#HTML" />
+            <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html">
+    <entry file="file://$PROJECT_DIR$/app_shop/templates/app_shop/cart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="120" column="11" lean-forward="true" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="11" />
+        <state relative-caret-position="216">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html">
+    <entry file="file://$PROJECT_DIR$/app_shop/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="273" column="25" selection-start-line="273" selection-start-column="25" selection-end-line="273" selection-end-column="25" />
+        <state relative-caret-position="216">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="18" />
           <folding>
-            <element signature="n#div#0;n#form#0;n#!!top" />
-            <element signature="n#div#1;n#form#0;n#!!top" />
-            <element signature="n#div#2;n#form#0;n#!!top" />
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step5.html">
+    <entry file="file://$PROJECT_DIR$/app_shop/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-350">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step4_order_confirmation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+        <state relative-caret-position="408">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
           <folding>
-            <element signature="n#div#0;n#!!top" />
-            <element signature="n#div#0;n#div#0;n#!!top" />
-            <element signature="n#div#1;n#!!top" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/dt_interview_ARCHIVED.html">
+    <entry file="file://$PROJECT_DIR$/app_shop/templates/app_shop/shop-product-detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="368" column="14" lean-forward="true" selection-start-line="368" selection-start-column="14" selection-end-line="368" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard_stepper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="457" column="3" lean-forward="true" selection-start-line="457" selection-start-column="3" selection-end-line="457" selection-end-column="3" />
+        <state>
           <folding>
-            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
+            <element signature="e#11230#11249#0#HTML" expanded="true" />
+            <element signature="e#12254#12272#0#HTML" expanded="true" />
+            <element signature="e#13276#13294#0#HTML" expanded="true" />
+            <element signature="e#14298#14316#0#HTML" expanded="true" />
+            <element signature="e#15320#15338#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder.js">
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/become-tutor.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="491" column="3" lean-forward="true" selection-start-line="491" selection-start-column="3" selection-end-line="491" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step2_basic_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="273" column="25" lean-forward="true" selection-start-line="273" selection-start-column="25" selection-end-line="273" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/interview/includes/inter_step6_result.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="706">
-          <caret line="63" column="6" selection-start-line="63" selection-start-column="6" selection-end-line="63" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_result.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="44" column="35" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="281" column="52" selection-start-line="281" selection-start-column="52" selection-end-line="281" selection-end-column="52" />
+        <state relative-caret-position="192">
+          <caret line="8" column="96" selection-start-line="8" selection-start-column="96" selection-end-line="8" selection-end-column="96" />
           <folding>
-            <element signature="e#1375#2678#0#HTML" />
-            <element signature="e#2695#2715#0#DjangoTemplate" />
-            <element signature="e#4326#5454#0#HTML" />
-            <element signature="e#5811#9584#0#HTML" />
-            <element signature="e#9906#11215#0#HTML" />
+            <element signature="e#749#773#0#DjangoTemplate" />
           </folding>
         </state>
       </provider>
