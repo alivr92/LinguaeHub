@@ -19,11 +19,13 @@
     {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">#}
 {% endblock %}
 {% block embed_style %}
-{#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/client/css/reservation.css' %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/client/css/reservation.css' %}">#}
     <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/stepper.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/step6.css' %}">
+
 {% endblock %}
 {% block embed_script_inHead %}
-     {#    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>#}
+    {#    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>#}
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
 {% endblock %}
 {% block my_style %}{% endblock %}
@@ -53,8 +55,10 @@
     <input type="hidden" id="currentStep" value="{{ current_step }}">
     <input type="hidden" id="applicantUId" value="{{ applicantUId }}">
     <input type="hidden" id="isVIP" value="{{ isVIP }}">
-    <p>Current Step: {{ current_step }}</p>
-    <p>isVIP: {{ isVIP }}</p>
+    <input type="hidden" id="maxEntries" value="{{ maxEntries }}">
+{#    <p>Current Step: {{ current_step }}</p>#}
+{#    <p>isVIP: {{ isVIP }}</p>#}
+{#    <p>maxEntries: {{ maxEntries }}</p>#}
 
 
     <div class="card bg-transparent border rounded-3 mb-5">
@@ -160,9 +164,20 @@
                                 You have accepted in primitive submission, keep going and complete your profile.
                             </p>
                             <!-- Step 1 button -->
-                            <div class="d-flex justify-content-end mt-3">
-                                <button class="btn btn-primary next-btn mb-0">Next</button>
+                            {#                            <div class="d-flex justify-content-end mt-3">#}
+                            {#                                <button class="btn btn-primary next-btn mb-0">Next</button>#}
+                            {#                            </div>#}
+
+                            <div class="d-flex justify-content-end mt-4">
+                                <div>
+                                    <button type="button" class="btn btn-primary btn-next " id="btnSkip_step1"
+                                            data-action="skip" data-step="1">
+                                        Skip and go Next <i class="bi bi-arrow-right ms-2"></i>
+                                    </button>
+                                </div>
                             </div>
+
+
                         </div>
                         <!-- Basic information START -->
                     </div>
@@ -171,8 +186,8 @@
                     <!-- Step 2 content START -->
                     <div id="step-2" role="tabpanel" class="content fade" aria-labelledby="steppertrigger2">
                         <!-- Title -->
-{#                        <h4><i class="bi bi-person-circle text-primary"></i> Full personal & public details</h4>#}
-{#                        <hr> <!-- Divider -->#}
+                        {#                        <h4><i class="bi bi-person-circle text-primary"></i> Full personal & public details</h4>#}
+                        {#                        <hr> <!-- Divider -->#}
                         <div class="row">
                             <div class="col-12 col-xl-12">
                                 {% include 'ap2_tutor/wizard/includes/w_step2_basic_profile.html' %}
@@ -184,21 +199,21 @@
                     <!-- Step 3 content Teaching Skill START -->
                     <div id="step-3" role="tabpanel" class="content fade" aria-labelledby="steppertrigger3">
                         <!-- Title -->
-{#                        <h4><i class="bi bi-globe text-primary"></i> Select skills, upload certificate/video</h4>#}
-{#                        <hr> <!-- Divider -->#}
+                        {#                        <h4><i class="bi bi-globe text-primary"></i> Select skills, upload certificate/video</h4>#}
+                        {#                        <hr> <!-- Divider -->#}
                         <!-- Content -->
-{#                        {% include 'ap2_tutor/wizard/includes/w_step3_skills.html' %}#}
+                        {#                        {% include 'ap2_tutor/wizard/includes/w_step3_skills.html' %}#}
                         {% include 'ap2_tutor/wizard/includes/w_step3_skills_mixed.html' %}
-{#                        {% include 'ap2_tutor/wizard/includes/step3_deepseek.html' %}#}
+                        {#                        {% include 'ap2_tutor/wizard/includes/step3_deepseek.html' %}#}
                     </div>
                     <!-- Step 3 content END -->
 
                     <!-- Step 4: Education -->
                     <div id="step-4" role="tabpanel" class="content fade" aria-labelledby="steppertrigger4">
                         <!-- Title -->
-{#                        <h4 class="fw-bold"><i class="bi bi-clipboard-check text-primary"></i>Education Qulifications#}
-{#                        </h4>#}
-{#                        <hr> <!-- Divider -->#}
+                        {#                        <h4 class="fw-bold"><i class="bi bi-clipboard-check text-primary"></i>Education Qulifications#}
+                        {#                        </h4>#}
+                        {#                        <hr> <!-- Divider -->#}
                         <!-- Content -->
                         {% include 'ap2_tutor/wizard/includes/w_step4_education.html' %}
                     </div>
@@ -206,19 +221,19 @@
                     <!-- Step 5: Review & Submit -->
                     <div id="step-5" role="tabpanel" class="content fade" aria-labelledby="steppertrigger5">
                         <!-- Title -->
-{#                        <h4 class="fw-bold"><i class="bi bi-clipboard-check text-primary"></i>Final confirmation (Review#}
-{#                            and Submit Your Application)</h4>#}
-{#                        <hr> <!-- Divider -->#}
+                        {#                        <h4 class="fw-bold"><i class="bi bi-clipboard-check text-primary"></i>Final confirmation (Review#}
+                        {#                            and Submit Your Application)</h4>#}
+                        {#                        <hr> <!-- Divider -->#}
                         <!-- Content -->
-{#                        {% include 'ap2_tutor/wizard/includes/w_step5_review.html' %}#}
-                        {% include 'ap2_tutor/wizard/includes/step5_deepseek.html' %}
+                        {#                        {% include 'ap2_tutor/wizard/includes/w_step5_review.html' %}#}
+                        {% include 'ap2_tutor/wizard/includes/w_step5_deepseek.html' %}
                     </div>
 
                     <!-- Step 6 content START -->
                     <div id="step-6" role="tabpanel" class="content fade" aria-labelledby="steppertrigger6">
                         <!-- Title -->
-                        <h4><i class="bi bi-bar-chart-line text-primary"></i> Application Status</h4>
-                        <hr> <!-- Divider -->
+{#                        <h4><i class="bi bi-bar-chart-line text-primary"></i> Application Status</h4>#}
+{#                        <hr> <!-- Divider -->#}
                         <!-- Content -->
                         {% include 'ap2_tutor/wizard/includes/w_step6_result.html' %}
                     </div>
@@ -235,108 +250,363 @@
 <!-- **************** MAIN CONTENT END **************** -->
 {% block dt_modal %}
     {#    {% include 'ap2_meeting/client/client_modals.html' %}#}
-
-    <!-- Modal for PDF  ????-->
-    <div class="modal fade" id="certModal{{ skill.id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
+    <!-- PDF Modal -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Certificate - {{ skill.name }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">PDF Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="height: 80vh">
-                    <iframe src="{{ skill.certificate.url }}" class="w-100 h-100 border rounded"
-                            frameborder="0"></iframe>
+                <div class="modal-body">
+                    <div class="text-center py-5" id="pdf-loading">
+                        <div class="spinner-border text-primary"></div>
+                        <p>Loading PDF...</p>
+                    </div>
+                    <canvas id="pdf-canvas" class="d-none"></canvas>
+                    <div id="pdf-error" class="alert alert-danger d-none"></div>
+                </div>
+                <div class="modal-footer">
+                    <button id="prev-page" class="btn btn-secondary">Previous</button>
+                    <span id="page-num">Page: 1</span>
+                    <button id="next-page" class="btn btn-secondary">Next</button>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
     <!-- Video Guidelines Modal -->
-<div class="modal fade" id="videoGuidelinesModal" tabindex="-1" aria-labelledby="videoGuidelinesModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="videoGuidelinesModalLabel"><i class="bi bi-camera-video me-2"></i>Video
-                    Guidelines</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal fade" id="videoGuidelinesModal" tabindex="-1" aria-labelledby="videoGuidelinesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoGuidelinesModalLabel"><i class="bi bi-camera-video me-2"></i>Video
+                        Guidelines</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info bg-light border-0">
+                        <div class="d-flex">
+                            <i class="bi bi-lightbulb-fill text-warning me-3 mt-1"></i>
+                            <div>
+                                <p class="mb-1"><strong>Great introduction videos get more students</strong></p>
+                                <p class="mb-0">Follow these tips to create an effective video.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Do:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-check me-2 mt-1"></i>
+                                    <span>Introduce yourself and your teaching experience</span>
+                                </li>
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-check me-2 mt-1"></i>
+                                    <span>Speak clearly in each language you teach</span>
+                                </li>
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-check me-2 mt-1"></i>
+                                    <span>Show your personality and teaching style</span>
+                                </li>
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-check me-2 mt-1"></i>
+                                    <span>Keep it between 1-3 minutes</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-x-circle-fill text-danger me-2"></i>Don't:</h6>
+                            <ul class="list-unstyled">
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-x me-2 mt-1"></i>
+                                    <span>Read from a script (be natural)</span>
+                                </li>
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-x me-2 mt-1"></i>
+                                    <span>Include background noise or distractions</span>
+                                </li>
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-x me-2 mt-1"></i>
+                                    <span>Upload low-quality or blurry videos</span>
+                                </li>
+                                <li class="mb-2 d-flex">
+                                    <i class="bi bi-x me-2 mt-1"></i>
+                                    <span>Exceed 100MB file size</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6 class="fw-bold"><i class="bi bi-film me-2"></i>Technical Requirements:</h6>
+                        <ul class="list-inline">
+                            <li class="list-inline-item badge bg-light text-dark me-2">MP4 format</li>
+                            <li class="list-inline-item badge bg-light text-dark me-2">Max 100MB</li>
+                            <li class="list-inline-item badge bg-light text-dark me-2">16:9 aspect ratio</li>
+                            <li class="list-inline-item badge bg-light text-dark">720p resolution or higher</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-info bg-light border-0">
-                    <div class="d-flex">
-                        <i class="bi bi-lightbulb-fill text-warning me-3 mt-1"></i>
-                        <div>
-                            <p class="mb-1"><strong>Great introduction videos get more students</strong></p>
-                            <p class="mb-0">Follow these tips to create an effective video.</p>
+        </div>
+    </div>
+
+
+    <!-- Modal Trigger in your form (unchanged) -->
+    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a>
+
+    <!-- Terms and Conditions Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h2 class="modal-title fs-4" id="termsModalLabel">
+                        <i class="bi bi-file-text-fill me-2 text-primary"></i>
+                        Terms of Service
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Scrollable content container -->
+                    <div class="terms-container" style="max-height: 60vh; overflow-y: auto;">
+                        <!-- Last Updated Badge -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+            <span class="badge bg-primary-soft text-primary">
+              <i class="bi bi-clock-history me-1"></i>
+              Last Updated: January 1, 2023
+            </span>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="window.print()">
+                                <i class="bi bi-printer-fill me-1"></i> Print
+                            </button>
+                        </div>
+
+                        <!-- Actual Terms Content -->
+                        <article class="terms-content">
+                            <section class="mb-4">
+                                <h3 class="h5 text-primary">1. Introduction</h3>
+                                <p>Welcome to our platform. By accessing or using our service, you agree to be bound by
+                                    these terms...</p>
+                            </section>
+
+                            <section class="mb-4">
+                                <h3 class="h5 text-primary">2. User Responsibilities</h3>
+                                <p>You agree not to use the service for any unlawful purpose or in any way that might
+                                    harm, damage, or disparage any other party...</p>
+                            </section>
+
+                            <!-- More sections... -->
+
+                            <section class="mb-4">
+                                <h3 class="h5 text-primary">10. Governing Law</h3>
+                                <p>These terms shall be governed by and construed in accordance with the laws of [Your
+                                    Jurisdiction]...</p>
+                            </section>
+                        </article>
+
+                        <!-- Version History Accordion -->
+                        <div class="accordion mt-4" id="termsHistory">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#historyCollapse">
+                                        <i class="bi bi-clock-history me-2"></i> Version History
+                                    </button>
+                                </h2>
+                                <div id="historyCollapse" class="accordion-collapse collapse"
+                                     data-bs-parent="#termsHistory">
+                                    <div class="accordion-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span>Version 2.1 (Jan 1, 2023)</span>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View</a>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span>Version 2.0 (Jul 15, 2022)</span>
+                                                <a href="#" class="btn btn-sm btn-outline-primary">View</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="modalTermsCheck">
+                        <label class="form-check-label" for="modalTermsCheck">
+                            I have read and understand these terms
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        <i class="bi bi-check-circle-fill me-1"></i> Accept
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h2 class="modal-title fs-4" id="privacyModalLabel">
+                        <i class="bi bi-shield-lock-fill me-2 text-success"></i>
+                        Privacy Policy
+                    </h2>
+                    <div class="d-flex align-items-center ms-auto">
+          <span class="badge bg-success-soft text-success me-2">
+            <i class="bi bi-gdpr"></i> GDPR Compliant
+          </span>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <!-- Data Categories Tabs -->
+                    <ul class="nav nav-tabs mb-4" id="privacyTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#data-collection"
+                                    type="button">
+                                <i class="bi bi-collection-fill me-1"></i> Data Collection
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data-usage" type="button">
+                                <i class="bi bi-gear-fill me-1"></i> Usage
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data-sharing" type="button">
+                                <i class="bi bi-share-fill me-1"></i> Sharing
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#user-rights" type="button">
+                                <i class="bi bi-person-check-fill me-1"></i> Your Rights
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" style="max-height: 50vh; overflow-y: auto;">
+                        <!-- Data Collection Tab -->
+                        <div class="tab-pane fade show active" id="data-collection">
+                            <h3 class="h5 text-success mb-3">What We Collect</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="card border-success-soft h-100">
+                                        <div class="card-body">
+                                            <h4 class="h6"><i class="bi bi-person-badge-fill text-success me-2"></i>Personal
+                                                Data</h4>
+                                            <ul class="list-unstyled">
+                                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Name &
+                                                    contact info
+                                                </li>
+                                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Payment
+                                                    details
+                                                </li>
+                                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Usage data
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="card border-primary-soft h-100">
+                                        <div class="card-body">
+                                            <h4 class="h6"><i class="bi bi-cookie text-primary me-2"></i>Automated
+                                                Collection</h4>
+                                            <ul class="list-unstyled">
+                                                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Cookies
+                                                </li>
+                                                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Analytics
+                                                </li>
+                                                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Device
+                                                    info
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Tab Panes -->
+                        <div class="tab-pane fade" id="data-usage">...</div>
+                        <div class="tab-pane fade" id="data-sharing">...</div>
+
+                        <!-- User Rights Tab (Most Important) -->
+                        <div class="tab-pane fade" id="user-rights">
+                            <h3 class="h5 text-success mb-3">Your Rights Under GDPR</h3>
+                            <div class="alert alert-success-soft">
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                                You may contact our DPO at <a href="mailto:dpo@yourcompany.com">dpo@yourcompany.com</a>
+                            </div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="p-3 border rounded bg-light">
+                                        <h4 class="h6"><i class="bi bi-eye-fill text-success me-2"></i> Right to Access
+                                        </h4>
+                                        <p>Request copies of your personal data</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 border rounded bg-light">
+                                        <h4 class="h6"><i class="bi bi-trash-fill text-success me-2"></i> Right to
+                                            Erasure</h4>
+                                        <p>Request deletion of your data</p>
+                                    </div>
+                                </div>
+                                <!-- More rights... -->
+                            </div>
+
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-outline-success">
+                                    <i class="bi bi-download me-2"></i> Download Data Request Form
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Do:</h6>
-                        <ul class="list-unstyled">
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-check me-2 mt-1"></i>
-                                <span>Introduce yourself and your teaching experience</span>
-                            </li>
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-check me-2 mt-1"></i>
-                                <span>Speak clearly in each language you teach</span>
-                            </li>
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-check me-2 mt-1"></i>
-                                <span>Show your personality and teaching style</span>
-                            </li>
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-check me-2 mt-1"></i>
-                                <span>Keep it between 1-3 minutes</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6 class="fw-bold mb-3"><i class="bi bi-x-circle-fill text-danger me-2"></i>Don't:</h6>
-                        <ul class="list-unstyled">
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-x me-2 mt-1"></i>
-                                <span>Read from a script (be natural)</span>
-                            </li>
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-x me-2 mt-1"></i>
-                                <span>Include background noise or distractions</span>
-                            </li>
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-x me-2 mt-1"></i>
-                                <span>Upload low-quality or blurry videos</span>
-                            </li>
-                            <li class="mb-2 d-flex">
-                                <i class="bi bi-x me-2 mt-1"></i>
-                                <span>Exceed 100MB file size</span>
-                            </li>
-                        </ul>
+                <div class="modal-footer bg-light">
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="cookieConsent" checked>
+                            <label class="form-check-label" for="cookieConsent">
+                                Essential Cookies
+                            </label>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
+                                <i class="bi bi-x-circle me-1"></i> Close
+                            </button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                                <i class="bi bi-check-circle-fill me-1"></i> Acknowledge
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="mt-4">
-                    <h6 class="fw-bold"><i class="bi bi-film me-2"></i>Technical Requirements:</h6>
-                    <ul class="list-inline">
-                        <li class="list-inline-item badge bg-light text-dark me-2">MP4 format</li>
-                        <li class="list-inline-item badge bg-light text-dark me-2">Max 100MB</li>
-                        <li class="list-inline-item badge bg-light text-dark me-2">16:9 aspect ratio</li>
-                        <li class="list-inline-item badge bg-light text-dark">720p resolution or higher</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
             </div>
         </div>
     </div>
-</div>
 
 
 {% endblock %}
+
+
 
 {% block scripts_vendors %}
     <!-- Vendors -->
@@ -352,8 +622,7 @@
     <script src="{% static 'assets/js/avr.js' %}" type="module"></script>
     <!------------------------ Wizard Stepper Scripts ------------------------>
     <script src="{% static 'ap2_tutor/assets/js/wizard/wizard.js' %}" type="module"></script>
-{#    <script src="{% static 'ap2_tutor/assets/js/wizard/step3_skills.js' %}" type="module"></script>#}
-    <script src="{% static 'ap2_tutor/assets/js/wizard/step3_skills_new.js' %}" type="module"></script>
+    <script src="{% static 'ap2_tutor/assets/js/wizard/step3_skills.js' %}" type="module"></script>
     <script src="{% static 'ap2_tutor/assets/js/wizard/step4_edu.js' %}" type="module"></script>
-{#    <script src="{% static 'ap2_tutor/assets/js/wizard/step5_review.js' %}" type="module"></script>#}
+    <script src="{% static 'ap2_tutor/assets/js/wizard/step5_review.js' %}" type="module"></script>
 {% endblock %}

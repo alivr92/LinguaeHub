@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app_accounts.models import (UserProfile, Language, UserSkill, Level, SkillCategory, Skill, UserSpecialization,
-                                 UserEducation)
+                                 UserEducation, DegreeLevel)
 from django.utils.html import format_html
 
 
@@ -54,11 +54,17 @@ class LevelAdmin(admin.ModelAdmin):
 
 @admin.register(UserEducation)
 class UserEducationAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'degree', 'field_of_study', 'institution', 'graduation_year', 'status',
+    list_display = ['id', 'user', 'degree', 'field_of_study', 'institution', 'start_year', 'end_year', 'status',
                     'is_certified', 'is_notified']
     list_display_links = ['user', ]
     list_editable = ['status', 'is_certified', 'is_notified']
     ordering = ('user',)
+
+
+@admin.register(DegreeLevel)
+class DegreeLevelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
+    list_editable = ('order',)
 
 
 @admin.register(UserSkill)

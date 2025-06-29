@@ -265,3 +265,71 @@ step 3 : file upload button style ----------------------------------------------
 .choices__list--dropdown .choices__item {
     padding-left: 25px;
 }
+
+
+/*********************************** Custom CSS for Step 2 ***********************************/
+  .icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .uploadremove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    transform: translate(25%, -25%);
+  }
+
+  .bg-primary-soft {
+    background-color: rgba(13, 110, 253, 0.1);
+  }
+
+  .bg-info-soft {
+    background-color: rgba(13, 202, 240, 0.1);
+  }
+
+  .bg-warning-soft {
+    background-color: rgba(255, 193, 7, 0.1);
+  }
+
+  .bg-success-soft {
+    background-color: rgba(25, 135, 84, 0.1);
+  }
+
+
+
+/* STEP 5 STYLE */
+/* Highlight entire row */
+.highlight-error {
+    animation: pulse-checkbox 1.5s infinite;
+    background-color: rgba(220, 53, 69, 0.07);
+    transition: all 0.5s ease;
+    border-radius: 5px;
+}
+
+/* Checkbox-specific styling */
+.has-error .form-check-input {
+    border-color: #dc3545 !important;
+}
+
+.was-validated .form-check-input:invalid {
+    animation: pulse-checkbox 1.5s infinite;
+}
+
+@keyframes pulse-checkbox {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.21); }
+    70% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}

@@ -164,7 +164,7 @@
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Your Teaching Skills</h5>
-            <span class="badge bg-primary">Up to {{ maxSkills }} skills</span>
+            <span class="badge bg-primary">Up to {{ maxEntries }} skills</span>
         </div>
         <div class="card-body">
             <div id="skills-container">
@@ -187,12 +187,12 @@
 
     <!-- Step 3 button -->
     <div class="d-flex justify-content-between mt-3">
-        <button type="button" class="btn btn-secondary btn-prev" id="btnPrev_step3" data-action="prev" data-step="3">
+        <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_step3" data-action="prev" data-step="3">
             <i class="bi bi-arrow-left me-2"></i> Previous
         </button>
 
         <div>
-            <button type="button" class="btn btn-success btn-save me-2" id="btnSave_step3" data-action="save"
+            <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_step3" data-action="save"
                     data-step="3">
                 <i class="bi bi-save me-1"></i> Save
             </button>
@@ -201,90 +201,8 @@
             </button>
         </div>
     </div>
-
-
 </div>
 
-
-<!-- Hidden template for Skill Card  -->
-{#<template id="skill-card-template">#}
-{#    <div class="skill-card mb-4 p-3 border rounded">#}
-{#        <input type="hidden" name="step" value="3">#}
-{##}
-{#        <div class="row g-3">#}
-{#            <div class="col-md-4">#}
-{#                <label class="form-label">Teaching Skill <span class="text-danger">*</span> <i#}
-{#                        class="bi bi-info-circle text-primary"#}
-{#                        data-bs-toggle="tooltip"#}
-{#                        title="{{ CFChar.tooltip_teaching_skill }}"></i></label>#}
-{#                <select class="form-select js-choice border-0 z-index-9 bg-transparent"#}
-{#                        name="skill"#}
-{#                        aria-label=".form-select-sm"#}
-{#                        data-search-enabled="true"#}
-{#                        data-remove-item-button="true"#}
-{#                        required>#}
-{#                    <option value="">Select Skill</option>#}
-{#                    {% for skill in skills %}#}
-{#                        <option class="align-content-start"#}
-{#                                value="{{ skill.id }}">{{ skill }}</option>#}
-{#                    {% endfor %}#}
-{#                </select>#}
-{#            </div>#}
-{#            <div class="col-md-3">#}
-{#                <label class="form-label">Skill Level <span class="text-danger">*</span><i#}
-{#                        class="bi bi-info-circle text-primary"#}
-{#                        data-bs-toggle="tooltip"#}
-{#                        title="{{ CFChar.tooltip_skill_level }}"></i></label>#}
-{#                <select class="form-select js-choice border-0 z-index-9 bg-transparent"#}
-{#                        name="level"#}
-{#                        aria-label=".form-select-sm"#}
-{#                        data-search-enabled="true"#}
-{#                        data-remove-item-button="true"#}
-{#                        required>#}
-{#                    <option value="">Select Level</option>#}
-{#                    {% for level in levels %}#}
-{#                        <option value="{{ level.id }}">{{ level }}</option>#}
-{#                    {% endfor %}#}
-{#                </select>#}
-{#            </div>#}
-{#            <div class="col-md-3">#}
-{##}
-{#                <label class="form-label">Demonstration Video <i class="bi bi-info-circle text-primary"#}
-{#                                                                 data-bs-toggle="tooltip"#}
-{#                                                                 title="{{ CFChar.tooltip_video_intro }}"></i></label>#}
-{#                <label class="btn btn-sm btn-primary-soft mx-2 w-100 label_skill_video">#}
-{#                    <i class="bi bi-upload"></i> Upload#}
-{#                </label>#}
-{##}
-{##}
-{#                <input type="file" class="form-control d-none skill_video_input"#}
-{#                       name="skill_video" accept=".mp4,.mov,.avi">#}
-{#                <small class="text-muted">Optional</small>#}
-{#            </div>#}
-{#            <div class="col-md-2">#}
-{#                <label class="form-label">Certificate <i class="bi bi-info-circle text-primary"#}
-{#                                                         data-bs-toggle="tooltip"#}
-{#                                                         title="{{ CFChar.tooltip_certificate }}"></i></label>#}
-{##}
-{#                <label class="btn btn-sm btn-primary-soft mx-2 w-100 label_skill_certificate">#}
-{#                    <i class="bi bi-upload"></i> Upload#}
-{#                </label>#}
-{#                <input type="file"#}
-{#                       class="form-control d-none certificate_input"#}
-{#                       name="certificate"#}
-{#                       accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">#}
-{#                <small class="text-muted">Optional</small>#}
-{#            </div>#}
-{#            <div class="col-12 text-end">#}
-{#                <button type="button" class="btn btn-sm btn-outline-danger remove-skill">#}
-{#                    <i class="bi bi-trash me-1"></i>Remove#}
-{#                </button>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</template>#}
-
-{#-----------------------------------------------------------------------#}
 <template id="skill-card-template">
     <div class="skill-card mb-4 p-3 border rounded bg-white transition-all">
         <input type="hidden" name="step" value="3">
@@ -377,3 +295,83 @@
         </div>
     </div>
 </template>
+
+
+
+<!-- Hidden template for Skill Card  -->
+{#<template id="skill-card-template">#}
+{#    <div class="skill-card mb-4 p-3 border rounded">#}
+{#        <input type="hidden" name="step" value="3">#}
+{##}
+{#        <div class="row g-3">#}
+{#            <div class="col-md-4">#}
+{#                <label class="form-label">Teaching Skill <span class="text-danger">*</span> <i#}
+{#                        class="bi bi-info-circle text-primary"#}
+{#                        data-bs-toggle="tooltip"#}
+{#                        title="{{ CFChar.tooltip_teaching_skill }}"></i></label>#}
+{#                <select class="form-select js-choice border-0 z-index-9 bg-transparent"#}
+{#                        name="skill"#}
+{#                        aria-label=".form-select-sm"#}
+{#                        data-search-enabled="true"#}
+{#                        data-remove-item-button="true"#}
+{#                        required>#}
+{#                    <option value="">Select Skill</option>#}
+{#                    {% for skill in skills %}#}
+{#                        <option class="align-content-start"#}
+{#                                value="{{ skill.id }}">{{ skill }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="col-md-3">#}
+{#                <label class="form-label">Skill Level <span class="text-danger">*</span><i#}
+{#                        class="bi bi-info-circle text-primary"#}
+{#                        data-bs-toggle="tooltip"#}
+{#                        title="{{ CFChar.tooltip_skill_level }}"></i></label>#}
+{#                <select class="form-select js-choice border-0 z-index-9 bg-transparent"#}
+{#                        name="level"#}
+{#                        aria-label=".form-select-sm"#}
+{#                        data-search-enabled="true"#}
+{#                        data-remove-item-button="true"#}
+{#                        required>#}
+{#                    <option value="">Select Level</option>#}
+{#                    {% for level in levels %}#}
+{#                        <option value="{{ level.id }}">{{ level }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="col-md-3">#}
+{##}
+{#                <label class="form-label">Demonstration Video <i class="bi bi-info-circle text-primary"#}
+{#                                                                 data-bs-toggle="tooltip"#}
+{#                                                                 title="{{ CFChar.tooltip_video_intro }}"></i></label>#}
+{#                <label class="btn btn-sm btn-primary-soft mx-2 w-100 label_skill_video">#}
+{#                    <i class="bi bi-upload"></i> Upload#}
+{#                </label>#}
+{##}
+{##}
+{#                <input type="file" class="form-control d-none skill_video_input"#}
+{#                       name="skill_video" accept=".mp4,.mov,.avi">#}
+{#                <small class="text-muted">Optional</small>#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                <label class="form-label">Certificate <i class="bi bi-info-circle text-primary"#}
+{#                                                         data-bs-toggle="tooltip"#}
+{#                                                         title="{{ CFChar.tooltip_certificate }}"></i></label>#}
+{##}
+{#                <label class="btn btn-sm btn-primary-soft mx-2 w-100 label_skill_certificate">#}
+{#                    <i class="bi bi-upload"></i> Upload#}
+{#                </label>#}
+{#                <input type="file"#}
+{#                       class="form-control d-none certificate_input"#}
+{#                       name="certificate"#}
+{#                       accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">#}
+{#                <small class="text-muted">Optional</small>#}
+{#            </div>#}
+{#            <div class="col-12 text-end">#}
+{#                <button type="button" class="btn btn-sm btn-outline-danger remove-skill">#}
+{#                    <i class="bi bi-trash me-1"></i>Remove#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</template>#}

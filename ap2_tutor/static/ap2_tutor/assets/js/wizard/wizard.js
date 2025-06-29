@@ -1,5 +1,11 @@
-// import {validateStep3, submitStep3} from './step3_skills.js';
-import {validateStep3, submitStep3} from './step3_skills_new.js';
+import {validateStep3, submitStep3, initTooltips, initSelects} from './step3_skills.js';
+import {validateStep4, submitStep4} from './step4_edu.js';
+// Import shared utilities
+// import {} from '/static/assets/js/fileHandlers.js';
+// import {showBootstrapAlert2} from '/static/assets/js/avr.js';
+// Set MAX Entries limit based on VIP status (3 in general and 5 for VIP users)
+export const maxEntries = parseInt(document.getElementById('maxEntries').value);
+
 
 document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------
@@ -14,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // | Step 7: Rejected (Declined)              |
     // --------------------------------------------
 
-
+    initTooltips();
+    initSelects();
     // Initialize the stepper
     const stepperElement = document.querySelector('.bs-stepper');
     const stepper = new Stepper(stepperElement, {
@@ -52,13 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
         goToStep(stepValue + 1);
 
         // Show only the correct step
-        const stepId = `#step-${stepValue + 1}`;  // +1 because your step IDs are 1-based
-        const targetStep = document.querySelector(stepId);
-        if (targetStep) {
-            targetStep.classList.add('active', 'show', 'd-block');
-            targetStep.style.display = 'block';
-        }
-
+        // const stepId = `#step-${stepValue + 1}`;  // +1 because your step IDs are 1-based
+        // const targetStep = document.querySelector(stepId);
+        // if (targetStep) {
+        //     targetStep.classList.add('active', 'show', 'd-block');
+        //     targetStep.style.display = 'block';
+        // }
+        // showTargetStep(stepValue + 1);
 
         updateStepHeader(stepValue); // Update stepper header state (Show us active step!)
         updateCompletedSteps(); // Update visual indicators
@@ -89,6 +96,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`Previous clicked for step ${step}`);
                 goToStep(step - 1); // No validation needed
                 break;
+            case 'skip':
+                console.log(`Skip clicked for step ${step}`);
+                handleSkipAction(step); // Validates internally
+                goToStep(step + 1);
+                break;
             case 'save':
                 console.log(`Save clicked for step ${step}`);
                 handleSaveAction(step); // Validates internally
@@ -118,9 +130,25 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     //-------------------------------------------------------------------------------------
+    //---------------------- Handle skip action based on current step ----------------------
+    function handleSkipAction(step) {
+        switch (step) {
+            case 1:
+                return skipStep1();
+            case 4:
+                return skipStep4();
+            // Add more steps as needed
+            default:
+                console.error('Unknown step:', step);
+                return false;
+        }
+    }
+
     //---------------------- Handle save action based on current step ----------------------
     function handleSaveAction(step) {
         switch (step) {
+            case 1:
+                return skipStep1();
             case 2:
                 return saveStep2();
             case 3:
@@ -241,12 +269,50 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function saveStep4() {
-        console.log('Saving step 4 data');
+    //validateStep4() , submitStep4()
+    async function saveStep4() {
+        console.log('Saving step 4 data ...');
+        // Client-side validation
+        let temp = validateStep4();
+        console.log('validateStep4: ', temp);
+        if (!validateStep4()) {
+            return false;
+        }
+        try {
+            const result = await submitStep4();
+            if (result.success) {
+                showBootstrapAlert('Your Education and Qualifications saved successfully.', 'success', 5000);
+                return true;
+            } else {
+                showBootstrapAlert(result.error || 'Error saving education', 'danger', 5000);
+                return false;
+            }
+        } catch (error) {
+            console.error('Error saving step 4:', error);
+            showBootstrapAlert('Error saving education', 'danger', 5000);
+            return false;
+        }
+    }
+
+    function saveStep5() {
         // Add your step 4 validation and save logic here
         // Return true if successful, false otherwise
         return true;
     }
+
+    function skipStep1() {
+        console.log('Skipping step 1 ...');
+        return true;
+    }
+
+    function skipStep4() {
+        console.log('Skipping step 4 ...');
+        // ****** Do VALIDATION  for data which inserted! or skip if cards are empty! ******
+        // Add your step 4 validation here
+        // Return true if successful, false otherwise
+        return true;
+    }
+
 
     function handleSubmitAction() {
         return true;
@@ -270,10 +336,10 @@ document.addEventListener('DOMContentLoaded', function () {
         completedSteps.add(currentStep);
         updateCompletedSteps();
 
-        hideStepperContents(); // Hide all Stepper content divs
         console.log('currentStep: ', currentStep);
-        showTargetStep(currentStep);  // Show target step
         updateStepHeader(); // Update stepper header
+        hideStepperContents(); // Hide all Stepper content divs
+        showTargetStep(currentStep);  // Show target step
         return true;
     }
 
@@ -331,13 +397,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
     // Hide all content divs
     function hideStepperContents() {
         document.querySelectorAll('.bs-stepper-content .content').forEach(content => {
             content.classList.remove('active', 'show', 'd-block');
             content.style.display = 'none';
         });
+        return;
+    }
+
+
+    // Show target step
+    function showTargetStep(stepNumber) {
+        const targetStep = document.querySelector(`#step-${stepNumber}`);
+        if (targetStep) {
+            targetStep.classList.add('active', 'show', 'd-block');
+            targetStep.style.display = 'block';
+        }
     }
 
     function clearExistingErrors() {
@@ -360,15 +436,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-
-    // Show target step
-    function showTargetStep(stepNumber) {
-        const targetStep = document.querySelector(`#step-${stepNumber}`);
-        if (targetStep) {
-            targetStep.classList.add('active', 'show', 'd-block');
-            targetStep.style.display = 'block';
-        }
-    }
 
     function updateStepHeader(stepNumber) {
         document.querySelectorAll('.step').forEach((step, index) => {
@@ -691,4 +758,12 @@ function initializeToStep2() {
 
     // Update visual indicators
     updateStepVisuals();
+}
+
+function showAlert(message, type) {
+    const container = document.getElementById("alert-container");
+    const alertBox = document.createElement("div");
+    alertBox.className = `alert alert-${type} alert-dismissible`;
+    alertBox.innerHTML = `${message}<button type="button" class="close" data-dismiss="alert">&times;</button>`;
+    container.appendChild(alertBox);
 }

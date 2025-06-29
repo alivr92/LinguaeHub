@@ -1,5 +1,4 @@
 import traceback
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponseForbidden
 import json
@@ -10,7 +9,7 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Delet
 from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, datetime
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -27,11 +26,16 @@ from utils.converters import utc_to_local
 from utils.decorators import ownership_required
 
 from ap2_meeting.models import Review, Session
-from ap2_tutor.models import ProviderApplication, Tutor, TeachingCategory, SubTeachingCategory
-from app_accounts.models import UserProfile, Level, Skill, UserSkill
-from .forms import ProviderApplicationForm, CombinedProfileForm, ProfileBasicForm, CombinedSkillForm
-from app_accounts.forms import UserEducationForm
+from ap2_tutor.models import ProviderApplication, Tutor, TeachingCategory, TeachingCertificate, TEACHING_CERTIFICATES
+from app_accounts.models import UserProfile, Level, Skill, UserSkill, UserEducation, DegreeLevel, DEGREE_LEVELS
+from .forms import (ProviderApplicationForm, CombinedProfileForm, ProfileBasicForm, CombinedSkillForm,
+                    EducationalExtraForm)
+from app_accounts.forms import UserEducationForm, AgreementForm
 from ap2_meeting.forms import AppointmentSettingForm
+
+from django.core.files.storage import default_storage
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
 
 s_gender = UserProfile.objects.values_list('gender', flat=True).distinct()
 s_country = UserProfile.objects.values_list('country', flat=True).distinct()
@@ -433,7 +437,14 @@ class DTWizard(BasicProfile, RoleRequiredMixin):
         try:
             user_profile = UserProfile.objects.get(user=user)
             tutor = Tutor.objects.get(profile=user_profile)
-
+            # Educaiton cards context
+            context['edu_extra_form'] = EducationalExtraForm(
+                user_instance=user,
+                tutor_instance=tutor
+            )
+            context['degree_levels'] = DegreeLevel.objects.all()
+            # context['degree_levels'] = DEGREE_LEVELS
+            context['teaching_certificates'] = TEACHING_CERTIFICATES
             # Basic profile form is needed in multiple steps
             context['profile_basic_form'] = ProfileBasicForm(
                 user_instance=user,
@@ -442,7 +453,7 @@ class DTWizard(BasicProfile, RoleRequiredMixin):
             )
             context['applicantUId'] = user.id
             context['isVIP'] = user.profile.is_vip
-            context['maxSkills'] = 5 if user.profile.is_vip else 3
+            context['maxEntries'] = 5 if user.profile.is_vip else 3
             context['skills'] = Skill.objects.all()
             context['levels'] = Level.objects.all()
             context['skillForm'] = CombinedSkillForm(user=user)  # Pass user to the form
@@ -450,7 +461,8 @@ class DTWizard(BasicProfile, RoleRequiredMixin):
             context['existing_skills'] = UserSkill.objects.filter(user=user)
             context['education_form'] = UserEducationForm(user=user)
             context['user_education'] = user.education.all() if hasattr(user, 'education') else None
-
+            context['tutor'] = Tutor.objects.get(profile__user=user)
+            context['AgreementForm'] = AgreementForm()
         except (UserProfile.DoesNotExist, Tutor.DoesNotExist):
             # Handle case where profile doesn't exist
             messages.error(self.request, 'Profile not found. Please contact support.')
@@ -756,6 +768,7 @@ def get_existed_skills_BACKUP_KEEP_IT(request):
         return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 
+@login_required
 @ownership_required(lookup_field='id', lookup_url_kwarg='applicantUId', id_param='applicantUId')
 def get_existed_skills(request):
     # Your existing logic (simplified since ownership is checked by decorator)
@@ -1157,19 +1170,329 @@ def save_skills(request):
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
 
 
+# -------------------------------------------
+@ownership_required(lookup_field='id', lookup_url_kwarg='applicantUId', id_param='applicantUId')
+def get_education_data(request):
+    try:
+        user = request.user
+
+        # Get education records
+        educations = UserEducation.objects.filter(user=user).select_related('degree').order_by('-end_year')
+
+        # Get teaching certificates
+        certificates = TeachingCertificate.objects.filter(user=user).order_by('-completion_date')
+
+        # Format education data
+        education_list = []
+        for edu in educations:
+            education_list.append({
+                'id': edu.id,
+                'degree': edu.degree.id,
+                'degreeName': edu.degree.name,
+                'field': edu.field_of_study,
+                'institution': edu.institution,
+                'start_year': edu.start_year,
+                'end_year': edu.end_year,
+                'document': request.build_absolute_uri(edu.document.url) if edu.document else None,
+                'description': edu.description,
+                'status': edu.status
+            })
+
+        # Format certificate data
+        certificate_list = []
+        for cert in certificates:
+            certificate_list.append({
+                'id': cert.id,
+                'name': cert.name,
+                'organization': cert.issuing_organization,
+                'completion_year': cert.completion_date,  # Changed from date to year
+                'document': request.build_absolute_uri(
+                    cert.document.url) if cert.document else None,
+                'is_certified': cert.is_certified
+            })
+
+        return JsonResponse({
+            'status': 'success',
+            'education': education_list,
+            'certifications': certificate_list
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e),
+            'traceback': traceback.format_exc() if settings.DEBUG else None
+        }, status=500)
+
+
+# Shared helper functions
 def validate_file_extension(filename, allowed_extensions):
+    """Validate file extension against allowed list"""
     extension = filename.split('.')[-1].lower()
     return extension in allowed_extensions
 
 
+def handle_file_upload(model_instance, field_name, new_file, allowed_extensions):
+    """Handle file upload with validation and cleanup of old file"""
+    if not validate_file_extension(new_file.name, allowed_extensions):
+        return False
+
+    # Delete old file if exists
+    old_file = getattr(model_instance, field_name)
+    if old_file:
+        old_file.delete(save=False)
+
+    # Save new file
+    setattr(model_instance, field_name, new_file)
+    return True
+
+
+def process_removals(model, user, ids_to_remove, file_fields=None):
+    """Process removal of multiple items with file cleanup"""
+    if not ids_to_remove:
+        return
+
+    items_to_delete = model.objects.filter(id__in=ids_to_remove, user=user)
+
+    if file_fields:
+        for item in items_to_delete:
+            for field in file_fields:
+                file = getattr(item, field)
+                if file:
+                    file.delete(save=False)
+
+    items_to_delete.delete()
+
+
 @require_POST
 @csrf_exempt
-def submit_form_profile_MAIN(request):
+@transaction.atomic
+def save_educations(request):
+    if not request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+
+    try:
+        user = request.user
+        allowed_extensions = ['pdf', 'jpg', 'jpeg', 'png']
+        current_year = datetime.now().year
+        max_year = current_year + 10
+
+        # Debug logging
+        print("Received FILES:", list(request.FILES.keys()))
+        print("Received POST data:", {
+            k: v for k, v in request.POST.items()
+            if not k.startswith('csrf') and not k.endswith('[]')
+        })
+
+        # Parse tracking data - we only need new and removed now
+        education_new = json.loads(request.POST.get('education_new', '[]'))
+        education_removed = json.loads(request.POST.get('education_removed', '[]'))
+        education_doc_removed = json.loads(request.POST.get('education_doc_removed', '[]'))
+
+        certification_new = json.loads(request.POST.get('certification_new', '[]'))
+        certification_removed = json.loads(request.POST.get('certification_removed', '[]'))
+        certification_doc_removed = json.loads(request.POST.get('certification_doc_removed', '[]'))
+
+        # ===== 0. PROCESS Two Optional fields =====
+        years_experience = request.POST.get('years_experience')
+        teaching_tags = json.loads(request.POST.get('teaching_tags', '[]'))
+
+        tutor = Tutor.objects.get(profile__user=user)
+        if years_experience:
+            tutor.years_experience = years_experience
+        if teaching_tags:
+            tutor.teaching_tags.set(teaching_tags)  # Use .set() for ManyToMany fields
+        tutor.save()
+
+        # ===== 1. PROCESS REMOVALS FIRST =====
+        # Remove education entries and their files
+        if education_removed:
+            # First get all educations that will be deleted
+            educations_to_delete = UserEducation.objects.filter(
+                id__in=education_removed,
+                user=user
+            )
+
+            # Delete their files first
+            for education in educations_to_delete:
+                if education.document:
+                    education.document.delete(save=False)
+
+            # Then delete the records
+            educations_to_delete.delete()
+
+        # Remove certification entries and their files
+        if certification_removed:
+            certs_to_delete = TeachingCertificate.objects.filter(
+                id__in=certification_removed,
+                user=user
+            )
+
+            for cert in certs_to_delete:
+                if cert.document:
+                    cert.document.delete(save=False)
+
+            certs_to_delete.delete()
+
+        # ===== 2. PROCESS DOCUMENT REMOVALS =====
+        # Handle cases where card exists but document was removed
+        for card_id in education_doc_removed:
+            try:
+                education = UserEducation.objects.get(id=card_id, user=user)
+                if education.document:
+                    education.document.delete(save=False)
+                    education.document = None
+                    education.save()
+            except UserEducation.DoesNotExist:
+                continue
+
+        for card_id in certification_doc_removed:
+            try:
+                certification = TeachingCertificate.objects.get(id=card_id, user=user)
+                if certification.document:
+                    certification.document.delete(save=False)
+                    certification.document = None
+                    certification.save()
+            except TeachingCertificate.DoesNotExist:
+                continue
+
+        # ===== 3. PROCESS EDUCATION ENTRIES =====
+        saved_educations = []
+        education_ids = request.POST.getlist('education_ids[]')
+        degrees = request.POST.getlist('degrees[]')
+        fields = request.POST.getlist('fields[]')
+        institutions = request.POST.getlist('institutions[]')
+        start_years = request.POST.getlist('start_years[]')
+        end_years = request.POST.getlist('end_years[]')
+        descriptions = request.POST.getlist('descriptions[]')
+
+        for i in range(len(education_ids)):
+            card_id = education_ids[i]
+            try:
+                degree = DegreeLevel.objects.get(id=degrees[i])
+                start_year = int(start_years[i])
+                end_year = int(end_years[i])
+
+                # Validate years
+                if start_year < 1900 or start_year > max_year or end_year < 1900 or end_year > max_year:
+                    raise ValueError(f"Invalid year for education entry {i+1}")
+                if end_year < start_year:
+                    raise ValueError(f"Graduation year must be >= start year for education entry {i+1}")
+
+                if card_id in education_new:
+                    # Create new education
+                    education = UserEducation(
+                        user=user,
+                        degree=degree,
+                        field_of_study=fields[i],
+                        institution=institutions[i],
+                        start_year=start_year,
+                        end_year=end_year,
+                        description=descriptions[i],
+                        status='pending'
+                    )
+                else:
+                    # Update existing education
+                    education = UserEducation.objects.get(id=card_id, user=user)
+                    education.degree = degree
+                    education.field_of_study = fields[i]
+                    education.institution = institutions[i]
+                    education.start_year = start_year
+                    education.end_year = end_year
+                    education.description = descriptions[i]
+                    education.status = 'pending'
+
+                # Handle document upload - only process if file was actually uploaded
+                file_key = f'education_doc_{card_id}'
+                if file_key in request.FILES:
+                    file = request.FILES[file_key]
+                    if file.name.split('.')[-1].lower() in allowed_extensions:
+                        if education.document:  # Remove existing file first
+                            education.document.delete(save=False)
+                        education.document = file
+
+                education.save()
+                saved_educations.append(education.id)
+
+            except (DegreeLevel.DoesNotExist, UserEducation.DoesNotExist, ValueError) as e:
+                print(f"Error processing education {i+1}: {str(e)}")
+                continue
+
+        # ===== 4. PROCESS CERTIFICATION ENTRIES =====
+        saved_certifications = []
+        certification_ids = request.POST.getlist('certification_ids[]')
+        cert_names = request.POST.getlist('cert_names[]')
+        cert_orgs = request.POST.getlist('cert_orgs[]')
+        cert_years = request.POST.getlist('cert_years[]')
+
+        for i in range(len(certification_ids)):
+            card_id = certification_ids[i]
+            try:
+                cert_year = int(cert_years[i])
+                if cert_year < 1900 or cert_year > max_year:
+                    raise ValueError(f"Invalid year for certification entry {i+1}")
+
+                if card_id in certification_new:
+                    # Create new certification
+                    certification = TeachingCertificate(
+                        user=user,
+                        name=cert_names[i],
+                        issuing_organization=cert_orgs[i],
+                        completion_date=cert_year,
+                        is_certified=False
+                    )
+                else:
+                    # Update existing certification
+                    certification = TeachingCertificate.objects.get(id=card_id, user=user)
+                    certification.name = cert_names[i]
+                    certification.issuing_organization = cert_orgs[i]
+                    certification.completion_date = cert_year
+                    certification.is_certified = False
+
+                # Handle document upload
+                file_key = f'certification_doc_{card_id}'
+                if file_key in request.FILES:
+                    file = request.FILES[file_key]
+                    if file.name.split('.')[-1].lower() in allowed_extensions:
+                        if certification.document:  # Remove existing file first
+                            certification.document.delete(save=False)
+                        certification.document = file
+
+                certification.save()
+                saved_certifications.append(certification.id)
+
+            except (TeachingCertificate.DoesNotExist, ValueError) as e:
+                print(f"Error processing certification {i+1}: {str(e)}")
+                continue
+
+        # Update application status
+        ProviderApplication.objects.filter(user=user).update(status='added_edu')
+
+        return JsonResponse({
+            'success': True,
+            'message': 'Education and certification data saved successfully',
+            'saved_educations': saved_educations,
+            'saved_certifications': saved_certifications
+        })
+
+    except Exception as e:
+        print(f"Error in save_educations: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': str(e),
+            'traceback': traceback.format_exc() if settings.DEBUG else None
+        }, status=500)
+
+
+@require_POST
+@csrf_exempt
+def submit_form_profile(request):
     user = request.user
     try:
         user_profile = UserProfile.objects.get(user=user)
         tutor = Tutor.objects.get(profile=user_profile)
     except (UserProfile.DoesNotExist, Tutor.DoesNotExist) as e:
+        print(f"Profile lookup error: {str(e)}")  # Debug logging
         return JsonResponse({
             'success': False,
             'errors': {'__all__': 'User profile not found'}
@@ -1180,45 +1503,61 @@ def submit_form_profile_MAIN(request):
         request.FILES,
         user_instance=user,
         profile_instance=user_profile,
-        tutor_instance=tutor
+        # tutor_instance=tutor
     )
 
     if form.is_valid():
-        form.cleaned_data['email'] = user.email
         try:
-            form.save(user)
-            # change applicant status to complete_profile
+            # Debug: Print cleaned data before saving
+            print(f"Form cleaned data: {form.cleaned_data}")
+
+            # Save the form
+            # saved_user, saved_profile, saved_tutor = form.save(user)
+            saved_user, saved_profile = form.save(user)
+
+            # Debug: Print saved objects
+            print(f"Saved user: {saved_user}")
+            print(f"Saved profile: {saved_profile}")
+            # print(f"Saved tutor: {saved_tutor}")
+
+            # Update applicant status
             applicant = ProviderApplication.objects.get(user=user)
             applicant.status = 'completed_profile'
             applicant.save()
-            print(f'Im in form_valid!')
+
             return JsonResponse({
                 'success': True,
                 'message': 'Profile updated successfully'
             })
 
         except Exception as e:
-            print(f'Im form this error!!')
+            # Get the complete traceback
+            import traceback
+            error_trace = traceback.format_exc()
+            print(f"Error during save: {str(e)}\n{error_trace}")  # Detailed error logging
+
             return JsonResponse({
                 'success': False,
-                'errors': {'__all__': str(e)}
+                'errors': {'__all__': str(e)},
+                'traceback': error_trace  # Include in development only
             }, status=400)
+    else:
+        # Print form errors for debugging
+        print(f"Form errors: {form.errors}")
 
-    # Return form errors
-    errors = {}
-    for field in form.errors:
-        errors[field] = form.errors[field][0]
+        errors = {}
+        for field in form.errors:
+            errors[field] = form.errors[field][0]
 
-    print(f'Finally!!')
-    return JsonResponse({
-        'success': False,
-        'errors': errors
-    }, status=400)
+        return JsonResponse({
+            'success': False,
+            'errors': errors
+        }, status=400)
 
 
 @require_POST
 @csrf_exempt
-def submit_form_profile(request):
+def submit_edu(request):
     user = request.user
     try:
         user_profile = UserProfile.objects.get(user=user)
@@ -1336,61 +1675,18 @@ def submit_form_skill(request):
     }, status=400)
 
 
-def get_categories1(request):
-    categories = TeachingCategory.objects.prefetch_related("sub_teaching_categories").all()
-    data = [
-        {
-            "category": category.name,
-            "subcategories": [{"id": sub.id, "name": sub.name} for sub in category.sub_teaching_categories.all()]
-        }
-        for category in categories
-    ]
-
-    return JsonResponse({"categories": data})
-
-
-
-# Current --------------------------------------------------------------------------------------
-def get_categories(request):
-    categories = TeachingCategory.objects.prefetch_related("sub_teaching_categories").all()
-    data = [
-        {
-            "category": category.name,
-            "subcategories": [
-                {"id": sub.id, "name": sub.name}
-                for sub in category.sub_teaching_categories.all()
-            ]
-        }
-        for category in categories
-    ]
-    return JsonResponse({"categories": data})
-
-def get_subcategories(request):
-    category_name = request.GET.get('category')
-    if not category_name:
-        return JsonResponse({"subcategories": []})
-
-    try:
-        category = TeachingCategory.objects.get(name=category_name)
-        subcategories = category.sub_teaching_categories.all().values('id', 'name')
-        return JsonResponse({"subcategories": list(subcategories)})
-    except TeachingCategory.DoesNotExist:
-        return JsonResponse({"subcategories": []})
-
-
-def get_category_for_subcategories(request):
-    subcategory_ids = request.GET.get('ids', '').split(',')
-    if not subcategory_ids:
-        return JsonResponse({"category": None})
-
-    try:
-        # Get the first subcategory to find its parent category
-        subcategory = SubTeachingCategory.objects.filter(id__in=subcategory_ids).first()
-        if subcategory:
-            return JsonResponse({"category": subcategory.teaching_category.name})
-        return JsonResponse({"category": None})
-    except Exception:
-        return JsonResponse({"category": None})
+def wizard_submit_final(request):
+    if request.method == 'POST':
+        form = AgreementForm(request.POST, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            applicant = ProviderApplication.objects.get(user=request.user)
+            applicant.status = 'decision'
+            applicant.save()
+            return redirect('tutor:dt_wizard')
+    else:
+        form = AgreementForm(instance=request.user.profile)
+    return render(request, 'ap2_tutor/wizard/dt_wizard.html', {'form': form})
 
 
 class SuccessSubmit(TemplateView, RoleRequiredMixin):

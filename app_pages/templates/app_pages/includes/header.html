@@ -62,7 +62,8 @@
                     {#                                {% endif %}#}
                     {#                                    href="{% url 'tutor:tutor_list' %}" id="menu-tutor" aria-expanded="false">Tutors</a>#}
                     {#                    </li>#}
-                    <!-- Nav item 03 About Us-->
+
+                    <!-- Nav item: About Us -->
                     <li class="nav-item">
                         <a
                                 {% if 'about' in request.path %}
@@ -73,7 +74,7 @@
                                     href="{% url 'app_pages:about' %}" id="menu-tutor" aria-expanded="false">About
                             Us</a>
                     </li>
-                    <!-- Nav item 04 Contact Us-->
+                    <!-- Nav item: Contact Us -->
                     <li class="nav-item">
                         <a
                                 {% if 'contact-us' in request.path %}
@@ -84,7 +85,18 @@
                                     href="{% url 'app_pages:contact_us' %}" id="menu-tutor" aria-expanded="false">Contact
                             Us</a>
                     </li>
-                    <!-- Nav item 07 Blog-->
+                    <!-- Nav item: Pricing -->
+                    <li class="nav-item">
+                        <a
+                                {% if 'pricing' in request.path %}
+                                    class="nav-link active text-primary"
+                                {% else %}
+                                    class="nav-link"
+                                {% endif %}
+                                    href="{% url 'app_pages:pricing' %}" id="menu-tutor"
+                                    aria-expanded="false">Pricing</a>
+                    </li>
+                    <!-- Nav item: Blog-->
                     <li class="nav-item">
                         <a
                                 {% if 'blog' in request.path %}
@@ -95,10 +107,10 @@
                                     href="{% url 'blog:home' %}" id="menu-tutor" aria-expanded="false">Blog</a>
                     </li>
 
-                    <!-- Nav item Shop-->
+                    <!-- Nav item: Shop-->
                     <li class="nav-item">
                         <a
-                                {% if 'product' in request.path %}
+                                {% if 'shop' in request.path %}
                                     class="nav-link active text-primary"
                                 {% else %}
                                     class="nav-link"
@@ -106,7 +118,7 @@
                                     href="{% url 'shop:products' %}" id="menu-shop" aria-expanded="false">Shop</a>
                     </li>
 
-                    <!-- Nav item 5 Account -->
+                    <!-- Nav item: Account -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="accounntMenu" data-bs-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -206,7 +218,7 @@
                     </li>
 
 
-                    <!-- Nav item 5 link-->
+                    <!-- Nav item: link-->
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="advanceMenu" data-bs-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="false">
@@ -307,7 +319,8 @@
                                         <!-- Title -->
                                         <div class="d-flex justify-content-between">
                                             <h6 class="m-0">Angular 4 Tutorial in audio (Compact Disk)</h6>
-                                            <a href="#" class="small text-primary-hover"><i class="bi bi-x-lg"></i></a>
+                                            <a href="#" class="small text-primary-hover"><i
+                                                    class="bi bi-x-lg"></i></a>
                                         </div>
                                         <!-- Select item -->
                                         <form class="choices-sm pt-2 col-4">
@@ -338,8 +351,10 @@
                                     <div class="col-9">
                                         <!-- Title -->
                                         <div class="d-flex justify-content-between">
-                                            <h6 class="m-0">The Principles of Beautiful Graphics Design (Paperback)</h6>
-                                            <a href="#" class="small text-primary-hover"><i class="bi bi-x-lg"></i></a>
+                                            <h6 class="m-0">The Principles of Beautiful Graphics Design
+                                                (Paperback)</h6>
+                                            <a href="#" class="small text-primary-hover"><i
+                                                    class="bi bi-x-lg"></i></a>
                                         </div>
                                         <!-- Select item -->
                                         <form class="choices-sm pt-2 col-4">
@@ -359,8 +374,8 @@
                             </div>
                             <!-- Button -->
                             <div class="card-footer bg-transparent border-top py-3 text-center d-flex justify-content-between position-relative">
-                                <a href="#" class="btn btn-sm btn-light mb-0">View Cart</a>
-                                <a href="#" class="btn btn-sm btn-success mb-0">Checkout</a>
+                                <a href="{% url 'shop:cart' %}" class="btn btn-sm btn-light mb-0">View Cart</a>
+                                <a href="{% url 'shop:checkout' %}" class="btn btn-sm btn-success mb-0">Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -368,7 +383,6 @@
                 </div>
                 <!-- Cart dropdown END -->
             {% endif %}
-
             <!-- Profile START -->
             {% if user.is_authenticated %}
                 <div class="dropdown ms-1 ms-lg-0">

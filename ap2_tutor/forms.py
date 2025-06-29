@@ -4,7 +4,10 @@ import os
 from django.contrib.auth.models import User
 from app_accounts.models import (UserProfile, Language, Skill, Level, UserSkill, UserEducation,
                                  LANGUAGE_CHOICES, GENDER_CHOICES, COUNTRY_CHOICES, LEVEL_CHOICES, SKILL_CHOICES)
-from ap2_tutor.models import ProviderApplication, Tutor
+from ap2_tutor.models import ProviderApplication, Tutor, TeachingCategory, TEACHING_YEARS
+
+# if user is VIP -> 5 else: 3
+MAX_MULTIPLE_ITEMS = 3
 
 
 class ProviderApplicationForm(forms.ModelForm):
@@ -756,3 +759,55 @@ class SocialURLForm(forms.Form):
         profile, created = UserProfile.objects.update_or_create(user=user, defaults=profile_data)
 
         return profile
+
+
+# On-boarding wizard step 4 (Extra info: years_experience, teaching_tags (TAGs) )
+class EducationalExtraForm(forms.Form):
+    years_experience = forms.ChoiceField(choices=TEACHING_YEARS, required=False, initial='', widget=forms.Select(attrs={
+        'class': 'form-select js-choice border-1 z-index-9 bg-transparent',
+        'aria-label': '.form-select-sm',
+        'data-search-enabled': 'true',
+        'data-remove-item-button': 'true',
+        'placeholder': 'Years of Experience',
+    }))
+    teaching_tags = forms.ModelMultipleChoiceField(
+        queryset=TeachingCategory.objects.all(),
+        required=False,
+        widget=forms.SelectMultiple(attrs={
+            'class': 'form-select js-choice border-0 z-index-9 bg-transparent',
+            'multiple': 'multiple',
+            'aria-label': '.form-select-sm',
+            'data-max-item-count': MAX_MULTIPLE_ITEMS,
+            'data-remove-item-button': 'true',
+            'placeholder': 'Select Teaching Tags',
+            'required': 'required',
+        })
+    )
+
+    def __init__(self, *args, **kwargs):
+        # Extract instance data for User, UserProfile, and Tutor
+        self.user_instance = kwargs.pop('user_instance', None)
+        self.tutor_instance = kwargs.pop('tutor_instance', None)
+
+        # Call super().__init__() first to initialize self.fields
+        super().__init__(*args, **kwargs)
+
+        if self.tutor_instance:
+            # Populate Tutor fields
+            tutor_fields = ['years_experience']
+            for field in tutor_fields:
+                self.fields[field].initial = getattr(self.tutor_instance, field)
+            self.fields['teaching_tags'].initial = self.tutor_instance.teaching_tags.all()
+            # self.fields['skill_level'].initial = self.tutor_instance.skill_level.all()
+
+    def save(self, user):
+        # Update or create Tutor
+        tutor_data = {
+            'profile': user.profile,
+            'years_experience': self.cleaned_data['years_experience'],
+        }
+        tutor, created = Tutor.objects.update_or_create(profile=user.profile, defaults=tutor_data)
+        # Handle many-to-many fields
+        tutor.teaching_tags.set(self.cleaned_data['teaching_tags'])
+
+        return tutor

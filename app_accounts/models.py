@@ -5,7 +5,11 @@ from django.core.validators import MaxValueValidator, MinValueValidator, FileExt
 
 USER_TYPES = [('student', 'Student'), ('tutor', 'Tutor'), ('admin', 'Admin'), ('staff', 'Staff'),
               ('interviewer', 'Interviewer')]
-GENDER_CHOICES = [('female', 'Female'), ('male', 'Male'), ('transgender', 'Transgender')]
+GENDER_CHOICES = [('female', 'Female'), ('male', 'Male'),
+                  ('trans', 'Transgendered'),
+                  ('ambiguous', 'Ambiguous'),
+                  ('neuter', 'Neuter'),
+                  ]
 ALLOWED_EXTENSIONS_VIDEO = ['mp4', 'ts']
 ALLOWED_EXTENSIONS_CERTIFICATE = ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg']
 SKILL_STATUS_CHOICES = [
@@ -485,6 +489,16 @@ CATEGORY_CHOICES = [
     ('instrument', 'Instrument'),
 ]
 SKILL_CHOICES = LANGUAGE_CHOICES_EXTENDED + SCIENCES
+DEGREE_LEVELS = [
+    ('', 'Select degree'),
+    ('high_school', 'High School Diploma'),
+    ('associate', 'Associate Degree'),
+    ('bachelor', "Bachelor's Degree"),
+    ('master', "Master's Degree"),
+    ('phd', 'PhD/Doctorate'),
+    ('professional', 'Professional Degree'),
+    ('other', 'Other'),
+]
 
 
 class Language(models.Model):
@@ -521,6 +535,18 @@ class Level(models.Model):
 
     class Meta:
         ordering = ['name']
+
+    def __str__(self):
+        return self.get_name_display()
+
+
+class DegreeLevel(models.Model):
+    """Predefined degree levels (BA, BSc, MA, MSc, PhD, etc.)"""
+    name = models.CharField(max_length=50, choices=DEGREE_LEVELS)
+    order = models.PositiveSmallIntegerField(help_text="For sorting purposes")
+
+    class Meta:
+        ordering = ['order']
 
     def __str__(self):
         return self.get_name_display()
@@ -581,10 +607,16 @@ class UserSpecialization(models.Model):
 
 class UserEducation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='educations')
-    degree = models.CharField(max_length=100)  # e.g., BA, BSc, MA, PhD
+    degree = models.ForeignKey(DegreeLevel, on_delete=models.PROTECT)
     field_of_study = models.CharField(max_length=100)  # e.g., Linguistics, English
     institution = models.CharField(max_length=200)
-    graduation_year = models.PositiveIntegerField(
+    start_year = models.PositiveIntegerField(
+        validators=[MinValueValidator(1900), MaxValueValidator(timezone.now().year)],
+        null=True,
+        blank=True
+    )
+    # graduation_year
+    end_year = models.PositiveIntegerField(
         validators=[MinValueValidator(1900), MaxValueValidator(timezone.now().year)])
     document = models.FileField(
         upload_to='applicants/education/%Y/%m/%d/',
@@ -592,6 +624,7 @@ class UserEducation(models.Model):
         blank=True,
         validators=[FileExtensionValidator(allowed_extensions=ALLOWED_EXTENSIONS_CERTIFICATE)],
     )
+    description = models.TextField(blank=True, max_length=500)
     is_certified = models.BooleanField(default=False)
     is_notified = models.BooleanField(default=False)
     status = models.CharField(max_length=20, choices=SKILL_STATUS_CHOICES, default='pending')
@@ -601,12 +634,12 @@ class UserEducation(models.Model):
     needs_interview = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-graduation_year']
+        ordering = ['-end_year']
         verbose_name = 'Education Record'
         verbose_name_plural = 'Education Records'
 
     def __str__(self):
-        return f"{self.user.username} – {self.degree} in {self.field_of_study} ({self.graduation_year})"
+        return f"{self.user.username} – {self.degree} in {self.field_of_study} ({self.end_year})"
 
 
 class UserProfile(models.Model):
@@ -621,18 +654,20 @@ class UserProfile(models.Model):
     lang_native = models.CharField(max_length=100, choices=LANGUAGE_CHOICES, default='Unknown')
     lang_speak = models.ManyToManyField(Language, blank=True)
     bio = models.TextField(max_length=500, blank=True)
-    availability = models.BooleanField(blank=True, default=True)
-    is_vip = models.BooleanField(blank=False, default=False)
     rating = models.FloatField(default=0.0)
     reviews_count = models.IntegerField(default=0)
-    url_facebook = models.URLField(max_length=150, blank=True)
-    url_insta = models.URLField(max_length=150, blank=True)
-    url_twitter = models.URLField(max_length=150, blank=True)
-    url_linkedin = models.URLField(max_length=150, blank=True)
-    url_youtube = models.URLField(max_length=150, blank=True)
+
+    availability = models.BooleanField(blank=True, default=True)
+    is_vip = models.BooleanField(blank=False, default=False)
+    is_active = models.BooleanField(default=False)  # show on frontend only if active
+
+    terms_agreed = models.BooleanField(default=False)
+    terms_agreed_date = models.DateTimeField(null=True, blank=True)
+    email_consent = models.BooleanField(default=False)
+    email_consent_date = models.DateTimeField(null=True, blank=True)
+
     create_date = models.DateTimeField(auto_now_add=True)  # Use auto_now_add
     last_modified = models.DateTimeField(default=timezone.now, blank=True)
-    is_active = models.BooleanField(default=False)  # show on frontend only if active
 
     def __str__(self):
         return self.user.username
@@ -650,3 +685,15 @@ class UserProfile(models.Model):
             self.photo = 'photos/default.png'
         self.last_modified = timezone.now()
         super().save(*args, **kwargs)
+
+
+class UserSocial(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='socials')
+    url_facebook = models.URLField(max_length=150, blank=True)
+    url_insta = models.URLField(max_length=150, blank=True)
+    url_twitter = models.URLField(max_length=150, blank=True)
+    url_linkedin = models.URLField(max_length=150, blank=True)
+    url_youtube = models.URLField(max_length=150, blank=True)
+
+    def __str__(self):
+        return self.user.username

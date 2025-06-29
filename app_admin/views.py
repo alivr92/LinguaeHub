@@ -283,7 +283,7 @@ def update_applicant_status(request, applicant_id):
         status = request.POST.get('status')
         print(f'state: {status}')
 
-        if status not in dict(ProviderApplication.STATUS_CHOICES).keys():
+        if status not in dict(STATUS_WIZARD).keys():
             return JsonResponse({'error': 'Invalid status'}, status=400)
 
         # Handle special cases
@@ -335,6 +335,20 @@ def update_applicant_status(request, applicant_id):
                     uSkill.verified_at = timezone.now()
 
                 uSkill.save()
+
+            for edu in applicant.user.educations.all():
+                edu_badge = request.POST.get(f'edu_badge_{edu.id}') == 'true'
+                edu.is_certified = edu_badge
+                edu.verified_by = request.user
+                edu.verified_at = timezone.now()
+                edu.save()
+
+            for cert in applicant.user.certificates.all():
+                cert_badge = request.POST.get(f'cert_badge_{cert.id}') == 'true'
+                cert.is_certified = cert_badge
+                cert.verified_by = request.user
+                cert.verified_at = timezone.now()
+                cert.save()
 
             # Save interviewer comments
             # set acceptance comment
@@ -393,67 +407,67 @@ def update_applicant_status(request, applicant_id):
         }, status=500)
 
 
-def update_provider_request_status_2(request, provider_id):
-    """Handle provider application status updates via AJAX"""
-    # Enhanced header check (works with all Django versions)
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.META.get(
-        'HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
-
-    if not is_ajax or not request.method == 'POST':
-        return JsonResponse(
-            {'error': 'Invalid request', 'detail': 'Only AJAX POST requests allowed'},
-            status=400
-        )
-
-    try:
-        # 1. Validate and get applicant
-        applicant = ProviderApplication.objects.select_related('user', 'user__profile').get(pk=provider_id)
-        status = request.POST.get('status')
-
-        if status not in dict(ProviderApplication.STATUS_CHOICES):
-            return JsonResponse(
-                {'error': 'Invalid status', 'valid_statuses': list(dict(ProviderApplication.STATUS_CHOICES).keys())},
-                status=400
-            )
-
-        # 2. Process common fields
-        applicant.status = status
-        applicant.verified_by = request.user if request.user.is_authenticated else None
-        applicant.verified_at = timezone.now()
-
-        # 3. Status-specific processing
-        if status == 'invited':
-            applicant.invitation_token = get_random_string(64)
-            applicant.token_expiry = timezone.now() + timedelta(days=7)
-            send_invitation_email(applicant, request)
-
-        elif status == 'rejected':
-            applicant.interviewer_comment = request.POST.get('interviewer_comment', '')
-            applicant.user.profile.is_active = False
-            send_rejection_email(applicant)
-
-        elif status == 'accepted':
-            if not process_skills(applicant, request.POST):
-                return JsonResponse(
-                    {'error': 'Invalid skills data', 'detail': 'Skills and levels mismatch'},
-                    status=400
-                )
-            applicant.user.profile.is_active = True
-            applicant.user.profile.save()
-
-            # 4. Final save and response
-            applicant.save()
-            return JsonResponse({
-                'success': True,
-                'new_status': applicant.get_status_display(),
-                'status_class': status,
-            })
-
-    except ProviderApplication.DoesNotExist:
-        return JsonResponse({'error': 'Application not found'}, status=404)
-    except Exception as e:
-        # logger.error(f"Error updating provider status: {str(e)}", exc_info=True)
-        return JsonResponse({'error': 'Server error'}, status=500)
+# def update_provider_request_status_2(request, provider_id):
+#     """Handle provider application status updates via AJAX"""
+#     # Enhanced header check (works with all Django versions)
+#     is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.META.get(
+#         'HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+#
+#     if not is_ajax or not request.method == 'POST':
+#         return JsonResponse(
+#             {'error': 'Invalid request', 'detail': 'Only AJAX POST requests allowed'},
+#             status=400
+#         )
+#
+#     try:
+#         # 1. Validate and get applicant
+#         applicant = ProviderApplication.objects.select_related('user', 'user__profile').get(pk=provider_id)
+#         status = request.POST.get('status')
+#
+#         if status not in dict(ProviderApplication.STATUS_CHOICES):
+#             return JsonResponse(
+#                 {'error': 'Invalid status', 'valid_statuses': list(dict(ProviderApplication.STATUS_CHOICES).keys())},
+#                 status=400
+#             )
+#
+#         # 2. Process common fields
+#         applicant.status = status
+#         applicant.verified_by = request.user if request.user.is_authenticated else None
+#         applicant.verified_at = timezone.now()
+#
+#         # 3. Status-specific processing
+#         if status == 'invited':
+#             applicant.invitation_token = get_random_string(64)
+#             applicant.token_expiry = timezone.now() + timedelta(days=7)
+#             send_invitation_email(applicant, request)
+#
+#         elif status == 'rejected':
+#             applicant.reviewer_comment = request.POST.get('reviewer_comment', '')
+#             applicant.user.profile.is_active = False
+#             send_rejection_email(applicant)
+#
+#         elif status == 'accepted':
+#             if not process_skills(applicant, request.POST):
+#                 return JsonResponse(
+#                     {'error': 'Invalid skills data', 'detail': 'Skills and levels mismatch'},
+#                     status=400
+#                 )
+#             applicant.user.profile.is_active = True
+#             applicant.user.profile.save()
+#
+#             # 4. Final save and response
+#             applicant.save()
+#             return JsonResponse({
+#                 'success': True,
+#                 'new_status': applicant.get_status_display(),
+#                 'status_class': status,
+#             })
+#
+#     except ProviderApplication.DoesNotExist:
+#         return JsonResponse({'error': 'Application not found'}, status=404)
+#     except Exception as e:
+#         # logger.error(f"Error updating provider status: {str(e)}", exc_info=True)
+#         return JsonResponse({'error': 'Server error'}, status=500)
 
 
 # Helper functions

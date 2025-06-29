@@ -39,9 +39,12 @@ STATUS_WIZARD = [
 ]
 
 TEACHING_CERTIFICATES = [
+    ('', 'Select certificate'),
     # 🇬🇧 English Language Proficiency
     ('toefl', 'TOEFL'),
     ('ielts', 'IELTS'),
+    ('tesol', 'TESOL'),
+    ('tefl', 'TEFL'),
     ('cambridge_a2', 'Cambridge English A2 Key'),
     ('cambridge_b1', 'Cambridge English B1 Preliminary'),
     ('cambridge_b2', 'Cambridge English B2 First'),
@@ -130,8 +133,12 @@ TEACHING_CERTIFICATES = [
 
     # 🇧🇬 Bulgarian Language Proficiency
     ('bulgarian_certificate', 'Bulgarian Language Proficiency Exam'),
+
+    # Other
+    ('other', 'Other'),
 ]
 TEACHING_YEARS = [
+    ('', 'Select period'),
     (0, 'Less than 1 year'),
     (1, '1-2 years'),
     (2, '3-5 years'),
@@ -148,13 +155,12 @@ class TeachingCategory(models.Model):
 
 
 # Detailed Teaching Categories
-class SubTeachingCategory(models.Model):
+class TeachingSubCategory(models.Model):
+    category = models.ForeignKey(TeachingCategory, on_delete=models.CASCADE, related_name="teaching_sub_categories")
     name = models.CharField(max_length=100, unique=True)
-    teaching_category = models.ForeignKey(TeachingCategory, on_delete=models.CASCADE,
-                                          related_name="sub_teaching_categories")
 
     def __str__(self):
-        return f"{self.teaching_category.name} → {self.name}"
+        return f"{self.category.name} → {self.name}"
 
 
 class Tutor(models.Model):
@@ -175,7 +181,7 @@ class Tutor(models.Model):
     student_count = models.IntegerField(default=0)
     course_count = models.IntegerField(default=0)
     years_experience = models.PositiveSmallIntegerField(null=True, blank=True, choices=TEACHING_YEARS)
-    teaching_categories = models.ManyToManyField(SubTeachingCategory, blank=True)
+    teaching_tags = models.ManyToManyField(TeachingCategory, blank=True)
     create_date = models.DateTimeField(auto_now_add=True)  # Use auto_now_add
     # rating = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
     # create_date = models.DateTimeField(default=datetime.now) # Use auto_now_add
@@ -273,63 +279,60 @@ class PNotification(models.Model):
 # ---------------------------------------------------------------------
 
 
-class DegreeLevel(models.Model):
-    """Predefined degree levels (BA, BSc, MA, MSc, PhD, etc.)"""
-    name = models.CharField(max_length=50)
-    order = models.PositiveSmallIntegerField(help_text="For sorting purposes")
-
-    class Meta:
-        ordering = ['order']
-
-    def __str__(self):
-        return self.name
-
-
-class Education(models.Model):
-    """Tutor's formal education entries"""
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='educations')
-    degree = models.ForeignKey(DegreeLevel, on_delete=models.PROTECT)
-    field_of_study = models.CharField(max_length=100)
-    institution = models.CharField(max_length=150)
-    start_year = models.PositiveIntegerField(
-        validators=[MinValueValidator(1950), MaxValueValidator(2100)],
-        null=True,
-        blank=True
-    )
-    end_year = models.PositiveIntegerField(
-        validators=[MinValueValidator(1950), MaxValueValidator(2100)]
-    )
-    description = models.TextField(blank=True)
-    diploma = models.FileField(
-        upload_to='educations/diplomas/',
-        null=True,
-        blank=True,
-        help_text="Upload diploma or certificate"
-    )
-    is_verified = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['-end_year']
-        verbose_name_plural = 'Education Entries'
-
-    def __str__(self):
-        return f"{self.degree} in {self.field_of_study} at {self.institution}"
+# class Education(models.Model):
+#     """Tutor's formal education entries"""
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='educations')
+#     degree = models.ForeignKey(DegreeLevel, on_delete=models.PROTECT)
+#     field_of_study = models.CharField(max_length=100)
+#     institution = models.CharField(max_length=150)
+#     start_year = models.PositiveIntegerField(
+#         validators=[MinValueValidator(1950), MaxValueValidator(2100)],
+#         null=True,
+#         blank=True
+#     )
+#     end_year = models.PositiveIntegerField(
+#         validators=[MinValueValidator(1950), MaxValueValidator(2100)],
+#         null=True,
+#         blank=True
+#     )
+#     description = models.TextField(blank=True)
+#     diploma = models.FileField(
+#         upload_to='educations/diplomas/',
+#         null=True,
+#         blank=True,
+#         help_text="Upload diploma or certificate"
+#     )
+#     is_verified = models.BooleanField(default=False)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#     class Meta:
+#         ordering = ['-end_year']
+#         verbose_name_plural = 'Education Entries'
+#
+#     def __str__(self):
+#         return f"{self.degree} in {self.field_of_study} at {self.institution}"
 
 
 class TeachingCertificate(models.Model):
     """Tutor's teaching certifications (TEFL, TESOL, etc.)"""
-    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE, related_name='certificates')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='certificates')
     name = models.CharField(max_length=100, choices=TEACHING_CERTIFICATES, blank=False)
     issuing_organization = models.CharField(max_length=150)
-    completion_date = models.DateField()
-    certificate_file = models.FileField(
-        upload_to='educations/certificates/',
+    completion_date = models.PositiveIntegerField(
+        validators=[MinValueValidator(1950), MaxValueValidator(timezone.now().year)],
         null=True,
         blank=True
     )
-    is_verified = models.BooleanField(default=False)
+    document = models.FileField(
+        upload_to='applicants/certificates/%Y/%m/%d/',
+        null=True,
+        blank=True
+    )
+    is_certified = models.BooleanField(default=False)
+    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='cert_verifyed_by',
+                                    null=True, blank=True, )
+    verified_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -338,3 +341,4 @@ class TeachingCertificate(models.Model):
 
     def __str__(self):
         return f"{self.name} from {self.issuing_organization}"
+

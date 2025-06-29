@@ -103,14 +103,6 @@
                 <!-- Search and select END -->
 
 
-                <!-- Search and Filter Form  AIIIIIIIIIIIIIIIIII-->
-                {#                <form method="get" class="mb-4">#}
-                {##}
-                {##}
-                {##}
-                {##}
-                {#                </form>#}
-
 
             </div>
             <!-- Card header END -->
@@ -479,67 +471,249 @@
                                 {% endif %}
                             </h6>
                         </div>
-                        <table class="table" id="skillsTable_inModal">
-                            <thead class="table-light">
-                            <tr>
-                                <th>Skill</th>
-                                <th>Certificate</th>
-                                <th>Video</th>
-                                <th>Level</th>
-                                <th>Status</th>
-                                <th>Certified</th>
-                            </tr>
-                            </thead>
 
-                            <tbody>
-                            <!-- Existing skills -->
-                            {% for uSkill in applicant.user.user_skill.all %}
-                                <tr class="m-0 p-0">
-                                    <td>{{ uSkill.skill }}</td>
-                                    <td>
-                                        <!-- CV -->
+
+                        <h6 class="text-primary px-2">Teaching Skills:</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table" id="skillsTable_inModal">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Skill</th>
+                                    <th>Certificate</th>
+                                    <th>Video</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                    <th>Certified</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <!-- Existing skills -->
+                                {% for uSkill in applicant.user.user_skill.all %}
+                                    <tr class="m-0 p-0">
+                                        <td>{{ uSkill.skill }}</td>
+                                        <td>
                                         {% if uSkill.certificate %}
-                                            <a href="{{ uSkill.certificate.url }}"
-                                               class="btn btn-primary-soft btn-round"
-                                               target="_blank"
-                                               data-bs-toggle="tooltip" data-bs-placement="top"
-                                               title="Download"><i
-                                                    class="bi bi-download"></i></a>
-                                        {% else %}
-                                            <span class="p-2"> NA</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if uSkill.video %}
-                                            <!-- Video button -->
-                                            <a data-glightbox data-gallery="office-tour"
-                                               href="{{ uSkill.video.url }}"
-                                               class="btn btn-round btn-primary-soft overflow-visible"
-                                               data-bs-toggle="tooltip" data-bs-placement="top"
-                                               title="Skill Video">
-                                                <i class="fas fa-play"></i>
-                                            </a>
-                                        {% else %}
-                                            <span class="p-2"> NA</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ uSkill.level }}</td>
-                                    <td><span class="badge bg-opacity-15 bg-{% if uSkill.status == 'rejected' %}danger text-danger
+                                                {% with uSkill.certificate.name|lower as filename %}
+                                                    {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                        <!-- Image Lightbox -->
+                                                        <a href="{{ uSkill.certificate.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           data-glightbox="file-gallery"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="View">
+                                                            <i class="bi bi-image"></i>
+                                                        </a>
+                                                        {#                                        {% elif ".pdf" in filename %}#}
+                                                        {#                                            <!-- PDF in iframe -->#}
+                                                        {#                                            <a href="{{ uSkill.certificate.url }}"#}
+                                                        {#                                               data-glightbox="file-gallery"#}
+                                                        {#                                               data-type="iframe"#}
+                                                        {#                                               data-title="PDF Preview">#}
+                                                        {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                        {#                                            </a>#}
+                                                    {% else %}
+                                                        <!-- Other Files: fallback download link -->
+                                                        <a href="{{ uSkill.certificate.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           target="_blank"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="Download"><i
+                                                                class="bi bi-download"></i></a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                <span class="text-muted small">NA</span>
+                                            {% endif %}
+                                        
+                                        </td>
+                                        <td>
+                                            {% if uSkill.video %}
+                                                <!-- Video button -->
+                                                <a data-glightbox data-gallery="office-tour"
+                                                   href="{{ uSkill.video.url }}"
+                                                   class="btn btn-round btn-primary-soft overflow-visible"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                   title="Skill Video">
+                                                    <i class="fas fa-play"></i>
+                                                </a>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ uSkill.level }}</td>
+                                        <td><span class="badge bg-opacity-15 bg-{% if uSkill.status == 'rejected' %}danger text-danger
                                     {% elif uSkill.status == 'pending' %}warning text-warning
                                     {% elif uSkill.status == 'approved' %}success text-success
                                     {% elif uSkill.status == 'need_interview' %}primary text-primary
                                     {% endif %}
-">{{ uSkill.status }}</span></td>
-                                    <td>{% if uSkill.is_certified %}<span class="text-success">✅</span>{% else %}
-                                        N/A{% endif %}</td>
+                                            ">{{ uSkill.status }}</span></td>
+                                        <td>
+                                            {% if uSkill.is_certified %}
+                                                <span class="text-success"><i class="fas fa-check-circle fs-5 me-1"></i></span>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+                                        </td>
+
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <h6 class="text-primary px-2">Teaching Certifications:</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table" id="CertificationTable">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Certification</th>
+                                    <th>Organization</th>
+                                    <th>Year</th>
+                                    <th>Document</th>
+                                    <th>Certified</th>
                                 </tr>
-                            {% endfor %}
+                                </thead>
 
-                            </tbody>
+                                <tbody>
+                                <!-- Existing skills -->
+                                {% for cert in applicant.user.certificates.all %}
+                                    <tr>
+                                        <td class="col-3 col-md-3 ">{{ cert.get_name_display }}</td>
+                                        <td class="col-3 col-md-3 ">{{ cert.issuing_organization }}</td>
+                                        <td class="col-3 col-md-3 ">{{ cert.completion_date }}</td>
+                                        <td class="col-1 col-md-1 ">
+                                            <!-- Document/Diploma -->
+                                            {% if cert.document %}
+                                                {% with cert.document.name|lower as filename %}
+                                                    {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                        <!-- Image Lightbox -->
+                                                        <a href="{{ cert.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           data-glightbox="file-gallery"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="View">
+                                                            <i class="bi bi-image"></i>
+                                                        </a>
+                                                        {#                                        {% elif ".pdf" in filename %}#}
+                                                        {#                                            <!-- PDF in iframe -->#}
+                                                        {#                                            <a href="{{ cert.document.url }}"#}
+                                                        {#                                               data-glightbox="file-gallery"#}
+                                                        {#                                               data-type="iframe"#}
+                                                        {#                                               data-title="PDF Preview">#}
+                                                        {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                        {#                                            </a>#}
+                                                    {% else %}
+                                                        <!-- Other Files: fallback download link -->
+                                                        <a href="{{ cert.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           target="_blank"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="Download"><i
+                                                                class="bi bi-download"></i></a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                <span class="text-muted small">NA</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="col-2 col-md-2 ">
+                                            <!-- Check box -->
+                                            {% if cert.is_certified %}
+                                                <span class="text-success"><i class="fas fa-check-circle fs-5 me-1"></i></span>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
 
-                        </table>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <h6 class="text-primary px-2">Formal Education:</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table" id="EducationTable">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Degree</th>
+                                    <th>Field of Study</th>
+                                    <th>Institution</th>
+                                    <th>Years</th>
+                                    <th>Description</th>
+                                    <th>Document</th>
+                                    <th>Certified</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <!-- Existing skills -->
+                                {% for edu in applicant.user.educations.all %}
+                                    <tr>
+                                        <td class="col-3 col-md-3 ">{{ edu.degree.get_name_display }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.field_of_study }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.institution }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.start_year }}-{{ edu.end_year }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.description }}</td>
+                                        <td class="col-1 col-md-1 ">
+                                            <!-- Document/Diploma -->
+                                            {% if edu.document %}
+                                                {% with edu.document.name|lower as filename %}
+                                                    {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                        <!-- Image Lightbox -->
+                                                        <a href="{{ edu.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           data-glightbox="file-gallery"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="View">
+                                                            <i class="bi bi-image"></i>
+                                                        </a>
+                                                        {#                                        {% elif ".pdf" in filename %}#}
+                                                        {#                                            <!-- PDF in iframe -->#}
+                                                        {#                                            <a href="{{ edu.document.url }}"#}
+                                                        {#                                               data-glightbox="file-gallery"#}
+                                                        {#                                               data-type="iframe"#}
+                                                        {#                                               data-title="PDF Preview">#}
+                                                        {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                        {#                                            </a>#}
+                                                    {% else %}
+                                                        <!-- Other Files: fallback download link -->
+                                                        <a href="{{ edu.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           target="_blank"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="Download"><i
+                                                                class="bi bi-download"></i></a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                <span class="text-muted small">NA</span>
+                                            {% endif %}
 
 
+                                        </td>
+                                        <td class="col-2 col-md-2 ">
+                                            <!-- Check box -->
+                                        {% if edu.is_certified %}
+                                                <span class="text-success"><i class="fas fa-check-circle fs-5 me-1"></i></span>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Modal footer ORIGINAL -->
@@ -559,8 +733,8 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title">Skill
-                            Approval: {{ applicant.first_name }} {{ applicant.last_name }}</h5>
+                        <h5 class="modal-title">Skill Approval:
+                            {{ applicant.first_name }} {{ applicant.last_name }}</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
@@ -578,7 +752,8 @@
                                 Enable skills and set the maximum teaching level for each (A1-C2)
                             </div>
 
-                            <div class="table-responsive">
+                            <h6 class="text-primary px-2">Teaching Skills:</h6>
+                            <div class="table-responsive mb-3">
                                 <table class="table" id="skillsTable">
                                     <thead class="table-light">
                                     <tr>
@@ -597,16 +772,37 @@
                                         <tr>
                                             <td class="col-3 col-md-3 ">{{ uSkill.skill }}</td>
                                             <td class="col-1 col-md-1 ">
-                                                <!-- CV -->
                                                 {% if uSkill.certificate %}
-                                                    <a href="{{ uSkill.certificate.url }}"
-                                                       class="btn btn-primary-soft btn-round me-1 mb-1 "
-                                                       target="_blank"
-                                                       data-bs-toggle="tooltip" data-bs-placement="top"
-                                                       title="Download"><i
-                                                            class="bi bi-download"></i></a>
+                                                    {% with uSkill.certificate.name|lower as filename %}
+                                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                            <!-- Image Lightbox -->
+                                                            <a href="{{ uSkill.certificate.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               data-glightbox="file-gallery"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="View">
+                                                                <i class="bi bi-image"></i>
+                                                            </a>
+                                                            {#                                        {% elif ".pdf" in filename %}#}
+                                                            {#                                            <!-- PDF in iframe -->#}
+                                                            {#                                            <a href="{{ uSkill.certificate.url }}"#}
+                                                            {#                                               data-glightbox="file-gallery"#}
+                                                            {#                                               data-type="iframe"#}
+                                                            {#                                               data-title="PDF Preview">#}
+                                                            {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                            {#                                            </a>#}
+                                                        {% else %}
+                                                            <!-- Other Files: fallback download link -->
+                                                            <a href="{{ uSkill.certificate.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               target="_blank"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="Download"><i
+                                                                    class="bi bi-download"></i></a>
+                                                        {% endif %}
+                                                    {% endwith %}
                                                 {% else %}
-                                                    <span class="p-2"> NA</span>
+                                                    <span class="text-muted small">NA</span>
                                                 {% endif %}
                                             </td>
                                             <td class="col-1 col-md-1 ">
@@ -621,7 +817,7 @@
                                                         <i class="fas fa-play"></i>
                                                     </a>
                                                 {% else %}
-                                                    <span class="p-2"> NA</span>
+                                                    <span class="text-muted small"> NA</span>
                                                 {% endif %}
                                             </td>
                                             <td class="col-3 col-md-3 ">
@@ -673,6 +869,168 @@
                                 </table>
                             </div>
 
+                            <h6 class="text-primary px-2">Teaching Certifications:</h6>
+                            <div class="table-responsive mb-3">
+                                <table class="table" id="CertificationTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Certification</th>
+                                        <th>Organization</th>
+                                        <th>Year</th>
+                                        <th>Document</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <!-- Existing skills -->
+                                    {% for cert in applicant.user.certificates.all %}
+                                        <tr>
+                                            <td class="col-3 col-md-3 ">{{ cert.get_name_display }}</td>
+                                            <td class="col-3 col-md-3 ">{{ cert.issuing_organization }}</td>
+                                            <td class="col-3 col-md-3 ">{{ cert.completion_date }}</td>
+                                            <td class="col-1 col-md-1 ">
+                                                <!-- Document/Diploma -->
+                                                {% if cert.document %}
+                                                    {% with cert.document.name|lower as filename %}
+                                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                            <!-- Image Lightbox -->
+                                                            <a href="{{ cert.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               data-glightbox="file-gallery"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="View">
+                                                                <i class="bi bi-image"></i>
+                                                            </a>
+                                                            {#                                        {% elif ".pdf" in filename %}#}
+                                                            {#                                            <!-- PDF in iframe -->#}
+                                                            {#                                            <a href="{{ cert.document.url }}"#}
+                                                            {#                                               data-glightbox="file-gallery"#}
+                                                            {#                                               data-type="iframe"#}
+                                                            {#                                               data-title="PDF Preview">#}
+                                                            {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                            {#                                            </a>#}
+                                                        {% else %}
+                                                            <!-- Other Files: fallback download link -->
+                                                            <a href="{{ cert.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               target="_blank"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="Download"><i
+                                                                    class="bi bi-download"></i></a>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% else %}
+                                                    <span class="text-muted small">NA</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-2 col-md-2 ">
+                                                <!-- Check box -->
+                                                <div class="col-1 col-md-1 d-flex justify-content-between">
+                                                    <div class="form-check">
+                                                        <input
+                                                                class="form-check-input badge-select"
+                                                                name="cert_badge_{{ cert.id }}"
+                                                                type="checkbox"
+                                                                value="true"
+                                                                {% if cert.is_certified %}checked{% endif %}
+                                                        >
+                                                        <label class="form-check-label"
+                                                               for="exampleCheck1">Certified</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <h6 class="text-primary px-2">Formal Education:</h6>
+                            <div class="table-responsive mb-3">
+                                <table class="table" id="EducationTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Degree</th>
+                                        <th>Field of Study</th>
+                                        <th>Institution</th>
+                                        <th>Years</th>
+                                        <th>Description</th>
+                                        <th>Document</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <!-- Existing skills -->
+                                    {% for edu in applicant.user.educations.all %}
+                                        <tr>
+                                            <td class="col-3 col-md-3 ">{{ edu.degree.get_name_display }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.field_of_study }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.institution }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.start_year }}-{{ edu.end_year }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.description }}</td>
+                                            <td class="col-1 col-md-1 ">
+                                                <!-- Document/Diploma -->
+                                                {% if edu.document %}
+                                                    {% with edu.document.name|lower as filename %}
+                                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                            <!-- Image Lightbox -->
+                                                            <a href="{{ edu.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               data-glightbox="file-gallery"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="View">
+                                                                <i class="bi bi-image"></i>
+                                                            </a>
+                                                            {#                                        {% elif ".pdf" in filename %}#}
+                                                            {#                                            <!-- PDF in iframe -->#}
+                                                            {#                                            <a href="{{ edu.document.url }}"#}
+                                                            {#                                               data-glightbox="file-gallery"#}
+                                                            {#                                               data-type="iframe"#}
+                                                            {#                                               data-title="PDF Preview">#}
+                                                            {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                            {#                                            </a>#}
+                                                        {% else %}
+                                                            <!-- Other Files: fallback download link -->
+                                                            <a href="{{ edu.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               target="_blank"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="Download"><i
+                                                                    class="bi bi-download"></i></a>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% else %}
+                                                    <span class="text-muted small">NA</span>
+                                                {% endif %}
+
+
+                                            </td>
+
+                                            <td class="col-2 col-md-2 ">
+                                                <!-- Check box -->
+                                                <div class="col-1 col-md-1 d-flex justify-content-between">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input badge-select"
+                                                               name="edu_badge_{{ edu.id }}"
+                                                               type="checkbox"
+                                                               value="true"
+                                                               {% if edu.is_certified %}checked{% endif %}>
+                                                        <label class="form-check-label"
+                                                               for="exampleCheck1">Certified</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Interviewer Notes</label>

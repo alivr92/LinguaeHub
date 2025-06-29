@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from app_accounts.models import UserEducation
+from django.utils import timezone
+
+from app_accounts.models import UserEducation, UserProfile
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -72,7 +74,7 @@ class UserRegistrationForm(forms.ModelForm):
 class UserEducationForm(forms.ModelForm):
     class Meta:
         model = UserEducation
-        fields = ['degree', 'field_of_study', 'institution', 'graduation_year', 'document']
+        fields = ['degree', 'field_of_study', 'institution', 'end_year', 'document']
         widgets = {
             'degree': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -86,7 +88,7 @@ class UserEducationForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Institution',
             }),
-            'graduation_year': forms.NumberInput(attrs={
+            'end_year': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Graduation year',
                 'min': 1900,
@@ -106,6 +108,37 @@ class UserEducationForm(forms.ModelForm):
         instance = super().save(commit=False)
         if self.user:
             instance.user = self.user
+        if commit:
+            instance.save()
+        return instance
+
+
+class AgreementForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['terms_agreed'].required = True  # Explicitly mark as required
+
+    class Meta:
+        model = UserProfile
+        fields = ['terms_agreed', 'email_consent']
+        widgets = {
+            'terms_agreed': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+                'required': 'required',
+                'id': 'terms_agreed1'  # Match the template's label
+            }),
+            'email_consent': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+                'id': 'email_consent1'  # Match the template's label
+            }),
+        }
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.cleaned_data.get('terms_agreed'):
+            instance.terms_agreed_date = timezone.now()  # Auto-set agreement timestamp
+        if self.cleaned_data.get('email_consent'):
+            instance.email_consent_date = timezone.now()  # Auto-set consent timestamp
         if commit:
             instance.save()
         return instance

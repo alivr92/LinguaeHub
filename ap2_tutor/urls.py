@@ -33,13 +33,17 @@ urlpatterns = [
     # ---------------------- functions -------------------------------------------------------
     path('wizard/submit-profile/', views.submit_form_profile, name='submit_form_profile'),
     path('wizard/submit-form-skill/', views.submit_form_skill, name='submit_form_skill'),
-    path('get-existed-skills/', views.get_existed_skills, name='get_existed_skills'),
-    path('save-skills/', views.save_skills, name='save_skills'),
+    path('wizard/submit-edu/', views.submit_edu, name='submit_edu'),
+    path('wizard/submit-final/', views.wizard_submit_final, name='wizard_submit_final'),
 
-    path('get-categories/', views.get_categories, name='get_categories'),
-    path('get-subcategories/', views.get_subcategories, name='get_subcategories'),
-    path('get-category-for-subcategories/', views.get_category_for_subcategories,
-         name='get_category_for_subcategories'),
+    path('get-existed-skills/', views.get_existed_skills, name='get_existed_skills'),
+    path('get-education-data/', views.get_education_data, name='get_education_data'),
+    path('save-skills/', views.save_skills, name='save_skills'),
+    path('save-educations/', views.save_educations, name='save_educations'),
+
+    # path('get-categories/', views.get_categories, name='get_categories'),
+    # path('get-subcategories/', views.get_subcategories, name='get_subcategories'),
+    # path('get-category-for-subcategories/', views.get_category_for_subcategories, name='get_category_for_subcategories'),
 
     # path('wizard/', views.BaseWizardView.as_view(), name='dt_wizard'),
     # path('wizard/step2/', views.ProfileStepView.as_view(), name='dt_wizard_step2'),

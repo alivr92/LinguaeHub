@@ -1,12 +1,15 @@
+import {showBootstrapAlert2} from '/static/assets/js/avr.js';
+// import {maxEntries} from './wizard.js';
+const maxEntries = parseInt(document.getElementById('maxEntries').value);
+console.log('maxEntries: ', maxEntries);
+
 // =============================================
 // GLOBAL VARIABLES
 // =============================================
-const template = document.getElementById('skill-row-template');
+const template = document.getElementById('skill-card-template');
 const applicantUId = parseInt(document.getElementById('applicantUId').value);
-const alertLimitMessage = document.querySelector('#skillLimitAlert');
 const container = document.getElementById('skills-container');
-const maxSkills = document.getElementById('isVIP').value.toLowerCase() === 'true' ? 5 : 3; // Set max skills limit based on VIP status
-console.log('maxSkills: ', maxSkills);
+// const maxSkills = document.getElementById('isVIP').value.toLowerCase() === 'true' ? 5 : 3; // Set max skills limit based on VIP status
 const validVideoTypes = ['mp4'];
 const validCertificateTypes = ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg'];
 
@@ -18,11 +21,6 @@ let errLevels = [];
 let removedSkillIds = [];    // Track completely removed skills
 
 // ===== FILE STATE TRACKING =====--------------------------------------------------
-let existedSkills = [];
-// let existedVideos = [];      // Skills that had videos when loaded
-// let existedCertificates = []; // Skills that had certificates when loaded
-
-// ====== FILE TRACKING ======
 const trackers = {
     video: {
         existed: [],   // Skills that had videos when loaded
@@ -54,7 +52,7 @@ export function validateStep3() {
     console.log(`validate3-trackers: `, trackers);
 
     const container = document.getElementById('skills-container');
-    const rows = container.querySelectorAll('.skill-row');
+    const cards = container.querySelectorAll('.skill-card');
     const videoIntroInput = document.querySelector('[name="video_intro"]');
     let isValid = true;
 
@@ -62,28 +60,28 @@ export function validateStep3() {
     errSkills = [];
     errLevels = [];
 
-    if (rows.length > maxSkills) {
-        showBootstrapAlert(`Maximum ${maxSkills} skills allowed`, 'danger', 5000);
+    if (cards.length > maxEntries) {
+        showBootstrapAlert22(`Maximum ${maxEntries} skills allowed`, 'danger', 5000);
         return false;
     }
 
-    rows.forEach((row, index) => {
-        const rowId = row.dataset.rowId;
-        const skill = row.querySelector('[name^="skill"]');
-        const level = row.querySelector('[name^="level"]');
-        const skillVideo = row.querySelector('[name^="skill_video"]');
-        const certificate = row.querySelector('[name^="certificate"]');
+    cards.forEach((card, index) => {
+        const cardId = card.dataset.cardId;
+        const skill = card.querySelector('[name^="skill"]');
+        const level = card.querySelector('[name^="level"]');
+        const skillVideo = card.querySelector('[name^="skill_video"]');
+        const certificate = card.querySelector('[name^="certificate"]');
 
         const skillName = skill?.options[skill.selectedIndex]?.text || 'Unknown Skill';
-        const rowNumber = index + 1;
+        const cardNumber = index + 1;
 
         // Required fields
         if (!skill?.value) {
-            errSkills.push(`Row ${rowNumber}`);
+            errSkills.push(`Row ${cardNumber}`);
             isValid = false;
         }
         if (!level?.value) {
-            errLevels.push(`Row ${rowNumber} (${skillName})`);
+            errLevels.push(`Row ${cardNumber} (${skillName})`);
             isValid = false;
         }
 
@@ -91,12 +89,12 @@ export function validateStep3() {
         if (skillVideo?.files[0]) {
             const file = skillVideo.files[0];
             if (!validateFileType(file, validVideoTypes)) {
-                showBootstrapAlert(`Invalid video format for row ${rowNumber}. Allowed: ${validVideoTypes.join(', ')}`, 'danger', 5000);
+                showBootstrapAlert2(`Invalid video format for row ${cardNumber}. Allowed: ${validVideoTypes.join(', ')}`, 'danger', 5000);
                 isValid = false;
             } else {
-                const isExisted = trackers.video.existed.includes(rowId);
+                const isExisted = trackers.video.existed.includes(cardId);
                 const action = isExisted ? 'changed' : 'uploaded';
-                updateTracker('video', action, rowId, true);
+                updateTracker('video', action, cardId, true);
             }
         }
 
@@ -104,39 +102,39 @@ export function validateStep3() {
         if (certificate?.files[0]) {
             const file = certificate.files[0];
             if (!validateFileType(file, validCertificateTypes)) {
-                showBootstrapAlert(`Invalid certificate format for row ${rowNumber}. Allowed: ${validCertificateTypes.join(', ')}`, 'danger', 5000);
+                showBootstrapAlert2(`Invalid certificate format for row ${cardNumber}. Allowed: ${validCertificateTypes.join(', ')}`, 'danger', 5000);
                 isValid = false;
             } else {
-                const isExisted = trackers.certificate.existed.includes(rowId);
+                const isExisted = trackers.certificate.existed.includes(cardId);
                 const action = isExisted ? 'changed' : 'uploaded';
-                updateTracker('certificate', action, rowId, true);
+                updateTracker('certificate', action, cardId, true);
             }
         }
     });
 
     // Display collected skill/level errors
     if (errSkills.length > 0) {
-        showBootstrapAlert(`Please select a skill for: ${errSkills.join(', ')}`, 'danger', 5000);
+        showBootstrapAlert2(`Please select a skill for: ${errSkills.join(', ')}`, 'danger', 5000);
     }
     if (errLevels.length > 0) {
-        showBootstrapAlert(`Please select a level for: ${errLevels.join(', ')}`, 'danger', 5000);
+        showBootstrapAlert2(`Please select a level for: ${errLevels.join(', ')}`, 'danger', 5000);
     }
 
     // Intro video check
     // if (!hasExistingIntroVideo && !videoIntroInput?.files?.[0]) {
-    //     showBootstrapAlert('Introduction video is required', 'danger', 5000);
+    //     showBootstrapAlert2('Introduction video is required', 'danger', 5000);
     //     isValid = false;
     // } else if (videoIntroInput?.files?.[0] && !validateFileType(videoIntroInput.files[0], validVideoTypes)) {
-    //     showBootstrapAlert(`Invalid intro video format. Allowed: ${validVideoTypes.join(', ')}`, 'danger', 5000);
+    //     showBootstrapAlert2(`Invalid intro video format. Allowed: ${validVideoTypes.join(', ')}`, 'danger', 5000);
     //     isValid = false;
     // }
 
     // Additional validation for intro video
     if (!trackers.introVideo.existed && !trackers.introVideo.uploaded) {
-        showBootstrapAlert('Introduction video is required', 'danger', 5000);
+        showBootstrapAlert2('Introduction video is required', 'danger', 5000);
         isValid = false;
     } else if (videoIntroInput?.files?.[0] && !validateFileType(videoIntroInput.files[0], validVideoTypes)) {
-        showBootstrapAlert(`Invalid intro video format. Allowed: ${validVideoTypes.join(', ')}`, 'danger', 5000);
+        showBootstrapAlert2(`Invalid intro video format. Allowed: ${validVideoTypes.join(', ')}`, 'danger', 5000);
         isValid = false;
     }
 
@@ -149,7 +147,7 @@ export async function submitStep3() {
     const container = document.getElementById('skills-container');
     if (!container) return {success: false, error: 'Form elements not found'};
 
-    const rows = Array.from(container.querySelectorAll('.skill-row'));
+    const cards = Array.from(container.querySelectorAll('.skill-card'));
     let submitTimeout;
 
     try {
@@ -180,14 +178,14 @@ export async function submitStep3() {
             trackers.introVideo.uploaded ? 'uploaded' :
                 trackers.introVideo.removed ? 'removed' : 'unchanged');
 
-        // Process each row
-        rows.forEach((row, index) => {
-            const rowId = row.dataset.rowId;
-            const isNewSkill = trackers.skills.new.includes(rowId);
-            const skill = row.querySelector('[name^="skill"]');
-            const level = row.querySelector('[name^="level"]');
-            const skillVideo = row.querySelector('[name^="skill_video"]');
-            const certificate = row.querySelector('[name^="certificate"]');
+        // Process each card
+        cards.forEach((card, index) => {
+            const cardId = card.dataset.cardId;
+            const isNewSkill = trackers.skills.new.includes(cardId);
+            const skill = card.querySelector('[name^="skill"]');
+            const level = card.querySelector('[name^="level"]');
+            const skillVideo = card.querySelector('[name^="skill_video"]');
+            const certificate = card.querySelector('[name^="certificate"]');
 
             if (!skill || !level) {
                 throw new Error(`Missing required fields in row ${index + 1}`);
@@ -196,27 +194,27 @@ export async function submitStep3() {
             // Append skill data
             formData.append(`skills[]`, skill.value);
             formData.append(`levels[]`, level.value);
-            formData.append(`skill_ids[]`, rowId);
+            formData.append(`skill_ids[]`, cardId);
 
             // Handle files based on tracker state
             if (skillVideo?.files[0]) {
-                formData.append(`skill_videos_${rowId}`, skillVideo.files[0]);
+                formData.append(`skill_videos_${cardId}`, skillVideo.files[0]);
             }
             if (certificate?.files[0]) {
-                formData.append(`certificates_${rowId}`, certificate.files[0]);
+                formData.append(`certificates_${cardId}`, certificate.files[0]);
             }
 
 
             // Handle files for new skills
             if (isNewSkill) {
-                const skillVideo = row.querySelector('[name^="skill_video"]');
-                const certificate = row.querySelector('[name^="certificate"]');
+                const skillVideo = card.querySelector('[name^="skill_video"]');
+                const certificate = card.querySelector('[name^="certificate"]');
 
                 if (skillVideo?.files[0]) {
-                    formData.append(`new_skill_videos_${rowId}`, skillVideo.files[0]);
+                    formData.append(`new_skill_videos_${cardId}`, skillVideo.files[0]);
                 }
                 if (certificate?.files[0]) {
-                    formData.append(`new_skill_certs_${rowId}`, certificate.files[0]);
+                    formData.append(`new_skill_certs_${cardId}`, certificate.files[0]);
                 }
             }
 
@@ -262,7 +260,7 @@ export async function submitStep3() {
         const result = await response.json();
         if (result.success) {
             resetTrackers();
-            showAllExistedSkills(); // Refresh the display with new data
+            loadExistingSkills(); // Refresh the display with new data
         }
 
         return result;
@@ -288,112 +286,9 @@ function resetTrackers() {
 }
 
 // Call this after successful submission
-
-// --------------------------- Add Blank skill row ---------------------------
-document.getElementById('btnAddSkill').addEventListener('click', function () {
-    if (checkSkillLimit()) return;
-    else addBlankSkillRow();
-});
-
-
-// ---------------------------------------------------------------------------
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // =============================================
 // MAIN FUNCTIONS
 // =============================================
-function addExistedSkillRow(uSkillId, skillId, levelId, video, certificate, status) {
-    if (!template) {
-        console.error('Template not found!');
-        return;
-    }
-
-    const newRow = template.content.cloneNode(true);
-    container.appendChild(newRow);
-    const addedRow = container.lastElementChild;
-    addedRow.classList.add('skill-row');
-    addedRow.dataset.rowId = uSkillId;
-
-    // Track this as an existing skill
-    trackers.skills.existed.push(uSkillId);
-
-    // Set skill and level values
-    const skillSelect = addedRow.querySelector('[name="skill"]');
-    const levelSelect = addedRow.querySelector('[name="level"]');
-    if (skillSelect) skillSelect.value = skillId;
-    if (levelSelect) levelSelect.value = levelId;
-
-    // Initialize Choices.js
-    if (typeof Choices !== 'undefined') {
-        if (skillSelect) new Choices(skillSelect, {searchEnabled: true, removeItemButton: true, shouldSort: false});
-        if (levelSelect) new Choices(levelSelect, {searchEnabled: true, removeItemButton: true, shouldSort: false});
-    }
-
-    // Set up file inputs (naming, class, click-to-upload)
-    // setupFileInputs(addedRow, uSkillId);
-    setupFileInputs(addedRow, uSkillId, uSkillId);
-
-
-    // Display existing files if present
-    const videoInput = addedRow.querySelector('[name^="skill_video"]');
-    const certInput = addedRow.querySelector('[name^="certificate"]');
-    const videoLabel = addedRow.querySelector('.label_skill_video');
-    const certLabel = addedRow.querySelector('.label_skill_certificate');
-
-    if (video && videoInput && videoLabel) {
-        createExistingFileDisplay('video', videoInput, videoLabel, addedRow);
-    }
-
-    if (certificate && certInput && certLabel) {
-        createExistingFileDisplay('certificate', certInput, certLabel, addedRow);
-    }
-
-    // Remove button logic
-    setupRemoveButton(addedRow, uSkillId);
-    // addedRow.querySelector('.remove-skill')?.addEventListener('click', function () {
-    //     if (!confirm('Are you sure you want to remove this skill?')) return;
-    //     if (uSkillId) removedSkillIds.push(uSkillId);
-    //     this.closest('.skill-row').remove();
-    //     checkSkillLimit();
-    // });
-
-    initTooltips();
-}
-
-function setupRemoveButton(row, rowId) {
-    console.log('setupRemoveButton');
-    row.querySelector('.remove-skill')?.addEventListener('click', function () {
-        console.log('setupRemoveButton CLICKED!');
-
-        if (!confirm('Are you sure you want to remove this skill?')) return;
-
-        // If this is an existing skill (not new), add to removed skills
-        //Note 1: all files (video/cert) which relates to this row should be mark to delete from storage
-        //Note 2: We don't need to track if a rowId was not belong to any existed skill!
-        if (trackers.skills.existed.includes(rowId)) {
-            updateTracker('video', 'removed', rowId, true);
-            updateTracker('certificate', 'removed', rowId, true);
-            updateTracker('skills', 'removed', rowId, true);
-            removedSkillIds.push(rowId);
-        }
-        //---------------------------------------------------------------------------------------------
-
-        // If this is a new skill, remove from new skills tracker
-        trackers.skills.new = trackers.skills.new.filter(id => id !== rowId);
-
-        // Remove from all file trackers
-        // ['video', 'certificate'].forEach(type => {
-        //     ['existed', 'uploaded', 'changed'].forEach(action => {
-        //         trackers[type][action] = trackers[type][action].filter(id => id !== rowId);
-        //     });
-        // });
-        //---------------------------------------------------------------------------------------------
-
-        this.closest('.skill-row').remove();
-        checkSkillLimit();
-    });
-}
-
-
 function appendHiddenInput(parent, name, value) {
     const input = document.createElement('input');
     input.type = 'hidden';
@@ -402,9 +297,9 @@ function appendHiddenInput(parent, name, value) {
     parent.appendChild(input);
 }
 
-function createExistingFileDisplay(type, inputElement, labelElement, row, isIntroVideo = false) {
+function createExistingFileDisplay(type, inputElement, labelElement, card, isIntroVideo = false) {
     const container = inputElement.parentNode;
-    const uSkillId = row.dataset.rowId;
+    const uSkillId = card.dataset.cardId;
     const removeFlagName = isIntroVideo
         ? 'remove_video_intro'
         : `${type === 'video' ? 'remove_skill_video_' : 'remove_certificate_'}${uSkillId}`;
@@ -451,7 +346,7 @@ function createExistingFileDisplay(type, inputElement, labelElement, row, isIntr
             // Remove the old file display and process as new upload
             displayDiv.remove();
             updateTracker(type, 'changed', uSkillId);
-            handleFileUploadForRow(type, inputElement, labelElement, row, {
+            handleFileUploadForCard(type, inputElement, labelElement, card, {
                 uSkillId,
                 removeInputPrefix: type === 'video' ? 'remove_skill_video_' : 'remove_certificate_'
             });
@@ -472,7 +367,7 @@ function createExistingFileDisplay(type, inputElement, labelElement, row, isIntr
         removeFlag.type = 'hidden';
         removeFlag.name = removeFlagName;
         removeFlag.value = 'true';
-        row.appendChild(removeFlag);
+        card.appendChild(removeFlag);
 
         updateTracker(type, 'removed', uSkillId);
 
@@ -500,7 +395,6 @@ function createExistingFileDisplay(type, inputElement, labelElement, row, isIntr
     return displayDiv;
 }
 
-//--------------================================================================================================
 function handleVideoIntro(videoIntroUrl) {
     const input = document.querySelector('[name="video_intro"]');
     const label = document.querySelector('.label_skill_video');
@@ -553,7 +447,7 @@ function createVideoIntroDisplay(input, label, container, fileInfo, isExisting) 
 
     // Create new display
     const displayDiv = document.createElement('div');
-    displayDiv.className = 'd-flex align-items-center bg-light rounded p-2 intro-video-display mb-2 col-12';
+    displayDiv.className = ' align-items-center bg-light rounded p-2 intro-video-display mb-2 col-12';
 
     const icon = document.createElement('i');
     icon.className = isExisting
@@ -570,7 +464,7 @@ function createVideoIntroDisplay(input, label, container, fileInfo, isExisting) 
     // Change button
     const changeBtn = document.createElement('button');
     changeBtn.type = 'button';
-    changeBtn.className = 'btn btn-sm btn-outline-primary me-1';
+    changeBtn.className = 'btn btn-sm btn-outline-primary';
     changeBtn.innerHTML = '<i class="bi bi-pencil-fill"></i>';
     changeBtn.setAttribute('data-bs-toggle', 'tooltip');
     changeBtn.setAttribute('title', 'Change video');
@@ -625,81 +519,157 @@ function createVideoIntroDisplay(input, label, container, fileInfo, isExisting) 
     initTooltips();
 }
 
-//--------------================================================================================================
+// ===================================
+// MAIN FUNCTIONS - REFACTORED (DRY)
+// ===================================
 
-function addBlankSkillRow() {
-    const newRow = template.content.cloneNode(true);
-    const rowId = Date.now().toString(); // Ensure string ID for consistency
+/**
+ * Creates a new skill card with common setup
+ * @param {string} cardId - Unique ID for the card
+ * @param {Object} options - Configuration options
+ * @param {boolean} options.isExisting - Whether this is an existing skill
+ * @param {string|null} options.skillId - Skill ID for existing cards
+ * @param {string|null} options.levelId - Level ID for existing cards
+ * @param {string|null} options.video - Video URL for existing cards
+ * @param {string|null} options.certificate - Certificate URL for existing cards
+ * @returns {HTMLElement|null} The created card element
+ */
+function createSkillCard(cardId, options = {}) {
+    if (!template) {
+        console.error('Template not found!');
+        return null;
+    }
 
-    const row = createSkillRow(rowId, newRow);
-    setupFileInputs(row, rowId);
-    setupRemoveButton(row, rowId);
-    container.appendChild(row);
+    // Clone the template
+    const newCard = template.content.cloneNode(true);
+    const card = newCard.querySelector('.skill-card') || document.createElement('div');
+    card.className = 'skill-card border rounded p-3 mb-3 bg-white shadow-sm';
+    card.dataset.cardId = cardId;
 
-    // Track this as a new skill
-    trackers.skills.new.push(rowId);
-    console.log('New skill added with ID:', rowId);
+    // Set skill and level values if provided
+    if (options.skillId || options.levelId) {
+        const skillSelect = card.querySelector('[name="skill"]');
+        const levelSelect = card.querySelector('[name="level"]');
+        if (skillSelect) skillSelect.value = options.skillId || '';
+        if (levelSelect) levelSelect.value = options.levelId || '';
+    }
 
-    initSelects();
+    // Initialize Choices.js
+    initSelectsForCard(card);
+
+    // Track the skill
+    if (options.isExisting) {
+        trackers.skills.existed.push(cardId);
+    } else {
+        trackers.skills.new.push(cardId);
+    }
+
+    return card;
+}
+
+/**
+ * Adds an existing skill card with all its data
+ * @param {string} uSkillId - Unique skill ID
+ * @param {string} skillId - Skill ID
+ * @param {string} levelId - Level ID
+ * @param {string|null} video - Video URL if exists
+ * @param {string|null} certificate - Certificate URL if exists
+ */
+function addExistedSkillCard(uSkillId, skillId, levelId, video, certificate) {
+    const card = createSkillCard(uSkillId, {
+        isExisting: true,
+        skillId,
+        levelId
+    });
+
+    if (!card) return;
+
+    container.appendChild(card);
+
+    // Display existing files if present
+    const videoInput = card.querySelector('[name^="skill_video"]');
+    const certInput = card.querySelector('[name^="certificate"]');
+    const videoLabel = card.querySelector('.label_skill_video');
+    const certLabel = card.querySelector('.label_skill_certificate');
+
+    if (video && videoInput && videoLabel) {
+        createExistingFileDisplay('video', videoInput, videoLabel, card);
+        updateTracker('video', 'existed', uSkillId);
+    }
+
+    if (certificate && certInput && certLabel) {
+        createExistingFileDisplay('certificate', certInput, certLabel, card);
+        updateTracker('certificate', 'existed', uSkillId);
+    }
+
+    // Setup file inputs and remove button
+    setupFileInputs(card, uSkillId);
+    setupRemoveButton(card, uSkillId);
+
     initTooltips();
-    return rowId; // Return the new row ID
-
 }
 
-function createSkillRow(rowId, templateClone) {
-    const row = document.createElement('tr');
-    row.className = 'skill-row';
-    row.innerHTML = templateClone.querySelector('tr').innerHTML;
-    row.dataset.rowId = rowId;
-    return row;
+/**
+ * Adds a blank skill card for new skill entry
+ * @returns {string|null} The ID of the newly created card
+ */
+function addBlankSkillCard() {
+    if (checkSkillLimit()) return null;
+
+    const cardId = Date.now().toString();
+    const card = createSkillCard(cardId);
+
+    if (!card) return null;
+
+    container.appendChild(card);
+
+    // Setup file inputs and remove button
+    setupFileInputs(card, cardId);
+    setupRemoveButton(card, cardId);
+
+    initTooltips();
+
+    // console.log('New skill added with ID:', cardId);
+    return cardId;
 }
 
-function setupFileInputs(row, rowId, uSkillId = null) {
-    const videoInput = row.querySelector('[name^="skill_video"]');
-    const certInput = row.querySelector('[name^="certificate"]');
-    const videoLabel = row.querySelector('.label_skill_video');
-    const certLabel = row.querySelector('.label_skill_certificate');
+/**
+ * Initializes Choices.js for select elements in a card
+ * @param {HTMLElement} card - The card element
+ */
+function initSelectsForCard(card) {
+    if (typeof Choices !== 'undefined') {
+        const skillSelect = card.querySelector('[name="skill"]');
+        const levelSelect = card.querySelector('[name="level"]');
 
-    if (videoInput) {
-        videoInput.name = `skill_videos_${rowId}`;
-        videoInput.classList.add('skill_video_input');
-    }
+        const choicesOptions = {
+            searchEnabled: true,
+            removeItemButton: true,
+            shouldSort: false,
+            allowHTML: true,
+            classNames: {
+                containerOuter: 'choices',
+                containerInner: 'choices__inner bg-light',
+                listDropdown: 'choices__list--dropdown'
+            }
+        };
 
-    if (certInput) {
-        certInput.name = `certificates_${rowId}`;
-        certInput.classList.add('certificate_input');
-    }
+        if (skillSelect && !skillSelect.hasAttribute('data-choicejs')) {
+            new Choices(skillSelect, choicesOptions);
+            skillSelect.setAttribute('data-choicejs', 'true');
+        }
 
-    if (videoInput && videoLabel) {
-        videoLabel.addEventListener('click', () => videoInput.click());
-        videoInput.addEventListener('change', () => {
-            // For new skills, always mark as uploaded
-            const isNewSkill = trackers.skills.new.includes(rowId);
-            handleFileUploadForRow('video', videoInput, videoLabel, row, {
-                uSkillId: rowId,
-                isNew: isNewSkill
-            });
-        });
-    }
-
-    if (certInput && certLabel) {
-        certLabel.addEventListener('click', () => certInput.click());
-        certInput.addEventListener('change', () => {
-            // For new skills, always mark as uploaded
-            const isNewSkill = trackers.skills.new.includes(rowId);
-            handleFileUploadForRow('certificate', certInput, certLabel, row, {
-                uSkillId: rowId,
-                isNew: isNewSkill
-            });
-        });
+        if (levelSelect && !levelSelect.hasAttribute('data-choicejs')) {
+            new Choices(levelSelect, choicesOptions);
+            levelSelect.setAttribute('data-choicejs', 'true');
+        }
     }
 }
-
-// =============================================
+// =======================
 // FILE UPLOAD MODULES
-// =============================================
+// =======================
 
-function handleFileUploadForRow(fileType, fileInput, fileLabel, rowElement, options = {}) {
+function handleFileUploadForCard(fileType, fileInput, fileLabel, cardElement, options = {}) {
     if (!fileInput.files || fileInput.files.length === 0) return;
 
     // ✅ Defensive: check if tracker exists
@@ -712,7 +682,7 @@ function handleFileUploadForRow(fileType, fileInput, fileLabel, rowElement, opti
     const file = fileInput.files[0];
     const fileName = file.name;
     const container = fileInput.parentNode;
-    const uSkillId = options.uSkillId || rowElement.dataset.rowId;
+    const uSkillId = options.uSkillId || cardElement.dataset.cardId;
 
     // Determine if this is a new skill
     const isNewSkill = options.isNew !== undefined ? options.isNew : trackers.skills.new.includes(uSkillId);
@@ -721,17 +691,7 @@ function handleFileUploadForRow(fileType, fileInput, fileLabel, rowElement, opti
     const action = isNewSkill ? 'uploaded' :
         trackers[fileType].existed.includes(uSkillId) ? 'changed' : 'uploaded';
 
-
-    // Determine the action based on tracker state
-    // if (isNewSkill) {
-    //     action = 'uploaded'; // Always 'uploaded' for new skills
-    // } else {
-    //     const hadFile = trackers[fileType].existed.includes(uSkillId);
-    //     action = hadFile ? 'changed' : 'uploaded';
-    // }
-
     updateTracker(fileType, action, uSkillId, true);
-
 
     const iconClass = fileType === 'video' ? 'bi bi-file-earmark-play-fill' : 'bi bi-file-earmark-text-fill';
     // Define removeInputPrefix based on fileType
@@ -774,13 +734,13 @@ function handleFileUploadForRow(fileType, fileInput, fileLabel, rowElement, opti
         tracker.uploaded = tracker.uploaded.filter(id => id !== uSkillId);
         console.log(`${fileType}-uploaded: `, tracker.uploaded);
 
-        let removeFlag = rowElement.querySelector(`input[name="${removeFlagName}"]`);
+        let removeFlag = cardElement.querySelector(`input[name="${removeFlagName}"]`);
         if (!removeFlag) {
             removeFlag = document.createElement('input');
             removeFlag.type = 'hidden';
             removeFlag.name = removeFlagName;
             removeFlag.value = 'true';
-            rowElement.appendChild(removeFlag);
+            cardElement.appendChild(removeFlag);
         }
     };
 
@@ -793,7 +753,7 @@ function handleFileUploadForRow(fileType, fileInput, fileLabel, rowElement, opti
     container.insertBefore(displayDiv, fileInput.nextSibling);
 
     // Remove previous remove flag if re-uploading
-    rowElement.querySelector(`input[name="${removeFlagName}"]`)?.remove();
+    cardElement.querySelector(`input[name="${removeFlagName}"]`)?.remove();
 
     initTooltips();
 }
@@ -811,7 +771,7 @@ function handleFileUpload(input, options = {}) {
     Array.from(files).forEach((file, index) => {
         const ext = file.name.split('.').pop().toLowerCase();
         if (!allowedExtensions.includes(ext)) {
-            showBootstrapAlert(`Unsupported file type: ${ext}`, 'danger', 4000);
+            showBootstrapAlert2(`Unsupported file type: ${ext}`, 'danger', 4000);
             return;
         }
 
@@ -836,12 +796,10 @@ function handleFileUpload(input, options = {}) {
     }
 }
 
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 /**
  * Shows all existing skills from the server
  */
-async function showAllExistedSkills() {
+async function loadExistingSkills() {
     if (!applicantUId) {
         console.error('No applicantUId found!');
         return;
@@ -853,7 +811,7 @@ async function showAllExistedSkills() {
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
-        console.log('Received data:', data);
+        // console.log('Received data:', data);
         // Process intro video
         handleVideoIntro(data.video_intro);
 
@@ -867,22 +825,21 @@ async function showAllExistedSkills() {
         // Process skills
         if (data.existed_uSkill_list && Array.isArray(data.existed_uSkill_list)) {
             data.existed_uSkill_list.forEach(uSkill => {
-                console.log('Processing skill:', uSkill);
+                // console.log('Processing skill:', uSkill);
                 if (uSkill) updateTracker('skills', 'existed', uSkill.uSkillId);
                 if (uSkill.video) updateTracker('video', 'existed', uSkill.uSkillId);
                 if (uSkill.certificate) updateTracker('certificate', 'existed', uSkill.uSkillId);
-                addExistedSkillRow(
+                addExistedSkillCard(
                     uSkill.uSkillId,
                     uSkill.skill,
                     uSkill.level,
                     uSkill.video,
                     uSkill.certificate,
-                    uSkill.status
                 );
             });
             // console.log('existedVideos: ', existedVideos);
-            console.log('Videos-existed: ', trackers.video.existed);
-            console.log('Certificates-existed: ', trackers.certificate.existed);
+            // console.log('Videos-existed: ', trackers.video.existed);
+            // console.log('Certificates-existed: ', trackers.certificate.existed);
         } else {
             console.error('Invalid data format:', data);
         }
@@ -891,9 +848,9 @@ async function showAllExistedSkills() {
     }
 }
 
-// ==========================================================================================
+// =======================
 // HELPER FUNCTIONS
-// ==========================================================================================
+// =======================
 // Validate file type
 function validateFileType(file, allowedExtensions) {
     if (!file || !file.name) return false;
@@ -909,10 +866,11 @@ function validateFileType(file, allowedExtensions) {
  * Checks if skill limit has been reached
  */
 function checkSkillLimit() {
+    const alertLimitMessage = document.querySelector('#skillLimitAlert');
     const btnAddSkill = document.getElementById('btnAddSkill');
-    if (container.querySelectorAll('.skill-row').length >= maxSkills) {
+    if (container.querySelectorAll('.skill-card').length >= maxEntries) {
         if (alertLimitMessage) alertLimitMessage.classList.remove('d-none');
-        showBootstrapAlert(`Maximum ${maxSkills} skills allowed`, 'danger', 5000);
+        showBootstrapAlert2(`Maximum ${maxEntries} skills allowed`, 'danger', 5000);
         btnAddSkill.disabled = true;
         return true; // means limit reached
     } else {
@@ -965,17 +923,6 @@ function renderFilePreview(file, index, container) {
     container.appendChild(fileDiv);
 }
 
-// Optional: Dynamic update helper
-function updateTracker_MAIN(type, action, id, logger = false) {
-    const tracker = trackers?.[type]?.[action];
-    if (!tracker) {
-        console.warn(`Unknown tracker type or action: ${type} - ${action}`);
-        return;
-    }
-    if (!tracker.includes(id)) tracker.push(id);
-    if (logger) console.log(`${type} - ${action}: `, trackers[type][action]);
-}
-
 function updateTracker(type, action, id, logger = false) {
     // First remove the ID from any other actions in the same type
     Object.keys(trackers[type]).forEach(key => {
@@ -992,11 +939,11 @@ function updateTracker(type, action, id, logger = false) {
     if (logger) console.log(`${type} - ${action}: `, trackers[type][action]);
 }
 
-// =============================================
+// ============================
 // INITIALIZATION
-// =============================================
+// ============================
 // Initialize select2/choices.js
-function initSelects() {
+export function initSelects() {
     if (typeof Choices !== 'undefined') {
         document.querySelectorAll('.js-choice:not([data-choicejs])').forEach(select => {
             try {
@@ -1022,7 +969,7 @@ function initSelects() {
 /**
  * Initializes tooltips
  */
-function initTooltips() {
+export function initTooltips() {
     if (typeof bootstrap !== 'undefined') {
         document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
             // Dispose if already has a tooltip instance
@@ -1034,15 +981,26 @@ function initTooltips() {
     }
 }
 
-// --------- Initialize on DOM ready
+// ============================
+// EVENT LISTENERS
+// ============================
+document.getElementById('btnAddSkill').addEventListener('click', function() {
+    addBlankSkillCard();
+});
+// --------------------------- Add Blank skill card ---------------------------
+// ============================
+// INITIALIZATION
+// ============================
 document.addEventListener('DOMContentLoaded', function () {
-    try {
-        showAllExistedSkills();
+     try {
+        loadExistingSkills();
+        initSelects();
+        initTooltips();
     } catch (e) {
-        console.error(e);
+        console.error('Initialization error:', e);
     }
     try {
-        addBlankSkillRow();
+        addBlankSkillCard();
     } catch (e) {
         console.error(e);
     }
@@ -1059,71 +1017,77 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// ======================== Generate Review-Step 5 Skills Table ========================
-const reviewContainer = document.getElementById('review-skills-container');
-const reviewTemplate = document.getElementById('review-row-template');
+// =============================
+// SUPPORTING FUNCTIONS
+// =============================
 
-function generateReviewStepSkills() {
-    const reviewContainer = document.getElementById('skillReviewContainer');
-    if (!reviewContainer) {
-        console.warn('Review container not found');
-        return;
+/**
+ * Sets up file inputs for a skill card
+ * @param {HTMLElement} card - The card element
+ * @param {string} cardId - The card's unique ID
+ */
+function setupFileInputs(card, cardId) {
+    const videoInput = card.querySelector('[name^="skill_video"]');
+    const certInput = card.querySelector('[name^="certificate"]');
+    const videoLabel = card.querySelector('.label_skill_video');
+    const certLabel = card.querySelector('.label_skill_certificate');
+
+    if (videoInput) {
+        videoInput.name = `skill_videos_${cardId}`;
+        videoInput.classList.add('skill_video_input');
     }
 
-    // Clear previous content
-    reviewContainer.innerHTML = '';
-
-    const rows = container.querySelectorAll('.skill-row');
-    if (!rows.length) {
-        console.warn('No skill rows found');
-        return;
+    if (certInput) {
+        certInput.name = `certificates_${cardId}`;
+        certInput.classList.add('certificate_input');
     }
 
-    rows.forEach(row => {
-        const skillSelect = row.querySelector('[name^="skill"]');
-        const levelSelect = row.querySelector('[name^="level"]');
-        const videoInput = row.querySelector('[name^="skill_video"]');
-        const certificateInput = row.querySelector('[name^="certificate"]');
+    if (videoInput && videoLabel) {
+        videoLabel.addEventListener('click', () => videoInput.click());
+        videoInput.addEventListener('change', () => {
+            handleFileUploadForCard('video', videoInput, videoLabel, card, {
+                uSkillId: cardId,
+                isNew: trackers.skills.new.includes(cardId)
+            });
+        });
+    }
 
-        if (!skillSelect || !levelSelect) {
-            console.warn('Required select elements not found');
-            return;
-        }
-
-        const skillName = skillSelect.options[skillSelect.selectedIndex]?.text || 'Not selected';
-        const levelName = levelSelect.options[levelSelect.selectedIndex]?.text || 'Not selected';
-        const videoFile = videoInput?.files[0]?.name || 'No file';
-        const certFile = certificateInput?.files[0]?.name || 'No file';
-
-        // Clone and populate a row using reviewTemplate
-        const reviewTemplate = document.getElementById('reviewTemplate');
-        if (!reviewTemplate) {
-            console.warn('Review template not found');
-            return;
-        }
-
-        const newRow = reviewTemplate.content.cloneNode(true);
-        const addedRow = newRow.querySelector('.review-row');
-
-        if (addedRow) {
-            const skillNameEl = addedRow.querySelector('.review-skill-name');
-            const levelNameEl = addedRow.querySelector('.review-level-name');
-            const videoFileEl = addedRow.querySelector('.review-video-file');
-            const certFileEl = addedRow.querySelector('.review-cert-file');
-
-            if (skillNameEl) skillNameEl.textContent = skillName;
-            if (levelNameEl) levelNameEl.textContent = levelName;
-            if (videoFileEl && videoFile !== 'No file') videoFileEl.textContent = `Video: ${videoFile}`;
-            if (certFileEl && certFile !== 'No file') certFileEl.textContent = `Certificate: ${certFile}`;
-
-            reviewContainer.appendChild(addedRow);
-        }
-    });
+    if (certInput && certLabel) {
+        certLabel.addEventListener('click', () => certInput.click());
+        certInput.addEventListener('change', () => {
+            handleFileUploadForCard('certificate', certInput, certLabel, card, {
+                uSkillId: cardId,
+                isNew: trackers.skills.new.includes(cardId)
+            });
+        });
+    }
 }
 
-container.addEventListener('change', function () {
-    // generateReviewStepSkills();
-});
-// ---------------------------------- ARCHIVED (MAIN) ----------------------------------
+/**
+ * Sets up the remove button for a skill card
+ * @param {HTMLElement} card - The card element
+ * @param {string} cardId - The card's unique ID
+ */
+function setupRemoveButton(card, cardId) {
+    const removeBtn = card.querySelector('.remove-skill');
+    if (!removeBtn) return;
 
-//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    removeBtn.addEventListener('click', function() {
+        if (!confirm('Are you sure you want to remove this skill?')) return;
+
+        // Handle tracking based on whether this is an existing or new skill
+        if (trackers.skills.existed.includes(cardId)) {
+            // Existing skill - mark for removal
+            updateTracker('video', 'removed', cardId, true);
+            updateTracker('certificate', 'removed', cardId, true);
+            updateTracker('skills', 'removed', cardId, true);
+            removedSkillIds.push(cardId);
+        } else {
+            // New skill - just remove from new skills tracker
+            trackers.skills.new = trackers.skills.new.filter(id => id !== cardId);
+        }
+
+        card.remove();
+        checkSkillLimit();
+    });
+}

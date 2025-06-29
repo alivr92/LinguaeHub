@@ -43,6 +43,10 @@ class About(TemplateView):
     template_name = 'app_pages/about.html'
 
 
+class Pricing(TemplateView):
+    template_name = 'app_pages/pricing.html'
+
+
 class ContactUs(FormView):
     template_name = 'app_pages/contact-us.html'
     form_class = ContactUsForm
