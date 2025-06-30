@@ -4,53 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/ap2_meeting/views.py" line="507" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - app shop&quot;">
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/step5.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/step6.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/pricing.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/js/avr_file_utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/js/fileHandlers.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/js/jquery-1.10.1.min.js" afterDir="false" />
+    <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - complete wizard&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder_backup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_backup2_ui.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills_new.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard_cursor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step3_deepseek.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/archive/w_step3_deepseek.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step5_deepseek.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/archive/w_step3_skills.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills_mixed.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills_mixed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_education.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step4_education.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step6_result.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step6_result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_admin/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_admin/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_shop/templates/app_shop/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_shop/templates/app_shop/shop.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/js/avr.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/js/avr.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/emails/interview/decision/final_accept.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/emails/interview/decision/final_accept.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -84,7 +41,7 @@
       <file leaf-file-name="da_tutor_request.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
+            <state relative-caret-position="20160">
               <caret line="840" column="84" selection-start-line="840" selection-start-column="75" selection-end-line="840" selection-end-column="84" />
               <folding>
                 <element signature="n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" />
@@ -96,12 +53,10 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_admin/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-499">
-              <caret line="285" column="39" lean-forward="true" selection-start-line="285" selection-start-column="39" selection-end-line="285" selection-end-column="39" />
+            <state relative-caret-position="6144">
+              <caret line="285" column="39" selection-start-line="285" selection-start-column="39" selection-end-line="285" selection-end-column="39" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
-                <element signature="e#11454#12016#0" />
-                <element signature="e#12065#12517#0" />
               </folding>
             </state>
           </provider>
@@ -110,8 +65,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="252" lean-forward="true" selection-start-line="252" selection-end-line="252" />
+            <state relative-caret-position="5832">
+              <caret line="252" selection-start-line="252" selection-end-line="252" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <element signature="e#4301#4457#0" />
@@ -146,20 +101,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="w_step5_deepseek.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="step5_review.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_shop/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="24">
+              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="w_step5_deepseek.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="640" column="33" lean-forward="true" selection-start-line="640" selection-start-column="33" selection-end-line="640" selection-end-column="33" />
-              <folding>
-                <element signature="e#28109#30059#0#HTML" />
-                <element signature="e#30088#31508#0#HTML" />
-                <element signature="e#33064#33800#0#HTML" />
-                <element signature="e#33950#34264#0#HTML" />
-                <element signature="e#34352#36145#0#HTML" />
-                <element signature="e#41796#42182#0#HTML" />
-                <element signature="e#42317#43556#0#HTML" />
-              </folding>
+            <state relative-caret-position="170">
+              <caret line="1177" column="16" lean-forward="true" selection-start-line="1177" selection-start-column="16" selection-end-line="1177" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="413">
+              <caret line="82" column="52" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -178,8 +154,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Spoken Languages</find>
-      <find>lang</find>
       <find>years_experience</find>
       <find>&lt;form</find>
       <find>form&gt;</find>
@@ -208,6 +182,8 @@
       <find>STATUS_CHOICES</find>
       <find>_badge_{{</find>
       <find>Teaching Skills</find>
+      <find>Contac</find>
+      <find>form-check</find>
     </findStrings>
     <replaceStrings>
       <replace>trackers.edu.</replace>
@@ -257,7 +233,6 @@
         <option value="$PROJECT_DIR$/app_pages/urls.py" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
         <option value="$PROJECT_DIR$/app_shop/templates/app_shop/shop.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/pricing.html" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/step5_deepseek.html" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" />
@@ -287,7 +262,6 @@
         <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js" />
         <option value="$PROJECT_DIR$/app_accounts/models.py" />
         <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/step5.css" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" />
         <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css" />
         <option value="$PROJECT_DIR$/app_accounts/forms.py" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" />
@@ -299,6 +273,8 @@
         <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
         <option value="$PROJECT_DIR$/app_admin/views.py" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" />
       </list>
     </option>
   </component>
@@ -373,15 +349,6 @@
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -397,95 +364,12 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="wizard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="wizard" type="462c0819:PsiDirectoryNode" />
-              <item name="includes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_accounts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app_admin" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="app_shop" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="emails" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="emails" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -651,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1750181120428</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="&quot;Commit by Pycharm - complete wizard&quot;">
+      <created>1751157621096</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751157621096</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -665,10 +556,9 @@
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49501246" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.76375" weight="0.45261845" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49750623" visible="true" weight="0.185" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49750623" visible="true" weight="0.185" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.5885287" />
       <window_info anchor="right" id="SciView" order="4" />
       <window_info id="Structure" order="1" sideWeight="0.50124687" side_tool="true" weight="0.185" />
       <window_info id="Favorites" order="2" sideWeight="0.50249374" side_tool="true" weight="0.185" />
@@ -679,6 +569,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.5885287" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -693,7 +584,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;Commit by Pycharm&quot;" />
     <MESSAGE value="&quot;Commit by Pycharm - app shop&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Commit by Pycharm - app shop&quot;" />
+    <MESSAGE value="&quot;Commit by Pycharm - complete wizard&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Commit by Pycharm - complete wizard&quot;" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1920" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1736498681659">
@@ -732,40 +624,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/migrations/0003_alter_providerapplication_status.py" />
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step3_skills.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
-          <folding>
-            <element signature="e#1059#1630#0" />
-            <element signature="e#1765#5554#0" />
-            <element signature="e#11000#11251#0" />
-            <element signature="e#11717#15201#0" />
-            <element signature="e#15244#16587#0" />
-            <element signature="e#16669#19509#0" />
-            <element signature="e#20251#21235#0" />
-            <element signature="e#21609#22607#0" />
-            <element signature="e#22752#23156#0" />
-            <element signature="e#23304#24261#0" />
-            <element signature="e#24432#27627#0" />
-            <element signature="e#27698#28978#0" />
-            <element signature="e#29069#30869#0" />
-            <element signature="e#31018#31245#0" />
-            <element signature="e#31324#31972#0" />
-            <element signature="e#32036#32266#0" />
-            <element signature="e#32356#32642#0" />
-            <element signature="e#32718#33552#0" />
-            <element signature="e#33611#34099#0" />
-            <element signature="e#34246#35072#0" />
-            <element signature="e#35137#35510#0" />
-            <element signature="e#36624#37901#0" />
-            <element signature="e#38095#38963#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/migrations/0003_alter_teachingcertificate_completion_date.py" />
     <entry file="file://$PROJECT_DIR$/ap2_tutor/migrations/0002_auto_20250622_0106.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -831,16 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="684" column="1" selection-start-line="684" selection-start-column="1" selection-end-line="684" selection-end-column="1" />
-          <folding>
-            <element signature="e#1614#7339#0" />
-            <element signature="e#22397#31942#0" />
-            <element signature="e#33669#34760#0" />
-            <element signature="e#34945#35758#0" />
-            <element signature="e#48942#49764#0" />
-            <element signature="e#49817#49977#0" />
-            <element signature="e#50036#50524#0" />
-            <element signature="e#52904#53219#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -879,31 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="144" column="28" lean-forward="true" selection-start-line="144" selection-start-column="28" selection-end-line="144" selection-end-column="28" />
-          <folding>
-            <element signature="e#1059#1630#0" />
-            <element signature="e#1765#5554#0" />
-            <element signature="e#11000#11251#0" />
-            <element signature="e#11717#15201#0" />
-            <element signature="e#15244#16587#0" />
-            <element signature="e#16669#19509#0" />
-            <element signature="e#20251#21235#0" />
-            <element signature="e#21609#22607#0" />
-            <element signature="e#22752#23156#0" />
-            <element signature="e#23304#24261#0" />
-            <element signature="e#24432#27627#0" />
-            <element signature="e#27698#28978#0" />
-            <element signature="e#29069#30869#0" />
-            <element signature="e#31018#31245#0" />
-            <element signature="e#31324#31972#0" />
-            <element signature="e#32036#32266#0" />
-            <element signature="e#32356#32642#0" />
-            <element signature="e#32718#33552#0" />
-            <element signature="e#33611#34099#0" />
-            <element signature="e#34246#35072#0" />
-            <element signature="e#35137#35510#0" />
-            <element signature="e#36624#37901#0" />
-            <element signature="e#38095#38963#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -918,16 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#1614#7339#0" />
-            <element signature="e#22397#31942#0" />
-            <element signature="e#33669#34760#0" />
-            <element signature="e#34945#35758#0" />
-            <element signature="e#48942#49764#0" />
-            <element signature="e#49817#49977#0" />
-            <element signature="e#50036#50524#0" />
-            <element signature="e#52904#53219#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -942,14 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="705" lean-forward="true" selection-start-line="705" selection-end-line="705" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#22274#25746#0" />
-            <element signature="e#25791#27083#0" />
-            <element signature="e#27128#29296#0" />
-            <element signature="e#29336#31504#0" />
-            <element signature="e#31633#33726#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -967,13 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/emails/interview/success_after_schedule.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -988,16 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
           <caret line="742" column="7" lean-forward="true" selection-start-line="742" selection-start-column="7" selection-end-line="742" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#88#0" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#!!top" expanded="true" />
-            <element signature="n#!!block;n#fixContentSpacing#0" />
-            <element signature="n#!!block;n#goToStep_DELETE#0" />
-            <element signature="n#!!block;n#goToStep_main#0" />
-            <element signature="n#!!block;n#handleStepChange#0" />
-            <element signature="n#!!block;n#showAlert#0" />
-            <element signature="e#74#81#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1005,10 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="115" column="19" lean-forward="true" selection-start-line="115" selection-start-column="19" selection-end-line="115" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#3132#4005#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1016,9 +800,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1039,9 +820,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="152" column="38" lean-forward="true" selection-start-line="152" selection-start-column="38" selection-end-line="152" selection-end-column="38" />
-          <folding>
-            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1095,7 +873,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
+        <state relative-caret-position="20160">
           <caret line="840" column="84" selection-start-line="840" selection-start-column="75" selection-end-line="840" selection-end-column="84" />
           <folding>
             <element signature="n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" />
@@ -1107,6 +885,42 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="517">
           <caret line="29" column="85" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5832">
+          <caret line="252" selection-start-line="252" selection-end-line="252" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#4301#4457#0" />
+            <element signature="e#10066#10712#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_review.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="40" lean-forward="true" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_admin/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6144">
+          <caret line="285" column="39" selection-start-line="285" selection-start-column="39" selection-end-line="285" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="413">
+          <caret line="82" column="52" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -1133,49 +947,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="252" lean-forward="true" selection-start-line="252" selection-end-line="252" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#4301#4457#0" />
-            <element signature="e#10066#10712#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_review.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="14" column="40" lean-forward="true" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-499">
-          <caret line="285" column="39" lean-forward="true" selection-start-line="285" selection-start-column="39" selection-end-line="285" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-            <element signature="e#11454#12016#0" />
-            <element signature="e#12065#12517#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="640" column="33" lean-forward="true" selection-start-line="640" selection-start-column="33" selection-end-line="640" selection-end-column="33" />
+        <state relative-caret-position="170">
+          <caret line="1177" column="16" lean-forward="true" selection-start-line="1177" selection-start-column="16" selection-end-line="1177" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_shop/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <element signature="e#28109#30059#0#HTML" />
-            <element signature="e#30088#31508#0#HTML" />
-            <element signature="e#33064#33800#0#HTML" />
-            <element signature="e#33950#34264#0#HTML" />
-            <element signature="e#34352#36145#0#HTML" />
-            <element signature="e#41796#42182#0#HTML" />
-            <element signature="e#42317#43556#0#HTML" />
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_shop/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -74,7 +74,7 @@
                                     href="{% url 'app_pages:about' %}" id="menu-tutor" aria-expanded="false">About
                             Us</a>
                     </li>
-                    <!-- Nav item: Contact Us -->
+                    <!-- Nav item: Contact -->
                     <li class="nav-item">
                         <a
                                 {% if 'contact-us' in request.path %}
@@ -82,8 +82,7 @@
                                 {% else %}
                                     class="nav-link"
                                 {% endif %}
-                                    href="{% url 'app_pages:contact_us' %}" id="menu-tutor" aria-expanded="false">Contact
-                            Us</a>
+                                    href="{% url 'app_pages:contact_us' %}" id="menu-tutor" aria-expanded="false">Contact</a>
                     </li>
                     <!-- Nav item: Pricing -->
                     <li class="nav-item">

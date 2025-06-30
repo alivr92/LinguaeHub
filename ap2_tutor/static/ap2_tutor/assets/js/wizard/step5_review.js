@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('agreement-form');
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         if (!form.checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const invalidField = form.querySelector(':invalid');
             if (invalidField) {
                 const container = invalidField.closest('.form-check');
-
+                // console.log('container: ', container);
                 // Scroll to container
                 container.scrollIntoView({
                     behavior: 'smooth',
