@@ -4,10 +4,61 @@
     <bookmark url="file://$PROJECT_DIR$/ap2_meeting/views.py" line="507" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - complete wizard&quot;">
+    <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - deployment process1&quot;">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0002_auto_20250622_0106.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0003_teachingcertificate_completion_date.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0004_auto_20250625_0233.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0005_auto_20250625_1843.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0006_alter_teachingcertificate_name.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0007_rename_is_verified_teachingcertificate_is_certified.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0008_auto_20250629_0421.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0002_auto_20250520_0316.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0003_userskill_is_notified.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0004_auto_20250522_0026.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0005_alter_skill_category.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0006_alter_skill_category.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0007_alter_skill_category.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0008_auto_20250525_1641.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0009_auto_20250621_0413.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0010_auto_20250622_0339.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0011_auto_20250625_0233.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0012_auto_20250625_1843.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0013_auto_20250627_0034.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0014_alter_userprofile_gender.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0015_auto_20250628_1851.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_shop/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.bak" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dir" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db1.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/populate_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/01_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/a1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/a3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/01_main.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/02_main.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/03_main.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/04_main.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/05_main.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/06_M.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/07_M.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/book/09.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/logo_black_gold.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/images/logo_white_gold.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,18 +89,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="da_tutor_request.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20160">
-              <caret line="840" column="84" selection-start-line="840" selection-start-column="75" selection-end-line="840" selection-end-column="84" />
-              <folding>
-                <element signature="n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#2;n#form#0;n#div#1;n#div#0;n#div#0;n#div#2;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_admin/views.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -79,7 +118,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
+            <state relative-caret-position="264">
               <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="e#860#6990#0" />
@@ -110,14 +149,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_shop/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="24">
-              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+              <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard_default.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/dashboard_default.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="609">
+              <caret line="190" lean-forward="true" selection-start-line="190" selection-end-line="190" />
             </state>
           </provider>
         </entry>
@@ -125,8 +179,8 @@
       <file leaf-file-name="w_step5_deepseek.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="1177" column="16" lean-forward="true" selection-start-line="1177" selection-start-column="16" selection-end-line="1177" selection-end-column="16" />
+            <state relative-caret-position="28248">
+              <caret line="1177" column="16" selection-start-line="1177" selection-start-column="16" selection-end-line="1177" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -134,7 +188,7 @@
       <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
+            <state relative-caret-position="1968">
               <caret line="82" column="52" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
             </state>
           </provider>
@@ -154,10 +208,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>years_experience</find>
-      <find>&lt;form</find>
-      <find>form&gt;</find>
-      <find>accept</find>
       <find>DTW</find>
       <find>submit_</find>
       <find>timezone</find>
@@ -184,6 +234,10 @@
       <find>Teaching Skills</find>
       <find>Contac</find>
       <find>form-check</find>
+      <find>envLinguaeHub/</find>
+      <find>.env</find>
+      <find>.gitignore</find>
+      <find>.sql</find>
     </findStrings>
     <replaceStrings>
       <replace>trackers.edu.</replace>
@@ -224,7 +278,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
         <option value="$PROJECT_DIR$/app_shop/templates/app_shop/shop-product-detail.html" />
         <option value="$PROJECT_DIR$/app_shop/urls.py" />
         <option value="$PROJECT_DIR$/app_shop/templates/app_shop/cart.html" />
@@ -275,6 +328,7 @@
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
         <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -315,56 +369,6 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="wizard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_shop" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
@@ -542,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1751157621096</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="&quot;Commit by Pycharm - deployment process1&quot;">
+      <created>1751280935649</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1751280935649</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -585,7 +596,8 @@
     <MESSAGE value="&quot;Commit by Pycharm&quot;" />
     <MESSAGE value="&quot;Commit by Pycharm - app shop&quot;" />
     <MESSAGE value="&quot;Commit by Pycharm - complete wizard&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Commit by Pycharm - complete wizard&quot;" />
+    <MESSAGE value="&quot;Commit by Pycharm - deployment process1&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Commit by Pycharm - deployment process1&quot;" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1920" y="252" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1736498681659">
@@ -624,22 +636,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/migrations/0002_auto_20250622_0106.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="46" column="39" lean-forward="true" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard.js" />
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/skill_adder_backup.js" />
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step3_skills_mixed.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="164" column="42" selection-start-line="164" selection-start-column="42" selection-end-line="164" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
@@ -820,6 +816,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
           <caret line="152" column="38" lean-forward="true" selection-start-line="152" selection-start-column="38" selection-end-line="152" selection-end-column="38" />
+          <folding>
+            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -919,14 +918,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
+        <state relative-caret-position="1968">
           <caret line="82" column="52" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_accounts/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
+        <state relative-caret-position="264">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="e#860#6990#0" />
@@ -949,8 +948,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="1177" column="16" lean-forward="true" selection-start-line="1177" selection-start-column="16" selection-end-line="1177" selection-end-column="16" />
+        <state relative-caret-position="28248">
+          <caret line="1177" column="16" selection-start-line="1177" selection-start-column="16" selection-end-line="1177" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -961,9 +960,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/templatetags/custom_filters.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app_shop/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="240">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -973,10 +976,24 @@
     <entry file="file://$PROJECT_DIR$/app_shop/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="24">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/dashboard/dashboard_default.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="190" lean-forward="true" selection-start-line="190" selection-end-line="190" />
         </state>
       </provider>
     </entry>
