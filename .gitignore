@@ -134,7 +134,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-# .env
+.env
 .venv
 env/
 venv/
@@ -185,7 +185,8 @@ media/
 # End of https://www.toptal.com/developers/gitignore/api/django
 
 #IDE
+# migrations
 .idea/workspace.xml
 "envLinguaeHub/" 
 ".env"    
-.sql .gitignore
+# .sql .gitignore

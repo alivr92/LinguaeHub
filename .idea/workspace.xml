@@ -5,60 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - deployment process1&quot;">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0002_auto_20250622_0106.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0003_teachingcertificate_completion_date.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0004_auto_20250625_0233.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0005_auto_20250625_1843.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0006_alter_teachingcertificate_name.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0007_rename_is_verified_teachingcertificate_is_certified.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_tutor/migrations/0008_auto_20250629_0421.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0002_auto_20250520_0316.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0003_userskill_is_notified.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0004_auto_20250522_0026.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0005_alter_skill_category.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0006_alter_skill_category.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0007_alter_skill_category.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0008_auto_20250525_1641.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0009_auto_20250621_0413.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0010_auto_20250622_0339.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0011_auto_20250625_0233.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0012_auto_20250625_1843.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0013_auto_20250627_0034.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0014_alter_userprofile_gender.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_accounts/migrations/0015_auto_20250628_1851.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_shop/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.bak" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/celerybeat-schedule.dir" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db1.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dump.rdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dump.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/populate_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/01_.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/a1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/a3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/01_main.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/02_main.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/03_main.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/04_main.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/05_main.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/06_M.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/07_M.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/book/09.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/logo_black_gold.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/assets/images/logo_white_gold.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dump.rdb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -170,8 +122,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="190" lean-forward="true" selection-start-line="190" selection-end-line="190" />
+            <state relative-caret-position="-639">
+              <caret line="136" selection-start-line="136" selection-end-line="136" />
             </state>
           </provider>
         </entry>
@@ -208,7 +160,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DTW</find>
       <find>submit_</find>
       <find>timezone</find>
       <find>acceptForm-{{</find>
@@ -238,6 +189,7 @@
       <find>.env</find>
       <find>.gitignore</find>
       <find>.sql</find>
+      <find># migrations</find>
     </findStrings>
     <replaceStrings>
       <replace>trackers.edu.</replace>
@@ -558,7 +510,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1616" height="916" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.23625" side_tool="true" weight="0.32917705" />
@@ -636,13 +587,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="3293" column="4" selection-start-line="3293" selection-start-column="4" selection-end-line="3293" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu_deepseek.js" />
     <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4.js" />
     <entry file="file://$PROJECT_DIR$/static/assets/js/avr_file_utils.js">
@@ -990,10 +934,17 @@
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="190" lean-forward="true" selection-start-line="190" selection-end-line="190" />
+        <state relative-caret-position="-639">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
         </state>
       </provider>
     </entry>
