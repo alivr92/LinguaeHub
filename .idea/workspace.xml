@@ -2,43 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - deployment process1&quot;">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml___jb_tmp___" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/01.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/02.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/04.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/05.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/06.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/06.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/07.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/07.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/09.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/09.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/10.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/11.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/12.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/13.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/14.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/14.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/15.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/16.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/about/17.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/about/17.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/TUV_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/TUV_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/TUV_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/r1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/r2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/r3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/r4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/amin_recoms/r5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/3by4/01.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/3by4/01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/3by4/01_.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/3by4/a1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/3by4/a3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/courses/4by3/15.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/courses/4by3/15.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_black2_gold.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_black_gold.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_white_gold.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/videos/en.vtt" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/videos/en.vtt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/videos/fr.vtt" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/videos/fr.vtt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,23 +33,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
+            <state relative-caret-position="318">
+              <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="177" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
+      <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
-              <folding>
-                <element signature="e#312#336#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="314">
+              <caret line="422" column="75" selection-start-line="422" selection-start-column="75" selection-end-line="422" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app_accounts/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -93,8 +63,8 @@
       <file leaf-file-name=".env" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="59" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="59" />
+            <state relative-caret-position="24">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -113,7 +83,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nov</find>
       <find>termsCheckbox.addEventListener('change', function () {</find>
       <find>pulse-border</find>
       <find>AgreementForm</find>
@@ -143,6 +112,7 @@
       <find>requirements.txt</find>
       <find>settings.py</find>
       <find>static</find>
+      <find>d_edit</find>
     </findStrings>
     <replaceStrings>
       <replace>trackers.edu.</replace>
@@ -229,11 +199,11 @@
         <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
         <option value="$PROJECT_DIR$/app_admin/views.py" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
         <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" />
         <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
       </list>
     </option>
   </component>
@@ -278,6 +248,32 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="includes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -290,6 +286,13 @@
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="videos" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -474,6 +477,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1616" height="916" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.23625" side_tool="true" weight="0.32917705" />
@@ -481,8 +485,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49501246" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.76375" visible="true" weight="0.45261845" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49750623" visible="true" weight="0.185" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.76375" weight="0.45261845" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49750623" visible="true" weight="0.185" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="4" />
@@ -551,7 +555,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4.js" />
     <entry file="file://$PROJECT_DIR$/static/assets/js/avr_file_utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -709,13 +712,6 @@
     <entry file="file://$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/step5.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
@@ -852,10 +848,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/fz3temp-3/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="82" column="52" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
+        <state relative-caret-position="312">
+          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
         </state>
       </provider>
     </entry>
@@ -871,15 +867,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="59" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="59" />
+        <state relative-caret-position="24">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
+        <state relative-caret-position="318">
+          <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="177" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_accounts/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="23" column="63" selection-start-line="23" selection-start-column="63" selection-end-line="23" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="422" column="75" selection-start-line="422" selection-start-column="75" selection-end-line="422" selection-end-column="75" />
         </state>
       </provider>
     </entry>
