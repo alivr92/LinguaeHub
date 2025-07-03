@@ -274,8 +274,8 @@ class DAProviderRequest(LoginRequiredMixin, RoleRequiredMixin, ListView):
 @login_required
 @require_POST
 def update_applicant_status(request, applicant_id):
-    # if not request.headers.get('x-requested-with') == 'XMLHttpRequest' or not request.method == 'POST':
-    if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    if not request.headers.get('x-requested-with') == 'XMLHttpRequest' or not request.method == 'POST':
+    # if request.method == 'POST' and request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({'error': 'Invalid request'}, status=400)
 
     try:

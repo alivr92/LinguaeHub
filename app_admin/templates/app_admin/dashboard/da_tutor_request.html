@@ -1106,10 +1106,6 @@
 
 {% endblock %}
 {% block my_scripts %}
-
-{% endblock %}
-
-
 <script>
     // ----------------------  Control Action Buttons ----------------------
     document.addEventListener('DOMContentLoaded', function () {
@@ -1121,6 +1117,7 @@
                 const applicantId = this.dataset.applicantId;
                 const newStatus = this.dataset.status;
 
+                console.log('newStatus: ', newStatus);
                 // Find the closest table row (tr) ancestor of the clicked button
                 const row = this.closest('tr');
 
@@ -1377,3 +1374,4 @@
 
     });
 </script>
+{% endblock %}
