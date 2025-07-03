@@ -188,7 +188,6 @@ media/
 #IDE
 # migrations
 .idea/workspace.xml
-"envLinguaeHub/" 
-".env"    --cas
+"envLinguaeHub/"
 .gitignore
-LinguaeHub/LinguaeHub/settings.py
+LinguaeHub/settings.py
