@@ -1,13 +1,153 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 from app_accounts.models import UserEducation, UserProfile
 
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+from django.db import transaction
 
-class UserRegistrationForm(forms.ModelForm):
+User = get_user_model()
+
+
+class RegistrationForm(UserCreationForm):
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control form-control-lg border-1',
+            'placeholder': 'First name',
+            'required': 'required',
+        })
+    )
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control form-control-lg border-1',
+            'placeholder': 'Last name',
+            'required': 'required',
+        })
+    )
+    terms_agreed = forms.BooleanField(
+        required=True,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input',
+            'required': 'required',
+        })
+    )
+    email_consent = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input',
+        })
+    )
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2', 'first_name', 'last_name']
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'form-control form-control-lg border-1',
+                'placeholder': 'Username',
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control form-control-lg border-1',
+                'placeholder': 'Email',
+            }),
+            'password1': forms.PasswordInput(attrs={
+                'class': 'form-control border-1',
+                'placeholder': 'Password',
+            }),
+            'password2': forms.PasswordInput(attrs={
+                'class': 'form-control border-1 rounded ps-1',
+                'placeholder': 'Confirm Password',
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Add Bootstrap classes to password fields
+        self.fields['password1'].widget.attrs.update({
+            'class': 'form-control form-control-lg border-1',
+            'placeholder': 'Password'
+        })
+        self.fields['password2'].widget.attrs.update({
+            'class': 'form-control border-1',
+            'placeholder': 'Confirm Password'
+        })
+        # Add real-time validation classes
+        for field in self.fields:
+            if field not in ['terms_agreed', 'email_consent', 'captcha']:
+                self.fields[field].widget.attrs.update({
+                    'oninput': "this.classList.remove('is-invalid'); this.classList.add('is-valid')"
+                })
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            self.add_error('email', 'This email is already registered')
+            self.fields['email'].widget.attrs.update({'class': 'form-control form-control-lg border-1 is-invalid'})
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            self.add_error('username', 'This username is already taken')
+            self.fields['username'].widget.attrs.update({'class': 'form-control form-control-lg border-1 is-invalid'})
+        return username
+
+    def save_main(self, commit=True):
+        user = super().save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+
+        if commit:
+            user.save()
+            UserProfile.objects.create(
+                user=user,
+                terms_agreed=self.cleaned_data['terms_agreed'],
+                terms_agreed_date=timezone.now(),
+                email_consent=self.cleaned_data['email_consent'],
+                email_consent_date=timezone.now() if self.cleaned_data['email_consent'] else None
+            )
+        return user
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+
+        if commit:
+            with transaction.atomic():
+                user.save()
+                # Use get_or_create to prevent duplicates
+                UserProfile.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'terms_agreed': self.cleaned_data['terms_agreed'],
+                        'terms_agreed_date': timezone.now(),
+                        'email_consent': self.cleaned_data['email_consent'],
+                        'email_consent_date': timezone.now() if self.cleaned_data['email_consent'] else None
+                    }
+                )
+        return user
+
+
+class RegistrationForm_MAIN(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    first_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'First name',
+        'required': 'required',
+    }))
+    last_name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Last name',
+        'required': 'required',
+    }))
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control border-1 bg-light rounded ps-1',
+        'class': 'form-control border-1 rounded ps-1',
         'placeholder': 'Username',
         'id': 'exampleUserName',
     }))
@@ -17,7 +157,7 @@ class UserRegistrationForm(forms.ModelForm):
     #     'user_type': 'student',
     # }))
     email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'class': 'form-control border-1 bg-light rounded ps-1',
+        'class': 'form-control border-1 rounded ps-1',
         'placeholder': 'Email'
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
@@ -28,6 +168,15 @@ class UserRegistrationForm(forms.ModelForm):
         'class': 'form-control border-1 bg-light rounded ps-1',
         'placeholder': '*********',
     }), label="Confirm Password")
+    terms_agreed = forms.BooleanField(widget=forms.CheckboxInput(attrs={
+        'class': 'form-check-input',
+        'required': 'required',
+        'id': 'terms_agreed1'  # Match the template's label
+    }), )
+    email_consent = forms.BooleanField(widget=forms.CheckboxInput(attrs={
+        'class': 'form-check-input',
+        'id': 'email_consent1'  # Match the template's label
+    }), )
 
     class Meta:
         model = User
@@ -36,10 +185,13 @@ class UserRegistrationForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         username = cleaned_data.get('username')
-        # user_type = cleaned_data.get('user_type')
         email = cleaned_data.get('email')
         password = cleaned_data.get('password')
         password_confirm = cleaned_data.get('password_confirm')
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
+        terms_agreed = cleaned_data.get('terms_agreed')
+        email_consent = cleaned_data.get('email_consent')
 
         # if User.objects.filter(username=username).exists():
         #     raise forms.ValidationError("Sorry, this username has been registered before! Try another one.")
@@ -64,6 +216,17 @@ class UserRegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.applicant = kwargs.pop('applicant', None)
         super().__init__(*args, **kwargs)
+
+        # Add form-control-lg consistently
+        # for field in self.fields:
+        #     self.fields[field].widget.attrs.update({
+        #         'class': 'form-control form-control-lg border-1'
+        #     })
+        #
+        #     if self.errors.get(field):
+        #         self.fields[field].widget.attrs.update({
+        #             'class': 'form-control border-1 is-invalid'
+        #         })
 
         if self.applicant:  # If coming from invitation
             self.fields['email'].initial = self.applicant.email

@@ -11,6 +11,20 @@
 {#            <img class="dark-mode-item navbar-brand-item" src="{% static 'assets/images/logo1.png' %}" alt="logo">#}
         </a>
         <h5 class="sitename mx-0 px-0">{{ CFChar.site_name }}</h5>
+
+
+    <!-- Logo + Name Row -->
+<div class="d-flex align-items-center">
+    <!-- Logo -->
+    <a class="me-3" href="{% url 'app_pages:home' %}">
+        <img class="light-mode-item" src="{{ CFImage.site_logo_light.url }}" alt="logo" style="height: 2.5rem;">
+        <img class="dark-mode-item" src="{{ CFImage.site_logo_dark.url }}" alt="logo" style="height: 2.5rem;">
+    </a>
+
+    <!-- Site Name -->
+    <h2 class="mb-0 fw-bold text-uppercase" style="font-size: 1.75rem;">{{ CFChar.site_name }}</h2>
+</div>
+
         <!-- Logo END -->
 
         {% include 'app_pages/includes/navbar.html' %}

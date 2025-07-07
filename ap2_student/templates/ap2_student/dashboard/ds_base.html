@@ -92,6 +92,7 @@
 
     {% block head_style %}{% endblock %}
     {% block embed_style %}{% endblock %}
+    {% block my_style %}{% endblock %}
 </head>
 
 <body>
@@ -110,7 +111,9 @@
     <section class="pt-0">
         <div class="container">
             <div class="row">
+            {% if user.profile.is_active %}
                 {% include 'ap2_student/dashboard/includes/ds_sidebar.html' %}
+            {% endif %}
                 {% block dashboard_main_content %}{% endblock %}
             </div> <!-- Row END -->
         </div>

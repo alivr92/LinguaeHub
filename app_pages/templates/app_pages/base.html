@@ -72,7 +72,7 @@
 
     <!-- Favicon -->
     {#  <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}">#}
-    <link rel="shortcut icon" href="{% static 'assets/images/logo1.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/logo_white_gold.png' %}">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,12 +85,12 @@
         <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
-{#        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">#}
+        {#        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">#}
     {% endblock %}
 
 
     <!-- Include Bootstrap CSS -->
-{#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">#}
+    {#    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">#}
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
 
@@ -107,28 +107,28 @@
 {#		<div class="spinner-grow text-primary"></div>#}
 {#	</div>#}
 {#</div>#}
+{% include 'app_pages/includes/topheader.html' %}
 {% block body_header %}
     {# {% include 'app_pages/includes/topbar.html' %}#}
     {% include 'app_pages/includes/header.html' %}
 {% endblock %}
 {% block body_content %}{% endblock %}
-{% block body_footer %}
-    {% include 'app_pages/includes/footer.html' %}
-{% endblock %}
+{% block body_footer %}{% include 'app_pages/includes/footer.html' %}{% endblock %}
+{% block sticky_elements %}{% endblock %}
 <!-- Back to top -->
 <div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
 
 <!-- Include jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>#}
 <script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
 
 {% block scripts_vendors %}
     <!-- Vendors -->
     <script src="{% static 'assets/vendor/tiny-slider/tiny-slider.js' %}"></script>
     <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
-{#    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>#}
+    {#    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>#}
 {% endblock %}
 
 <!-- Template Functions -->

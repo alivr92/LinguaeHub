@@ -6,14 +6,28 @@
     <!-- Logo Nav START -->
     <nav class="navbar navbar-expand-xl">
         <div class="container">
-            <!-- Logo START -->
-            <a class="navbar-brand" href="{% url 'app_pages:home' %}">
-                <img class="light-mode-item navbar-brand-item" src="{% static 'assets/images/logo_white_gold.png' %}"
-                     style="min-height: 42px; min-width: 42px;"
-                     alt="logo">
-                <img class="dark-mode-item navbar-brand-item" src="{% static 'assets/images/logo_black2_gold.png' %}"
-                     alt="logo">
-            </a>
+            <!-- Logo + Name Row -->
+            <div class="d-flex justify-content-between align-items-center ">
+    <!-- Logo -->
+    <a class="navbar-brand  me-3" href="{% url 'app_pages:home' %}">
+        <img class="light-mode-item navbar-brand-item" src="{{ CFImage.site_logo_light.url }}"
+             alt="logo" style="height: 3rem; width: 6rem;">
+        <img class="dark-mode-item navbar-brand-item" src="{{ CFImage.site_logo_dark.url }}"
+             alt="logo" style="height: 3rem; width: 6rem;">
+    </a>
+
+    <!-- Site Name - takes remaining space and aligns right -->
+    <h3 class="mb-0 text-uppercase " > {{ CFChar.site_name }}</h3>
+</div>
+            <!-- Logo -->
+            {#                <a class="me-3" href="{% url 'app_pages:home' %}">#}
+            {#                    <img class="light-mode-item" src="{{ CFImage.site_logo_light.url }}" alt="logo"#}
+            {#                         style="height: 2.5rem;">#}
+            {#                    <img class="dark-mode-item" src="{{ CFImage.site_logo_dark.url }}" alt="logo"#}
+            {#                         style="height: 2.5rem;">#}
+            {#                </a>#}
+
+
             <!-- Logo END -->
 
             <!-- Responsive navbar toggler -->

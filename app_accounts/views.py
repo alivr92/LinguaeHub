@@ -6,14 +6,19 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.utils import timezone
+from datetime import datetime, timedelta
+from django.utils.crypto import get_random_string
 from app_accounts.models import UserProfile
 from ap2_tutor.models import Tutor, ProviderApplication
 from ap2_student.models import Student
 from app_staff.models import Staff
 from app_admin.models import AdminProfile
 from django.views.generic import View, CreateView, ListView, TemplateView
-from .forms import UserRegistrationForm
+from .forms import RegistrationForm
 from utils.pages import error_page
+from utils.email import send_activation_email
+from django.db import transaction
+
 
 class SignInView(View):
     template_name = 'app_accounts/sign-in.html'
@@ -72,11 +77,9 @@ class SignUpView2(View):
             return redirect('accounts:sign_in')
 
 
-
-
 class RegistrationMixin:
     model = User
-    form_class = UserRegistrationForm
+    form_class = RegistrationForm
     success_url = reverse_lazy('accounts:dashboard')
 
     # Add token validation flag
@@ -125,34 +128,65 @@ class RegistrationMixin:
         return kwargs
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.set_password(form.cleaned_data['password'])
-        user.save()
+        try:
+            with transaction.atomic():
+                user = form.save()
 
-        profile = UserProfile.objects.create(
-            user=user,
-            user_type=self.user_type
-        )
+                # Get or create profile to prevent duplicates
+                profile, created = UserProfile.objects.get_or_create(
+                    user=user,
+                    defaults={'user_type': self.user_type}
+                )
 
-        if self.user_type == 'student':
-            Student.objects.create(profile=profile)
-        elif self.user_type == 'tutor':
-            Tutor.objects.create(profile=profile)
-            # Link user to applicant if token was used
-            if hasattr(self, 'applicant'):
-                self._link_applicant_to_user(user)
-                self._transfer_applicant_data(user, profile)
-                self.applicant.status = 'registered'
-                self.applicant.save()
+                if not created:
+                    # Profile already existed, update it
+                    profile.user_type = self.user_type
+                    profile.save()
 
-        elif self.user_type == 'staff':
-            Staff.objects.create(profile=profile)
-        elif self.user_type == 'admin':
-            AdminProfile.objects.create(profile=profile)
+                # Set additional profile fields
+                profile.terms_agreed = form.cleaned_data['terms_agreed']
+                profile.terms_agreed_date = timezone.now()
+                profile.email_consent = form.cleaned_data['email_consent']
+                profile.email_consent_date = timezone.now() if form.cleaned_data['email_consent'] else None
+                profile.save()
 
-        messages.success(self.request, "Registration successful!")
-        login(self.request, user)
-        return super().form_valid(form)
+                # Rest of your role-specific logic...
+
+                if self.user_type == 'student':
+                    Student.objects.get_or_create(profile=profile)
+                    # profile.is_active = True
+                    # profile.save()
+                    # Generate activation token (valid for 24 hours or 1 day)
+                    profile.activation_token = get_random_string(64)
+                    profile.token_expiry = timezone.now() + timedelta(days=1)  # 24 hours
+
+                    # Build the activation URL
+                    activation_url = self.request.build_absolute_uri(
+                        reverse('student:ds_home') + f'?token={profile.activation_token}')
+                    # Send acceptance email with registration link
+                    send_activation_email(self.request, user, activation_url)
+
+                    
+                elif self.user_type == 'tutor':
+                    Tutor.objects.get_or_create(profile=profile)
+                    if hasattr(self, 'applicant'):
+                        self._link_applicant_to_user(user)
+                        self._transfer_applicant_data(user, profile)
+                        self.applicant.status = 'registered'
+                        self.applicant.save()
+
+                elif self.user_type == 'staff':
+                    Staff.objects.get_or_create(profile=profile)
+                elif self.user_type == 'admin':
+                    AdminProfile.objects.get_or_create(profile=profile)
+
+                messages.success(self.request, "Registration successful!")
+                login(self.request, user)
+                return super().form_valid(form)
+
+        except Exception as e:
+            messages.error(self.request, f"Registration failed: {str(e)}")
+            return self.form_invalid(form)
 
     def _create_role_profile(self, profile):
         """Create role-specific profile (Tutor/Student/etc)"""
@@ -192,6 +226,10 @@ class SignUpStudent(RegistrationMixin, CreateView):
     template_name = 'app_accounts/sign_up.html'
     user_type = 'student'
     require_valid_token = False  # Open registration for students
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Please correct the errors below.")
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class SignUpTutor(RegistrationMixin, CreateView):
@@ -291,11 +329,18 @@ def dashboard(request):
         else:
             return redirect('tutor:dt_wizard')
     elif user_type == 'student':
-        return redirect('student:ds_home')
+        if user.profile.is_active:
+            return redirect('student:ds_home')
+        else:
+            return redirect('student:activation_required')
     else:
         # Handle invalid or unexpected user_type (e.g., log an error)
         print(f"Invalid or unexpected user_type: {user_type}")
         return redirect('accounts:ds_home')
+
+
+
+
 
 
 @login_required
@@ -315,6 +360,5 @@ def dashboardEdit(request, pk):
     else:
         # Redirect to a default page or handle unauthenticated roles
         return redirect('student:ds_edit', pk)
-
 
 # finally Here MUST CHECK FOR JUST TUTOR ACCESS NOT OTHERS!!!!

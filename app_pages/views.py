@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView, ListView, DetailView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
-from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
 from ap2_tutor.models import Tutor
@@ -11,6 +10,7 @@ from ap2_meeting.models import Session, Review
 from .forms import ContactUsForm
 from django.utils.timezone import now, timedelta
 from django.db.models import Q
+from utils.email import notification_email_to_admin, get_base64_logo
 
 
 class Home2(TemplateView):
@@ -18,7 +18,7 @@ class Home2(TemplateView):
 
 
 class Home(TemplateView):
-    template_name = 'app_pages/home.html'
+    template_name = 'app_pages/home_mixed.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,23 +53,20 @@ class ContactUs(FormView):
     success_url = reverse_lazy('app_pages:contact_us')
 
     def form_valid(self, form):
-        fullname = self.request.POST.get('fullname')
-        phone = self.request.POST.get('phone')
-        email = self.request.POST.get('email')
-        message = self.request.POST.get('message')
-
-        admin_info = User.objects.get(is_superuser=True)
-        admin_email = admin_info.email
-
-        # print('settings.EMAIL_HOST_USER: ', settings.EMAIL_HOST_USER)
-        # print('settings.EMAIL_HOST_USER: ', settings.EMAIL_HOST_PASSWORD)
-        send_mail(
-            f"Subject: New message from:{fullname}, Email:{email}, Phone: {phone} ",
-            f"message: {message}",
-            settings.EMAIL_HOST_USER,
-            [admin_email],
-            fail_silently=False,
-        )
+        fullname = self.request.POST.get('name')
+        subject = f'New message from: {fullname}'
+        template = 'emails/admin/notify_admin_contact_us'
+        context = {
+            'fullname': fullname,
+            'email': self.request.POST.get('email'),
+            'phone': self.request.POST.get('phone'),
+            'message': self.request.POST.get('message'),
+            'admin_dashboard_uri': self.request.build_absolute_uri(reverse('my_admin:da_contact_us')),
+            'site_name': settings.SITE_NAME,
+            # 'logo_uri': self.request.build_absolute_uri(static('assets/images/logo_white_gold.png'))
+            'logo_base64': get_base64_logo()
+        }
+        notification_email_to_admin(subject, template, context)
 
         form.save()  # Save the form data to the database
         messages.success(self.request, 'We received your message. We will get back to you soon.')
@@ -84,9 +81,12 @@ class FAQ(TemplateView):
     template_name = 'app_pages/faq.html'
 
 
-
 class AGB(TemplateView):
     template_name = 'app_pages/agb.html'
+
+
+class PrivacyPolicy(TemplateView):
+    template_name = 'app_pages/privacy_policy.html'
 
 
 class HelpCenter(TemplateView):

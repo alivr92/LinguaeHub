@@ -3,7 +3,33 @@
 {% load custom_filters %}
 
 {% block head_title %}User Sign Up{% endblock %}
+{% block head_script %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+{% block my_style %}
 
+    <style>
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .is-valid {
+            border-color: #28a745 !important;
+        }
+
+        /* Responsive password fields */
+        @media (max-width: 992px) {
+            .col-lg-6 {
+                width: 100%;
+            }
+        }
+    </style>
+{% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
@@ -55,131 +81,324 @@
 
                                 {% include 'includes/messages.html' %}
                                 <!-- Form START -->
-                                <form action="{% url 'accounts:sign_up' %}" method="POST">
+                                {#                                <form class="needs-validation" novalidate action="{% url 'accounts:sign_up' %}"#}
+                                {#                                      method="POST">#}
+                                {#                                    {% csrf_token %}#}
+                                {##}
+                                {#                                <!-- Full name -->#}
+                                {#                    <div class="col-12">#}
+                                {#                        <label class="form-label">Full name</label>#}
+                                {#                        <div class="input-group">#}
+                                {#                            {{ form.first_name }}#}
+                                {#                            {% for error in form.first_name.errors %}#}
+                                {#                                <div class="alert alert-danger alert-dismissible">{{ error }}#}
+                                {#                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span#}
+                                {#                                            aria-hidden="true">&times;</span></button>#}
+                                {#                                </div>#}
+                                {#                            {% endfor %}#}
+                                {#                            {{ form.last_name }}#}
+                                {#                            {% for error in form.last_name.errors %}#}
+                                {#                                <div class="alert alert-danger alert-dismissible">{{ error }}#}
+                                {#                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span#}
+                                {#                                            aria-hidden="true">&times;</span></button>#}
+                                {#                                </div>#}
+                                {#                            {% endfor %}#}
+                                {#                        </div>#}
+                                {#                    </div>#}
+                                {##}
+                                {#                                    <!-- Username -->#}
+                                {#                                    <div class="mb-4">#}
+                                {#                                        <label for="exampleInputEmail1" class="form-label">Username *</label>#}
+                                {#                                        <div class="input-group input-group-lg">#}
+                                {#                      <span class="input-group-text  rounded-start border-0 text-secondary px-3"><i#}
+                                {#                              class="fas bi-person-badge"></i></span>#}
+                                {#                                            {{ form.username }}#}
+                                {#                                            {% for error in form.username.errors %}#}
+                                {#                                                <div class="invalid-feedback d-block">{{ error }}</div>#}
+                                {#                                            {% endfor %}#}
+                                {#                                        </div>#}
+                                {##}
+                                {#                                    </div>#}
+                                {#                                    <!-- Email -->#}
+                                {#                                    <div class="mb-4">#}
+                                {#                                        <label for="exampleInputEmail1" class="form-label">Email address *</label>#}
+                                {#                                        <div class="input-group input-group-lg">#}
+                                {#                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i#}
+                                {#                              class="fas fa-envelope"></i></span>#}
+                                {#                                            {{ form.email }}#}
+                                {#                                            {% for error in form.email.errors %}#}
+                                {#                                                <div class="invalid-feedback d-block">{{ error }}</div>#}
+                                {#                                            {% endfor %}#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <!-- Password -->#}
+                                {#                                    <div class="mb-4">#}
+                                {#                                        <label for="inputPassword5" class="form-label">Password *</label>#}
+                                {#                                        <div class="input-group input-group-lg">#}
+                                {#                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i#}
+                                {#                              class="fas fa-lock"></i></span>#}
+                                {#                                            {{ form.password }}#}
+                                {#                                            {% for error in form.password.errors %}#}
+                                {#                                                <div class="invalid-feedback d-block">{{ error }}</div>#}
+                                {#                                            {% endfor %}#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <!-- Password Confirm -->#}
+                                {#                                    <div class="mb-4">#}
+                                {#                                        <label for="inputPassword6" class="form-label">Confirm Password *</label>#}
+                                {#                                        <div class="input-group input-group-lg">#}
+                                {#                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i#}
+                                {#                              class="fas fa-lock"></i></span>#}
+                                {#                                            {{ form.password_confirm }}#}
+                                {#                                            {% for error in form.password_confirm.errors %}#}
+                                {#                                                <div class="invalid-feedback d-block">{{ error }}</div>#}
+                                {#                                            {% endfor %}#}
+                                {#                                        </div>#}
+                                {#                                        {% for error in form.password_confirm.errors %}#}
+                                {#                                            <div class="alert alert-danger alert-dismissible">{{ error }}#}
+                                {#                                                <button type="button" class="close" data-dismiss="alert"#}
+                                {#                                                        aria-label="Close"><span aria-hidden="true">&times;</span>#}
+                                {#                                                </button>#}
+                                {#                                            </div>#}
+                                {#                                        {% endfor %}#}
+                                {#                                    </div>#}
+                                {#                                    <!-- Check box -->#}
+                                {#                                    <div class="form-check mb-3 {% if form.terms_agreed.errors %}has-error{% endif %}"#}
+                                {#                                         id="terms_container">#}
+                                {#                                        {{ form.terms_agreed }}#}
+                                {#                                        <label class="form-check-label" for="terms_agreed1"> I agree to the#}
+                                {#                                            <a href="{% url 'app_pages:agb' %}" data-bs-toggle="modal"#}
+                                {#                                               data-bs-target="#termsModal">Terms of#}
+                                {#                                                Service</a> and <a href="#" data-bs-toggle="modal"#}
+                                {#                                                                   data-bs-target="#privacyModal">Privacy Policy</a>#}
+                                {#                                        </label>#}
+                                {#                                        {% if form.terms_agreed.errors %}#}
+                                {#                                            <div class="invalid-feedback d-block">#}
+                                {#                                                {{ form.terms_agreed.errors.0 }}#}
+                                {#                                            </div>#}
+                                {#                                        {% endif %}#}
+                                {##}
+                                {#                                    </div>#}
+                                {#                                    <div class="form-check">#}
+                                {#                                        {{ form.email_consent }}#}
+                                {#                                        <label class="form-check-label" for="email_consent1">#}
+                                {#                                            I consent to receiving important notifications and updates via email#}
+                                {#                                        </label>#}
+                                {#                                    </div>#}
+                                {##}
+                                {##}
+                                {#                                    <!-- Button -->#}
+                                {#                                    <div class="g-recaptcha w-100 mb-3"#}
+                                {#                                         data-sitekey="6Le9ZHgrAAAAAMb1Jw812j-Hs1b_SCYbkyRZmRKt"></div>#}
+                                {##}
+                                {#                                    <div class="align-items-center mt-0">#}
+                                {#                                        <div class="d-grid">#}
+                                {#                                            <button class="btn btn-primary mb-0" type="submit">Sign Up</button>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </form>#}
+
+                                <form class="needs-validation" novalidate method="POST"
+                                      action="{% url 'accounts:sign_up' %}" id="registrationForm">
                                     {% csrf_token %}
-                                    <!-- Username -->
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail1" class="form-label">Username *</label>
-                                        <div class="input-group input-group-lg">
-                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
-                              class="fas bi-person-badge"></i></span>
-                                            {{ form.username }}
+
+                                    <!-- Name Fields Row -->
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name *</label>
+                                            <div class="input-group input-group-lg">
+                <span class="input-group-text rounded-start border-0 text-secondary px-3">
+                    <i class="fas fa-user"></i>
+                </span>
+                                                {{ form.first_name }}
+                                            </div>
+                                            <div class="invalid-feedback first_name-errors">
+                                                {% for error in form.first_name.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
                                         </div>
-                                        {% for error in form.username.errors %}
-                                            <div class="alert alert-danger alert-dismissible">{{ error }}
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name *</label>
+                                            <div class="input-group input-group-lg">
+                <span class="input-group-text rounded-start border-0 text-secondary px-3">
+                    <i class="fas fa-user"></i>
+                </span>
+                                                {{ form.last_name }}
+                                            </div>
+                                            <div class="invalid-feedback last_name-errors">
+                                                {% for error in form.last_name.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Username & Email Row -->
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Username *</label>
+                                            <div class="input-group input-group-lg">
+                <span class="input-group-text rounded-start border-0 text-secondary px-3">
+                    <i class="fas fa-user-tag"></i>
+                </span>
+                                                {{ form.username }}
+                                            </div>
+                                            <div class="invalid-feedback username-errors">
+                                                {% for error in form.username.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email *</label>
+                                            <div class="input-group input-group-lg">
+                <span class="input-group-text rounded-start border-0 text-secondary px-3">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                                                {{ form.email }}
+                                            </div>
+                                            <div class="invalid-feedback email-errors">
+                                                {% for error in form.email.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Password Fields - Responsive Row -->
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <label class="form-label">Password *</label>
+                                            <div class="input-group input-group-lg">
+                <span class="input-group-text rounded-start border-0 text-secondary px-3">
+                    <i class="fas fa-lock"></i>
+                </span>
+                                                {{ form.password1 }}
+                                                <button class="btn btn-outline-secondary toggle-password px-3"
+                                                        type="button">
+                                                    <i class="fas fa-eye "></i>
                                                 </button>
                                             </div>
-                                        {% endfor %}
-                                    </div>
-                                    <!-- Email -->
-                                    <div class="mb-4">
-                                        <label for="exampleInputEmail1" class="form-label">Email address *</label>
-                                        <div class="input-group input-group-lg">
-                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
-                              class="fas fa-envelope"></i></span>
-                                            {{ form.email }}
+                                            <div class="invalid-feedback password1-errors">
+                                                {% for error in form.password1.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                            <div class="form-text">Minimum 8 characters with numbers</div>
                                         </div>
-                                        {% for error in form.email.errors %}
-                                            <div class="alert alert-danger alert-dismissible">{{ error }}
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <label class="form-label">Confirm Password *</label>
+                                            <div class="input-group input-group-lg">
+                <span class="input-group-text rounded-start border-0 text-secondary px-3">
+                    <i class="fas fa-lock"></i>
+                </span>
+                                                {{ form.password2 }}
+                                                <button class="btn btn-outline-secondary toggle-password px-3"
+                                                        type="button">
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                             </div>
-                                        {% endfor %}
-                                    </div>
-                                    <!-- Password -->
-                                    <div class="mb-4">
-                                        <label for="inputPassword5" class="form-label">Password *</label>
-                                        <div class="input-group input-group-lg">
-                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
-                              class="fas fa-lock"></i></span>
-                                            {{ form.password }}
-                                        </div>
-                                        {% for error in form.password.errors %}
-                                            <div class="alert alert-danger alert-dismissible">{{ error }}
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                </button>
+                                            <div class="invalid-feedback password2-errors">
+                                                {% for error in form.password2.errors %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
                                             </div>
-                                        {% endfor %}
-                                    </div>
-                                    <!-- Password Confirm -->
-                                    <div class="mb-4">
-                                        <label for="inputPassword6" class="form-label">Confirm Password *</label>
-                                        <div class="input-group input-group-lg">
-                      <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i
-                              class="fas fa-lock"></i></span>
-                                            {{ form.password_confirm }}
                                         </div>
-                                        {% for error in form.password_confirm.errors %}
-                                            <div class="alert alert-danger alert-dismissible">{{ error }}
-                                                <button type="button" class="close" data-dismiss="alert"
-                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                </button>
+                                    </div>
+
+                                    <!-- Legal Section -->
+                                    <div class="card mb-4 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="form-check mb-3">
+                                                {{ form.terms_agreed }}
+                                                <label class="form-check-label fw-bold"
+                                                       for="{{ form.terms_agreed.id_for_label }}">
+                                                    I agree to the <a href="{% url 'app_pages:agb' %}" target="_blank">Terms
+                                                    of Service</a> and
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy
+                                                        Policy</a>
+                                                </label>
+                                                <div class="invalid-feedback terms_agreed-errors">
+                                                    {% for error in form.terms_agreed.errors %}
+                                                        <div>{{ error }}</div>
+                                                    {% endfor %}
+                                                </div>
                                             </div>
-                                        {% endfor %}
-                                    </div>
-                                    {#                  <!-- Check box -->#}
-                                    {#                  <div class="mb-4">#}
-                                    {#                    <div class="form-check">#}
-                                    {#                      <input type="checkbox" class="form-check-input" id="checkbox-1">#}
-                                    {#                      <label class="form-check-label" for="checkbox-1">By signing up, you agree to the<a href="#"> terms#}
-                                    {#                        of service</a></label>#}
-                                    {#                    </div>#}
-                                    {#                  </div>#}
-                                    <!-- Button -->
-                                    <div class="align-items-center mt-0">
-                                        <div class="d-grid">
-                                            <button class="btn btn-primary mb-0" type="submit">Sign Up</button>
+                                            <div class="form-check">
+                                                {{ form.email_consent }}
+                                                <label class="form-check-label"
+                                                       for="{{ form.email_consent.id_for_label }}">
+                                                    I consent to receiving important notifications and updates via email
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <!-- CAPTCHA -->
+                                    <div class="mb-4 text-center">
+                                        {{ form.captcha }}
+                                        <div class="invalid-feedback captcha-errors">
+                                            {% for error in form.captcha.errors %}
+                                                <div>{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg py-3 fw-bold" type="submit">
+                                            <i class="fas fa-user-plus me-2"></i> Create Account
+                                        </button>
+                                    </div>
+
+
                                 </form>
+
+
                                 <!-- Form END -->
 
                                 <!-- Social buttons -->
-                                <div class="row">
-                                    <!-- Divider with text -->
-                                    <div class="position-relative my-4">
-                                        <hr>
-                                        <p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">
-                                            Or</p>
-                                    </div>
-                                    <!-- Social btn -->
-                                    <div class="col-xxl-6 d-grid">
-                                        <a href="#" class="btn bg-google mb-2 mb-xxl-0"><i
-                                                class="fab fa-fw fa-google text-white me-2"></i>Signup
-                                            with Google</a>
-                                    </div>
-                                    <!-- Social btn -->
-                                    <div class="col-xxl-6 d-grid">
-                                        <a href="#" class="btn bg-facebook mb-0"><i
-                                                class="fab fa-fw fa-facebook-f me-2"></i>Signup with
-                                            Facebook</a>
-                                    </div>
-                                </div>
+                                {#                                <div class="row">#}
+                                {#                                    <!-- Divider with text -->#}
+                                {#                                    <div class="position-relative my-4">#}
+                                {#                                        <hr>#}
+                                {#                                        <p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">#}
+                                {#                                            Or</p>#}
+                                {#                                    </div>#}
+                                {#                                    <!-- Social btn -->#}
+                                {#                                    <div class="col-xxl-6 d-grid">#}
+                                {#                                        <a href="#" class="btn bg-google mb-2 mb-xxl-0"><i#}
+                                {#                                                class="fab fa-fw fa-google text-white me-2"></i>Signup#}
+                                {#                                            with Google</a>#}
+                                {#                                    </div>#}
+                                {#                                    <!-- Social btn -->#}
+                                {#                                    <div class="col-xxl-6 d-grid">#}
+                                {#                                        <a href="#" class="btn bg-facebook mb-0"><i#}
+                                {#                                                class="fab fa-fw fa-facebook-f me-2"></i>Signup with#}
+                                {#                                            Facebook</a>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
 
                                 <!-- Register as Tutor button -->
-{#                                <div class="row">#}
-{#                                    <!-- Divider with text -->#}
-{#                                    <div class="position-relative my-4">#}
-{#                                        <hr>#}
-{#                                        <p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">#}
-{#                                            Or</p>#}
-{#                                    </div>#}
-{#                                    <!-- Social btn -->#}
-{#                                    <div class="col-xxl-12 d-grid">#}
-{#                                        <a href="{% url 'accounts:sign_up_tutor' %}"#}
-{#                                           class="btn btn-purple mb-2 mb-xxl-0"><i#}
-{#                                                class="fas fa-user-tie text-white me-2"></i>I am a Tutor</a>#}
-{#                                    </div>#}
-{#                                </div>#}
-
-                                <!-- Sign up link -->
-                                <div class="mt-4 text-center">
-                                    <span>Already have an account?<a
-                                            href="{% url 'accounts:sign_in' %}"> Sign in here</a></span>
+                                {#                                <div class="row">#}
+                                {#                                    <!-- Divider with text -->#}
+                                {#                                    <div class="position-relative my-4">#}
+                                {#                                        <hr>#}
+                                {#                                        <p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">#}
+                                {#                                            Or</p>#}
+                                {#                                    </div>#}
+                                {#                                    <!-- Social btn -->#}
+                                {#                                    <div class="col-xxl-12 d-grid">#}
+                                {#                                        <a href="{% url 'accounts:sign_up_tutor' %}"#}
+                                {#                                           class="btn btn-purple mb-2 mb-xxl-0"><i#}
+                                {#                                                class="fas fa-user-tie text-white me-2"></i>I am a Tutor</a>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                <!-- Login Link -->
+                                <div class="text-center mt-4">
+                                    <p class="mb-0">Already have an account? <a href="{% url 'accounts:sign_in' %}"
+                                                                                class="fw-bold">Sign in </a></p>
                                 </div>
                             </div>
                         </div>
@@ -191,3 +410,99 @@
     <!-- **************** MAIN CONTENT END **************** -->
 {% endblock %}
 
+{% block my_scripts %}
+    <!-- Add this script for real-time validation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('input', function (event) {
+                    const input = event.target;
+                    if (input.checkValidity()) {
+                        input.classList.remove('is-invalid');
+                        input.classList.add('is-valid');
+                    } else {
+                        input.classList.remove('is-valid');
+                        input.classList.add('is-invalid');
+                    }
+                }, false);
+            });
+        });
+    </script>
+
+
+    <!-- Password Toggle Script -->
+
+
+    <!-- Real-time Validation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Password toggle functionality
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function () {
+                    const input = this.parentElement.querySelector('input');
+                    const icon = this.querySelector('i');
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    icon.classList.toggle('fa-eye');
+                    icon.classList.toggle('fa-eye-slash');
+                });
+            });
+
+            // Real-time validation
+            const form = document.getElementById('registrationForm');
+            const fields = [
+                'first_name', 'last_name', 'username', 'email',
+                'password1', 'password2', 'terms_agreed', 'captcha'
+            ];
+
+            fields.forEach(field => {
+                const input = form.querySelector(`[name="${field}"]`);
+                if (input) {
+                    input.addEventListener('input', function () {
+                        validateField(this);
+                    });
+                    input.addEventListener('blur', function () {
+                        validateField(this);
+                    });
+                }
+            });
+
+            function validateField(input) {
+                const fieldName = input.name;
+                const value = input.value;
+                const errorContainer = document.querySelector(`.${fieldName}-errors`);
+
+                // Basic validation (you can enhance this with specific rules)
+                if (input.required && !value) {
+                    input.classList.add('is-invalid');
+                    input.classList.remove('is-valid');
+                    if (errorContainer) errorContainer.style.display = 'block';
+                } else {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                    if (errorContainer) errorContainer.style.display = 'none';
+                }
+
+                // Special case for terms checkbox
+                if (fieldName === 'terms_agreed') {
+                    const checkboxError = document.querySelector('.terms_agreed-errors');
+                    if (!input.checked) {
+                        if (checkboxError) checkboxError.style.display = 'block';
+                    } else {
+                        if (checkboxError) checkboxError.style.display = 'none';
+                    }
+                }
+            }
+
+            // Initial validation on page load for any pre-filled fields
+            fields.forEach(field => {
+                const input = form.querySelector(`[name="${field}"]`);
+                if (input && input.value) {
+                    validateField(input);
+                }
+            });
+        });
+    </script>
+{% endblock %}

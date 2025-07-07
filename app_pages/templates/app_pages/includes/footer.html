@@ -8,13 +8,26 @@ Footer START -->
 
             <!-- Widget 1 START -->
             <div class="col-lg-3">
-                <!-- logo -->
-                <a class="me-0" href="index.html">
-                    {#          <img class="light-mode-item h-40px" src="{% static 'assets/images/logo.svg' %}" alt="logo">#}
-                    <img class="light-mode-item h-40px" src="{{ CFImage.site_logo_light.url }}" alt="logo">
-                    <img class="dark-mode-item h-40px" src="{{ CFImage.site_logo_dark.url }}" alt="logo">
-                </a>
-                <p class="my-3">{{ CFText.site_description }}</p>
+                <!-- Logo + Name Row -->
+                <div class="w-100">
+                    <!-- Logo + Name Row - Full width justified -->
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div class="d-flex align-items-center">
+                            <a class="me-3" href="{% url 'app_pages:home' %}">
+                                <img class="light-mode-item" src="{{ CFImage.site_logo_light.url }}" alt="logo"
+                                     style="height: 2.5rem;">
+                                <img class="dark-mode-item" src="{{ CFImage.site_logo_dark.url }}" alt="logo"
+                                     style="height: 2.5rem;">
+                            </a>
+                            <h2 class="mb-0 fw-bold text-uppercase text-justify"
+                                style="font-size: 1.75rem;">{{ CFChar.site_name }}</h2>
+                        </div>
+                        <div></div> <!-- Empty flex item for spacing -->
+                    </div>
+
+                    <!-- Description Text - Full width justified -->
+                    <p class="text-secondary mt-2 mb-3 w-100 text-justify">{{ CFText.site_description }}</p>
+                </div>
                 <!-- Social media icon -->
                 <ul class="list-inline mb-0 mt-3">
                     <li class="list-inline-item"><a class="btn btn-white btn-sm shadow px-2 text-facebook"
@@ -68,7 +81,8 @@ Footer START -->
                                 guide</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'app_pages:agb' %}">Terms &amp;
                                 Conditions (AGB)</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:sign_up_tutor' %}">Tutor Registration</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:sign_up_tutor' %}">Tutor
+                                Registration</a></li>
                         </ul>
                     </div>
                 </div>

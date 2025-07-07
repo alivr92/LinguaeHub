@@ -15,6 +15,7 @@
                 <!-- Dashboard menu -->
                 <div class="list-group list-group-dark list-group-borderless collapse-list">
                     <a class="list-group-item {% if 'panel' in request.path %}active{% endif %}" href="{% url 'student:ds_home' %}"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+                {% if user.profile.is_active %}
                     <a class="list-group-item {% if 'subscription' in request.path %}active{% endif %}" href="{% url 'student:ds_subscription' %}"><i class="bi bi-card-checklist fa-fw me-2"></i>My Subscription</a>
                     <a class="list-group-item {% if 'class-list' in request.path %}active{% endif %}" href="{% url 'student:ds_class_list' %}"><i class="bi bi-laptop fa-fw me-2"></i>My Classes</a>
                     <a class="list-group-item {% if 'course-resume' in request.path %}active{% endif %}" href="{% url 'student:ds_course_resume' %}"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
@@ -24,6 +25,7 @@
 {#                    <a class="list-group-item {% if 'edit' in request.path %}active{% endif %}" href="{% url 'student:ds_edit' user.profile.student_profile.pk %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>#}
                     <a class="list-group-item {% if 'setting' in request.path %}active{% endif %}" href="{% url 'student:ds_setting' %}"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
 {#                    <a class="list-group-item {% if 'delete-account' in request.path %}active{% endif %}" href="{% url 'student:ds_delete_account' user.profile.student_profile.pk %}"><i class="bi bi-trash fa-fw me-2"></i>Delete Profile</a>#}
+                {% endif %}
                     <a class="list-group-item text-danger bg-danger-soft-hover" href="{% url 'accounts:sign_out' %}"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
                 </div>
             </div>

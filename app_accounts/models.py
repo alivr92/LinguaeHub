@@ -666,6 +666,9 @@ class UserProfile(models.Model):
     email_consent = models.BooleanField(default=False)
     email_consent_date = models.DateTimeField(null=True, blank=True)
 
+    activation_token = models.CharField(max_length=100, blank=True, null=True, unique=True)
+    token_expiry = models.DateTimeField(blank=True, null=True)
+
     create_date = models.DateTimeField(auto_now_add=True)  # Use auto_now_add
     last_modified = models.DateTimeField(default=timezone.now, blank=True)
 

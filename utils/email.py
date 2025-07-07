@@ -2,6 +2,10 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
+import base64
+from django.templatetags.static import static
+from django.urls import reverse_lazy, reverse
+from django.utils import timezone
 
 
 def send_dual_email(subject, template_name, context, to_email, from_email=None):
@@ -31,7 +35,7 @@ def send_dual_email(subject, template_name, context, to_email, from_email=None):
     email.send()
 
 
-def notification_email_to_admin(subject, template_name, context, from_email=None, to_email=None, ):
+def notification_email_to_admin(subject, template_name, context, from_email=None, to_email=None):
     """
     Send an email with both HTML and plain text versions.
 
@@ -46,8 +50,8 @@ def notification_email_to_admin(subject, template_name, context, from_email=None
     to_email = to_email or settings.EMAIL_ADMIN_USER
 
     # Render both text and HTML templates
-    text_content = render_to_string(f'{template_name}.txt', context)
     html_content = render_to_string(f'{template_name}.html', context)
+    text_content = render_to_string(f'{template_name}.txt', context)
 
     # Ensure to_email is a list
     if isinstance(to_email, str):
@@ -153,3 +157,38 @@ def notification_formatted_email(subject, template_name, context, photo, resume_
 
     # Send the email
     email_message.send(fail_silently=False)
+
+
+def get_base64_logo():
+    with open("static/assets/images/logo_white_gold.png", "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode('utf-8')
+
+
+def get_absolute_logo_url(request):
+    # Force HTTP if in development
+    if settings.DEBUG:
+        return request.build_absolute_uri(static('assets/images/logo_white_gold.png')).replace('https://', 'http://')
+    return request.build_absolute_uri(static('assets/images/logo_white_gold.png'))
+
+
+def send_activation_email(request, user, activation_url):
+    """Send activation email with activation link"""
+    context = {
+        'first_name': user.first_name,
+        'full_name': f"{user.first_name} {user.last_name}",
+        'activation_url': activation_url,
+        'site_name': settings.SITE_NAME,
+        'support_email': settings.EMAIL_SUPPORT,
+        'current_year': timezone.now().year,
+        'company_address': settings.COMPANY_ADDRESS,
+        'privacy_policy_url': request.build_absolute_uri(reverse('app_pages:privacy_policy')),
+        'terms_url': request.build_absolute_uri(reverse('app_pages:agb')),
+        'full_logo_url': request.build_absolute_uri(static('assets/images/logo_white_gold.png'))
+    }
+
+    send_dual_email(
+        subject=f"Activate Your {settings.SITE_NAME} Account",
+        template_name='emails/accounts/activation',
+        context=context,
+        to_email=[user.email]
+    )
