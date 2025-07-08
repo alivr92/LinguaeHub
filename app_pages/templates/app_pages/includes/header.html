@@ -33,7 +33,7 @@
                         <!-- Dark mode logo -->
                         <source srcset="{{ CFImage.site_logo_dark.url }}" media="(prefers-color-scheme: dark)">
                         <!-- Fallback logo -->
-                        <img class="img-fluid "
+                        <img class="img-fluid protected-image"
                              src="{{ CFImage.site_logo_light.url }}"
                              alt="logo"
                              style="height: auto; max-height: 50px; width: auto;">
@@ -206,7 +206,7 @@
                                 <div class="row p-3 g-2">
                                     <!-- Image -->
                                     <div class="col-3">
-                                        <img class="rounded-2" src="{% static 'assets/images/book/02.jpg' %}"
+                                        <img class="rounded-2 protected-image" src="{% static 'assets/images/book/02.jpg' %}"
                                              alt="avatar">
                                     </div>
 
@@ -239,7 +239,7 @@
                                 <div class="row p-3 g-2">
                                     <!-- Image -->
                                     <div class="col-3">
-                                        <img class="rounded-2" src="{% static 'assets/images/book/04.jpg' %}"
+                                        <img class="rounded-2 protected-image" src="{% static 'assets/images/book/04.jpg' %}"
                                              alt="avatar">
                                     </div>
 
@@ -284,7 +284,7 @@
                     <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
                        data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                        aria-expanded="false">
-                        <img class="avatar-img rounded-circle" src="{{ user.profile.photo.url }}" alt="avatar">
+                        <img class="avatar-img rounded-circle protected-image" src="{{ user.profile.photo.url }}" alt="avatar">
                     </a>
                     <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
                         aria-labelledby="profileDropdown">
@@ -294,10 +294,10 @@
                                 <!-- Avatar -->
                                 <div class="avatar me-3">
                                     {% if user.profile.photo %}
-                                        <img class="avatar-img rounded-circle shadow" src="{{ user.profile.photo.url }}"
+                                        <img class="avatar-img rounded-circle shadow protected-image" src="{{ user.profile.photo.url }}"
                                              alt="avatar">
                                     {% else %}
-                                        <img class="avatar-img rounded-circle shadow"
+                                        <img class="avatar-img rounded-circle shadow protected-image"
                                              src="{% static 'app_accounts/img/avatar/default.png' %}" alt="avatar">
                                     {% endif %}
                                 </div>

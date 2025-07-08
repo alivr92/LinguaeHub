@@ -71,7 +71,7 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'assets/images/logo1.png' %}">
+    <link rel="shortcut icon" href="{{ CFImage.site_logo_light.url }}">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -89,6 +89,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/avr_style.css' %}">
 
 
     {% block embed_style %}{% endblock %}

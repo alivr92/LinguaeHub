@@ -14,9 +14,9 @@ Footer START -->
                     <div class="d-flex justify-content-between align-items-center w-100">
                         <div class="d-flex align-items-center">
                             <a class="me-3" href="{% url 'app_pages:home' %}">
-                                <img class="light-mode-item" src="{{ CFImage.site_logo_light.url }}" alt="logo"
+                                <img class="light-mode-item protected-image" src="{{ CFImage.site_logo_light.url }}" alt="logo"
                                      style="height: 2.5rem;">
-                                <img class="dark-mode-item" src="{{ CFImage.site_logo_dark.url }}" alt="logo"
+                                <img class="dark-mode-item protected-image" src="{{ CFImage.site_logo_dark.url }}" alt="logo"
                                      style="height: 2.5rem;">
                             </a>
                             <h2 class="mb-0 fw-bold text-uppercase text-justify"
@@ -77,8 +77,8 @@ Footer START -->
                     <div class="col-6 col-md-4">
                         <h5 class="mb-2 mb-md-4">Teaching</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item"><a class="nav-link" href="{% url 'tutor:become_tutor' %}">Become a
-                                teacher</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'tutor:become_tutor' %}">Become an instructor
+                                </a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'app_pages:help_center' %}">How to
                                 guide</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'app_pages:agb' %}">Terms &amp;
@@ -138,13 +138,13 @@ Footer START -->
                                         <i class="fas fa-globe me-2"></i>Language
                                     </a>
                                     <ul class="dropdown-menu min-w-auto" aria-labelledby="languageSwitcher">
-                                        <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2"
+                                        <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2 protected-image"
                                                                                         src="{% static 'assets/images/flags/uk.svg' %}"
                                                                                         alt="">English</a></li>
-                                        <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2"
+                                        <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2 protected-image"
                                                                                         src="{% static 'assets/images/flags/gr.svg' %}"
                                                                                         alt="">German </a></li>
-                                        <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2"
+                                        <li><a class="dropdown-item me-4" href="#"><img class="fa-fw me-2 protected-image"
                                                                                         src="{% static 'assets/images/flags/sp.svg' %}"
                                                                                         alt="">French</a></li>
                                     </ul>

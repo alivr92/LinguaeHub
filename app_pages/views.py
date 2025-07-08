@@ -98,8 +98,7 @@ class TermsUser(TemplateView):
 
 
 class PrivacyPolicy(TemplateView):
-    # template_name = 'app_pages/privacy_policy.html'
-    template_name = 'app_pages/privacy2.html'
+    template_name = 'app_pages/privacy_policy.html'
 
 
 class HelpCenter(TemplateView):

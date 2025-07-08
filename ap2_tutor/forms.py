@@ -5,12 +5,16 @@ from django.contrib.auth.models import User
 from app_accounts.models import (UserProfile, Language, Skill, Level, UserSkill, UserEducation,
                                  LANGUAGE_CHOICES, GENDER_CHOICES, COUNTRY_CHOICES, LEVEL_CHOICES, SKILL_CHOICES)
 from ap2_tutor.models import ProviderApplication, Tutor, TeachingCategory, TEACHING_YEARS
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
 # if user is VIP -> 5 else: 3
 MAX_MULTIPLE_ITEMS = 3
 
 
 class ProviderApplicationForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
     class Meta:
         model = ProviderApplication
         fields = ['first_name', 'last_name', 'email', 'phone', 'photo', 'resume', 'bio', 'lang_native', 'skills']

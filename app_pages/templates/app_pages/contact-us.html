@@ -87,7 +87,7 @@
 
                     <div class="col-md-6 align-items-center text-center">
                         <!-- Image -->
-                        <img src="{% static 'assets/images/element/contact.svg' %}" class="h-400px" alt="">
+                        <img src="{% static 'assets/images/element/contact.svg' %}" class="h-400px protected-image" alt="">
 
                         <!-- Social media button -->
                         <div class="d-sm-flex align-items-center justify-content-center mt-2 mt-sm-4">
@@ -161,7 +161,10 @@
                                         {% endfor %}
                                     </div>
 
-                                    <div class="g-recaptcha" data-sitekey="6Le9ZHgrAAAAAMb1Jw812j-Hs1b_SCYbkyRZmRKt"></div>
+                                    {{ form.captcha }}
+                                    {% for error in form.captcha.errors %}
+                                        <div class="invalid-feedback d-block">{{ error }}</div>
+                                    {% endfor %}
 
 
                                     <!-- Button -->

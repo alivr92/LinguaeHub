@@ -132,7 +132,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'lingo_db',
         'USER': 'postgres',  # VPS: lucas
-        'PASSWORD': env.str('DB_PASSWORD'),
+        'PASSWORD': env.str('DB_PASSWORD'), # DB_PASSWORD_VPS
         'HOST': 'localhost',
         'PORT': '5432',
     }

@@ -6,9 +6,9 @@
 
         <!-- Logo START -->
         <a class="navbar-brand mx-0 px-0" href="{% url 'app_pages:home' %}">
-            <img class="light-mode-item navbar-brand-item" style="max-width: 48px; max-height: 48px; margin-right: 0"
+            <img class="light-mode-item navbar-brand-item protected-image" style="max-width: 48px; max-height: 48px; margin-right: 0"
                  src="{% static 'assets/images/logo1.png' %}" alt="logo">
-{#            <img class="dark-mode-item navbar-brand-item" src="{% static 'assets/images/logo1.png' %}" alt="logo">#}
+{#            <img class="dark-mode-item navbar-brand-item protected-image" src="{% static 'assets/images/logo1.png' %}" alt="logo">#}
         </a>
         <h5 class="sitename mx-0 px-0">{{ CFChar.site_name }}</h5>
 
@@ -17,8 +17,8 @@
 <div class="d-flex align-items-center">
     <!-- Logo -->
     <a class="me-3" href="{% url 'app_pages:home' %}">
-        <img class="light-mode-item" src="{{ CFImage.site_logo_light.url }}" alt="logo" style="height: 2.5rem;">
-        <img class="dark-mode-item" src="{{ CFImage.site_logo_dark.url }}" alt="logo" style="height: 2.5rem;">
+        <img class="light-mode-item protected-image" src="{{ CFImage.site_logo_light.url }}" alt="logo" style="height: 2.5rem;">
+        <img class="dark-mode-item protected-image" src="{{ CFImage.site_logo_dark.url }}" alt="logo" style="height: 2.5rem;">
     </a>
 
     <!-- Site Name -->
@@ -48,7 +48,7 @@
                 <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
                    data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
                    aria-expanded="false">
-                    <img class="avatar-img rounded-circle" src="{{ user.profile.photo.url }}" alt="avatar">
+                    <img class="avatar-img rounded-circle protected-image" src="{{ user.profile.photo.url }}" alt="avatar">
                 </a>
                 <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
                     aria-labelledby="profileDropdown">
@@ -58,10 +58,10 @@
                             <!-- Avatar -->
                             <div class="avatar me-3">
                                 {% if user.profile.photo %}
-                                    <img class="avatar-img rounded-circle shadow" src="{{ user.profile.photo.url }}"
+                                    <img class="avatar-img rounded-circle shadow protected-image" src="{{ user.profile.photo.url }}"
                                          alt="avatar">
                                 {% else %}
-                                    <img class="avatar-img rounded-circle shadow"
+                                    <img class="avatar-img rounded-circle shadow protected-image"
                                          src="{% static 'app_accounts/img/avatar/default.png' %}" alt="avatar">
                                 {% endif %}
                             </div>

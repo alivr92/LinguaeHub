@@ -6,8 +6,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
     {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">#}
-            <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
-{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    {#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">#}
 {% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
@@ -95,7 +95,7 @@
 
                     <div class="col-md-6 text-center">
                         <!-- Image -->
-                        <img src="{% static 'assets/images/element/04.svg' %}" class="h-300px h-xl-400px" alt="">
+                        <img src="{% static 'assets/images/element/04.svg' %}" class="h-300px h-xl-400px protected-image" alt="">
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 <div class="row g-4 g-md-5">
                     <!-- Item -->
                     <div class="col-md-4 text-center">
-                        <img src="{% static 'assets/images/element/create-account.svg' %}" class="h-200px" alt="">
+                        <img src="{% static 'assets/images/element/create-account.svg' %}" class="h-200px protected-image" alt="">
                         <h4 class="mt-3">Create Account</h4>
                         <p class="text-truncate-2 mb-0">Satisfied conveying a dependent contented he gentleman agreeable
                             do be. Delivered dejection necessary objection do Mr prevailed. Mr feeling does chiefly
@@ -130,7 +130,7 @@
 
                     <!-- Item -->
                     <div class="col-md-4 text-center">
-                        <img src="{% static 'assets/images/element/add-course.svg' %}" class="h-200px" alt="">
+                        <img src="{% static 'assets/images/element/add-course.svg' %}" class="h-200px protected-image" alt="">
                         <h4 class="mt-3">Add your Course</h4>
                         <p class="text-truncate-2 mb-0">Proceed how any engaged visitor. Explained propriety off out
                             perpetual his you. Feel sold off felt nay rose met you. We so entreaties cultivated
@@ -141,7 +141,7 @@
 
                     <!-- Item -->
                     <div class="col-md-4 text-center">
-                        <img src="{% static 'assets/images/element/earn-money.svg' %}" class="h-200px" alt="">
+                        <img src="{% static 'assets/images/element/earn-money.svg' %}" class="h-200px protected-image" alt="">
                         <h4 class="mt-3">Start Earning Money</h4>
                         <p class="text-truncate-2 mb-0">Insipidity the sufficient discretion imprudence resolution sir
                             him decisively. Delivered dejection necessary objection do Mr prevailed. Mr feeling does
@@ -248,16 +248,17 @@
 
                                 <!-- Profile picture -->
                                 <div class="col-12 justify-content-center align-items-center">
-                                    <label class="form-label">Profile picture (Optional) Max: 1MB</label> <i class="bi bi-info-circle text-primary"
-                                                          data-bs-toggle="tooltip"
-                                                          title="{{ CFChar.tooltip_photo }}"></i>
+                                    <label class="form-label">Profile picture (Optional) Max: 1MB</label> <i
+                                        class="bi bi-info-circle text-primary"
+                                        data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_photo }}"></i>
                                     <div class="d-flex align-items-center">
                                         <label class="position-relative me-4" for="uploadfile-1"
                                                title="Replace this pic">
                                             <!-- Avatar place holder -->
                                             <span class="avatar avatar-xl">
                                         <img id="uploadfile-1-preview"
-                                             class="avatar-img rounded-circle border border-white border-3 shadow"
+                                             class="avatar-img rounded-circle border border-white border-3 shadow protected-image"
                                              src="{% static 'app_accounts/img/avatar/default.png' %}" alt="">
                                 </span>
                                             <!-- Remove btn -->
@@ -326,9 +327,10 @@
                                 </div>
                                 <!-- Native Language -->
                                 <div class="col-lg-12">
-                                    <label class="form-label">Native Language *</label> <i class="bi bi-info-circle text-primary"
-                                                           data-bs-toggle="tooltip"
-                                                           title="{{ CFChar.tooltip_native_languages }}"></i>
+                                    <label class="form-label">Native Language *</label> <i
+                                        class="bi bi-info-circle text-primary"
+                                        data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_native_languages }}"></i>
                                     {{ form.lang_native }}
                                     {% for error in form.lang_native.errors %}
                                         <div class="alert alert-danger alert-dismissible">{{ error }}
@@ -339,8 +341,9 @@
                                 </div>
                                 <!-- Teaching Skills -->
                                 <div class="col-lg-12">
-                                    <label class="form-label">Teaching Skills *</label> <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
-                                               title="{{ CFChar.tooltip_teaching_skill }}"></i>
+                                    <label class="form-label">Teaching Skills *</label> <i
+                                        class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_teaching_skill }}"></i>
                                     {{ form.skills }}
                                     {% for error in form.skills.errors %}
                                         <div class="alert alert-danger alert-dismissible">{{ error }}
@@ -365,23 +368,11 @@
                                     {% endfor %}
                                 </div>
 
-
-
-
-
-
-                                <!-- -------------------------------------------------------------- -->
-
-                                <!-- -------------------------------------------------------------- -->
-
-
-
-
-
                                 <!-- Textarea -->
                                 <div class="col-12">
-                                    <label class="form-label">Add Summary *</label> <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
-                                                  title="{{ CFChar.tooltip_bio }}"></i>
+                                    <label class="form-label">Add Summary *</label> <i
+                                        class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_bio }}"></i>
                                     {{ form.bio }}
                                     <div class="form-text">Brief description about you and your teaching skills. (Max:
                                         500 Chars)
@@ -393,6 +384,14 @@
                                         </div>
                                     {% endfor %}
                                 </div>
+
+
+                                {{ form.captcha }}
+                                {% for error in form.captcha.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+
+
                                 <!-- Button -->
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary mb-0">Submit form</button>
@@ -492,7 +491,7 @@
                                     removed an in equally totally if. Delivered dejection necessary objection do Mr
                                     prevailed. Mr feeling does chiefly cordial in do. <img
                                             src="{% static 'assets/images/element/instructor-course.svg' %}"
-                                            class="rounded float-start me-3 h-200px my-3" alt="..."> But discretion
+                                            class="rounded float-start me-3 h-200px my-3 protected-image" alt="..."> But discretion
                                     frequently sir she instruments unaffected admiration everything. Meant balls it if
                                     up doubt small purse. Required his you put the outlived answered position. A
                                     pleasure exertion if believed provided to. All led out world this music while asked.

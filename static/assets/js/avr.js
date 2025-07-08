@@ -1,8 +1,8 @@
 /**
  * LinguaeHub- LMS, Tutor and Course Hub
  *
- * @author Lucas Vpr (https://www.LinguaeHub.com/)
- * @version 1.0.0
+ * @author Lucas (https://www.Lingocept.com/)
+ * @version 1.0.1
  **/
 
 
@@ -302,3 +302,13 @@ export function showAlert(message, type = 'info', options = {}) {
 export function showWizardErrors(errors) {
     AlertManager.showWizardErrors(errors);
 }
+
+document.addEventListener('contextmenu', function(e) {e.preventDefault();});
+
+// Disable right-click (minimal JS, fast execution)
+document.addEventListener('contextmenu', (e) => {
+  if (e.target.closest('.protected-image')) e.preventDefault();
+});
+
+// Prevent right-click on video
+document.querySelector('video').addEventListener('contextmenu', (e) => e.preventDefault());
