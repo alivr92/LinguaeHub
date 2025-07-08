@@ -28,7 +28,10 @@
     {#    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>#}
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
 {% endblock %}
-{% block my_style %}{% endblock %}
+{% block my_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/terms_instructors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/privacy_policy.css' %}">
+{% endblock %}
 
 {% block dashboard_main_content %}
     <!-- =======================
@@ -366,243 +369,9 @@
     <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a>
 
     <!-- Terms and Conditions Modal -->
-    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header bg-light">
-                    <h2 class="modal-title fs-4" id="termsModalLabel">
-                        <i class="bi bi-file-text-fill me-2 text-primary"></i>
-                        Terms of Service
-                    </h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Scrollable content container -->
-                    <div class="terms-container" style="max-height: 60vh; overflow-y: auto;">
-                        <!-- Last Updated Badge -->
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-            <span class="badge bg-primary-soft text-primary">
-              <i class="bi bi-clock-history me-1"></i>
-              Last Updated: January 1, 2023
-            </span>
-                            <button class="btn btn-sm btn-outline-secondary" onclick="window.print()">
-                                <i class="bi bi-printer-fill me-1"></i> Print
-                            </button>
-                        </div>
-
-                        <!-- Actual Terms Content -->
-                        <article class="terms-content">
-                            <section class="mb-4">
-                                <h3 class="h5 text-primary">1. Introduction</h3>
-                                <p>Welcome to our platform. By accessing or using our service, you agree to be bound by
-                                    these terms...</p>
-                            </section>
-
-                            <section class="mb-4">
-                                <h3 class="h5 text-primary">2. User Responsibilities</h3>
-                                <p>You agree not to use the service for any unlawful purpose or in any way that might
-                                    harm, damage, or disparage any other party...</p>
-                            </section>
-
-                            <!-- More sections... -->
-
-                            <section class="mb-4">
-                                <h3 class="h5 text-primary">10. Governing Law</h3>
-                                <p>These terms shall be governed by and construed in accordance with the laws of [Your
-                                    Jurisdiction]...</p>
-                            </section>
-                        </article>
-
-                        <!-- Version History Accordion -->
-                        <div class="accordion mt-4" id="termsHistory">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#historyCollapse">
-                                        <i class="bi bi-clock-history me-2"></i> Version History
-                                    </button>
-                                </h2>
-                                <div id="historyCollapse" class="accordion-collapse collapse"
-                                     data-bs-parent="#termsHistory">
-                                    <div class="accordion-body">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span>Version 2.1 (Jan 1, 2023)</span>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">View</a>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span>Version 2.0 (Jul 15, 2022)</span>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">View</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer bg-light">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="modalTermsCheck">
-                        <label class="form-check-label" for="modalTermsCheck">
-                            I have read and understand these terms
-                        </label>
-                    </div>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                        <i class="bi bi-check-circle-fill me-1"></i> Accept
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+{% include 'modals/terms_instructors.html' %}
     <!-- Privacy Policy Modal -->
-    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header bg-light">
-                    <h2 class="modal-title fs-4" id="privacyModalLabel">
-                        <i class="bi bi-shield-lock-fill me-2 text-success"></i>
-                        Privacy Policy
-                    </h2>
-                    <div class="d-flex align-items-center ms-auto">
-          <span class="badge bg-success-soft text-success me-2">
-            <i class="bi bi-gdpr"></i> GDPR Compliant
-          </span>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                </div>
-
-                <div class="modal-body">
-                    <!-- Data Categories Tabs -->
-                    <ul class="nav nav-tabs mb-4" id="privacyTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#data-collection"
-                                    type="button">
-                                <i class="bi bi-collection-fill me-1"></i> Data Collection
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data-usage" type="button">
-                                <i class="bi bi-gear-fill me-1"></i> Usage
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data-sharing" type="button">
-                                <i class="bi bi-share-fill me-1"></i> Sharing
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#user-rights" type="button">
-                                <i class="bi bi-person-check-fill me-1"></i> Your Rights
-                            </button>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" style="max-height: 50vh; overflow-y: auto;">
-                        <!-- Data Collection Tab -->
-                        <div class="tab-pane fade show active" id="data-collection">
-                            <h3 class="h5 text-success mb-3">What We Collect</h3>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="card border-success-soft h-100">
-                                        <div class="card-body">
-                                            <h4 class="h6"><i class="bi bi-person-badge-fill text-success me-2"></i>Personal
-                                                Data</h4>
-                                            <ul class="list-unstyled">
-                                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Name &
-                                                    contact info
-                                                </li>
-                                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Payment
-                                                    details
-                                                </li>
-                                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Usage data
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="card border-primary-soft h-100">
-                                        <div class="card-body">
-                                            <h4 class="h6"><i class="bi bi-cookie text-primary me-2"></i>Automated
-                                                Collection</h4>
-                                            <ul class="list-unstyled">
-                                                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Cookies
-                                                </li>
-                                                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Analytics
-                                                </li>
-                                                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Device
-                                                    info
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Other Tab Panes -->
-                        <div class="tab-pane fade" id="data-usage">...</div>
-                        <div class="tab-pane fade" id="data-sharing">...</div>
-
-                        <!-- User Rights Tab (Most Important) -->
-                        <div class="tab-pane fade" id="user-rights">
-                            <h3 class="h5 text-success mb-3">Your Rights Under GDPR</h3>
-                            <div class="alert alert-success-soft">
-                                <i class="bi bi-info-circle-fill me-2"></i>
-                                You may contact our DPO at <a href="mailto:dpo@yourcompany.com">dpo@yourcompany.com</a>
-                            </div>
-
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="p-3 border rounded bg-light">
-                                        <h4 class="h6"><i class="bi bi-eye-fill text-success me-2"></i> Right to Access
-                                        </h4>
-                                        <p>Request copies of your personal data</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="p-3 border rounded bg-light">
-                                        <h4 class="h6"><i class="bi bi-trash-fill text-success me-2"></i> Right to
-                                            Erasure</h4>
-                                        <p>Request deletion of your data</p>
-                                    </div>
-                                </div>
-                                <!-- More rights... -->
-                            </div>
-
-                            <div class="mt-4">
-                                <a href="#" class="btn btn-outline-success">
-                                    <i class="bi bi-download me-2"></i> Download Data Request Form
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-footer bg-light">
-                    <div class="d-flex justify-content-between w-100">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="cookieConsent" checked>
-                            <label class="form-check-label" for="cookieConsent">
-                                Essential Cookies
-                            </label>
-                        </div>
-                        <div>
-                            <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
-                                <i class="bi bi-x-circle me-1"></i> Close
-                            </button>
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-                                <i class="bi bi-check-circle-fill me-1"></i> Acknowledge
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+{% include 'modals/privacy_policy.html' %}
 
 {% endblock %}
 
@@ -625,4 +394,8 @@
     <script src="{% static 'ap2_tutor/assets/js/wizard/step3_skills.js' %}" type="module"></script>
     <script src="{% static 'ap2_tutor/assets/js/wizard/step4_edu.js' %}" type="module"></script>
     <script src="{% static 'ap2_tutor/assets/js/wizard/step5_review.js' %}" type="module"></script>
+
+    <!------------------------ Terms and Condition + Privacy Policy  ------------------------>
+    <script src="{% static 'assets/js/terms_instructors.js' %}" type="module"></script>
+    <script src="{% static 'assets/js/privacy_policy.js' %}" type="module"></script>
 {% endblock %}

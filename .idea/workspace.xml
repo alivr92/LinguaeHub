@@ -2,45 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb31cd45-6bfb-4375-8d81-8529a23d6e8a" name="Default Changelist" comment="&quot;Commit by Pycharm - deployment process1&quot;">
-      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/activation_required.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/activation_required2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/home_mixed.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/topheader.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/privacy_policy.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/accounts/activation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/accounts/activation.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/admin/notify_admin_contact_us.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/admin/notify_admin_contact_us.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/impressum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/privacy2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/terms.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/terms_user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/privacy_policy.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/terms_instructors.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/privacy_policy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/terms_instructors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/modals/privacy_policy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/modals/terms_instructors.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_student/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_student/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign-in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" beforeDir="false" afterPath="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/home_mixed.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/home_mixed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app_pages/templates/app_pages/privacy_policy.html" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/templates/app_pages/privacy_policy.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app_pages/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app_pages/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo-light.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo-mobile-light.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo-mobile.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/assets/images/logo_black_gold.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/assets/images/logo-light.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/assets/images/logo-mobile.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/email.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/email.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/01.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/01.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/02.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/02.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/04.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/04.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/05.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/05.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/07.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/07.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/assets/images/bg/08.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/assets/images/bg/08.jpg" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -71,77 +60,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home_mixed.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home_mixed.html">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="651" lean-forward="true" selection-start-line="651" selection-end-line="651" />
+            <state relative-caret-position="408">
+              <caret line="36" column="16" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
               <folding>
-                <element signature="e#9363#10785#0#HTML" />
-                <element signature="e#4711#6575#0#HTML" />
-                <element signature="e#6692#10223#0#HTML" />
-                <element signature="e#6763#7509#0#HTML" />
-                <element signature="e#7537#8260#0#HTML" />
-                <element signature="e#8289#8653#0#HTML" />
-                <element signature="e#8681#9022#0#HTML" />
-                <element signature="e#10442#12640#0#HTML" />
-                <element signature="e#11305#12612#0#HTML" />
-                <element signature="e#12742#45527#0#HTML" />
-                <element signature="e#22345#25517#0#HTML" />
-                <element signature="e#49084#54903#0#HTML" />
-                <element signature="e#54955#63160#0#HTML" />
-                <element signature="e#63201#63545#0#HTML" />
-                <element signature="e#71352#79420#0#HTML" />
-                <element signature="e#80914#81014#0#HTML" expanded="true" />
-                <element signature="e#48909#52854#0#HTML" />
-                <element signature="e#106995#125123#0#HTML" />
-                <element signature="e#125264#132284#0#HTML" />
-                <element signature="e#150654#152703#0#HTML" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="1009" lean-forward="true" selection-start-line="739" selection-end-line="1009" />
-              <folding>
-                <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
-                <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#main#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index-10.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-10.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="561" lean-forward="true" selection-start-line="481" selection-end-line="561" />
-              <folding>
-                <element signature="n#head#0;n#html#0;n#!!top" />
-                <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#0;n#main#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#1;n#main#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#2;n#main#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#3;n#main#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#4;n#main#0;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#section#5;n#main#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index-7.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-7.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="275" lean-forward="true" selection-start-line="231" selection-end-line="275" />
-              <folding>
-                <element signature="n#section#1;n#main#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="e#312#336#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,19 +78,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>api</find>
-      <find>logo</find>
-      <find>build_absolute_uri</find>
-      <find>send_invitation_email</find>
-      <find>send_activation_email</find>
       <find>applicant</find>
       <find>reverse</find>
       <find>return Json</find>
@@ -184,13 +104,18 @@
       <find>.jpg</find>
       <find>.svg&quot;</find>
       <find>src=&quot;{% static 'assets/</find>
-      <find>z-index</find>
       <find>Let us</find>
       <find>.jpg&quot;</find>
-      <find>About E</find>
       <find>src=&quot;assets/</find>
       <find>07</find>
       <find>assets/images/element/07.png</find>
+      <find>assets/images/bg/3by4/01.png</find>
+      <find>&lt;div class=&quot;col-12 position-relative z-index-1&quot;&gt;</find>
+      <find>z-index-n1</find>
+      <find>About E</find>
+      <find>z-index</find>
+      <find>contact@</find>
+      <find>Data</find>
     </findStrings>
     <replaceStrings>
       <replace>education-file-input</replace>
@@ -220,8 +145,8 @@
       <replace>user</replace>
       <replace>profile</replace>
       <replace>form</replace>
-      <replace>.jpg' %}&quot;</replace>
       <replace>src=&quot;{% static 'assets/</replace>
+      <replace>.jpg' %}&quot;</replace>
       <replace>.svg' %}&quot;</replace>
     </replaceStrings>
   </component>
@@ -231,23 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/wizard.js" />
-        <option value="$PROJECT_DIR$/ap2_tutor/urls.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/utils.js" />
-        <option value="$PROJECT_DIR$/ap2_tutor/admin.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step4_edu.js" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/step5.css" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/stepper.css" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard_base.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/css/step6.css" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step6_result.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/views.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/models.py" />
-        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html" />
-        <option value="$PROJECT_DIR$/ap2_tutor/static/ap2_tutor/assets/js/wizard/step5_review.js" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/app_admin/templates/app_admin/dashboard/da_tutor_request.html" />
         <option value="$PROJECT_DIR$/app_admin/views.py" />
         <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step2_basic_profile.html" />
         <option value="$PROJECT_DIR$/templates/emails/admin/notify_admin_contact.html" />
@@ -258,9 +166,6 @@
         <option value="$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html" />
         <option value="$PROJECT_DIR$/app_accounts/forms.py" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/about.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html" />
         <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_home_inactive.html" />
         <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html" />
@@ -269,19 +174,39 @@
         <option value="$PROJECT_DIR$/templates/emails/accounts/activation.html" />
         <option value="$PROJECT_DIR$/templates/emails/accounts/activation.txt" />
         <option value="$PROJECT_DIR$/utils/email.py" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/app_pages/urls.py" />
         <option value="$PROJECT_DIR$/app_accounts/models.py" />
         <option value="$PROJECT_DIR$/app_accounts/views.py" />
         <option value="$PROJECT_DIR$/ap2_student/urls.py" />
         <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/activation_required.html" />
         <option value="$PROJECT_DIR$/ap2_student/views.py" />
         <option value="$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/activation_required2.html" />
-        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/topheader.html" />
-        <option value="$PROJECT_DIR$/app_pages/views.py" />
-        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/LinguaeHub/settings.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html" />
         <option value="$PROJECT_DIR$/app_pages/templates/app_pages/home_mixed.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/base.html" />
+        <option value="$PROJECT_DIR$/static/assets/js/terms_instructors.js" />
+        <option value="$PROJECT_DIR$/templates/modals/terms_instructors.html" />
+        <option value="$PROJECT_DIR$/static/assets/css/terms_instructors.css" />
+        <option value="$PROJECT_DIR$/static/assets/css/privacey_policy.css" />
+        <option value="$PROJECT_DIR$/static/assets/js/privacy_policy.js" />
+        <option value="$PROJECT_DIR$/templates/modals/privacy_policy.html" />
+        <option value="$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/Impresum.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/impresum.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/impressum.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/agb.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/terms.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/privacy_policy.html" />
+        <option value="$PROJECT_DIR$/app_pages/urls.py" />
+        <option value="$PROJECT_DIR$/app_pages/views.py" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/terms_user.html" />
+        <option value="$PROJECT_DIR$/app_pages/templates/app_pages/privacy2.html" />
       </list>
     </option>
   </component>
@@ -332,33 +257,85 @@
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
+              <item name="wizard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="ap2_tutor" type="462c0819:PsiDirectoryNode" />
+              <item name="wizard" type="462c0819:PsiDirectoryNode" />
               <item name="includes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app_pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
@@ -369,21 +346,7 @@
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
               <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="emails" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="emails" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LinguaeHub" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="emails" type="462c0819:PsiDirectoryNode" />
-              <item name="interview" type="462c0819:PsiDirectoryNode" />
+              <item name="modals" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LinguaeHub" type="b2602c69:ProjectViewProjectNode" />
@@ -581,7 +544,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.49501246" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.76375" weight="0.4775561" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49750623" visible="true" weight="0.185" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49750623" visible="true" weight="0.185" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.5885287" />
@@ -650,190 +613,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/includes/w_step5_deepseek.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="1199" column="22" lean-forward="true" selection-start-line="1177" selection-start-column="16" selection-end-line="1199" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/dashboard/dt_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="101" column="26" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="101" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="327" column="25" lean-forward="true" selection-start-line="327" selection-start-column="25" selection-end-line="327" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-            <element signature="e#538#3971#0" />
-            <element signature="e#4038#13462#0" />
-            <element signature="e#22274#25746#0" />
-            <element signature="e#25791#27083#0" />
-            <element signature="e#27128#29296#0" />
-            <element signature="e#29336#31504#0" />
-            <element signature="e#31748#32000#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" lean-forward="true" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django/contrib/auth/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="159" column="54" selection-start-line="159" selection-start-column="54" selection-end-line="159" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/envLinguaeHub/Lib/site-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1843">
-          <caret line="388" column="8" selection-start-line="388" selection-start-column="8" selection-end-line="388" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/templates/app_accounts/sign_up.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="270" column="98" selection-start-line="270" selection-start-column="98" selection-end-line="270" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_accounts/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" selection-start-line="9" selection-end-line="10" />
-          <folding>
-            <element signature="e#3501#4071#0" />
-            <element signature="e#270#409#0" />
-            <element signature="e#416#476#0" />
-            <element signature="e#675#777#0" />
-            <element signature="e#1025#1132#0" />
-            <element signature="e#3022#4371#0" />
-            <element signature="e#4416#5542#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/about.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="117" column="53" selection-start-line="117" selection-start-column="53" selection-end-line="117" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" column="60" lean-forward="true" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#a#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#0;n#div#0;n#div#0;n#header#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#footer#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="87" column="75" selection-start-line="87" selection-start-column="75" selection-end-line="87" selection-end-column="75" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#1;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_home_inactive.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="586">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/includes/ds_sidebar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" selection-end-line="35" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/ds_base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="114" column="20" selection-start-line="114" selection-start-column="20" selection-end-line="114" selection-end-column="20" />
-          <folding>
-            <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_admin/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ap2_tutor/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="249" lean-forward="true" selection-start-line="247" selection-start-column="4" selection-end-line="249" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_admin/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -855,24 +634,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/emails/accounts/activation.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
           <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -990,16 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="211" column="23" selection-start-line="211" selection-start-column="23" selection-end-line="211" selection-end-column="23" />
-          <folding>
-            <element signature="e#312#336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ap2_student/templates/ap2_student/dashboard/activation_required.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="874">
@@ -1044,16 +799,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -1068,25 +813,6 @@
             <element signature="n#section#3;n#main#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#4;n#main#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#5;n#main#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="1672" lean-forward="true" selection-start-line="1392" selection-end-line="1672" />
-          <folding>
-            <element signature="n#head#0;n#html#0;n#!!top" />
-            <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#0;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#1;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#2;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#3;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#4;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#5;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#6;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#section#7;n#main#0;n#body#0;n#html#0;n#!!top" />
           </folding>
         </state>
       </provider>
@@ -1106,27 +832,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="115" column="69" selection-start-line="115" selection-start-column="69" selection-end-line="115" selection-end-column="69" />
+        <state relative-caret-position="633">
+          <caret line="192" column="2" selection-start-line="192" selection-start-column="2" selection-end-line="192" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="4" column="47" lean-forward="true" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-7.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="275" lean-forward="true" selection-start-line="231" selection-end-line="275" />
-          <folding>
-            <element signature="n#section#1;n#main#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="197">
+          <caret line="451" column="61" lean-forward="true" selection-start-line="451" selection-start-column="61" selection-end-line="451" selection-end-column="61" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-10.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="561" lean-forward="true" selection-start-line="481" selection-end-line="561" />
+        <state relative-caret-position="93">
+          <caret line="484" column="25" selection-start-line="484" selection-start-column="25" selection-end-line="484" selection-end-column="25" />
           <folding>
             <element signature="n#head#0;n#html#0;n#!!top" />
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
@@ -1142,8 +872,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="1009" lean-forward="true" selection-start-line="739" selection-end-line="1009" />
+        <state relative-caret-position="96">
+          <caret line="88" column="7" lean-forward="true" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
           <folding>
             <element signature="n#script#0;n#head#0;n#html#0;n#!!top" />
             <element signature="n#header#0;n#body#0;n#html#0;n#!!top" />
@@ -1152,12 +882,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../resources/_Bootstrap-Templates/_top/_LinguaeHub/template/index-3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="96" column="47" selection-start-line="96" selection-start-column="40" selection-end-line="96" selection-end-column="47" />
+          <folding>
+            <element signature="n#head#0;n#html#0;n#!!top" />
+            <element signature="n#section#0;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#1;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#2;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#3;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#4;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#5;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#6;n#main#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#7;n#main#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="52" column="43" selection-start-line="52" selection-start-column="43" selection-end-line="52" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="38" column="67" selection-start-line="38" selection-start-column="67" selection-end-line="38" selection-end-column="67" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/home_mixed.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="651" lean-forward="true" selection-start-line="651" selection-end-line="651" />
+        <state>
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
           <folding>
+            <element signature="e#8528#11495#0#HTML" />
             <element signature="e#9363#10785#0#HTML" />
+            <element signature="e#5022#10841#0#HTML" />
+            <element signature="e#10893#19098#0#HTML" />
+            <element signature="e#19139#19483#0#HTML" />
+            <element signature="e#19646#25978#0#HTML" />
+            <element signature="e#26138#26745#0#HTML" />
+            <element signature="e#26779#27252#0#HTML" />
+            <element signature="e#27290#35358#0#HTML" />
+            <element signature="e#36862#36977#0#HTML" expanded="true" />
             <element signature="e#4711#6575#0#HTML" />
             <element signature="e#6692#10223#0#HTML" />
             <element signature="e#6763#7509#0#HTML" />
@@ -1167,16 +950,222 @@
             <element signature="e#10442#12640#0#HTML" />
             <element signature="e#11305#12612#0#HTML" />
             <element signature="e#12742#45527#0#HTML" />
-            <element signature="e#22345#25517#0#HTML" />
-            <element signature="e#49084#54903#0#HTML" />
-            <element signature="e#54955#63160#0#HTML" />
-            <element signature="e#63201#63545#0#HTML" />
-            <element signature="e#71352#79420#0#HTML" />
-            <element signature="e#80914#81014#0#HTML" expanded="true" />
             <element signature="e#48909#52854#0#HTML" />
             <element signature="e#106995#125123#0#HTML" />
             <element signature="e#125264#132284#0#HTML" />
             <element signature="e#150654#152703#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/js/terms_instructors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/css/terms_instructors.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/modals/terms_instructors.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="311" lean-forward="true" selection-start-line="311" selection-end-line="311" />
+          <folding>
+            <element signature="e#130#22523#0#HTML" />
+            <element signature="e#631#652#0#HTML" expanded="true" />
+            <element signature="e#1284#1309#0#HTML" expanded="true" />
+            <element signature="e#1363#1378#0#HTML" expanded="true" />
+            <element signature="e#4208#4233#0#HTML" expanded="true" />
+            <element signature="e#4291#4332#0#HTML" expanded="true" />
+            <element signature="e#5571#5624#0#HTML" expanded="true" />
+            <element signature="e#6792#6845#0#HTML" expanded="true" />
+            <element signature="e#8535#8588#0#HTML" expanded="true" />
+            <element signature="e#9914#9967#0#HTML" expanded="true" />
+            <element signature="e#11607#11660#0#HTML" expanded="true" />
+            <element signature="e#12758#12811#0#HTML" expanded="true" />
+            <element signature="e#14881#14934#0#HTML" expanded="true" />
+            <element signature="e#16127#16180#0#HTML" expanded="true" />
+            <element signature="e#17151#17204#0#HTML" expanded="true" />
+            <element signature="e#18355#18408#0#HTML" expanded="true" />
+            <element signature="e#19334#19387#0#HTML" expanded="true" />
+            <element signature="e#20821#20880#0#HTML" expanded="true" />
+            <element signature="e#21226#21285#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/css/privacy_policy.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/assets/js/privacy_policy.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ap2_tutor/templates/ap2_tutor/wizard/dt_wizard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="387" column="14" lean-forward="true" selection-start-line="387" selection-start-column="14" selection-end-line="387" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/contact-us.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="205" column="18" selection-end-line="311" selection-end-column="14" />
+          <folding>
+            <element signature="e#824#4249#0#HTML" />
+            <element signature="e#4402#10234#0#HTML" />
+            <element signature="e#12573#16147#0#HTML" />
+            <element signature="e#12649#14920#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/impressum.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="177" selection-start-line="177" selection-end-line="177" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding>
+            <element signature="e#633#1434#0#HTML" />
+            <element signature="e#1530#37273#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/terms.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+          <folding>
+            <element signature="n#block#0;n#!!top" />
+            <element signature="e#1803#20222#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/agb.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" />
+          <folding>
+            <element signature="e#142#1657#0#HTML" />
+            <element signature="e#231#22449#0#HTML" />
+            <element signature="e#1151#22388#0#HTML" />
+            <element signature="e#2321#2374#0#HTML" expanded="true" />
+            <element signature="e#3593#3646#0#HTML" expanded="true" />
+            <element signature="e#5778#5831#0#HTML" expanded="true" />
+            <element signature="e#6830#6883#0#HTML" expanded="true" />
+            <element signature="e#7941#7994#0#HTML" expanded="true" />
+            <element signature="e#9678#9731#0#HTML" expanded="true" />
+            <element signature="e#17049#17102#0#HTML" expanded="true" />
+            <element signature="e#19675#19728#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="96" column="46" selection-start-line="96" selection-start-column="46" selection-end-line="96" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/modals/privacy_policy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="619">
+          <caret line="646" column="6" selection-start-line="147" selection-end-line="646" selection-end-column="6" />
+          <folding>
+            <element signature="e#8751#44703#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/privacy_policy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/terms_user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="49" column="77" selection-start-line="49" selection-start-column="77" selection-end-line="49" selection-end-column="77" />
+          <folding>
+            <element signature="e#1519#1646#0#HTML" expanded="true" />
+            <element signature="e#4725#4778#0#HTML" expanded="true" />
+            <element signature="e#5999#6052#0#HTML" expanded="true" />
+            <element signature="e#8898#8951#0#HTML" expanded="true" />
+            <element signature="e#12150#12203#0#HTML" expanded="true" />
+            <element signature="e#14484#14537#0#HTML" expanded="true" />
+            <element signature="e#16431#16484#0#HTML" expanded="true" />
+            <element signature="e#19136#19189#0#HTML" expanded="true" />
+            <element signature="e#21837#21890#0#HTML" expanded="true" />
+            <element signature="e#24711#24764#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/privacy2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="34" column="37" lean-forward="true" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+          <folding>
+            <element signature="e#2163#2181#0#HTML" expanded="true" />
+            <element signature="e#5163#5216#0#HTML" expanded="true" />
+            <element signature="e#6605#6658#0#HTML" expanded="true" />
+            <element signature="e#10469#10522#0#HTML" expanded="true" />
+            <element signature="e#13013#13066#0#HTML" expanded="true" />
+            <element signature="e#14709#14762#0#HTML" expanded="true" />
+            <element signature="e#17844#17897#0#HTML" expanded="true" />
+            <element signature="e#19031#19084#0#HTML" expanded="true" />
+            <element signature="e#20609#20662#0#HTML" expanded="true" />
+            <element signature="e#25330#25383#0#HTML" expanded="true" />
+            <element signature="e#29371#29424#0#HTML" expanded="true" />
+            <element signature="e#32201#32254#0#HTML" expanded="true" />
+            <element signature="e#33556#33609#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_pages/templates/app_pages/includes/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LinguaeHub/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="36" column="16" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+          <folding>
+            <element signature="e#312#336#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -58,6 +58,8 @@ Footer START -->
                             <li class="nav-item"><a class="nav-link" href="{% url 'app_pages:contact_us' %}">Contact us
                                 (Imprint)</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'blog:home' %}">News and Blog</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'shop:products' %}">Products</a></li>
+
                         </ul>
                     </div>
 
@@ -81,8 +83,6 @@ Footer START -->
                                 guide</a></li>
                             <li class="nav-item"><a class="nav-link" href="{% url 'app_pages:agb' %}">Terms &amp;
                                 Conditions (AGB)</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'accounts:sign_up_tutor' %}">Tutor
-                                Registration</a></li>
                         </ul>
                     </div>
                 </div>
@@ -150,9 +150,11 @@ Footer START -->
                                     </ul>
                                 </div>
                             </li>
-                            <li class="list-inline-item"><a class="nav-link" href="{% url 'app_pages:agb' %}">Terms of
-                                use</a></li>
-                            <li class="list-inline-item"><a class="nav-link pe-0" href="#">Privacy policy</a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="{% url 'app_pages:terms' %}">Terms and Condition</a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="{% url 'app_pages:terms_user' %}">User Terms and Condition</a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="{% url 'app_pages:agb' %}">AGB</a></li>
+                            <li class="list-inline-item"><a class="nav-link pe-0" href="{% url 'app_pages:privacy_policy' %}">Privacy policy</a></li>
+                            <li class="list-inline-item"><a class="nav-link pe-0" href="{% url 'app_pages:impressum' %}">Impresum</a></li>
                         </ul>
                     </div>
                 </div>

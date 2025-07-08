@@ -190,4 +190,4 @@ media/
 .idea/workspace.xml
 "envLinguaeHub/"
 .gitignore
-LinguaeHub/settings.py
+# LinguaeHub/settings.py

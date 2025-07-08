@@ -1,0 +1,369 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Terms & Condition{% endblock %}
+{% block my_style %}
+<style>
+    .object-fit-cover {
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-image {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 0.375rem;
+    }
+
+    .feature-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-body {
+        flex-grow: 1;
+    }
+
+    .equal-height-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .equal-height-row > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Terms specific styles */
+    .terms-section {
+        border-bottom: 1px solid #e0e0e0;
+        padding: 2rem 0;
+    }
+
+    .terms-section:last-child {
+        border-bottom: none;
+    }
+
+    .terms-header {
+        background-color: #6f42c1;
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
+    }
+
+    .highlight-box {
+        background-color: #f8f9fa;
+        border-left: 4px solid #6f42c1;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+
+    .penalty-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .penalty-table th, .penalty-table td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        text-align: left;
+    }
+
+    .penalty-table th {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <!-- Page Header START -->
+        <section class="terms-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="display-5 fw-bold text-white">Terms and Conditions (AGB)</h1>
+                        <p class="lead text-white-50 mb-0">Effective Date: 01.07.2025 | Version: 1.0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page Header END -->
+
+        <!-- Terms Content START -->
+        <section class="py-5">
+            <div class="container">
+                <!-- Section 1 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">1. Scope and Applicability</h2>
+                    <p>These Terms and Conditions ("Terms") govern all access to and use of the Lingocept® platform ("Platform") by individuals and entities ("Users"), including language learners ("Learners") and language professionals ("Instructors"). The Platform is operated by Lingocept® and accessible via web, mobile apps, and APIs.</p>
+                    <p>Use of the Platform constitutes acceptance of these Terms.</p>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">2. Services Offered</h2>
+                    <h4>2.1 Language Learning Platform</h4>
+                    <p>Lingocept® offers a mediated marketplace where Learners can book sessions and access educational content. Lingocept® facilitates account creation, scheduling, payment, and communication.</p>
+
+                    <h4>2.2 Proprietary Product</h4>
+                    <p>Lingocept® provides a proprietary learning product ("Product") including structured digital content and learning frameworks. Purchase grants a personal, non-transferable license.</p>
+
+                    <h4>2.3 Role Disclaimer</h4>
+                    <p>Lingocept® is not a party to the contracts between Learners and Instructors.</p>
+                </div>
+
+                <!-- Section 3 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">3. Eligibility and Registration</h2>
+                    <ul>
+                        <li>Users must be 18+, or 13+ with verifiable parental consent.</li>
+                        <li>Accurate personal and payment data must be submitted.</li>
+                        <li>Each User may register one account per role unless explicitly authorized.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">4. Account Security</h2>
+                    <p>Users are responsible for maintaining the confidentiality of login credentials. Unauthorized use must be reported immediately. Lingocept® reserves the right to suspend or terminate accounts in case of violations or fraud.</p>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">5. User Conduct</h2>
+                    <p>Strictly prohibited:</p>
+                    <ul>
+                        <li>Sharing private contact information before trial completion</li>
+                        <li>Circumventing payments or conducting off-platform sessions</li>
+                        <li>Sharing or republishing Product content</li>
+                        <li>Using bots or scrapers without prior written consent</li>
+                        <li>Harassment, discrimination, or unlawful behavior</li>
+                    </ul>
+                    <p>Violations may result in suspension, termination, or legal consequences.</p>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">6. Instructor Obligations</h2>
+                    <p>Instructors must:</p>
+                    <ul>
+                        <li>Hold relevant qualifications</li>
+                        <li>Maintain truthful and updated profiles</li>
+                        <li>Provide lessons professionally and ethically</li>
+                        <li>Comply with the Tutor Code of Conduct</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4>6.1 Code of Conduct and Operational Standards for Instructors</h4>
+                        <p>To ensure consistent educational quality and learner satisfaction, all Instructors are required to adhere to the following standards while using the Lingocept® Platform:</p>
+                        <ul>
+                            <li><strong>Professional Appearance and Conduct:</strong> Instructors must be dressed appropriately and maintain professional behavior in both speech and appearance during all lessons and recorded content (e.g., profile video, demo classes).</li>
+                            <li><strong>Use of Equipment:</strong> Lessons must be conducted using a stable internet connection on a PC or laptop. Use of smartphones or tablets for teaching is not permitted unless explicitly approved.</li>
+                            <li><strong>Lesson Environment:</strong> A quiet, well-lit, and distraction-free teaching space is mandatory. Background noise, visual disruptions, or inappropriate locations are prohibited.</li>
+                            <li><strong>Camera Use:</strong> The Instructor's webcam must remain on during the entire session, except in the case of technical failure, which must be reported immediately.</li>
+                            <li><strong>Punctuality:</strong> Instructors must join sessions on time. Repeated tardiness or absence without prior notice may result in account suspension.</li>
+                            <li><strong>No Off-Platform Engagement:</strong> Sharing of personal contact information or inviting Learners to external platforms or communication channels is strictly forbidden.</li>
+                            <li><strong>Privacy and Confidentiality:</strong> Instructors are prohibited from sharing, storing, or disclosing any Learner data, conversations, or private information.</li>
+                            <li><strong>Training and Monitoring:</strong> Instructors must attend platform-led training when required and agree to periodic quality audits, including random monitoring of live sessions.</li>
+                            <li><strong>Zero Tolerance for Misconduct:</strong> Any form of harassment, discriminatory behavior, offensive language, or unprofessional conduct is grounds for immediate termination.</li>
+                        </ul>
+                        <p>Lingocept® reserves the right to suspend, demote, or permanently remove any Instructor who fails to comply with these standards, or who receives repeated negative evaluations from Learners.</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>6.2 Code of Conduct for Learners</h4>
+                        <p>To maintain a respectful, safe, and professional learning environment for all Users, Learners must adhere to the following conduct standards:</p>
+                        <ul>
+                            <li><strong>Respect and Professionalism:</strong> Learners must treat Instructors and support staff with courtesy and respect at all times. Abusive, discriminatory, or offensive language or behavior will not be tolerated.</li>
+                            <li><strong>Punctuality:</strong> Learners must join scheduled sessions on time. Late arrivals or no-shows without prior cancellation may result in the lesson being marked as completed.</li>
+                            <li><strong>Camera Use and Participation:</strong> Instructors may request that Learners have their cameras on during lessons to improve engagement. Refusal without valid reason may impact lesson quality.</li>
+                            <li><strong>Lesson Environment:</strong> Learners must participate from a quiet and safe environment, free of distractions. Public or disruptive locations are not appropriate for lessons.</li>
+                            <li><strong>No Off-Platform Engagement:</strong> Learners may not request or initiate contact with Instructors outside the Lingocept® platform. Sharing personal contact information is strictly prohibited.</li>
+                            <li><strong>Privacy and Consent:</strong> Recording sessions or sharing lesson content without the Instructor's and Lingocept®'s written permission is strictly prohibited.</li>
+                            <li><strong>Misuse of the Platform:</strong> Learners may not use the platform to solicit unrelated services, violate laws, or impersonate others.</li>
+                        </ul>
+                        <p>Lingocept® reserves the right to suspend or permanently block access to any Learner account found in violation of this Code of Conduct.</p>
+                    </div>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">7. Payment Terms</h2>
+                    <h4>7.1 Learners</h4>
+                    <ul>
+                        <li>Subscription or pay-as-you-go credit models are prepaid.</li>
+                        <li>Credits are valid during the billing cycle; limited rollover allowed.</li>
+                        <li>Pricing is shown in EUR € (incl. VAT where applicable).</li>
+                    </ul>
+
+                    <h4>7.2 Instructors</h4>
+                    <ul>
+                        <li>Instructors earn a percentage (e.g. 70–85%) of lesson revenue.</li>
+                        <li>Commission rates may vary by volume/performance.</li>
+                        <li>Trial lessons may be unpaid or discounted.</li>
+                    </ul>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">8. Scheduling & Cancellations</h2>
+                    <h4>Learners:</h4>
+                    <ul>
+                        <li>Free cancellations/rescheduling up to 24h before lesson</li>
+                        <li>Late cancellations incur full credit charge</li>
+                    </ul>
+
+                    <h4>Instructors:</h4>
+                    <ul>
+                        <li>24h notice required for rescheduling</li>
+                        <li>Repeated cancellations may lead to penalties or deactivation</li>
+                    </ul>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">9. Trial Lessons</h2>
+                    <ul>
+                        <li>One trial per Learner–Instructor pair</li>
+                        <li>Duration limited (e.g. 30 minutes)</li>
+                        <li>No contact sharing before trial completion</li>
+                    </ul>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">10. Refund Policy</h2>
+                    <ul>
+                        <li>Full refunds within 14 days if no credits used</li>
+                        <li>Partial refunds at Lingocept®'s discretion after lesson use</li>
+                        <li>EU withdrawal rights (Directive 2011/83/EU) apply</li>
+                    </ul>
+                </div>
+
+                <!-- Section 11 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">11. Intellectual Property</h2>
+                    <h4>11.1 Ownership</h4>
+                    <p>All Platform materials (including but not limited to text, audio, video, design elements, teaching frameworks, and learning methodologies) are the exclusive intellectual property of Lingocept®. This includes a proprietary, original, and innovative method developed by Lingocept® to support learners in improving their English comprehension and speaking skills. While designed to accelerate progress, results vary based on the learner's individual engagement, background, and effort. No outcome is guaranteed. This methodology is protected under applicable intellectual property laws and forms a central component of the Product.</p>
+
+                    <h4>11.2 Instructor Content</h4>
+                    <p>Instructors retain rights to materials they create but grant Lingocept® a worldwide, royalty-free license to use such materials for quality control, educational, and promotional purposes.</p>
+
+                    <h4>11.3 Restrictions</h4>
+                    <p>Users may not, under any circumstances:</p>
+                    <ul>
+                        <li>Reproduce, replicate, or redistribute Product content whether it is for commercial, educational, or private use.</li>
+                        <li>Share, teach, disclose, license, sublicense, translate, alter, or commercialize any part of the Product or the proprietary methodology</li>
+                        <li>Use the Product or methodology in commercial, educational, or training settings, whether for profit or not, including use in their own businesses or instructional services</li>
+                        <li>Grant access to third parties, whether individuals or organizations, without Lingocept®'s express written consent</li>
+                        <li>Adapt or apply the methodology, in whole or in part, to the instruction or learning of any language, including English or any other language, regardless of whether it is for commercial, educational, or private use.</li>
+                        <li>Reverse-engineer, imitate, or derive competing instructional frameworks based on the Product or proprietary methodology</li>
+                    </ul>
+                    <p>Any breach of these terms constitutes a material violation and will trigger contractual penalties as defined in Section 12.</p>
+                </div>
+
+                <!-- Section 12 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">12. Penalties for Violations</h2>
+                    <h4>12.1 Sanctions:</h4>
+                    <ul>
+                        <li>Account termination</li>
+                        <li>Access revoked without refund</li>
+                    </ul>
+
+                    <h4>12.2 Fixed Penalties:</h4>
+                    <table class="penalty-table">
+                        <thead>
+                            <tr>
+                                <th>Violator Type</th>
+                                <th>Penalty Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Individual</td>
+                                <td>€5,000 per violation</td>
+                            </tr>
+                            <tr>
+                                <td>Entity/Company</td>
+                                <td>€100,000 per violation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>These penalties are contractual and do not limit claims for additional damages under German civil law.</p>
+                </div>
+
+                <!-- Section 13 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">13. Limitation of Liability</h2>
+                    <p>Lingocept® is not liable for:</p>
+                    <ul>
+                        <li>Disputes between Users</li>
+                        <li>Indirect damages or loss of earnings</li>
+                        <li>Platform downtime or data loss</li>
+                    </ul>
+                    <p>Liability is capped at the amount paid by the User in the prior 12 months.</p>
+                </div>
+
+                <!-- Section 14 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">14. Data Protection</h2>
+                    <p>Lingocept® complies with GDPR and other applicable privacy laws. See our Privacy Policy for details on data use, cookie handling, and user rights.</p>
+                </div>
+
+                <!-- Section 15 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">15. Platform Availability</h2>
+                    <p>No guarantee is made for uninterrupted service. Features may be modified or suspended at any time.</p>
+                </div>
+
+                <!-- Section 16 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">16. Termination</h2>
+                    <p>Users or Lingocept® may terminate accounts with notice. Remaining credits may expire. Data is handled per Privacy Policy.</p>
+                </div>
+
+                <!-- Section 17 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">17. Governing Law and Jurisdiction</h2>
+                    <p>These Terms are governed by the laws of Germany. Place of jurisdiction: Berlin. EU Users may use the Online Dispute Resolution (ODR) platform.</p>
+                </div>
+
+                <!-- Section 18 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">18. Amendments</h2>
+                    <p>Lingocept® may amend these Terms with notice via email or platform update. Continued use implies acceptance.</p>
+                </div>
+
+                <!-- Section 19 -->
+                <div class="terms-section">
+                    <h2 class="fw-bold mb-4">19. Contact</h2>
+                    <p><strong>Lingocept®</strong><br>
+                    Website: <a href="https://www.lingocept.com">www.lingocept.com</a><br>
+                    Email: <a href="mailto:contact@lingocept.com">contact@lingocept.com</a><br>
+                    Address: Berlin, Germany</p>
+                </div>
+            </div>
+        </section>
+        <!-- Terms Content END -->
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}

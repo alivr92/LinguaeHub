@@ -47,6 +47,10 @@ class Pricing(TemplateView):
     template_name = 'app_pages/pricing.html'
 
 
+class Impressum(TemplateView):
+    template_name = 'app_pages/impressum.html'
+
+
 class ContactUs(FormView):
     template_name = 'app_pages/contact-us.html'
     form_class = ContactUsForm
@@ -85,8 +89,17 @@ class AGB(TemplateView):
     template_name = 'app_pages/agb.html'
 
 
+class TermsCondition(TemplateView):
+    template_name = 'app_pages/terms.html'
+
+
+class TermsUser(TemplateView):
+    template_name = 'app_pages/terms_user.html'
+
+
 class PrivacyPolicy(TemplateView):
-    template_name = 'app_pages/privacy_policy.html'
+    # template_name = 'app_pages/privacy_policy.html'
+    template_name = 'app_pages/privacy2.html'
 
 
 class HelpCenter(TemplateView):

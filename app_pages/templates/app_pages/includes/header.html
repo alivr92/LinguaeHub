@@ -6,29 +6,62 @@
     <!-- Logo Nav START -->
     <nav class="navbar navbar-expand-xl">
         <div class="container">
+            {#            <!-- Logo + Name Row -->#}
+            {#            <div class="d-flex justify-content-between align-items-center ">#}
+            {#                <!-- Logo -->#}
+            {#                <a class="navbar-brand  me-3" href="{% url 'app_pages:home' %}">#}
+            {#                    <img class="light-mode-item navbar-brand-item" src="{{ CFImage.site_logo_light.url }}"#}
+            {#                         alt="logo" style="height: 3rem; width: 6rem;">#}
+            {#                    <img class="dark-mode-item navbar-brand-item" src="{{ CFImage.site_logo_dark.url }}"#}
+            {#                         alt="logo" style="height: 3rem; width: 6rem;">#}
+            {#                </a>            <!-- Logo END -->#}
+            {##}
+            {##}
+            {#                <!-- Site Name - takes remaining space and aligns right -->#}
+            {#                <h3 class="mb-0 text-uppercase "> {{ CFChar.site_name }}</h3>#}
+            {#            </div>#}
+
+
             <!-- Logo + Name Row -->
-            <div class="d-flex justify-content-between align-items-center ">
-    <!-- Logo -->
-    <a class="navbar-brand  me-3" href="{% url 'app_pages:home' %}">
-        <img class="light-mode-item navbar-brand-item" src="{{ CFImage.site_logo_light.url }}"
-             alt="logo" style="height: 3rem; width: 6rem;">
-        <img class="dark-mode-item navbar-brand-item" src="{{ CFImage.site_logo_dark.url }}"
-             alt="logo" style="height: 3rem; width: 6rem;">
-    </a>
+                <div class="d-flex align-items-center flex-nowrap" style="gap: 2px;">
 
-    <!-- Site Name - takes remaining space and aligns right -->
-    <h3 class="mb-0 text-uppercase " > {{ CFChar.site_name }}</h3>
-</div>
-            <!-- Logo -->
-            {#                <a class="me-3" href="{% url 'app_pages:home' %}">#}
-            {#                    <img class="light-mode-item" src="{{ CFImage.site_logo_light.url }}" alt="logo"#}
-            {#                         style="height: 2.5rem;">#}
-            {#                    <img class="dark-mode-item" src="{{ CFImage.site_logo_dark.url }}" alt="logo"#}
-            {#                         style="height: 2.5rem;">#}
-            {#                </a>#}
+                <!-- Logo -->
+                <a class="navbar-brand flex-shrink-0 mx-0" href="{% url 'app_pages:home' %}" style="min-width: 120px;">
+                    <picture>
+                        <!-- Light mode logo -->
+                        <source srcset="{{ CFImage.site_logo_light.url }}" media="(prefers-color-scheme: light)">
+                        <!-- Dark mode logo -->
+                        <source srcset="{{ CFImage.site_logo_dark.url }}" media="(prefers-color-scheme: dark)">
+                        <!-- Fallback logo -->
+                        <img class="img-fluid "
+                             src="{{ CFImage.site_logo_light.url }}"
+                             alt="logo"
+                             style="height: auto; max-height: 50px; width: auto;">
+                    </picture>
+                </a>
+
+                <!-- Site Name - Responsive sizing and spacing -->
+                <h3 class="mb-0 mx-0 text-uppercase fs-5 fs-md-4 fs-lg-3 text-truncate"
+                    style="line-height: 1.2;">{{ CFChar.site_name }}
+                </h3>
+            </div>
+        <!-- Logo + Name Row - Perfect Spacing -->
+{#<div class="d-flex align-items-center flex-nowrap" style="gap: 2px;">#}
+{#    <!-- Logo with fixed width -->#}
+{#    <a class="navbar-brand p-0 m-0" href="{% url 'app_pages:home' %}" style="width: 120px; flex-shrink: 0;">#}
+{#        <img class="d-block"#}
+{#             src="{{ CFImage.site_logo_light.url }}"#}
+{#             alt="logo"#}
+{#             style="height: auto; max-height: 50px; display: block;">#}
+{#    </a>#}
+{##}
+{#    <!-- Site Name with tight spacing -->#}
+{#    <h3 class="m-0 p-0 text-uppercase fs-5 fs-md-4 fs-lg-3" style="line-height: 1.2;">#}
+{#        {{ CFChar.site_name }}#}
+{#    </h3>#}
+{#</div>#}
 
 
-            <!-- Logo END -->
 
             <!-- Responsive navbar toggler -->
             <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -43,19 +76,13 @@
 
             <!-- Main navbar START -->
             <div class="navbar-collapse w-100 collapse" id="navbarCollapse">
-
-
                 <!-- Nav Main menu START -->
                 <ul class="navbar-nav navbar-nav-scroll me-auto">
-
-
                 </ul>
                 <!-- Nav Main menu END -->
 
                 <!-- Nav Main menu START -->
                 <ul class="navbar-nav navbar-nav-scroll mx-auto">
-
-
                     <!-- Nav item 1 Home -->
                     <li class="nav-item">
                         <a
@@ -99,184 +126,39 @@
                                     href="{% url 'app_pages:contact_us' %}" id="menu-tutor" aria-expanded="false">Contact</a>
                     </li>
                     <!-- Nav item: Pricing -->
-                    <li class="nav-item">
-                        <a
-                                {% if 'pricing' in request.path %}
-                                    class="nav-link active text-primary"
-                                {% else %}
-                                    class="nav-link"
-                                {% endif %}
-                                    href="{% url 'app_pages:pricing' %}" id="menu-tutor"
-                                    aria-expanded="false">Pricing</a>
-                    </li>
+                    {#                    <li class="nav-item">#}
+                    {#                        <a#}
+                    {#                                {% if 'pricing' in request.path %}#}
+                    {#                                    class="nav-link active text-primary"#}
+                    {#                                {% else %}#}
+                    {#                                    class="nav-link"#}
+                    {#                                {% endif %}#}
+                    {#                                    href="{% url 'app_pages:pricing' %}" id="menu-tutor"#}
+                    {#                                    aria-expanded="false">Pricing</a>#}
+                    {#                    </li>#}
                     <!-- Nav item: Blog-->
-                    <li class="nav-item">
-                        <a
-                                {% if 'blog' in request.path %}
-                                    class="nav-link active text-primary"
-                                {% else %}
-                                    class="nav-link"
-                                {% endif %}
-                                    href="{% url 'blog:home' %}" id="menu-tutor" aria-expanded="false">Blog</a>
-                    </li>
+                    {#                    <li class="nav-item">#}
+                    {#                        <a#}
+                    {#                                {% if 'blog' in request.path %}#}
+                    {#                                    class="nav-link active text-primary"#}
+                    {#                                {% else %}#}
+                    {#                                    class="nav-link"#}
+                    {#                                {% endif %}#}
+                    {#                                    href="{% url 'blog:home' %}" id="menu-tutor" aria-expanded="false">Blog</a>#}
+                    {#                    </li>#}
 
                     <!-- Nav item: Shop-->
-                    <li class="nav-item">
-                        <a
-                                {% if 'shop' in request.path %}
-                                    class="nav-link active text-primary"
-                                {% else %}
-                                    class="nav-link"
-                                {% endif %}
-                                    href="{% url 'shop:products' %}" id="menu-shop" aria-expanded="false">Shop</a>
-                    </li>
-
+                    {#                    <li class="nav-item">#}
+                    {#                        <a#}
+                    {#                                {% if 'shop' in request.path %}#}
+                    {#                                    class="nav-link active text-primary"#}
+                    {#                                {% else %}#}
+                    {#                                    class="nav-link"#}
+                    {#                                {% endif %}#}
+                    {#                                    href="{% url 'shop:products' %}" id="menu-shop" aria-expanded="false">Shop</a>#}
+                    {#                    </li>#}
                     <!-- Nav item: Account -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="accounntMenu" data-bs-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Pages</a>
-                        <ul class="dropdown-menu" aria-labelledby="accounntMenu">
-                            <!-- Dropdown submenu -->
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item dropdown-toggle" href="#"><i
-                                        class="fas fa-user-tie fa-fw me-1"></i>Instructor</a>
-                                <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
-                                    <li><a class="dropdown-item" href="instructor-dashboard.html"><i
-                                            class="bi bi-grid-fill fa-fw me-1"></i>Dashboard</a></li>
-                                    <li><a class="dropdown-item" href="instructor-manage-course.html"><i
-                                            class="bi bi-basket-fill fa-fw me-1"></i>Courses</a></li>
-                                    <li><a class="dropdown-item" href="instructor-create-course.html"><i
-                                            class="bi bi-file-earmark-plus-fill fa-fw me-1"></i>Create Course</a></li>
-                                    <li><a class="dropdown-item" href="course-added.html"><i
-                                            class="bi bi-file-check-fill fa-fw me-1"></i>Course Added</a></li>
-                                    <li><a class="dropdown-item" href="instructor-quiz.html"><i
-                                            class="bi bi-question-diamond fa-fw me-1"></i>Quiz</a></li>
-                                    <li><a class="dropdown-item" href="instructor-earning.html"><i
-                                            class="fas fa-chart-line fa-fw me-1"></i>Earnings</a></li>
-                                    <li><a class="dropdown-item" href="instructor-studentlist.html"><i
-                                            class="fas fa-user-graduate fa-fw me-1"></i>Students</a></li>
-                                    <li><a class="dropdown-item" href="instructor-order.html"><i
-                                            class="bi bi-cart-check-fill fa-fw me-1"></i>Orders</a></li>
-                                    <li><a class="dropdown-item" href="instructor-review.html"><i
-                                            class="bi bi-star-fill fa-fw me-1"></i>Reviews</a></li>
-                                    <li><a class="dropdown-item" href="instructor-payout.html"><i
-                                            class="fas fa-wallet fa-fw me-1"></i>Payout</a></li>
-                                </ul>
-                            </li>
-
-                            <!-- Dropdown submenu -->
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item dropdown-toggle" href="#"><i
-                                        class="fas fa-user-graduate fa-fw me-1"></i>Student</a>
-                                <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
-                                    <li><a class="dropdown-item" href="student-dashboard.html"><i
-                                            class="bi bi-grid-fill fa-fw me-1"></i>Dashboard</a></li>
-                                    <li><a class="dropdown-item" href="student-subscription.html"><i
-                                            class="bi bi-card-checklist fa-fw me-1"></i>My Subscriptions</a></li>
-                                    <li><a class="dropdown-item" href="student-course-list.html"><i
-                                            class="bi bi-basket-fill fa-fw me-1"></i>Courses</a></li>
-                                    <li><a class="dropdown-item" href="student-course-resume.html"><i
-                                            class="far fa-fw fa-file-alt me-1"></i>Course Resume</a></li>
-                                    <li><a class="dropdown-item" href="student-quiz.html"><i
-                                            class="bi bi-question-diamond fa-fw me-1"></i>Quiz </a></li>
-                                    <li><a class="dropdown-item" href="student-payment-info.html"><i
-                                            class="bi bi-credit-card-2-front-fill fa-fw me-1"></i>Payment Info</a></li>
-                                    <li><a class="dropdown-item" href="student-bookmark.html"><i
-                                            class="fas bi-cart-check-fill fa-fw me-1"></i>Wishlist</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a class="dropdown-item" href="admin-dashboard.html"><i
-                                    class="fas fa-user-cog fa-fw me-1"></i>Admin</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="instructor-edit-profile.html"><i
-                                    class="fas fa-fw fa-edit me-1"></i>Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="instructor-setting.html"><i
-                                    class="fas fa-fw fa-cog me-1"></i>Settings</a></li>
-                            <li><a class="dropdown-item" href="instructor-delete-account.html"><i
-                                    class="fas fa-fw fa-trash-alt me-1"></i>Delete Profile</a></li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <!-- Dropdown Level -->
-                            <li class="dropdown-submenu dropend">
-                                <a class="dropdown-item dropdown-toggle" href="#">Dropdown levels</a>
-                                <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
-
-                                    <!-- dropdown submenu open right -->
-                                    <li class="dropdown-submenu dropend">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Dropdown (end)</a>
-                                        <ul class="dropdown-menu" data-bs-popper="none">
-                                            <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                                            <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-
-                                    <!-- dropdown submenu open left -->
-                                    <li class="dropdown-submenu dropstart">
-                                        <a class="dropdown-item dropdown-toggle" href="#">Dropdown (start)</a>
-                                        <ul class="dropdown-menu dropdown-menu-end" data-bs-popper="none">
-                                            <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                                            <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown item</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-
                     <!-- Nav item: link-->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="advanceMenu" data-bs-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end min-w-auto" data-bs-popper="none">
-                            <li>
-                                <a class="dropdown-item" href="https://support.webestica.com/" target="_blank">
-                                    <i class="text-warning fa-fw bi bi-life-preserver me-2"></i>Support
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="docs/index.html" target="_blank">
-                                    <i class="text-danger fa-fw bi bi-card-text me-2"></i>Documentation
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="https://eduport.webestica.com/rtl/" target="_blank">
-                                    <i class="text-info fa-fw bi bi-toggle-off me-2"></i>RTL demo
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="https://themes.getbootstrap.com/store/webestica/"
-                                   target="_blank">
-                                    <i class="text-success fa-fw bi bi-cloud-download-fill me-2"></i>Buy Eduport!
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="docs/alerts.html" target="_blank">
-                                    <i class="text-orange fa-fw bi bi-puzzle-fill me-2"></i>Components
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="docs/snippets.html">
-                                    <i class="text-purple fa-fw bi bi-stickies-fill me-2"></i>Snippets
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                 </ul>
                 <!-- Nav Main menu END -->
 

@@ -1,784 +1,445 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
 {% block head_title %}AGB{% endblock %}
+{% block my_style %}
 
+    <!-- Embedded CSS -->
+    <style>
+        .list-icon {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .list-icon li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-icon li:before {
+            content: "•";
+            color: var(--bs-primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Color variants */
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1);
+            border-color: rgba(13, 110, 253, 0.2);
+        }
+
+        .bg-success-soft {
+            background-color: rgba(25, 135, 84, 0.1);
+            border-color: rgba(25, 135, 84, 0.2);
+        }
+
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .bg-info-soft {
+            background-color: rgba(13, 202, 240, 0.1);
+            border-color: rgba(13, 202, 240, 0.2);
+        }
+
+        .bg-danger-soft {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.2);
+        }
+
+        .alert-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1);
+            border-color: rgba(13, 110, 253, 0.2);
+            color: var(--bs-primary);
+        }
+
+        .alert-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.2);
+            color: #664d03;
+        }
+
+        .alert-danger-soft {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.2);
+            color: #58151c;
+        }
+
+        .border-primary-soft {
+            border-color: rgba(13, 110, 253, 0.3) !important;
+        }
+
+        .border-success-soft {
+            border-color: rgba(25, 135, 84, 0.3) !important;
+        }
+
+        .border-danger-soft {
+            border-color: rgba(220, 53, 69, 0.3) !important;
+        }
+    </style>
+{% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
-    <main>
-
+    <!-- Terms and Conditions (AGB) Page -->
+    <main class="bg-light">
         <!-- =======================
-        Main Banner START -->
-        <section class="bg-light">
+        Page Banner START -->
+        <section class="pt-5 pb-4 bg-white">
             <div class="container">
-
-                <!-- Title -->
-                <div class="row position-relative pb-4">
-                    <div class="col-lg-8 position-relative">
-                        <!-- Title -->
-                        <h1>Terms & Condition (AGB)</h1>
-                        <p>For who thoroughly her boy estimating conviction. Removed demands expense account in outward
-                            tedious do. Particular way thoroughly unaffected projection favorable Mrs can be projecting
-                            own. Thirty it matter enable become admire in giving.</p>
+                <div class="row">
+                    <div class="col-lg-8 col-xl-6 text-center mx-auto">
+                        <h1 class="mb-3">Terms and Conditions (AGB)</h1>
+                        <div class="d-flex justify-content-center gap-3">
+                        <span class="badge bg-primary">
+                            <i class="bi bi-calendar-check me-1"></i> Effective: 01.07.2025
+                        </span>
+                            <span class="badge bg-secondary">
+                            Version: 1.0
+                        </span>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Image -->
-                <div class="h-300px mb-n9 rounded-3"
-                     style="background-image:url({% static 'assets/images/bg/05.jpg' %}); background-position: center left; background-size: cover;">
-                </div>
-
             </div>
         </section>
         <!-- =======================
-        Main Banner END -->
+        Page Banner END -->
 
         <!-- =======================
-        Detail START -->
-        <section class="pt-9">
+        Content START -->
+        <section class="pt-4 pb-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Content -->
-                        <div id="content">
-                            <h3>
-                                Allgemeine Nutzungsbedingungen von Balint Media für Videoproduktionen im Kundenauftrag
-                            </h3>
-                            <p><br/><b>1. Vertragsgegenstand und Gestaltungsfreiheit</b><br/>
-                                <b>a)</b> Die nachfolgenden Allgemeinen Geschäftsbedingungen (AGB) gelten für alle
-                                Vertragsverhältnisse und Geschäftsbeziehungen zwischen Balint Media und natürlichen oder
-                                juristischen Personen, die bei Abschluss des Geschäfts in gewerblicher oder
-                                selbständiger Eigenschaft handeln, sowie mit juristischen Personen des öffentlichen
-                                Rechts. Für den Abschluss von Verträgen mit Verbrauchern finden diese Allgemeinen
-                                Geschäftsbedingungen keine Anwendung. <br/>
-                                <b>b)</b> Balint Media, Inhaberin Frau Mihaela Balint, Bahlenstr. 30, 40589 Düsseldorf,
-                                produziert im Kundenauftrag hochwertige filmische Präsentationen von bewegten Bildern in
-                                Form von Videoproduktionen und Animationen (nachstehend: "Filme" genannt) für
-                                Unternehmen, Institutionen u.ä. insbesondere zu Werbezwecken, als Imagefilme, als
-                                filmische Dokumentationen von Events oder für sonstige Verwendungszwecke. Wir bieten
-                                darüber hinaus auch ergänzende Dienstleistungen in diesem Umfeld an, so etwa die
-                                Nachbearbeitung, Vermarktung und die Distribution der uns hergestellten Filme, unter
-                                Einschluss von Präsentationen in den Medien des Internets und des Mobilfunks, die einer
-                                gesonderten Vereinbarung bedürfen. <br/>
-                                <b>c)</b> Das Vertragsverhältnis zwischen uns und unseren Kunden richtet sich
-                                ausschließlich nach den vorliegenden Bestimmungen in der zum Zeitpunkt des
-                                Vertragsschlusses jeweils geltenden Form, die stets unter der URL
-                                https://www.balintmedia.de/agb aufrufbar ist. Abweichende, entgegenstehende oder
-                                ergänzende Allgemeine Geschäftsbedingungen unserer Geschäftspartner werden ausdrücklich
-                                nicht Vertragsbestandteil, es sei denn ihrer Geltung wird ausdrücklich vor
-                                Vertragsschluss schriftlich zugestimmt. Wir behalten uns vor, diese Allgemeinen
-                                Geschäftsbedingungen bei Bedarf zu ändern. Alle Änderungen dieser Allgemeinen
-                                Geschäftsbedingungen werden im Rahmen unserer Angebote auf unseren Webseiten
-                                veröffentlicht.<br/>
-                                <b>d)</b> Im Rahmen des uns durch den Kunden erteilten Auftrags wird uns nach Maßgabe
-                                dieser Allgemeinen Geschäftsbedingungen Gestaltungsfreiheit eingeräumt. Sämtliche
-                                Reklamationen bezüglich der künstlerischen oder bildlichen Gestaltung sind
-                                ausgeschlossen, sofern diesbezüglich keine gesonderte Vereinbarung in Textform getroffen
-                                wird. Sofern der Auftraggeber während oder nach der Produktion Änderungswünsche äußert,
-                                hat er die Mehrkosten nach unseren üblichen Honorarsätzen zu tragen. Für diesen Fall
-                                bleibt der vereinbarte Vergütungsanspruch von Balint Media für bereits begonnene
-                                Arbeiten unberührt.<br/><br/>
-                                <b>2. Auftragsproduktionen &amp; Auftragserteilung</b><br/>
-                                <b>a)</b> Im Regelfall erfolgt die Auftragserteilung schriftlich. Wir erstellen Ihnen
-                                gerne ein Angebot, nach Ihren Angaben und Wünschen. Aus der Auftragsbestätigung gehen
-                                Auftragsinhalt – und Auftragsumfang eingehend hervor. Bei nur mündlicher
-                                Auftragserteilung gehen mögliche Übermittlungsfehler zu Lasten des Auftraggebers. In
-                                diesem Fall fassen wir die wesentlichen Angaben des Auftraggebers in einer
-                                Auftragsbestätigung zusammen. Wird dieser nicht widersprochen, werden die darin
-                                enthaltenen Angaben Vertragsbestandteil. Die Annahme eines Auftrages behalten wir uns
-                                ausdrücklich vor.<br/>
-                                <b>b)</b> Sollten mehrere Auftraggeber oder Koproduzenten als Vertragspartner des
-                                Auftraggebers uns den Auftrag für die Erstellung eines Filmwerkes erteilen, ist vor
-                                Drehbeginn schriftlich zu regeln, welcher Auftraggeber in Vollmacht der übrigen
-                                Auftraggeber gegenüber uns Erklärungen abzugeben hat. Insbesondere gilt dies für die
-                                namentliche Bekanntmachung jener Person, die für die Abnahme des Filmwerkes
-                                verantwortlich ist. <br/><br/>
-                                <b>3. Streamingdienste und Videokonferenzen; spezifische Haftungsausschlüsse</b><br/>
-                                <b>a)</b> Für bieten auch Streamingdienste und Videokonferenzen auf der Basis eines
-                                individuellen Angebots an, etwa für die Online – Übertragung von Konferenzen, Webinaren
-                                oder virtuellen Hautversammlungen an. Eine dedizierte Internetleitung mit mind. 20 Mbit
-                                Upload für den unterbrechungsfreien Upstream der Liveübertragung muss vom Auftraggeber
-                                zur Verfügung gestellt werden.<br/>
-                                <b>b)</b> Die zur Leistungserbringung erforderlichen technischen Gerätschaften und das
-                                nötige Personal stellen wir zur Verfügung, es sein denn, individualvertraglich ist etwas
-                                anderes vereinbart.<br/>
-                                <b>c)</b> Wir testen alle Hard- und Softwarekomponenten mindestens 24 h vor der
-                                Veranstaltung vor Ort. Dabei gehen wir davon aus, dass Bühne, Möbilierung,
-                                Installationen, Schallschutz, Regieplätze und sonst. technologische Anforderungen
-                                (Beamer, TV, Monitor, Internetanschluss/ WLAN), welche nicht im Angebot enthalten sind,
-                                bei der Projektumsetzung nach Absprache zur Verfügung stehen. Die Durchführung solcher
-                                Projekte setzt ein faires Kooperationsverhältnis zwischen allen Beteiligten voraus.
-                                <br/>
-                                <b>d)</b> Unsere Leistungen beinhalten in Abhängigkeit des individuellen Angebots die
-                                Optionen Konzeption, Planung, Einkauf, Setup, Aufbau, Development, Livestreaming,
-                                Encoding und Hosting über ein oder mehrere<br/>CDN (Content Delivery Network). Die
-                                Hardware wird von uns in Kooperation mit dem Kunden vor Ort installiert und getestet,
-                                sofern der Kunde nicht über ein eigenes, entsprechendes Equipment verfügt und dies
-                                Bestandteil des Vertrages ist. Auf Anfrage können weitere Leistungen über eine
-                                schriftliche Erweiterung des Angebots erfolgen, so etwa die Anmietung eines Streaming -
-                                Servers. <br>
-                                <b>e)</b> Sollte uns wider Erwarten, die vertraglich geschuldete Erbringung eines
-                                Auftrags im Einzelfall nicht möglich sein, so wird der Auftraggeber über die Gründe
-                                unverzüglich in Kenntnis gesetzt. <br/>
-                                <b>f)</b> Der Auftraggeber stellt uns nach Vertragsschluss rechtzeitig alle
-                                erforderlichen Informationen zur Verfügung, welche für die Realisierung des Projekts im
-                                vereinbarten Zeitraum benötigt werden. Wir haften nicht für Verzögerungen oder
-                                Mehraufwand, die durch fehlerhafte oder unzureichende Informationen, von uns nicht zu
-                                vertretende Verzögerungen oder nicht oder nicht vollständig zur Verfügung gestellte
-                                Materialien oder Daten entstanden sind. Wenn die Verzögerung des Projektabschlusses den
-                                Zeitraum der geplanten Projektabwicklung aufgrund verspäteter oder versäumter Lieferung
-                                der benötigten Rohdaten oder Informationen um 10 Werktage überschreitet, behalten wir
-                                uns das Recht vor, das Projekt abzuschließen und laut vorliegendem Angebot zu berechnen.
-                                <br/>
-                                <b>g)</b> Vor der Produktion muss vor Ort eine ausfallsichere und stabile
-                                Internetverbindung sichergestellt werden. BalintMedia haftet nicht für Ausfälle oder
-                                Störungen der Infrastruktur des Auftraggebers oder auf Wunsch des Kunden in das Projekt
-                                einbezogener Dritter. Wir haften auch nicht für Ausfälle der Infrastruktur von etwaig in
-                                die Realisierung des Projektes – insbesondere im Rahmen des von uns bereit gestellten
-                                Streams-&nbsp; einbezogenen Dritten, wie Facebook, Twitter, Instagram, Teamlink,
-                                Facetime, Microsoft Teams, Cisco Webex, Zoom, und vergleichbare Anbieter von
-                                softwarebasierter Videokonferenztechnologie, für deren Nutzung deren eigene
-                                Geschäftsbedingungen ausschließlich im Verhältnis zum Auftraggeber Anwendung finden.
-                                Sieht der Vertrag eine Einbeziehung solcher Drittanbieter vor, ist der Auftraggeber für
-                                die Einhaltung der entsprechenden Vorgaben des Datenschutzrechts im Verhältnis zu
-                                solchen Drittanbietern verantwortlich, etwa im Rahmen einer Auftragsdatenverarbeitung.
-                                Die erforderlichen datenschutzrechtlichen Einwilligungen werden seitens des
-                                Auftragsgebers mit Vertragsschluss erteilt. <br/>
-                                <b>h)</b> Wir haften nicht für entstandene Kosten von Verwertungsgesellschaften (z.B.
-                                Gema), Übertragungsgebühren, Rundfunkverträgen oder sonst. Gebühren.<br/><br/>
-                                <b>4. Preise</b><br/>
-                                <b>a)</b> Unsere Preisangaben verstehen sich in Euro zzgl. der gesetzlichen MwSt. Unsere
-                                kalkulierte Arbeitszeit pro Drehtag beträgt max. 10 Stunden, sofern keine anderweitige
-                                Vereinbarung in Textform getroffen wurde. Der vertraglich vereinbarte Preis umfasst
-                                sämtliche Herstellungskosten, einschließlich einer Masterkopie, und die Einräumung eines
-                                Nutzungsrechts am Filmwerk nach Maßgabe dieser AGB oder einer gesonderten Vereinbarung.
-                                Die von uns in unseren Angeboten angegebenen Preise sind rechtlich bindend und allein
-                                gültig. Preisänderungen können erfolgen, wenn zwischen Vertragsschluss und vereinbartem
-                                Produktionstermin mehr als vier Monate liegen. Der Kunde ist in diesem Fall zum
-                                Rücktritt nur dann berechtigt, wenn die Preiserhöhung 10% des ursprünglich vereinbarten
-                                Preises übersteigt. <br/>
-                                <b>b)</b> Soweit nicht anders vereinbart wird, erfolgt die Bezahlung durch Bankeinzug
-                                nach Erteilung einer entsprechenden Einzugsermächtigung an Balint Media ohne Abzug.
-                                Erfolgt die Auslieferung per Rechnung, ist der Rechnungsbetrag sofort nach
-                                Rechnungserhalt ohne Abzug zur Zahlung fällig. Balint Media ist berechtigt, mit der
-                                Rechnung ein Zahlungsziel zu setzen, bei dessen Nichteinhaltung der Auftraggeber in
-                                Verzug gerät. Bei nicht fristgerechter Zahlung sind wir berechtigt, Verzugszinsen in
-                                Höhe von 8% über dem Basiszinssatz der Europäischen Zentralbank zu verlangen, sofern
-                                nicht ein höherer Schaden nachweisbar ist. Balint Media ist berechtigt, bei
-                                Zahlungseinstellung durch den Auftraggeber oder Eröffnung eines Insolvenzverfahrens über
-                                das Vermögen des Auftraggebers weitere Leistungen von einer angemessenen
-                                Sicherheitsleistung abhängig zu machen, die Balint Media für den gesamten geschuldeten
-                                Betrag absichert und in der von uns angegebenen Frist zu erbringen ist. In einem solchen
-                                Fall sind wir berechtigt, unsere Leistung bis zur Stellung der Sicherheit zu verweigern.
-                                Wird diese Sicherheit nicht in angemessener Form fristgerecht erbracht, ist Balint Media
-                                berechtigt vom Vertrag zurückzutreten. Erhaltene Vorschusszahlungen werden in einem
-                                solchen Fall nicht erstattet.<br/><br/>
-                                <b>5. Drehvorbereitende Maßnahmen; Storyboard oder ähnliches</b><br/>
-                                <b>a)</b> Der Auftraggeber trägt dafür Sorge, dass am Drehort Bedingungen herrschen, die
-                                eine zügige Durchführung der Dreharbeiten zulassen. Wetterbedingte oder sonstige
-                                Verschiebungen seitens des Auftraggebers bzw. Abbrüche des Drehs sind nicht Bestandteil
-                                der von uns kalkulierten Produktionskosten. Aus den genannten Gründen etwaig anfallende
-                                Zusatzkosten werden von uns in Rechnung gestellt. Nichts anderes gilt für etwaig
-                                zusätzlich erforderliche Drehtage, die nicht auf grob fahrlässiges oder vorsätzliches
-                                Verhalten von „Balint Media“ zurückzuführen sind. <br/>
-                                <b>b)</b> Die Erstellung eines Exposès, Konzeptes, Storyboards oder Drehbuchs bedarf
-                                einer gesonderten Vereinbarung, die in den Herstellungskosten des Filmes nicht enthalten
-                                ist. Wird ein Vertrag über die Erstellung eines Exposès, Konzeptes, Storyboards oder
-                                Drehbuchs mit uns abgeschlossen, ist der vereinbarte Preis vom Auftraggeber auch dann zu
-                                entrichten, wenn er das Konzept, Storyboard oder Drehbuch nicht verfilmen lässt, bzw.
-                                vom Auftrag zurücktritt. <br/>
-                                <b>c)</b> Sofern der Auftraggeber ausdrücklich den Abschluss einer bestimmten
-                                Versicherung verlangt, muss er dies uns spätestens bei der Auftragsbestätigung
-                                schriftlich mitteilen. Die Kosten einer solchen Versicherung trägt der Auftraggeber.
-                                <br/>
-                                <b>d)</b> Sollte ein Nachdreh erforderlich sein, dessen Ursachen von uns nicht aufgrund
-                                eines grob fahrlässigen Verschuldens zu vertreten sind, ist die Geltendmachung von
-                                anfallenden Reisekosten oder Verdienstausfall des Auftraggebers sowie weiterer Kosten
-                                ausgeschlossen.<br/><br/>
-                                <b>6. Termine; Fristen</b><br/>
-                                <b>a)</b> Eine Festsetzung von Dreh – oder sonstigen Leistungsterminen sowie von Fristen
-                                bedarf stets der Textform. Die Frist beginnt jeweils mit der Absendung der
-                                Auftragsbestätigung, frühestens jedoch mit der restlosen Klärung aller Einzelheiten der
-                                Produktion sowie der Beibringung der vom Auftraggeber zu beschaffenden
-                                Ausgangsmaterialien, Unterlagen, notwendigen Einzelanweisungen und ggf. erforderlich
-                                werdenden Genehmigungen jeglicher Art. Dies gilt insbesondere, wenn die
-                                Leistungserbringung von Balint Media von Genehmigungen Dritter abhängt. Nachträglich vom
-                                Auftraggeber gewünschte Änderungen unterbrechen die Frist. Diese Frist beginnt nach
-                                Einigung über die gewünschten Änderungen neu zu laufen. Im Falle, dass Balint Media
-                                vereinbarte Termine oder Fristen schuldhaft nicht einhalten, ist der Auftraggeber
-                                berechtigt, vom Vertrag zurückzutreten, sofern er vorher der Balint Media schriftlich
-                                eine angemessene Nachfrist gesetzt hat und diese Nachfrist fruchtlos verstrichen ist.
-                                Liefer- und Leistungsverzögerungen aufgrund höherer Gewalt und aufgrund von Ereignissen,
-                                die der Balint Media die Lieferung wesentlich erschweren oder unmöglich machen, auch
-                                wenn sie bei Lieferanten oder Unterlieferanten von Balint Media eintreten, hat Balint
-                                Media nicht zu vertreten. Sie berechtigen Balint Media die Leistung um die Dauer der
-                                Behinderung zuzüglich einer angemessenen Anlaufzeit hinauszuschieben oder wegen des
-                                nicht erfüllten Teils ganz oder teilweise vom Vertrag zurückzutreten. <br/>
-                                <b>b)</b> Die zwischen Auftraggeber und Balint Media vereinbarten Termine für den
-                                Einsatz von Kamerateams, Seminaren oder anderen Dienstleistungen sind für beide Seiten
-                                verbindlich. Sollte der Auftraggeber einen vereinbarten Termin absagen oder vereinbarte
-                                Dienstleistungen ohne vorherige Absage ganz oder teilweise nicht abnehmen, so kann
-                                Balint Media die vereinbarte Vergütung verlangen. Balint Media muss sich aber dasjenige
-                                anrechnen lassen, was infolge der nicht erbrachten Leistung an Aufwendungen erspart
-                                wird. Diese Regelung gilt nicht, wenn Einsätze von Kamerateams, Seminaren oder
-                                Dienstleistungen unter Wahrung einer vereinbarten Stornierungsfrist abgesagt werden
-                                müssen. Sollte Balint Media aus technischen oder personellen Gründen nicht in der Lage
-                                sein, einen vereinbarten Auftrag fristgerecht auszuführen, wird der Auftraggeber
-                                unverzüglich benachrichtigt.<br/><br/>
-                                <b>7. Herstellung, Abnahme</b><br/>
-                                <b>a)</b> Die Vor- und/oder Dreharbeiten beginnen nach schriftlicher Vereinbarung oder
-                                nach Vereinbarung in Textform.<br/>
-                                <b>b)</b> Stellt der Auftraggeber ein Exposé, Konzept, Storyboard oder Drehbuch oder
-                                bereits bestehende Filmwerke oder Filmszenen zur Verfügung, sind uns die zur weiteren
-                                Bearbeitung erforderlichen Rechte für die Dauer der Herstellung zu übertragen. Der
-                                Auftraggeber versichert, Inhaber der für die Nutzung durch uns erforderlichen Rechte zu
-                                sein. Zu einer darüber hinausgehenden Prüfung der Rechte sind wir nicht verpflichtet.
-                                <br/>
-                                <b>c)</b> Die künstlerische und technische Gestaltung des Filmwerkes obliegt im Rahmen
-                                der Auftragserteilung Balint Media. Wir unterrichten den Auftraggeber bzw. seinen
-                                Bevollmächtigten in geeigneten Fällen über Ort und vorgesehene Abläufe der Vorarbeiten,
-                                Aufnahmen und Nachbearbeitung so zeitig wie möglich und zumutbar. In diesem Zusammenhang
-                                obliegen uns, sofern nicht ausdrücklich etwas anders vereinbart wird, sämtliche
-                                künstlerisch-organisatorischen Tätigkeiten der Filmherstellung. Dazu zählen etwa die
-                                Drehvorbereitung, die Beschaffung des künstlerischen und/oder technischen Personals, von
-                                Moderatoren, Stellung von technischer Ausrüstung (Beleuchtung, Kameras, Film- und
-                                Verbrauchsmaterial) und Requisiten, die Beschaffung etwaig erforderlicher
-                                Dreherlaubnisse, die Durchführung der Dreharbeiten einschließlich etwaiger Interviews,
-                                Redaktion, Schnitt, Farbkorrektur und Programmierung mittels Software sowie
-                                vergleichbaren Leistungen.<br/>
-                                <b>d)</b> Nach Fertigstellung hat der Auftraggeber bzw. sein Bevollmächtigter im
-                                Regelfall vor der Endfertigung des Films die Abnahme einer Sichtungskopie vorzunehmen.
-                                Die Nutzung einer Sichtungskopie – etwa zu Werbezwecken - vor einer ausdrücklichen
-                                Erklärung der Abnahme steht einer Vornahme der Abnahme gleich. Die Sichtungskopie wird
-                                dem Auftraggeber entweder als DVD oder auf einem vergleichbaren Speichermedium zugesandt
-                                oder sie kann online auf einem Server eingesehen und von dort aus gespeichert werden.
-                                Erfolgen keine berechtigten Einwände des Auftraggebers oder seines Bevollmächtigten gilt
-                                die Umsetzung des Konzeptes, Exposés, Storyboards oder Drehbuchs durch den Film als
-                                abgenommen. Änderungen die mit dem bestehenden Filmmaterial (Schnitt, Text, Ton) bei uns
-                                durchgeführt werden können, sind im Angebotspreis bereits enthalten. Darüber hinaus
-                                entstehender Aufwand ist vergütungspflichtig. Dies gilt insbesondere für zusätzlich
-                                erforderliche Drehtage, die gesondert in Rechnung gestellt werden. Sollten seitens des
-                                Auftraggebers nach Abnahme des Werkes Änderungen gewünscht werden, so gehen diese
-                                Änderungen auf Lasten und Kosten des Auftraggebers. Änderungswünsche sind uns
-                                schriftlich oder in Textform mitzuteilen. Wir unterrichten den Auftraggeber bzw. seinen
-                                Bevollmächtigten so schnell wie möglich über die voraussichtlichen Kosten etwaiger
-                                Änderungen, sofern diese möglich und zumutbar sind. <br/>
-                                <b>e)</b> Änderungen am Filmwerk sind ausschließlich von uns vorzunehmen, sofern nichts
-                                anderes schriftlich oder in Textform vereinbart wird. Aus Gründen des Geschmacks oder
-                                eines Nichtgefallens ohne konkrete Darstellung von Mängeln des Werkes darf eine Abnahme
-                                nicht verweigert werden. <br/>
-                                <b>f)</b> Sofern aus künstlerischen, technischen oder sonstigen Gründen hinsichtlich
-                                eines bereits genehmigten Exposés, Konzeptes, Storyboards oder Drehbuchs
-                                Änderungsvorschläge unsererseits erforderlich werden und sollten diese Mehrkosten
-                                gegenüber dem vereinbarten Herstellungspreis verursachen, bedürfen diese der vorherigen
-                                Zustimmung des Auftraggebers bzw. seines Bevollmächtigten. Mehrkosten, die nicht
-                                ausdrücklich genehmigt worden sind, können von uns nicht geltend gemacht werden. Für
-                                Änderungswünsche des Auftraggebers gilt diese Regelung entsprechend. Sollte die
-                                Produktion in einem derartigen Fall nicht durchführbar sein, gilt Nr.5 dieser
-                                Allgemeinen Geschäftsbedingungen entsprechend. <br/>
-                                <b>g)</b> Technische Mängelrügen und Beanstandungen des Auftraggebers müssen
-                                unverzüglich, spätestens innerhalb von fünf Arbeitstagen nach Erhalt der Sichtungskopie
-                                angezeigt werden. Bei begründeten Beanstandungen haben wir das Recht und die Pflicht,
-                                bis zu zwei Nachbesserungsversuche zur Mängelbeseitigung durchzuführen. Sollte der
-                                Mangel danach nicht beseitigt worden sein, kann der Kunde vom Vertrag zurücktreten. Die
-                                seitens des Auftragsgebers eingeräumten Nutzungsrechte verbleiben in diesem Fall bei
-                                uns. Sollten wir auf unsere Vorschläge oder Freigabeersuchen für die beiden
-                                Nachbesserungen keine Rückmeldung seitens des Auftragebers binnen fünf Werktagen
-                                bekommen, gilt der von uns unterbreitete Vorschlag als angenommen. Dies gilt auch im
-                                Falle einer öffentlichen Zugänglichmachung der Sichtungskopie. Erhalten wir auf unsere
-                                Vorschläge oder Freigabeersuchen keinerlei Rückmeldung binnen zehn Werktagen, gilt
-                                unsere Gesamtleistung als mangelfrei erbracht, so dass die vereinbarte Vergütung
-                                spätestens zu diesem Zeitpunkt fällig wird. <br/><br/>
-                                8. Balint Media ist berechtigt, anstelle einer Nachbesserung Ersatz zu liefern, sofern
-                                dies sinnvoll ist. Schlagen zwei Nachbesserungen durch Balint Media fehl, bzw. leistet
-                                sie nicht Ersatz, ist der Auftraggeber berechtigt zu mindern, wenn die gesetzlichen
-                                Voraussetzungen vorliegen. Subjektiver Beurteilung unterliegende Merkmale (z.B. Wirkung,
-                                Stimmung, inhaltliche Umsetzung etc.) und geringfügige Abweichungen vom Original stellen
-                                keinen Mangel dar. Für material- oder produktionsbedingte Schwankungen gelten die
-                                jeweils branchenüblichen Toleranzen. Die Gewährleistungsverpflichtung von Balint Media
-                                erlischt, wenn der Auftraggeber ohne schriftliche Zustimmung von Balint Media Änderungen
-                                oder Instandsetzungsarbeiten an den gelieferten Leistungen und Waren vornimmt oder
-                                vornehmen lässt. <br/><br/>
-                                <b>8. Unterstützungspflicht; Freistellung</b><br/>
-                                <b>a)</b> Der Auftraggeber und Balint Media werden sich bei etwaiger gerichtlicher oder
-                                außergerichtlicher Geltendmachung von Ansprüchen aus den erworbenen Rechten gegenseitig
-                                vertrauensvoll unterstützen und notwendige Auskünfte unter Einschluss der Überlassung
-                                geeigneter Unterlagen erteilen. Dies gilt entsprechend für den Fall einer gerichtlichen
-                                oder außergerichtlichen Inanspruchnahme des Kunden oder Balint Media durch Dritte. <br/>
-                                <b>b)</b> Wenn der Auftraggeber entgegen seiner Erklärung nicht zur Einräumung von
-                                Rechten in der Lage gewesen sein sollte oder berechtigte Ansprüche Dritter gegen Balint
-                                Media und den Auftraggeber aus solchen Rechten bestehen, stellt der Auftraggeber uns von
-                                sämtlichen Ansprüchen einschließlich Schadensersatzansprüchen, Gerichts- und
-                                Anwaltskosten frei, die Dritte gegen uns wegen einer Verletzung ihrer Rechte berechtigt
-                                geltend machen. Dies gilt auch für uns dadurch entstehende, angemessene Kosten der
-                                Rechtsverteidigung und/oder Rechtsverfolgung. <br/><br/>
-                                <b>9. Zahlungen; Versand</b><br/>
-                                <b>a)</b> Alle Rechnungsbeträge sind nach Rechnungserhalt ohne Abzug fällig. Wir
-                                behalten uns das Recht vor, einen angemessen Vorschuss auf die vereinbarte Vergütung in
-                                Höhe von 30 % nach Auftragserteilung oder Vorkasse zu verlangen. <br/>
-                                <b>b)</b> Alle Versendungen und Rücksendungen erfolgen auf Gefahr des Auftraggebers. Die
-                                Gefahr geht auch dann auf den Auftraggeber über, wenn frachtfreie Lieferung vereinbart
-                                ist. Sofern auf Wunsch des Auftraggebers der Versand oder die Zustellung verzögert, geht
-                                die Gefahr vom Bestehen der Versandbereitschaft an, auf den Auftraggeber über.<br/>
-                                <b>c)</b> Der Auftraggeber darf uns gegenüber nur mit unbestrittenen oder rechtskräftig
-                                festgestellten Forderungen aufrechnen.<br/><br/>
-                                <b>10. Übertragung von Nutzungsrechten, Urheber – und Verwertungsrechte</b><br/>
-                                <b>a)</b> Wenn es für die Durchführung der Produktion erforderlich ist, Gegenstände
-                                abzubilden oder vorbestehende Werke zu verwenden, an denen Rechte Dritter oder des
-                                Kunden, insbesondere Urheber- oder Leistungsschutzrechte bzw. entsprechende
-                                Nutzungsrechte bestehen, ist der Kunde verpflichtet, uns auf etwaig bestehende Rechte
-                                Dritter oder des Kunden unter Nennung von Art und Umfang bestehender Rechte hinzuweisen.
-                                Im Übrigen sind sowohl der Kunde als auch wir an gesetzliche Beschränkungen gebunden,
-                                die sich aus geltenden Gesetzen und/oder Rechten Dritter – etwa aus § 59 UrhG oder §§
-                                22, 23 KUG - ergeben können. <br/>
-                                <b>b)</b> Der Auftraggeber versichert, dass entgegenstehende Rechte Dritter entweder
-                                nicht bestehen oder dem Auftraggeber entsprechende Nutzungsrechte übertragen worden
-                                sind, sofern diese Rechte nicht bei einer Verwertungsgesellschaft liegen, worauf seitens
-                                des Auftraggebers bei entsprechender Kenntnis ausdrücklich hinzuweisen ist. Die dem
-                                Auftraggeber zustehenden Rechte werden uns für die Dauer der Durchführung der Produktion
-                                übertragen. Dazu zählen insbesondere die Theaterrechte (Kino-/Vorführungsrecht), die
-                                Videogrammrechte, das Senderecht, das Vervielfältigungs-, Verbreitungs- und
-                                Übermittlungsrecht, das Recht der öffentlichen Zugänglichmachung, das Bearbeitungs- und
-                                Synchronisationsrecht, das Recht zur Werbung und (Teil-)Auswertung, das Drucknebenrecht,
-                                das Tonträgerrecht und das Recht zur Auswertung des Films in interaktiven Formen etc.,
-                                jeweils unter Einschluss derzeit noch unbekannter Nutzungsarten. <br/>
-                                <b>c)</b> Mit der vollständigen Zahlung der vereinbarten Vergütung zum Fälligkeitstermin
-                                erwirbt der Kunde ein nicht ausschließliches, zeitlich und räumlich unbeschränktes
-                                Nutzungsrecht an dem Film für den unmittelbar eigenen Bedarf des Kunden zur
-                                Vervielfältigung, Verbreitung und öffentlichen Zugänglichmachung des Filmes oder von
-                                Ausschnitten daraus, auch in Form von Stand- bzw. Lichtbildern, auf gedrucktem
-                                Werbematerial, auf Datenträgern wie CD, DVD oder USB – Stick, sowie in den Medien des
-                                Internets. Das Original-Filmmaterial verbleibt in unserem Besitz und Eigentum.
-                                Nutzungsrechte – unter Einschluss eines ausschließlichen Nutzungsrechtes - daran, können
-                                durch den Auftraggeber im Rahmen einer gesonderten Vereinbarung erworben werden.<br/>
-                                <b>d)</b> Weder für uns noch für den Auftraggeber besteht eine Verpflichtung den
-                                hergestellten Film auch tatsächlich zu nutzen. Wird der Film seitens des Auftraggebers
-                                nicht genutzt, bleibt unser Vergütungsanspruch davon unberührt. <br/>
-                                <b>e)</b> Der Auftraggeber ist in der Herstellung von Kopien des produzierten Films für
-                                eigene Zwecke im Rahmen des übergebenen Datenformats in keiner Weise beschränkt. Davon
-                                ausgenommen sind die Rechte zur Bearbeitung, Änderung, Ergänzung, fremdsprachigen
-                                Synchronisation, der Verwendung von Ausschnitten in Bild und/oder Ton und der
-                                Formatumwandlung, sofern sie nicht vertraglich ausdrücklich vereinbart und gesondert
-                                abgegolten werden. Erfolgt eine Kopie von DVD zu DVD oder von Blu-Ray Disk auf Blu-Ray
-                                Disk oder auf einem sonstigen Datenträger, so muss ein Copyright-Vermerk für Balint
-                                Media an geeigneter Stelle vorgehalten werden. Dies gilt auch für die Präsentation
-                                unserer Werke im Internet oder im Wege der Nutzung durch mobile Endgeräte.<br/>
-                                <b>f)</b> Der Auftraggeber erklärt sich ausdrücklich damit einverstanden, dass aufgrund
-                                des Vertragsinhaltes etwaig gesetzlichnotwendige Meldungen an Verwertungsgesellschaften
-                                von Balint Media auf Kosten des Auftraggebers vorgenommen werden. Übernimmt der
-                                Auftraggeber die Meldungen selbst, sind Balint Media entsprechende Nachweise auf
-                                Verlangen innerhalb einer angemessener Frist vorzulegen.<br/>
-                                <b>g)</b> Mit der Ablieferung des Filmmasters an den Auftraggeber geht das Risiko für
-                                die Kopierunterlagen auf diesen über. Wir sind berechtigt, unsere Geschäftsbezeichnung
-                                im Film und auf DVD oder einem sonstigen Datenspeicher als Copyrightvermerk zu zeigen.
-                                Darüber hinaus sind wir berechtigt, Kopien des produzierten Films für eigene Werbezwecke
-                                (z.B. auf der Webseite), anlässlich von Wettbewerben und Festivals herzustellen und
-                                diese öffentlich vorführen, sofern keine andere Vereinbarung getroffen wurde. Die
-                                Nennung von Balint Media im Vor – und Abspann des Filmes wird ausdrücklich vereinbart.
-                                Jede Änderung, insbesondere die Nennung weiterer Beteiligter, bedarf der vorherigen
-                                Zustimmung des Auftraggebers. Bei einer Weitergabe der Filmproduktion an Dritte, wird
-                                der Auftraggeber auch für den Fall der Weiterübertragung dem Dritten die Nennungspflicht
-                                auferlegen. <br/>
-                                <b>h)</b> Die Urheberrechte an den von uns im Kundenauftrag erarbeiteten Exposés,
-                                Konzepten, Storyboards, Drehbüchern, Zeichnungen, Plänen und ähnliche Unterlagen
-                                verbleiben in vollem Umfang bei Balint Media, wenn sie im Rahmen der Filmproduktion
-                                keine Verwendung finden oder dafür kein Honorar vereinbart worden sein sollte. Jede
-                                Verwendung, insbesondere die Weitergabe, Vervielfältigung und/oder Veröffentlichung
-                                solcher Materialien bedarf unserer schriftlichen Zustimmung. <br/><br/>
-                                <b>11. Vorzeitige Vertragsauflösung</b><br/>
-                                Kündigt der Auftraggeber nach Auftragserteilung ohne Verschulden seitens „Balint Media“
-                                nach § 648, werden unsererseits 30% des vereinbarten Honorars dem Auftraggeber in
-                                Rechnung gestellt. Kündigt der Auftraggeber nach § 648 a BGB aus wichtigem Grund, hat
-                                Balint Media das Recht, die bis zur Kündigung angefallene Vergütung zu verlangen.
-                                Erfolgt die Vertragsauflösung durch den Kunden in der Zeit nach dem 10. Tag vor
-                                Drehbeginn, sind 40% des vereinbarten Honorars seitens des Auftraggebers zahlbar und
-                                fällig. Erfolgt die Vertragsauflösung nach Drehbeginn, werden dem Auftraggeber 75% des
-                                vereinbarten Honorars in Rechnung gestellt. Sofern die die bereits getätigten
-                                Aufwendungen die jeweilige Summen überschreiten sollten, ist der entsprechende Aufwand
-                                nach entsprechendem Nachweis zu erstatten. Es bleibt dem Auftraggeber unbenommen
-                                nachzuweisen, dass der durch die Kündigung entstandene Ausfall geringer ist. <br/><br/>
-                                <b>12. Eigentumsvorbehalt</b><br/>
-                                Alle unsererseits gelieferten Werke bleiben bis zur vollständigen Bezahlung der
-                                Vergütung Eigentum von Balint Media.<br/><br/>
-                                <b>13. Haftung</b><br/>
-                                <b>a)</b> Für Personenschäden, die uns oder von uns eingesetzten Erfüllungsgehilfen,
-                                zurechenbar sind, haften wir unbeschränkt. Das gleiche gilt für sonstige Schäden, die
-                                dem Auftraggeber infolge einer von uns vorsätzlich oder grob fahrlässig verübten
-                                Pflichtverletzung entstanden sind. Für vertragstypische Schäden, die dem Kunden infolge
-                                einer von uns verübten wesentlichen Vertragsverletzung entstanden sind, haften wir auch
-                                dann, wenn uns lediglich leichte Fahrlässigkeit zur Last fällt. In allen anderen Fällen
-                                ist unsere Haftung für leichte Fahrlässigkeit ausgeschlossen. Eine wesentliche
-                                Vertragspflicht im vorstehend genannten Sinne ist eine solche, deren Erfüllung die
-                                ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren
-                                Einhaltung der Vertragspartner regelmäßig vertraut hat. Die vorstehenden
-                                Haftungsbeschränkungen betreffen nicht Ansprüche des Kunden aus Produkthaftung. <br/>
-                                <b>b)</b> Für die von Balint Media schuldhaft verursachten Verluste, Beschädigungen oder
-                                Löschungen, der an Balint Media zur Bearbeitung übergebenen Materialien, haften wir auf
-                                Wiederherstellung oder Materialersatz, soweit dies technisch möglich ist. Sofern uns die
-                                Wiederherstellung oder Ersetzung nicht möglich ist, haften wir mit Ausnahme eines
-                                Verschuldens wegen grober Fahrlässigkeit oder Vorsatzes in solchen Fällen nur auf den
-                                Materialwert des Trägermaterials vergleichbarer Qualität und Menge.&nbsp; Balint Media
-                                haftet nicht für technische Fehler aufgrund von Installationen und technischen
-                                Leistungen, die durch dritte Anbieter bereitgestellt werden. Wir haften darüberhinaus
-                                generell nicht für technische Störungen, deren Ursachen nicht in unserem
-                                Verantwortungsbereich liegen. Darüber hinaus haften wir auch nicht für Fehler des
-                                Kunden, etwa wenn dieser Streamings, Uploads oder Updates selbst vornimmt sowie
-                                eigenständige Änderungen an den zur Verfügung gestellten Daten vornimmt. Dies gilt auch
-                                für alle Aktivitäten des Kunden, die dieser intern in seinem technischen
-                                Verantwortungsbereich selbst vornimmt oder durch Dritte vornehmen lässt.<br/>
-                                <b>c)</b> Wir liefern unsere Filme auf Datenträgern aus, die zum Zeitpunkt der Übergabe
-                                an den Auftraggeber,die aktuellen technischen Standards erfüllen (BluRay, DVD, CD,
-                                USB-Massenspeichergerät, FTP-Hosting). Die Prüfung der Kompatibilität zum
-                                Wiedergabegerät oder der Wiedergabemöglichkeit bei dem Kunden geht zu dessen Risiko.
-                                Balint Media haftet nicht bei technischen Störungen der Kameraausrüstung. Schadensersatz
-                                durch technische Probleme (z.B. bei Dreharbeiten) leistet Balint Media nur nach eigenem
-                                Ermessen und nur im Rahmen von Wertminderungen. Im Übrigen ist die Haftung von Balint
-                                Media auf grobe Fahrlässigkeit und Vorsatz beschränkt. <br/><br/>
-                                <b>14. Geheimhaltungsvereinbarung</b><br/>
-                                Die Vertragsparteien verwenden alle Unterlagen (Muster, Modelle, Informationen und
-                                Daten) und Kenntnisse, die sie aufgrund der Geschäftsverbindung erhalten, nur für die
-                                gemeinsam verfolgten Zwecke und verpflichten sich zur Verschwiegenheit gegenüber
-                                Dritten, insbesondere gegenüber Endkunden und zur Einhaltung sämtlicher Anforderungen
-                                der Datenschutzgesetze. Dies gilt nicht, wenn die betreffenden Informationen allgemein
-                                bekannt sind oder sie dem Vertragspartner bei Erhalt der Informationen bereits bekannt
-                                waren sowie bei gesetzlichen Verpflichtungen zur Weitergabe an Behörden und Justiz.
-                                <br/><br/>
-                                <b>15. Schlussbestimmung</b><br/>
-                                <b>a)</b> Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des
-                                UN-Kaufrechts (CISG).<br/>
-                                <b>b)</b> Erfüllungsort für unsere Zahlungsansprüche ist Düsseldorf. Der Gerichtsstand
-                                ist Düsseldorf. <br/>
-                                <b>c)</b> Sollten einzelne Bestimmungen dieser Allgemeinen Geschäftsbedingungen ganz
-                                oder teilweise gegen zwingendes Recht verstoßen oder aus anderen Gründen nichtig oder
-                                unwirksam sein, bleibt die Gültigkeit der übrigen Bestimmungen davon unberührt. Die
-                                nichtige oder unwirksame Bestimmung ist durch eine solche zu ersetzen, die dem nach dem
-                                Willen der Parteien wirtschaftlich Gewollten in zulässiger Weise nach den gesetzlichen
-                                Wertungen am nächsten kommt. <br/>
-                                <b>d)</b> Sämtliche Übertragungen von Rechten und Pflichten des Kunden aus dem mit uns
-                                geschlossenen Vertrag bedürfen zu ihrer Wirksamkeit unserer ausdrücklichen schriftlichen
-                                Zustimmung.<br/><br/>
-                                Gültig ab 01.01.2010, mit den später erfolgten Änderungen, Stand: 01.03.2021</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- List -->
-                <div class="row mt-4">
-                    <!-- Title -->
-                    <h5 class="mt-3">Why Study in Canada?</h5>
-
-                    <!-- List item -->
-                    <div class="col-lg-4">
-                        <ul class="list-group list-group-borderless">
-                            <li class="list-group-item h6 fw-normal d-flex"><i
-                                    class="bi bi-patch-check-fill text-success me-2"></i>One of the best places to live
-                                and work
-                            </li>
-                            <li class="list-group-item h6 fw-normal d-flex"><i
-                                    class="bi bi-patch-check-fill text-success me-2"></i>Affordable education & living
-                            </li>
-                            <li class="list-group-item h6 fw-normal d-flex"><i
-                                    class="bi bi-patch-check-fill text-success me-2"></i>20 hrs/week work while Studying
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- List item -->
-                    <div class="col-lg-4">
-                        <ul class="list-group list-group-borderless">
-                            <li class="list-group-item h6 fw-normal d-flex"><i
-                                    class="bi bi-patch-check-fill text-success me-2"></i>Degree recognized all over the
-                                world
-                            </li>
-                            <li class="list-group-item h6 fw-normal d-flex"><i
-                                    class="bi bi-patch-check-fill text-success me-2"></i>Career-oriented specialized
-                                courses
-                            </li>
-                            <li class="list-group-item h6 fw-normal d-flex"><i
-                                    class="bi bi-patch-check-fill text-success me-2"></i>2-year study + 3-year work
-                                permit + PR
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Buttons -->
-                <div class="row mt-4">
-                    <!-- Title -->
-                    <div class="col-12">
-                        <h5 class="mb-3">Top Courses To Study In Canada</h5>
-                        <!-- Button list -->
-                        <ul class="list-inline hstack gap-3 flex-wrap">
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Engineering</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Biomedical</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Visual Arts</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Business
-                                Administration</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Liberal Arts &
-                                Science</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Social
-                                Science</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Health Care</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Intensive
-                                English</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Mathematics</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Computer
-                                Science</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Buttons -->
-                <div class="row mt-4">
-                    <!-- Title -->
-                    <div class="col-12">
-                        <h5 class="mb-3">Top Level Programs</h5>
-                        <!-- Button list -->
-                        <ul class="list-inline hstack gap-3 flex-wrap">
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Advance
-                                Diploma</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Applied
-                                Degree</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">AEC</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Associate
-                                Degree</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Bachelor
-                                Degree</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Certificate</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Diploma</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Doctorate</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">DEC</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Post Graduate</a>
-                            </li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">Master</a></li>
-                            <li class="list-inline-item"><a class="btn btn-light btn-sm mb-0" href="#">University
-                                Transfer</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Table -->
-                <div class="row mt-4">
-                    <div class="col-12">
-                        <div class="table-responsive-md border-0">
-                            <!-- Table START -->
-                            <table class="table table caption-top table-bordered align-middle p-4 mb-0">
-
-                                <!-- Title -->
-                                <caption class="h5 mb-0 bg-primary text-white ps-4 rounded-top">Intake & Deadline
-                                </caption>
-
-                                <!-- Table head -->
-                                <thead class="border-0">
-                                <tr class="border-top-0 table-border-color">
-                                    <th scope="col">Intake</th>
-                                    <th scope="col">Months</th>
-                                    <th scope="col">Deadline</th>
-                                </tr>
-                                </thead>
-
-                                <!-- Table body START -->
-                                <tbody class="border-top-0">
-                                <!-- Table item -->
-                                <tr>
-                                    <!-- Table data -->
-                                    <td><span class="text-body">Winter Semester</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">November / December</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">Jun / July</span></td>
-                                </tr>
-
-                                <!-- Table item -->
-                                <tr>
-                                    <!-- Table data -->
-                                    <td><span class="text-body">Spring Semester</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">January / February</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">August / September</span></td>
-                                </tr>
-
-                                <!-- Table item -->
-                                <tr>
-                                    <!-- Table data -->
-                                    <td><span class="text-body">Summer Semester</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">April / May</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">October / November</span></td>
-                                </tr>
-
-                                <!-- Table item -->
-                                <tr>
-                                    <!-- Table data -->
-                                    <td><span class="text-body">Fall Semester</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">August / September</span></td>
-
-                                    <!-- Table data -->
-                                    <td><span class="text-body">March / April</span></td>
-                                </tr>
-
-                                </tbody>
-                                <!-- Table body END -->
-                            </table>
-                            <!-- Table END -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- University -->
-                <div class="row g-4 mt-4">
-
-                    <h5>Top Universities In Canada</h5>
-
-                    <div class="col-md-6 col-xl-4">
-                        <!-- Card START -->
-                        <div class="card card-body shadow p-4 align-items-start">
-                            <!-- Image -->
-                            <img class="rounded-1 h-60px" src="{% static 'assets/images/client/uni-logo-03.svg' %}"
-                                 alt="university logo">
-
-                            <!-- Title -->
-                            <h5 class="card-title mt-3 mb-0">College of Toronto</h5>
-                            <span>A Public University In Toronto, Canada</span>
-
-                            <!-- Button -->
-                            <a href="index-5.html" class="btn btn-lg btn-link p-0 mt-3 stretched-link"><u>Visit
-                                University</u></a>
-                        </div>
-                        <!-- Card END -->
-                    </div>
-
-                    <div class="col-md-6 col-xl-4">
-                        <!-- Card START -->
-                        <div class="card card-body shadow p-4 align-items-start">
-                            <!-- Image -->
-                            <img class="rounded-1 h-60px" src="{% static 'assets/images/client/uni-logo-01.svg' %}"
-                                 alt="university logo">
-
-                            <!-- Title -->
-                            <h5 class="card-title mt-3 mb-0">Indiana College of - Montreal</h5>
-                            <span>A Public University In Montreal, Canada</span>
-
-                            <!-- Button -->
-                            <a href="index-5.html" class="btn btn-lg btn-link p-0 mt-3 stretched-link"><u>Visit
-                                University</u></a>
-                        </div>
-                        <!-- Card END -->
-                    </div>
-
-                    <div class="col-md-6 col-xl-4">
-                        <!-- Card START -->
-                        <div class="card card-body shadow p-4 align-items-start">
-                            <!-- Image -->
-                            <img class="rounded-1 h-60px" src="{% static 'assets/images/client/uni-logo-02.svg' %}"
-                                 alt="university logo">
-
-                            <!-- Title -->
-                            <h5 class="card-title mt-3 mb-0">University Of British Columbia</h5>
-                            <span>University In Vancouver, Canada</span>
-
-                            <!-- Button -->
-                            <a href="index-5.html" class="btn btn-lg btn-link p-0 mt-3 stretched-link"><u>Visit
-                                University</u></a>
-                        </div>
-                        <!-- Card END -->
-                    </div>
-
-                    <div class="col-md-6 col-xl-4">
-                        <!-- Card START -->
-                        <div class="card card-body shadow p-4 align-items-start">
-                            <!-- Image -->
-                            <img class="rounded-1 h-60px" src="{% static 'assets/images/client/uni-logo-04.svg' %}"
-                                 alt="university logo">
-
-                            <!-- Title -->
-                            <h5 class="card-title mt-3 mb-0">Andeerson Campus</h5>
-                            <span>A Public University In Canada</span>
-
-                            <!-- Button -->
-                            <a href="index-5.html" class="btn btn-lg btn-link p-0 mt-3 stretched-link"><u>Visit
-                                University</u></a>
-                        </div>
-                        <!-- Card END -->
-                    </div>
-                </div>
-
-            </div>
-            </div>
-            </div>
-        </section>
-        <!-- =======================
-        Detail END -->
-
-        <!-- =======================
-        Action Box START-->
-        <section class="pt-0">
-            <div class="container position-relative">
-                <!-- SVG decoration START -->
-                <figure class="position-absolute top-50 start-50 translate-middle ms-2">
-                    <svg>
-                        <path class="fill-white opacity-4"
-                              d="m496 22.999c0 10.493-8.506 18.999-18.999 18.999s-19-8.506-19-18.999 8.507-18.999 19-18.999 18.999 8.506 18.999 18.999z"></path>
-                        <path class="fill-white opacity-4"
-                              d="m775 102.5c0 5.799-4.701 10.5-10.5 10.5-5.798 0-10.499-4.701-10.499-10.5 0-5.798 4.701-10.499 10.499-10.499 5.799 0 10.5 4.701 10.5 10.499z"></path>
-                        <path class="fill-white opacity-4"
-                              d="m192 102c0 6.626-5.373 11.999-12 11.999s-11.999-5.373-11.999-11.999c0-6.628 5.372-12 11.999-12s12 5.372 12 12z"></path>
-                        <path class="fill-white opacity-4"
-                              d="m20.499 10.25c0 5.66-4.589 10.249-10.25 10.249-5.66 0-10.249-4.589-10.249-10.249-0-5.661 4.589-10.25 10.249-10.25 5.661-0 10.25 4.589 10.25 10.25z"></path>
-                    </svg>
-                </figure>
-                <!-- SVG decoration END -->
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="bg-danger p-4 p-sm-5 rounded-3">
-                            <div class="row position-relative">
-                                <!-- Svg decoration -->
-                                <figure class="fill-white opacity-1 position-absolute top-50 start-0 translate-middle-y">
-                                    <svg width="141px" height="141px">
-                                        <path d="M140.520,70.258 C140.520,109.064 109.062,140.519 70.258,140.519 C31.454,140.519 -0.004,109.064 -0.004,70.258 C-0.004,31.455 31.454,-0.003 70.258,-0.003 C109.062,-0.003 140.520,31.455 140.520,70.258 Z"></path>
-                                    </svg>
-                                </figure>
-                                <!-- Action box -->
-                                <div class="col-11 mx-auto position-relative">
-                                    <div class="row align-items-center">
-                                        <!-- Title -->
-                                        <div class="col-lg-7">
-                                            <h3 class="text-white">Not sure where to study?</h3>
-                                            <p class="text-white mb-3 mb-lg-0">Speedily say has suitable disposal add
-                                                boy. On forth doubt miles of child. Exercise joy man children rejoiced.
-                                                Yet uncommonly his ten who diminution astonished.</p>
-                                        </div>
-                                        <!-- Content and input -->
-                                        <div class="col-lg-5 text-lg-end">
-                                            <a href="{% url 'app_pages:contact_us' %}" class="btn btn-warning mb-0">Contact us</a>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xl-8">
+                        <!-- Terms Card -->
+                        <div class="card shadow-sm border-0 overflow-hidden">
+                            <div class="card-header bg-primary text-white py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="h5 mb-0"><i class="bi bi-file-text-fill me-2"></i> General Terms</h2>
+                                    <button class="btn btn-sm btn-outline-light" onclick="window.print()">
+                                        <i class="bi bi-printer me-1"></i> Print
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <!-- Scope -->
+                                <section id="sectionScope" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">1</span>
+                                        <h3 class="h5 fw-bold mb-0">Scope and Applicability</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <p>These Terms and Conditions ("Terms") govern all access to and use of the
+                                            Lingocept® platform ("Platform") by individuals and entities ("Users"),
+                                            including language learners ("Learners") and language professionals
+                                            ("Instructors"). The Platform is operated by Lingocept® and accessible via
+                                            web, mobile apps, and APIs.</p>
+                                        <div class="alert alert-primary-soft mt-3">
+                                            <i class="bi bi-info-circle-fill me-2"></i>
+                                            Use of the Platform constitutes acceptance of these Terms.
                                         </div>
                                     </div>
+                                </section>
+
+                                <!-- Services -->
+                                <section id="sectionServices" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">2</span>
+                                        <h3 class="h5 fw-bold mb-0">Services Offered</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="card border-primary-soft mb-3">
+                                            <div class="card-body">
+                                                <h4 class="h6 text-primary"><i class="bi bi-people-fill me-2"></i>
+                                                    Language Learning Platform</h4>
+                                                <p>Lingocept® offers a mediated marketplace where Learners can book
+                                                    sessions and access educational content. Lingocept® facilitates
+                                                    account creation, scheduling, payment, and communication.</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-primary-soft mb-3">
+                                            <div class="card-body">
+                                                <h4 class="h6 text-primary"><i class="bi bi-box-seam-fill me-2"></i>
+                                                    Proprietary Product</h4>
+                                                <p>Lingocept® provides a proprietary learning product ("Product")
+                                                    including structured digital content and learning frameworks.
+                                                    Purchase grants a personal, non-transferable license.</p>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-warning-soft">
+                                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                            <strong>Role Disclaimer:</strong> Lingocept® is not a party to the contracts
+                                            between Learners and Instructors.
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Eligibility -->
+                                <section id="sectionEligibility" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">3</span>
+                                        <h3 class="h5 fw-bold mb-0">Eligibility and Registration</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <ul class="list-icon">
+                                            <li>Users must be 18+, or 13+ with verifiable parental consent</li>
+                                            <li>Accurate personal and payment data must be submitted</li>
+                                            <li>Each User may register one account per role unless explicitly
+                                                authorized
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+
+                                <!-- Account Security -->
+                                <section id="sectionAccount" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">4</span>
+                                        <h3 class="h5 fw-bold mb-0">Account Security</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <p>Users are responsible for maintaining the confidentiality of login
+                                            credentials. Unauthorized use must be reported immediately.</p>
+                                        <div class="alert alert-danger-soft">
+                                            <i class="bi bi-shield-exclamation me-2"></i>
+                                            Lingocept® reserves the right to suspend or terminate accounts in case of
+                                            violations or fraud.
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- User Conduct -->
+                                <section id="sectionConduct" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">5</span>
+                                        <h3 class="h5 fw-bold mb-0">User Conduct</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <p class="fw-bold text-danger">Strictly prohibited:</p>
+                                        <div class="card border-danger-soft mb-3">
+                                            <div class="card-body">
+                                                <ul class="list-icon">
+                                                    <li>Sharing private contact information before trial completion</li>
+                                                    <li>Circumventing payments or conducting off-platform sessions</li>
+                                                    <li>Sharing or republishing Product content</li>
+                                                    <li>Using bots or scrapers without prior written consent</li>
+                                                    <li>Harassment, discrimination, or unlawful behavior</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p class="text-danger">Violations may result in suspension, termination, or
+                                            legal consequences.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Instructor Obligations -->
+                                <section id="sectionInstructors" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">6</span>
+                                        <h3 class="h5 fw-bold mb-0">Instructor Obligations</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="card border-primary-soft mb-3">
+                                            <div class="card-body">
+                                                <h4 class="h6 text-primary">Basic Requirements</h4>
+                                                <ul class="list-icon">
+                                                    <li>Hold relevant qualifications</li>
+                                                    <li>Maintain truthful and updated profiles</li>
+                                                    <li>Provide lessons professionally and ethically</li>
+                                                    <li>Comply with the Tutor Code of Conduct</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Instructor Code of Conduct -->
+                                        <div class="card border-warning mb-4">
+                                            <div class="card-header bg-warning-soft">
+                                                <h4 class="h6 mb-0"><i class="bi bi-list-check me-2"></i> Code of
+                                                    Conduct and Operational Standards</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <p>To ensure consistent educational quality and learner satisfaction,
+                                                    all Instructors are required to adhere to the following
+                                                    standards:</p>
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i
+                                                                    class="bi bi-person-check text-warning me-2"></i>
+                                                                Professional Standards</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>Appropriate dress and professional behavior</li>
+                                                                <li>Stable internet connection on PC/laptop</li>
+                                                                <li>Quiet, well-lit teaching space</li>
+                                                                <li>Webcam must remain on during sessions</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i class="bi bi-clock text-warning me-2"></i>
+                                                                Operational Requirements</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>Punctuality for all sessions</li>
+                                                                <li>No off-platform engagement</li>
+                                                                <li>Strict privacy and confidentiality</li>
+                                                                <li>Attendance at required training</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="alert alert-danger-soft mt-3">
+                                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                                    <strong>Zero Tolerance:</strong> Any misconduct may result in
+                                                    immediate termination.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Learner Code of Conduct -->
+                                        <div class="card border-info">
+                                            <div class="card-header bg-info-soft">
+                                                <h4 class="h6 mb-0"><i class="bi bi-people-fill me-2"></i> Code of
+                                                    Conduct for Learners</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i
+                                                                    class="bi bi-chat-square-heart text-info me-2"></i>
+                                                                Interaction Standards</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>Treat all with courtesy and respect</li>
+                                                                <li>No abusive or offensive language</li>
+                                                                <li>Camera use as requested</li>
+                                                                <li>Quiet participation environment</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i
+                                                                    class="bi bi-shield-lock text-info me-2"></i>
+                                                                Platform Rules</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>No off-platform contact</li>
+                                                                <li>No session recording without consent</li>
+                                                                <li>No solicitation of unrelated services</li>
+                                                                <li>No impersonation or law violation</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Payment Terms -->
+                                <section id="sectionPayment" class="mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">7</span>
+                                        <h3 class="h5 fw-bold mb-0">Payment Terms</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <div class="card h-100 border-success-soft">
+                                                    <div class="card-body">
+                                                        <h4 class="h6 text-success"><i
+                                                                class="bi bi-person-video2 me-2"></i> Learners</h4>
+                                                        <ul class="small">
+                                                            <li>Subscription or pay-as-you-go credit models</li>
+                                                            <li>Credits valid during billing cycle</li>
+                                                            <li>Pricing in EUR € (incl. VAT)</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card h-100 border-primary-soft">
+                                                    <div class="card-body">
+                                                        <h4 class="h6 text-primary"><i
+                                                                class="bi bi-person-video me-2"></i> Instructors</h4>
+                                                        <ul class="small">
+                                                            <li>70-85% of lesson revenue</li>
+                                                            <li>Commission rates may vary</li>
+                                                            <li>Trial lessons may be unpaid</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- More sections continue with same pattern... -->
+
+                                <!-- Contact -->
+                                <section id="sectionContact">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 28px;">19</span>
+                                        <h3 class="h5 fw-bold mb-0">Contact</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h4 class="h5 text-primary mb-3"><i class="bi bi-headset me-2"></i>
+                                                    Lingocept®</h4>
+                                                <p class="mb-1"><i class="bi bi-globe me-2"></i> www.lingocept.com</p>
+                                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>
+                                                    contact@lingocept.com</p>
+                                                <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Berlin, Germany</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="card-footer bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="small text-muted mb-0">Last updated: July 1, 2025</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-download me-1"></i> Download PDF
+                                    </a>
                                 </div>
-                            </div> <!-- Row END -->
+                            </div>
+                        </div>
+
+                        <!-- Acceptance Section -->
+                        <div class="card shadow-sm border-primary mt-4">
+                            <div class="card-body text-center">
+                                <h3 class="h5 mb-3">Acceptance of Terms</h3>
+                                <p class="mb-4">By using our platform, you acknowledge that you have read and agree to
+                                    these Terms and Conditions.</p>
+                                <div class="d-flex justify-content-center gap-3">
+                                    <a href="{% url 'app_pages:home' %}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-left me-1"></i> Back to Home
+                                    </a>
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#acceptTermsModal">
+                                        <i class="bi bi-check-circle-fill me-1"></i> I Accept
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> <!-- Row END -->
+                </div>
             </div>
         </section>
         <!-- =======================
-        Action Box END-->
-
+        Content END -->
     </main>
+
     <!-- **************** MAIN CONTENT END **************** -->
 {% endblock %}
