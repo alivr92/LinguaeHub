@@ -700,3 +700,52 @@ class UserSocial(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+
+class UserConsentLog(models.Model):
+    CONSENT_TYPE_CHOICES = [
+        ('terms', 'Terms of Service'),
+        ('privacy', 'Privacy Policy'),
+        ('nda', 'Instructor NDA'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='consent_logs')
+    consent_type = models.CharField(max_length=20, choices=CONSENT_TYPE_CHOICES)
+    consent_version = models.CharField(max_length=20, help_text="Version ID of legal document (e.g. v1.2)")
+    agreed = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    ip_address = models.GenericIPAddressField()
+    user_agent = models.TextField(blank=True, null=True)
+    location_city = models.CharField(max_length=100, blank=True, null=True)
+    location_country = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = "User Consent Log"
+        verbose_name_plural = "User Consent Logs"
+
+    def __str__(self):
+        return f"{self.user} | {self.consent_type} | {self.consent_version} | {self.timestamp}"
+
+
+class LoginIPLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='loginIPLogs')
+    ip_address = models.GenericIPAddressField()
+    user_agent = models.TextField(blank=True, null=True)
+    login_time = models.DateTimeField(auto_now_add=True)
+
+    location_city = models.CharField(max_length=100, blank=True, null=True)
+    location_country = models.CharField(max_length=100, blank=True, null=True)
+
+    is_new_ip = models.BooleanField(default=False)
+    is_flagged = models.BooleanField(default=False, help_text="Manually or automatically flagged as suspicious")
+
+    class Meta:
+        ordering = ['-login_time']
+        verbose_name = "Login IP Log"
+        verbose_name_plural = "Login IP Logs"
+
+    def __str__(self):
+        return f"{self.user} | {self.ip_address} | {self.login_time}"

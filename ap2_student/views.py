@@ -25,13 +25,14 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_POST
 
-
 logger = logging.getLogger(__name__)
+
 
 # DASHBOARD STUDENT ---------------------------------------------------------------------------------------------
 
 
-class ActivationRequiredView(LoginRequiredMixin, TemplateView):
+class ActivationRequiredView(LoginRequiredMixin, RoleRequiredMixin, TemplateView):
+    allowed_roles = ['student']
     template_name = 'ap2_student/dashboard/activation_required2.html'
 
     @method_decorator(never_cache)
@@ -59,6 +60,8 @@ class ActivationRequiredView(LoginRequiredMixin, TemplateView):
         if cooldown_until:
             return cooldown_until - timezone.now()
         return None
+
+
 class ActivationRequiredView111(LoginRequiredMixin, TemplateView):
     template_name = 'ap2_student/dashboard/activation_required.html'
 
@@ -152,8 +155,6 @@ class DSHome(LoginRequiredMixin, RoleRequiredMixin, TemplateView):
                 return redirect('student:activation_required')
 
         return super().dispatch(request, *args, **kwargs)
-
-
 
 
 class DSHome111(LoginRequiredMixin, RoleRequiredMixin, TemplateView):

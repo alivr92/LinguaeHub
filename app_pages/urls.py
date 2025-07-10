@@ -18,7 +18,7 @@ urlpatterns = [
     path('help-center/', views.HelpCenter.as_view(), name='help_center'),
     path('coming-soon/', views.ComingSoon.as_view(), name='coming_soon'),
     path('pricing/', views.Pricing.as_view(), name='pricing'),
-    path('impressum/', views.Impressum.as_view(), name='impressum'),
+    path('imprint/', views.Imprint.as_view(), name='imprint'),
     # path('services/', views.services, name='services'),
     # path('dashboard/', views.dashboard, name='dashboard'),
 

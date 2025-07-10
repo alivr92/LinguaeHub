@@ -192,3 +192,15 @@ def send_activation_email(request, user, activation_url):
         context=context,
         to_email=[user.email]
     )
+
+
+def send_security_alert(user, ip, timestamp):
+    subject = "Security Alert: New Login Detected"
+    message = (
+        f"Dear {user.username},\n\n"
+        f"A login was detected from a new IP address:\n\n"
+        f"IP: {ip}\nTime: {timestamp}\n\n"
+        f"If this was not you, please reset your password immediately.\n\n"
+        f"– Security Team"
+    )
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])

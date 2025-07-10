@@ -1,5 +1,5 @@
 <!-- Profile form START -->
-<form id="profileForm" action="{% url 'tutor:submit_form_profile' %}"
+<form id="profileForm" action="{% url 'tutor:submit_profile' %}"
       class="row g-4 needs-validation" method="POST" enctype="multipart/form-data"
       novalidate>
     {% csrf_token %}

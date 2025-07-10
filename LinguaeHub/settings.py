@@ -211,9 +211,15 @@ EMAIL_SUPPORT = env.str('EMAIL_SUPPORT')  # to inform people to know how contact
 RECAPTCHA_PUBLIC_KEY = env.str('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = env.str('RECAPTCHA_PRIVATE_KEY')
 
+# Activation user accounts by Email
 ACTIVATION_MAX_ATTEMPTS = 3  # Max resend attempts per hour
 ACTIVATION_COOLDOWN = 10  # 2 minutes base cooldown (in seconds)
 ACTIVATION_TOKEN_LIFETIME = 86400  # 24 hours (in seconds)
+
+# Track user IPs for production
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 SITE_NAME = 'Lingocept'
 COMPANY_ADDRESS = env.str('COMPANY_ADDRESS')

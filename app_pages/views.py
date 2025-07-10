@@ -47,8 +47,8 @@ class Pricing(TemplateView):
     template_name = 'app_pages/pricing.html'
 
 
-class Impressum(TemplateView):
-    template_name = 'app_pages/impressum.html'
+class Imprint(TemplateView):
+    template_name = 'app_pages/imprint.html'
 
 
 class ContactUs(FormView):

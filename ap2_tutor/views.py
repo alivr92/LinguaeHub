@@ -1486,7 +1486,7 @@ def save_educations(request):
 
 @require_POST
 @csrf_exempt
-def submit_form_profile(request):
+def submit_profile(request):
     user = request.user
     try:
         user_profile = UserProfile.objects.get(user=user)
@@ -1682,6 +1682,15 @@ def wizard_submit_final(request):
             form.save()
             applicant = ProviderApplication.objects.get(user=request.user)
             applicant.status = 'decision'
+
+            # Get and store the applicant's IP address
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                ip = x_forwarded_for.split(',')[0]
+            else:
+                ip = request.META.get('REMOTE_ADDR')
+            applicant.location_ip = ip
+
             applicant.save()
             return redirect('tutor:dt_wizard')
     else:

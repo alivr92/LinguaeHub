@@ -1,5 +1,5 @@
 <!-- Profile form START -->
-{#<form id="profileForm" class="row g-4 needs-validation" method="POST" action="{% url 'tutor:submit_form_profile' %}"#}
+{#<form id="profileForm" class="row g-4 needs-validation" method="POST" action="{% url 'tutor:submit_profile' %}"#}
 {#      enctype="multipart/form-data" novalidate>#}
 {#    {% csrf_token %}#}
 {#    <input type="hidden" name="profile_form">#}
@@ -249,7 +249,7 @@
     </div>
 
     <!-- Form Container -->
-    <form id="profileForm" class="needs-validation" method="POST" action="{% url 'tutor:submit_form_profile' %}"
+    <form id="profileForm" class="needs-validation" method="POST" action="{% url 'tutor:submit_profile' %}"
           enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         <input type="hidden" name="profile_form">

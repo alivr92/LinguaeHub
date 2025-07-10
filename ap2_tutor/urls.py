@@ -31,7 +31,7 @@ urlpatterns = [
     path('wizard/submit/', views.SuccessSubmit.as_view(), name='success_submit'),
 
     # ---------------------- functions -------------------------------------------------------
-    path('wizard/submit-profile/', views.submit_form_profile, name='submit_form_profile'),
+    path('wizard/submit-profile/', views.submit_profile, name='submit_profile'),
     path('wizard/submit-form-skill/', views.submit_form_skill, name='submit_form_skill'),
     path('wizard/submit-edu/', views.submit_edu, name='submit_edu'),
     path('wizard/submit-final/', views.wizard_submit_final, name='wizard_submit_final'),

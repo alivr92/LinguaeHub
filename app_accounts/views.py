@@ -8,7 +8,7 @@ from django.contrib.auth.models import User, Group
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.utils.crypto import get_random_string
-from app_accounts.models import UserProfile
+from app_accounts.models import UserProfile, UserConsentLog, LoginIPLog
 from ap2_tutor.models import Tutor, ProviderApplication
 from ap2_student.models import Student
 from app_staff.models import Staff
@@ -17,6 +17,7 @@ from django.views.generic import View, CreateView, ListView, TemplateView
 from .forms import RegistrationForm
 from utils.pages import error_page
 from utils.email import send_activation_email
+from utils.trackers import get_client_ip, get_geo_data
 from django.db import transaction
 
 
@@ -35,6 +36,7 @@ class SignInView(View):
         if user is not None:
             login(request, user)
             messages.success(request, "You are successfully logged in. Welcome!")
+            log_user_login(request, user)
             return redirect('accounts:dashboard')
         else:
             messages.error(request, 'Invalid login credentials!')
@@ -148,6 +150,10 @@ class RegistrationMixin:
                 profile.terms_agreed_date = timezone.now()
                 profile.email_consent = form.cleaned_data['email_consent']
                 profile.email_consent_date = timezone.now() if form.cleaned_data['email_consent'] else None
+
+                # Get and store the user's IP address
+                save_user_consent(self.request, user, 'terms', 'v1.2')
+
                 profile.save()
 
                 # Rest of your role-specific logic...
@@ -166,7 +172,7 @@ class RegistrationMixin:
                     # Send acceptance email with registration link
                     send_activation_email(self.request, user, activation_url)
 
-                    
+
                 elif self.user_type == 'tutor':
                     Tutor.objects.get_or_create(profile=profile)
                     if hasattr(self, 'applicant'):
@@ -339,10 +345,6 @@ def dashboard(request):
         return redirect('accounts:ds_home')
 
 
-
-
-
-
 @login_required
 def dashboardEdit(request, pk):
     if not request.user.is_authenticated:
@@ -361,4 +363,40 @@ def dashboardEdit(request, pk):
         # Redirect to a default page or handle unauthenticated roles
         return redirect('student:ds_edit', pk)
 
+
 # finally Here MUST CHECK FOR JUST TUTOR ACCESS NOT OTHERS!!!!
+
+
+def save_user_consent(request, user, consent_type, version):
+    ip = get_client_ip(request)
+    geo = get_geo_data(ip)
+    agent = request.META.get('HTTP_USER_AGENT', '')
+
+    UserConsentLog.objects.create(
+        user=user,
+        consent_type=consent_type,
+        consent_version=version,
+        agreed=True,
+        ip_address=ip,
+        user_agent=agent,
+        location_city=geo['city'],
+        location_country=geo['country']
+    )
+
+
+def log_user_login(request, user):
+    ip = get_client_ip(request)
+    geo = get_geo_data(ip)
+    agent = request.META.get('HTTP_USER_AGENT', '')
+
+    is_new_ip = not LoginIPLog.objects.filter(user=user, ip_address=ip).exists()
+
+    LoginIPLog.objects.create(
+        user=user,
+        ip_address=ip,
+        user_agent=agent,
+        location_city=geo['city'],
+        location_country=geo['country'],
+        is_new_ip=is_new_ip,
+        is_flagged=is_new_ip  # You could add logic here to auto-flag or notify
+    )

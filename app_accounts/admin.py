@@ -1,6 +1,6 @@
 from django.contrib import admin
 from app_accounts.models import (UserProfile, Language, UserSkill, Level, SkillCategory, Skill, UserSpecialization,
-                                 UserEducation, DegreeLevel)
+                                 UserEducation, DegreeLevel, LoginIPLog, UserConsentLog)
 from django.utils.html import format_html
 
 
@@ -83,3 +83,39 @@ class UserSpecializationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
+
+
+@admin.register(LoginIPLog)
+class LoginIPLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'user', 'ip_address', 'location_city', 'location_country',
+        'login_time', 'is_new_ip', 'is_flagged'
+    )
+    list_filter = ('is_flagged', 'is_new_ip', 'location_country')
+    search_fields = ('user__username', 'ip_address')
+    readonly_fields = ('user', 'ip_address', 'login_time', 'location_city', 'location_country')
+
+    actions = ['mark_as_safe', 'send_alert_email']
+
+    def mark_as_safe(self, request, queryset):
+        updated = queryset.update(is_flagged=False)
+        self.message_user(request, f"{updated} entries marked as safe.")
+
+    def send_alert_email(self, request, queryset):
+        for log in queryset:
+            # Integrate with your email utility
+            # send_security_alert(log.user, log.ip_address, log.login_time)
+            self.message_user(request, f"Alert would be sent to {log.user.email} (IP: {log.ip_address})")
+
+    send_alert_email.short_description = "Send email alerts to selected users"
+
+
+@admin.register(UserConsentLog)
+class UserConsentLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'user', 'consent_type', 'consent_version',
+        'timestamp', 'ip_address', 'location_country'
+    )
+    list_filter = ('consent_type', 'consent_version', 'location_country')
+    search_fields = ('user__username', 'ip_address', 'consent_type')
+    readonly_fields = ('user', 'consent_type', 'timestamp', 'ip_address')
