@@ -1,0 +1,345 @@
+{% extends 'ap2_student/dashboard/dc_base.html' %}
+{% load static %}
+{% load meeting_custom_filters %}
+
+{% block dashboard_main_content %}
+    <!-- Main content START -->
+    <div class="col-xl-9">
+
+
+        <div class="card bg-transparent border rounded-3">
+            <!-- Card header START -->
+            <div class="card-header bg-transparent border-bottom">
+                <h3 class="mb-0">My Classes</h3>
+            </div>
+            <!-- Card header END -->
+
+            <!-- Card body START -->
+            <div class="card-body">
+
+                <!-- Search and select START -->
+                <div class="row g-3 align-items-center justify-content-between mb-4">
+                    <!-- Content -->
+                    <div class="col-md-8">
+                        <form class="rounded position-relative">
+                            <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search"
+                                   aria-label="Search">
+                            <button
+                                    class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
+                                    type="submit">
+                                <i class="fas fa-search fs-6 "></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Select option -->
+                    <div class="col-md-3">
+                        <!-- Short by filter -->
+                        <form>
+                            <select class="form-select js-choice border-0 z-index-9 bg-transparent"
+                                    aria-label=".form-select-sm">
+                                <option value="">Sort by</option>
+                                <option>Free</option>
+                                <option>Newest</option>
+                                <option>Most popular</option>
+                                <option>Most Viewed</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <!-- Search and select END -->
+
+                <!-- Course list table START -->
+                <div class="table-responsive border-0">
+                    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                        <!-- Table head -->
+                        <thead>
+                        <tr>
+                            <th scope="col" class="border-0 rounded-start">Tutor</th>
+                            <th scope="col" class="border-0">Title</th>
+                            <th scope="col" class="border-0">Class ID</th>
+                            <th scope="col" class="border-0">Start date</th>
+                            <th scope="col" class="border-0 rounded-end">Status</th>
+                            <th scope="col" class="border-0 rounded-end">Action</th>
+                        </tr>
+                        </thead>
+
+                        <!-- Table body START -->
+                        <tbody>
+
+
+                        {% for session in session_list %}
+                            <!-- Table item -->
+                            <tr>
+                                <!-- Table data -->
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <!-- Image -->
+                                        <div class="w-100px">
+                                            <img src="{{ session.provider.profile.photo.url }}" class="rounded" alt="">
+                                        </div>
+                                        <div class="mb-0 ms-2">
+                                            <!-- Title -->
+                                            <h6><a
+                                                    href="{% url 'provider:tutor_detail' session.provider.pk %}">{{ session.provider.profile.user.first_name }} {{ session.provider.profile.user.last_name }}</a>
+                                            </h6>
+                                            <!-- Info -->
+                                            {#                                            <div class="overflow-hidden">#}
+                                            {#                                                <h6 class="mb-0 text-end">6 days left</h6>#}
+                                            {#                                                <div class="progress progress-sm bg-primary bg-opacity-10">#}
+                                            {#                                                    <div class="progress-bar bg-primary aos" role="progressbar"#}
+                                            {#                                                         data-aos="slide-left"#}
+                                            {#                                                         data-aos-delay="200" data-aos-duration="1000"#}
+                                            {#                                                         data-aos-easing="ease-in-out"#}
+                                            {#                                                         style="width: 60%" aria-valuenow="6" aria-valuemin="0"#}
+                                            {#                                                         aria-valuemax="10">#}
+                                            {#                                                    </div>#}
+                                            {#                                                </div>#}
+                                            {#                                            </div>#}
+
+                                            <div class="overflow-hidden">
+                                                <h6 class="mb-0 text-end">
+
+                                                    {% if not session.is_upcoming %}
+                                                        <span class="badge bg-success bg-opacity-15 text-success">Completed session</span>
+
+                                                    {% elif session.time_left_days > max_days %}
+                                                        <span class="text-secondary"> >{{ max_days }} days left</span>
+{#                                                        <span>More than {{ max_days }} days left</span>#}
+                                                    {% else %}
+                                                        {% if session.time_left_days > 0 %}
+                                                            {{ session.time_left_days }} day
+                                                            {{ session.time_left_days|pluralize }} left
+                                                        {% elif session.time_left_hours > 0 %}
+                                                            {{ session.time_left_hours }} hour
+                                                            {{ session.time_left_hours|pluralize }} left
+                                                        {% else %}
+                                                            Starting soon
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </h6>
+                                                {% if session.time_left_days >= 0 %}
+                                                    <!-- Check if time_left_days exists and is valid -->
+                                                    <div class="progress progress-sm bg-primary bg-opacity-10">
+                                                        <div class="progress-bar bg-primary aos" role="progressbar"
+                                                             data-aos="slide-left"
+                                                             data-aos-delay="200" data-aos-duration="1000"
+                                                             data-aos-easing="ease-in-out"
+                                                             style="width: {% if session.time_left_days > max_days %}100{% else %}{{ session.progress_percent|default:0 }}{% endif %}%"
+                                                             aria-valuenow="{% if session.time_left_days > max_days %}100{% else %}{{ session.progress_percent|default:0 }}{% endif %}"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100">
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <!-- Class title -->
+                                <td>{{ session.subject }}</td>
+
+                                <!-- Class ID -->
+                                <td>{{ session.appointment_id }}</td>
+
+                                <!-- start_session_utc -->
+                                <td>{{ session.start_session_utc }}</td>
+
+                                <!-- status -->
+                                <td>{{ session.status }}</td>
+
+                                <!-- Action -->
+                                <td>
+
+                                    {% if session.status == 'finished' %}
+                                        {% with session.reviews.all|first as review %}
+                                            {% if review %}
+                                                {% if review.is_published %}
+                                                    <span class="badge bg-success bg-opacity-15 text-success me-1 mb-1 mb-md-0">Feedback published</span>
+                                                {% else %}
+                                                    <span class="badge bg-warning bg-opacity-15 text-warning me-1 mb-1 mb-md-0">Feedback under review</span>
+                                                {% endif %}
+                                            {% else %}
+                                                <button type="button"
+                                                        class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"
+                                                        data-bs-toggle="modal" data-bs-target="#comment"
+                                                        data-session-id="{{ session.id }}"
+                                                        data-provider-id="{{ session.provider.id }}"
+                                                        data-client-id="{{ request.user.profile.client_profile.id }}">
+                                                    Comment
+                                                </button>
+                                            {% endif %}
+                                        {% endwith %}
+                                    {% else %}
+                                        <button type="button" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"
+                                                disabled>Comment
+                                        </button>
+                                    {% endif %}
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        <!-- Table body END -->
+                    </table>
+                </div>
+                <!-- Course list table END -->
+
+                <!-- Pagination START -->
+                <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+                    <!-- Content -->
+                    <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }}
+                        to {{ page_obj.end_index }}
+                        of {{ page_obj.paginator.count }} entries</p>
+
+                    <!-- Pagination START -->
+                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?page={{ page_obj.previous_page_number }}"
+                                                                  tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i
+                                            class="fas fa-angle-left" style="color: #d3d3d3;"></i></a></li>
+                                {% endif %}
+
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                        {% if p == page_obj.number %}
+                                            <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item mb-0"><a class="page-link"
+                                                                          href="?page={{ p }}">{{ p }}</a></li>
+                                        {% endif %}
+                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                        <li class="page-item mb-0"><a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                                        </li>
+                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                        <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?page={{ page_obj.next_page_number }}"><i
+                                            class="fas fa-angle-right"></i></a></li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i
+                                            class="fas fa-angle-right"
+                                            style="color: #d3d3d3;"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                    <!-- Pagination END -->
+
+
+                </div>
+                <!-- Pagination 1 END -->
+
+
+            </div>
+            <!-- Card body START -->
+        </div>
+        <!-- Main content END -->
+
+    </div>
+
+    <!-- Popup modal for Post Comment and do rating START -->
+    <div class="modal fade" id="comment" tabindex="-1" aria-labelledby="commentLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-white" id="commentLabel">Session Comment</h5>
+                    <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="reviewForm" class="row text-start g-3" action="{% url 'client:dc_class_list' %}"
+                          method="POST">
+                        {% csrf_token %}
+                        <!-- Hidden fields for providerId, clientId, and sessionId -->
+                        <input type="hidden" id="providerId" name="providerId" value="">
+                        <input type="hidden" id="clientId" name="clientId" value="">
+                        <input type="hidden" id="sessionId" name="sessionId" value="">
+
+                        <!-- label -->
+                        <div class="col-12 text-center">
+                            <label class="form-label"><h4>Leave a comment here</h4></label>
+                        </div>
+                        <!-- label -->
+                        <div class="col-6 ">
+                            <label class="form-label my-2">Rate your teacher</label>
+                        </div>
+                        <!-- Rating -->
+                        <div class="col-6">
+                            <select id="rate_tutor" name="rate_tutor" required class="form-select js-choice">
+                                <option value="5">★★★★★ (5/5)</option>
+                                <option value="4">★★★★☆ (4/5)</option>
+                                <option value="3">★★★☆☆ (3/5)</option>
+                                <option value="2">★★☆☆☆ (2/5)</option>
+                                <option value="1">★☆☆☆☆ (1/5)</option>
+                            </select>
+                        </div>
+                        <!-- label -->
+                        <div class="col-6">
+                            <label class="form-label my-2">Rate your session</label>
+                        </div>
+                        <!-- Rating -->
+                        <div class="col-6">
+                            <select id="rate_session" name="rate_session" required class="form-select js-choice">
+                                <option value="5">★★★★★ (5/5)</option>
+                                <option value="4">★★★★☆ (4/5)</option>
+                                <option value="3">★★★☆☆ (3/5)</option>
+                                <option value="2">★★☆☆☆ (2/5)</option>
+                                <option value="1">★☆☆☆☆ (1/5)</option>
+                            </select>
+                        </div>
+                        <!-- Message -->
+                        <div class="col-12">
+                            <textarea class="form-control" id="msg" name="msg" placeholder="Your review"
+                                      rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="submit" form="reviewForm" class="btn btn-primary my-0">Post Review</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup modal for Post Comment and do rating END -->
+
+
+{% endblock %}
+{% block my_scripts %}
+    <!-- Popup modal script START -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const commentButtons = document.querySelectorAll('[data-bs-target="#comment"]');
+            commentButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const sessionId = button.getAttribute('data-session-id');
+                    const providerId = button.getAttribute('data-provider-id');
+                    const clientId = button.getAttribute('data-client-id');
+
+                    // Set hidden field values
+                    document.getElementById('providerId').value = providerId;
+                    document.getElementById('clientId').value = clientId;
+                    document.getElementById('sessionId').value = sessionId;
+                });
+            });
+        });
+    </script>
+    <!-- Popup modal script END -->
+{% endblock %}

@@ -1,0 +1,19 @@
+Subject: Application Status – {{ site_name }}
+
+Dear {{ full_name }},
+
+Thank you for submitting your application to become a tutor at {{ site_name }}.
+
+After a thorough review of your submitted video(s) and certificate(s), we regret to inform you that we are unable to approve your application at this time.
+
+{% if reviewer_comment %}
+Reviewer’s Note:
+“{{ reviewer_comment }}”
+{% endif %}
+
+We sincerely appreciate your interest and encourage you to apply again in the future after refining your materials.
+
+Wishing you every success in your professional journey.
+
+Kind regards,
+The {{ site_name }} Team

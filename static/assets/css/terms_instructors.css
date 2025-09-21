@@ -1,0 +1,56 @@
+/* Custom list styling */
+.list-icon {
+    list-style-type: none;
+    padding-left: 0;
+}
+.list-icon li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.list-icon li:before {
+    content: "•";
+    color: var(--bs-primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Document styling */
+.document-container {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Navigation styling */
+#termsTOC .nav-link {
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    padding-left: 0.5rem;
+    margin-left: -0.5rem;
+}
+#termsTOC .nav-link:hover,
+#termsTOC .nav-link:focus,
+#termsTOC .nav-link.active {
+    color: var(--bs-primary) !important;
+    border-left: 2px solid var(--bs-primary);
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* Dark mode styles */
+.modal-content.dark-mode {
+    background-color: #1a1a1a;
+    color: #f8f9fa;
+}
+.modal-content.dark-mode .card,
+.modal-content.dark-mode .bg-light {
+    background-color: #2d2d2d !important;
+    color: #f8f9fa;
+}
+.modal-content.dark-mode .text-muted {
+    color: #adb5bd !important;
+}
+.modal-content.dark-mode .border-end,
+.modal-content.dark-mode .border-top {
+    border-color: #444 !important;
+}

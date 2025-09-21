@@ -1,0 +1,118 @@
+{% load static %}
+<!-- Photo Guidelines Modal -->
+<div class="modal fade" id="photoGuidelinesModal" tabindex="-1" aria-labelledby="photoGuidelinesModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="photoGuidelinesModalLabel"><i class="bi bi-camera me-2"></i>Profile
+                    Photo Guidelines</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info bg-light border-0">
+                    <div class="d-flex">
+                        <i class="bi bi-lightbulb-fill text-warning me-3 mt-1"></i>
+                        <div>
+                            <p class="mb-1"><strong>A great profile photo helps you attract more students</strong>
+                            </p>
+                            <p class="mb-0">Students are 5x more likely to choose tutors with professional, friendly
+                                profile photos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-check-circle-fill text-success me-2"></i>Do:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Use a clear, high-resolution headshot (shoulders up)</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Smile and maintain eye contact with the camera</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Use even, natural lighting (face clearly visible)</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Choose a simple, uncluttered background</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-check me-2 mt-1"></i>
+                                <span>Wear professional or culturally appropriate attire</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-x-circle-fill text-danger me-2"></i>Don't:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Use group photos or photos with other people</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Upload blurry, pixelated, or low-quality images</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Use heavy filters or extreme editing</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Include hats or sunglasses that obscure your face</span>
+                            </li>
+                            <li class="mb-2 d-flex">
+                                <i class="bi bi-x me-2 mt-1"></i>
+                                <span>Use inappropriate or unprofessional content</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-bold"><i class="bi bi-image me-2"></i>Photo Examples:</h6>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="border p-2 text-center bg-light rounded">
+                                    <img src="{% static 'assets/images/avatar/profile_good.png' %}"
+                                         class="img-fluid mb-2" alt="Good example">
+                                    <small class="text-success d-block">Recommended</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="border p-2 text-center bg-light rounded">
+                                    <img src="{% static 'assets/images/avatar/profile_bad.png' %}"
+                                         class="img-fluid mb-2" alt="Bad example">
+                                    <small class="text-danger d-block">Not Recommended</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="fw-bold"><i class="bi bi-gear me-2"></i>Technical Requirements:</h6>
+                        <ul class="list-inline mb-3">
+                            <li class="list-inline-item badge bg-light text-dark me-2">JPG or PNG</li>
+                            <li class="list-inline-item badge bg-light text-dark me-2">Max 5MB</li>
+                            <li class="list-inline-item badge bg-light text-dark">Square aspect ratio</li>
+                        </ul>
+
+                        <h6 class="fw-bold mt-3"><i class="bi bi-shield-check me-2"></i>Content Policy:</h6>
+                        <p class="small text-muted">Photos must comply with our community guidelines. We reserve the
+                            right to remove inappropriate content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                {#                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>#}
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1404 @@
+{% extends 'app_admin/dashboard/da_base.html' %}
+{% load static %}
+
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/glightbox/css/glightbox.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+{% endblock %}
+{% block popup_style %}
+    <style>
+        .skill-select {
+            min-width: 150px;
+        }
+
+        .level-select {
+            min-width: 100px;
+        }
+
+        .remove-skill {
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+{% endblock %}
+
+{% block admin_main_content %}
+    <!-- Page main content START -->
+    <div class="page-content-wrapper border">
+
+        <!-- Title -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <h1 class="h3 mb-2 mb-sm-0">Tutor Requests</h1>
+            </div>
+        </div>
+
+        <!-- Main card START -->
+        <div class="card bg-transparent border">
+
+            <!-- Card header START -->
+            <div class="card-header bg-light border-bottom">
+                <!-- Search and select START -->
+                {#                <div class="row g-3 align-items-center justify-content-between">#}
+                <form class="row g-3 align-items-center d-flex ">
+                    <!-- Search bar -->
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 rounded position-relative mb-1">
+                        <input class="form-control bg-body" type="search" placeholder="Search"
+                               name="search" value="{% if current_search %}{{ current_search }}{% endif %}">
+                        {#                            <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"#}
+                        {#                                    type="submit">#}
+                        {#                                <i class="fas fa-search fs-6 "></i>#}
+                        {#                            </button>#}
+                    </div>
+
+                    <!-- Status option -->
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 mb-1">
+                        <!-- Sort by Status -->
+                        <select name="status" class="form-select js-choice border-0 z-index-9 bg-transparent"
+                                aria-label=".form-select-sm">
+                            <option value="">Status</option>
+                            <option value="all">All Statuses</option>
+                            {% for value, label in status_choices %}
+                                <option value="{{ value }}" {% if current_status == value %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Ordering option -->
+                    <div class="col-12 col-sm-12 col-md-3 col-lg-2 mb-1">
+                        <select name="order" class="form-select js-choice border-0 z-index-9 bg-transparent"
+                                aria-label=".form-select-sm">
+                            <option value="">Order by</option>
+                            <option value="newest" {% if current_order == value %}selected{% endif %}>Newest
+                            </option>
+                            <option value="oldest" {% if current_order == value %}selected{% endif %}>Oldest
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <!-- Button Group -->
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 ">
+                        <div class="row g-2 py-1">
+                            <!-- Filter button -->
+                            <div class="col-md-6 col-12 col-sm-6 ">
+                                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                            </div>
+
+                            <!-- Reset button -->
+                            <div class="col-md-6 col-12 col-sm-6">
+                                <a href="?" class="btn btn-secondary w-100">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <!-- Search and select END -->
+
+
+            </div>
+            <!-- Card header END -->
+
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Tutor request table START -->
+                <div class="table-responsive border-0">
+                    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+
+                        <!-- Table head -->
+                        <thead>
+                        <tr>
+                            <th scope="col" class="border-0 rounded-start">Tutor name</th>
+                            <th scope="col" class="border-0 ">Info</th>
+                            <th scope="col" class="border-0 ">CV</th>
+                            <th scope="col" class="border-0 ">Video</th>
+                            <th scope="col" class="border-0">Teaching Skills</th>
+                            <th scope="col" class="border-0">Requested Date</th>
+                            <th scope="col" class="border-0">Status</th>
+                            <th scope="col" class="border-0 rounded-end">Action</th>
+                        </tr>
+                        </thead>
+
+                        <!-- Table body START -->
+                        <tbody>
+                        {% for applicant in applicants %}
+                            <!-- Table row -->
+                            <tr>
+                                <!-- Table data -->
+                                <td>
+                                    <div class="d-flex align-items-center position-relative">
+                                        <!-- Image -->
+                                        <div class="avatar avatar-md">
+                                            <img src="{{ applicant.profile.photo.url }}" class="rounded-circle"
+                                                 style="min-width: 48px; max-width: 48px; min-height: 48px; max-height: 48px;"
+                                                 alt="">
+                                        </div>
+                                        <div class="mb-0 ms-2">
+                                            <!-- Title -->
+                                            <h6 class="mb-0"><a href="#"
+                                                                class="stretched-link " data-bs-toggle="modal"
+                                                                data-bs-target="#appDetail-{{ applicant.id }}">{{ applicant.profile.user.first_name }} {{ applicant.profile.user.last_name }}</a>
+                                            </h6>
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <!-- Full Applicant Profile -->
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-primary-soft"
+                                       data-bs-toggle="modal"
+                                       data-bs-target="#appDetail-{{ applicant.id }}">
+                                        View
+                                    </a>
+
+                                </td>
+                                <td>
+                                    <!-- CV -->
+                                    {% if applicant.profile.resume %}
+                                        <a href="{{ applicant.profile.resume.url }}"
+                                           class="btn btn-primary-soft btn-round me-1 mb-1 "
+                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i
+                                                class="bi bi-download"></i></a>
+                                    {% else %}
+                                        <span class="p-2"> NA</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <!-- Video -->
+                                    {% if applicant.video_intro %}
+                                        <a data-glightbox data-gallery="office-tour"
+                                           href="{{ applicant.video_intro.url }}"
+                                           class="btn btn-round btn-primary-soft  overflow-visible "
+                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                           title="Introduction Video">
+                                            <i class="fas fa-play"></i>
+                                        </a>
+                                    {% else %}
+                                        <span class="p-2"> NA</span>
+                                    {% endif %}
+                                </td>
+                                <!-- Table data -->
+                                <td class="text-center text-sm-start">
+                                    <h6 class="mb-0">
+                                        {% for uSkill in applicant.profile.user.skills.all %}
+                                            {{ uSkill.skill }},
+                                        {% endfor %}
+                                    </h6>
+                                </td>
+
+                                <!-- Table data -->
+                                <td>{{ applicant.create_date|date }}</td>
+
+                                <!-- Table data -->
+                                <td>
+                                    <!-- Status Badge -->
+                                    <span class="badge bg-opacity-15 bg-{% if applicant.status == 'pending' %}warning text-warning
+                                                                        {% elif applicant.status == 'email_verified' %}info text-info
+                                                                        {% elif applicant.status == 'registered' %}primary text-primary
+                                                                        {% elif applicant.status == 'completed_profile' %}info text-info
+                                                                        {% elif applicant.status == 'scheduled' %}primary text-primary
+                                                                        {% elif applicant.status == 'decision' %}secondary text-secondary
+                                                                        {% elif applicant.status == 'accepted' %}success text-success
+                                                                        {% elif applicant.status == 'rejected' %}danger text-danger{% endif %} me-2 mb-1">
+                                    {{ applicant.get_status_display }}</span>
+                                </td>
+                                <!-- Table data -->
+                                <td>
+                                    <div class="d-flex align-items-center">
+
+
+                                        {#                    <a href="#" class="btn btn-success-soft me-1 mb-1 mb-lg-0">Accept</a>#}
+                                        {#                    <a href="#" class="btn btn-secondary-soft me-1 mb-1 mb-lg-0">Reject</a>#}
+                                        {#                    <a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal" data-bs-target="#appDetail-{{ applicant.id }}">View App</a>#}
+
+                                        <!-- Action Buttons -->
+                                        <div class="btn-group btn-group-sm">
+                                            {% if applicant.status == 'pending' %}
+                                                <button class="btn btn-danger-soft set-status"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="rejected">
+                                                    Reject
+                                                </button>
+                                                <button class="btn btn-success-soft set-status"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="invited">
+                                                    Invite
+                                                </button>
+                                            {% elif applicant.status == 'scheduled' %}
+                                                <div class="video-link-wrapper">
+                                                    {% if not applicant.interview_session.is_sent_link %}
+                                                        <div class="row w-100 gx-2 align-items-center">
+                                                            <div class="col-8">
+                                                                <input class="form-control form-control-sm session-link-input mt-0 mb-1"
+                                                                       type="url"
+                                                                       placeholder="Paste meeting link"
+                                                                       required/>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <button class="btn btn-sm btn-primary-soft w-100 set-link"
+                                                                        data-applicant-id="{{ applicant.id }}"
+                                                                        data-session-id="{{ applicant.interview_session.id }}">
+                                                                    Set Link
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+                                                    {% else %}
+                                                        <button class="btn btn-sm btn-warning-soft change-link"
+                                                                data-applicant-id="{{ applicant.id }}"
+                                                                data-session-id="{{ applicant.interview_session.id }}"
+                                                                data-link-url="{{ applicant.interview_session.video_call_link }}">
+                                                            Change link
+                                                        </button>
+                                                    {% endif %}
+                                                </div>
+                                            {% elif applicant.status == 'decision' %}
+                                                <button class="btn btn-danger-soft"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#decision-reject-{{ applicant.id }}"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="rejected">
+                                                    Reject
+                                                </button>
+                                                <button class="btn btn-success-soft"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#decision-accept-{{ applicant.id }}"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="accepted">
+                                                    Accept
+                                                </button>
+                                            {% elif applicant.status == 'rejected' %}
+                                                <button class="btn btn-success-soft set-status"
+                                                        data-applicant-id="{{ applicant.id }}"
+                                                        data-status="invited">
+                                                    Invite
+                                                </button>
+                                            {% elif applicant.status == 'invited' or applicant.status == 'registered' or applicant.status == 'accepted' %}
+                                                <!-- just waiting for registration-->
+                                                {#                                                 <button class="btn btn-success-soft set-status disabled"#}
+                                                {#                                                        data-applicant-id="{{ applicant.id }}"#}
+                                                {#                                                        data-status="waiting">#}
+                                                {#                                                    No Action#}
+                                                {#                                                </button>#}
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </td>
+
+
+                            </tr>
+                        {% endfor %}
+
+                        <!-- Table row -->
+                        {#                        <tr>#}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td>#}
+                        {#                                <div class="d-flex align-items-center position-relative">#}
+                        {#                                    <!-- Image -->#}
+                        {#                                    <div class="avatar avatar-md">#}
+                        {#                                        <img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle"#}
+                        {#                                             alt="">#}
+                        {#                                    </div>#}
+                        {#                                    <div class="mb-0 ms-2">#}
+                        {#                                        <!-- Title -->#}
+                        {#                                        <h6 class="mb-0"><a href="#" class="stretched-link">Dennis Barrett</a></h6>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </td>#}
+                        {##}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td class="text-center text-sm-start">#}
+                        {#                                <h6 class="mb-0">Javascript, Java</h6>#}
+                        {#                            </td>#}
+                        {##}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td>21 Jan 2021</td>#}
+                        {#                            <td>21 Jan 2021</td>#}
+                        {##}
+                        {#                            <!-- Table data -->#}
+                        {#                            <!-- Table data -->#}
+                        {#                            <td>#}
+                        {#                                <a href="#" class="btn btn-success me-1 mb-1 mb-md-0 disabled">Accepted</a>#}
+                        {#                                <a href="#" class="btn btn-primary-soft me-1 mb-0" data-bs-toggle="modal"#}
+                        {#                                   data-bs-target="#appDetail-{{ applicant.id }}">View App</a>#}
+                        {#                            </td>#}
+                        {#                        </tr>#}
+
+
+                        </tbody>
+                        <!-- Table body END -->
+                    </table>
+                </div>
+                <!-- Tutor request table END -->
+            </div>
+            <!-- Card body END -->
+
+            <!-- Card footer START -->
+            <div class="card-footer bg-transparent pt-0">
+
+                <!-- Pagination START -->
+                <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+                    <!-- Content -->
+                    <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }}
+                        to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
+                    <!-- Pagination -->
+                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?{% if current_search %}search={{ current_search }}&{% endif %}{% if current_status %}status={{ current_status }}&{% endif %}{% if current_order %}order={{ current_order }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                                                                  tabindex="-1"><i class="fas fa-angle-left"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i
+                                            class="fas fa-angle-left" style="color: #d3d3d3;"></i></a></li>
+                                {% endif %}
+
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                        {% if p == page_obj.number %}
+                                            <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item mb-0"><a class="page-link"
+                                                                          href="?{% if current_search %}search={{ current_search }}&{% endif %}{% if current_status %}status={{ current_status }}&{% endif %}{% if current_order %}order={{ current_order }}&{% endif %}page={{ p }}">{{ p }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                        <li class="page-item mb-0"><a class="page-link" href="?page={{ p }}">{{ p }}</a>
+                                        </li>
+                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                        <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item mb-0"><a class="page-link"
+                                                                  href="?{% if current_status %}status={{ current_status }}&{% endif %}{% if current_search %}search={{ current_search }}&{% endif %}{% if current_order %}order={{ current_order }}&{% endif %}page={{ page_obj.next_page_number }}"><i
+                                            class="fas fa-angle-right"></i></a></li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i
+                                            class="fas fa-angle-right"
+                                            style="color: #d3d3d3;"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                </div>
+                <!-- Pagination END -->
+
+
+            </div>
+            <!-- Card footer END -->
+        </div>
+        <!-- Main card END -->
+    </div>
+    <!-- Page main content END -->
+{% endblock %}
+
+{% block admin_popup_modals %}
+    {% for applicant in applicants %}
+        <!-- Modal START (View Application)-->
+        <div class="modal fade" id="appDetail-{{ applicant.id }}" tabindex="-1" aria-labelledby="appDetaillabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal header -->
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title text-white" id="appDetaillabel">Applicant details</h5>
+                        <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                                aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body p-5">
+                        <div class="d-lg-flex">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-md me-4 flex-shrink-0">
+                                <img class="avatar-img rounded-circle" src="{{ applicant.profile.photo.url }}"
+                                     alt="avatar">
+                            </div>
+                            <div class="me-4 flex-shrink-0 mx-3">
+                                <!-- Name -->
+                                <span class="small">Name:</span>
+                                <h6 class="mb-3">{{ applicant.profile.user.first_name }} {{ applicant.profile.user.last_name }}</h6>
+                            </div>
+
+                            <div class="me-4 flex-shrink-0 mx-3">
+                                <!-- Email -->
+                                <span class="small">Email:</span>
+                                <h6 class="mb-3">{{ applicant.profile.user.email }}</h6>
+
+                            </div>
+                            <div class="me-4 flex-shrink-0 mx-3">
+
+                                <!-- Phone number -->
+                                <span class="small">Phone number:</span>
+                                <h6 class="mb-3">
+                                    {{ applicant.profile.phone_country_code }}{{ applicant.profile.phone_number }}</h6>
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <span class="small mt-5">Summary:</span>
+                        <p class="text-dark mb-2">
+                            {{ applicant.profile.bio }}
+                        </p>
+
+
+                        <div class="d-md-flex mr-3 my-4">
+                            <!-- Resume -->
+                            <span class="small ">Resume:</span>
+                            <h6 class="mx-3">
+                                {% if applicant.profile.resume %}
+                                    <a href="{{ applicant.profile.resume.url }}"
+                                       class="btn btn-primary-soft btn-round me-1 mb-1 mb-md-0"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Download"><i
+                                            class="bi bi-download"></i></a>
+                                {% else %}
+                                    NA
+                                {% endif %}
+                            </h6>
+                        </div>
+
+
+                        <h6 class="text-primary px-2">Teaching Skills:</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table" id="skillsTable_inModal">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Skill</th>
+                                    <th>Certificate</th>
+                                    <th>Video</th>
+                                    <th>Level</th>
+                                    <th>Status</th>
+                                    <th>Certified</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <!-- Existing skills -->
+                                {% for uSkill in applicant.profile.user.skills.all %}
+                                    <tr class="m-0 p-0">
+                                        <td>{{ uSkill.skill }}</td>
+                                        <td>
+                                            {% if uSkill.certificate %}
+                                                {% with uSkill.certificate.name|lower as filename %}
+                                                    {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                        <!-- Image Lightbox -->
+                                                        <a href="{{ uSkill.certificate.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           data-glightbox="file-gallery"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="View">
+                                                            <i class="bi bi-image"></i>
+                                                        </a>
+                                                        {#                                        {% elif ".pdf" in filename %}#}
+                                                        {#                                            <!-- PDF in iframe -->#}
+                                                        {#                                            <a href="{{ uSkill.certificate.url }}"#}
+                                                        {#                                               data-glightbox="file-gallery"#}
+                                                        {#                                               data-type="iframe"#}
+                                                        {#                                               data-title="PDF Preview">#}
+                                                        {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                        {#                                            </a>#}
+                                                    {% else %}
+                                                        <!-- Other Files: fallback download link -->
+                                                        <a href="{{ uSkill.certificate.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           target="_blank"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="Download"><i
+                                                                class="bi bi-download"></i></a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                <span class="text-muted small">NA</span>
+                                            {% endif %}
+
+                                        </td>
+                                        <td>
+                                            {% if uSkill.video %}
+                                                <!-- Video button -->
+                                                <a data-glightbox data-gallery="office-tour"
+                                                   href="{{ uSkill.video.url }}"
+                                                   class="btn btn-round btn-primary-soft overflow-visible"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                   title="Skill Video">
+                                                    <i class="fas fa-play"></i>
+                                                </a>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ uSkill.level }}</td>
+                                        <td><span class="badge bg-opacity-15 bg-{% if uSkill.status == 'rejected' %}danger text-danger
+                                    {% elif uSkill.status == 'pending' %}warning text-warning
+                                    {% elif uSkill.status == 'approved' %}success text-success
+                                    {% elif uSkill.status == 'need_interview' %}primary text-primary
+                                    {% endif %}
+                                            ">{{ uSkill.status }}</span></td>
+                                        <td>
+                                            {% if uSkill.is_certified %}
+                                                <span class="text-success"><i class="fas fa-check-circle fs-5 me-1"></i></span>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+                                        </td>
+
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <h6 class="text-primary px-2">Teaching Certifications:</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table" id="CertificationTable">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Certification</th>
+                                    <th>Organization</th>
+                                    <th>Year</th>
+                                    <th>Document</th>
+                                    <th>Certified</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <!-- Existing skills -->
+                                {% for cert in applicant.profile.user.certificates.all %}
+                                    <tr>
+                                        <td class="col-3 col-md-3 ">{{ cert.get_name_display }}</td>
+                                        <td class="col-3 col-md-3 ">{{ cert.issuing_organization }}</td>
+                                        <td class="col-3 col-md-3 ">{{ cert.completion_date }}</td>
+                                        <td class="col-1 col-md-1 ">
+                                            <!-- Document/Diploma -->
+                                            {% if cert.document %}
+                                                {% with cert.document.name|lower as filename %}
+                                                    {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                        <!-- Image Lightbox -->
+                                                        <a href="{{ cert.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           data-glightbox="file-gallery"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="View">
+                                                            <i class="bi bi-image"></i>
+                                                        </a>
+                                                        {#                                        {% elif ".pdf" in filename %}#}
+                                                        {#                                            <!-- PDF in iframe -->#}
+                                                        {#                                            <a href="{{ cert.document.url }}"#}
+                                                        {#                                               data-glightbox="file-gallery"#}
+                                                        {#                                               data-type="iframe"#}
+                                                        {#                                               data-title="PDF Preview">#}
+                                                        {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                        {#                                            </a>#}
+                                                    {% else %}
+                                                        <!-- Other Files: fallback download link -->
+                                                        <a href="{{ cert.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           target="_blank"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="Download"><i
+                                                                class="bi bi-download"></i></a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                <span class="text-muted small">NA</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="col-2 col-md-2 ">
+                                            <!-- Check box -->
+                                            {% if cert.is_certified %}
+                                                <span class="text-success"><i class="fas fa-check-circle fs-5 me-1"></i></span>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <h6 class="text-primary px-2">Formal Education:</h6>
+                        <div class="table-responsive mb-3">
+                            <table class="table" id="EducationTable">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Degree</th>
+                                    <th>Field of Study</th>
+                                    <th>Institution</th>
+                                    <th>Years</th>
+                                    <th>Description</th>
+                                    <th>Document</th>
+                                    <th>Certified</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <!-- Existing skills -->
+                                {% for edu in applicant.profile.user.educations.all %}
+                                    <tr>
+                                        <td class="col-3 col-md-3 ">{{ edu.degree.get_name_display }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.field_of_study }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.institution }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.start_year }}-{{ edu.end_year }}</td>
+                                        <td class="col-3 col-md-3 ">{{ edu.description }}</td>
+                                        <td class="col-1 col-md-1 ">
+                                            <!-- Document/Diploma -->
+                                            {% if edu.document %}
+                                                {% with edu.document.name|lower as filename %}
+                                                    {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                        <!-- Image Lightbox -->
+                                                        <a href="{{ edu.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           data-glightbox="file-gallery"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="View">
+                                                            <i class="bi bi-image"></i>
+                                                        </a>
+                                                        {#                                        {% elif ".pdf" in filename %}#}
+                                                        {#                                            <!-- PDF in iframe -->#}
+                                                        {#                                            <a href="{{ edu.document.url }}"#}
+                                                        {#                                               data-glightbox="file-gallery"#}
+                                                        {#                                               data-type="iframe"#}
+                                                        {#                                               data-title="PDF Preview">#}
+                                                        {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                        {#                                            </a>#}
+                                                    {% else %}
+                                                        <!-- Other Files: fallback download link -->
+                                                        <a href="{{ edu.document.url }}"
+                                                           class="btn btn-primary-soft btn-round"
+                                                           target="_blank"
+                                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                                           title="Download"><i
+                                                                class="bi bi-download"></i></a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                <span class="text-muted small">NA</span>
+                                            {% endif %}
+
+
+                                        </td>
+                                        <td class="col-2 col-md-2 ">
+                                            <!-- Check box -->
+                                            {% if edu.is_certified %}
+                                                <span class="text-success"><i class="fas fa-check-circle fs-5 me-1"></i></span>
+                                            {% else %}
+                                                <span class="text-muted">NA</span>
+                                            {% endif %}
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer ORIGINAL -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal END -->
+
+
+        <!-- Popup modal: (ACCEPT) and UNLOCK applicant skill level -->
+        <div class="modal fade" id="decision-accept-{{ applicant.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Skill Approval:
+                            {{ applicant.profile.user.first_name }} {{ applicant.profile.user.last_name }}</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form id="acceptForm-{{ applicant.id }}" class="acceptForm" method="POST"
+                              action="{% url 'my_admin:update_applicant_status' applicant.id %}">
+
+                            {% csrf_token %}
+                            <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
+                            <input type="hidden" name="status" value="accepted">
+
+                            <div class="alert alert-info mb-3">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Enable skills and set the maximum teaching level for each (A1-C2)
+                            </div>
+
+                            <h6 class="text-primary px-2">Teaching Skills:</h6>
+                            <div class="table-responsive mb-3">
+                                <table class="table" id="skillsTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Skill</th>
+                                        <th>Certificate</th>
+                                        <th>Video</th>
+                                        <th>Level</th>
+                                        <th>Badge</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <!-- Existing skills -->
+                                    {% for uSkill in applicant.profile.user.skills.all %}
+                                        <tr>
+                                            <td class="col-3 col-md-3 ">{{ uSkill.skill }}</td>
+                                            <td class="col-1 col-md-1 ">
+                                                {% if uSkill.certificate %}
+                                                    {% with uSkill.certificate.name|lower as filename %}
+                                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                            <!-- Image Lightbox -->
+                                                            <a href="{{ uSkill.certificate.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               data-glightbox="file-gallery"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="View">
+                                                                <i class="bi bi-image"></i>
+                                                            </a>
+                                                            {#                                        {% elif ".pdf" in filename %}#}
+                                                            {#                                            <!-- PDF in iframe -->#}
+                                                            {#                                            <a href="{{ uSkill.certificate.url }}"#}
+                                                            {#                                               data-glightbox="file-gallery"#}
+                                                            {#                                               data-type="iframe"#}
+                                                            {#                                               data-title="PDF Preview">#}
+                                                            {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                            {#                                            </a>#}
+                                                        {% else %}
+                                                            <!-- Other Files: fallback download link -->
+                                                            <a href="{{ uSkill.certificate.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               target="_blank"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="Download"><i
+                                                                    class="bi bi-download"></i></a>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% else %}
+                                                    <span class="text-muted small">NA</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-1 col-md-1 ">
+                                                {% if uSkill.video %}
+                                                    <!-- Video button -->
+                                                    {#                            <div class="d-flex align-items-center justify-content-center py-2 ms-0 ms-sm-4">#}
+                                                    <a data-glightbox data-gallery="office-tour"
+                                                       href="{{ uSkill.video.url }}"
+                                                       class="btn btn-round btn-primary-soft overflow-visible"
+                                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                                       title="Skill Video">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                {% else %}
+                                                    <span class="text-muted small"> NA</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-3 col-md-3 ">
+                                                <select class="form-select level-select"
+                                                        name="skill_level_{{ uSkill.id }}"
+                                                        {% if uSkill.level %}data-initial-value="{{ uSkill.level.name }}"{% endif %}
+                                                        required>
+                                                    {% for level in LEVEL_CHOICES %}
+                                                        <option value="{{ level.0 }}"
+                                                                {% if uSkill.level.name == level.0 %}selected{% endif %}>{{ level.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                            <td class="col-2 col-md-2 ">
+                                                <!-- Check box -->
+                                                <div class="col-1 col-md-1 d-flex justify-content-between">
+                                                    <div class="form-check">
+                                                        <input
+                                                                class="form-check-input badge-select"
+                                                                name="skill_badge_{{ uSkill.id }}"
+                                                                type="checkbox"
+                                                                value="true"
+                                                                {% if uSkill.is_certified %}checked{% endif %}
+                                                        >
+                                                        <label class="form-check-label"
+                                                               for="exampleCheck1">Certified</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="col-3 col-md-3 ">
+                                                <select class="form-select status-select "
+                                                        name="skill_status_{{ uSkill.id }}"
+                                                        {% if uSkill.status %}data-initial-value="{{ uSkill.status }}"{% endif %}
+                                                        required>
+                                                    {% for status in SKILL_STATUS_CHOICES %}
+                                                        <option value="{{ status.0 }}"
+                                                                {% if uSkill.status == status.0 %}selected{% endif %}>{{ status.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <h6 class="text-primary px-2">Teaching Certifications:</h6>
+                            <div class="table-responsive mb-3">
+                                <table class="table" id="CertificationTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Certification</th>
+                                        <th>Organization</th>
+                                        <th>Year</th>
+                                        <th>Document</th>
+                                        <th>Badge</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <!-- Existing skills -->
+                                    {% for cert in applicant.profile.user.certificates.all %}
+                                        <tr>
+                                            <td class="col-3 col-md-3 ">{{ cert.get_name_display }}</td>
+                                            <td class="col-3 col-md-3 ">{{ cert.issuing_organization }}</td>
+                                            <td class="col-3 col-md-3 ">{{ cert.completion_date }}</td>
+                                            <td class="col-1 col-md-1 ">
+                                                <!-- Document/Diploma -->
+                                                {% if cert.document %}
+                                                    {% with cert.document.name|lower as filename %}
+                                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                            <!-- Image Lightbox -->
+                                                            <a href="{{ cert.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               data-glightbox="file-gallery"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="View">
+                                                                <i class="bi bi-image"></i>
+                                                            </a>
+                                                            {#                                        {% elif ".pdf" in filename %}#}
+                                                            {#                                            <!-- PDF in iframe -->#}
+                                                            {#                                            <a href="{{ cert.document.url }}"#}
+                                                            {#                                               data-glightbox="file-gallery"#}
+                                                            {#                                               data-type="iframe"#}
+                                                            {#                                               data-title="PDF Preview">#}
+                                                            {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                            {#                                            </a>#}
+                                                        {% else %}
+                                                            <!-- Other Files: fallback download link -->
+                                                            <a href="{{ cert.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               target="_blank"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="Download"><i
+                                                                    class="bi bi-download"></i></a>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% else %}
+                                                    <span class="text-muted small">NA</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-2 col-md-2 ">
+                                                <!-- Check box -->
+                                                <div class="col-1 col-md-1 d-flex justify-content-between">
+                                                    <div class="form-check">
+                                                        <input
+                                                                class="form-check-input badge-select"
+                                                                name="cert_badge_{{ cert.id }}"
+                                                                type="checkbox"
+                                                                value="true"
+                                                                {% if cert.is_certified %}checked{% endif %}
+                                                        >
+                                                        <label class="form-check-label"
+                                                               for="exampleCheck1">Certified</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="col-3 col-md-3 ">
+                                                <select class="form-select status-select "
+                                                        name="cert_status_{{ cert.id }}"
+                                                        {% if cert.status %}data-initial-value="{{ cert.status }}"{% endif %}
+                                                        required>
+                                                    {% for status in SKILL_STATUS_CHOICES %}
+                                                        <option value="{{ status.0 }}"
+                                                                {% if cert.status == status.0 %}selected{% endif %}>{{ status.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <h6 class="text-primary px-2">Formal Education:</h6>
+                            <div class="table-responsive mb-3">
+                                <table class="table" id="EducationTable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Degree</th>
+                                        <th>Field of Study</th>
+                                        <th>Institution</th>
+                                        <th>Years</th>
+                                        <th>Description</th>
+                                        <th>Document</th>
+                                        <th>Badge</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <!-- Existing skills -->
+                                    {% for edu in applicant.profile.user.educations.all %}
+                                        <tr>
+                                            <td class="col-3 col-md-3 ">{{ edu.degree.get_name_display }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.field_of_study }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.institution }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.start_year }}-{{ edu.end_year }}</td>
+                                            <td class="col-3 col-md-3 ">{{ edu.description }}</td>
+                                            <td class="col-1 col-md-1 ">
+                                                <!-- Document/Diploma -->
+                                                {% if edu.document %}
+                                                    {% with edu.document.name|lower as filename %}
+                                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                                            <!-- Image Lightbox -->
+                                                            <a href="{{ edu.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               data-glightbox="file-gallery"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="View">
+                                                                <i class="bi bi-image"></i>
+                                                            </a>
+                                                            {#                                        {% elif ".pdf" in filename %}#}
+                                                            {#                                            <!-- PDF in iframe -->#}
+                                                            {#                                            <a href="{{ edu.document.url }}"#}
+                                                            {#                                               data-glightbox="file-gallery"#}
+                                                            {#                                               data-type="iframe"#}
+                                                            {#                                               data-title="PDF Preview">#}
+                                                            {#                                                <i class="bi bi-file-earmark-pdf me-1"></i>View PDF#}
+                                                            {#                                            </a>#}
+                                                        {% else %}
+                                                            <!-- Other Files: fallback download link -->
+                                                            <a href="{{ edu.document.url }}"
+                                                               class="btn btn-primary-soft btn-round"
+                                                               target="_blank"
+                                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                                               title="Download"><i
+                                                                    class="bi bi-download"></i></a>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% else %}
+                                                    <span class="text-muted small">NA</span>
+                                                {% endif %}
+
+
+                                            </td>
+                                            <td class="col-2 col-md-2 ">
+                                                <!-- Check box -->
+                                                <div class="col-1 col-md-1 d-flex justify-content-between">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input badge-select"
+                                                               name="edu_badge_{{ edu.id }}"
+                                                               type="checkbox"
+                                                               value="true"
+                                                               {% if edu.is_certified %}checked{% endif %}>
+                                                        <label class="form-check-label"
+                                                               for="exampleCheck1">Certified</label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        <td class="col-3 col-md-3 ">
+                                                <select class="form-select status-select "
+                                                        name="edu_status_{{ edu.id }}"
+                                                        {% if edu.status %}data-initial-value="{{ edu.status }}"{% endif %}
+                                                        required>
+                                                    {% for status in SKILL_STATUS_CHOICES %}
+                                                        <option value="{{ status.0 }}"
+                                                                {% if edu.status == status.0 %}selected{% endif %}>{{ status.1 }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Interviewer Notes</label>
+                                <textarea class="form-control" name="reviewer_comment" rows="3"></textarea>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" form="acceptForm-{{ applicant.id }}" class="btn btn-success">
+                                    <i class="bi bi-check-circle me-1"></i> Approve Tutor
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Popup modal: (ACCEPT) and UNLOCK applicant skill level END -->
+
+        <!-- Popup modal: (REJECT) START -->
+        <div class="modal fade" id="decision-reject-{{ applicant.id }}" tabindex="-1" aria-labelledby="decisionLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title text-white" id="decisionLabel">Interviewer Decision</h5>
+                        <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                                aria-label="Close">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form id="rejectForm-{{ applicant.id }}" class="row text-start g-3 rejectForm" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="applicant_id" value="{{ applicant.id }}">
+                            <input type="hidden" name="status" value="rejected">
+
+                            <!-- label -->
+                            <div class="col-12 text-center">
+                                <label class="form-label"><h4>Leave a comment here</h4></label>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <textarea class="form-control" id="reject-comment" name="reviewer_comment"
+                                          placeholder="Your review"
+                                          rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end">
+                        <button type="submit" form="rejectForm-{{ applicant.id }}" class="btn btn-danger my-0">Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Popup modal: (REJECT) END -->
+
+    {% endfor %}
+
+
+
+{% endblock %}
+
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
+
+{% endblock %}
+{% block my_scripts %}
+    <script>
+        // ----------------------  Control Action Buttons ----------------------
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('#just Loaded!');
+
+            // Status change handler for all action buttons
+            document.querySelectorAll('.set-status').forEach(button => {
+                button.addEventListener('click', function () {
+                    const applicantId = this.dataset.applicantId;
+                    const newStatus = this.dataset.status;
+
+                    console.log('newStatus: ', newStatus);
+                    // Find the closest table row (tr) ancestor of the clicked button
+                    const row = this.closest('tr');
+
+                    // Find the status badge within this row
+                    const badge = row.querySelector('.badge');
+
+                    // Show loading state (optional)
+                    this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+                    fetch(`/myadmin/update-applicant-status/${applicantId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        body: `status=${encodeURIComponent(newStatus)}`
+                    })
+                        .then(response => {
+                            if (!response.ok) throw new Error('Network response was not ok');
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                // Update badge text
+                                badge.textContent = data.new_status;
+
+                                // Update badge color
+                                badge.className = `badge bg-${
+                                    newStatus === 'pending' ? 'warning' :
+                                        newStatus === 'registered' ? 'primary' :
+                                            newStatus === 'scheduled' ? 'secondary' :
+                                                newStatus === 'accepted' ? 'success' :
+                                                    newStatus === 'rejected' ? 'danger' : 'info'
+                                    } me-2`;
+
+                                // Reset button text
+                                this.innerHTML = newStatus === 'accepted' ? 'Accepted' :
+                                    newStatus === 'rejected' ? 'Rejected' : 'Invited';
+
+                                // Disable all action buttons for this applicant
+                                row.querySelectorAll('.set-status').forEach(btn => {
+                                    btn.disabled = true;
+                                });
+
+                                // Show success toast
+                                const toast = new bootstrap.Toast(document.getElementById('statusToast'));
+                                document.getElementById('toastMessage').textContent =
+                                    `Status updated to ${data.new_status}`;
+                                toast.show();
+                            } else {
+                                throw new Error(data.error || 'Failed to update status');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            // Reset button text
+                            this.innerHTML = `${
+                                newStatus === 'accepted' ? 'Accept' :
+                                    newStatus === 'rejected' ? 'Reject' : 'Invite'
+                                }`;
+                            alert('Error updating status: ' + error.message);
+                        });
+                });
+            });
+
+
+            // Handle acceptForm submission
+            // Initialize modals
+            document.querySelectorAll('.acceptForm').forEach(form => {
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    const submitButton = form.querySelector('[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
+
+                    try {
+                        // Show loading state
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+
+                        const formData = new FormData(this);
+
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest', // For detecting AJAX requests in Django
+                            }
+                        });
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            // Success - you might want to close the modal or refresh the page
+                            if (data.success) {
+                                location.reload(); // Or handle success differently
+                            } else {
+                                alert(data.message || 'An error occurred');
+                            }
+                        } else {
+                            alert(data.message || 'An error occurred');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('An error occurred while submitting the form');
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }
+                });
+            });
+
+
+            // Handle rejectForm submission
+            document.querySelectorAll('form.rejectForm').forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const formData = new FormData(form);
+                    const applicantId = formData.get('applicant_id');
+                    const status = formData.get('status');
+                    const interviewerComment = formData.get('reviewer_comment');
+
+                    const submitBtn = document.querySelector(`button[form="${form.id}"]`);
+                    const originalBtnText = submitBtn.innerHTML;
+
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = `
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...
+    `;
+
+                    fetch(`/myadmin/update-applicant-status/${applicantId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRFToken': getCookie('csrftoken'),
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            status: status,
+                            reviewer_comment: interviewerComment,
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Optional: update status badge or reload page
+                                alert('Decision saved successfully!');
+                                window.location.reload(); // or smarter DOM update
+                            } else {
+                                alert(data.error || 'Failed to update decision.');
+                            }
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            alert('Error submitting decision.');
+                        });
+                });
+            });
+
+
+            //  ----------------------  Set Online Meeting url ----------------------
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            // ✅ Universal click handler (event delegation)
+            document.addEventListener('click', function (e) {
+                const target = e.target;
+
+                // 🔹 Handle "Change Link" button
+                if (target.classList.contains('change-link')) {
+                    e.preventDefault();
+                    const wrapper = target.closest('.video-link-wrapper');
+                    const applicantId = target.dataset.applicantId;
+                    const sessionId = target.dataset.sessionId;
+                    const linkUrl = target.dataset.linkUrl;
+
+                    wrapper.innerHTML = `
+  <div class="row w-100 gx-2 align-items-center">
+    <div class="col-8">
+      <input class="form-control form-control-sm session-link-input mt-0 mb-1"
+             type="url"
+             placeholder="Paste meeting link"
+             value="${linkUrl}"
+             required />
+    </div>
+    <div class="col-4">
+      <button class="btn btn-sm btn-primary-soft w-100 set-link"
+              data-applicant-id="${applicantId}"
+              data-session-id="${sessionId}">
+        Set Link
+      </button>
+    </div>
+  </div>
+`;
+
+
+                }
+
+                // 🔹 Handle "Set Link" button
+                if (target.classList.contains('set-link')) {
+                    e.preventDefault();
+                    const wrapper = target.closest('.video-link-wrapper');
+                    const input = wrapper.querySelector('.session-link-input');
+                    const sessionId = target.dataset.sessionId;
+                    const applicantId = target.dataset.applicantId;
+                    const link = input.value.trim();
+
+                    if (!link || !link.startsWith('http')) {
+                        alert('Please enter a valid link (must start with http)');
+                        input.classList.add('is-invalid');
+                        return;
+                    }
+
+                    fetch(`/myadmin/set-video-call-link/${sessionId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRFToken': getCookie('csrftoken'),
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({session_link: link})
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Video link saved successfully!');
+                                input.classList.remove('is-invalid');
+                                input.classList.add('is-valid');
+
+                                wrapper.innerHTML = `
+            <button class="btn btn-sm btn-warning-soft change-link"
+                    data-applicant-id="${applicantId}"
+                    data-session-id="${sessionId}"
+                    data-link-url="${link || ''}">
+              Change link
+            </button>`;
+                            } else {
+                                input.classList.add('is-invalid');
+                                alert(data.error || 'Something went wrong');
+                            }
+                        })
+                        .catch(err => {
+                            alert('Error occurred while saving the link.');
+                            console.error(err);
+                        });
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

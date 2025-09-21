@@ -1,0 +1,369 @@
+/* Custom styles for availability accordion */
+/*.accordion-button:not(.collapsed) {*/
+/*background-color: #f8f9fa;*/
+/*box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);*/
+/*}*/
+
+/*.accordion-button:focus {*/
+/*box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.1);*/
+/*}*/
+
+/*.time-slots-container {*/
+/*max-height: 200px;*/
+/*overflow-y: auto;*/
+/*}*/
+
+/*.bg-primary-soft {*/
+/*background-color: rgba(13, 110, 253, 0.1) !important;*/
+/*color: #0d6efd !important;*/
+/*}*/
+
+/*!* Responsive adjustments *!*/
+/*@media (max-width: 768px) {*/
+/*.accordion-body .row > div {*/
+/*margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.accordion-body .d-flex {*/
+/*flex-wrap: wrap;*/
+/*}*/
+
+/*.accordion-body .btn {*/
+/*flex: 1;*/
+/*min-width: 120px;*/
+/*}*/
+/*}*/
+
+/*!* Time input styling *!*/
+/*.form-control[type="time"] {*/
+/*min-width: 100px;*/
+/*}*/
+
+/*!* Badge styling *!*/
+/*.badge {*/
+/*font-size: 0.75em;*/
+/*padding: 0.35em 0.65em;*/
+/*}*/
+
+/*.btn-xs {*/
+/*font-size: 0.75rem;*/
+/*padding: 0.25rem 0.4rem;*/
+/*}*/
+
+/* Custom styles for improved accordion  ==================================== Good */
+/*.accordion-item {*/
+    /*transition: transform 0.2s ease, box-shadow 0.2s ease;*/
+/*}*/
+
+/*.accordion-item:hover {*/
+    /*transform: translateY(-2px);*/
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;*/
+/*}*/
+
+/*.accordion-button {*/
+    /*padding: 0.75rem 1rem;*/
+    /*font-size: 0.9rem;*/
+/*}*/
+
+/*.accordion-button:not(.collapsed) {*/
+    /*background-color: #f8f9fa;*/
+    /*color: #0d6efd;*/
+/*}*/
+
+/*.accordion-button:focus {*/
+    /*box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);*/
+/*}*/
+
+/*.time-slots-container {*/
+    /*border: 1px solid #e9ecef;*/
+    /*border-radius: 0.375rem;*/
+    /*padding: 0.5rem;*/
+    /*background-color: #fff;*/
+/*}*/
+
+/*.time-slots-container .time-slot-item {*/
+    /*padding: 0.375rem 0.75rem;*/
+    /*margin-bottom: 0.25rem;*/
+    /*background-color: #f8f9fa;*/
+    /*border-radius: 0.25rem;*/
+    /*border-left: 3px solid #0d6efd;*/
+    /*font-size: 0.875rem;*/
+/*}*/
+
+/*.time-slots-container .time-slot-item:last-child {*/
+    /*margin-bottom: 0;*/
+/*}*/
+
+/*.bg-primary-soft {*/
+    /*background-color: rgba(13, 110, 253, 0.1) !important;*/
+    /*color: #0d6efd !important;*/
+/*}*/
+
+/*!* Form switch customization *!*/
+/*.form-switch .form-check-input {*/
+    /*width: 2.5em;*/
+    /*height: 1.25em;*/
+/*}*/
+
+/*.form-switch .form-check-input:checked {*/
+    /*background-color: #198754;*/
+    /*border-color: #198754;*/
+/*}*/
+
+/*!* Responsive adjustments *!*/
+/*@media (max-width: 576px) {*/
+    /*.accordion-button {*/
+        /*font-size: 0.85rem;*/
+        /*padding: 0.625rem 0.875rem;*/
+    /*}*/
+
+    /*.accordion-body {*/
+        /*padding: 1rem;*/
+    /*}*/
+
+    /*.bg-light.rounded {*/
+        /*padding: 0.875rem !important;*/
+    /*}*/
+/*}*/
+
+/*!* Button hover effects *!*/
+/*.btn-sm {*/
+    /*padding: 0.25rem 0.5rem;*/
+    /*font-size: 0.875rem;*/
+/*}*/
+
+/*.btn-primary {*/
+    /*transition: all 0.2s ease;*/
+/*}*/
+
+/*.btn-primary:hover {*/
+    /*transform: translateY(-1px);*/
+    /*box-shadow: 0 2px 8px rgba(13, 110, 253, 0.3);*/
+/*}*/
+
+/*!* Custom scrollbar for time slots *!*/
+/*.time-slots-container::-webkit-scrollbar {*/
+    /*width: 4px;*/
+/*}*/
+
+/*.time-slots-container::-webkit-scrollbar-track {*/
+    /*background: #f1f1f1;*/
+    /*border-radius: 2px;*/
+/*}*/
+
+/*.time-slots-container::-webkit-scrollbar-thumb {*/
+    /*background: #c1c1c1;*/
+    /*border-radius: 2px;*/
+/*}*/
+
+/*.time-slots-container::-webkit-scrollbar-thumb:hover {*/
+    /*background: #a8a8a8;*/
+/*}*/
+
+
+/*--------------------------------------------------- */
+/* Single row controls layout */
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.time-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.time-input {
+    min-width: 80px;
+    text-align: center;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+}
+
+.time-separator {
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.add-btn, .clear-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.375rem;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    border: none;
+    box-shadow: 0 2px 6px rgba(13, 110, 253, 0.2);
+}
+
+.add-btn:hover {
+    background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+.clear-btn {
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.clear-btn:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+
+.free-day-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.form-switch {
+    margin: 0;
+}
+
+.form-switch .form-check-input {
+    width: 2.8em;
+    height: 1.4em;
+    margin-right: 0;
+}
+
+.form-switch .form-check-label {
+    margin-left: 0.5rem;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.form-switch .form-check-label i {
+    font-size: 1.1rem;
+}
+
+.form-switch .form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.form-switch .form-check-input:checked + .form-check-label {
+    color: #198754;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .controls-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .time-inputs {
+        order: 1;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .action-buttons {
+        order: 2;
+    }
+
+    .free-day-toggle {
+        order: 3;
+    }
+
+    .time-input {
+        min-width: 70px;
+        font-size: 0.8125rem;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .controls-row {
+        gap: 0.5rem;
+        padding: 0.625rem;
+    }
+
+    .time-input {
+        min-width: 75px;
+    }
+
+    .add-btn, .clear-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Hover effects and transitions */
+.controls-row {
+    transition: all 0.3s ease;
+}
+
+.controls-row:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Focus states */
+.time-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+}
+
+.add-btn:focus, .clear-btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.1);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.1);
+}
+
+/* Tooltip styles for better UX */
+[title] {
+    position: relative;
+}
+
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0.75rem;
+    background: #333;
+    color: white;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    z-index: 1000;
+    margin-bottom: 0.5rem;
+}
+
+[title]:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #333;
+    margin-bottom: -0.25rem;
+}

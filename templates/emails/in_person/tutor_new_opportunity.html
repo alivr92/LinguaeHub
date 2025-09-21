@@ -1,0 +1,250 @@
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>New Course Opportunity on {{ site_name }}</title>#}
+{#</head>#}
+{#<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">#}
+{#<table role="presentation"#}
+{#       style="max-width: 650px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">#}
+{#    <tr>#}
+{#        <td style="padding: 40px 30px;">#}
+{##}
+{#            <!-- Header -->#}
+{#            <table role="presentation" style="width: 100%; margin-bottom: 20px;">#}
+{#                <tr>#}
+{#                    <td>#}
+{#                        <h1 style="color: #2b6cb0; margin: 0; font-size: 24px;">{{ site_name }}</h1>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            </table>#}
+{##}
+{#            <!-- Main Content -->#}
+{#            <h2 style="color: #2b2b2b; margin-top: 0;">New In-Person Teaching Opportunity</h2>#}
+{#            <p style="font-size: 16px; line-height: 1.6; color: #444;">#}
+{#                Dear {{ teacher_name }},#}
+{#            </p>#}
+{#            <p>A student near you is looking for a tutor for <strong>{{ request.service.name }}</strong>.</p>#}
+{##}
+{#            <p style="font-size: 16px; line-height: 1.6; color: #444;">#}
+{#                We are pleased to inform you that a new in-person teaching opportunity is now available. Based on your#}
+{#                profile and qualifications, you have been matched for this course.#}
+{#            </p>#}
+{#            <!-- Course Details Table -->#}
+{#            <table role="presentation"#}
+{#                   style="width: 100%; border-collapse: collapse; margin: 25px 0; background-color: #f9fafc; border-radius: 6px;">#}
+{#                <tr>#}
+{#                    <td style="padding: 20px; border: 1px solid #e5e7eb;">#}
+{#                        <h3 style="color: #374151; margin-top: 0;">Course Offer Details</h3>#}
+{#                        <table role="presentation" style="width: 100%;">#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280; width: 40%;"><strong>Location:</strong>#}
+{#                                </td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ offer.location }}</td>#}
+{#                            </tr>#}
+{##}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Distance from you:</strong></td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ offer.distance }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Student(s):</strong></td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ offer.students }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Student's Goal:</strong></td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ request.student_notes }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Sessions:</strong>#}
+{#                                </td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ request.number_of_sessions }}#}
+{#                                    x {{ request.session_duration_hours }} hours#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Preferred Start:</strong></td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ request.preferred_start_date }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Hourly Rate:</strong></td>#}
+{#                                <td style="padding: 8px 0; color: #1d4ed8;"><strong>{{ offer.tutor_payout_per_hour }}</strong>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Your Potential Payout:</strong></td>#}
+{#                                <td style="padding: 8px 0; color: #1d4ed8;"><strong>€{{ offer.total_payout }}</strong>#}
+{#                                    (€{{ offer.tutor_payout_per_hour }}/h)#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td style="padding: 8px 0; color: #6b7280;"><strong>Preferred Experience:</strong>#}
+{#                                </td>#}
+{#                                <td style="padding: 8px 0; color: #111827;">{{ offer.preferred_exp }}</td>#}
+{#                            </tr>#}
+{#                        </table>#}
+{##}
+{#                    </td>#}
+{#                </tr>#}
+{#            </table>#}
+{##}
+{#            <!-- Call to Action -->#}
+{#            <p style="font-size: 16px; line-height: 1.6; color: #444;">#}
+{#                This offer is first-come, first-served and expires on <strong>{{ offer.expires_at }}</strong>.#}
+{#                This position is allocated on a <strong>first-come, first-served</strong> basis.#}
+{#                Please confirm your acceptance promptly to secure this opportunity.#}
+{#            </p>#}
+{##}
+{#            <table role="presentation" style="width: 100%; margin: 30px 0; text-align: center;">#}
+{#                <tr>#}
+{#                    <td>#}
+{#                        <a href="{{ accept_url }}"#}
+{#                           style="background-color: #10b981; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin: 0 10px;">#}
+{#                            ✅ Accept This Offer#}
+{#                        </a>#}
+{#                        <a href="{{ decline_url }}"#}
+{#                           style="background-color: #ef4444; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin: 0 10px;">#}
+{#                            ❌ Decline This Offer#}
+{#                        </a>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            </table>#}
+{##}
+{##}
+{#            <!-- Footer -->#}
+{#            <p style="font-size: 16px; line-height: 1.6; color: #444;">#}
+{#                Thank you for your continued professionalism and dedication as part of the {{ site_name }} network.#}
+{#            </p>#}
+{#            <p style="font-size: 16px; color: #444;">#}
+{#                Best regards,<br>#}
+{#                <strong>The {{ site_name }} Team</strong>#}
+{#            </p>#}
+{#        </td>#}
+{#    </tr>#}
+{#</table>#}
+{#</body>#}
+{#</html>#}
+
+
+
+{# ============================================================================================== #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Teaching Opportunity on {{ site_name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
+<table role="presentation" style="max-width: 650px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <tr>
+        <td style="padding: 40px 30px;">
+
+            <!-- Header -->
+            <table role="presentation" style="width: 100%; margin-bottom: 20px;">
+                <tr>
+                    <td>
+                        <h1 style="color: #2b6cb0; margin: 0; font-size: 24px;">{{ site_name }}</h1>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Main Content -->
+            <h2 style="color: #2b2b2b; margin-top: 0;">New In-Person Teaching Opportunity</h2>
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                Dear {{ teacher_name }},
+            </p>
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                A student near you is looking for a tutor for <strong>{{ request.service.name }}</strong>. Based on your profile and location, you have been matched for this request.
+            </p>
+
+            <!-- Course Details Table -->
+            <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 25px 0; background-color: #f9fafc; border-radius: 6px;">
+                <tr>
+                    <td style="padding: 20px; border: 1px solid #e5e7eb;">
+                        <h3 style="color: #374151; margin-top: 0;">Request Details</h3>
+
+                        <table role="presentation" style="width: 100%;">
+                            <!-- FIX: Get location from the student's profile linked to the request -->
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280; width: 40%;"><strong>Student Location:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ request.student.profile.city }}, {{ request.student.profile.country }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280; width: 40%;"><strong>Student Gender:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ request.student.profile.gender }}</td>
+                            </tr>
+                            <!-- Note: 'Distance' is a complex, calculated field not stored on the offer.
+                                   It's best omitted from the initial email to avoid confusion or incorrect data.
+                                   It can be calculated and shown on the acceptance confirmation or in the dashboard.
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Distance from you:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ offer.distance }}</td>
+                            </tr>
+                            -->
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Student's Goal:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ request.student_notes }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Sessions:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ offer.number_of_sessions }} x {{ offer.session_duration_hours }} hours</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Student Current Level:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ request.current_level }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Preferred Start:</strong></td>
+                                <td style="padding: 8px 0; color: #111827;">{{ request.preferred_start_date }}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Your Hourly Rate:</strong></td>
+                                <td style="padding: 8px 0; color: #1d4ed8;"><strong>€{{ offer.tutor_payout_per_hour }}/h</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px 0; color: #6b7280;"><strong>Your Total Payout:</strong></td>
+                                <td style="padding: 8px 0; color: #1d4ed8;"><strong>€{{ offer.total_payout }}</strong></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Call to Action -->
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                This offer is exclusive to you for now, but it is first-come, first-served and <strong>expires on {{ offer.expires_at|date:"M j, Y" }} at {{ offer.expires_at|time:"H:i" }}</strong>. Please respond promptly to secure this opportunity.
+            </p>
+
+            <table role="presentation" style="width: 100%; margin: 30px 0; text-align: center;">
+                <tr>
+                    <td>
+                        <a href="{{ accept_url }}"
+                           style="background-color: #10b981; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin: 0 10px;">
+                            ✅ Accept This Offer
+                        </a>
+                        <a href="{{ decline_url }}"
+                           style="background-color: #ef4444; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin: 0 10px;">
+                            ❌ Decline This Offer
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+            <p style="font-size: 14px; color: #888; text-align: center;">
+                <em>Note: The final meeting location will be coordinated and confirmed with the student upon acceptance.</em>
+            </p>
+
+            <!-- Footer -->
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                Thank you for your continued partnership with {{ site_name }}.
+            </p>
+            <p style="font-size: 16px; color: #444;">
+                Best regards,<br>
+                <strong>The {{ site_name }} Team</strong>
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

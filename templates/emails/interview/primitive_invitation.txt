@@ -1,0 +1,23 @@
+Subject: Complete Your Tutor Profile – {{ site_name }}
+
+Hi {{ full_name }},
+
+Thank you for applying to become a tutor on {{ site_name }}!
+
+We're excited to invite you to the next step in your application.
+
+Please complete your registration using the link below:
+👉 {{ registration_url }}
+
+During this step, you'll be able to:
+- Upload your introduction video
+- Choose the languages and levels you want to teach
+- Set your hourly and trial lesson rates
+- Add certifications or teaching experience (optional but recommended)
+
+If you have any questions or need help, simply reply to this email — we’re happy to assist.
+
+⚠️ Note: This link is valid for 7 days.
+
+Best regards,
+{{ site_name }} Team

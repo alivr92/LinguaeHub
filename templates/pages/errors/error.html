@@ -1,0 +1,36 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+
+{% block head_title %}{{ err_title }}{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+{% endblock %}
+{% block body_content %}
+    {% include 'includes/messages.html' %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <section class="pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <!-- Image -->
+                        <img src="{% static 'assets/images/element/error404-01.svg' %}" class="h-200px h-md-400px mb-4 protected-image"
+                             alt="">
+                        <!-- Title -->
+                        <h1 class="display-1 text-danger mb-0">{{ err_code }}</h1>
+                        <!-- Subtitle -->
+                        <h2>Oh no, something went wrong!</h2>
+                        <!-- info -->
+                        <p class="mb-4">{{ err_message }}</p>
+                        <!-- Button -->
+                        <a href="{% url 'app_pages:home' %}" class="btn btn-primary mb-0">Take me to Homepage</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}

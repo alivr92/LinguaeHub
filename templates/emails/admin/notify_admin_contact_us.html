@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Contact Form Submission – {{ site_name }}</title>
+</head>
+<body style="font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8f9fa; padding: 20px; line-height: 1.6;">
+    <table style="max-width: 600px; margin: auto; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+        <!-- Header -->
+        <tr>
+            <td style="padding: 30px 30px 20px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef; border-radius: 8px 8px 0 0;">
+                <h1 style="color: #2c3e50; margin: 0; font-size: 24px;">
+                    <img src="data:image/png;base64,{{ logo_base64 }}" alt="{{ site_name }}" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+                    New Contact Request
+                </h1>
+            </td>
+        </tr>
+
+        <!-- Content -->
+        <tr>
+            <td style="padding: 30px;">
+                <h2 style="color: #2c3e50; margin-top: 0;">New Message Received</h2>
+
+                <p style="font-size: 16px; color: #495057;">
+                    A visitor has submitted a contact form on {{ site_name }}. Please review the details below:
+                </p>
+
+                <div style="background-color: #f8f9fa; border-radius: 6px; padding: 20px; margin: 20px 0;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td style="width: 30%; color: #6c757d; padding: 8px 0;">From:</td>
+                            <td style="padding: 8px 0; font-weight: 500;">{{ fullname }}</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #6c757d; padding: 8px 0;">Email:</td>
+                            <td style="padding: 8px 0;">
+                                <a href="mailto:{{ email }}" style="color: #3498db; text-decoration: none;">{{ email }}</a>
+                            </td>
+                        </tr>
+                        {% if phone %}
+                        <tr>
+                            <td style="color: #6c757d; padding: 8px 0;">Phone:</td>
+                            <td style="padding: 8px 0;">{{ phone }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td style="color: #6c757d; padding: 8px 0; vertical-align: top;">Message:</td>
+                            <td style="padding: 8px 0;">{{ message }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p style="font-size: 16px; color: #495057;">
+                    <strong>Action Required:</strong> Please respond to this inquiry within 24 hours.
+                </p>
+
+                <div style="text-align: center; margin: 30px 0 20px;">
+                    <a href="{{ admin_dashboard_uri }}"
+                       style="background-color: #3498db; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: 500; display: inline-block;">
+                        View in Admin Dashboard
+                    </a>
+                </div>
+
+{#                <div style="border-top: 1px solid #e9ecef; padding-top: 20px; margin-top: 20px;">#}
+{#                    <p style="font-size: 14px; color: #6c757d; margin-bottom: 5px;">#}
+{#                        <strong>Submission Details:</strong>#}
+{#                    </p>#}
+{#                    <p style="font-size: 13px; color: #6c757d; margin: 0;">#}
+{#                        Received on 2025{{ submission_date|date:"F j, Y \a\t g:i A" }} ({{ timezone }})#}
+{#                    </p>#}
+{#                </div>#}
+            </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+            <td style="padding: 20px 30px; background-color: #f8f9fa; color: #6c757d; font-size: 13px; text-align: center; border-radius: 0 0 8px 8px;">
+                <p style="margin: 0;">
+                    This is an automated notification from {{ site_name }}. Please do not reply to this email.
+                </p>
+                <p style="margin: 10px 0 0;">
+                    &copy; {% now "Y" %} {{ site_name }}. All rights reserved.
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

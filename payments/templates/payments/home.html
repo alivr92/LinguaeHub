@@ -1,0 +1,16 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Django + Stripe Checkout{% endblock %}
+{% block head_style %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static 'payments/js/pay_main.min.js' %}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
+{% endblock %}
+{% block body_content %}
+    <section class="section">
+        <div class="container">
+            <button class="button is-primary" id="submitBtn">Purchase!</button>
+        </div>
+    </section>
+{% endblock %}

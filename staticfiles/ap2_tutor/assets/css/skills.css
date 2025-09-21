@@ -1,0 +1,53 @@
+/* Skill Card Styling */
+.skill-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    background-color: white;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 50px; /* Space for remove button */
+}
+
+.skill-card:hover {
+    border-color: rgba(13, 110, 253, 0.3);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+/* Make buttons equal height */
+.label_skill_video,
+.label_skill_certificate,
+.label_skill_thumbnail {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .skill-card {
+        padding-bottom: 20px;
+    }
+
+    .skill-card .position-absolute {
+        position: relative !important;
+        bottom: auto !important;
+        end: auto !important;
+        text-align: right;
+        padding: 10px 0 0 0 !important;
+    }
+
+    .skill-card .row > div {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .label_skill_video,
+    .label_skill_certificate,
+    .label_skill_thumbnail {
+        white-space: normal;
+        text-align: center;
+        padding: 0.5rem;
+    }
+}

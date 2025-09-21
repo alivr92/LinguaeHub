@@ -1,0 +1,232 @@
+{% load static %}
+{#<div class="alert alert-info mb-4">#}
+{#    <h5>Before setting availability, please configure your appointment settings:</h5>#}
+{#    <p>Time zone, session length, and other preferences need to be set first.</p>#}
+{#    <!-- Time Zone -->#}
+{#    <div class="col-lg-6">#}
+{#        <label class="form-label">Time Zone</label>#}
+{#        <select class="form-select js-choice z-index-9 border-0 bg-light" aria-label=".form-select-sm">#}
+{#            <option value="">Select your Time Zone</option>#}
+{#            {% for tz in all_timezones %}#}
+{#                <option value="{{ tz }}" {% if user_timezone == tz %}selected{% endif %}>#}
+{#                    {{ tz }}#}
+{#                </option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#        <div class="form-text">All your time slots will be saved by this timezone</div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<!-- APPOINTMENT WeekDays START -->#}
+{#<!-- Card START -->#}
+{#<div class="card border bg-transparent rounded-3">#}
+{#    <!-- Card body START -->#}
+{#    <div class="card-body p-4">#}
+{##}
+{#        <!-- Extra options -->#}
+{#        <div class="form-check form-check-md my-4">#}
+{#            <input type="hidden" id="providerUId" value="{{ user.id }}">#}
+{#            <input class="form-check-input" type="checkbox" value="" id="freeWeek">#}
+{#            <label class="form-check-label" for="freeWeek">Free all week days</label>#}
+{#        </div>#}
+{#        <!-- Accordion START -->#}
+{#        <div class="accordion accordion-icon accordion-bg-light" id="AccordionWeekDays">#}
+{#        </div>#}
+{#        <div class="container mt-4">#}
+{#            <div class="d-flex align-items-center gap-2 h-100">#}
+{#              <button class="btn btn-primary w-50" id="showTimes">Show Times on Table</button>#}
+{#                <button class="btn btn-success w-100" id="submitTimes">Submit Available Times</button>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!-- Accordion END -->#}
+{#    </div>#}
+{#    <!-- Card body END -->#}
+{#</div>#}
+{#<!-- Card END -->#}
+{#<!-- APPOINTMENT BUTTONS END -->#}
+{##}
+{#<!-- Messages from js will show here (Where embed message block defined in base)-->#}
+{#<div id="alert-container" class="m-3"></div>#}
+
+{# ============================================================================ #}
+<div class="container py-4">
+    <!-- Progress Bar -->
+    <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Step 5 of 7</span>
+            <span class="text-muted">75% complete</span>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Your Availability</h2>
+        <p class="text-muted">Set your weekly availability for teaching sessions</p>
+    </div>
+
+    <!-- Important Information Card -->
+    <div class=" border-0 shadow-sm mb-4">
+        <div class="card-header bg-light border-bottom d-flex align-items-center">
+            <i class="bi bi-info-circle-fill text-primary me-2"></i>
+            <h5 class="mb-0">Availability Guidelines</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info bg-light border-0 mb-3">
+                <div class="d-flex">
+                    <i class="bi bi-lightbulb-fill text-warning me-3 mt-1"></i>
+                    <div>
+                        <p class="mb-1"><strong>Flexible tutors get 2x more bookings</strong></p>
+                        <p class="mb-0">Setting clear availability helps students book sessions that work for both of
+                            you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span>Set your <strong>timezone first</strong> - all times will be based on this</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span>Be realistic about when you're available to teach</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span>Consider your timezone and your students' timezones</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>You can mark entire days as "Free" if you're available all day</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>Add multiple time slots for each day if needed</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>You can update your availability anytime</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Timezone Selection Section -->
+            <div class="mt-4 pt-3 border-top">
+                <h5 class="fw-bold mb-3"><i class="bi bi-clock me-2"></i>Timezone Settings</h5>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Important:</strong> All your time slots will be saved based on the timezone you
+                            select below.
+                        </div>
+
+                        <!-- Time Zone Selector -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Your Time Zone <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select js-choice z-index-9" id="timezone-select" name="timezone"
+                                    required>
+                                <option value="">Select your Time Zone</option>
+                                {% for tz in all_timezones %}
+                                    <option value="{{ tz }}" {% if user_timezone == tz %}selected{% endif %}>
+                                        {{ tz }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">This ensures your availability shows correctly to students in
+                                different timezones
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title"><i class="bi bi-question-circle me-2"></i>Need help?</h6>
+                                <p class="card-text small">Select the timezone where you'll be located when teaching.
+                                    Students will see your availability converted to their local time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Availability Setting Card -->
+    <div class=" border-0 shadow-sm mb-4">
+        <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Weekly Availability</h5>
+            <div class="form-check form-check-md">
+                <input class="form-check-input" type="checkbox" value="" id="freeWeek">
+                <label class="form-check-label" for="freeWeek">Mark all days as available</label>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info d-flex align-items-center mb-4">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <div>
+                    Click on each day to expand and set your available time slots.
+                    Students will only see times that match your set timezone above.
+                </div>
+            </div>
+
+            <!-- Accordion for days of week -->
+            <div class="accordion accordion-icon accordion-bg-light d-flex flex-column align-items-center"
+                 id="AccordionWeekDays">
+                <!-- JS will generate accordion items here -->
+            </div>
+
+            <div class="mt-4 pt-3 border-top">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="text-muted small">
+                        <i class="bi bi-lightbulb me-1"></i>Tip: Set consistent hours for better student expectations
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_availability" data-action="prev"
+                data-step="5">
+            <i class="bi bi-arrow-left me-2"></i> Previous
+        </button>
+
+        <div>
+            <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_availability"
+                    data-action="save" data-step="5">
+                <i class="bi bi-save me-1"></i> Save
+            </button>
+            <button type="button" class="btn btn-primary btn-next" id="btnNext_availability" data-action="next"
+                    data-step="5">
+                Next <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Hidden element with all timezones data -->
+<div id="timezone-data"
+     data-all-timezones="{% for tz in all_timezones %}{{ tz }}{% if not forloop.last %},{% endif %}{% endfor %}"
+     data-user-timezone="{{ user_timezone }}"
+     style="display: none;">
+</div>
+
+<!-- Hidden provider ID -->
+<input type="hidden" id="providerUId" value="{{ user.id }}">
+
+<!-- Messages container -->
+<div id="alert-container" class="m-3"></div>

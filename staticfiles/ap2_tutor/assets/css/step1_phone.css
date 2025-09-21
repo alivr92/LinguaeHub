@@ -1,0 +1,176 @@
+/*!*!*!* Flag styling for choices *!*!*!*/
+/*!*!*.item-with-flag {*!*!*/
+    /*!*!*display: flex;*!*!*/
+    /*!*!*align-items: center;*!*!*/
+    /*!*!*padding: 8px 10px;*!*!*/
+/*!*!*}*!*!*/
+
+/*!*!*.choices__list--dropdown .item-with-flag {*!*!*/
+    /*!*!*padding: 10px 15px;*!*!*/
+/*!*!*}*!*!*/
+
+/*!*!*.fi {*!*!*/
+    /*!*!*width: 20px;*!*!*/
+    /*!*!*height: 15px;*!*!*/
+    /*!*!*box-shadow: 0 0 1px rgba(0,0,0,0.5);*!*!*/
+    /*!*!*margin-right: 8px;*!*!*/
+/*!*!*}*!*!*/
+
+/*!*!* Phone Input Group *!*!*/
+/*!*.phone-input-group {*!*/
+    /*!*display: flex;*!*/
+    /*!*border: 1px solid #ced4da;*!*/
+    /*!*border-radius: 0.375rem;*!*/
+    /*!*overflow: hidden;*!*/
+    /*!*transition: border-color 0.15s ease-in-out;*!*/
+/*!*}*!*/
+
+/*!*.phone-input-group:focus-within {*!*/
+    /*!*border-color: #86b7fe;*!*/
+    /*!*box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);*!*/
+/*!*}*!*/
+
+/*!*.country-code-wrapper {*!*/
+    /*!*width: 120px;*!*/
+    /*!*flex-shrink: 0;*!*/
+    /*!*border-right: 1px solid #ced4da;*!*/
+/*!*}*!*/
+
+/*!*.country-code-select {*!*/
+    /*!*border: none;*!*/
+    /*!*height: 100%;*!*/
+    /*!*width: 100%;*!*/
+    /*!*padding: 0.375rem 0.75rem;*!*/
+/*!*}*!*/
+
+/*!*.phone-number-input {*!*/
+    /*!*border: none;*!*/
+    /*!*flex-grow: 1;*!*/
+    /*!*padding: 0.375rem 0.75rem;*!*/
+/*!*}*!*/
+
+/*!*!* Choices.js Customization *!*!*/
+/*!*.choices__list--dropdown .choices__item {*!*/
+    /*!*display: flex;*!*/
+    /*!*align-items: center;*!*/
+    /*!*padding: 8px 10px;*!*/
+/*!*}*!*/
+
+/*!*.choices__list--dropdown .flag-icon {*!*/
+    /*!*width: 20px;*!*/
+    /*!*height: 15px;*!*/
+    /*!*margin-right: 8px;*!*/
+    /*!*box-shadow: 0 0 1px rgba(0,0,0,0.3);*!*/
+/*!*}*!*/
+
+/*!*.choices__inner {*!*/
+    /*!*border: none !important;*!*/
+    /*!*background: transparent !important;*!*/
+    /*!*padding: 0 !important;*!*/
+/*!*}*!*/
+
+/*!*.choices[data-type*=select-one] .choices__inner {*!*/
+    /*!*padding-bottom: 0 !important;*!*/
+/*!*}*!*/
+
+/*!*.choices__list--single {*!*/
+    /*!*padding: 0 !important;*!*/
+    /*!*display: flex;*!*/
+    /*!*align-items: center;*!*/
+/*!*}*!*/
+
+/*!*.choices__list--single .flag-icon {*!*/
+    /*!*margin-right: 6px;*!*/
+/*!*}*!*/
+
+
+/*!*=================================================*!*/
+/*!* Custom Choices.js dropdown styling *!*/
+/*.choices__list--dropdown .choices__item {*/
+    /*display: flex !important;*/
+    /*align-items: center;*/
+    /*white-space: nowrap !important;*/
+    /*padding: 8px 12px !important;*/
+    /*min-height: auto !important;*/
+/*}*/
+
+/*.choices__list--dropdown .choices__item .flag-icon {*/
+    /*flex-shrink: 0;*/
+    /*width: 20px;*/
+    /*height: 15px;*/
+    /*margin-right: 8px;*/
+    /*box-shadow: 0 0 1px rgba(0,0,0,0.3);*/
+/*}*/
+
+/*.choices__list--dropdown .choices__item .country-info {*/
+    /*display: inline-flex;*/
+    /*align-items: center;*/
+    /*white-space: nowrap;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+/*}*/
+
+/*.choices__dropdown {*/
+    /*min-width: 300px !important; !* Adjust width as needed *!*/
+/*}*/
+
+/*!* Selected item styling *!*/
+/*.choices__list--single .choices__item {*/
+    /*display: flex !important;*/
+    /*align-items: center;*/
+    /*white-space: nowrap;*/
+/*}*/
+
+/*.choices__list--single .flag-icon {*/
+    /*margin-right: 6px;*/
+/*}*/
+
+
+
+
+  /* Phone Input Container */
+  .phone-input-container {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Selected Display */
+  .choices__list--single {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    height: 38px;
+  }
+
+  .choices__list--single .choices__item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* Dropdown Options */
+  .choices__list--dropdown {
+    width: auto !important;
+    min-width: 100%;
+  }
+
+  .choices__list--dropdown .choices__item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 8px 12px;
+  }
+
+  /* Flag Styling */
+  .flag-icon {
+    width: 20px;
+    height: 15px;
+    margin-right: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
+  }
+
+  /* Ensure dropdown width fits content */
+  .choices__inner {
+    min-width: 80px; /* Minimum width for selected display */
+  }

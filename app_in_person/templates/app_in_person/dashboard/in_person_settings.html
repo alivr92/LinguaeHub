@@ -1,0 +1,706 @@
+{#======================== BEST ======================= #}
+
+<!-- Privacy START -->
+{#<div class="border rounded-3 shadow-sm bg-white">#}
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <!-- Card START -->#}
+{#            <div class="card bg-transparent border-0">#}
+{#                <!-- Card header START -->#}
+{#                <div class="card-header bg-transparent border-bottom">#}
+{#                    <h3 class="card-header-title text-primary mb-0">#}
+{#                        <i class="bi bi-geo-alt-fill me-2"></i>Meeting Preferences & Location Settings#}
+{#                    </h3>#}
+{#                </div>#}
+{#                <!-- Card header END -->#}
+{##}
+{#                <!-- Card body START -->#}
+{#                <div class="card-body">#}
+{#                    <!-- Profile START -->#}
+{#                    <form id="clientLocationForm" class="needs-validation" method="POST"#}
+{#                          enctype="multipart/form-data" novalidate>#}
+{#                        <div class="card-body">#}
+{#                            <!-- Method Selection -->#}
+{#                            <div class="mb-4">#}
+{#                                <h5 class="fw-semibold mb-3">Select Your Preferred Meeting Method</h5>#}
+{#                                <div class="row g-3">#}
+{#                                    <!-- Online Only Option -->#}
+{#                                    <div class="col-md-4">#}
+{#                                        <div class="method-card card h-100 {% if form.meeting_method.value == 'online' %}selected{% endif %}"#}
+{#                                             data-method="online">#}
+{#                                            <div class="card-body text-center">#}
+{#                                                <div class="mb-3">#}
+{#                                                    <i class="bi bi-laptop text-primary" style="font-size: 2.5rem;"></i>#}
+{#                                                </div>#}
+{#                                                <h6 class="card-title fw-bold">Online Only</h6>#}
+{#                                                <p class="card-text small">All sessions conducted remotely</p>#}
+{#                                                <div class="form-check form-check-inline">#}
+{#                                                    <input class="form-check-input" type="radio"#}
+{#                                                           name="meeting_method" id="method_online"#}
+{#                                                           value="online"#}
+{#                                                           {% if form.meeting_method.value == 'online' %}checked{% endif %}>#}
+{#                                                    <label class="form-check-label fw-bold" for="method_online">#}
+{#                                                        Select#}
+{#                                                    </label>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <!-- Hybrid Option -->#}
+{#                                    <div class="col-md-4">#}
+{#                                        <div class="method-card card h-100 {% if form.meeting_method.value == 'hybrid' %}selected{% endif %}"#}
+{#                                             data-method="hybrid">#}
+{#                                            <div class="card-body text-center">#}
+{#                                                <div class="mb-3">#}
+{#                                                    <i class="bi bi-laptop text-primary me-1"#}
+{#                                                       style="font-size: 2rem;"></i>#}
+{#                                                    <i class="bi bi-plus"></i>#}
+{#                                                    <i class="bi bi-people-fill text-success ms-1"#}
+{#                                                       style="font-size: 2rem;"></i>#}
+{#                                                </div>#}
+{#                                                <h6 class="card-title fw-bold">Hybrid</h6>#}
+{#                                                <p class="card-text small">Both online and in-person options</p>#}
+{#                                                <div class="form-check form-check-inline">#}
+{#                                                    <input class="form-check-input" type="radio"#}
+{#                                                           name="meeting_method" id="method_hybrid"#}
+{#                                                           value="hybrid"#}
+{#                                                           {% if form.meeting_method.value == 'hybrid' %}checked{% endif %}>#}
+{#                                                    <label class="form-check-label fw-bold" for="method_hybrid">#}
+{#                                                        Select#}
+{#                                                    </label>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <!-- In-Person Only Option -->#}
+{#                                    <div class="col-md-4">#}
+{#                                        <div class="method-card card h-100 {% if form.meeting_method.value == 'in_person' %}selected{% endif %}"#}
+{#                                             data-method="in_person">#}
+{#                                            <div class="card-body text-center">#}
+{#                                                <div class="mb-3">#}
+{#                                                    <i class="bi bi-people-fill text-success"#}
+{#                                                       style="font-size: 2.5rem;"></i>#}
+{#                                                </div>#}
+{#                                                <h6 class="card-title fw-bold">In-Person Only</h6>#}
+{#                                                <p class="card-text small">Only face-to-face sessions</p>#}
+{#                                                <div class="form-check form-check-inline">#}
+{#                                                    <input class="form-check-input" type="radio"#}
+{#                                                           name="meeting_method" id="method_in_person"#}
+{#                                                           value="in_person"#}
+{#                                                           {% if form.meeting_method.value == 'in_person' %}checked{% endif %}>#}
+{#                                                    <label class="form-check-label fw-bold" for="method_in_person">#}
+{#                                                        Select#}
+{#                                                    </label>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                                <!-- Dynamic Method Hint -->#}
+{#                                <div class="alert alert-info mt-3 d-flex align-items-center" id="methodHint">#}
+{#                                    <i class="bi bi-info-circle-fill me-2 fs-5 info-icon"></i>#}
+{#                                    <div>#}
+{#                                        <strong>Our platform specializes in online teaching</strong>.#}
+{#                                        In-person sessions are an <span class="text-decoration-underline">optional supplement</span>.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <!-- In-Person Details (Conditional) -->#}
+{#                            <div id="inPersonLocationSection"#}
+{#                                 class="{% if form.meeting_method.value != 'hybrid' and form.meeting_method.value != 'in_person' %}d-none{% endif %}">#}
+{#                                <hr class="my-4">#}
+{#                                <h5 class="fw-semibold text-success mb-3">#}
+{#                                    <i class="bi bi-pin-map-fill me-2"></i>In-Person Meeting Details#}
+{#                                </h5>#}
+{##}
+{#                                <!-- Location Explanation Card -->#}
+{#                                <div class="card bg-light border-0 mb-4">#}
+{#                                    <div class="card-body">#}
+{#                                        <h6 class="card-title fw-semibold mb-3">#}
+{#                                            <i class="bi bi-geo me-2 text-primary"></i>How to Set Your Location#}
+{#                                        </h6>#}
+{#                                        <ul class="list-unstyled mb-0">#}
+{#                                            <li class="mb-2 d-flex">#}
+{#                                                <i class="bi bi-search text-primary me-2 mt-1"></i>#}
+{#                                                <div><strong>Search</strong> for your city or area in the search box, or#}
+{#                                                </div>#}
+{#                                            </li>#}
+{#                                            <li class="mb-2 d-flex">#}
+{#                                                <i class="bi bi-cursor text-primary me-2 mt-1"></i>#}
+{#                                                <div><strong>Click directly on the map</strong> to set your location#}
+{#                                                </div>#}
+{#                                            </li>#}
+{#                                            <li class="mb-2 d-flex">#}
+{#                                                <i class="bi bi-shield-check text-primary me-2 mt-1"></i>#}
+{#                                                <div>Your exact location is <strong>securely stored</strong> and only#}
+{#                                                    shared with tutors after they've been accepted and you've confirmed#}
+{#                                                    the session#}
+{#                                                </div>#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{##}
+{#                                        <hr class="my-3">#}
+{##}
+{#                                        <h6 class="card-title fw-semibold mb-2">Location Precision Options</h6>#}
+{#                                        <div class="row">#}
+{#                                            <div class="col-md-6 mb-2">#}
+{#                                                <div class="d-flex">#}
+{#                                                    <i class="bi bi-geo-alt text-success me-2 mt-1"></i>#}
+{#                                                    <div>#}
+{#                                                        <strong>Approximate Location</strong> (city/area level):#}
+{#                                                        <small class="d-block text-muted">Select if you prefer meeting#}
+{#                                                            at public places or educational institutions in your area#}
+{#                                                        </small>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="col-md-6 mb-2">#}
+{#                                                <div class="d-flex">#}
+{#                                                    <i class="bi bi-geo-fill text-primary me-2 mt-1"></i>#}
+{#                                                    <div>#}
+{#                                                        <strong>Exact Location</strong> (zoom in on map):#}
+{#                                                        <small class="d-block text-muted">Select if you want sessions at#}
+{#                                                            your home or specific private location#}
+{#                                                        </small>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{#                                <div class="row g-3">#}
+{#                                    <!-- Map Location Picker -->#}
+{#                                    <div class="col-12">#}
+{#                                        <label class="form-label fw-semibold">Your Meeting Location <span#}
+{#                                                class="text-danger">*</span></label>#}
+{##}
+{#                                        <!-- Search Box -->#}
+{#                                        <div class="input-group mb-3">#}
+{#                                            <span class="input-group-text bg-transparent"><i#}
+{#                                                    class="bi bi-search"></i></span>#}
+{#                                            <input type="text" id="locationSearch" class="form-control"#}
+{#                                                   placeholder="Search for your city or area..." autocomplete="off">#}
+{#                                            <button class="btn btn-outline-secondary" type="button" id="clearSearch">#}
+{#                                                <i class="bi bi-x"></i> Clear#}
+{#                                            </button>#}
+{#                                        </div>#}
+{##}
+{#                                        <!-- Map Container -->#}
+{#                                        <div id="osmMap" class="map-container" style="height: 350px; width: 100%;"#}
+{#                                             class="border rounded mb-2"></div>#}
+{##}
+{#                                        <!-- Location Display -->#}
+{#                                        <div class="d-flex justify-content-between align-items-center mt-2 p-3 bg-light rounded">#}
+{#                                            <div>#}
+{#                                                <div class="d-flex align-items-center mb-1">#}
+{#                                                    <i class="bi bi-geo me-1 text-muted"></i>#}
+{#                                                    <small class="text-muted">Coordinates: <span#}
+{#                                                            id="coordinatesDisplay">#}
+{#                                                                        Not set#}
+{#                                                                    </span></small>#}
+{#                                                </div>#}
+{#                                                <div class="d-flex align-items-center">#}
+{#                                                    <i class="bi bi-pin-map me-1 text-muted"></i>#}
+{#                                                    <small class="text-muted">Service Area:#}
+{#                                                        <span id="displayCity">#}
+{#                                                                            Not detected#}
+{#                                                                        </span>,#}
+{#                                                        <span id="displayCountry">#}
+{#                                                                            Not detected#}
+{#                                                                        </span>#}
+{#                                                    </small>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <button type="button" id="resetLocation"#}
+{#                                                    class="btn btn-sm btn-outline-danger">#}
+{#                                                <i class="bi bi-x-circle me-1"></i> Reset Location#}
+{#                                            </button>#}
+{#                                        </div>#}
+{##}
+{#                                        <!-- Hidden Fields -->#}
+{#                                        <input type="hidden" name="latitude" id="osmLat" value="">#}
+{#                                        <input type="hidden" name="longitude" id="osmLng" value="">#}
+{#                                        <input type="hidden" name="country" id="mapCountry" value="">#}
+{#                                        <input type="hidden" name="city" id="mapCity" value="">#}
+{#                                    </div>#}
+{##}
+{#                                    <!-- Teaching Radius -->#}
+{#                                    <div class="col-md-6">#}
+{#                                        <label class="form-label fw-semibold">Maximum Travel Distance#}
+{#                                            <i class="bi bi-info-circle text-primary ms-1"#}
+{#                                               data-bs-toggle="tooltip"#}
+{#                                               title="We'll only match you with students/tutors within this radius">#}
+{#                                            </i>#}
+{#                                        </label>#}
+{#                                        <div class="input-group">#}
+{#                                            <input type="number" class="form-control" name="meeting_radius" value="10"#}
+{#                                                   min="1" max="100">#}
+{#                                            <span class="input-group-text">km</span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <!-- Meeting Preferences -->#}
+{#                                    <div class="col-md-6">#}
+{#                                        <label class="form-label fw-semibold">Session Location Preference</label>#}
+{#                                        <select class="form-select" name="meeting_location">#}
+{#                                            <option value="any">Any suitable location</option>#}
+{#                                            <option value="public">Public spaces only</option>#}
+{#                                            <option value="educational">Educational institutions</option>#}
+{#                                            <option value="private">Private location</option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+{##}
+{#                                    <!-- Student-specific fields (simulated) -->#}
+{#                                    <div class="col-md-6">#}
+{#                                        <label class="form-label fw-semibold">Meeting Aim</label>#}
+{#                                        <select class="form-select" name="inp_aim">#}
+{#                                            <option value="exam_prep">Exam preparation</option>#}
+{#                                            <option value="skill_development">Skill development</option>#}
+{#                                            <option value="homework_help">Homework help</option>#}
+{#                                            <option value="project_work">Project work</option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                    <div class="col-md-6">#}
+{#                                        <label class="form-label fw-semibold">Preferred start date</label>#}
+{#                                        <input type="date" class="form-control" name="inp_start">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <!-- Security Note -->#}
+{#                            <div class="mt-4 p-3 security-badge rounded">#}
+{#                                <div class="d-flex">#}
+{#                                    <i class="bi bi-shield-check text-success me-2 fs-5"></i>#}
+{#                                    <div>#}
+{#                                        <strong>Privacy Protection:</strong> Your exact location is stored securely and#}
+{#                                        will only be shared with a tutor after they've been accepted and you've#}
+{#                                        confirmed the session. You maintain full control over your location privacy.#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <!-- Buttons -->#}
+{#                            <div class="d-sm-flex justify-content-end mt-4 pt-3 border-top">#}
+{#                                <button type="button" class="btn btn-sm btn-outline-secondary me-2">#}
+{#                                    Cancel#}
+{#                                </button>#}
+{#                                <button type="submit" form="clientLocationForm" id="btnSave"#}
+{#                                        class="btn btn-sm btn-primary mb-0">#}
+{#                                    <i class="bi bi-check-circle me-1"></i> Save Preferences#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </form>#}
+{#                    <!-- Teaching Method Section End -->#}
+{#                </div>#}
+{#                <!-- Card body END -->#}
+{#            </div>#}
+{#            <!-- Card END -->#}
+{#        </div>#}
+{#        <!-- Privacy END -->#}
+{#    </div>#}
+{#</div>#}
+<!-- Main content END -->
+
+
+{# --------------------------------------------------- #}
+<!-- Privacy START -->
+<div class="border rounded-3 shadow-sm bg-white">
+    <div class="row">
+        <div class="col-12">
+            <!-- Card START -->
+            <div class="card bg-transparent border-0">
+                <!-- Card header START -->
+                <div class="card-header bg-transparent border-bottom">
+                    <h3 class="card-header-title text-primary mb-0">
+                        <i class="bi bi-people-fill fs-3 mx-2"></i>Meeting Preferences & Location Settings
+{#                        <i class="bi bi-geo-alt-fill me-2"></i>Meeting Preferences & Location Settings#}
+                    </h3>
+                </div>
+                <!-- Card header END -->
+
+                <!-- Card body START -->
+                <div class="card-body">
+                    <!-- Stats boxes START -->
+                    <div class="row g-4 mb-4">
+                        <!-- Tutors with location -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 bg-primary bg-opacity-10 border border-primary rounded-3 stats-box">
+                                <h6 class="mb-2">Tutors with Location</h6>
+                                <h2 class="mb-0 stats-number text-primary">1,247</h2>
+                                <small class="text-muted d-block mb-2">Available in your area</small>
+                                <a href="#" class="btn btn-sm btn-primary btn-soft mt-2 mb-0">View Tutors</a>
+                            </div>
+                        </div>
+
+                        <!-- Students with location -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 bg-success bg-opacity-10 border border-success rounded-3 stats-box">
+                                <h6 class="mb-2">Students with Location</h6>
+                                <h2 class="mb-0 stats-number text-success">3,891</h2>
+                                <small class="text-muted d-block mb-2">Seeking in-person sessions</small>
+                                <a href="#" class="btn btn-sm btn-success btn-soft mt-2 mb-0">View Students</a>
+                            </div>
+                        </div>
+
+                        <!-- Missing location -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 bg-warning bg-opacity-15 border border-warning rounded-3 stats-box">
+                                <h6 class="mb-2">Potential Matches</h6>
+                                <h2 class="mb-0 stats-number text-warning">156</h2>
+                                <small class="text-muted d-block mb-2">Based on your preferences</small>
+                                <a href="#" class="btn btn-sm btn-warning btn-soft mt-2 mb-0">View Matches</a>
+                            </div>
+                        </div>
+
+                        <!-- Potential matches -->
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="text-center p-4 bg-info bg-opacity-10 border border-info rounded-3 stats-box">
+                                <h6 class="mb-2">Hybrid Advantage</h6>
+                                <h2 class="mb-0 stats-number text-info">+65%</h2>
+                                <small class="text-muted d-block mb-2">More matching opportunities</small>
+                                <a href="#" class="btn btn-sm btn-info btn-soft mt-2 mb-0">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Stats boxes END -->
+
+                    <!-- Profile START -->
+                    <form id="clientLocationForm" class="needs-validation" method="POST"
+                          enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                        <div class="card-body">
+                            <!-- Method Selection -->
+                            <div class="mb-4">
+                                <h5 class="fw-semibold mb-3">Select Your Preferred Meeting Method</h5>
+                                <div class="row g-4">
+                                    <!-- Online Only Option -->
+                                    <div class="col-md-4">
+                                        <div class="method-card card h-100 " data-method="online">
+                                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                                <div>
+                                                    <div class="mb-3 d-flex justify-content-center align-items-center"
+                                                         style="height: 60px;">
+                                                        <i class="bi bi-laptop text-primary fs-1"></i>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                                        <input class="form-check-input me-2 hidden-radio " type="radio"
+                                                               name="meeting_method" id="method_online"
+                                                               value="online"
+                                                               {% if form.meeting_method.value == 'online' %}checked{% endif %}>
+                                                        <h6 class="card-title fw-bold mb-0">Online Only</h6>
+                                                    </div>
+                                                    <p class="card-text small text-secondary mb-0">All sessions
+                                                        conducted remotely</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hybrid Option -->
+                                    <div class="col-md-4">
+                                        <div class="method-card card h-100 " data-method="hybrid">
+                                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                                <div>
+                                                    <div class="mb-3 d-flex justify-content-center align-items-center position-relative"
+                                                         style="height: 60px;">
+                                                        <span class="badge bg-success position-absolute top-0 start-1 translate-middle ">Recommended</span>
+                                                        <i class="bi bi-laptop text-primary fs-3 me-1"></i>
+                                                        <i class="bi bi-plus small mx-1"></i>
+                                                        <i class="bi bi-people-fill text-success fs-3 ms-1"></i>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                                        <input class="form-check-input me-2 hidden-radio" type="radio"
+                                                               name="meeting_method" id="method_hybrid"
+                                                               value="hybrid"
+                                                               {% if form.meeting_method.value == 'hybrid' %}checked{% endif %}>
+                                                        <h6 class="card-title fw-bold mb-0">Hybrid</h6>
+                                                    </div>
+                                                    <p class="card-text small text-secondary mb-0">Both online and
+                                                        in-person options</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- In-Person Only Option -->
+                                    <div class="col-md-4">
+                                        <div class="method-card card h-100 " data-method="in_person">
+                                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                                <div>
+                                                    <div class="mb-3 d-flex justify-content-center align-items-center"
+                                                         style="height: 60px;">
+                                                        <i class="bi bi-people-fill text-success fs-1"></i>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center align-items-center mb-2">
+                                                        <input class="form-check-input me-2 hidden-radio" type="radio"
+                                                               name="meeting_method" id="method_in_person"
+                                                               value="in_person"
+                                                               {% if form.meeting_method.value == 'in_person' %}checked{% endif %}>
+                                                        <h6 class="card-title fw-bold mb-0">In-Person Only</h6>
+                                                    </div>
+                                                    <p class="card-text small text-secondary mb-0">Only face-to-face
+                                                        sessions</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Dynamic Method Hint -->
+                                <div class="alert alert-info mt-3 d-flex align-items-center" id="methodHint">
+                                    <i class="bi bi-info-circle-fill me-2 fs-5 info-icon"></i>
+                                    <div>
+                                        <strong>Hybrid Approach - Recommended</strong>
+                                        <ul class="benefit-list mt-2 mb-0">
+                                            <li><span class="highlight">Best matching opportunity</span> - we'll show
+                                                you online options if in-person isn't available
+                                            </li>
+                                            <li>Flexibility to choose between online and in-person sessions</li>
+                                            <li>Wider selection of tutors/students</li>
+                                            <li>Fallback to online when in-person isn't convenient</li>
+                                        </ul>
+                                        <p class="mt-2 mb-0">
+                                            <small>Choosing hybrid increases your chances of finding the right match by
+                                                <span class="highlight">65%</span> compared to in-person only.
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- In-Person Details (Conditional) -->
+                            <div id="inPersonLocationSection">
+                                <hr class="my-4">
+                                <h5 class="fw-semibold text-success mb-3">
+                                    <i class="bi bi-pin-map-fill me-2"></i>In-Person Meeting Details
+                                </h5>
+
+                                <!-- Location Explanation Card -->
+                                <div class="card bg-light border-0 mb-4">
+                                    <div class="card-body">
+                                        <h6 class="card-title fw-semibold mb-3">
+{#                                            <i class="bi bi-geo me-2 text-primary"></i>#}
+                                            How to Set Your Location
+                                        </h6>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2 d-flex">
+                                                <i class="bi bi-search text-primary me-2 "></i>
+                                                <div><strong>Search</strong> for your city or area in the search box, or
+                                                </div>
+                                            </li>
+                                            <li class="mb-2 d-flex">
+                                                <i class="bi bi-cursor text-primary me-2 "></i>
+                                                <div><strong>Click directly on the map</strong> to set your location
+                                                </div>
+                                            </li>
+                                            <li class="mb-2 d-flex">
+                                                <i class="bi bi-shield-check text-primary me-2 "></i>
+                                                <div>Your exact location is <strong>securely stored</strong> and only
+                                                    shared with tutors after they've been accepted and you've confirmed
+                                                    the session
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                        <hr class="my-3">
+
+                                        <h6 class="card-title fw-semibold mb-2">Location Precision Options</h6>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-2">
+                                                <div class="d-flex">
+                                                    <i class="bi bi-geo-alt text-success me-2 mt-1"></i>
+                                                    <div>
+                                                        <strong>Approximate Location</strong> (city/area level):
+                                                        <small class="d-block text-muted">Select if you prefer meeting
+                                                            at public places or educational institutions in your area
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <div class="d-flex">
+                                                    <i class="bi bi-geo-fill text-primary me-2 mt-1"></i>
+                                                    <div>
+                                                        <strong>Exact Location</strong> (zoom in on map):
+                                                        <small class="d-block text-muted">Select if you want sessions at
+                                                            your home or specific private location
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3">
+                                    <!-- Map Location Picker -->
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Your Meeting Location <span
+                                                class="text-danger">*</span></label>
+
+                                        <!-- Search Box -->
+                                        {#                                                        <div class="input-group mb-3">#}
+                                        {#                                                            <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>#}
+                                        {#                                                            <input type="text" id="locationSearch" class="form-control"#}
+                                        {#                                                                   placeholder="Search for your city or area..." autocomplete="off">#}
+                                        {#                                                            <button class="btn btn-outline-secondary" type="button" id="clearSearch">#}
+                                        {#                                                                <i class="bi bi-x"></i> Clear#}
+                                        {#                                                            </button>#}
+                                        {#                                                        </div>#}
+
+                                        <!-- Map Container -->
+                                        <div id="osmMap" class="map-container" style="height: 350px; width: 100%;"
+                                             class="border rounded mb-2"></div>
+
+                                        <!-- Location Display -->
+                                        <div class="d-flex justify-content-between align-items-center mt-2 p-3 bg-light rounded">
+                                            <div>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <i class="bi bi-geo me-1 text-muted"></i>
+                                                    <small class="text-muted">Coordinates: <span
+                                                            id="coordinatesDisplay">
+                                                                        {% if form.latitude.value and form.longitude.value %}
+                                                                            {{ form.latitude.value|floatformat:4 }},
+                                                                            {{ form.longitude.value|floatformat:4 }}
+                                                                        {% else %}
+                                                                            Not set
+                                                                        {% endif %}
+                                                                    </span></small>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-pin-map me-1 text-muted"></i>
+                                                    <small class="text-muted">Service Area:
+                                                        <span id="displayCity">
+                                {% if form.city.value %}
+                                    {{ form.city.value }}
+                                {% else %}
+                                    Not detected
+                                {% endif %}
+                            </span>,
+                                                        <span id="displayCountry">
+                                {% if form.country.value %}
+                                    {{ form.country.value }}
+                                {% else %}
+                                    Not detected
+                                {% endif %}
+                            </span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <button type="button" id="resetLocation"
+                                                    class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-x-circle me-1"></i> Reset Location
+                                            </button>
+                                        </div>
+
+                                        <!-- Hidden Fields -->
+                                        <input type="hidden" name="latitude" id="osmLat"
+                                               value="{{ form.latitude.value|default_if_none:'' }}">
+                                        <input type="hidden" name="longitude" id="osmLng"
+                                               value="{{ form.longitude.value|default_if_none:'' }}">
+                                        <input type="hidden" name="country" id="mapCountry"
+                                               value="{{ form.country.value|default_if_none:'' }}">
+                                        <input type="hidden" name="city" id="mapCity"
+                                               value="{{ form.city.value|default_if_none:'' }}">
+                                        <input type="hidden" name="offers_in_person" id="offersInPerson"
+                                               value="{% if form.offers_in_person.value %}true{% else %}false{% endif %}">
+                                    </div>
+
+
+                                    <!-- Meeting Radius -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Maximum Travel Distance
+                                            <i class="bi bi-info-circle text-primary"
+                                               data-bs-toggle="tooltip"
+                                               title="We'll only match you with students within this radius">
+                                            </i>
+                                        </label>
+                                        <div class="input-group border-radius-1">
+                                            {{ form.meeting_radius }}
+                                            <span class="input-group-text">km</span>
+                                        </div>
+                                        {% for error in form.meeting_radius.errors %}
+                                            <div class="invalid-feedback d-block">{{ error }}</div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <!-- Meeting Preferences -->
+                                    <div class="col-md-6">
+                                        <label class="form-label">Session Location Preference</label>
+                                        {% if form.meeting_location %}
+                                            {{ form.meeting_location|default_if_none:'any' }}
+                                            {% for error in form.meeting_location.errors %}
+                                                <div class="invalid-feedback d-block">{{ error }}</div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+
+
+                                    <!-- Student-specific fields (simulated) -->
+                                    {% if user.profile.user_type == 'student' %}
+                                        <!-- Meeting Aim -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Meeting Aim</label>
+                                            {% if form.inp_aim %}
+                                                {{ form.inp_aim }}
+                                                {% for error in form.inp_aim.errors %}
+                                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                        <!-- Meeting start DATE -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Preferred start date</label>
+                                            {% if form.inp_start %}
+                                                {{ form.inp_start }}
+                                                {% for error in form.inp_start.errors %}
+                                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+
+                            <!-- Security Note -->
+                            <div class="mt-4 p-3 security-badge rounded" id="privacyHint">
+                                <div class="d-flex">
+                                    <i class="bi bi-shield-check text-success me-2 fs-5"></i>
+                                    <div>
+                                        <strong>Privacy Protection:</strong> Your exact location is stored securely and
+                                        will only be shared with a tutor after they've been accepted and you've
+                                        confirmed the session. You maintain full control over your location privacy.
+                                    </div>
+                                </div>
+                            </div>
+
+                        <!-- Buttons -->
+                            <div class="d-sm-flex justify-content-end mt-4">
+                                <button type="submit" form="clientLocationForm" id="btnSave"
+                                        class="btn btn-sm btn-primary mb-0">Save changes
+                                </button>
+                            </div>
+                            <!-- Buttons -->
+{#                            <div class="d-sm-flex justify-content-end mt-4 pt-3 border-top">#}
+{#                                <button type="submit" form="clientLocationForm" id="btnSave"#}
+{#                                        class="btn btn-sm btn-primary mb-0">#}
+{#                                    <i class="bi bi-check-circle me-1"></i> Save Preferences#}
+{#                                </button>#}
+{#                            </div>#}
+                        </div>
+                    </form>
+                    <!-- Teaching Method Section End -->
+                </div>
+                <!-- Card body END -->
+            </div>
+            <!-- Card END -->
+        </div>
+        <!-- Privacy END -->
+    </div>
+</div>
+<!-- Main content END -->

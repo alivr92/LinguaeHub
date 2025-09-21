@@ -1,0 +1,80 @@
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+{% endblock %}
+
+{% block embed_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/dashboard_schedule/css/d_appointments.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+
+  <!-- Main content START -->
+  <div class="col-xl-9">
+
+    <!-- Table Settings START -->
+    <!-- Table Settings END -->
+
+  </div>
+  <!-- Main content END -->
+
+  <!-- Popup modal for Confirm selections START -->
+  <div class="modal fade" id="confirmWeek" tabindex="-1" aria-labelledby="confirmWeekLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" id="confirmWeekLabel">Confirmation</h5>
+          <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal" aria-label="Close"><i
+            class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body">
+          <form class="row text-start g-3">
+            <!-- Course name -->
+            <div class="col-12 text-center">
+              <label class="form-label"><h4>Do you confirm your changes?</h4></label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <button type="button" id="btnNo" class="btn btn-danger my-0" data-bs-dismiss="modal">Discard</button>
+          <button type="button" id="btnYes" class="btn btn-success my-0">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Popup modal for Confirm selections END -->
+
+
+{% endblock %}
+{% block embed_messages %}
+  <!-- Messages from js will show here (Where embed message block defined in base)-->
+{#  <div id="alert-container" class="m-3"></div>#}
+{% endblock %}
+
+{% block embed_content %}
+  <section id="vtable">
+  {% include 'ap2_meeting/dashboard/d_table.html' %}
+  </section>
+{% endblock %}
+
+{% block scripts_vendors %}
+  <!-- Vendors -->
+  <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+{% endblock %}
+{% block embed_script %}
+  {% if user.is_authenticated %}
+    <script src="{% static 'ap2_meeting/dashboard_schedule/js/d_appointments.min.js' %}"></script>
+  {% endif %}
+{% endblock %}
+
+{% block my_scripts %}
+
+{% endblock %}

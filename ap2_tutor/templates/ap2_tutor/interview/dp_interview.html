@@ -1,0 +1,271 @@
+{% extends 'ap2_tutor/interview/includes/dp_interview_base.html' %}
+{% load static %}
+{% load tz %}
+{% load custom_filters %}
+{% load my_custom_filters %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/glightbox/css/glightbox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/quill/css/quill.snow.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/stepper/css/bs-stepper.min.css' %}">
+    <!-- Add this script to load the Stepper CSS -->
+    {#    <link href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">#}
+
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">#}
+{% endblock %}
+{% block embed_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/client/css/reservation.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/stepper.css' %}">
+{% endblock %}
+{#{% block my_style %}{% endblock %}#}
+{% block dashboard_main_content %}
+    <!-- =======================
+    Steps START -->
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <!-- Content -->
+            <p class="text-center">
+                {#                        Use this interface to complete your profile and book the best suitable time#}
+                {#                        for interview.#}
+                {#                        Once you are done you will be in our waiting list of our examiner interview. If approved, your#}
+                {#                        profile will appear in {{ CFChar.site_name }} tutor portal#}
+                {#                        and you will be informed by email that you have been accepted.#}
+
+                Complete your profile using this interface and schedule the most convenient time for your
+                interview. Once submitted, your application will be added to our interview waiting list for
+                examiner review. Upon approval, your profile will be featured on the {{ CFChar.site_name }}
+                tutor portal, and you will receive an email notification confirming your acceptance.
+            </p>
+        </div>
+    </div>
+
+
+    <input type="hidden" id="currentStep" value="{{ current_step }}">
+    <p>Current Step: {{ current_step }}</p>
+
+
+    <div class="card bg-transparent border rounded-3 mb-5">
+        <div id="stepper" class="bs-stepper stepper-outline">
+            <!-- Card header -->
+            <div class="card-header bg-light border-bottom px-lg-5">
+                <!-- Step Buttons START -->
+                <div class="bs-stepper-header" role="tablist">
+                    <!-- Step 1 -->
+                    <div class="step" data-target="#step-1">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger1" aria-controls="step-1">
+                                        <span class="bs-stepper-circle completed-step bg-success text-white d-flex justify-content-center align-items-center">
+                                            <i class="bi bi-check" style="font-size: 2rem;"></i></span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Primitive application</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 2 -->
+                    <div class="step" data-target="#step-2">
+                        <div class="d-grid text-center align-items-center">
+                            <!-- Step trigger in header -->
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger2" aria-controls="step-2">
+                                <span class="bs-stepper-circle">2</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Complete profile</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 3 -->
+                    <div class="step" data-target="#step-3">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger3" aria-controls="step-3">
+                                <span class="bs-stepper-circle">3</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Booking interview</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 4 -->
+                    <div class="step" data-target="#step-4">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger4" aria-controls="step-4">
+                                <span class="bs-stepper-circle">4</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Review and submit</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 5 -->
+                    <div class="step" data-target="#step-5">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger5" aria-controls="step-5">
+                                <span class="bs-stepper-circle">5</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Interview</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 6 -->
+                    <div class="step" data-target="#step-6">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger6" aria-controls="step-4">
+                                <span class="bs-stepper-circle">6</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Result</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step Buttons END -->
+            </div>
+
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Step content START -->
+                <div class="bs-stepper-content">
+                    <!-- Step 1 content START -->
+                    <div id="step-1" role="tabpanel" class="content fade" aria-labelledby="steppertrigger1">
+                        <!-- Title -->
+                        <h4>Primitive application</h4>
+                        <hr> <!-- Divider -->
+
+                        <!-- Basic information START -->
+                        <div class="row g-4">
+                            <p class="d-flex justify-content-center align-items-center">
+                                <span class="bs-stepper-circle completed-step bg-success text-white d-flex justify-content-center align-items-center">
+                                            <i class="bi bi-check" style="font-size: 2rem;"></i></span>
+                            </p>
+                            <p class="text-center">
+                                You have accepted in primitive submission, keep going and complete your profile.
+                            </p>
+                            <!-- Step 1 button -->
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-primary next-btn mb-0">Next</button>
+                            </div>
+                            {#                            <button class="btn btn-primary next-btn"#}
+                            {#                                    data-stepper-next aria-label="Next step">#}
+                            {#                                Next#}
+                            {#                            </button>#}
+                        </div>
+                        <!-- Basic information START -->
+                    </div>
+                    <!-- Step 1 content END -->
+
+                    <!-- Step 2 content START -->
+                    <div id="step-2" role="tabpanel" class="content fade" aria-labelledby="steppertrigger2">
+                        <!-- Title -->
+                        <h4>Complete Profile</h4>
+                        <hr> <!-- Divider -->
+                        <div class="row">
+                            <!-- Profile form START -->
+                            <div class="col-12 col-xl-12">
+                                {% include 'ap2_tutor/interview/includes/inter_step2_basic_profile.html' %}
+                            </div>
+                            <!-- Profile form END -->
+
+                        </div>
+                    </div>
+                    <!-- Step 2 content END -->
+
+                    <!-- Step 3 content Reservation START -->
+                    <div id="step-3" role="tabpanel" class="content fade" aria-labelledby="steppertrigger3">
+                        <!-- Title -->
+                        <h4>Schedule your appointment</h4>
+                        <hr> <!-- Divider -->
+                        <div class="row">
+
+                            <!-- Session selection container -->
+                            <div id="sessionSelectionContainer">
+                                {% include 'ap2_meeting/interview_table.html' %}
+                            </div>
+                            <!-- Step 3 button -->
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary btn-prev mb-0">Previous</button>
+                                {#                                <button class="btn btn-primary next-btn mb-0">Next</button>#}
+                                {#                                <button class="btn btn-primary mb-0"  aria-label="Submit and continue">Next</button>#}
+                                {#                                <button type="button" class="btn btn-primary next-btn" id="btnNextSchedule"#}
+                                {#                                        aria-label="Submit and continue">Next#}
+                                {#                                </button>#}
+                                <a id="btnNextSchedule" href="#" class="btn btn-next btn-primary ">Next</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 3 content Reservation END -->
+
+                    <!-- Step 4 content START (Order Confirmation Step)-->
+                    <!-- Session review section -->
+                    <div id="step-4" role="tabpanel" class="content fade" aria-labelledby="steppertrigger4">
+                        <!-- Title -->
+                        <h4><i class="bi bi-calendar2-check-fill text-primary"></i> Review your session details</h4>
+                        <hr> <!-- Divider -->
+                        <!-- Content -->
+                        {% include 'ap2_tutor/interview/includes/inter_step4_order_confirmation.html' %}
+                    </div>
+                    <!-- Step 4 content END -->
+
+                    <!-- Step 5 content START (Meeting Link)-->
+                    <div id="step-5" role="tabpanel" class="content fade" aria-labelledby="steppertrigger5">
+                        <!-- Title -->
+                        <h4>Online Meeting</h4>
+                        <hr> <!-- Divider -->
+                        <!-- Content -->
+                        {% include 'ap2_tutor/interview/includes/inter_step5.html' %}
+                    </div>
+                    <!-- Step 5 content END -->
+
+                    <!-- Step 6 content START -->
+                    <div id="step-6" role="tabpanel" class="content fade" aria-labelledby="steppertrigger6">
+                        <!-- Title -->
+                        <h4>Final Result</h4>
+                        <hr> <!-- Divider -->
+                        <!-- Content -->
+                        {% include 'ap2_tutor/interview/includes/inter_step6_result.html' %}
+                    </div>
+                    <!-- Step 6 content END -->
+                </div>
+            </div>
+            <!-- Card body END -->
+        </div>
+    </div>
+    <!-- =======================
+    Steps END -->
+{% endblock %}
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+{% block dt_modal %}
+    {% include 'ap2_meeting/client/client_modals.html' %}
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    {#    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>#}
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/js/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/stepper/js/bs-stepper.min.js' %}"></script>
+    {#    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>#}
+{% endblock %}
+{% block embed_script %}
+    {% if user.is_authenticated %}
+        <script src="{% static 'ap2_meeting/client/js/reservation.min.js' %}"></script>
+    {% endif %}
+{% endblock %}
+
+{% block my_scripts %}
+    <script src="{% static 'assets/js/avr_set_profile_photo.js' %}"></script>
+    <script src="{% static 'ap2_tutor/assets/js/interview/interview_stepper.min.js' %}"></script>
+{% endblock %}

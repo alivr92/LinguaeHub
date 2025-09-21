@@ -1,0 +1,132 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #4e54c8, #8f94fb);
+    --secondary-gradient: linear-gradient(135deg, #ff7e5f, #feb47b);
+    --success-gradient: linear-gradient(135deg, #56ab2f, #a8e063);
+    --orange-gradient: linear-gradient(135deg, #ff9966, #ff5e62);
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/*body {*/
+    /*background-color: #f8f9fa;*/
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+/*}*/
+
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow);
+}
+
+.card-header {
+    /*background: var(--primary-gradient);*/
+    /*color: white;*/
+    font-weight: 600;
+}
+
+.bg-orange {
+    background: var(--orange-gradient);
+    padding: 4px 12px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.bg-orange:hover {
+    transform: scale(1.05);
+}
+
+.form-range::-webkit-slider-thumb {
+    background: var(--primary-gradient);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form-range::-moz-range-thumb {
+    background: var(--primary-gradient);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.table tbody tr {
+    transition: var(--transition);
+}
+
+.table tbody tr:hover {
+    background-color: rgba(78, 84, 200, 0.1);
+    transform: translateX(5px);
+}
+
+.progress {
+    height: 8px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    background: var(--primary-gradient);
+    transition: width 1s ease-in-out;
+}
+
+.monthly-earnings-card {
+    background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.slider-container {
+    position: relative;
+    padding: 15px 0;
+}
+
+.slider-tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.form-range:active + .slider-tooltip {
+    opacity: 1;
+}
+
+.highlight-change {
+    animation: highlight 1s ease;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: rgba(255, 193, 7, 0.5);
+    }
+    100% {
+        background-color: transparent;
+    }
+}

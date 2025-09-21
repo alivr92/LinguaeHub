@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timesheet Table</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles for the table */
+        .timesheet-table {
+            width: 100%;
+            table-layout: fixed;
+        }
+        .timesheet-table th, .timesheet-table td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 8px;
+        }
+        .timesheet-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .timesheet-table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        .timesheet-table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        .timesheet-table .time-column {
+            width: 100px;
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Weekly Timesheet</h2>
+        <table class="table table-bordered timesheet-table">
+            <thead>
+                <tr>
+                    <th class="time-column">Time</th>
+                    <th>Sat</th>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Generate rows for each time slot -->
+                {% for hour in range24 %}
+                    {% for minute in minutes %}
+                        <tr>
+{#                            <td class="time-column">{{ "%02d:%s" | format(hour, minute) }}</td>#}
+                            <td class="time-column">{{ "%02d:%s" }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

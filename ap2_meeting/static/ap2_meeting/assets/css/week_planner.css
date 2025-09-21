@@ -1,0 +1,118 @@
+﻿body {
+  color: #666;
+  font-family: Helvetica Neue;
+  font-weight: 200;
+}
+
+rm-weekly-schedule {
+  background-color: #f5f5fa;
+  border: 1px solid #ddd;
+  display: table;
+  overflow: hidden;
+  width: 100%;
+}
+
+.rmws-hour-labels {
+  display: table-cell;
+  padding-top: 48px;
+  vertical-align: middle;
+  width: 51px;
+}
+
+.rmws-hour-label {
+  box-sizing: border-box;
+  font-size: 13px;
+  height: 50px;
+  margin-right: 10px;
+  position: relative;
+  text-align: right;
+  top: -8px
+}
+
+.rmws-days {
+  display: table-cell;
+  height: 100%;
+}
+
+.rmws-day {
+  border-left: 1px solid #ddd;
+  box-sizing: border-box;
+  float: left;
+  height: 100%;
+  width: 100% / 7;
+}
+
+.rmws-day-label {
+  background-color: #eaeaf0;
+  border-bottom: 1px solid #ddd;
+  line-height: 48px;
+  text-align: center;
+}
+
+.rmws-slots {
+  height: 100%;
+  position: relative;
+}
+
+.rmws-slot {
+  border-bottom: 1px dotted #e0e0e0;
+  box-sizing: border-box;
+  height: 10px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.rmws-event {
+  background-color: rgba(255,0,0,.5);
+  border: 1px solid rgba(255,0,0,.75);
+  border-radius: 3px;
+  box-sizing: border-box;
+  color: rgba(155,0,0,.75);
+  left: 0;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 4px;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+
+  .rmws-time {
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .rmws-handle {
+    cursor: row-resize;
+    height: 7px;
+    left: 0;
+    right: 0;
+    position: absolute;
+
+    &.rmws-handle-bottom {
+      bottom: -1px;
+    }
+
+    &.rmws-handle-top {
+      top: -1px;
+    }
+  }
+
+  .rmws-close {
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    right: 4px;
+    top: 2px;
+
+    &:after {
+      content: "\f00d";
+      font-family: FontAwesome;
+    }
+  }
+
+  &:hover .rmws-close {
+    display: block;
+  }
+}

@@ -1,0 +1,241 @@
+{% extends 'app_admin/dashboard/da_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+{% endblock %}
+
+{% block admin_main_content %}
+    <!-- Page main content START -->
+    <div class="page-content-wrapper border">
+
+        <!-- Title -->
+        <div class="row mb-3">
+            <div class="col-12 d-sm-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-2 mb-sm-0">Tutor Directory</h1>
+                <div>
+                    <a href="#" class="btn btn-sm btn-primary mb-0 me-2">Export Data</a>
+                    <a href="#" class="btn btn-sm btn-light mb-0">Send Reminders</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters START -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6 col-lg-4">
+                <form class="rounded position-relative">
+                    <input class="form-control bg-body" type="search" placeholder="Search tutors..."
+                           aria-label="Search">
+                    <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
+                            type="submit">
+                        <i class="fas fa-search fs-6"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-6 col-lg-8">
+                <div class="row g-2">
+                    <div class="col-sm-4">
+                        <select class="form-select js-choice border-0" data-search-enabled="false">
+                            <option value="">All Meeting Methods</option>
+                            <option value="online">Online Only</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="in_person">In-Person Only</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select js-choice border-0" data-search-enabled="false">
+                            <option value="">All Countries</option>
+                            {% for country in countries %}
+                                <option value="{{ country.0 }}">{{ country.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select js-choice border-0" data-search-enabled="false">
+                            <option value="all" {% if has_location == 'all' %}selected{% endif %}>All Locations</option>
+                            <option value="yes" {% if has_location == 'yes' %}selected{% endif %}>With Location</option>
+                            <option value="no" {% if has_location == 'no' %}selected{% endif %}>Without Location
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Filters END -->
+
+        <!-- Card START -->
+        <div class="card bg-transparent border">
+
+            <!-- Card header START -->
+            <div class="card-header bg-light border-bottom">
+                <div class="row g-3 align-items-center justify-content-between">
+                    <div class="col-md-8">
+                        <h5 class="mb-0">Showing {{ tutors.count }} Tutors</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex justify-content-end">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-sm btn-outline-light active"><i
+                                        class="bi bi-grid-fill"></i></button>
+                                <button type="button" class="btn btn-sm btn-outline-light"><i class="bi bi-list-ul"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Card header END -->
+
+            <!-- Card body START -->
+            <div class="card-body">
+                <div class="table-responsive border-0">
+                    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="border-0 rounded-start">Tutor</th>
+                            <th scope="col" class="border-0">Contact</th>
+                            <th scope="col" class="border-0">Location</th>
+                            <th scope="col" class="border-0">Method</th>
+                            <th scope="col" class="border-0">Radius</th>
+                            <th scope="col" class="border-0">Students</th>
+                            <th scope="col" class="border-0 rounded-end">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for t_profile in tutors %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xs flex-shrink-0">
+                                            <img class="avatar-img rounded-circle"
+                                                 src="{{ t_profile.photo.url|default:'/static/assets/images/avatar/placeholder.jpg' }}"
+                                                 alt="avatar">
+                                        </div>
+                                        <div class="ms-2">
+                                            <h6 class="mb-0">{{ t_profile.user.get_full_name }}</h6>
+                                            <small class="text-body">{{ t_profile.title|default:"Tutor" }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small class="text-body">{{ t_profile.user.email }}</small>
+                                    <br>
+                                    <small>{{ t_profile.full_phone|default:"No phone" }}</small>
+                                </td>
+                                <td>
+                                    {% if t_profile.city and t_profile.country %}
+                                        <span class="d-block">{{ t_profile.city }}</span>
+                                        <small class="text-body">{{ t_profile.get_country_display }}</small>
+                                    {% else %}
+                                        <span class="badge bg-danger bg-opacity-10 text-danger">Missing</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                <span class="badge
+                                    {% if t_profile.meeting_method == 'online' %}bg-primary
+                                    {% elif t_profile.meeting_method == 'hybrid' %}bg-purple
+                                    {% else %}bg-success{% endif %} bg-opacity-10
+                                    text-{% if t_profile.meeting_method == 'online' %}primary
+                                    {% elif t_profile.meeting_method == 'hybrid' %}purple
+                                    {% else %}success{% endif %}">
+                                    {{ t_profile.get_meeting_method_display }}
+                                </span>
+                                </td>
+                                <td>
+                                    {% if t_profile.meeting_radius %}
+                                        {{ t_profile.meeting_radius }} km
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if t_profile %}
+                                        {% if t_profile.latitude and t_profile.longitude %}
+                                            <a href="{% url 'my_admin:user_neighborhood_detail' t_profile.user.id %}"
+                                               class="badge bg-info bg-opacity-10 text-info">
+                                                {{ t_profile.nearby_students.count }} nearby
+                                            </a>
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="text-muted">No profile</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        {% if t_profile %}
+
+                                            <a href="{% url 'my_admin:user_neighborhood_detail' t_profile.user.id %}"
+                                               class="btn btn-sm btn-primary-soft" data-bs-toggle="tooltip"
+                                               title="View Matches">
+                                                <i class="bi bi-people-fill"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-sm btn-light" data-bs-toggle="tooltip"
+                                               title="Edit Profile">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        {% else %}
+                                            <span class="text-muted">No profile</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center py-4">No tutors found matching your criteria</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Card body END -->
+
+            <!-- Card footer START -->
+            <div class="card-footer bg-transparent pt-0">
+                <!-- Pagination START -->
+                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                    <!-- Content -->
+                    <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of {{ tutors.count }} entries</p>
+                    <!-- Pagination -->
+                    <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+                        <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                            <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i
+                                    class="fas fa-angle-left"></i></a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Pagination END -->
+            </div>
+            <!-- Card footer END -->
+        </div>
+        <!-- Card END -->
+    </div>
+    <!-- Page main content END -->
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.js' %}"></script>
+    <script>
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+{% endblock %}

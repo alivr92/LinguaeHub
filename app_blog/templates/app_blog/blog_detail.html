@@ -1,0 +1,460 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load wp_filters %}
+{% block head_title %}Post: {{ post.title|safe }}
+    {#    {{ post.title }}#}
+{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/glightbox/css/glightbox.css' %}">
+{% endblock %}
+
+{% block my_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app_blog/css/blog_style.css' %}">
+{% endblock %}
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+
+        <!-- =======================
+        Main Content START -->
+        <section class="pb-0 pt-4 pb-md-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Title and Info START -->
+                        <div class="row">
+                            <!-- Avatar and Share -->
+                            <div class="col-lg-3 align-items-center mt-4 mt-lg-5 order-2 order-lg-1">
+                                <div class="text-lg-center">
+                                    <!-- Author info -->
+                                    <div class="position-relative">
+                                        <!-- Avatar -->
+                                        <div class="avatar avatar-xxl">
+                                            <img class="avatar-img rounded-circle"
+                                                    {#                                                 src="{% static 'assets/images/avatar/09.jpg' %}"#}
+                                                 src="{{ post.author_avatar_url }}"
+                                                 alt="avatar">
+                                        </div>
+                                        <a href="#"
+                                           class="h5 stretched-link mt-2 mb-0 d-block">{{ post.author }}</a>
+                                        <p class="mb-2">
+                                            {#                                            {% if post.author_primary_role %}#}
+                                            {#                                                <span class="user-role">{{ post.author_primary_role }}  </span>#}
+                                            {#                                            {% endif %}#}
+                                            Author at {{ CFChar.site_name }}</p>
+                                    </div>
+                                    <!-- Info -->
+                                    <ul class="list-inline list-unstyled">
+                                        <li class="list-inline-item d-lg-block my-lg-2">{{ post.date|date }}</li>
+                                        <li class="list-inline-item d-lg-block my-lg-2"><i class="bi bi-stopwatch-fill"></i> {{ post.reading_time }} to read </li>
+                                        <li class="list-inline-item badge text-bg-orange"><i
+                                                class="far text-white fa-heart me-1"></i>{{ post.likes }}</li>
+                                        <li class="list-inline-item badge text-bg-info"><i
+                                                class="far fa-eye me-1"></i>{{ post.visits }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="col-lg-9 order-1">
+                                <!-- Pre title -->
+                                <span>{{ post.date|simplified_timesince }} ago</span><span class="mx-2">|</span>
+                                {% if post.tags %}
+                                    {% for tag in post.tags %}
+                                        <span class="badge bg-cat-{{ tag|slugify }} bg-primary">{{ tag }}</span>
+                                    {% endfor %}
+                                {% endif %}
+                                <!-- Title -->
+                                <h1 class="mt-2 mb-0 display-5">{{ post.title|safe }}</h1>
+                                <!-- Info -->
+                                {{ post.excerpt|safe|truncatechars:800 }}
+                            </div>
+                        </div>
+                        <!-- Title and Info END -->
+
+                        <!-- Video START -->
+                        <div class="row mt-4">
+                            <div class="col-xl-10 mx-auto">
+                                <!-- Card item START -->
+                                {#                                <div class="card overflow-hidden h-200px h-sm-300px h-lg-400px h-xl-500px rounded-3 text-center"#}
+                                {#                                     {% static 'assets/images/event/10.jpg' %}#}
+                                {#                                     style="background-image:url({{ post.featured_image }}); background-position: center left; background-size: cover;">#}
+                                {#                                    <!-- Card Image overlay -->#}
+                                {#                                    <div class="bg-overlay bg-dark opacity-4"></div>#}
+                                {#                                </div>#}
+                                <div class="card overflow-hidden h-200px h-sm-300px h-lg-400px h-xl-500px rounded-3 text-center wide-image-container"
+                                        {#                                     style="background-image:url({{ post.featured_image }}); background-position: center left; background-size: cover;">#}
+                                     style="background-image:url({{ post.featured_image }}); background-position: center center; background-size: cover; width: 100%;">
+                                    <!-- Card Image overlay -->
+                                    {#                                    <div class="bg-overlay bg-dark opacity-4"></div>#}
+                                </div>
+                                <!-- Card item END -->
+                            </div>
+                        </div>
+                        <!-- Video END -->
+
+                        <!-- Quote and content START -->
+                        <div class="row mt-4">
+                            <!-- Content ========================================================== -->
+                            {{ post.content|safe }}
+                            <!-- Content =========================================================== -->
+
+                            {#                            <div class="wp-content-iframe">#}
+                            {#                                <iframe#}
+                            {#                                        src="{{ post.iframe_url }}"#}
+                            {#                                        frameborder="0"#}
+                            {#                                        style="width: 100%; height: 800px; border: none;"#}
+                            {#                                        onload="resizeIframe(this)"#}
+                            {#                                ></iframe>#}
+                            {#                            </div>#}
+
+
+                        </div>
+                        <!-- Quote and content END -->
+
+
+                        <!-- Tags and share START -->
+                        <div class="d-lg-flex justify-content-lg-between mb-4">
+                            <!-- Social media button -->
+                            <div class="align-items-center mb-3 mb-lg-0">
+                                <h6 class="mb-2 me-4 d-inline-block">Share on:</h6>
+                                <ul class="list-inline mb-0 mb-2 mb-sm-0">
+                                    {#                                    <li class="list-inline-item"><a class="btn px-2 btn-sm bg-facebook" href="#"><i class="fab fa-fw fa-facebook-f"></i></a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn px-2 btn-sm bg-instagram-gradient" href="#"><i class="fab fa-fw fa-instagram"></i></a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn px-2 btn-sm bg-twitter" href="#"><i class="fab fa-fw fa-twitter"></i></a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn px-2 btn-sm bg-linkedin" href="#"><i class="fab fa-fw fa-linkedin-in"></i></a></li>#}
+
+                                    {% with full_url=request.build_absolute_uri post_title=post.title.rendered|striptags %}
+                                        <li class="list-inline-item">
+                                            <a class="btn px-2 btn-sm bg-facebook"
+                                               href="https://www.facebook.com/sharer/sharer.php?u={{ full_url|urlencode }}"
+                                               target="_blank">
+                                                <i class="fab fa-fw fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="btn px-2 btn-sm bg-twitter"
+                                               href="https://twitter.com/intent/tweet?text={{ post_title|urlencode }}&url={{ full_url|urlencode }}"
+                                               target="_blank">
+                                                <i class="fab fa-fw fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="btn px-2 btn-sm bg-linkedin"
+                                               href="https://www.linkedin.com/sharing/share-offsite/?url={{ full_url|urlencode }}"
+                                               target="_blank">
+                                                <i class="fab fa-fw fa-linkedin-in"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="btn px-2 btn-sm bg-instagram-gradient"
+                                               href="https://www.instagram.com/?url={{ full_url|urlencode }}"
+                                               target="_blank">
+                                                <i class="fab fa-fw fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    {% endwith %}
+
+                                </ul>
+                            </div>
+                            <!-- Popular tags -->
+                            <div class="align-items-center">
+                                <h6 class="mb-2 me-4 d-inline-block">Popular Tags:</h6>
+                                <ul class="list-inline mb-0 social-media-btn">
+                                    {#                                    <li class="list-inline-item"><a class="btn btn-outline-light btn-sm mb-lg-0" href="#">blog</a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn btn-outline-light btn-sm mb-lg-0" href="#">business</a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn btn-outline-light btn-sm mb-lg-0" href="#">bootstrap</a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn btn-outline-light btn-sm mb-lg-0" href="#">data science</a></li>#}
+                                    {#                                    <li class="list-inline-item"><a class="btn btn-outline-light btn-sm mb-lg-0" href="#">deep learning</a></li>#}
+
+                                    {% for tag in popular_tags|slice:":5" %}
+                                        <li class="list-inline-item">
+                                            <a class="btn btn-sm btn-outline-secondary mb-1"
+                                               href="{% url 'blog:posts_by_tag' tag.id %}">
+{#                                               title="Used {{ tag.count }} times">#}
+                                                {{ tag.name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Tags and share END -->
+
+                        <hr> <!-- Divider -->
+
+
+                        <!-- Comment review and form START -->
+                        <div class="row mt-4">
+                            <!-- Comment START [Fetch from rest API WP]-->
+                            {#                            <div class="col-md-7">#}
+                            {#                                <h3>{{ post.comments|length }} comment{{ post.comments|length|pluralize }}</h3>#}
+                            {##}
+                            {#                                {% for comment in post.comments %}#}
+                            {#                                    {% if not comment.parent %}#}
+                            {#                                        <!-- Comment level 1-->#}
+                            {#                                        <div class="my-4 d-flex">#}
+                            {#                                            <img class="avatar avatar-md rounded-circle me-3"#}
+                            {#                                                 src="#}
+                            {#                                                       {{ comment.author_avatar|default:'{% static 'assets/images/avatar/01.jpg' %}' }}"#}
+                            {#                                                         {{ comment.author_avatar }}"#}
+                            {#                                                 alt="{{ comment.author_name }}">#}
+                            {#                                            <div>#}
+                            {#                                                <div class="mb-2">#}
+                            {#                                                    <h5 class="m-0">{{ comment.author_name }}</h5>#}
+                            {#                                                    <span class="me-3 small">{{ comment.date }}</span>#}
+                            {#                                                </div>#}
+                            {#                                                <div>{{ comment.content|safe }}</div>#}
+                            {#                                                <a href="#" class="btn btn-sm btn-light mb-0">Reply</a>#}
+                            {#                                                <!-- Nested comments -->#}
+                            {#                                                {% for reply in post.comments %}#}
+                            {#                                                    {% if reply.parent == comment.id %}#}
+                            {#                                                        <div class="my-4 d-flex ps-2 ps-md-4">#}
+                            {#                                                            <img class="avatar avatar-md rounded-circle me-3"#}
+                            {#                                                                 src="#}
+                            {#                                                                         {{ reply.author_avatar|default:'{% static 'assets/images/avatar/02.jpg' %}' }}"#}
+                            {#                                                                 alt="{{ reply.author_name }}">#}
+                            {#                                                            <div>#}
+                            {#                                                                <div class="mb-2">#}
+                            {#                                                                    <h5 class="m-0">{{ reply.author_name }}</h5>#}
+                            {#                                                                    <span class="me-3 small">{{ reply.date }}</span>#}
+                            {#                                                                </div>#}
+                            {#                                                                <div>{{ reply.content|safe }}</div>#}
+                            {#                                                                <a href="#" class="btn btn-sm btn-light mb-0">Reply</a>#}
+                            {#                                                            </div>#}
+                            {#                                                        </div>#}
+                            {#                                                    {% endif %}#}
+                            {#                                                {% endfor %}#}
+                            {#                                            </div>#}
+                            {#                                        </div>#}
+                            {#                                    {% endif %}#}
+                            {#                                {% empty %}#}
+                            {#                                    <p>No comments yet. Be the first to comment!</p>#}
+                            {#                                {% endfor %}#}
+                            {#                            </div>#}
+                            <!-- Comment END [Fetch from rest API WP] -->
+
+                            <!-- Comment START (by Django)-->
+                            <div class="col-md-7">
+                                <h3>{{ comments|length }} comment{{ comments|length|pluralize }}</h3>
+
+                                {% if comments %}
+                                    {% for comment in comments %}
+                                        <!-- Comment level 1-->
+                                        <div class="my-4 d-flex">
+                                            <img class="avatar avatar-md rounded-circle me-3"
+
+                                                    {% if comment.user %}
+                                                 src="{{ comment.user.profile.photo.url }}"
+                                                    {% else %}
+                                                 src="{% static 'assets/images/default.png' %}"
+                                                    {% endif %}
+                                                 alt="{{ comment.name }}">
+                                            <div>
+                                                <div class="mb-2">
+                                                    <h5 class="m-0">{{ comment.name }}</h5>
+                                                    <span class="me-3 small">{{ comment.create_date|date }} at {{ comment.create_date|time }}</span>
+                                                </div>
+                                                <p>{{ comment.message }}</p>
+                                                {#                                        <a href="#" class="btn btn-sm btn-light mb-0">Reply</a>#}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <p>No comments yet. Be the first to comment!</p>
+                                {% endif %}
+                            </div>
+                            <!-- Comment END -->
+
+                            {% if post.comment_status == 'open' %}
+                                <!-- Form START -->
+                                <div class="col-md-5">
+                                    {% include 'includes/messages.html' %}
+                                    <!-- Title -->
+                                    <h3 class="mt-3 mt-sm-0">Your Views Please!</h3>
+                                    {% if user.is_authenticated %}
+                                        <small>Your email address will not be published. Required fields are marked *
+                                        </small><br>
+                                    {% else %}
+                                        <small class="text-danger"><b>Note:</b> You need to register to be able to post
+                                            a comment!
+                                        </small>
+                                    {% endif %}
+
+                                    {#                                    <form class="row g-3 mt-2 mb-5" method="post" action="{% url 'blog:submit_comment' post.slug %}">#}
+                                    <form class="row g-3 mt-2 mb-5 needs-validation" method="POST"
+                                          enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{ post.id }}" class="form-control"
+                                               name="wp_post_id" required>
+                                        <input type="hidden" value="{{ post.title }}" class="form-control"
+                                               name="wp_post_title" required>
+                                        <!-- Name -->
+                                        <div class="col-lg-6">
+                                            <label class="form-label">Name *</label>
+                                            {% if user.is_authenticated %}
+                                                <input type="text"
+                                                       value="{{ user.first_name }} {{ user.last_name }}"
+                                                       class="form-control" name="name" required readonly>
+                                            {% else %}
+                                                <input type="text" class="form-control" name="name" required disabled>
+                                                {#                                                {{ form.name }}#}
+                                            {% endif %}
+                                            {% for error in form.name.errors %}
+                                                <div class="alert alert-danger alert-dismissible">{{ error }}
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col-lg-6">
+                                            <label class="form-label">Email *</label>
+                                            {% if user.is_authenticated %}
+                                                <input type="email" value="{{ user.email }}" class="form-control"
+                                                       name="email" required readonly>
+                                            {% else %}
+                                                <input type="email" class="form-control" name="email" required disabled>
+                                                {#                                                {{ form.email }}#}
+                                            {% endif %}
+                                            {% for error in form.name.errors %}
+                                                <div class="alert alert-danger alert-dismissible">{{ error }}
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                        <!-- Comment -->
+                                        <div class="col-12">
+                                            <label class="form-label">Your Comment *</label>
+                                            {% if user.is_authenticated %}
+                                                {{ form.message }}
+                                            {% else %}
+                                                <textarea class="form-control" rows="3" name="content" required
+                                                          disabled></textarea>
+                                            {% endif %}
+                                            {% for error in form.name.errors %}
+                                                <div class="alert alert-danger alert-dismissible">{{ error }}
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                        <!-- Button -->
+                                        <div class="col-12">
+                                            {% if user.is_authenticated %}
+                                                <button type="submit" class="btn btn-primary mb-0">Post comment
+                                                </button>
+                                            {% else %}
+                                                <button type="submit" class="btn btn-primary mb-0" disabled>Post
+                                                    comment
+                                                </button>
+
+                                            {% endif %}
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Form END -->
+                            {% endif %}
+                        </div>
+                        <!-- Comment review and form END -->
+
+
+                    </div>
+                </div> <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Main Content END -->
+
+        <!-- =======================
+        Related blog START -->
+        <section class="pt-0">
+            <div class="container">
+                <!-- Title -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="mb-0">You may also like </h2>
+                    </div>
+                </div>
+
+
+                <!-- Slider START -->
+                <div class="tiny-slider arrow-round arrow-hover arrow-dark">
+                    <div class="tiny-slider-inner" data-autoplay="false" data-arrow="true" data-edge="2"
+                         data-dots="false" data-items="3" data-items-lg="2" data-items-sm="1">
+                        {% for r_post in related_posts %}
+                            <!-- Slider item -->
+                            <div class="card bg-transparent">
+                                <div class="row g-0">
+                                    <!-- Image -->
+                                    <div class="col-md-4">
+                                        <img src="{{ r_post.featured_image }}"
+                                             style="max-width: 150px;min-width: 150px; max-height: 100px; min-height: 100px;"
+                                             class="img-fluid rounded-start" alt="{{ r_post.title }}">
+                                    </div>
+                                    <!-- Card body -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <!-- Title -->
+                                            <h6 class="card-title"><a
+                                                    href="{% url 'blog:post_detail' r_post.slug %}">{{ r_post.title }}</a>
+                                            </h6>
+                                            <span class="small">{{ r_post.date }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Slider END -->
+
+
+            </div>
+        </section>
+        <!-- =======================
+        Related blog END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+    <!-- =======================
+{% endblock %}
+
+
+{% block scripts_vendors %}
+<!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/tiny-slider/tiny-slider.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
+{% endblock %}
+{% block my_scripts %}
+    {#    <script>#}
+    {#function resizeIframe(iframe) {#}
+    {#    // Auto-resize iframe to content height#}
+    {#    iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';#}
+    {##}
+    {#    // Remove WordPress header/footer if visible#}
+    {#    try {#}
+    {#        const elements = iframe.contentWindow.document.querySelectorAll(#}
+    {#            '#wpadminbar, .site-header, .site-footer, .comments-area'#}
+    {#        );#}
+    {#        elements.forEach(el => el.remove());#}
+    {#    } catch(e) { console.log(e); }#}
+    {#  }#}
+    {#</script>#}
+{% endblock %}

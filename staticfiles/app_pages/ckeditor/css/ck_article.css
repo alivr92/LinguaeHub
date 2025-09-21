@@ -1,0 +1,205 @@
+/* Enterprise-level content styling for CKEditor */
+.styled-ckeditor {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.75;
+    color: #2d3748;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Typography scale with consistent vertical rhythm */
+.styled-ckeditor h2,
+.styled-ckeditor h3,
+.styled-ckeditor h4 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    line-height: 1.3;
+}
+
+.styled-ckeditor h2 {
+    font-size: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.75rem;
+    margin-top: 3rem;
+}
+
+.styled-ckeditor h3 {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+}
+
+.styled-ckeditor h4 {
+    font-size: 1.3rem;
+    margin-top: 2rem;
+}
+
+/* Paragraph styling with optimal readability */
+.styled-ckeditor p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #4a5568;
+}
+
+/* Enhanced list styling */
+.styled-ckeditor ul,
+.styled-ckeditor ol {
+    margin-bottom: 2rem;
+    padding-left: 2.5rem;
+}
+
+.styled-ckeditor li {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+}
+
+.styled-ckeditor ul {
+    list-style-type: disc;
+}
+
+.styled-ckeditor ol {
+    list-style-type: decimal;
+}
+
+/* Professional table styling */
+.styled-ckeditor table {
+    width: 100%;
+    margin: 2.5rem 0;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.styled-ckeditor table th,
+.styled-ckeditor table td {
+    padding: 1rem 1.25rem;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.styled-ckeditor table th {
+    background-color: #f7fafc;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.styled-ckeditor table tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* Image styling with subtle enhancements */
+.styled-ckeditor img {
+    max-width: 100%;
+    height: auto;
+    margin: 2.5rem 0;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Sophisticated blockquote styling */
+.styled-ckeditor blockquote {
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-left: 4px solid #4299e1;
+    background-color: #f8fafc;
+    font-style: normal;
+    border-radius: 0 6px 6px 0;
+    color: #2d3748;
+}
+
+.styled-ckeditor blockquote p {
+    margin-bottom: 0;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #4a5568;
+}
+
+/* Code blocks with better contrast */
+.styled-ckeditor pre {
+    padding: 1.5rem;
+    background-color: #f8fafc;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 2.5rem 0;
+    border: 1px solid #e2e8f0;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Link styling with smooth transitions */
+.styled-ckeditor a {
+    color: #3182ce;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 500;
+}
+
+.styled-ckeditor a:hover {
+    color: #2c5282;
+    text-decoration: underline;
+}
+
+/* Enhanced custom classes */
+.styled-ckeditor .lead {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+/* Info and warning boxes with improved styling */
+.styled-ckeditor .info-box {
+    background-color: #ebf8ff;
+    border-left: 4px solid #4299e1;
+    padding: 1.5rem;
+    margin: 2.5rem 0;
+    border-radius: 0 6px 6px 0;
+    color: #2c5282;
+}
+
+.styled-ckeditor .warning-box {
+    background-color: #fffaf0;
+    border-left: 4px solid #dd6b20;
+    padding: 1.5rem;
+    margin: 2.5rem 0;
+    border-radius: 0 6px 6px 0;
+    color: #9c4221;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .styled-ckeditor {
+        padding: 0;
+    }
+
+    .styled-ckeditor h2 {
+        font-size: 1.75rem;
+    }
+
+    .styled-ckeditor h3 {
+        font-size: 1.5rem;
+    }
+
+    .styled-ckeditor h4 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Additional utility classes */
+.styled-ckeditor .text-highlight {
+    background-color: #fefcbf;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+.styled-ckeditor .footnote {
+    font-size: 0.85rem;
+    color: #718096;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 1rem;
+    margin-top: 3rem;
+}

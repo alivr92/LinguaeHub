@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Accepted - {{ site_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Header -->
+        <div class="bg-green-500 py-4 px-6">
+            <h1 class="text-white text-2xl font-bold text-center">🎉 Offer Accepted!</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+            <div class="text-center mb-2">
+                <svg class="w-16 h-16 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 text-center mb-2">You've secured the class!</h2>
+            <p class="text-gray-600 text-center mb-4">
+                Thank you for accepting the in-person teaching opportunity for <strong>{{ offer.request.service.name }}</strong>.
+                The student has been notified and we are confirming the booking.
+            </p>
+
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded">
+                <p class="text-green-700 font-medium">What happens next?</p>
+                <ul class="text-green-600 text-sm list-disc list-inside mt-2">
+                    <li>The student has 24 hours to confirm the booking.</li>
+                    <li>Once confirmed, you will receive a detailed email with the student's contact information and meeting notes.</li>
+                    <li>The session will be added to your upcoming lessons dashboard.</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <a href="{% url 'provider:dp_home' %}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition duration-200">
+                    Go to My Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-100 py-4 px-6 border-t border-gray-200">
+            <p class="text-xs text-gray-500 text-center">
+                Need help? Contact our <a href="mailto:support@lingocept.com" class="text-green-500 hover:underline">support team</a>.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

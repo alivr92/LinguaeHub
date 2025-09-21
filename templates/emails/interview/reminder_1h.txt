@@ -1,0 +1,18 @@
+Subject: Interview Reminder – Your session starts in 1 hour
+
+Hi {{ full_name }},
+
+Just a quick reminder that your interview with {{ site_name }} is scheduled to begin in about 1 hour.
+
+Please join a few minutes early to ensure everything is working smoothly.
+
+Date & Time:
+{{ session_start_time }} ({{ timezone }})
+
+Meeting Link:
+{{ video_call_link }}
+
+If you have any issues or questions, feel free to reach out before the session begins.
+
+Best regards,
+{{ site_name }} Team

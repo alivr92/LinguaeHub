@@ -1,0 +1,552 @@
+<!-- ===================
+EDUCATION STEP TEMPLATE (Bootstrap 5) — FULL VERSION
+=================== -->
+<div class="container py-4">
+    <!-- Progress Bar -->
+    <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Step 4 of 7</span>
+            <span class="text-muted">60% complete</span>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;" aria-valuenow="60"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Your Education & Qualifications</h2>
+        <p class="text-muted">Complete your profile to increase your visibility and credibility with students</p>
+    </div>
+
+    <!-- Education Section -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Formal Education</h5>
+            <span class="badge bg-primary">Highly Recommended</span>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info bg-light border-0 mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-info-circle-fill text-primary me-3 mt-1"></i>
+                    <div>
+                        <p class="mb-1"><strong>Tutors with verified education receive 3x more student
+                            inquiries</strong></p>
+                        <p class="mb-0">Uploading documents helps us verify your credentials and build trust with
+                            students.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="education-container">
+                <!-- Education entries will be added here -->
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button type="button" id="btnAddEducation" class="btn btn-outline-primary"><i
+                        class="bi bi-plus-circle me-2"></i>Add Education
+                </button>
+                <div id="educationLimitAlert" class="alert alert-warning py-2 mb-0 d-none "><i
+                        class="bi bi-exclamation-triangle-fill me-2 "></i>Maximum educations reached
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Teaching Certifications Section -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light border-bottom">
+            <h5 class="mb-0">Teaching Certifications</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning bg-light border-0 mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-exclamation-triangle-fill text-warning me-3 mt-1"></i>
+                    <div>
+                        <p class="mb-1"><strong>Certified tutors earn 40% more on average</strong></p>
+                        <p class="mb-0">Add any teaching certificates or qualifications you hold (TEFL, TESOL, etc.)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="certification-container">
+                <!-- Certification entries will be added here -->
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button type="button" id="btnAddCertification" class="btn btn-outline-primary"><i
+                        class="bi bi-plus-circle me-2"></i>Add Certification
+                </button>
+                <div id="certificationLimitAlert" class="alert alert-warning py-2 mb-0 d-none "><i
+                        class="bi bi-exclamation-triangle-fill me-2 "></i>Maximum certifications reached
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Teaching Experience Section -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-header bg-light border-bottom">
+            <h5 class="mb-0">Teaching Experience</h5>
+        </div>
+        <div class="card-body mb-3">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="years-experience" class="form-label">Years of Teaching Experience</label>
+                    {{ edu_extra_form.years_experience }}
+                    {% for error in edu_extra_form.years_experience.errors %}
+                        <div class="alert alert-danger alert-dismissible">{{ error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-6">
+
+                    <!-- Choice select -->
+                    <label for="teaching_tags" class="form-label">Teaching Special Fields (Tags)
+                        <i class="bi bi-info-circle text-primary me-1" data-bs-toggle="tooltip"
+                           title="Choose suitable tags help you to show in related search or categories. Choose them selective"></i>
+                    </label>
+                    {{ edu_extra_form.teaching_tags }}
+                    {% for error in edu_extra_form.teaching_tags.errors %}
+                        <div class="alert alert-danger alert-dismissible">{{ error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {#                <select id="teachingCategoriesSelect" class="form-select js-choice" multiple>#}
+                {#                    <!-- Will be populated dynamically -->#}
+                {#                </select>#}
+
+                <!-- Your select element -->
+                {#<select id="teachingCategoriesSelect" multiple style="width: 100%"></select>#}
+
+                {#<script>#}
+                {#document.addEventListener("DOMContentLoaded", function() {#}
+                {#    // Test with hardcoded data first#}
+                {#    const testData = [#}
+                {#        {id: 1, name: "TOEFL Preparation"},#}
+                {#        {id: 2, name: "IELTS Preparation"},#}
+                {#        {id: 3, name: "Corporate Training"}#}
+                {#    ];#}
+                {##}
+                {#    const select = document.getElementById('teachingCategoriesSelect');#}
+                {#    testData.forEach(item => {#}
+                {#        const option = document.createElement('option');#}
+                {#        option.value = item.id;#}
+                {#        option.text = item.name;#}
+                {#        select.appendChild(option);#}
+                {#    });#}
+                {##}
+                {#    // Verify DOM actually contains options#}
+                {#    console.log("Select options:", select.innerHTML);#}
+                {# });#}
+                {#</script> #}
+
+
+                <!-- This works well -->
+                {#<select id="categoryDropdown" class="form-select">#}
+                {#    <option value="">Select Teaching Category</option>#}
+                {#</select>#}
+                {##}
+                {#<script>#}
+                {#document.addEventListener("DOMContentLoaded", function() {#}
+                {#    fetch("/tutor/get-categories/")#}
+                {#    .then(response => response.json())#}
+                {#    .then(data => {#}
+                {#        let dropdown = document.getElementById("categoryDropdown");#}
+                {##}
+                {#        data.categories.forEach(cat => {#}
+                {#            let optgroup = document.createElement("optgroup");#}
+                {#            optgroup.label = cat.category;#}
+                {##}
+                {#            cat.subcategories.forEach(sub => {#}
+                {#                let option = document.createElement("option");#}
+                {#                option.value = sub.id;  // Using ID for database storage#}
+                {#                option.textContent = sub.name;#}
+                {#                optgroup.appendChild(option);#}
+                {#            });#}
+                {##}
+                {#            dropdown.appendChild(optgroup);#}
+                {#        });#}
+                {#    })#}
+                {#    .catch(error => console.error("Error fetching categories:", error));#}
+                {# });#}
+                {#</script>#}
+
+
+                {#                <div class="col-md-6">#}
+                {#                    <label for="student-levels" class="form-label">Student Levels You Teach</label>#}
+                {#                    <select class="form-select" id="student-levels" multiple>#}
+                {#                        <option value="professional">Professional/Business</option>#}
+                {#                        <option value="children">Children (under 12)</option>#}
+                {#                        <option value="teens">Teenagers (13-18)</option>#}
+                {#                        <option value="adults">Adults</option>#}
+                {#                        <option value="seniors">Seniors</option>#}
+                {#                    </select>#}
+                {##}
+                {##}
+                {##}
+                {#                    <small class="text-muted">Hold Ctrl/Cmd to select multiple</small>#}
+                {#                </div>#}
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 4 Navigation buttons -->
+    <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_step4" data-action="prev"
+                data-step="4">
+            <i class="bi bi-arrow-left me-2"></i> Previous
+        </button>
+
+        <div>
+            <button type="button" class="btn btn-light me-2" id="btnSkip_step4" data-action="skip"
+                    data-step="4">
+                Skip for now
+            </button>
+            <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_step4" data-action="save"
+                    data-step="4">
+                <i class="bi bi-save me-1"></i> Save
+            </button>
+            <button type="button" class="btn btn-primary btn-next " id="btnNext_step4" data-action="next" data-step="4">
+                Next <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Security Note -->
+    <div class="text-center mt-4">
+        <p class="text-muted small">
+            <i class="bi bi-shield-lock me-1"></i>All documents are securely stored and only used for verification
+            purposes.
+        </p>
+    </div>
+</div>
+
+<!-- Education Entry Template MAIN-->
+{#<template id="education-template">#}
+{#    <div class="education-entry mb-4 p-3 border rounded">#}
+{#        <div class="row g-3">#}
+{#            <div class="col-md-3">#}
+{#                <label class="form-label">Degree Level</label>#}
+{#                <select class="form-select js-choice"#}
+{#                        name="degree_level"#}
+{#                        aria-label="Degree Level"#}
+{#                        required>#}
+{#                    <option value="">Select degree</option>#}
+{#                    {% for degree in degree_levels %}#}
+{#                        <option value="{{ degree.id }}">{{ degree }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="col-md-3">#}
+{#                <label class="form-label">Field of Study</label>#}
+{#                <input type="text" name="study_field" class="form-control" placeholder="e.g., Computer Science"#}
+{#                       required>#}
+{#            </div>#}
+{#            <div class="col-md-4">#}
+{#                <label class="form-label">Institution</label>#}
+{#                <input type="text" name="institution" class="form-control" placeholder="e.g., Stanford University"#}
+{#                       required>#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                <label class="form-label">Graduation Year</label>#}
+{#                <select class="form-select js-choice"#}
+{#                        id="grad_year"#}
+{#                        name="grad_year"#}
+{#                        aria-label="Graduation Year">#}
+{#                    <option value="">Select year</option>#}
+{#                    <!-- Years will be populated via JS -->#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="col-md-8">#}
+{#                <label class="form-label">Description (Optional)</label>#}
+{#                <textarea name="description" class="form-control" rows="2"#}
+{#                          placeholder="Any relevant details about your studies"></textarea>#}
+{#            </div>#}
+{#            <div class="col-md-4">#}
+{#                <label class="form-label label_edu_file">Upload Diploma/Certificate</label>#}
+{#                <input type="file" name="edu_file" class="form-control input-education-file" accept=".pdf,.jpg,.png">#}
+{#                <small class="text-muted">Max 5MB</small>#}
+{#            </div>#}
+{#            <div class="col-12 text-end">#}
+{#                <button type="button" class="btn btn-sm btn-outline-danger remove-education">#}
+{#                    <i class="bi bi-trash me-1"></i>Remove#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</template>#}
+
+<!-- Certification Entry Template MAIN-->
+{#<template id="certification-template">#}
+{#    <div class="certification-entry mb-4 p-3 border rounded">#}
+{#        <div class="row g-3">#}
+{#            <div class="col-md-4">#}
+{#                <label class="form-label">Certificate Name</label>#}
+{#                <input type="text" class="form-control" name="cert_name" placeholder="e.g., TEFL, TESOL" required>#}
+{#            </div>#}
+{#            <div class="col-md-4">#}
+{#                <label class="form-label">Issuing Organization</label>#}
+{#                <input type="text" class="form-control" name="cert_org" placeholder="e.g., University of Cambridge" required>#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                <label class="form-label">Year Obtained</label>#}
+{#                <select class="form-select" name="cert_year">#}
+{#                    <option value="">Year</option>#}
+{#                    <!-- Years will be populated via JS -->#}
+{#                </select>#}
+{#            </div>#}
+{#            <div class="col-md-2">#}
+{#                <label class="form-label label_cert_file">Upload Certificate</label>#}
+{#                <input type="file" class="form-control" name="cert_file" accept=".pdf,.jpg,.png">#}
+{#            </div>#}
+{#            <div class="col-12 text-end">#}
+{#                <button type="button" class="btn btn-sm btn-outline-danger remove-certification">#}
+{#                    <i class="bi bi-trash me-1"></i>Remove#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</template>#}
+{#------------------------------------ template II ---------------------------------------------------------#}
+<!-- Education Entry Template -->
+<template id="education-template">
+    <div class="education-card entry-card mb-4 p-3 border rounded bg-white" data-entry-type="education"
+         data-entry-id="">
+        <div class="row g-3 align-items-end">
+            <!-- Degree Level -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <label class="form-label fw-semibold">Degree Level <span class="text-danger">*</span><i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Select your highest completed degree"></i></label>
+                <select class="form-select js-choice" name="degree_level" required>
+                    <option value="">Select degree</option>
+                    {% for degree in degree_levels %}
+                        <option value="{{ degree.id }}">{{ degree }}</option>
+                    {% endfor %}
+                </select>
+                {#                <div class="form-text"><span class="text-muted">Highest completed degree</span></div>#}
+            </div>
+
+            <!-- Field of Study -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <label class="form-label fw-semibold">Field of Study <span class="text-danger">*</span>
+                    <i class="bi bi-info-circle text-primary me-1" data-bs-toggle="tooltip"
+                       title="Your major or primary area of study"></i>
+                </label>
+                <input type="text" name="study_field" class="form-control" required>
+                {#                <div class="form-text"><span class="text-muted">Major/primary study area</span></div>#}
+            </div>
+
+            <!-- Institution -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <label class="form-label fw-semibold">Institution <span class="text-danger">*</span><i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Name of your university or college"></i></label>
+                <input type="text" name="institution" class="form-control" required>
+                {#                <div class="form-text"><span class="text-muted">University/college name</span></div>#}
+            </div>
+
+            <!-- Start Year -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <label class="form-label fw-semibold">Start Year <span class="text-danger">*</span><i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Year you started your education"></i></label>
+                <input type="number" class="form-control" name="start_year" required min="1900" max="{% now 'Y' %}">
+                {#                <div class="form-text"><span class="text-muted">Year of graduation</span></div>#}
+            </div>
+
+            <!-- Graduation Year -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <label class="form-label fw-semibold">Graduation Year <span class="text-danger">*</span><i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Year you graduated or expect to graduate"></i></label>
+                <input type="number" class="form-control" name="end_year" required min="1900" max="{% now 'Y' %}">
+                {#                <div class="form-text"><span class="text-muted">Year of graduation</span></div>#}
+            </div>
+
+            <!-- Document Upload -->
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 file-upload-container">
+                <label class="form-label fw-semibold">Diploma (Optional)
+                    <i class="bi bi-info-circle text-primary me-1" data-bs-toggle="tooltip"
+                       title="Upload your diploma or certificate for verification"></i>
+                </label>
+                <div class="d-flex flex-column">
+                    <label class="btn btn-outline-primary btn-sm label-education-file">
+                        <i class="bi bi-upload me-1"></i> Upload Document
+                    </label>
+                    <input type="file" class="form-control d-none input-education-file"
+                           accept=".pdf,.jpg,.jpeg,.png">
+
+                    {#                    <input type="file" class="form-control d-none input-education-file"#}
+                    {#                           name="education_file" data-file-type="document"#}
+                    {#                           accept=".pdf,.jpg,.jpeg,.png">#}
+                    {#                    <div class="form-text"><span class="text-muted">PDF, JPG, PNG (Max 5MB)</span></div>#}
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-12 col-sm-6 col-md-8 col-lg-8">
+                <label class="form-label">Description (Optional) <i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Additional details about your education"></i></label>
+                <textarea name="description" class="form-control" rows="2"
+                          placeholder="Honors, specializations, or relevant coursework"></textarea>
+                <div class="form-text">
+                    <span class="text-muted">Briefly write about this</span>
+                </div>
+            </div>
+
+
+            <!-- Remove Button -->
+            <div class="col-12 text-end mt-2">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-entry" data-entry-type="education"><i
+                        class="bi bi-trash me-1"></i> Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- Certification Entry Template  -->
+<template id="certification-template">
+    <div class="certification-card entry-card mb-4 p-3 border rounded bg-white" data-entry-type="education"
+         data-entry-id="">
+        <div class="row g-3 align-items-end">
+            <!-- Certificate Name -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <label class="form-label fw-semibold">Certificate Name <span class="text-danger">*</span>
+                    <i class="bi bi-info-circle text-primary me-1" data-bs-toggle="tooltip"
+                       title="Type of teaching certification"></i>
+                </label>
+                <select class="form-select js-choice" name="cert_name" required>
+                    {#                    <option value="">Select certificate</option>#}
+                    {% for cert in teaching_certificates %}
+                        <option value="{{ cert.0 }}">{{ cert.1 }}</option>
+                    {% endfor %}
+                </select>
+                <div class="form-text"><span class="text-muted">Teaching qualification</span></div>
+            </div>
+
+            <!-- Issuing Organization -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <label class="form-label fw-semibold">Issuing Organization <span class="text-danger">*</span> <i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Organization that issued the certification"></i></label>
+                <input type="text" name="cert_org" class="form-control" required>
+                <div class="form-text"><span class="text-muted">Certifying body</span></div>
+            </div>
+
+            <!-- Year Obtained -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                <label class="form-label fw-semibold">Year Obtained <span class="text-danger">*</span> <i
+                        class="bi bi-info-circle text-primary me-1"
+                        data-bs-toggle="tooltip"
+                        title="Year you received this certification"></i></label>
+                <input type="number" class="form-control" name="cert_year" min="1900" max="{% now 'Y' %}" required>
+                <div class="form-text"><span class="text-muted">Year received</span></div>
+            </div>
+
+            <!-- Certificate Upload -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 file-upload-container">
+                <label class="form-label fw-semibold">Diploma/Certificate <span class="text-danger">*</span>
+                    <i class="bi bi-info-circle text-primary me-1" data-bs-toggle="tooltip"
+                       title="Upload your certification document"></i>
+                </label>
+                <div class="d-flex flex-column">
+                    <label class="btn btn-outline-primary btn-sm  label-certification-file">
+                        <i class="bi bi-upload me-1"></i> Upload
+                    </label>
+{#                    <input type="file" class="form-control d-none input-certification-file"#}
+{#                           name="certification_file" data-file-type="document"#}
+{#                           accept=".pdf,.jpg,.jpeg,.png">#}
+
+                    <!-- Certification -->
+                    <input type="file" class="form-control d-none input-certification-file"
+                           accept=".pdf,.jpg,.jpeg,.png" required>
+                    <div class="form-text"><span class="text-muted">PDF, JPG, PNG</span></div>
+
+                </div>
+            </div>
+
+
+            <!-- Remove Button -->
+            <div class="col-12 text-end mt-2">
+                <button type="button" class="btn btn-sm btn-outline-danger remove-entry"
+                        data-entry-type="certification">
+                    <i class="bi bi-trash me-1"></i> Remove
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+{#---------------------------------------- template III (Responsive) -----------------------------------------------------#}
+{# ---------------------------------------------------------------------------------------- #}
+
+<!-- JavaScript for dynamic functionality -->
+{#<script>#}
+{#    document.addEventListener('DOMContentLoaded', function () {#}
+{#        // Initialize the education section with one empty entry#}
+{#        addEducationEntry();#}
+{#        addCertificationEntry();#}
+{#        populateDate();#}
+{#        // Add education entry button#}
+{#        document.getElementById('add-education').addEventListener('click', addEducationEntry);#}
+{##}
+{#        // Add certification entry button#}
+{#        document.getElementById('add-certification').addEventListener('click', addCertificationEntry);#}
+{##}
+{#        // File upload display#}
+{#document.getElementById('resume-upload').addEventListener('change', function (e) {#}
+{#    const fileName = e.target.files[0]?.name || 'No file selected';#}
+{#    document.getElementById('resume-filename').textContent = fileName;#}
+{# });#}
+{#    });#}
+{##}
+{#    function addEducationEntry() {#}
+{#        const template = document.getElementById('education-template');#}
+{#        const clone = template.content.cloneNode(true);#}
+{#        document.getElementById('education-container').appendChild(clone);#}
+{#    }#}
+{##}
+{#    function addCertificationEntry() {#}
+{#        const template = document.getElementById('certification-template');#}
+{#        const clone = template.content.cloneNode(true);#}
+{#        document.getElementById('certifications-container').appendChild(clone);#}
+{#    }#}
+{##}
+{#    // Event delegation for remove buttons#}
+{#    document.addEventListener('click', function (e) {#}
+{#        if (e.target.classList.contains('remove-education')) {#}
+{#            e.target.closest('.education-entry').remove();#}
+{#        }#}
+{#        if (e.target.classList.contains('remove-certification')) {#}
+{#            e.target.closest('.certification-entry').remove();#}
+{#        }#}
+{#    });#}
+{##}
+{#    function populateDate() {#}
+{#        const years = document.getElementById('grad_year');#}
+{#        for (let i = 1990; i <= 2100; i++) {#}
+{#            const opt = document.createElement('option');#}
+{#            opt.value = i;#}
+{#            opt.textContent = i;#}
+{#            years.appendChild(opt);#}
+{#        }#}
+{#    }#}
+{#</script>#}

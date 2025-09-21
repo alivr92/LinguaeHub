@@ -1,0 +1,1498 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load tz %}
+{% load my_custom_filters %}
+{% block head_title %}Tutor: {{ tutor_single.profile.user.first_name }}
+    {{ tutor_single.profile.user.last_name }}{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+{% endblock %}
+{% block my_style %}
+
+<style>
+    /* Main carousel styles */
+    .car-details-sliders {
+        position: relative;
+    }
+
+    .carousel-inner {
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    .video-placeholder {
+        position: relative;
+    }
+
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.8);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .play-button i {
+        color: #d9230f;
+        font-size: 20px;
+        margin-left: 3px;
+    }
+
+    /* Thumbnail carousel styles */
+    .thumbnail-carousel-container {
+        position: relative;
+        padding: 0 30px;
+    }
+
+    .thumbnail-carousel {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .thumbnail-track {
+        display: flex;
+        transition: transform 0.5s ease;
+        gap: 8px;
+    }
+
+    .thumbnail-item {
+        flex: 0 0 23%;
+        margin-right: 8px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .thumbnail-item:last-child {
+        margin-right: 0;
+    }
+
+    .thumbnail-item.active {
+        border-color: #d9230f;
+    }
+
+    .thumbnail-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .thumbnail-prev, .thumbnail-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .thumbnail-prev {
+        left: 0;
+    }
+
+    .thumbnail-next {
+        right: 0;
+    }
+
+    .thumbnail-prev i, .thumbnail-next i {
+        color: #333;
+        font-size: 14px;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+
+        <!-- =======================
+        Page content START -->
+        <section class="pt-5 pb-0">
+            <div class="container">
+                <div class="row g-0 g-lg-5">
+
+                    <!-- Left sidebar START -->
+                    <div class="col-lg-4">
+                        <div class="row">
+
+                            <!-- Video START -->
+                            <div class="col-md-6 col-lg-12">
+                                <div class="card shadow p-2 mb-4 z-index-9">
+                                    <div class="overflow-hidden rounded-3" id="tutor-container">
+                                        <div id="tutor-image-wrapper">
+                                            <img src="{{ tutor_single.profile.photo.url }}" class="card-img"
+                                                 alt="course image"
+                                                 id="tutor-image">
+                                            <!-- Overlay -->
+                                            <div class="bg-overlay bg-dark opacity-6"></div>
+                                            <div class="card-img-overlay d-flex align-items-start flex-column p-3">
+                                                <!-- Video button and link -->
+                                                <div class="m-auto">
+                                                    <a href="#"
+                                                       class="btn btn-lg text-danger btn-round btn-white-shadow mb-0"
+                                                       onclick="showEmbedVideo(); return false;">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {#                  </div>#}
+                                    {#                </div>#}
+
+
+                                    <!-- APARAT EMBED VIDEO END -->
+
+
+                                    <!-- Card body -->
+                                    <div class="card-body px-3 cent">
+
+                                        <div class="text-center">
+                                            <!-- Rating -->
+                                            <ul class="list-inline ">
+                                                {% with rating=tutor_single.profile.rating %}
+                                                    {% for i in range %}
+                                                        <li class="list-inline-item me-0 small">
+                                                            {% if i <= rating %}
+                                                                <i class="fas fa-star text-warning"></i>
+                                                            {% elif  i|float_sub:0.5 <= rating %}
+                                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                                            {% else %}
+                                                                <i class="far fa-star text-warning"></i>
+                                                            {% endif %}
+                                                        </li>
+                                                    {% endfor %}
+                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>
+                                                {% endwith %}
+                                            </ul>
+
+                                        </div>
+
+                                        <!-- Info -->
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Price and time -->
+                                            <div>
+                                                {% if discount_valid %}
+                                                    <div class="d-flex align-items-center">
+                                                        <h3 class="fw-bold mb-0 me-2">
+                                                            ${{ discounted_price|format_decimal:2 }}
+                                                        </h3>
+                                                        <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>
+                                                        <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>
+                                                    </div>
+                                                    {% if remaining_time %}
+                                                        <p class="mb-0 text-danger"><i
+                                                                class="fas fa-stopwatch me-2"></i>{{ remaining_time }}
+                                                            left at this price</p>
+                                                    {% endif %}
+                                                {% else %}
+                                                    <div class="d-flex align-items-center">
+                                                        <h3 class="fw-bold mb-0 me-2">
+                                                            ${{ tutor_single.cost_hourly }}
+                                                        </h3>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+
+                                            <!-- Share button with dropdown -->
+                                            <div class="dropdown">
+                                                <!-- Share button -->
+                                                <a href="#" class="btn btn-sm btn-light rounded small" role="button"
+                                                   id="dropdownShare"
+                                                   data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-fw fa-share-alt"></i>
+                                                </a>
+                                                <!-- dropdown button -->
+                                                <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"
+                                                    aria-labelledby="dropdownShare">
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                            class="fab fa-twitter-square me-2"></i>Twitter</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                            class="fab fa-facebook-square me-2"></i>Facebook</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                            class="fab fa-linkedin me-2"></i>LinkedIn</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                            class="fas fa-copy me-2"></i>Copy link</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Buttons -->
+                                        <div class="mt-3 d-sm-flex justify-content-sm-between">
+                                            {% if tutor_single.cost_trial != 0 %}
+                                                <a href="#" class="btn btn-outline-primary mb-0">Trial Session for
+                                                    ${{ tutor_single.cost_trial|floatformat:0 }}</a>
+                                            {% else %}
+                                                <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>
+                                            {% endif %}
+                                            <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"
+                                               class="btn btn-success mb-0">Reserve Class</a>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- Video END -->
+
+
+                            <!-- Video Temperary ------------------------------------------------ -->
+<div class="col-md-6 col-lg-12">
+    <div class="card shadow p-2 mb-4 z-index-9">
+        <!-- Main carousel -->
+        <div id="tutorProfileCarousel" class="carousel car-details-sliders slide mb-40" data-ride="carousel">
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <!-- Main profile image (always shown) -->
+                <div class="carousel-item active" data-slide-number="0">
+                    <img src="{{ tutor_single.profile.photo.url }}" class="d-block w-100" alt="Tutor Profile">
+                </div>
+
+                <!-- Sample image 1 -->
+                <div class="carousel-item" data-slide-number="1">
+                    <img src="{% static 'assets/images/avatar/01.jpg' %}" class="d-block w-100" alt="Tutor Sample 1">
+                </div>
+
+                <!-- Sample image 2 -->
+                <div class="carousel-item" data-slide-number="2">
+                    <img src="{% static 'assets/images/avatar/02.jpg' %}" class="d-block w-100" alt="Tutor Sample 2">
+                </div>
+
+                <!-- Sample video (as image placeholder) -->
+                <div class="carousel-item" data-slide-number="3">
+                    <div class="video-placeholder">
+                        <img src="{% static 'assets/images/avatar/03.jpg' %}" class="d-block w-100" alt="Video Thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thumbnail navigation CAROUSEL -->
+            <div class="carousel-indicators-section clearfix">
+                <div class="thumbnail-carousel-container">
+                    <div class="thumbnail-carousel">
+                        <div class="thumbnail-track">
+                            <!-- Profile image thumbnail -->
+                            <div class="thumbnail-item active" data-target="#tutorProfileCarousel" data-slide-to="0">
+                                <img src="{{ tutor_single.profile.photo.url }}" class="img-fluid" alt="Profile Thumbnail">
+                            </div>
+
+                            <!-- Sample image 1 thumbnail -->
+                            <div class="thumbnail-item" data-target="#tutorProfileCarousel" data-slide-to="1">
+                                <img src="{% static 'assets/images/avatar/01.jpg' %}" class="img-fluid" alt="Sample 1 Thumbnail">
+                            </div>
+
+                            <!-- Sample image 2 thumbnail -->
+                            <div class="thumbnail-item" data-target="#tutorProfileCarousel" data-slide-to="2">
+                                <img src="{% static 'assets/images/avatar/02.jpg' %}" class="img-fluid" alt="Sample 2 Thumbnail">
+                            </div>
+
+                            <!-- Video thumbnail -->
+                            <div class="thumbnail-item" data-target="#tutorProfileCarousel" data-slide-to="3">
+                                <img src="{% static 'assets/images/avatar/03.jpg' %}" class="img-fluid" alt="Video Thumbnail">
+                            </div>
+
+                            <!-- Add more thumbnails if needed -->
+                        </div>
+                    </div>
+                    <button class="thumbnail-prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="thumbnail-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rest of your card content -->
+        <div class="card-body px-3 cent">
+            <!-- Your existing tutor info, rating, pricing etc -->
+            <h5 class="card-title">{{ tutor_single.get_full_name }}</h5>
+            <p class="card-text">Mathematics Tutor</p>
+            <!-- Add your other content here -->
+        </div>
+    </div>
+</div>
+
+
+                            <!-- Video Temperary ------------------------------------------------ -->
+
+
+                            <!-- Instructor image START -->
+                            {#                <div class="col-md-6 col-lg-12">#}
+                            {#                  <div class="card shadow p-2 mb-4 text-center">#}
+                            {#                    <div class="rounded-3">#}
+                            {#                      <!-- Image -->#}
+                            {#                      <img src="{{ tutor_single.profile.photo.url }}" class="card-img" alt="course image">#}
+                            {#                    </div>#}
+                            {##}
+                            {#                    <!-- Card body -->#}
+                            {#                    <div class="card-body px-3">#}
+                            {#                      <!-- Rating -->#}
+                            {#                      <ul class="list-inline">#}
+                            {#                        {% with rating=tutor_single.profile.rating %}#}
+                            {#                          {% for i in range %}#}
+                            {#                            <li class="list-inline-item me-0 small">#}
+                            {#                              {% if i <= rating %}#}
+                            {#                                <i class="fas fa-star text-warning"></i>#}
+                            {#                              {% elif  i|float_sub:0.5 <= rating %}#}
+                            {#                                <i class="fas fa-star-half-alt text-warning"></i>#}
+                            {#                              {% else %}#}
+                            {#                                <i class="far fa-star text-warning"></i>#}
+                            {#                              {% endif %}#}
+                            {#                            </li>#}
+                            {#                          {% endfor %}#}
+                            {#                          <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+                            {#                        {% endwith %}#}
+                            {#                      </ul>#}
+                            {##}
+                            {#                      <!-- Social media button -->#}
+                            {#                      <ul class="list-inline mb-0">#}
+                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-facebook"#}
+                            {#                                                        href="{{ tutor_single.profile.url_facebook }}"><i#}
+                            {#                          class="fab fa-fw fa-facebook-f"></i></a></li>#}
+                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-instagram-gradient"#}
+                            {#                                                        href="{{ tutor_single.profile.url_insta }}"><i#}
+                            {#                          class="fab fa-fw fa-instagram"></i></a></li>#}
+                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-twitter"#}
+                            {#                                                        href="{{ tutor_single.profile.url_twitter }}"><i#}
+                            {#                          class="fab fa-fw fa-twitter"></i></a></li>#}
+                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-linkedin"#}
+                            {#                                                        href="{{ tutor_single.profile.url_linkedin }}"><i#}
+                            {#                          class="fab fa-fw fa-linkedin-in"></i></a></li>#}
+                            {#                      </ul>#}
+                            {#                    </div>#}
+                            {##}
+                            {#                  </div>#}
+                            {#                </div>#}
+                            <!-- Instructor image END -->
+
+
+                            <div class="col-md-6 col-lg-12">
+                                <div class="card card-body shadow p-4 mb-4">
+
+                                    <!-- Education START -->
+                                    <!-- Title -->
+                                    <h4 class="mb-3">Education</h4>
+                                    {% for edu in tutor_single.profile.user.educations.all %}
+                                        <!-- Education item -->
+                                        <div class="d-flex align-items-center mb-4">
+                                        <span class="icon-md mb-0 bg-light rounded-3"><i
+                                                class="fas fa-graduation-cap"></i></span>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0">{{ edu.institution }}</h6>
+                                                <p class="mb-0 small">{{ edu.degree }} in {{ edu.field_of_study }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <!-- Education END -->
+
+                                    <hr> <!-- Divider -->
+
+                                    <!-- Skills START -->
+                                    <h4 class="mb-3">Skills</h4>
+                                    {% for skill in tutor_single.profile.user.skills.all %}
+                                        <!-- Progress item -->
+                                        <div class="overflow-hidden mb-4">
+                                            <h6 class="uppercase">{{ skill.skill }} </h6>
+                                            <div class="progress progress-sm bg-primary bg-opacity-10">
+                                                <div class="progress-bar aos" role="progressbar"
+                                                     data-aos="slide-right"
+                                                     data-aos-delay="200" data-aos-duration="1000"
+                                                     data-aos-easing="ease-in-out"
+                                                     style="width: {{ skill.progress_percent }}%; background-color: {{ skill.progress_color }};"
+                                                     aria-valuenow="90" aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                    <span class="progress-percent-simple h6 mb-0">{{ skill.level.name|upper }}</span>
+                                                    <span class="progress-percent-simple h6 mb-0"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <!-- Skills END -->
+
+
+                                    <!-- Social Media START -->
+                                    <!-- Title -->
+                                    {#                                    <h4 class="mb-3">Social Media</h4>#}
+
+                                    <!-- Social media buttons -->
+                                    {#                                    <div class="text-center">#}
+                                    {#                                        <ul class="list-inline mb-0">#}
+                                    {#                                            <li class="list-inline-item"><a class="btn px-2 btn-sm bg-facebook"#}
+                                    {#                                                                            href="{{ tutor_single.profile.url_facebook }}"><i#}
+                                    {#                                                    class="fab fa-fw fa-facebook-f"></i></a></li>#}
+                                    {#                                            <li class="list-inline-item"><a#}
+                                    {#                                                    class="btn px-2 btn-sm bg-instagram-gradient"#}
+                                    {#                                                    href="{{ tutor_single.profile.url_insta }}"><i#}
+                                    {#                                                    class="fab fa-fw fa-instagram"></i></a></li>#}
+                                    {#                                            <li class="list-inline-item"><a class="btn px-2 btn-sm bg-twitter"#}
+                                    {#                                                                            href="{{ tutor_single.profile.url_twitter }}"><i#}
+                                    {#                                                    class="fab fa-fw fa-twitter"></i></a></li>#}
+                                    {#                                            <li class="list-inline-item"><a class="btn px-2 btn-sm bg-linkedin"#}
+                                    {#                                                                            href="{{ tutor_single.profile.url_linkedin }}"><i#}
+                                    {#                                                    class="fab fa-fw fa-linkedin-in"></i></a></li>#}
+                                    {#                                        </ul>#}
+                                    {#                                    </div>#}
+                                    <!-- Social media END -->
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row End -->
+                    </div>
+                    <!-- Left sidebar END -->
+
+                    <!-- Main content START -->
+                    <div class="col-lg-8">
+
+                        <!-- Title -->
+                        <h5 class="mb-0">Hi, I am</h5>
+                        <h1 class="mb-0">{{ tutor_single.profile.user.first_name }} {{ tutor_single.profile.user.last_name }}</h1>
+                        <p>{{ tutor_single.profile.title }}</p>
+                        <!-- Content -->
+
+                        <p class="mt-4">{{ tutor_single.profile.bio|safe }}</p>
+                        <p>We focus a great deal on the understanding of behavioral psychology and influence triggers
+                            which are
+                            crucial for becoming a well-rounded Digital Marketer. We understand that theory is important
+                            to build a
+                            solid foundation, we understand that theory alone isn’t going to get the job done so that’s
+                            why this
+                            course is packed with practical hands-on examples that you can follow step by step.</p>
+                        <!-- Personal info -->
+                        <ul class="list-group list-group-borderless">
+                            <li class="list-group-item px-0">
+                                <span class="h6 fw-light"><i
+                                        class="fas fa-fw fa-map-marker-alt text-primary me-1 me-sm-3"></i>Location:</span>
+                                <span>{{ tutor_single.profile.country }}</span>
+                            </li>
+                            <li class="list-group-item px-0">
+                      <span class="h6 fw-light"><i
+                              class="fas fa-fw fa-envelope text-primary me-1 me-sm-3"></i>Email:</span>
+                                <span>{{ tutor_single.profile.user.email }}</span>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <span class="h6 fw-light"><i
+                                        class="fas fa-fw fa-headphones text-primary me-1 me-sm-3"></i>Phone number:</span>
+                                <span>{{ tutor_single.profile.phone }}</span>
+                            </li>
+                            <li class="list-group-item px-0">
+                      <span class="h6 fw-light"><i
+                              class="fas fa-fw fa-globe text-primary me-1 me-sm-3"></i>Website:</span>
+                                <span>{{ CFURL.site_url }}</span>
+                            </li>
+                        </ul>
+
+                        <!-- Counter START -->
+                        <div class="row mt-4 g-3">
+                            <!-- Counter item -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="d-flex align-items-center">
+                    <span class="icon-lg text-success mb-0 bg-success bg-opacity-10 rounded-3"><i
+                            class="fas fa-play"></i></span>
+                                    <div class="ms-3">
+                                        <div class="d-flex">
+                                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0"
+                                                data-purecounter-end="{{ tutor_single.session_count }}"
+                                                data-purecounter-delay="200">0</h5>
+                                            <span class="mb-0 h5">+</span>
+                                        </div>
+                                        <p class="mb-0 h6 fw-light">Total Sessions</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Counter item -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="d-flex align-items-center">
+                    <span class="icon-lg text-purple bg-purple bg-opacity-10 rounded-3 mb-0"><i
+                            class="fas fa-users"></i></span>
+                                    <div class="ms-3">
+                                        <div class="d-flex">
+                                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0"
+                                                data-purecounter-end="{{ tutor_single.student_count }}"
+                                                data-purecounter-delay="200">0</h5>
+                                            <span class="mb-0 h5">+</span>
+                                        </div>
+                                        <p class="mb-0 h6 fw-light">Total Students</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Counter item -->
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="d-flex align-items-center">
+                    <span class="icon-lg text-orange bg-orange bg-opacity-10 rounded-3 mb-0"><i
+                            class="fas fa-trophy"></i></span>
+                                    <div class="ms-3">
+                                        <div class="d-flex">
+                                            <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0"
+                                                data-purecounter-end="{{ tutor_single.profile.user.skills.count }}"
+                                                data-purecounter-delay="200">0</h5>
+                                            <span class="mb-0 h5">+</span>
+                                        </div>
+                                        <p class="mb-0 h6 fw-light">Total Skills</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Counter END -->
+
+                        <!-- Schedule START ------------------------------------------------------------------>
+                        {#            <div class="row g-4 mt-4">#}
+                        {#              <h2>Schedule Table</h2>#}
+                        {#                {% include 'ap2_meeting/carousel_events.html' %}#}
+                        {#              {% include 'ap2_meeting/trial/agenda.html' %}#}
+                        {#            </div>#}
+                        <!-- Schedule END -------------------------------------------------------------------->
+
+
+                        <!-- Course START -------------------------------------------------------------------->
+                        <!-- Course END ---------------------------------------------------------------------->
+
+
+                        <!-- Student review START -->
+                        {#            <div class="card border bg-transparent rounded-3 mt-5">#}
+                        {#              <!-- Header START -->#}
+                        {#              <div class="card-header bg-transparent border-bottom">#}
+                        {#                <div class="row justify-content-between align-middle">#}
+                        {#                  <!-- Title -->#}
+                        {#                  <div class="col-sm-6">#}
+                        {#                    <h3 class="card-header-title mb-2 mb-sm-0">Student review</h3>#}
+                        {#                  </div>#}
+                        {##}
+                        {#                  <!-- Short by filter -->#}
+                        {#                  <div class="col-sm-4">#}
+                        {#                    <form>#}
+                        {#                    <select class="form-select js-choice z-index-9 bg-white" aria-label=".form-select-sm">#}
+                        {#                      <select class="form-select z-index-9 bg-white" aria-label=".form-select-sm">#}
+                        {#                        <option value="">Sort by</option>#}
+                        {#                        <option>★★★★★ (5/5)</option>#}
+                        {#                        <option>★★★★☆ (4/5)</option>#}
+                        {#                        <option>★★★☆☆ (3/5)</option>#}
+                        {#                        <option>★★☆☆☆ (2/5)</option>#}
+                        {#                        <option>★☆☆☆☆ (1/5)</option>#}
+                        {#                      </select>#}
+                        {#                    </form>#}
+                        {#                  </div>#}
+                        {#                </div>#}
+                        {#              </div>#}
+                        {#              <!-- Header END -->#}
+                        {##}
+                        {#              <!-- Reviews START -->#}
+                        {#              <div class="card-body mt-2 mt-sm-4">#}
+                        {##}
+                        {#                <!-- Review item START -->#}
+                        {#                <div class="d-sm-flex">#}
+                        {#                  <!-- Avatar image -->#}
+                        {#                  <img class="avatar avatar-lg rounded-circle float-start me-3"#}
+                        {#                       src="{% static 'assets/images/avatar/01.jpg' %}" alt="avatar">#}
+                        {#                  <div>#}
+                        {#                    <div class="mb-3 d-sm-flex justify-content-sm-between align-items-center">#}
+                        {#                      <!-- Title -->#}
+                        {#                      <div>#}
+                        {#                        <h5 class="m-0">Frances Guerrero</h5>#}
+                        {#                        <span class="me-3 small">June 11, 2021 at 6:01 am </span>#}
+                        {#                      </div>#}
+                        {#                      <!-- Review star -->#}
+                        {#                      <ul class="list-inline mb-0">#}
+                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
+                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
+                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
+                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
+                        {#                        <li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>#}
+                        {#                      </ul>#}
+                        {#                    </div>#}
+                        {#                    <!-- Content -->#}
+                        {#                    <h6><span class="text-body fw-light">Review on:</span> How to implement sitemap on sass#}
+                        {#                    </h6>#}
+                        {#                    <p>Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant private blushes#}
+                        {#                      removed an in equally totally if. Delivered dejection necessary objection do Mr prevailed. Mr#}
+                        {#                      feeling does chiefly cordial in do. </p>#}
+                        {#                    <!-- Button -->#}
+                        {#                    <div class="text-end">#}
+                        {#                      <a href="#" class="btn btn-sm btn-primary-soft mb-1 mb-sm-0">Direct message</a>#}
+                        {#                      <a class="btn btn-sm btn-light mb-0" data-bs-toggle="collapse" href="#collapseComment"#}
+                        {#                         role="button" aria-expanded="false" aria-controls="collapseComment">#}
+                        {#                        Reply#}
+                        {#                      </a>#}
+                        {#                      <!-- collapse textarea -->#}
+                        {#                      <div class="collapse show" id="collapseComment">#}
+                        {#                        <div class="d-flex mt-3">#}
+                        {#                            <textarea class="form-control mb-0" placeholder="Add a comment..." rows="2"#}
+                        {#                                      spellcheck="false"></textarea>#}
+                        {#                          <button class="btn btn-sm btn-primary-soft ms-2 px-4 mb-0 flex-shrink-0"><i#}
+                        {#                            class="fas fa-paper-plane fs-5"></i></button>#}
+                        {#                        </div>#}
+                        {#                      </div>#}
+                        {#                    </div>#}
+                        {#                  </div>#}
+                        {#                </div>#}
+                        {#                <!-- Divider -->#}
+                        {#                <hr>#}
+                        {#                <!-- Review item END -->#}
+                        {##}
+                        {##}
+                        {#                <!-- Review item START -->#}
+                        {#                <div class="d-sm-flex">#}
+                        {#                  <!-- Avatar image -->#}
+                        {#                  <img class="avatar avatar-lg rounded-circle float-start me-3"#}
+                        {#                       src="{% static 'assets/images/avatar/09.jpg' %}" alt="avatar">#}
+                        {#                  <div>#}
+                        {#                    <div class="mb-3 d-sm-flex justify-content-sm-between align-items-center">#}
+                        {#                      <!-- Title -->#}
+                        {#                      <div>#}
+                        {#                        <h5 class="m-0">Carolyn Ortiz</h5>#}
+                        {#                        <span class="me-3 small">September 15, 2021 at 8:28 am</span>#}
+                        {#                      </div>#}
+                        {#                      <!-- Review star -->#}
+                        {#                      <ul class="list-inline mb-0">#}
+                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
+                        {#                        </li>#}
+                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
+                        {#                        </li>#}
+                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
+                        {#                        </li>#}
+                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
+                        {#                        </li>#}
+                        {#                        <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i>#}
+                        {#                        </li>#}
+                        {#                      </ul>#}
+                        {#                    </div>#}
+                        {#                    <!-- Content -->#}
+                        {#                    <h6><span class="text-body fw-light">Review on:</span> What are object prototypes?#}
+                        {#                    </h6>#}
+                        {#                    <p>Chiefly farther Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant#}
+                        {#                      private blushes removed an in equally totally if. Delivered dejection necessary objection do Mr#}
+                        {#                      prevailed. Mr feeling does chiefly cordial in do. </p>#}
+                        {#                    <!-- Button -->#}
+                        {#                    <div class="text-end">#}
+                        {#                      <a href="#" class="btn btn-sm btn-primary-soft mb-0">Direct message</a>#}
+                        {#                      <a href="#" class="btn btn-sm btn-light mb-0">Reply</a>#}
+                        {#                    </div>#}
+                        {#                  </div>#}
+                        {#                </div>#}
+                        {#                <!-- Review item END -->#}
+                        {#              </div>#}
+                        {#              <!-- Reviews END -->#}
+                        {##}
+                        {#              <div class="card-footer border-top">#}
+                        {#                <!-- Pagination START -->#}
+                        {#                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">#}
+                        {#                  <!-- Content -->#}
+                        {#                  <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>#}
+                        {#                  <!-- Pagination -->#}
+                        {#                  <nav class="d-flex justify-content-center mb-0" aria-label="navigation">#}
+                        {#                    <ul class="pagination pagination-sm pagination-primary-soft my-0 py-0">#}
+                        {#                      <li class="page-item my-0"><a class="page-link" href="#" tabindex="-1"><i#}
+                        {#                        class="fas fa-angle-left"></i></a></li>#}
+                        {#                      <li class="page-item my-0"><a class="page-link" href="#">1</a></li>#}
+                        {#                      <li class="page-item my-0 active"><a class="page-link" href="#">2</a></li>#}
+                        {#                      <li class="page-item my-0"><a class="page-link" href="#">3</a></li>#}
+                        {#                      <li class="page-item my-0"><a class="page-link" href="#"><i#}
+                        {#                        class="fas fa-angle-right"></i></a>#}
+                        {#                      </li>#}
+                        {#                    </ul>#}
+                        {#                  </nav>#}
+                        {#                </div>#}
+                        {#                <!-- Pagination END -->#}
+                        {#              </div>#}
+                        {#            </div>#}
+                        <!-- Student review END -->
+                        <!-- Tabs section START -->
+                        <div class="mt-5">
+                            <div class="card shadow rounded-2 p-0">
+                                <!-- Tabs START -->
+                                <div class="card-header border-bottom px-4 py-3">
+                                    <ul class="nav nav-pills nav-tabs-line py-0" id="course-pills-tab" role="tablist">
+                                        <!-- Tab item: Overview -->
+                                        <li class="nav-item me-2 me-sm-4" role="presentation">
+                                            <button class="nav-link mb-2 mb-md-0 active" id="course-pills-tab-1"
+                                                    data-bs-toggle="pill"
+                                                    data-bs-target="#course-pills-1" type="button" role="tab"
+                                                    aria-controls="course-pills-1"
+                                                    aria-selected="true">Overview
+                                            </button>
+                                        </li>
+                                        <!-- Tab item: Reviews -->
+                                        <li class="nav-item me-2 me-sm-4" role="presentation">
+                                            <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-4"
+                                                    data-bs-toggle="pill"
+                                                    data-bs-target="#course-pills-4" type="button" role="tab"
+                                                    aria-controls="course-pills-4"
+                                                    aria-selected="false">Reviews
+                                            </button>
+                                        </li>
+                                        <!-- Tab item: FAQs -->
+                                        <li class="nav-item me-2 me-sm-4" role="presentation">
+                                            <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-5"
+                                                    data-bs-toggle="pill"
+                                                    data-bs-target="#course-pills-5" type="button" role="tab"
+                                                    aria-controls="course-pills-5"
+                                                    aria-selected="false">FAQs
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- Tabs END -->
+
+                                <!-- Tab contents START -->
+                                <div class="card-body p-4">
+                                    <div class="tab-content pt-2" id="course-pills-tabContent">
+                                        <!-- Course Description Content START -->
+                                        <div class="tab-pane fade show active" id="course-pills-1" role="tabpanel"
+                                             aria-labelledby="course-pills-tab-1">
+                                            <!-- Course detail START -->
+                                            <h5 class="mb-3">Course Description</h5>
+                                            <p class="mb-3">Welcome to the <strong> Digital Marketing Ultimate Course
+                                                Bundle - 12 Courses in 1
+                                                (Over 36 hours of content)</strong></p>
+                                            <p class="mb-3">In this practical hands-on training, you’re going to learn
+                                                to become a digital
+                                                marketing expert with this <strong> ultimate course bundle that includes
+                                                    12 digital marketing
+                                                    courses in 1!</strong></p>
+                                            <p class="mb-3">If you wish to find out the skills that should be covered in
+                                                a basic digital
+                                                marketing course syllabus in India or anywhere around the world, then
+                                                reading this blog will
+                                                help. Before we delve into the advanced <strong><a href="#"
+                                                                                                   class="text-reset text-decoration-underline">digital
+                                                    marketing course</a></strong> syllabus, let’s look at the scope of
+                                                digital marketing and what
+                                                the future holds.</p>
+                                            <p class="mb-0">We focus a great deal on the understanding of behavioral
+                                                psychology and influence
+                                                triggers which are crucial for becoming a well rounded Digital Marketer.
+                                                We understand that
+                                                theory is important to build a solid foundation, we understand that
+                                                theory alone isn’t going to
+                                                get the job done so that’s why this course is packed with practical
+                                                hands-on examples that you
+                                                can follow step by step.</p>
+
+                                            <!-- List content -->
+                                            <h5 class="mt-4">What you’ll learn</h5>
+                                            <ul class="list-group list-group-borderless mb-3">
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Digital
+                                                    marketing course introduction
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Customer Life
+                                                    cycle
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>What is Search
+                                                    engine optimization(SEO)
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Facebook ADS
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Facebook
+                                                    Messenger Chatbot
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Search engine
+                                                    optimization tools
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Why SEO
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>URL Structure
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Featured
+                                                    Snippet
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>SEO tips and
+                                                    tricks
+                                                </li>
+                                                <li class="list-group-item h6 fw-light d-flex mb-0"><i
+                                                        class="fas fa-check-circle text-success me-2"></i>Google tag
+                                                    manager
+                                                </li>
+                                            </ul>
+
+                                            <p class="mb-0">As it so contrasted oh estimating instrument. Size like body
+                                                someone had. Are
+                                                conduct viewing boy minutes warrant the expense? Tolerably behavior may
+                                                admit daughters
+                                                offending her ask own. Praise effect wishes change way and any wanted.
+                                                Lively use looked latter
+                                                regard had. Do he it part more last in. </p>
+                                            <!-- Course detail END -->
+
+                                        </div>
+                                        <!-- Content END -->
+
+                                        <!-- Reviews Content START -->
+                                        <div class="tab-pane fade" id="course-pills-4" role="tabpanel"
+                                             aria-labelledby="course-pills-tab-4">
+                                            <!-- Review START -->
+                                            <div class="row mb-4">
+                                                <h5 class="mb-4">Our Student Reviews</h5>
+
+                                                <!-- Rating info -->
+                                                <div class="col-md-4 mb-3 mb-md-0">
+                                                    <div class="text-center">
+                                                        {% with rating=tutor_single.profile.rating %}
+                                                            <!-- Info -->
+                                                            <h2 class="mb-0">{{ rating|floatformat:1 }}</h2>
+                                                            <!-- Star -->
+                                                            <ul class="list-inline ">
+
+                                                            {% for i in range %}
+                                                                <li class="list-inline-item me-0 small">
+                                                                    {% if i <= rating %}
+                                                                        <i class="fas fa-star text-warning"></i>
+                                                                    {% elif  i|float_sub:0.5 <= rating %}
+                                                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                                                    {% else %}
+                                                                        <i class="far fa-star text-warning"></i>
+                                                                    {% endif %}
+                                                                </li>
+                                                            {% endfor %}
+                                                            {#                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+                                                        {% endwith %}
+                                                        </ul>
+                                                        <p class="mb-0">(Based on students reviews)</p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Progress-bar and star -->
+                                                <div class="col-md-8">
+                                                    <div class="row align-items-center">
+                                                        <!-- Progress bar and Rating -->
+                                                        <div class="col-6 col-sm-8">
+                                                            <!-- Progress item -->
+                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                     style="width: 100%"
+                                                                     aria-valuenow="100" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6 col-sm-4">
+                                                            <!-- Star item -->
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- Progress bar and Rating -->
+                                                        <div class="col-6 col-sm-8">
+                                                            <!-- Progress item -->
+                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                     style="width: 80%"
+                                                                     aria-valuenow="80" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6 col-sm-4">
+                                                            <!-- Star item -->
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- Progress bar and Rating -->
+                                                        <div class="col-6 col-sm-8">
+                                                            <!-- Progress item -->
+                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                     style="width: 60%"
+                                                                     aria-valuenow="60" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6 col-sm-4">
+                                                            <!-- Star item -->
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- Progress bar and Rating -->
+                                                        <div class="col-6 col-sm-8">
+                                                            <!-- Progress item -->
+                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                     style="width: 40%"
+                                                                     aria-valuenow="40" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6 col-sm-4">
+                                                            <!-- Star item -->
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <!-- Progress bar and Rating -->
+                                                        <div class="col-6 col-sm-8">
+                                                            <!-- Progress item -->
+                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                                <div class="progress-bar bg-warning" role="progressbar"
+                                                                     style="width: 20%"
+                                                                     aria-valuenow="20" aria-valuemin="0"
+                                                                     aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-6 col-sm-4">
+                                                            <!-- Star item -->
+                                                            <ul class="list-inline mb-0">
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="fas fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                                <li class="list-inline-item me-0 small"><i
+                                                                        class="far fa-star text-warning"></i></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Review END -->
+
+                                            {% for review in reviews %}
+                                                <!-- Student review START -->
+                                                <div class="row">
+                                                    <!-- Review item START -->
+                                                    <div class="d-md-flex my-4">
+                                                        <!-- Avatar -->
+                                                        <div class="avatar avatar-xl me-4 flex-shrink-0">
+                                                            <img class="avatar-img rounded-circle"
+                                                                 src="{{ review.student.profile.photo.url }}"
+                                                                 alt="avatar">
+                                                        </div>
+                                                        <!-- Text -->
+                                                        <div>
+                                                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
+                                                                <h5 class="me-3 mb-0">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</h5>
+                                                                <!-- Review star -->
+                                                                <ul class="list-inline mb-0">
+                                                                    {% with rating=review.rate_tutor %}
+                                                                        {% for i in range %}
+                                                                            <li class="list-inline-item me-0">
+                                                                                {% if i <= rating %}
+                                                                                    {#                                            <i class="fas fa-star text-warning"></i>#}
+                                                                                    <i class="fas fa-star text-warning"></i>
+                                                                                    </li>
+                                                                                    {#                                          {% elif  i|float_sub:0.5 <= rating %}#}
+                                                                                    {#                                            <i class="fas fa-star-half-alt text-warning"></i>#}
+                                                                                {% else %}
+                                                                                    {#                                            <i class="far fa-star text-warning"></i>#}
+                                                                                    <i class="far fa-star text-warning"></i>
+                                                                                    </li>
+                                                                                {% endif %}
+                                                                            </li>
+                                                                        {% endfor %}
+                                                                        <li class="list-inline-item ms-2 h6 fw-light mb-0"></li>
+                                                                    {% endwith %}
+                                                                </ul>
+                                                            </div>
+                                                            <!-- Info -->
+                                                            <p class="small mb-2">
+                                                                {#                                  {% timezone user_timezone %}#}
+                                                                {{ review.create_date|timesince }} ago
+                                                                {#                                  {% endtimezone %}#}
+                                                            </p>
+                                                            <p class="mb-2">{{ review.message }} </p>
+                                                            <!-- Like and dislike button -->
+                                                            <div class="btn-group" role="group"
+                                                                 aria-label="Basic radio toggle button group">
+                                                                <!-- Like button -->
+                                                                <input type="radio" class="btn-check" name="btnradio"
+                                                                       id="btnradio1">
+                                                                <label class="btn btn-outline-light btn-sm mb-0"
+                                                                       for="btnradio1"><i
+                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}
+                                                                </label>
+                                                                <!-- Dislike button -->
+                                                                <input type="radio" class="btn-check" name="btnradio"
+                                                                       id="btnradio2">
+                                                                <label class="btn btn-outline-light btn-sm mb-0"
+                                                                       for="btnradio2"> <i
+                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Review item END -->
+                                                    <!-- Divider -->
+                                                    <hr>
+                                                </div>
+                                                <!-- Student review END -->
+                                            {% endfor %}
+
+                                        </div>
+                                        <!-- Content END -->
+
+                                        <!-- FAQs Content START -->
+                                        <div class="tab-pane fade" id="course-pills-5" role="tabpanel"
+                                             aria-labelledby="course-pills-tab-5">
+                                            <!-- Title -->
+                                            <h5 class="mb-3">Frequently Asked Questions</h5>
+                                            <!-- Accordion START -->
+                                            <div class="accordion accordion-flush" id="accordionExample">
+                                                <!-- Item -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingOne">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                                aria-controls="collapseOne">
+                                                            <span class="text-secondary fw-bold me-3">01</span>
+                                                            <span class="h6 mb-0">How Digital Marketing Work?</span>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                                         aria-labelledby="headingOne"
+                                                         data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body pt-0">
+                                                            Comfort reached gay perhaps chamber his six detract besides
+                                                            add. Moonlight newspaper up
+                                                            its enjoyment agreeable depending. Timed voice share led him
+                                                            to widen noisy young. At
+                                                            weddings believed laughing although the material does the
+                                                            exercise of. Up attempt offered
+                                                            ye civilly so sitting to. She new course gets living within
+                                                            Elinor joy. She rapturous
+                                                            suffering concealed.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Item -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingTwo">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapseTwo" aria-expanded="false"
+                                                                aria-controls="collapseTwo">
+                                                            <span class="text-secondary fw-bold me-3">02</span>
+                                                            <span class="h6 mb-0">What is SEO?</span>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                                         aria-labelledby="headingTwo"
+                                                         data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body pt-0">
+                                                            Pleasure and so read the was hope entire first decided the
+                                                            so must have as on was want up
+                                                            of I will rival in came this touched got a physics to
+                                                            travelling so all especially
+                                                            refinement monstrous desk they was arrange the overall
+                                                            helplessly out of particularly ill
+                                                            are purer.
+                                                            <p class="mt-2">Person she control of to beginnings view
+                                                                looked eyes Than continues its
+                                                                and because and given and shown creating curiously to
+                                                                more in are man were smaller by we
+                                                                instead the these sighed Avoid in the sufficient me real
+                                                                man longer of his how her for
+                                                                countries to brains warned notch important Finds be to
+                                                                the of on the increased explain
+                                                                noise of power deep asking contribution this live of
+                                                                suppliers goals bit separated
+                                                                poured sort several the was organization the if
+                                                                relations go work after mechanic But
+                                                                we've area wasn't everything needs of and doctor where
+                                                                would.</p>
+                                                            Go he prisoners And mountains in just switching city steps
+                                                            Might rung line what Mr Bulk;
+                                                            Was or between towards the have phase were its world my
+                                                            samples are the was royal he
+                                                            luxury the about trying And on he to my enough is was the
+                                                            remember a although lead in were
+                                                            through serving their assistant fame day have for its after
+                                                            would cheek dull have what in
+                                                            go feedback assignment Her of a any help if the a of
+                                                            semantics is rational overhauls
+                                                            following in from our hazardous and used more he themselves
+                                                            the parents up just
+                                                            regulatory.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Item -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingThree">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapseThree" aria-expanded="false"
+                                                                aria-controls="collapseThree">
+                                                            <span class="text-secondary fw-bold me-3">03</span>
+                                                            <span class="h6 mb-0">Who should join this course?</span>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                                         aria-labelledby="headingThree"
+                                                         data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body pt-0">
+                                                            Post no so what deal evil rent by real in. But her ready
+                                                            least set lived spite solid.
+                                                            September how men saw tolerably two behavior arranging. She
+                                                            offices for highest and
+                                                            replied one venture pasture. Applauded no discovery in
+                                                            newspaper allowance am northward.
+                                                            Frequently partiality possession resolution at or appearance
+                                                            unaffected me. Engaged its
+                                                            was the evident pleased husband. Ye goodness felicity do
+                                                            disposal dwelling no. First am
+                                                            plate jokes to began to cause a scale. <strong>Subjects he
+                                                            prospect elegance followed no
+                                                            overcame</strong> possible it on.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Item -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingFour">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapseFour" aria-expanded="false"
+                                                                aria-controls="collapseFour">
+                                                            <span class="text-secondary fw-bold me-3">04</span>
+                                                            <span class="h6 mb-0">What are the T&C for this program?</span>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                                         aria-labelledby="headingFour"
+                                                         data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body pt-0">
+                                                            Night signs creeping yielding green Seasons together man
+                                                            green fruitful make fish behold
+                                                            earth unto you'll lights living moving sea open for fish day
+                                                            multiply tree good female god
+                                                            had fruitful of creature fill shall don't day fourth lesser
+                                                            he the isn't let multiply may
+                                                            Creeping earth under was You're without which image stars in
+                                                            Own creeping night of wherein
+                                                            Heaven years their he over doesn't whose won't kind seasons
+                                                            light Won't that fish him
+                                                            whose won't also it dominion heaven fruitful Whales created
+                                                            And likeness doesn't that
+                                                            Years without divided saying morning creeping hath you'll
+                                                            seas cattle in multiply under
+                                                            together in us said above dry tree herb saw living darkness
+                                                            without have won't for i
+                                                            behold meat brought winged Moving living second beast Over
+                                                            fish place beast image very him
+                                                            evening Thing they're fruit together forth day Seed lights
+                                                            Land creature together Multiply
+                                                            waters form brought.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Item -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingFive">
+                                                        <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapseFive" aria-expanded="false"
+                                                                aria-controls="collapseFive">
+                                                            <span class="text-secondary fw-bold me-3">05</span>
+                                                            <span class="h6 mb-0">What certificates will I be received for this program?</span>
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseFive" class="accordion-collapse collapse"
+                                                         aria-labelledby="headingFive"
+                                                         data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body pt-0">
+                                                            Smile spoke total few great had never their too Amongst
+                                                            moments do in arrived at my
+                                                            replied Fat weddings servants but man believed prospect
+                                                            Companions understood is as
+                                                            especially pianoforte connection introduced Nay newspaper
+                                                            can sportsman are admitting
+                                                            gentleman belonging his Is oppose no he summer lovers twenty
+                                                            in Not his difficulty
+                                                            boisterous surrounded bed Seems folly if in given scale Sex
+                                                            contented dependent conveying
+                                                            advantage.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Accordion END -->
+                                        </div>
+                                        <!-- Content END -->
+
+
+                                    </div>
+                                </div>
+                                <!-- Tab contents END -->
+                            </div>
+                        </div>
+
+                        <!-- Tabs section END -->
+                    </div>
+                    <!-- Main content END -->
+
+
+                </div>
+                <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Page content END -->
+
+
+        <!-- =======================
+        Related instructor START -->
+        <section>
+            <div class="container">
+                <!-- Title -->
+                <div class="row mb-4">
+                    <h2 class="mb-0">Related Instructors</h2>
+                </div>
+
+                <!-- Slider START -->
+                <div class="tiny-slider arrow-round arrow-creative arrow-blur arrow-hover">
+                    <div class="tiny-slider-inner" data-autoplay="false" data-arrow="true" data-dots="false"
+                         data-items="4"
+                         data-items-lg="3" data-items-md="2" data-items-xs="1">
+                        {% for r_tutor in related_tutors %}
+                            <!-- Card item START -->
+                            <div class="card bg-transparent">
+                                <div class="position-relative">
+                                    <!-- Image -->
+                                    <img src="{{ r_tutor.profile.photo.url }}" class="card-img" alt="course image">
+                                    <!-- Overlay -->
+                                    <div class="card-img-overlay d-flex flex-column p-3">
+                                        <div class="w-100 mt-auto text-end">
+                                            <!-- Card category -->
+                                            <a href="#" class="badge text-bg-info rounded-1"><i
+                                                    class="fas fa-user-graduate me-2"></i>{{ r_tutor.student_count }}
+                                            </a>
+                                            <a href="#" class="badge text-bg-orange rounded-1"><i
+                                                    class="fas fa-clipboard-list me-2"></i>{{ r_tutor.session_count }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card body -->
+                                <div class="card-body text-center">
+                                    <!-- Title -->
+                                    <h5 class="card-title"><a
+                                            href="{% url 'provider:tutor_detail' r_tutor.pk %}">{{ r_tutor.profile.user.first_name }} {{ r_tutor.profile.user.last_name }}</a>
+                                    </h5>
+                                    <p class="mb-2">{{ r_tutor.profile.title }}</p>
+                                    <!-- Rating -->
+                                    <ul class="list-inline ">
+                                        {% with rating=r_tutor.profile.rating %}
+                                            {% for i in range %}
+                                                <li class="list-inline-item me-0 small">
+                                                    {% if i <= rating %}
+                                                        <i class="fas fa-star text-warning"></i>
+                                                    {% elif  i|float_sub:0.5 <= rating %}
+                                                        <i class="fas fa-star-half-alt text-warning"></i>
+                                                    {% else %}
+                                                        <i class="far fa-star text-warning"></i>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                            <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>
+                                        {% endwith %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Card item END -->
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <!-- Slider END -->
+
+            </div>
+        </section>
+        <!-- =======================
+        Related instructor END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/tiny-slider/tiny-slider.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script  src="{% static 'js/app.js' %}"></script>
+
+{% endblock %}
+
+
+{% block scripts %}
+{#    <script>#}
+{#        function showEmbedVideo() {#}
+{#            var container = document.getElementById('tutor-container');#}
+{#            var imageWrapper = document.getElementById('tutor-image-wrapper');#}
+{##}
+{#            if (container && imageWrapper) {#}
+{#                var videoContainer = document.createElement('div');#}
+{#                videoContainer.className = 'overflow-hidden rounded-3';#}
+{#                videoContainer.style.position = 'relative';#}
+{#                videoContainer.style.paddingTop = '56.25%'; // Maintain aspect ratio#}
+{##}
+{#                videoContainer.innerHTML = `#}
+{#            <iframe src="#}
+{#                        {% if tutor_single.video_url %}#}
+{#                        {{ tutor_single.video_url }}#}
+{#                        {% else %}#}
+{#                        https://www.aparat.com/video/video/embed/videohash/bsbhy86/vt/frame#}
+{#                        {% endif %}#}
+{#"#}
+{#                    allowFullScreen="true"#}
+{#                    webkitallowfullscreen="true"#}
+{#                    mozallowfullscreen="true"#}
+{#                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">#}
+{##}
+{#            </iframe>`;#}
+{##}
+{#                while (container.firstChild) {#}
+{#                    container.removeChild(container.firstChild);#}
+{#                }#}
+{##}
+{#                container.appendChild(videoContainer);#}
+{#            } else {#}
+{#                console.error('Element not found');#}
+{#            }#}
+{#        }#}
+{#    </script>#}
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Thumbnail carousel navigation
+    const track = document.querySelector('.thumbnail-track');
+    const thumbnails = document.querySelectorAll('.thumbnail-item');
+    const prevBtn = document.querySelector('.thumbnail-prev');
+    const nextBtn = document.querySelector('.thumbnail-next');
+    let currentPosition = 0;
+
+    // Handle thumbnail click to change main image
+    thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', function() {
+            // Remove active class from all thumbnails
+            thumbnails.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked thumbnail
+            this.classList.add('active');
+
+            // Get the slide number from data attribute
+            const slideTo = this.getAttribute('data-slide-to');
+            // Use Bootstrap's carousel to show the corresponding slide
+            $('#tutorProfileCarousel').carousel(parseInt(slideTo));
+        });
+    });
+
+    // Thumbnail carousel navigation buttons
+    prevBtn.addEventListener('click', function() {
+        currentPosition += 25;
+        if (currentPosition > 0) currentPosition = 0;
+        track.style.transform = `translateX(${currentPosition}%)`;
+    });
+
+    nextBtn.addEventListener('click', function() {
+        currentPosition -= 25;
+        const maxPosition = -((thumbnails.length - 4) * 25);
+        if (currentPosition < maxPosition) currentPosition = maxPosition;
+        track.style.transform = `translateX(${currentPosition}%)`;
+    });
+
+    // Update active thumbnail when main carousel slides
+    $('#tutorProfileCarousel').on('slid.bs.carousel', function (e) {
+        const slideNumber = $(e.relatedTarget).data('slide-number');
+        thumbnails.forEach(t => t.classList.remove('active'));
+        thumbnails[slideNumber].classList.add('active');
+
+        // Center the active thumbnail in the carousel
+        const thumbWidth = thumbnails[0].offsetWidth + 8; // include gap
+        const containerWidth = document.querySelector('.thumbnail-carousel').offsetWidth;
+        const thumbPosition = slideNumber * thumbWidth;
+        const centerPosition = containerWidth / 2 - thumbWidth / 2;
+
+        currentPosition = centerPosition - thumbPosition;
+        track.style.transform = `translateX(${currentPosition}px)`;
+    });
+});
+</script>
+
+
+{% endblock %}

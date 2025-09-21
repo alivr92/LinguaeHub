@@ -1,0 +1,13 @@
+Subject: Interview Starts in 10 Minutes – Join Now
+
+Hi {{ full_name }},
+
+Your interview with {{ site_name }} is starting in about 10 minutes.
+
+Please join now using the link below:
+{{ video_call_link }}
+
+If you run into issues, reach out to our support team right away.
+
+Best of luck,
+{{ site_name }} Team

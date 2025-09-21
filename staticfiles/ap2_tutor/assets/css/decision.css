@@ -1,0 +1,78 @@
+/*!* Additional styles to ensure compatibility *!*/
+
+/* step 6 final decision */
+.application-status-card {
+    border-left: 6px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.status-accepted {
+    border-color: #28a745;
+}
+
+.status-rejected {
+    border-color: #dc3545;
+}
+
+.status-review {
+    border-color: #6f42c1;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-icon {
+    font-size: 2rem;
+}
+
+/*tooltip inner text */
+.tooltip-inner {
+    text-align: left !important;
+}
+
+/*###################################################################*/
+
+/* Unified styling for all status cards */
+.application-status-card {
+    transition: all 0.3s ease;
+}
+
+.status-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Reviewer notes styling */
+.reviewer-notes {
+    border-left: 3px solid;
+}
+
+.bg-light-success {
+    background-color: rgba(25, 135, 84, 0.05);
+}
+
+.bg-light-danger {
+    background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* Timeline items */
+.timeline-item {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timeline-item:before {
+    content: "";
+    position: absolute;
+    left: 0.35rem;
+    top: 0.5rem;
+    bottom: 0;
+    width: 2px;
+    background-color: #e9ecef;
+}

@@ -1,0 +1,17 @@
+Subject: New Skill(s) Approved – {{ site_name }}
+
+Hello {{ full_name }},
+
+We’re pleased to let you know that the following new skill(s) have been approved and added to your tutor profile:
+
+{% for uSkill in approved_uSkills %}
+- {{ uSkill.skill }} (Level: {{ uSkill.level }}) {% if uSkill.is_certified %}[Certified]{% endif %}
+{% endfor %}
+
+These skills are now visible on your public profile. You can log in to manage them via your dashboard:
+{{ dashboard_uri }}
+
+Thank you for being part of {{ site_name }}!
+
+Best regards,
+The {{ site_name }} Team

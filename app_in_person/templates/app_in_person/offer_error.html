@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Processing Offer - {{ site_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Header -->
+        <div class="bg-yellow-500 py-4 px-6">
+            <h1 class="text-white text-2xl font-bold text-center">⚠️ Unable to Process</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6">
+            <div class="text-center mb-4">
+                <svg class="w-16 h-16 text-yellow-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 text-center mb-2">{{ error_title }}</h2>
+            <p class="text-gray-600 text-center mb-6">
+                {{ error_message }}
+            </p>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded">
+                <p class="text-yellow-800 text-sm">
+                    <strong>Possible reasons:</strong>
+                    <ul class="list-disc list-inside mt-1 ml-2">
+                        <li>The offer period has lapsed.</li>
+                        <li>The offer has already been accepted or declined.</li>
+                        <li>The student's request has been withdrawn or fulfilled by another tutor.</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="text-center">
+                <a href="{% url 'provider:dp_home' %}" class="inline-block bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded transition duration-200 mr-2">
+                    Return Home
+                </a>
+                <a href="mailto:support@lingocept.com" class="inline-block bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded transition duration-200">
+                    Contact Support
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-100 py-3 px-6 border-t border-gray-200">
+            <p class="text-xs text-gray-500 text-center">
+                &copy; {% now "Y" %} {{ site_name }}. All rights reserved.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

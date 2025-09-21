@@ -1,0 +1,47 @@
+<div class="row">
+    <p class="text-center">
+        Your online meeting will start at <span
+            class="text-primary text-lg">{{ interview_start_at }}</span> based on <span
+            class="text-primary text-lg text-bold">{{ applicant_tz }}</span> time.
+    </p>
+
+    <div style="text-align: center; margin: 30px 0;">
+        {% if video_call_link %}
+            <a href="{{ video_call_link }}" target="_blank"
+               class="btn btn-lg btn-primary text-lg px-lg-6 py-lg-3">
+                Join Meeting
+            </a>
+        {% else %}
+            <button class="btn btn-lg btn-secondary text-lg px-lg-6 py-lg-3" disabled
+                    style="cursor: not-allowed;">
+                Join Meeting
+            </button>
+        {% endif %}
+    </div>
+
+    <h5 class="mt-5">Notes: </h5>
+    <p class="text-gray-dark ">
+        1. This link will be activate just one hour before your booked time! But surely you
+        will be
+        notify by email half hour before meeting start!
+    </p>
+
+    <p class="text-sm-start">
+        2. If it is half hour before the meeting time just refresh the page to activate the
+        button. (Review by Amin)
+    </p>
+    <p class="text-sm-start">
+        3. If the links does not work well leave a ticket in contact support form or call
+        to +1-123456789 (Review by Amin)
+    </p>
+    <p class="text-sm-start">
+        4. In some services like Google meet or zoom, you may need to have account to be able to
+        use (Review by Amin)
+    </p>
+    <!-- Step 5 button -->
+    <div class="d-flex justify-content-between">
+
+        {#                                <button class="btn btn-secondary prev-btn mb-0">Previous</button>#}
+        {#                                <a id="btnNextSchedule" href="#" class="btn btn-primary ">Next</a>#}
+    </div>
+</div>

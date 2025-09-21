@@ -1,0 +1,297 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block head_title %}Student Dashboard{% endblock %}</title>
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="{{ CFURL.site_url }}">
+    <meta name="description" content="{{ CFText.site_slogan }}">
+
+    <!-- Dark mode -->
+    <script>
+        const storedTheme = localStorage.getItem('theme')
+
+        const getPreferredTheme = () => {
+            if (storedTheme) {
+                return storedTheme
+            }
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light'
+        }
+
+        const setTheme = function (theme) {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-bs-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-bs-theme', theme)
+            }
+        }
+
+        setTheme(getPreferredTheme())
+
+        window.addEventListener('DOMContentLoaded', () => {
+            var el = document.querySelector('.theme-icon-active');
+            if (el != 'undefined' && el != null) {
+                const showActiveTheme = theme => {
+                    const activeThemeIcon = document.querySelector('.theme-icon-active use')
+                    const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
+                    const svgOfActiveBtn = btnToActive.querySelector('.mode-switch use').getAttribute('href')
+
+                    document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
+                        element.classList.remove('active')
+                    })
+
+                    btnToActive.classList.add('active')
+                    activeThemeIcon.setAttribute('href', svgOfActiveBtn)
+                }
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    if (storedTheme !== 'light' || storedTheme !== 'dark') {
+                        setTheme(getPreferredTheme())
+                    }
+                })
+
+                showActiveTheme(getPreferredTheme())
+
+                document.querySelectorAll('[data-bs-theme-value]')
+                    .forEach(toggle => {
+                        toggle.addEventListener('click', () => {
+                            const theme = toggle.getAttribute('data-bs-theme-value')
+                            localStorage.setItem('theme', theme)
+                            setTheme(theme)
+                            showActiveTheme(theme)
+                        })
+                    })
+
+            }
+        })
+
+    </script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap">
+
+    {% block head_style_plugins %}
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+    {% endblock %}
+
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/avr_style.css' %}">
+
+    {% block head_style %}{% endblock %}
+    {% block embed_style %}{% endblock %}
+    {% block my_style %}{% endblock %}
+    {% block head_script %}{% endblock %}
+
+</head>
+
+<body>
+{% block dc_header %}{% include 'app_pages/includes/header.html' %}{% endblock %}
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+    <div class="container mt-3">
+        {% include 'includes/messages.html' %}
+    </div>
+    {% block dc_banner %}{% include 'ap2_student/dashboard/includes/dc_banner.html' %}{% endblock %}
+    <!-- =======================
+    Page content START -->
+    <section class="pt-0">
+        <div class="container">
+            <div class="row">
+
+                {% block dc_sidebar %}
+                    {% if user.profile.is_email_verified %}
+                        {% include 'ap2_student/dashboard/includes/dc_sidebar.html' %}
+                    {% endif %}
+                {% endblock %}
+
+                {% block dashboard_main_content %}{% endblock %}
+            </div> <!-- Row END -->
+        </div>
+    </section>
+    <!-- =======================
+    Page content END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+{% block dashboard_footer %}
+    {#  {% include 'app_accounts/dashboard/includes/dashboard_footer.html' %}#}
+    <!-- =======================
+    Footer START -->
+    <footer class="bg-dark p-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Widget -->
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <!-- Logo START -->
+                    <a href="{% url 'app_pages:home' %}"> <img class="h-20px" src="{{ CFImage.site_logo_light.url }}"
+                                                               alt="logo">
+                    </a>
+                </div>
+
+                <!-- Widget -->
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="text-center text-white text-primary-hover">
+                        Copyrights ©{% now 'Y' %} {{ CFChar.site_name }}. Build by <a href="{{ CFURL.site_url }}"
+                                                                                      target="_blank"
+                                                                                      class="text-white">{{ CFChar.site_name }}</a>.
+                    </div>
+                </div>
+                <!-- Widget -->
+                <div class="col-md-4">
+                    <!-- Rating -->
+                    <ul class="list-inline mb-0 text-center text-md-end">
+                        <li class="list-inline-item ms-2"><a href="{{ CFURL.facebook }}"><i
+                                class="text-white fab fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item ms-2"><a href="{{ CFURL.instagram }}"><i
+                                class="text-white fab fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item ms-2"><a href="{{ CFURL.linkedin }}"><i
+                                class="text-white fab fa-linkedin-in"></i></a>
+                        </li>
+                        <li class="list-inline-item ms-2"><a href="{{ CFURL.twitter }}"><i
+                                class="text-white fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- =======================
+    Footer END -->
+{% endblock %}
+
+{% block dashboard_modal %}
+    <!-- Modal START -->
+    <div class="modal fade" id="coursePremium" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 bg-transparent">
+                    <!-- Close button -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body px-5 pb-5 position-relative overflow-hidden">
+
+                    <!-- Element -->
+                    <figure class="position-absolute bottom-0 end-0 mb-n4 me-n4 d-none d-sm-block">
+                        <img src="{% static 'assets/images/element/01.svg' %}" alt="element">
+                    </figure>
+                    <figure class="position-absolute top-0 end-0 z-index-n1 opacity-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                             width="818.6px"
+                             height="235.1px" viewBox="0 0 818.6 235.1">
+                            <path class="fill-info"
+                                  d="M735,226.3c-5.7,0.6-11.5,1.1-17.2,1.7c-66.2,6.8-134.7,13.7-192.6-16.6c-34.6-18.1-61.4-47.9-87.3-76.7 c-21.4-23.8-43.6-48.5-70.2-66.7c-53.2-36.4-121.6-44.8-175.1-48c-13.6-0.8-27.5-1.4-40.9-1.9c-46.9-1.9-95.4-3.9-141.2-16.5 C8.3,1.2,6.2,0.6,4.2,0H0c3.3,1,6.6,2,10,3c46,12.5,94.5,14.6,141.5,16.5c13.4,0.6,27.3,1.1,40.8,1.9 c53.4,3.2,121.5,11.5,174.5,47.7c26.5,18.1,48.6,42.7,70,66.5c26,28.9,52.9,58.8,87.7,76.9c58.3,30.5,127,23.5,193.3,16.7 c5.8-0.6,11.5-1.2,17.2-1.7c26.2-2.6,55-4.2,83.5-2.2v-1.2C790,222,761.2,223.7,735,226.3z"></path>
+                        </svg>
+                    </figure>
+                    <!-- Title -->
+                    <h2>Get Premium Course in <span class="text-success">$800</span></h2>
+                    <p>Prosperous understood Middletons in conviction an uncommonly do. Supposing so be resolving
+                        breakfast
+                        am or perfectly.</p>
+                    <!-- Content -->
+                    <div class="row mb-3 item-collapse">
+                        <div class="col-sm-6">
+                            <ul class="list-group list-group-borderless">
+                                <li class="list-group-item text-body"><i
+                                        class="bi bi-patch-check-fill text-success"></i>High
+                                    quality Curriculum
+                                </li>
+                                <li class="list-group-item text-body"><i
+                                        class="bi bi-patch-check-fill text-success"></i>Tuition
+                                    Assistance
+                                </li>
+                                <li class="list-group-item text-body"><i
+                                        class="bi bi-patch-check-fill text-success"></i>Diploma
+                                    course
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list-group list-group-borderless">
+                                <li class="list-group-item text-body"><i
+                                        class="bi bi-patch-check-fill text-success"></i>Intermediate
+                                    courses
+                                </li>
+                                <li class="list-group-item text-body"><i
+                                        class="bi bi-patch-check-fill text-success"></i>Over
+                                    200 online courses
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <a href="#" class="btn btn-lg btn-orange-soft">Purchase premium</a>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer d-block bg-info">
+                    <div class="d-sm-flex justify-content-sm-between align-items-center text-center text-sm-start">
+                        <!-- Social media button -->
+                        <ul class="list-inline mb-0 social-media-btn mb-2 mb-sm-0">
+                            <li class="list-inline-item"><a class="btn btn-sm mb-0 me-1 bg-white text-facebook"
+                                                            href="{{ CFURL.facebook }}"><i
+                                    class="fab fa-fw fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a class="btn btn-sm mb-0 me-1 bg-white text-instagram"
+                                                            href="{{ CFURL.instagram }}"><i
+                                    class="fab fa-fw fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a class="btn btn-sm mb-0 me-1 bg-white text-twitter"
+                                                            href="{{ CFURL.twitter }}"><i
+                                    class="fab fa-fw fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a class="btn btn-sm mb-0 bg-white text-linkedin"
+                                                            href="{{ CFURL.linkedin }}"><i
+                                    class="fab fa-fw fa-linkedin-in"></i></a></li>
+                        </ul>
+                        <!-- Contact info -->
+                        <div>
+                            <p class="mb-1 small"><a href="#" class="text-white"><i
+                                    class="far fa-envelope fa-fw me-2"></i>example@gmail.com</a>
+                            </p>
+                            <p class="mb-0 small"><a href="#" class="text-white"><i
+                                    class="fas fa-headset fa-fw me-2"></i>123-456-789</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal END -->
+{% endblock %}
+<!-- Back to top -->
+<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+
+
+<!-- Include jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+{% endblock %}
+
+<!-- Template Functions -->
+<script src="{% static 'assets/js/functions.min.js' %}"></script>
+<script src="{% static 'assets/js/avr.min.js' %}"></script>
+
+{% block embed_script %}{% endblock %}
+{% block my_scripts %}{% endblock %}
+</body>
+</html>

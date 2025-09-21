@@ -1,0 +1,286 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load tocify %}
+
+{% block head_title %}Article{% endblock %}
+
+{% block embed_style %}
+        <link rel="stylesheet" href="{% static 'app_pages/ckeditor/css/ck_article.css' %}">
+    <link rel="stylesheet" href="{% static 'app_pages/ckeditor/css/toc_style.css' %}">
+{% endblock %}
+
+{% block body_content %}
+    <body data-bs-spy="scroll" data-bs-target="#nav-scroll">
+
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <!-- =======================
+        Page Banner START -->
+        <section class="bg-primary bg-opacity-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <!-- Title -->
+                        <h1 class="display-6">Search Solution. Get Support</h1>
+                        <p class="mb-0">Search here to get answers to your questions.</p>
+                        <!-- Search bar -->
+                        <form class="bg-body rounded p-2 mt-4">
+                            <div class="input-group">
+                                <input class="form-control border-0 me-1" type="text" placeholder="Search question...">
+                                <button type="button" class="btn btn-dark mb-0 rounded">Search</button>
+                            </div>
+                        </form>
+
+                        <!-- Popular questions START -->
+                        <div class="row mt-4 align-items-center">
+                            <div class="col-12">
+                                <h5 class="mb-3">Popular questions</h5>
+                                <!-- Questions List START -->
+                                <div class="list-group list-group-horizontal gap-2 justify-content-center flex-wrap mb-0 border-0">
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> How can we
+                                        help?</a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> How to
+                                        upload data to the system? </a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html">
+                                        Installation Guide? </a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> How to view
+                                        expired course? </a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> What's are
+                                        the difference between a social?</a>
+                                    <a class="btn btn-primary-soft btn-sm fw-light" href="#!">View all question</a>
+                                </div>
+                                <!-- Questions list END -->
+                            </div>
+                        </div>
+                        <!-- Popular questions END -->
+                    </div>
+                </div> <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Page Banner END -->
+
+        <!-- =======================
+        Page Content START -->
+        <section>
+            <div class="container" data-sticky-container>
+
+                <div class="row g-4">
+                    <!-- Left side START -->
+                    <!-- TOC Sidebar -->
+                    <div class="col-md-3">
+                        <div data-sticky data-margin-top="80" data-sticky-for="768">
+                            <div id="toc-sidebar" class="navbar">
+                                <nav class="nav nav-pills nav-pill-soft flex-column">
+                                    {% for item in article.content|generate_toc|default:''|dictget:'toc' %}
+                                        <a class="nav-link {% if item.level == 3 %}ms-3{% elif item.level == 4 %}ms-4{% endif %}"
+                                           href="#{{ item.id }}">
+                                            {{ item.text }}
+                                        </a>
+                                    {% empty %}
+                                        <span class="text-muted">No headings found</span>
+                                    {% endfor %}
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Left side END -->
+
+                    <!-- Right side START -->
+                    <div class="col-md-9">
+                        <div class="nav-scroll" data-bs-spy="scroll" data-bs-target="#nav-scroll"
+                             data-bs-smooth-scroll="true" tabindex="0">
+
+
+                            {#                            ------------------------------------------------ #}
+                            <article class="help-article container py-5">
+                                <!-- Article Header -->
+                                <header class="article-header mb-5">
+                                    <div class="d-flex align-items-center mb-3">
+                                        {#                <a href="{% url 'app_pages:help_center' category_slug=article.section.category.slug %}"#}
+                                        {#                   class="badge bg-primary text-decoration-none me-2">#}
+                                        {#                    {{ article.section.category.title }}#}
+                                        {#                </a>#}
+                                        <span class="text-muted small">Last updated: {{ article.updated_at|date:"F j, Y" }}</span>
+                                    </div>
+                                    <h5 class="display-4 mb-4">{{ article.title }}</h5>
+                                </header>
+
+                                <!-- Article Content -->
+                                <div class="col-md-9">
+                                    <article class="help-article article-content styled-ckeditor">
+                                        {{ article.content|generate_toc|default:''|dictget:'content'|safe }}
+                                    </article>
+                                </div>
+
+                                <!-- Article Footer -->
+                                <footer class="article-footer mt-5 pt-4 border-top">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="feedback-section">
+                                                <h5 class="mb-3">Was this helpful?</h5>
+                                                <div class="btn-group" role="group">
+                                                    <button class="btn btn-outline-success feedback-btn"
+                                                            data-article-id="{{ article.id }}"
+                                                            data-helpful="true">
+                                                        <i class="bi bi-hand-thumbs-up"></i> Yes
+                                                    </button>
+                                                    <button class="btn btn-outline-danger feedback-btn"
+                                                            data-article-id="{{ article.id }}"
+                                                            data-helpful="false">
+                                                        <i class="bi bi-hand-thumbs-down"></i> No
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-md-end">
+                                            <div class="share-buttons">
+                                                <span class="me-2">Share:</span>
+                                                <!-- Add your share buttons here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </article>
+                            {#                            ------------------------------------------------ #}
+
+
+                        </div>
+                    </div>
+                    <!-- Right side END -->
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Page Content END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+
+
+{% block scripts_vendors %}
+    <script src="{% static 'assets/vendor/sticky-js/sticky.min.js' %}"></script>
+    {#<script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>#}
+{% endblock %}
+
+{% block my_scripts %}
+    <!-- Smooth Scroll and Scrollspy Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if Bootstrap is loaded
+            if (typeof bootstrap === 'undefined' || !bootstrap.ScrollSpy) {
+                console.error('Bootstrap ScrollSpy not available');
+                return;
+            }
+
+            const tocSidebar = document.getElementById('toc-sidebar');
+            const contentArea = document.querySelector('[data-bs-spy="scroll"]');
+
+            if (!tocSidebar || !contentArea) return;
+
+            // Initialize ScrollSpy with proper configuration
+            const scrollSpy = new bootstrap.ScrollSpy(contentArea, {
+                target: '#toc-sidebar',
+                offset: 120, // Match your header height
+                smoothScroll: true
+            });
+
+            // Manual click handler with precise scrolling
+            tocSidebar.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (!targetElement) return;
+
+                    // Clear all active states
+                    tocSidebar.querySelectorAll('.nav-link').forEach(el => {
+                        el.classList.remove('active');
+                    });
+
+                    // Set active state to clicked item
+                    this.classList.add('active');
+
+                    // Calculate precise scroll position
+                    const headerOffset = 120;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    // Smooth scroll with callback
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Update URL without page reload
+                    history.replaceState(null, null, targetId);
+
+                    // Force ScrollSpy refresh after scroll completes
+                    setTimeout(() => {
+                        scrollSpy.refresh();
+
+                        // Re-apply active class after scroll (safety check)
+                        tocSidebar.querySelectorAll('.nav-link').forEach(el => {
+                            el.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }, 800);
+                });
+            });
+
+            // Fix for initial page load with hash
+            if (window.location.hash) {
+                const initialTarget = document.querySelector(window.location.hash);
+                if (initialTarget) {
+                    const navLink = tocSidebar.querySelector(`.nav-link[href="${window.location.hash}"]`);
+                    if (navLink) {
+                        setTimeout(() => {
+                            navLink.classList.add('active');
+                            scrollSpy.refresh();
+                        }, 500);
+                    }
+                }
+            }
+
+            // Additional scroll event listener for better synchronization
+            let isScrolling;
+            window.addEventListener('scroll', function () {
+                clearTimeout(isScrolling);
+                isScrolling = setTimeout(() => {
+                    const activeSection = findActiveSection();
+                    if (activeSection) {
+                        tocSidebar.querySelectorAll('.nav-link').forEach(el => {
+                            el.classList.remove('active');
+                        });
+                        const correspondingLink = tocSidebar.querySelector(`.nav-link[href="#${activeSection}"]`);
+                        if (correspondingLink) {
+                            correspondingLink.classList.add('active');
+                        }
+                    }
+                }, 100);
+            });
+
+            // Helper function to find currently active section
+            function findActiveSection() {
+                const sections = Array.from(document.querySelectorAll('[id]'));
+                let activeSection = null;
+                let closestDistance = Infinity;
+
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 50) { // Visible area
+                        const distance = Math.abs(rect.top - 120); // Distance from ideal position
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            activeSection = section.id;
+                        }
+                    }
+                });
+
+                return activeSection;
+            }
+        });
+    </script>
+{% endblock %}

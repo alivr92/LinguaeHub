@@ -1,0 +1,81 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+
+{% block head_title %}Checkout{% endblock %}
+
+{% block body_content %}
+    <main>
+        <section class="py-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="m-0">Checkout</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-body shadow p-4">
+                            <h4 class="mb-4">Order Summary</h4>
+                            <p>Total Amount: $12.00</p>
+                            <button id="stripe-payment" class="btn btn-primary">Pay with Stripe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ stripe_public_key|default:"pk_test_YOUR_PUBLISHABLE_KEY" }}');  // Fallback for testing
+        var checkoutButton = document.getElementById("stripe-payment");
+
+        checkoutButton.addEventListener('click', function () {
+            checkoutButton.innerHTML = `Processing <i class='fas fa-spinner fa-spin ms-2'></i>`;
+            fetch("/create-checkout-session/", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({}),
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({sessionId: session.sessionId});
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.log("Error: ", error);
+                });
+        });
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+{% endblock %}

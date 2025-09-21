@@ -1,0 +1,313 @@
+<!-- Teaching Method Section -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary-soft d-flex align-items-center py-2">
+        <div class="icon-circle bg-primary-soft text-primary me-3">
+            <i class="bi bi-laptop fs-6"></i> /
+            <i class="bi bi-people fs-6"></i>
+        </div>
+        <h5 class="mb-0 text-primary">Teaching Method</h5>
+    </div>
+    <div class="card-body">
+        <!-- Method Selection -->
+        <div class="mb-4">
+            {% for value, label in profile_basic_form.fields.meeting_method.choices %}
+                <div class="form-check form-check-inline mb-3">
+                    <input class="form-check-input" type="radio"
+                           name="meeting_method" id="method_{{ value }}"
+                           value="{{ value }}"
+                           {% if profile_basic_form.meeting_method.value == value %}checked{% endif %}>
+                    <label class="form-check-label fw-bold" for="method_{{ value }}">
+                        {% if value == 'online' %}
+                            <i class="bi bi-laptop text-primary me-2"></i> {{ label }}
+                        {% elif value == 'hybrid' %}
+                            <i class="bi bi-laptop text-primary me-1"></i> +
+                            <i class="bi bi-people-fill text-success ms-1 me-1"></i> Hybrid ({{ label }}
+                            )
+                        {% else %}
+                            <i class="bi bi-people-fill text-success me-1"></i> {{ label }}
+                        {% endif %}
+
+                    </label>
+                </div>
+            {% endfor %}
+
+            <div class="alert alert-info mt-3 d-flex align-items-center">
+                <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                <div>
+                    <strong>Our platform specializes in online teaching</strong>.
+                    In-person sessions are an <span class="text-decoration-underline">optional supplement</span>.
+                </div>
+            </div>
+        </div>
+
+        <!-- In-Person Details (Conditional) -->
+        <div id="inPersonLocationSection"
+             class="{% if profile_basic_form.meeting_method.value not in 'hybrid,in_person' %}d-none{% endif %}">
+            <hr class="my-3">
+            <h6 class="fw-bold text-success mb-3">
+                <i class="bi bi-geo-alt-fill me-2"></i>In-Person Teaching Details
+            </h6>
+
+            <div class="row g-3">
+                <!-- Map Location Picker -->
+                <div class="col-12">
+                    <label class="form-label">Your Teaching Location <span class="text-danger">*</span></label>
+                    <div class="alert alert-light mb-3">
+                        <i class="bi bi-lightbulb text-warning me-2"></i>
+                        Set your primary meeting point for face-to-face sessions
+                    </div>
+
+                    <!-- Map Container -->
+                    <div id="osmMap" style="height: 300px; width: 100%;"
+                         class="border rounded mb-2"></div>
+
+                    <!-- Location Display -->
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div>
+                            <small class="text-muted d-block">Coordinates: <span
+                                    id="coordinatesDisplay">
+                                {% if profile_basic_form.latitude.value and profile_basic_form.longitude.value %}
+                                    {{ profile_basic_form.latitude.value|floatformat:4 }},
+                                    {{ profile_basic_form.longitude.value|floatformat:4 }}
+                                {% else %}
+                                    Not set
+                                {% endif %}
+                            </span></small>
+                            <small class="text-muted">Service Area: <span id="displayCity">
+                                {% if profile_basic_form.city.value %}{{ profile_basic_form.city.value }}{% else %}Not
+                                    detected{% endif %}
+                            </span></small>
+                        </div>
+                        <button type="button" id="resetLocation" class="btn btn-sm btn-outline-danger">
+                            <i class="bi bi-x-circle"></i> Clear
+                        </button>
+                    </div>
+
+                    <!-- Hidden Fields -->
+                    <input type="hidden" name="latitude" id="osmLat"
+                           value="{{ profile_basic_form.latitude.value|default_if_none:'' }}">
+                    <input type="hidden" name="longitude" id="osmLng"
+                           value="{{ profile_basic_form.longitude.value|default_if_none:'' }}">
+                    <input type="hidden" name="city" id="mapCity"
+                           value="{{ profile_basic_form.city.value|default_if_none:'' }}">
+                    {#                                    <input type="hidden" name="offers_in_person" id="offersInPerson"#}
+                    {#                                           value="{% if profile_basic_form.offers_in_person.value %}true{% else %}false{% endif %}">#}
+                </div>
+
+                <!-- Teaching Radius -->
+                <div class="col-md-6">
+                    <label class="form-label">Maximum Travel Distance
+                        <i class="bi bi-info-circle text-primary"
+                           data-bs-toggle="tooltip"
+                           title="We'll only match you with students within this radius">
+                        </i>
+                    </label>
+                    <div class="input-group border-radius-1">
+                        {{ profile_basic_form.meeting_radius }}
+                        <span class="input-group-text">km</span>
+                    </div>
+                    {% for error in profile_basic_form.meeting_radius.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Meeting Preferences -->
+                <div class="col-md-6">
+                    <label class="form-label">Session Location Preference</label>
+                    {% if profile_basic_form.meeting_location %}
+                        {{ profile_basic_form.meeting_location|default_if_none:'any' }}
+                        {% for error in profile_basic_form.meeting_location.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+                <!-- ========== TEACHING PREFERENCE SECTION (design I )========== -->
+                {#                <div class="card border-0 shadow-sm mb-4">#}
+                {#                    <div class="card-header bg-primary-soft d-flex align-items-center py-2">#}
+                {#                        <div class="icon-circle bg-primary-soft text-primary me-3">#}
+                {#                            <i class="bi bi-geo-alt-fill fs-5"></i>#}
+                {#                        </div>#}
+                {#                        <h5 class="mb-0 text-primary">Teaching Preferences</h5>#}
+                {#                    </div>#}
+                {#                    <div class="card-body">#}
+                {#                        <!-- In-Person Teaching Toggle -->#}
+                {#                        <div class="form-check form-switch mb-3">#}
+                {#                            <input class="form-check-input" type="checkbox" id="inPersonToggle" name="offers_in_person"#}
+                {#                                   {% if profile_basic_form.offers_in_person.value %}checked{% endif %}>#}
+                {#                            <label class="form-check-label fw-bold" for="inPersonToggle">#}
+                {#                                I offer in-person classes#}
+                {#                            </label>#}
+                {#                            <div class="form-text text-muted mt-1">#}
+                {#                                <i class="bi bi-info-circle me-1"></i>#}
+                {#                                By enabling this, you confirm availability to teach students face-to-face in your#}
+                {#                                specified location when matches are found.#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {##}
+                {#                        <!-- Location Details (Conditional) -->#}
+                {#                        <div id="inPersonLocationSection"#}
+                {#                             class="{% if not profile_basic_form.offers_in_person.value %}d-none{% endif %}">#}
+                {#                            <hr class="my-3">#}
+                {##}
+                {#                            <div class="row g-3">  <!-- Added this row wrapper -->#}
+                {#                                <!-- City Input -->#}
+                {#                                <div class="col-md-6">#}
+                {#                                    <label class="form-label">City for In-Person Classes <span#}
+                {#                                            class="text-danger">*</span></label>#}
+                {#                                    <div class="input-group">#}
+                {#                                        {{ profile_basic_form.city }}#}
+                {#                                        <span class="input-group-text">#}
+                {#                            <i class="bi bi-geo-alt"></i>#}
+                {#                        </span>#}
+                {#                                    </div>#}
+                {#                                    <div class="form-text">#}
+                {#                                        Where you're willing to meet students (e.g., "Berlin" or "Toronto Downtown")#}
+                {#                                    </div>#}
+                {#                                    {% for error in profile_basic_form.city.errors %}#}
+                {#                                        <div class="invalid-feedback d-block">{{ error }}</div>#}
+                {#                                    {% endfor %}#}
+                {#                                </div>#}
+                {##}
+                {#                                <!-- Teaching Radius -->#}
+                {#                                <div class="col-md-6">  <!-- Removed mt-3 here -->#}
+                {#                                    <label class="form-label">Maximum Travel Distance <i#}
+                {#                                            class="bi bi-info-circle text-primary"#}
+                {#                                            data-bs-toggle="tooltip"#}
+                {#                                            title="How far you're willing to travel for sessions"></i></label>#}
+                {#                                    <div class="input-group">#}
+                {#                                        {{ profile_basic_form.meeting_radius }}#}
+                {#                                        <span class="input-group-text">km</span>#}
+                {#                                    </div>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {##}
+                {#                            <!-- Clarification Note -->#}
+                {#                            <div class="row mt-3">  <!-- Added row here for consistency -->#}
+                {#                                <div class="col-12">#}
+                {#                                    <div class="alert alert-primary-soft border-primary bg-primary bg-opacity-10 d-flex align-items-center">#}
+                {#                                        <i class="bi bi-lightbulb fs-4 me-3 text-primary"></i>#}
+                {#                                        <div>#}
+                {#                                            <strong>Note:</strong> This only indicates your <em>general willingness</em>#}
+                {#                                            for in-person teaching.#}
+                {#                                            You'll always see student requests before confirming any sessions.#}
+                {#                                        </div>#}
+                {#                                    </div>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+
+                <!-- ========== TEACHING PREFERENCE SECTION -PERFECT- ========== -->
+                {#                <div class="card border-0 shadow-sm mb-4">#}
+                {#                    <div class="card-header bg-primary-soft d-flex align-items-center py-2">#}
+                {#                        <div class="icon-circle bg-primary-soft text-primary me-3">#}
+                {#                            <i class="bi bi-geo-alt-fill fs-5"></i>#}
+                {#                        </div>#}
+                {#                        <h5 class="mb-0 text-primary">Teaching Preferences</h5>#}
+                {#                    </div>#}
+                {#                    <div class="card-body">#}
+                {#                        <!-- In-Person Teaching Toggle -->#}
+                {#                        <div class="form-check form-switch mb-3">#}
+                {#                            <input class="form-check-input" type="checkbox" id="inPersonToggle" name="offers_in_person"#}
+                {#                                   {% if profile_basic_form.offers_in_person.value %}checked{% endif %}>#}
+                {#                            <label class="form-check-label fw-bold" for="inPersonToggle">#}
+                {#                                I offer in-person classes#}
+                {#                            </label>#}
+                {#                        </div>#}
+                {##}
+                {#                        <!-- Location Details (Conditional) -->#}
+                {#                        <div id="inPersonLocationSection"#}
+                {#                             class="{% if not profile_basic_form.offers_in_person.value %}d-none{% endif %}">#}
+                {#                            <hr class="my-3">#}
+                {#                            <div class="row g-3">#}
+                {#                                <!-- Map Location Picker -->#}
+                {#                                <div class="col-12">#}
+                {#                                    <label class="form-label">Teaching Location <span#}
+                {#                                            class="text-danger">*</span></label>#}
+                {#                                    <div class="alert alert-primary-soft mb-3">#}
+                {#                                        <i class="bi bi-info-circle me-2"></i>#}
+                {#                                        Search for your city or click on the map to set your location#}
+                {#                                    </div>#}
+                {##}
+                {#                                    <!-- Search Box with Autocomplete -->#}
+                {#                                    <div class="input-group mb-2">#}
+                {#                                        <input type="text" id="locationSearch" class="form-control"#}
+                {#                                               placeholder="Search for a city...">#}
+                {#                                        <button class="btn btn-outline-secondary" type="button" id="searchButton">#}
+                {#                                            <i class="bi bi-search"></i>#}
+                {#                                        </button>#}
+                {#                                    </div>#}
+                {##}
+                {##}
+                {#                                    <!-- Map Container with Integrated Search -->#}
+                {#                                    <div id="osmMap" style="height: 300px; width: 100%;"#}
+                {#                                         class="border rounded mb-2"></div>#}
+                {##}
+                {#                                    <!-- Location Display -->#}
+                {#                                    <div class="d-flex justify-content-between align-items-center mt-2">#}
+                {#                                        <div>#}
+                {#                                            <small class="text-muted d-block">Coordinates: <span#}
+                {#                                                    id="coordinatesDisplay">#}
+                {#                                                {% if profile_basic_form.latitude.value and profile_basic_form.longitude.value %}#}
+                {#                                                    {{ profile_basic_form.latitude.value|floatformat:4 }},#}
+                {#                                                    {{ profile_basic_form.longitude.value|floatformat:4 }}#}
+                {#                                                {% else %}#}
+                {#                                                    Not set#}
+                {#                                                {% endif %}#}
+                {#                                            </span></small>#}
+                {#                                            <small class="text-muted">Area: <span id="displayCity">#}
+                {#                                                {% if profile_basic_form.city.value %}#}
+                {#                                                    {{ profile_basic_form.city.value }}{% else %}Not#}
+                {#                                                    detected{% endif %}#}
+                {#                                            </span></small>#}
+                {#                                        </div>#}
+                {#                                        <button type="button" id="resetLocation" class="btn btn-sm btn-outline-danger">#}
+                {#                                            <i class="bi bi-x-circle"></i> Clear#}
+                {#                                        </button>#}
+                {#                                    </div>#}
+                {##}
+                {#                                    <!-- Hidden Fields -->#}
+                {#                                    <input type="hidden" name="latitude" id="osmLat"#}
+                {#                                           value="{{ profile_basic_form.latitude.value|default_if_none:'' }}">#}
+                {#                                    <input type="hidden" name="longitude" id="osmLng"#}
+                {#                                           value="{{ profile_basic_form.longitude.value|default_if_none:'' }}">#}
+                {#                                    <input type="hidden" name="city" id="mapCity"#}
+                {#                                           value="{{ profile_basic_form.city.value|default_if_none:'' }}">#}
+                {#                                </div>#}
+                {##}
+                {#                                <!-- Teaching Radius -->#}
+                {#                                <div class="col-md-6">#}
+                {#                                    <label class="form-label">Maximum Travel Distance <i#}
+                {#                                            class="bi bi-info-circle text-primary"#}
+                {#                                            data-bs-toggle="tooltip"#}
+                {#                                            title="Maximum distance you'll travel from pinned location"></i></label>#}
+                {#                                    <div class="input-group">#}
+                {#                                        {{ profile_basic_form.meeting_radius }}#}
+                {#                                        <span class="input-group-text">km</span>#}
+                {#                                    </div>#}
+                {#                                </div>#}
+                {##}
+                {#                                <!-- Meeting Preferences -->#}
+                {#                                <div class="col-md-6">#}
+                {#                                    <label class="form-label">Preferred Meeting Type</label>#}
+                {#                                    {% if profile_basic_form.meeting_preference.value %}#}
+                {#                                        {{ profile_basic_form.meeting_preference }}#}
+                {#                                        {% for error in profile_basic_form.meeting_preference.errors %}#}
+                {#                                            <div class="invalid-feedback d-block">{{ error }}</div>#}
+                {#                                        {% endfor %}#}
+                {#                                    {% endif %}#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}

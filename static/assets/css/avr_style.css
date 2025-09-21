@@ -1,0 +1,11 @@
+body {
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE10+/Edge */
+}
+.protected-image {
+  pointer-events: none; /* Disable right-click */
+  user-select: none;    /* Disable text selection */
+  /*background: url('/static/assets/images/logo_white_gold.png') center 48px repeat red; !* Optional: overlay *!*/
+}

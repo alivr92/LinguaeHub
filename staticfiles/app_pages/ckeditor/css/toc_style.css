@@ -1,0 +1,74 @@
+/* ---------------------------------------  Table Of Content (TOC) Sidebar styling --------------------------------------- */
+/*#toc-sidebar {*/
+    /*position: sticky;*/
+    /*top: 120px;*/
+    /*max-height: calc(100vh - 120px);*/
+    /*overflow-y: auto;*/
+/*}*/
+
+/*!*#toc-sidebar .nav-link {*!*/
+    /*!*padding: 0.25rem 0.5rem;*!*/
+    /*!*margin-bottom: 0.25rem;*!*/
+    /*!*border-radius: 4px;*!*/
+    /*!*color: #495057;*!*/
+    /*!*transition: all 0.2s;*!*/
+/*!*}*!*/
+
+/*.nav-pill-soft .nav-link {*/
+    /*background-color: rgba(var(--bs-primary-rgb), 0.1);*/
+    /*color: var(--bs-primary);*/
+    /*border: none;*/
+/*}*/
+
+/*#toc-sidebar .nav-link:hover,*/
+/*#toc-sidebar .nav-link:focus {*/
+    /*background-color: #f8f9fa;*/
+/*}*/
+
+/*#toc-sidebar .nav-link.active {*/
+    /*!*color: #0d6efd;*!*/
+    /*color: var(--bs-white) !important;*/
+    /*!*background-color: #e7f5ff;*!*/
+    /*background-color: var(--bs-primary);*/
+    /*font-weight: 500;*/
+/*}*/
+
+/*!* Indentation for nested items *!*/
+/*#toc-sidebar .ms-3 { padding-left: 1rem; }*/
+/*#toc-sidebar .ms-4 { padding-left: 2rem; }*/
+/*!* Ensure anchors account for fixed header *!*/
+/*:target::before {*/
+    /*content: "";*/
+    /*display: block;*/
+    /*height: 80px; !* Same as your header height *!*/
+    /*margin: -80px 0 0; !* Negative top margin *!*/
+/*}*/
+
+
+/* NEW STYLE -------------------------*/
+/* TOC Active State Fixes */
+#toc-sidebar .nav-link {
+    transition: none !important; /* Remove transitions that might interfere */
+}
+
+#toc-sidebar .nav-link.active {
+    color: white !important;
+    background-color: var(--bs-primary) !important;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+}
+
+/* Prevent other elements from interfering */
+[data-bs-spy="scroll"] {
+    position: relative;
+}
+
+/* Anchor offset adjustment */
+:target::before {
+    content: "";
+    display: block;
+    height: 120px;
+    margin: -120px 0 0;
+    pointer-events: none;
+}

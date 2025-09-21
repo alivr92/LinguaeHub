@@ -1,0 +1,196 @@
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-light border-bottom d-flex align-items-center">
+                        <i class="bi bi-percent text-primary me-2"></i>
+                        <h5 class="mb-0">Platform Commission Structure</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info d-flex align-items-center">
+                            <i class="bi bi-info-circle me-2 fs-4"></i>
+                            <div>We believe in fair compensation. Our commission funds platform improvements and student acquisition.</div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <div class="card h-100 border-0 bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title d-flex align-items-center"><i class="bi bi-people-fill me-2 text-info"></i>Trial Lessons</h6>
+                                        <p class="card-text">For trial lessons, our commission is <strong>100%</strong>.</p>
+                                        <p class="card-text"><small class="text-muted">This helps us cover student acquisition costs while ensuring you get paid for your time.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 border-0 bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title d-flex align-items-center"><i class="bi bi-graph-up me-2 text-success"></i>Regular Lessons</h6>
+                                        <p class="card-text">For regular lessons, we charge <strong>15-25%</strong> of your hourly rate.</p>
+                                        <p class="card-text"><small class="text-muted">The more you teach, the less commission we take.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card bg-light border-0">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold mb-3 d-flex align-items-center"><i class="bi bi-currency-dollar me-2 text-primary"></i>Set Your Lesson Price</h6>
+                                        <div class="mb-3">
+                                            <label for="lessonPrice" class="form-label">Hourly Rate ($)</label>
+                                            <input type="number" class="form-control" id="lessonPrice" min="10" max="100" value="24">
+                                        </div>
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="followRecommendation" checked>
+                                            <label class="form-check-label" for="followRecommendation">
+                                                Use recommended rate ($24/hr)
+                                            </label>
+                                        </div>
+                                        <div class="p-3 bg-white rounded">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span>Your Earnings:</span>
+                                                <strong class="text-success" id="yourEarnings">$16.80</strong>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span>Platform Fee:</span>
+                                                <strong class="text-danger" id="platformFee">$7.20</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-3 mt-md-0">
+                                <div class="card bg-light border-0 h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold mb-3 d-flex align-items-center"><i class="bi bi-award me-2 text-warning"></i>Current Commission Rate</h6>
+                                        <div class="text-center py-3">
+                                            <div class="display-4 fw-bold text-primary mb-0" id="commissionRate">25%</div>
+                                            <div class="text-muted">of your hourly rate</div>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="text-center mt-2">
+                                            <small class="text-muted">Progress to next tier: <span id="progressText">0/20 hours</span></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mb-3 d-flex align-items-center"><i class="bi bi-table me-2 text-primary"></i>Commission Rates Based on Teaching Hours</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="commissionTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Completed Hours</th>
+                                        <th>Commission Rate</th>
+                                        <th>Your Earnings (at current price)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0 - 20 hours</td>
+                                        <td><strong>25%</strong></td>
+                                        <td id="earningsTier1">$18.00 per lesson</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21 - 50 hours</td>
+                                        <td><strong>22%</strong></td>
+                                        <td id="earningsTier2">$18.72 per lesson</td>
+                                    </tr>
+                                    <tr>
+                                        <td>51 - 100 hours</td>
+                                        <td><strong>20%</strong></td>
+                                        <td id="earningsTier3">$19.20 per lesson</td>
+                                    </tr>
+                                    <tr>
+                                        <td>101 - 200 hours</td>
+                                        <td><strong>18%</strong></td>
+                                        <td id="earningsTier4">$19.68 per lesson</td>
+                                    </tr>
+                                    <tr class="table-success">
+                                        <td>200+ hours</td>
+                                        <td><strong>15%</strong></td>
+                                        <td id="earningsTier5">$20.40 per lesson</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Enhanced Monthly Earnings Projection -->
+                        <div class="mt-4 p-4 monthly-earnings-card shadow-sm">
+                            <h6 class="fw-bold mb-3 d-flex align-items-center"><i class="bi bi-calendar-check me-2 text-primary"></i>Monthly Earnings Projection</h6>
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Estimated lessons per week: <span class="bg-orange ms-2" id="lessonsValue">5 lessons</span></label>
+                                        <div class="slider-container" id="sliderContainer">
+                                            <input type="range" class="form-range" id="lessonsPerWeek" min="1" max="100" value="5">
+                                            <div class="slider-tooltip" id="sliderTooltip">5 lessons</div>
+                                            <div class="slider-ticks">
+                                                <div class="slider-tick major"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick major"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick major"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick major"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick major"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                                <div class="slider-tick"></div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <small>1 lesson</small>
+                                            <small>20 lessons</small>
+                                        </div>
+                                        <div class="slider-value-display" id="sliderValueDisplay">
+                                            <i class="bi bi-graph-up me-1"></i> Projected monthly income: <span id="sliderMonthly">$360</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card bg-white border-0 pulse-animation shadow">
+                                        <div class="card-body text-center py-4">
+                                            <h6 class="card-title text-muted">Estimated Monthly Income</h6>
+                                            <h3 class="text-primary fw-bold mb-0" id="monthlyEarnings">$360</h3>
+                                            <small class="text-muted">Based on current price</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 bg-light p-3 rounded">
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="text-muted">Weekly</div>
+                                        <div class="fw-bold" id="weeklyEarnings">$84.00</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="text-muted">Quarterly</div>
+                                        <div class="fw-bold" id="quarterlyEarnings">$1,090.80</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="text-muted">Yearly</div>
+                                        <div class="fw-bold" id="yearlyEarnings">$4,363.20</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

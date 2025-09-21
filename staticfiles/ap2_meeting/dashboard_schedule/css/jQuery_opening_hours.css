@@ -1,0 +1,37 @@
+﻿/* RANGE SLIDER STYLES */
+.range-checkbox { clear:left; float:left; margin:13px 10px 10px; }
+.range-label { float:left; display:block; width:80px; margin:10px; cursor: pointer; }
+.range-slider { float:left; margin:10px; }
+.range-time { width:100px; float:left; margin:10px; }
+.range-day-disabled { opacity:.5; }
+.range-day .ui-slider-range { background: #00A000; }
+.range-day .ui-slider-handle { cursor:w-resize !important; }
+.range-day-disabled .ui-slider-range { background: #fff; }
+.range-day-disabled .ui-slider-handle { cursor:default !important; background:none !important; border:none !important; }
+.range-values { position:relative; display:block; height:20px; overflow:hidden; margin:10px 0 10px; }
+.range-values span { position: absolute; border-left: 1px solid grey; padding-left:5px }
+.range-values span.r-0 { left:0 }
+.range-values span.r-3 { left:12.5% }
+.range-values span.r-6 { left:25% }
+.range-values span.r-9 { left:37.5% }
+.range-values span.r-12 { left:50% }
+.range-values span.r-15 { left:62.5% }
+.range-values span.r-18 { left:75% }
+.range-values span.r-21 { left:87.5% }
+.range-values span.r-24 { left:100%;margin-left:-1px; }
+
+/* RESULT DATA STYLES */
+#schedule { width: 500px; background:#eee; margin-top:20px; }
+#schedule th { text-align: left;border-bottom:1px solid grey; }
+#schedule th,#schedule td { padding:5px; }
+
+/************ PARAMS ************/
+body {
+  
+}
+.range-slider,.range-values {
+  width: 400px;
+}
+.range-values,#schedule,h1 {
+  margin-left: 143px;
+}

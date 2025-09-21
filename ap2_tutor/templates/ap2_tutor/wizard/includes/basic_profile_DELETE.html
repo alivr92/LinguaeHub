@@ -1,0 +1,546 @@
+{% load static %}
+
+<!-- Profile form START -->
+<form id="profileForm" class="row g-4 needs-validation" method="POST" action="{% url 'provider:submit_profile' %}"
+      enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="profile_form">
+    <input type="hidden" name="step" value="2"> <!-- Adjust value per form -->
+    <input type="hidden" name="action" value=""> <!-- Will be set by JS -->
+
+    {#    <h5 class="mb-0">👤 Basic Information</h5>#}
+    <!-- Card body START -->
+    <!-- Profile picture -->
+    {#    <div class="col-12 justify-content-center align-items-center">#}
+    {#        <label class="form-label">Profile picture * </label> <i class="bi bi-info-circle text-primary"#}
+    {#                                                                data-bs-toggle="tooltip"#}
+    {#                                                                title="{{ CFChar.tooltip_photo }}"></i>#}
+    {#        <div class="d-flex align-items-center">#}
+    {#            <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">#}
+    {#                <!-- Avatar place holder -->#}
+    {#                <span class="avatar avatar-xl">#}
+    {#                                        <img id="uploadfile-1-preview"#}
+    {#                                             class="avatar-img rounded-circle border border-white border-3 shadow"#}
+    {#                                             src="{{ profile_basic_form.photo.value.url }}" alt="">#}
+    {#                                </span>#}
+    {#                <!-- Remove btn -->#}
+    {#                <button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>#}
+    {#            </label>#}
+    {#            <!-- Upload button -->#}
+    {#            <label class="btn btn-primary-soft mb-0" for="uploadfile-1">Change</label>#}
+    {#            <input id="uploadfile-1" class="form-control d-none" type="file" name="photo">#}
+    {#            <!-- Hidden input to indicate photo deletion -->#}
+    {#            <input type="hidden" id="delete-photo" name="delete_photo" value="false">#}
+    {#        </div>#}
+    {#        {% for error in profile_basic_form.photo.errors %}#}
+    {#            <div class="alert alert-danger alert-dismissible">{{ error }}#}
+    {#                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span#}
+    {#                        aria-hidden="true">&times;</span></button>#}
+    {#            </div>#}
+    {#        {% endfor %}#}
+    {##}
+    {##}
+    {#    </div>#}
+
+    <!-- Full name -->
+    <div class="col-12">
+        <label class="form-label">Full name</label>
+        <div class="input-group">
+            {{ profile_basic_form.first_name }}
+            {% for error in profile_basic_form.first_name.errors %}
+                <div class="alert alert-danger alert-dismissible">{{ error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+            {% endfor %}
+            {{ profile_basic_form.last_name }}
+            {% for error in profile_basic_form.last_name.errors %}
+                <div class="alert alert-danger alert-dismissible">{{ error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="col-md-6">
+        <label class="form-label">Gender <b>*</b></label>
+        {{ profile_basic_form.gender }}
+        {% for error in profile_basic_form.gender.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Title -->
+    <div class="col-md-6">
+        <label class="form-label">Title</label> <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                                                   title="{{ CFChar.tooltip_title }}"></i>
+        {{ profile_basic_form.title }}
+        {% for error in profile_basic_form.title.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Divider -->
+    <hr class="mt-5 mb-3">
+    <!-- Section Name -->
+    <h5 class="mt-0">✉️Contact Info</h5>
+
+    <!-- Phone number -->
+    <div class="col-md-6">
+        <label class="form-label">Phone number</label>
+        {{ profile_basic_form.phone }}
+        <div class="invalid-feedback">
+            Please provide a valid phone number.
+        </div>
+        {% for error in profile_basic_form.phone.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Location (Country) -->
+    <div class="col-md-6">
+        <label class="form-label">Location (Country) *</label> <i class="bi bi-info-circle text-primary"
+                                                                  data-bs-toggle="tooltip"
+                                                                  title="{{ CFChar.tooltip_location }}"></i>
+        {{ profile_basic_form.country }}
+        <div class="invalid-feedback">
+            Please select a country.
+        </div>
+        {% for error in profile_basic_form.country.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Email -->
+    <div class="col-md-6">
+        <label class="form-label">Email <b>*</b></label>
+        {{ profile_basic_form.email }}
+        <div id="email-error" class="invalid-feedback">
+            {% if profile_basic_form.email.errors %}
+                {{ profile_basic_form.email.errors.0 }}
+            {% endif %}
+        </div>
+    </div>
+    <!-- Username ----------------------------- CHECK LATER?-->
+    <div class="col-md-6">
+        <label class="form-label">Username <b>*</b></label> <i class="bi bi-info-circle text-primary"
+                                                               data-bs-toggle="tooltip"
+                                                               title="{{ CFChar.tooltip_username }}"></i>
+        <div class="input-group">
+            <span class="input-group-text">{{ CFChar.site_name }}@</span>
+            {{ profile_basic_form.username }}
+        </div>
+        {% for error in profile_basic_form.username.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <!-- Divider -->
+    <hr class="mt-5 mb-3">
+    <!-- Section Name -->
+    <h5 class="mt-0">🌐 Language Info</h5>
+
+
+    <!-- Native Language -->
+    <div class="col-md-6">
+        <label class="form-label">Native Language *</label> <i class="bi bi-info-circle text-primary"
+                                                               data-bs-toggle="tooltip"
+                                                               title="{{ CFChar.tooltip_native_language }}"></i>
+        {{ profile_basic_form.lang_native }}
+        {% for error in profile_basic_form.lang_native.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Speaking Languages (SelectMultiple) -->
+    <div class="col-md-6">
+        <label class="form-label">
+            Spoken Languages * </label> <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                                           title="{{ CFChar.tooltip_spoken_languages }}"></i>
+        {{ profile_basic_form.lang_speak }}
+        <div class="invalid-feedback">
+            Please select at least one language.
+        </div>
+        {% for error in profile_basic_form.lang_speak.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <!-- Divider -->
+    <hr class="mt-5 mb-3">
+    <!-- Section Name -->
+    <h5 class="mt-0">📝 Biography</h5>
+
+    <!-- About me -->
+    <div class="col-12">
+        <label class="form-label">About me</label> <i class="bi bi-info-circle text-primary"
+                                                      data-bs-toggle="tooltip"
+                                                      title="{{ CFChar.tooltip_bio }}"></i>
+        {{ profile_basic_form.bio }}
+        <div class="form-text">Brief description for your profile.</div>
+        {% for error in profile_basic_form.bio.errors %}
+            <div class="alert alert-danger alert-dismissible">{{ error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Card body END -->
+
+    <!-- Step 2 button -->
+    <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-secondary btn-prev" id="btnPrev_step2"
+                data-action="prev" data-step="2">Previous
+        </button>
+
+        <div>
+            <button type="button" class="btn btn-success btn-save me-2" id="btnSave_step2"
+                    data-action="save" data-step="2"><i class="bi bi-save me-1"></i>Save
+            </button>
+
+            <button type="button" class="btn btn-primary btn-next" id="btnNext_step2"
+                    data-action="next" data-step="2">Next
+            </button>
+        </div>
+    </div>
+
+
+</form>
+<!-- Profile form END =============================================================-->
+
+
+<div class="container py-4">
+    {#    <!-- Progress Bar -->#}
+    <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Step 2 of 5</span>
+            <span class="text-muted">30% complete</span>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;" aria-valuenow="30"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Basic Information</h2>
+        <p class="text-muted">Tell us about yourself - this will appear on your public profile</p>
+    </div>
+
+    <!-- Form Container -->
+    <form id="profileForm" class="needs-validation" method="POST" action="{% url 'provider:submit_profile' %}"
+          enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="profile_form">
+        <input type="hidden" name="step" value="2">
+
+        <!-- ========== PROFILE SECTION ========== -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-light d-flex align-items-center py-3">
+                <div class="icon-circle bg-primary-soft text-primary me-3">
+                    <i class="bi bi-person-lines-fill fs-4"></i>
+                </div>
+                <h4 class="mb-0">Personal Details</h4>
+            </div>
+            <div class="card-body">
+
+                <div class="col-12 justify-content-center align-items-center">
+                    <label class="form-label">Profile picture * </label> <i class="bi bi-info-circle text-primary"
+                                                                            data-bs-toggle="tooltip"
+                                                                            title="{{ CFChar.tooltip_photo }}"></i>
+                    <div class="d-flex align-items-center">
+                        <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+                            <!-- Avatar place holder -->
+                            <span class="avatar avatar-xl">
+                                        <img id="uploadfile-1-preview"
+                                             class="avatar-img rounded-circle border border-white border-3 shadow"
+                                             src="{{ profile_basic_form.photo.value.url }}" alt="Profile" width="120" height="120">
+                                </span>
+                            <!-- Remove btn -->
+                            <button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>
+                        </label>
+                        <!-- Upload button -->
+                        <label class="btn btn-primary-soft mb-0" for="uploadfile-1">Change</label>
+                        <input id="uploadfile-1" class="form-control d-none" type="file" name="photo">
+                        <!-- Hidden input to indicate photo deletion -->
+                        <input type="hidden" id="delete-photo" name="delete_photo" value="false">
+
+                        {#                                ---------------------------------------- #}
+                                <div class="avatar-upload">
+                                    <!-- Preview and upload button -->
+                                    <div class="avatar-preview mb-3">
+                                        <div id="imagePreview"
+                                             style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden;">
+                                            <img src="{% static 'assets/images/default.png' %}" alt="Preview"
+                                                 class="img-fluid w-100 h-100">
+                                        </div>
+                                    </div>
+                                    {#                                    <label for="uploadfile-1" class="btn btn-outline-primary"><i class="bi bi-upload me-2"></i>Upload Photo</label>#}
+                                </div>
+                                {#                                ---------------------------------------- #}
+
+
+                    </div>
+                    {% for error in profile_basic_form.photo.errors %}
+                        <div class="alert alert-danger alert-dismissible">{{ error }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="row mb-4">
+                    <div class="col-12">
+{#                        <label class="form-label fw-medium">Profile Picture <span class="text-danger">*</span></label>#}
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-4">
+                            <div class="position-relative">
+                                <img id="uploadfile-1-preview"
+                                     class="rounded-circle border border-3 border-white shadow"
+                                     src="{{ profile_basic_form.photo.value.url }}" width="120" height="120"
+                                     alt="Profile">
+                                <button type="button"
+                                        class="btn btn-sm btn-danger position-absolute top-0 end-0 rounded-circle p-1 uploadremove">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                            <div>
+
+
+
+
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                                        data-bs-target="#photoGuidelinesModal">
+                                    <i class="bi bi-question-circle me-2"></i>Guidelines
+                                </button>
+                            </div>
+                        </div>
+                        {% for error in profile_basic_form.photo.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Name Fields -->
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">First Name <span class="text-danger">*</span></label>
+                        {{ profile_basic_form.first_name }}
+                        {% for error in profile_basic_form.first_name.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                        {{ profile_basic_form.last_name }}
+                        {% for error in profile_basic_form.last_name.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Gender & Title -->
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                        {{ profile_basic_form.gender }}
+                        {% for error in profile_basic_form.gender.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Professional Title</label>
+                        <div class="input-group">
+                            {{ profile_basic_form.title }}
+                            <span class="input-group-text" data-bs-toggle="tooltip" title="{{ CFChar.tooltip_title }}">
+                <i class="bi bi-info-circle text-primary"></i>
+              </span>
+                        </div>
+                        {% for error in profile_basic_form.title.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== CONTACT SECTION ========== -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-light d-flex align-items-center py-3">
+                <div class="icon-circle bg-info-soft text-info me-3">
+                    <i class="bi bi-envelope-plus-fill fs-4"></i>
+                </div>
+                <h4 class="mb-0">Contact Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                        {{ profile_basic_form.email }}
+                        {% for error in profile_basic_form.email.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone Number</label>
+                        {{ profile_basic_form.phone }}
+                        {% for error in profile_basic_form.phone.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Country <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            {{ profile_basic_form.country }}
+                            <span class="input-group-text" data-bs-toggle="tooltip"
+                                  title="{{ CFChar.tooltip_location }}">
+                <i class="bi bi-info-circle text-primary"></i>
+              </span>
+                        </div>
+                        {% for error in profile_basic_form.country.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Username <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">{{ CFChar.site_name }}@</span>
+                            {{ profile_basic_form.username }}
+                            <span class="input-group-text" data-bs-toggle="tooltip"
+                                  title="{{ CFChar.tooltip_username }}">
+                <i class="bi bi-info-circle text-primary"></i>
+              </span>
+                        </div>
+                        {% for error in profile_basic_form.username.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== LANGUAGE SECTION ========== -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-light d-flex align-items-center py-3">
+                <div class="icon-circle bg-warning-soft text-warning me-3">
+                    <i class="bi bi-translate fs-4"></i>
+                </div>
+                <h4 class="mb-0">Language Proficiency</h4>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Native Language <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            {{ profile_basic_form.lang_native }}
+                            <span class="input-group-text" data-bs-toggle="tooltip"
+                                  title="{{ CFChar.tooltip_native_language }}">
+                <i class="bi bi-info-circle text-primary"></i>
+              </span>
+                        </div>
+                        {% for error in profile_basic_form.lang_native.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Spoken Languages <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            {{ profile_basic_form.lang_speak }}
+                            <span class="input-group-text" data-bs-toggle="tooltip"
+                                  title="{{ CFChar.tooltip_spoken_languages }}">
+                <i class="bi bi-info-circle text-primary"></i>
+              </span>
+                        </div>
+                        {% for error in profile_basic_form.lang_speak.errors %}
+                            <div class="invalid-feedback d-block">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== BIOGRAPHY SECTION ========== -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-light d-flex align-items-center py-3">
+                <div class="icon-circle bg-success-soft text-success me-3">
+                    <i class="bi bi-pencil-square fs-4"></i>
+                </div>
+                <h4 class="mb-0">Professional Biography</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">About Me <span data-bs-toggle="tooltip" title="{{ CFChar.tooltip_bio }}">
+              <i class="bi bi-info-circle text-primary"></i></span></label>
+                    {{ profile_basic_form.bio }}
+                    <div class="form-text">Write a brief introduction that highlights your teaching experience and
+                        approach.
+                    </div>
+                    {% for error in profile_basic_form.bio.errors %}
+                        <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="d-flex justify-content-between mt-5">
+            <button type="button" class="btn btn-outline-secondary px-4" id="btn-prev">
+                <i class="bi bi-arrow-left me-2"></i>Previous
+            </button>
+            <div>
+                <button type="button" class="btn btn-light px-4 me-2" id="btn-save">
+                    <i class="bi bi-save me-2"></i>Save Draft
+                </button>
+                <button type="button" class="btn btn-primary px-4" id="btn-next">
+                    Continue <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- Step 2 button -->
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_step2"
+                    data-action="prev" data-step="2"><i class="bi bi-arrow-left me-2"></i>Previous
+            </button>
+            <div>
+                <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_step2"
+                        data-action="save" data-step="2"><i class="bi bi-save me-1"></i>Save
+                </button>
+
+                <button type="button" class="btn btn-primary btn-next" id="btnNext_step2"
+                        data-action="next" data-step="2">Next <i class="bi bi-arrow-right ms-2"></i></button>
+            </div>
+        </div>
+
+
+    </form>
+</div>

@@ -1,0 +1,143 @@
+<!-- Left sidebar START -->
+<div class="col-xl-3">
+    <!-- Responsive offcanvas body START -->
+    <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+        <!-- Offcanvas header -->
+        <div class="offcanvas-header bg-light">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">My profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar"
+                    aria-label="Close"></button>
+        </div>
+        <!-- Offcanvas body -->
+        <div class="offcanvas-body p-3 p-xl-0">
+            <div class="bg-dark border rounded-3 pb-0 p-3 w-100">
+                <!-- Dashboard menu -->
+                <div class="list-group list-group-dark list-group-borderless collapse-list">
+                    {% if not user.profile.is_active %}
+
+                        <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_wizard' %}"><i class="bi bi-person-check-fill fa-fw me-2"></i>Interview</a>
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-chat-dots fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-clock-history fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-clipboard-check fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-mic fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-headset fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-briefcase fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-person-badge-fill fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-chat-left-text-fill fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-chat-square-quote fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-star-fill fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-file-earmark-text-fill fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-journal-check fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-calendar-event-fill fa-fw me-2"></i>Interview</a>#}
+                        {#            <a class="list-group-item {% if 'interview' in request.path %}active{% endif %}" href="{% url 'provider:dp_wizard' %}"><i class="bi bi-clock-fill fa-fw me-2"></i>Interview</a>#}
+                        <a class="list-group-item {% if 'edit-profile' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_edit' user.profile.tutor_profile.pk %}"><i
+                                class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
+                        {#                    {% elif user.applicant.status == 'scheduled' %}#}
+                        {#              Show waiting page and interview online link #}
+                        {##}
+                        {#                        {% if user.client_sessions.video_call_link and session.start_session_utc|timeuntil < "01:00:00" %}#}
+                        {#                            <a href="{{ session.video_call_link }}" class="btn btn-success" target="_blank">Join#}
+                        {#                                Interview</a>#}
+                        {#                        {% else %}#}
+                        {#                            <p class="text-muted">You’ll receive the interview link 1 hour before the session#}
+                        {#                                starts.</p>#}
+                        {#                        {% endif %}#}
+
+
+                    {% else %}
+
+
+
+
+                        <a class="list-group-item {% if 'panel' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_home' %}"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+                        <a class="list-group-item {% if 'manage-course' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_manage_course' %}"><i class="bi bi-basket fa-fw me-2"></i>
+{#                            My Courses#}
+                        Upcoming Meetings
+                        </a>
+                        <!-- Collapse menu -->
+                        <a class="list-group-item  {% if 'appointments' in request.path %}active{% endif %}"
+                           data-bs-toggle="collapse" href="#collapseauthentication" role="button" aria-expanded="false"
+                           aria-controls="collapseauthentication">
+                            <i class="bi bi-calendar4-week fa-fw me-2"></i>Appointments
+                        </a>
+                        <!-- Submenu -->
+                        <ul class="nav collapse flex-column pb-3 {% if 'appointments' in request.path %}show{% endif %}"
+                            id="collapseauthentication" data-bs-parent="#navbar-sidebar">
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'manual' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'meeting:d_appointments' %}"><i class="far fa-fw fa-edit me-2"></i>
+                                Manual Add</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'edit' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'meeting:d_appointments_edit' %}"><i
+                                    class="far fa-fw fa-edit me-2"></i> Edit Table</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'table' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'meeting:d_appointments_vtable' %}#vtable"><i
+                                    class="bi bi-calendar-week fa-fw me-2"></i> Visual Table</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'settings' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'meeting:d_appointments_settings' %}"><i
+                                    class="bi bi-speedometer fa-fw me-2"></i> Settings</a></li>
+                        </ul>
+
+                        <!-- Collapse menu - UPGRADE Profile -->
+                        <a class="list-group-item  {% if 'promotion' in request.path %}active{% endif %}"
+                           data-bs-toggle="collapse" href="#collapsepromotion" role="button" aria-expanded="false"
+                           aria-controls="collapsepromotion">
+                            <i class="bi bi-calendar4-week fa-fw me-2"></i>Promotion
+                        </a>
+                        <!-- Submenu -->
+                        <ul class="nav collapse flex-column pb-3 {% if 'promotion' in request.path %}show{% endif %}"
+                            id="collapsepromotion" data-bs-parent="#navbar-sidebar">
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'manual' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'meeting:d_appointments' %}"><i class="far fa-fw fa-edit me-2"></i>
+                                Certify French</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'edit' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'meeting:d_appointments_edit' %}"><i
+                                    class="far fa-fw fa-edit me-2"></i> Certify German</a></li>
+                        </ul>
+
+                        <a class="list-group-item {% if 'quiz' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_quiz' %}"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
+                        <a class="list-group-item {% if 'earning' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_earning' %}"><i class="bi bi-graph-up fa-fw me-2"></i>Earnings</a>
+                        <a class="list-group-item {% if 'pricing' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_pricing' %}"><i class="bi bi-currency-dollar fa-fw me-2"></i>Pricing</a>
+                        <a class="list-group-item {% if 'student-list' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_client_list' %}"><i
+                                class="bi bi-people fa-fw me-2"></i>Students</a>
+                        <a class="list-group-item {% if 'order' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_order' %}"><i class="bi bi-folder-check fa-fw me-2"></i>Orders</a>
+                        <a class="list-group-item {% if 'review' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_reviews' %}"><i class="bi bi-star fa-fw me-2"></i>Reviews</a>
+                        <a class="list-group-item {% if 'edit-profile' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_edit' user.profile.tutor_profile.pk %}"><i
+                                class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
+                        <a class="list-group-item {% if 'payout' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_payout' %}"><i class="bi bi-wallet2 fa-fw me-2"></i>Payouts</a>
+                        <a class="list-group-item {% if 'setting' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_setting' %}"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
+                        <a class="list-group-item {% if 'in-person' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_in_person' %}"><i class="bi bi-geo fa-fw me-2"></i>In-Person
+                            Settings</a>
+
+                        <a class="list-group-item {% if 'delete-account' in request.path %}active{% endif %}"
+                           href="{% url 'provider:dp_delete_account' user.profile.tutor_profile.pk %}"><i
+                                class="bi bi-trash fa-fw me-2"></i>Delete Profile</a>
+                    {% endif %}
+                    <a class="list-group-item text-danger bg-danger-soft-hover" href="{% url 'accounts:sign_out' %}"><i
+                            class="fas fa-sign-out-alt fa-fw   me-2"></i>Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Responsive offcanvas body END -->
+</div>
+<!-- Left sidebar END -->

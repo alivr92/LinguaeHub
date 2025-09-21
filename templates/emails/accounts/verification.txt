@@ -1,0 +1,24 @@
+Subject: Activate Your Account - Complete Your Registration
+
+Welcome to {site_name}, {first_name}!
+
+We're excited to have you on board. To complete your registration and access all features, please verify your email address by clicking the link below:
+
+Activate Account: {verification_url}
+
+If the link doesn't work, copy and paste this URL into your browser:
+{verification_url}
+
+Security notice: This link expires in 24 hours and can only be used once. If you didn't request this, please ignore this email or contact support at {support_email}.
+
+What's Next?
+- Complete your profile to get personalized recommendations
+- Explore our learning resources and courses
+- Connect with instructors and other learners
+
+Need help? Contact us at {support_email}
+
+© {current_year} {site_name}. All rights reserved.
+Privacy Policy: {privacy_policy_url}
+Terms of Service: {terms_url}
+Our address: {company_address}

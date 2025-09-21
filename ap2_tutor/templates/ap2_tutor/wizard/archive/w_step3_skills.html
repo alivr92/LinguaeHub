@@ -1,0 +1,197 @@
+<!-- Trigger this modal programmatically when the step loads -->
+<div class="alert alert-info d-flex flex-row align-items-start gap-3 m-3 p-4 rounded-4 shadow-sm text-justify"
+     role="alert">
+    <i class="bi bi-info-circle-fill fs-3 text-primary pt-1 ms-1"></i>
+
+    <div class="flex-grow-1">
+        <p class="mb-1 fw-semibold">Please read carefully before continuing.</p>
+
+        <ul class="mb-2 ps-3">
+            <li>
+                For each skill, select the highest level you are <strong>fully skilled in</strong> and can <strong>confidently
+                teach</strong> up to.
+                Avoid overestimating — give your best honest estimation.
+            </li>
+            <li>
+                <strong>Note:</strong> These are your personal estimations. Our <strong>{{ CFChar.site_name }}</strong>
+                reviewers will unlock the final approved level for each skill.
+            </li>
+            <li>
+                Videos and certificates for each level are <strong>optional but highly recommended</strong>. They help
+                reviewers make better decisions
+                and can significantly <strong>boost your visibility and credibility</strong>.
+            </li>
+            <li>
+                The <strong>introduction video is mandatory</strong>. It will be the main content used for our decision
+                and will appear on your public profile.
+            </li>
+            <li>
+                If you selected multiple skills, you must <strong>speak in each relevant language for at least 1
+                minute</strong> in your video.
+            </li>
+            <li>
+                If you've recorded multiple videos for different skills, you can <strong>merge them into one seamless
+                video</strong> and upload it as your introduction.
+            </li>
+            <li>
+                In general you can add <strong>3</strong> skills. But <strong>VIP users</strong> can add up to 5 skills.
+            </li>
+            <li>
+                Recommended video length: <strong>1–3 minutes</strong>.
+                <em>(Tip: Check what competitors recommend — typically between 1 and 5 minutes.)</em>
+            </li>
+            <li>
+                <strong>Max file size:</strong> 100MB<br>
+                <strong>Accepted formats:</strong> MP4, MOV, AVI
+            </li>
+        </ul>
+
+        <p class="mb-0 text-muted small">
+            You must follow the above instructions to proceed with your tutor application.
+        </p>
+    </div>
+</div>
+
+
+<div class="card-body p-4">
+
+    <!-- Divider -->
+    <hr class="my-5">
+    <!-- Section Name -->
+    <h5 class="mt-0">📚 Introduction Video * <i class="bi bi-info-circle text-primary"
+                                                data-bs-toggle="tooltip"
+                                                title="{{ CFChar.tooltip_video_intro }}"></i></h5>
+    <!-- Video Intro Field (Outside Table) -->
+    <div class="mb-4">
+
+        <div class="row col-12 align-items-center" id="video_intro_container">
+
+            <div class="col-12">
+                <label id="" class="btn btn-lg btn-purple ms-2 m-3 label_skill_video"
+                       for="applicant_video_intro"><i class="bi bi-upload"></i> Upload</label>
+            </div>
+            <div class="col-6">
+                <input type="file"
+                       id="applicant_video_intro"
+                       class="form-control d-none"
+                       name="video_intro"
+                       placeholder="Upload Introduction Video"
+                       accept=".mp4"
+                       required>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Skills Table -->
+    <div class="table-responsive">
+        <table class="table table-hover align-middle" id="skills-table">
+            <thead class="table-info ">
+
+            <tr>
+                <th style="width: 25%">Teaching Skill * <i class="bi bi-info-circle text-primary"
+                                                           data-bs-toggle="tooltip"
+                                                           title="{{ CFChar.tooltip_teaching_skill }}"></i></th>
+                <th style="width: 25%">Skill Level * <i class="bi bi-info-circle text-primary"
+                                                        data-bs-toggle="tooltip"
+                                                        title="{{ CFChar.tooltip_skill_level }}"></i></th>
+                <th style="width: 22.5%">Video <i class="bi bi-info-circle text-primary"
+                                                data-bs-toggle="tooltip"
+                                                title="{{ CFChar.tooltip_video_intro }}"></i></th>
+                <th style="width: 22.5%">Certificate <i class="bi bi-info-circle text-primary"
+                                                      data-bs-toggle="tooltip"
+                                                      title="{{ CFChar.tooltip_certificate }}"></i></th>
+                <th style="width: 5%">Action</th>
+            </tr>
+            </thead>
+            <tbody id="skills-container">
+            <!-- Initial row will be added by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Skill limitation reached -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div id="skillLimitAlert" class="alert alert-warning py-2 mb-0 d-none ">Maximum skills reached</div>
+        <button type="button" id="btnAddSkill" class="btn btn-dark-soft ms-auto">
+            <i class="bi bi-plus-circle me-2"></i>Add Skill
+        </button>
+    </div>
+
+</div>
+
+<!-- Step 3 button -->
+<div class="d-flex justify-content-between mt-3">
+    <button type="button" class="btn btn-secondary btn-prev" id="btnPrev_step3" data-action="prev" data-step="3">
+        Previous
+    </button>
+
+    <div>
+        <button type="button" class="btn btn-success btn-save me-2" id="btnSave_step3" data-action="save" data-step="3">
+            <i class="bi bi-save me-1"></i> Save
+        </button>
+        <button type="button" class="btn btn-primary btn-next " id="btnNext_step3" data-action="next" data-step="3">
+            Next
+        </button>
+    </div>
+</div>
+
+
+<!-- Hidden template for new rows -->
+<template id="skill-row-template">
+    <tr class="skill-row">
+        <input type="hidden" name="step" value="3">
+        <td>
+            <select class="form-select js-choice border-0 z-index-9 bg-transparent"
+                    name="skill"
+                    aria-label=".form-select-sm"
+                    data-search-enabled="true"
+                    data-remove-item-button="true"
+                    required>
+                {% for skill in skills %}
+                    <option class="align-content-start"
+                            value="{{ skill.id }}">{{ skill }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td>
+            <select class="form-select js-choice border-0 z-index-9 bg-transparent"
+                    name="level"
+                    aria-label=".form-select-sm"
+                    data-search-enabled="true"
+                    data-remove-item-button="true"
+                    required>
+                <option value="">Select Level</option>
+                {% for level in levels %}
+                    <option value="{{ level.id }}">{{ level }}</option>
+                {% endfor %}
+            </select>
+        </td>
+        <td>
+            <label class="btn btn-sm btn-primary-soft mx-2 w-100 label_skill_video">
+                <i class="bi bi-upload"></i> Upload
+            </label>
+            <input type="file"
+                   class="form-control d-none skill_video_input"
+                   name="skill_video"
+                   accept=".mp4">
+        </td>
+        <td>
+            <label class="btn btn-sm btn-primary-soft mx-2 w-100 label_skill_certificate">
+                <i class="bi bi-upload"></i> Upload
+            </label>
+            <input type="file"
+                   class="form-control d-none certificate_input"
+                   name="certificate"
+                   accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-sm btn-outline-danger remove-skill" data-bs-toggle="tooltip"
+                    title="Remove">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+    </tr>
+</template>
+{# ------------------------------------------------------------------------------------------------------ #}

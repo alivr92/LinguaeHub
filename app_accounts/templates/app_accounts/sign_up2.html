@@ -1,0 +1,888 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block head_title %}User Sign Up{% endblock %}
+{% block head_script %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <style>
+        /* Base styles for input groups */
+        .input-group {
+            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+            border: 1px solid #dee2e6;
+        }
+
+        /* Focus state */
+        .input-group:focus-within {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        /* Success state (when input is valid) */
+        .input-group.is-valid-group {
+            border-color: #198754 !important;
+        }
+
+        .input-group.is-valid-group:focus-within {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+        }
+
+        /* Invalid state */
+        .input-group.is-invalid-group {
+            border-color: #dc3545 !important;
+        }
+
+        .input-group.is-invalid-group:focus-within {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+        }
+
+        /* Inner elements styling */
+        .input-group .form-control {
+            border: none;
+            box-shadow: none !important;
+            background-color: transparent;
+        }
+
+        .input-group .input-group-text {
+            border: none;
+            background-color: transparent;
+        }
+
+        /* Password toggle button */
+        .password-toggle {
+            cursor: pointer;
+            background-color: #f8f9fa;
+            border-left: 0;
+        }
+
+        .password-toggle:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Password requirements list */
+        .password-requirements {
+            margin-top: 0.5rem;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .requirement i {
+            margin-right: 0.5rem;
+            width: 1rem;
+            text-align: center;
+        }
+
+        .requirement.valid {
+            color: #198754;
+        }
+
+        .requirement.invalid {
+            color: #dc3545;
+            font-weight: 500;
+        }
+
+        /* Feedback messages */
+        #passwordFeedback {
+            display: inline-block;
+            margin-top: 0.25rem;
+            word-break: break-word;
+            max-width: 100%;
+        }
+
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .show-error {
+            display: block;
+        }
+
+        /* Legal section styling */
+        .legal-section {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.375rem;
+            border: 0px solid #dee2e6;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #495057;
+        }
+    </style>
+
+    <style>
+        /* Enhanced validation states */
+        .input-group.is-valid-group {
+            border-color: #198754 !important;
+        }
+
+        .input-group.is-invalid-group {
+            border-color: #dc3545 !important;
+        }
+
+        /* For checkbox validation */
+        .form-check.is-valid-group .form-check-input {
+            border-color: #198754 !important;
+        }
+
+        .form-check.is-invalid-group .form-check-input {
+            border-color: #dc3545 !important;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .error-message.show-error {
+            display: block;
+        }
+
+        /* Focus states for validation */
+        .input-group.is-valid-group:focus-within {
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+        }
+
+        .input-group.is-invalid-group:focus-within {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+    </style>
+{% endblock %}
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
+            <div class="container-fluid">
+                <div class="row d-flex align-items-stretch">
+                    <!-- left -->
+                    <div class="col-12 col-lg-6 d-md-flex align-items-center justify-content-center bg-primary bg-opacity-10">
+                        <div class="p-3 p-lg-4">
+                            <!-- Title -->
+                            <div class="text-center">
+                                <h2 class="fw-bold">Welcome to our largest community</h2>
+                                <p class="mb-0 h6 fw-light">Let's learn something new today!</p>
+                            </div>
+                            <!-- SVG Image -->
+                            <img src="{% static 'assets/images/element/02.svg' %}" class="mt-5" alt="">
+                            <!-- Info -->
+                            <div class="d-sm-flex mt-5 align-items-center justify-content-center">
+                                <ul class="avatar-group mb-2 mb-sm-0">
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/01.jpg' %}"
+                                                                      alt="avatar"></li>
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/02.jpg' %}"
+                                                                      alt="avatar"></li>
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/03.jpg' %}"
+                                                                      alt="avatar"></li>
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/04.jpg' %}"
+                                                                      alt="avatar"></li>
+                                </ul>
+                                <!-- Content -->
+                                <p class="mb-0 h6 fw-light ms-0 ms-sm-3">4k+ Students joined us, now it's your turn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right -->
+                    <div class="col-12 col-lg-6">
+                        <div class="row right-panel-content mx-auto">
+                            {#                            <div class="col-sm-10 col-xl-8 mx-auto px-0">#}
+                            <div class="col-xl-10 mx-auto">  <!-- Reduced from col-xl-8 -->
+
+                                <!-- Title -->
+                                <img src="{% static 'assets/images/element/03.svg' %}"
+                                     class="h-40px mb-2 protected-image" alt="">
+                                <h2>Sign up as a <span class="text-primary">student</span>!</h2>
+                                <p class="lead mb-4">Nice to see you! Please Sign up with your account.</p>
+
+                                {% include 'includes/messages.html' %}
+                                <!-- Form START -->
+                                <form class="needs-validation " novalidate method="POST"
+                                      action="{% url 'accounts:sign_up' %}" id="registrationForm">
+                                    {% csrf_token %}
+
+                                    <div class="row g-3 ">
+                                        <!-- Personal Information Section -->
+                                        {#                                        <div class="col-12">#}
+                                        {#                                            <h5 class="border-bottom pb-2 mb-3">#}
+                                        {#                                                <i class="fas fa-user me-2"></i>Personal Information#}
+                                        {#                                            </h5>#}
+                                        {#                                        </div>#}
+
+                                        <!-- Name Fields -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name *</label>
+                                            <div class="input-group  {% if form.first_name.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user"></i>
+                                                </span>
+                                                <input type="text"
+                                                       name="{{ form.first_name.name }}"
+                                                       class="form-control ps-2 py-3 {% if form.first_name.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.first_name.value|default:'' }}"
+                                                       placeholder="First Name"
+                                                       required>
+                                            </div>
+                                            {% if form.first_name.errors %}
+                                                <div class="error-message" id="first-name-error">
+                                                    {{ form.first_name.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name *</label>
+                                            <div class="input-group  {% if form.last_name.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user"></i>
+                                                </span>
+                                                <input type="text"
+                                                       name="{{ form.last_name.name }}"
+                                                       class="form-control ps-2 py-3 {% if form.last_name.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.last_name.value|default:'' }}"
+                                                       placeholder="Last Name"
+                                                       required>
+                                            </div>
+                                            {% if form.last_name.errors %}
+                                                <div class="error-message" id="last-name-error">
+                                                    {{ form.last_name.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Username -->
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label">Username *</label>
+                                            <div class="input-group  {% if form.username.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                                                <input type="text"
+                                                       name="{{ form.username.name }}"
+                                                       class="form-control ps-2 py-3 {% if form.username.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.username.value|default:'' }}"
+                                                       placeholder="Username"
+                                                       required>
+                                            </div>
+                                            {% if form.username.errors %}
+                                                <div class="error-message" id="username-error">
+                                                    {{ form.username.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Email -->
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label">Email Address *</label>
+                                            <div class="input-group  {% if form.email.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                                <input type="email"
+                                                       name="{{ form.email.name }}"
+                                                       class="form-control ps-2 py-3 {% if form.email.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.email.value|default:'' }}"
+                                                       placeholder="Email Address"
+                                                       required>
+                                            </div>
+                                            {% if form.email.errors %}
+                                                <div class="error-message" id="email-error">
+                                                    {{ form.email.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            {#                                            <div class="form-text">We'll use this as your username</div>#}
+                                        </div>
+
+                                        <!-- Security Section -->
+                                        {#                                        <div class="col-12 mt-4">#}
+                                        {#                                            <h5 class="border-bottom pb-2 mb-3">#}
+                                        {#                                                <i class="fas fa-lock me-2"></i>Account Security#}
+                                        {#                                            </h5>#}
+                                        {#                                        </div>#}
+
+                                        <!-- Password Fields -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Password *</label>
+                                            <div class="input-group  password-input-group {% if form.password1.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                                <input type="password"
+                                                       name="{{ form.password1.name }}"
+                                                       id="password1"
+                                                       class="form-control ps-2 py-0 {% if form.password1.errors %}is-invalid{% endif %}"
+                                                       placeholder="Password"
+                                                       required
+                                                       minlength="8">
+                                                <span class="input-group-text password-toggle"
+                                                      title="Reveal password" data-toggle="password1">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </span>
+                                            </div>
+                                            {% if form.password1.errors %}
+                                                <div class="error-message" id="password1-error">
+                                                    {{ form.password1.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            {#                                            <div class="form-text">Minimum 8 characters with numbers/symbols</div>#}
+                                        </div>
+
+                                        <!-- Password Confirm Fields -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Confirm Password *</label>
+                                            <div class="input-group  password-input-group {% if form.password2.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                                <input type="password"
+                                                       name="{{ form.password2.name }}"
+                                                       id="password2"
+                                                       class="form-control ps-2 py-3 {% if form.password2.errors %}is-invalid{% endif %}"
+                                                       placeholder="Confirm Password"
+                                                       required>
+                                                <span class="input-group-text password-toggle"
+                                                      title="Reveal password" data-toggle="password2">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </span>
+                                            </div>
+                                            {% if form.password2.errors %}
+                                                <div class="error-message" id="password2-error">
+                                                    {{ form.password2.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            <div class="error-message" id="mismatch-error" style="display: none;">
+                                                Passwords do not match
+                                            </div>
+                                        </div>
+
+                                        <!-- Password Strength Meter -->
+                                        <div class="my-3">
+                                            <div class="progress mb-2" style="height: 6px;">
+                                                <div class="progress-bar" id="passwordStrength"
+                                                     role="progressbar"></div>
+                                            </div>
+                                            <small id="passwordFeedback" class="text-muted"></small>
+                                        </div>
+                                        <!-- Password Requirements -->
+                                        <div class="row col-12 password-requirements mx-2 mb-3 ">
+                                            <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="requirement invalid" id="req-length">
+                                                    <i class="bi bi-circle"></i> <span>At least 8 characters</span>
+                                                </div>
+                                                <div class="requirement invalid" id="req-uppercase">
+                                                    <i class="bi bi-circle"></i>
+                                                    <span>At least 1 uppercase letter</span>
+                                                </div>
+                                                <div class="requirement invalid" id="req-lowercase">
+                                                    <i class="bi bi-circle"></i>
+                                                    <span>At least 1 lowercase letter</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+                                                <div class="requirement invalid" id="req-number">
+                                                    <i class="bi bi-circle"></i> <span>At least 1 number</span>
+                                                </div>
+                                                <div class="requirement invalid" id="req-special">
+                                                    <i class="bi bi-circle"></i>
+                                                    <span>At least 1 special character</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Legal Section -->
+                                        {#                                        <div class="col-12 mt-4">#}
+                                        {#                                            <h5 class="border-bottom pb-2 mb-3">#}
+                                        {#                                                <i class="fas fa-shield-alt me-2"></i>Legal & Privacy#}
+                                        {#                                            </h5>#}
+                                        {#                                        </div>#}
+
+                                        <div class="legal-section mb-3">
+                                            <div class="form-check mb-3">
+                                                <input type="checkbox"
+                                                       class="form-check-input {% if form.terms_agreed.errors %}is-invalid{% endif %}"
+                                                       name="{{ form.terms_agreed.name }}"
+                                                       id="{{ form.terms_agreed.id_for_label }}"
+                                                       required>
+                                                <label class="form-check-label fw-semibold"
+                                                       for="{{ form.terms_agreed.id_for_label }}">
+                                                    I agree to the <a href="{% url 'app_pages:terms' %}" target="_blank"
+                                                                      class="text-primary">Terms of Service</a> and
+                                                    <a href="{% url 'app_pages:privacy_policy' %}" target="_blank"
+                                                       class="text-primary">Privacy Policy</a>
+                                                    <span class="required-indicator">*</span>
+                                                </label>
+                                                {% if form.terms_agreed.errors %}
+                                                    <div class="error-message" id="terms-error">
+                                                        {{ form.terms_agreed.errors|join:", " }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input"
+                                                       name="{{ form.email_consent.name }}"
+                                                       id="{{ form.email_consent.id_for_label }}"
+                                                       {% if form.email_consent.value %}checked{% endif %}>
+                                                <label class="form-check-label"
+                                                       for="{{ form.email_consent.id_for_label }}">
+                                                    Receive educational content updates and platform notifications
+                                                </label>
+                                                <div class="form-text">You can unsubscribe at any time</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- CAPTCHA Section -->
+                                        {#                                        <div class="section-title">#}
+                                        {#                                            <i class="fas fa-robot me-2"></i>Security Verification#}
+                                        {#                                        </div>#}
+                                        <!-- CAPTCHA -->
+                                        <div class="col-12">
+                                            <div class="mb-4">
+                                                {{ form.captcha }}
+                                            </div>
+                                            {% if form.captcha.errors %}
+                                                <div class="error-message" id="captcha-error">
+                                                    {{ form.captcha.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-12 mt-4">
+                                            <button class="btn btn-primary btn-lg w-100 py-3" type="submit">
+                                                <i class="fas fa-user-plus me-2"></i>Create Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Login Link -->
+                                <div class="text-center mt-4">
+                                    <p class="mb-0">Already have an account? <a href="{% url 'accounts:sign_in' %}"
+                                                                                class="fw-bold">Sign in </a></p>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <p class="mb-0">Sign up as a <a href="{% url 'provider:become_tutor' %}"
+                                                                    class="fw-bold">Tutor <i
+                                            class="fas fa-user-tie"></i></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+
+{#{% block my_scripts %}#}
+{#    <script src="{% static 'assets/js/zxcvbn.js' %}"></script>#}
+{#    <script>#}
+{#        document.addEventListener('DOMContentLoaded', function () {#}
+{#            const passwordInput = document.getElementById('password1');#}
+{#            const confirmInput = document.getElementById('password2');#}
+{#            const strengthBar = document.getElementById('passwordStrength');#}
+{#            const feedback = document.getElementById('passwordFeedback');#}
+{#            const form = document.getElementById('registrationForm');#}
+{#            const mismatchError = document.getElementById('mismatch-error');#}
+{##}
+{#            // Track shown errors to prevent duplicates#}
+{#            const shownErrors = new Set();#}
+{##}
+{#            // Password toggle functionality#}
+{#            document.querySelectorAll('.password-toggle').forEach(toggle => {#}
+{#                toggle.addEventListener('click', function () {#}
+{#                    const inputId = this.getAttribute('data-toggle');#}
+{#                    const input = document.getElementById(inputId);#}
+{#                    const icon = this.querySelector('i');#}
+{##}
+{#                    if (input.type === 'password') {#}
+{#                        input.type = 'text';#}
+{#                        icon.classList.remove('bi-eye-fill');#}
+{#                        icon.classList.add('bi-eye-slash-fill');#}
+{#                        this.setAttribute('title', 'Conceal password');#}
+{#                    } else {#}
+{#                        input.type = 'password';#}
+{#                        icon.classList.remove('bi-eye-slash-fill');#}
+{#                        icon.classList.add('bi-eye-fill');#}
+{#                        this.setAttribute('title', 'Reveal password');#}
+{#                    }#}
+{#                });#}
+{#            });#}
+{##}
+{#            // Password strength and requirement validation#}
+{#            passwordInput.addEventListener('input', function () {#}
+{#                const password = this.value;#}
+{#                const inputGroup = this.closest('.password-input-group');#}
+{#                inputGroup.classList.remove('is-valid-group', 'is-invalid-group');#}
+{##}
+{#                const hasUpper = /[A-Z]/.test(password);#}
+{#                const hasLower = /[a-z]/.test(password);#}
+{#                const hasNumber = /[0-9]/.test(password);#}
+{#                const hasSpecial = /[^A-Za-z0-9]/.test(password);#}
+{#                const hasValidLength = password.length >= 8;#}
+{##}
+{#                // Update requirement indicators with more visual feedback#}
+{#                updateRequirement('req-length', hasValidLength, password.length > 0);#}
+{#                updateRequirement('req-uppercase', hasUpper, password.length > 0);#}
+{#                updateRequirement('req-lowercase', hasLower, password.length > 0);#}
+{#                updateRequirement('req-number', hasNumber, password.length > 0);#}
+{#                updateRequirement('req-special', hasSpecial, password.length > 0);#}
+{##}
+{#                // Add success class if all requirements are met#}
+{#                if (hasValidLength && hasUpper && hasLower && hasNumber && hasSpecial) {#}
+{#                    inputGroup.classList.add('is-valid-group');#}
+{#                } else {#}
+{#                    inputGroup.classList.add('is-invalid-group');#}
+{#                }#}
+{##}
+{#                // Calculate strength#}
+{#                if (password.length > 0) {#}
+{#                    const result = zxcvbn(password);#}
+{#                    const strengthPercent = (result.score + 1) * 20;#}
+{##}
+{#                    strengthBar.style.width = `${strengthPercent}%`;#}
+{#                    strengthBar.className = `progress-bar ${#}
+{#                        ['bg-danger', 'bg-danger', 'bg-warning', 'bg-info', 'bg-success'][result.score]#}
+{#                        }`;#}
+{##}
+{#                    const strengthText = ['Very Weak', 'Weak', 'Moderate', 'Strong', 'Very Strong'];#}
+{#                    feedback.textContent = strengthText[result.score];#}
+{##}
+{#                    if (result.feedback.warning) {#}
+{#                        feedback.textContent += ` - ${result.feedback.warning}`;#}
+{#                    }#}
+{#                    if (result.feedback.suggestions.length > 0) {#}
+{#                        feedback.textContent += ` (${result.feedback.suggestions.join(', ')})`;#}
+{#                    }#}
+{#                } else {#}
+{#                    strengthBar.style.width = '0%';#}
+{#                    feedback.textContent = '';#}
+{#                }#}
+{##}
+{#                // Check password match if confirm has value#}
+{#                if (confirmInput.value) {#}
+{#                    validatePasswordMatch();#}
+{#                }#}
+{#            });#}
+{##}
+{#            // Confirm password validation#}
+{#            confirmInput.addEventListener('input', validatePasswordMatch);#}
+{##}
+{#            function validatePasswordMatch() {#}
+{#                const confirmGroup = confirmInput.closest('.password-input-group');#}
+{#                if (confirmInput.value !== passwordInput.value) {#}
+{#                    confirmInput.setCustomValidity("Passwords do not match");#}
+{#                    mismatchError.style.display = 'block';#}
+{#                    confirmGroup.classList.remove('is-valid-group');#}
+{#                    confirmGroup.classList.add('is-invalid-group');#}
+{#                    shownErrors.add('mismatch');#}
+{#                } else {#}
+{#                    confirmInput.setCustomValidity("");#}
+{#                    mismatchError.style.display = 'none';#}
+{#                    confirmGroup.classList.remove('is-invalid-group');#}
+{#                    if (passwordInput.value.length >= 8) {#}
+{#                        confirmGroup.classList.add('is-valid-group');#}
+{#                    }#}
+{#                    shownErrors.delete('mismatch');#}
+{#                }#}
+{#            }#}
+{##}
+{#            // Form submission#}
+{#            form.addEventListener('submit', function (event) {#}
+{#                // Clear previous error displays#}
+{#                document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show-error'));#}
+{##}
+{#                // Reset shown errors#}
+{#                shownErrors.clear();#}
+{##}
+{#                // Validate password match#}
+{#                if (passwordInput.value !== confirmInput.value) {#}
+{#                    event.preventDefault();#}
+{#                    event.stopPropagation();#}
+{#                    mismatchError.classList.add('show-error');#}
+{#                    confirmInput.closest('.password-input-group').classList.add('is-invalid-group');#}
+{#                    shownErrors.add('mismatch');#}
+{#                }#}
+{##}
+{#                // Show all server-side errors#}
+{#                document.querySelectorAll('.error-message').forEach(el => {#}
+{#                    if (el.textContent.trim() && !shownErrors.has(el.id)) {#}
+{#                        el.classList.add('show-error');#}
+{#                        shownErrors.add(el.id);#}
+{#                    }#}
+{#                });#}
+{##}
+{#                if (!form.checkValidity()) {#}
+{#                    event.preventDefault();#}
+{#                    event.stopPropagation();#}
+{#                }#}
+{##}
+{#                form.classList.add('was-validated');#}
+{#            });#}
+{##}
+{#            // Helper function to update requirement indicators with more visual feedback#}
+{#            function updateRequirement(id, isValid, hasInput) {#}
+{#                const element = document.getElementById(id);#}
+{#                const icon = element.querySelector('i');#}
+{##}
+{#                if (!hasInput) {#}
+{#                    element.classList.remove('valid', 'invalid');#}
+{#                    icon.className = 'bi bi-circle';#}
+{#                    return;#}
+{#                }#}
+{##}
+{#                element.classList.toggle('valid', isValid);#}
+{#                element.classList.toggle('invalid', !isValid);#}
+{##}
+{#                if (isValid) {#}
+{#                    icon.className = 'bi bi-check-circle-fill';#}
+{#                    element.querySelector('span').style.fontWeight = 'normal';#}
+{#                } else {#}
+{#                    icon.className = 'bi bi-x-circle-fill';#}
+{#                    element.querySelector('span').style.fontWeight = '500';#}
+{#                }#}
+{#            }#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
+
+{% block my_scripts %}
+    <script src="{% static 'assets/js/zxcvbn.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registrationForm');
+            const passwordInput = document.getElementById('password1');
+            const confirmInput = document.getElementById('password2');
+            const strengthBar = document.getElementById('passwordStrength');
+            const feedback = document.getElementById('passwordFeedback');
+            const mismatchError = document.getElementById('mismatch-error');
+
+            // Track shown errors
+            const shownErrors = new Set();
+
+            // Real-time validation for ALL fields
+            form.querySelectorAll('input').forEach(input => {
+                // Validate on input (as user types)
+                input.addEventListener('input', function () {
+                    validateField(this);
+
+                    // Special handling for password fields
+                    if (this === passwordInput && confirmInput.value) {
+                        validatePasswordMatch();
+                    } else if (this === confirmInput) {
+                        validatePasswordMatch();
+                    }
+
+                    // Special handling for email format validation
+                    if (this.type === 'email' && this.value) {
+                        validateEmailFormat(this);
+                    }
+                });
+
+                // Also validate on blur (when leaving field)
+                input.addEventListener('blur', function () {
+                    validateField(this);
+                });
+            });
+
+            // Generic field validation
+            function validateField(field) {
+                const inputGroup = field.closest('.input-group') || field.closest('.form-check');
+                if (!inputGroup) return;
+
+                // Clear previous states
+                inputGroup.classList.remove('is-valid-group', 'is-invalid-group');
+
+                // Validate field (only if it has content or is required)
+                if (field.value || field.required) {
+                    if (field.checkValidity()) {
+                        inputGroup.classList.add('is-valid-group');
+                    } else {
+                        inputGroup.classList.add('is-invalid-group');
+                    }
+                }
+            }
+
+            // Email format validation
+            function validateEmailFormat(emailField) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const isValid = emailRegex.test(emailField.value);
+                const inputGroup = emailField.closest('.input-group');
+
+                if (inputGroup) {
+                    inputGroup.classList.remove('is-valid-group', 'is-invalid-group');
+                    if (isValid) {
+                        inputGroup.classList.add('is-valid-group');
+                    } else if (emailField.value) {
+                        inputGroup.classList.add('is-invalid-group');
+                    }
+                }
+            }
+
+            // Handle server-side errors on page load
+            function handleServerErrors() {
+                // Find all fields with server errors
+                document.querySelectorAll('.error-message').forEach(errorElement => {
+                    if (errorElement.textContent.trim()) {
+                        const fieldName = errorElement.id.replace('-error', '');
+                        const field = form.querySelector('[name="' + fieldName + '"]');
+                        if (field) {
+                            const inputGroup = field.closest('.input-group') || field.closest('.form-check');
+                            if (inputGroup) {
+                                inputGroup.classList.add('is-invalid-group');
+                                errorElement.classList.add('show-error');
+
+                                // Scroll to first error
+                                if (!shownErrors.size) {
+                                    field.scrollIntoView({behavior: 'smooth', block: 'center'});
+                                    field.focus();
+                                }
+                                shownErrors.add(fieldName);
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Keep all your existing password validation code ---
+            // Password toggle functionality
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function () {
+                    const input = this.closest('.input-group').querySelector('input');
+                    const icon = this.querySelector('i');
+
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('bi-eye-fill');
+                        icon.classList.add('bi-eye-slash-fill');
+                        this.setAttribute('title', 'Conceal password');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('bi-eye-slash-fill');
+                        icon.classList.add('bi-eye-fill');
+                        this.setAttribute('title', 'Reveal password');
+                    }
+                });
+            });
+
+            // Password strength validation
+            passwordInput.addEventListener('input', function () {
+                const password = this.value;
+                const inputGroup = this.closest('.password-input-group');
+                inputGroup.classList.remove('is-valid-group', 'is-invalid-group');
+
+                const hasUpper = /[A-Z]/.test(password);
+                const hasLower = /[a-z]/.test(password);
+                const hasNumber = /[0-9]/.test(password);
+                const hasSpecial = /[^A-Za-z0-9]/.test(password);
+                const hasValidLength = password.length >= 8;
+
+                // Update requirement indicators
+                updateRequirement('req-length', hasValidLength, password.length > 0);
+                updateRequirement('req-uppercase', hasUpper, password.length > 0);
+                updateRequirement('req-lowercase', hasLower, password.length > 0);
+                updateRequirement('req-number', hasNumber, password.length > 0);
+                updateRequirement('req-special', hasSpecial, password.length > 0);
+
+                if (hasValidLength && hasUpper && hasLower && hasNumber && hasSpecial) {
+                    inputGroup.classList.add('is-valid-group');
+                } else {
+                    inputGroup.classList.add('is-invalid-group');
+                }
+
+                // Calculate strength
+                if (password.length > 0) {
+                    const result = zxcvbn(password);
+                    const strengthPercent = (result.score + 1) * 20;
+                    strengthBar.style.width = `${strengthPercent}%`;
+                    strengthBar.className = `progress-bar ${
+                        ['bg-danger', 'bg-danger', 'bg-warning', 'bg-info', 'bg-success'][result.score]
+                        }`;
+
+                    feedback.textContent = ['Very Weak', 'Weak', 'Moderate', 'Strong', 'Very Strong'][result.score];
+                } else {
+                    strengthBar.style.width = '0%';
+                    feedback.textContent = '';
+                }
+            });
+
+            // Password match validation
+            function validatePasswordMatch() {
+                const confirmGroup = confirmInput.closest('.password-input-group');
+                if (confirmInput.value !== passwordInput.value) {
+                    confirmInput.setCustomValidity("Passwords do not match");
+                    mismatchError.style.display = 'block';
+                    confirmGroup.classList.add('is-invalid-group');
+                    shownErrors.add('mismatch');
+                } else {
+                    confirmInput.setCustomValidity("");
+                    mismatchError.style.display = 'none';
+                    confirmGroup.classList.remove('is-invalid-group');
+                    if (passwordInput.value.length >= 8) {
+                        confirmGroup.classList.add('is-valid-group');
+                    }
+                    shownErrors.delete('mismatch');
+                }
+            }
+
+            // Form submission
+            form.addEventListener('submit', function (event) {
+                // Validate all fields
+                form.querySelectorAll('input').forEach(input => validateField(input));
+
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            });
+
+            // Helper function for requirement indicators
+            function updateRequirement(id, isValid, hasInput) {
+                const element = document.getElementById(id);
+                const icon = element.querySelector('i');
+
+                if (!hasInput) {
+                    element.classList.remove('valid', 'invalid');
+                    icon.className = 'bi bi-circle';
+                    return;
+                }
+
+                element.classList.toggle('valid', isValid);
+                element.classList.toggle('invalid', !isValid);
+                icon.className = isValid ? 'bi bi-check-circle-fill' : 'bi bi-x-circle-fill';
+            }
+
+            // Handle server errors on page load
+            handleServerErrors();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load CF_filters %}
+{% block head_title %}Contact Us{% endblock %}
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
+{% endblock %}
+{% block my_style %}
+
+    <!-- Embedded CSS -->
+    <style>
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .border-danger-soft {
+            border-color: rgba(220, 53, 69, 0.3);
+        }
+
+        .alert-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.2);
+            color: #664d03;
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <!-- Impressum Page -->
+    <main class="bg-light">
+        <!-- =======================
+        Page Banner START -->
+        <section class="pt-5 pb-4 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-6 text-center mx-auto">
+                        <h1 class="mb-3">Imprint (Impressum)</h1>
+                        <p class="lead text-muted">Legal information according to § 5 TMG</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Page Banner END -->
+
+        <!-- =======================
+        Content START -->
+        <section class="pt-4 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xl-8">
+                        <!-- Legal Notice Card -->
+                        <div class="card shadow-sm border-0 overflow-hidden">
+                            <div class="card-header bg-primary text-white py-3">
+                                <h2 class="h5 mb-0"><i class="bi bi-building me-2"></i> Legal Information</h2>
+                            </div>
+                            <div class="card-body">
+                                <!-- Company Info -->
+                                <div class="row g-4 mb-4">
+                                    <div class="col-md-6">
+                                        <div class="d-flex">
+                                            <i class="bi bi-tag-fill text-primary fs-4 mt-1 me-3"></i>
+                                            <div>
+                                                <h3 class="h6">Trademark</h3>
+                                                <p class="mb-0">Lingocept® is a registered trademark</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex">
+                                            <i class="bi bi-geo-alt-fill text-primary fs-4 mt-1 me-3"></i>
+                                            <div>
+                                                <h3 class="h6">Address</h3>
+                                                <p class="mb-0">Berlin, Germany</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex">
+                                            <i class="bi bi-envelope-fill text-primary fs-4 mt-1 me-3"></i>
+                                            <div>
+                                                <h3 class="h6">Email</h3>
+                                                <p class="mb-0">{{ CFEmail.email2 }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex">
+                                            <i class="bi bi-telephone-fill text-primary fs-4 mt-1 me-3"></i>
+                                            <div>
+                                                <h3 class="h6">Phone</h3>
+                                                <p class="mb-0">{{ CFChar.phone1 }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <!-- Legal Status -->
+                                <div class="mb-4">
+                                    <h3 class="h5 text-primary mb-3"><i class="bi bi-file-text-fill me-2"></i> Legal
+                                        Status</h3>
+                                    <div class="alert alert-warning-soft">
+                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                        As of July 2025, Lingocept® is not yet registered as a corporate entity (e.g.,
+                                        GmbH). All platform services are provided under this trademark, and any future
+                                        changes in corporate structure will be disclosed here.
+                                    </div>
+                                </div>
+
+                                <!-- EU Dispute Resolution -->
+                                <div class="mb-4">
+                                    <h3 class="h5 text-primary mb-3"><i class="bi bi-euro-circle-fill me-2"></i> EU
+                                        Dispute Resolution</h3>
+                                    <p>The European Commission provides a platform for Online Dispute Resolution
+                                        (ODR):</p>
+                                    <a href="https://ec.europa.eu/consumers/odr/" target="_blank"
+                                       class="btn btn-outline-primary mb-3">
+                                        <i class="bi bi-box-arrow-up-right me-2"></i> ODR Platform
+                                    </a>
+                                    <p class="mb-0">Our contact email for dispute resolution:
+                                        <strong>{{ CFEmail.email2 }}</strong></p>
+                                </div>
+
+                                <!-- Disclaimer -->
+                                <div class="mb-4">
+                                    <h3 class="h5 text-primary mb-3"><i
+                                            class="bi bi-exclamation-triangle-fill me-2"></i> Disclaimer</h3>
+                                    <div class="card border-danger-soft">
+                                        <div class="card-body">
+                                            <h4 class="h6 text-danger">External Links</h4>
+                                            <p>Despite careful content control, we assume no liability for the content
+                                                of external links. The operators of the linked pages are solely
+                                                responsible for their content.</p>
+
+                                            <h4 class="h6 text-danger mt-3">Copyright</h4>
+                                            <p>Content and media published on this website are protected by copyright.
+                                                Reproduction, editing, distribution, or any kind of exploitation outside
+                                                the limits of copyright law require prior written consent from
+                                                Lingocept®.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Responsible for Content -->
+                                <div class="bg-light p-3 rounded">
+                                    <h3 class="h6 mb-2"><i class="bi bi-person-fill-gear text-primary me-2"></i>
+                                        Responsible for content according to § 55 Abs. 2 RStV:</h3>
+                                    <p class="mb-0">Lingocept® – Berlin, Germany</p>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-light text-center py-3">
+                                <p class="small text-muted mb-0">Last updated: July 1, 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Back to Contact Link -->
+                        <div class="text-center mt-4">
+                            <a href="{% url 'app_pages:contact_us' %}" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left me-2"></i> Back to Contact Page
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Content END -->
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}

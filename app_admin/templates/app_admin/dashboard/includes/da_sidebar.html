@@ -1,0 +1,165 @@
+{% load static %}
+<!-- Sidebar START -->
+<nav class="navbar sidebar navbar-expand-xl navbar-dark bg-dark">
+
+    <!-- Navbar brand for xl START -->
+    <div class="d-flex align-items-center">
+        <a class="navbar-brand" href="{% url 'app_pages:home' %}">
+            {#      <img class="navbar-brand-item" src="{% static 'assets/images/logo-light.svg' %}" alt="">#}
+            <img class="navbar-brand-item" src="{% static 'assets/images/logo_white_gold.png' %}" alt="">
+        </a>
+    </div>
+    <!-- Navbar brand for xl END -->
+
+    <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1"
+         id="offcanvasSidebar">
+        <div class="offcanvas-body sidebar-content d-flex flex-column bg-dark">
+
+            <!-- Sidebar menu START -->
+            <ul class="navbar-nav flex-column" id="navbar-sidebar">
+
+                <!-- Menu item 0 -->
+                <li class="nav-item"><a class="nav-link {% if 'panel' in request.path %}active{% endif %}"
+                                        href="{% url 'accounts:dashboard' %}"><i class="bi bi-house fa-fw me-2"></i>Dashboard</a>
+                </li>
+
+                <!-- Title -->
+{#                <li class="nav-item ms-2 my-2">Pages</li>#}
+
+
+
+
+                <!-- menu item: Interview -->
+                <li class="nav-item">
+                    <a class="nav-link {% if 'interview' in request.path %}show{% endif %}" data-bs-toggle="collapse" href="#collapseinterview" role="button" aria-expanded="false" aria-controls="collapseinterview"><i class="bi bi-person-check-fill fa-fw me-2"></i>Interview</a>
+                    <!-- Submenu -->
+                    <ul class="nav collapse flex-column" id="collapseinterview" data-bs-parent="#navbar-sidebar">
+                        <li class="nav-item"><a class="nav-link {% if 'manual' in request.path %}text-warning{% endif %}" href="{% url 'my_admin:da_interview' %}"><i class="far fa-fw fa-edit me-2"></i>  Manual Add</a></li>
+                        <li class="nav-item"> <a class="nav-link {% if 'edit' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments_edit' %}"><i class="far fa-fw fa-edit me-2"></i>  Edit Table</a></li>
+                        <li class="nav-item"> <a class="nav-link {% if 'table' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments_vtable' %}#vtable"><i class="bi bi-calendar-week fa-fw me-2"></i> Visual Table</a></li>
+                        <li class="nav-item"> <a class="nav-link {% if 'settings' in request.path %}text-warning{% endif %}" href="{% url 'meeting:d_appointments_settings' %}"><i class="bi bi-speedometer fa-fw me-2"></i> Settings</a></li>
+                    </ul>
+                </li>
+
+                <!-- menu item: Courses -->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#collapsecourse" role="button"
+                       aria-expanded="false" aria-controls="collapsecourse">
+                        <i class="bi bi-basket fa-fw me-2"></i>Courses</a>
+                    <!-- Submenu -->
+                    <ul class="nav collapse flex-column" id="collapsecourse" data-bs-parent="#navbar-sidebar">
+                        <li class="nav-item"><a class="nav-link {% if 'course-list' in request.path %}active{% endif %}"
+                                                href="{% url 'my_admin:da_course_list' %}">All Courses</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link {% if 'course-category' in request.path %}active{% endif %}"
+                                href="{% url 'my_admin:da_course_category' %}">Course Category</a></li>
+                        {#            <li class="nav-item"> <a class="nav-link {% if 'course-detail' in request.path %}active{% endif %}" href="{% url 'my_admin:da_course_detail' %}">Course Detail</a></li>#}
+                    </ul>
+                </li>
+
+                <!-- menu item: In-person Classes -->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#collapseInPersonClasses" role="button"
+                       aria-expanded="false" aria-controls="collapseInPersonClasses">
+                        <i class="bi bi-geo fa-fw me-2"></i>In-Person Classes</a>
+                    <!-- Submenu -->
+                    <ul class="nav collapse flex-column" id="collapseInPersonClasses" data-bs-parent="#navbar-sidebar">
+                        <li class="nav-item"><a class="nav-link {% if 'in-person-classes' in request.path %}active{% endif %}"
+                                                href="{% url 'my_admin:da_in_person_classes' %}">All Requests</a></li>
+                        <li class="nav-item"><a
+                                class="nav-link {% if 'in-person-classes-map' in request.path %}active{% endif %}"
+                                href="{% url 'my_admin:user_neighborhood_dashboard' %}">Neighborhood</a></li>
+                        {#            <li class="nav-item"> <a class="nav-link {% if 'course-detail' in request.path %}active{% endif %}" href="{% url 'my_admin:da_course_detail' %}">Course Detail</a></li>#}
+                    </ul>
+                </li>
+
+
+                <!-- menu item: Messenger -->
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" data-bs-toggle="collapse" href="#collapseMessenger" role="button"#}
+{#                       aria-expanded="false" aria-controls="collapseMessenger">#}
+{#                        <i class="bi bi-envelope fa-fw me-2"></i> Messenger</a>#}
+{#                    <!-- Submenu -->#}
+{#                    <ul class="nav collapse flex-column" id="collapseMessenger" data-bs-parent="#navbar-sidebar">#}
+{#                        <li class="nav-item"><a class="nav-link {% if 'messenger' in request.path %}active{% endif %}"#}
+{#                                                href="{% url 'messenger:inbox' %}"><i class="bi bi-inbox"></i> Inbox</a></li>#}
+{#                        <li class="nav-item"><a#}
+{#                                class="nav-link {% if 'new' in request.path %}active{% endif %}"#}
+{#                                href="{% url 'messenger:new_message' %}"><i class="bi bi-pencil-square"></i> New message</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+
+                <!-- Menu item: Students -->
+                <li class="nav-item"><a class="nav-link" href="{% url 'my_admin:da_student_list' %}"><i
+                        class="fas fa-user-graduate fa-fw me-2"></i>Students</a></li>
+
+                <!-- Menu item: Tutors -->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#collapseinstructors" role="button"
+                       aria-expanded="false" aria-controls="collapseinstructors">
+                        <i class="fas fa-user-tie fa-fw me-2"></i>Tutors {% if applicants_pending != 0 %}
+                                <span class="badge text-bg-success rounded-circle ms-2">{{ applicants_pending }}</span>
+                            {% endif %}</a>
+                    <!-- Submenu -->
+                    <ul class="nav collapse flex-column" id="collapseinstructors" data-bs-parent="#navbar-sidebar">
+                        <li class="nav-item"><a class="nav-link {% if 'tutor-list' in request.path %}active{% endif %}"
+                                                href="{% url 'my_admin:da_tutor_list' %}">Tutors</a></li>
+                        {#            <li class="nav-item"><a class="nav-link {% if 'tutor-detail' in request.path %}active{% endif %}" href="{% url 'my_admin:da_tutor_detail' user.tutor_profile.pk %}">Tutor Detail</a></li>#}
+                        <li class="nav-item"><a
+                                class="nav-link {% if 'tutor-request' in request.path %}active{% endif %}"
+                                href="{% url 'my_admin:da_tutor_request' %}">Tutor requests
+                            {% if applicants_pending != 0 %}
+                                <span class="badge text-bg-success rounded-circle ms-2">{{ applicants_pending }}</span>
+                            {% endif %}</a></li>
+                    </ul>
+                </li>
+
+                <!-- Menu item: Reviews -->
+                <li class="nav-item"><a class="nav-link {% if 'review' in request.path %}active{% endif %}"
+                                        href="{% url 'my_admin:da_review' %}"><i
+                        class="far fa-comment-dots fa-fw me-2"></i>Reviews</a></li>
+
+                <!-- Menu item: Contact -->
+                <li class="nav-item"><a class="nav-link {% if 'contact-us' in request.path %}active{% endif %}"
+                                        href="{% url 'my_admin:da_contact_us' %}"><i
+                        class="far fa-envelope fa-fw me-2"></i>Contact Us<span
+                        class="badge text-bg-success rounded-circle ms-2">{{ contact_us_unread }}</span></a></li>
+
+                <!-- Menu item: Earnings -->
+                <li class="nav-item"><a class="nav-link {% if 'earning' in request.path %}active{% endif %}"
+                                        href="{% url 'my_admin:da_earning' %}"><i
+                        class="far fa-chart-bar fa-fw me-2"></i>Earnings</a></li>
+
+                <!-- Menu item: Edit Profile -->
+{#                <li class="nav-item"><a class="nav-link {% if 'edit' in request.path %}active{% endif %}" href="{% url 'my_admin:da_edit' user.profile.pk %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a></li>#}
+                <!-- Menu item: Admin Settings -->
+                <li class="nav-item"><a class="nav-link {% if 'settings' in request.path %}active{% endif %}"
+                                        href="{% url 'my_admin:da_settings' %}"><i
+                        class="fas fa-user-cog fa-fw me-2"></i>Admin Settings</a></li>
+
+            </ul>
+            <!-- Sidebar menu end -->
+
+            <!-- Sidebar footer START -->
+            <div class="px-3 mt-auto pt-3">
+                <div class="d-flex align-items-center justify-content-between text-primary-hover">
+                    <a class="h5 mb-0 text-body" href="{% url 'my_admin:da_settings' %}" data-bs-toggle="tooltip"
+                       data-bs-placement="top" title="Settings">
+                        <i class="bi bi-gear-fill"></i>
+                    </a>
+                    <a class="h5 mb-0 text-body" href="{% url 'app_pages:home' %}" data-bs-toggle="tooltip"
+                       data-bs-placement="top" title="Home">
+                        <i class="bi bi-globe"></i>
+                    </a>
+                    <a class="h5 mb-0 text-body" href="{% url 'accounts:sign_out' %}" data-bs-toggle="tooltip"
+                       data-bs-placement="top" title="Sign out">
+                        <i class="bi bi-power"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Sidebar footer END -->
+
+        </div>
+    </div>
+</nav>
+<!-- Sidebar END -->

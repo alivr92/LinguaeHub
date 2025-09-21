@@ -1,0 +1,474 @@
+{% load static %}
+
+<div class="container py-4">
+    <!-- Progress Bar -->
+    <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Step 6 of 7</span>
+            <span class="text-muted">90% complete</span>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 90%;" aria-valuenow="90"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Set Your Lesson Price</h2>
+        <p class="text-muted">Choose a competitive price to attract students</p>
+    </div>
+
+    <!-- Pricing Information Card -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light border-bottom d-flex align-items-center">
+            <i class="bi bi-currency-dollar text-primary me-2"></i>
+            <h5 class="mb-0">Pricing Guidelines</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info bg-light border-0 mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-lightbulb-fill text-warning me-3 mt-1"></i>
+                    <div>
+                        <p class="mb-1"><strong>Starting with a competitive price can help attract more
+                            students</strong></p>
+                        <p class="mb-0">Once you've aced your first few trial lessons, you can adjust your price to meet
+                            your goals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span>Recommended starting price: <strong>$25 per hour</strong></span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span>Tutors who follow our recommendation have a <strong>40% higher</strong> chance of teaching their first trial lesson</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span>You can adjust your pricing at any time</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>All prices are in <strong>USD</strong></span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>Lesson duration is <strong>60 minutes</strong> by default</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>Consider your experience and qualifications when setting your price</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing Selection Card -->
+    {#    <div class="card border-0 shadow-sm mb-4">#}
+    {#        <div class="card-header bg-light border-bottom">#}
+    {#            <h5 class="mb-0">Your Lesson Price</h5>#}
+    {#        </div>#}
+    {#        <div class="card-body">#}
+    {#            <div class="row">#}
+    {#                <div class="col-lg-6">#}
+    {#                <form method="post"  id="pricing_form" action="{% url 'provider:update_pricing' %}">#}
+    {#                    {% csrf_token %}#}
+    {#                    <!-- Price Input -->#}
+    {#                    <div class="mb-4">#}
+    {#                        <label class="form-label fw-semibold">Set your 60-minute lesson price <span class="text-danger">*</span></label>#}
+    {#                        <div class="input-group input-group-lg">#}
+    {#                            <span class="input-group-text">$</span>#}
+    {#                            <input type="number" class="form-control" id="lessonPrice" name="lesson_price"#}
+    {#                                   min="10" max="100" step="1" value="25" required>#}
+    {#                            {{ PricingForm.cost_hourly }}#}
+    {#                            <span class="input-group-text">USD</span>#}
+    {#                        </div>#}
+    {#                        <div class="form-text">Price in USD only</div>#}
+    {#                        {% if form.cost_hourly.errors %}#}
+    {#                                            <div class="text-danger">#}
+    {#                                                {% for error in form.cost_hourly.errors %}#}
+    {#                                                    <small>{{ error }}</small>#}
+    {#                                                {% endfor %}#}
+    {#                                            </div>#}
+    {#                                        {% endif %}#}
+    {#                    </div>#}
+    {#                </form>#}
+    {##}
+    {#                    <!-- Recommendation -->#}
+    {#                    <div class="alert alert-warning">#}
+    {#                        <div class="form-check">#}
+    {#                            <input class="form-check-input" type="checkbox" id="followRecommendation" checked>#}
+    {#                            <label class="form-check-label" for="followRecommendation">#}
+    {#                                <strong>Follow our price recommendation</strong><br>#}
+    {#                                <small class="text-muted">Tutors who follow our recommendation have a 40% higher chance of teaching their first trial lesson within a week of approval.</small>#}
+    {#                            </label>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {##}
+    {#                <div class="col-lg-6">#}
+    {#                    <!-- Price Summary -->#}
+    {#                    <div class="card bg-light">#}
+    {#                        <div class="card-header bg-opacity-10">#}
+    {#                            <h6 class="mb-0">Price Summary</h6>#}
+    {#                        </div>#}
+    {#                        <div class="card-body">#}
+    {#                            <div class="d-flex justify-content-between mb-2">#}
+    {#                                <span>Your hourly rate:</span>#}
+    {#                                <strong id="hourlyRate">$25.00</strong>#}
+    {#                            </div>#}
+    {#                            <div class="d-flex justify-content-between mb-2">#}
+    {#                                <span>Platform commission:</span>#}
+    {#                                <strong id="commissionRate">30%</strong>#}
+    {#                            </div>#}
+    {#                            <hr>#}
+    {#                            <div class="d-flex justify-content-between mb-2">#}
+    {#                                <span>Your earnings per lesson:</span>#}
+    {#                                <strong id="yourEarnings">$17.50</strong>#}
+    {#                            </div>#}
+    {#                            <div class="d-flex justify-content-between">#}
+    {#                                <span>Platform fee per lesson:</span>#}
+    {#                                <strong id="platformFee">$7.5</strong>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+    {#    ---------------------------------- #}
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light border-bottom d-flex align-items-center">
+            <i class="bi bi-percent text-primary me-2"></i>
+            <h5 class="mb-0">Platform Commission Structure</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info d-flex align-items-center">
+                <i class="bi bi-info-circle me-2 fs-4"></i>
+                <div>We believe in fair compensation. Our commission funds platform improvements and student
+                    acquisition.
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="card h-100 border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title d-flex align-items-center"><i
+                                    class="bi bi-people-fill me-2 text-info"></i>Trial Lessons</h6>
+                            <p class="card-text">For trial lessons, our commission is <strong>100%</strong>.</p>
+                            <p class="card-text">
+                                <small class="text-muted">This helps us cover student acquisition costs while ensuring
+                                    you get paid for your time.
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title d-flex align-items-center"><i
+                                    class="bi bi-graph-up me-2 text-success"></i>Regular Lessons</h6>
+                            <p class="card-text">For regular lessons, we charge <strong>15-30%</strong> of your hourly
+                                rate.</p>
+                            <p class="card-text">
+                                <small class="text-muted">The more you teach, the less commission we take.</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card bg-light border-0">
+                        <div class="card-body">
+                            <h6 class="fw-bold mb-3 d-flex align-items-center"><i
+                                    class="bi bi-currency-dollar me-2 text-primary"></i>Set Your Lesson Price</h6>
+                            <div class="mb-3">
+                                <label for="lessonPrice" class="form-label">Hourly Rate ($)</label>
+                                <input type="number" class="form-control" id="lessonPrice" min="10" max="100"
+                                       value="25">
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="followRecommendation" checked>
+                                <label class="form-check-label" for="followRecommendation">
+                                    Use recommended rate ($25/hr)
+                                </label>
+                            </div>
+{#                            <div class="p-3 bg-white rounded">#}
+{#                                <div class="d-flex justify-content-between mb-2">#}
+{#                                    <span>Your Earnings:</span>#}
+{#                                    <strong class="text-success" id="yourEarnings">$16.80</strong>#}
+{#                                </div>#}
+{#                                <div class="d-flex justify-content-between">#}
+{#                                    <span>Platform Fee:</span>#}
+{#                                    <strong class="text-danger" id="platformFee">$7.20</strong>#}
+{#                                </div>#}
+{#                            </div>#}
+
+
+
+
+
+{#                            <div class="mb-3">#}
+{#                                    <label for="lessonPrice" class="form-label">Hourly Rate ($)</label>#}
+{#                                    <input type="number" class="form-control" id="lessonPrice" min="10" max="100" value="25">#}
+{#                                </div>#}
+{#                                <div class="form-check mb-3">#}
+{#                                    <input class="form-check-input" type="checkbox" id="followRecommendation" checked>#}
+{#                                    <label class="form-check-label" for="followRecommendation">#}
+{#                                        Use recommended rate ($25/hr)#}
+{#                                    </label>#}
+{#                                </div>#}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-3 mt-md-0">
+                    <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+{#                            <h6 class="fw-bold mb-3 d-flex align-items-center"><i#}
+{#                                    class="bi bi-award me-2 text-warning"></i>Current Commission Rate</h6>#}
+{#                            <div class="text-center py-3">#}
+{#                                <div class="display-4 fw-bold text-primary mb-0" id="commissionRate">30%</div>#}
+{#                                <div class="text-muted">of your hourly rate</div>#}
+{#                            </div>#}
+{#                            <div class="progress">#}
+{#                                <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="25"#}
+{#                                     aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                            </div>#}
+{#                            <div class="text-center mt-2">#}
+{#                                <small class="text-muted">Progress to next tier: <span#}
+{#                                        id="progressText">0/20 hours</span></small>#}
+{#                            </div>#}
+
+                            <h6 class="fw-bold mb-3 d-flex align-items-center"><i
+                                    class="bi bi-pie-chart-fill me-2 text-primary"></i>Earning Summary</h6>
+
+                            <div class="p-3 bg-white rounded">
+{#                            <div class="text-center py-3">#}
+{#                                <div class="display-4 fw-bold text-primary mb-0" id="commissionRate">30%</div>#}
+{#                                <div class="text-muted">of your hourly rate</div>#}
+{#                            </div>#}
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Current Commission Rate:</span>
+                                    <strong class="text-primary" id="commissionRate">30%</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Your Earnings:</span>
+                                    <strong class="text-success" id="yourEarnings">$16.80</strong>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Platform Fee:</span>
+                                    <strong class="text-danger" id="platformFee">$7.20</strong>
+                                </div>
+                            </div>
+
+{#                             <h6 class="fw-bold mb-3">Earnings Breakdown</h6>#}
+{#                                    <div class="d-flex justify-content-between mb-2">#}
+{#                                        <span class="text-muted">Platform Fee (30%):</span>#}
+{#                                        <span class="platform-fee" id="platformFee">$7.20</span>#}
+{#                                    </div>#}
+{#                                    <div class="d-flex justify-content-between mb-3">#}
+{#                                        <span class="text-muted">Your Earning:</span>#}
+{#                                        <span class="your-earning" id="yourEarnings">$16.80</span>#}
+{#                                    </div>#}
+{#                                    <div class="text-center mt-3">#}
+{#                                        <small class="text-muted">Based on your current commission rate</small>#}
+{#                                    </div>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h6 class="fw-bold mb-3 d-flex align-items-center"><i class="bi bi-table me-2 text-primary"></i>Commission
+                Rates Based on Teaching Hours</h6>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="commissionTable">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Completed Hours</th>
+                        <th>Commission Rate</th>
+                        <th>Your Earnings (at current price)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0 - 20 hours</td>
+                        <td><strong>30%</strong></td>
+                        <td id="earningsTier1">$17.50 per lesson</td>
+                    </tr>
+                    <tr>
+                        <td>21 - 50 hours</td>
+                        <td><strong>25%</strong></td>
+                        <td id="earningsTier2">$18.75 per lesson</td>
+                    </tr>
+                    <tr>
+                        <td>51 - 100 hours</td>
+                        <td><strong>22%</strong></td>
+                        <td id="earningsTier3">$19.50 per lesson</td>
+                    </tr>
+                    <tr>
+                        <td>101 - 200 hours</td>
+                        <td><strong>19%</strong></td>
+                        <td id="earningsTier4">$20.25 per lesson</td>
+                    </tr>
+                    <tr class="table-success">
+                        <td>200+ hours</td>
+                        <td><strong>15%</strong></td>
+                        <td id="earningsTier5">$21.25 per lesson</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Enhanced Monthly Earnings Projection -->
+            <div class="mt-4 p-4 monthly-earnings-card shadow-sm">
+                <h6 class="fw-bold mb-3 d-flex align-items-center"><i
+                        class="bi bi-calendar-check me-2 text-primary"></i>Monthly Earnings Projection</h6>
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        {#                                    <div class="mb-3">#}
+                        {#                                        <label class="form-label fw-semibold">Estimated lessons per week: <span class="bg-orange ms-2" id="lessonsValue">5 lessons</span></label>#}
+                        {#                                        <div class="slider-container">#}
+                        {#                                            <input type="range" class="form-range" id="lessonsPerWeek" min="1" max="20" value="5">#}
+                        {#                                            <div class="slider-tooltip" id="sliderTooltip">5 lessons</div>#}
+                        {#                                        </div>#}
+                        {#                                        <div class="d-flex justify-content-between mt-1">#}
+                        {#                                            <small>1 lesson</small>#}
+                        {#                                            <small>20 lessons</small>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Estimated lessons per week: <span
+                                    class="bg-orange ms-2 lessons-value"
+                                    id="lessonsValue">5 lessons</span></label>
+                            <div class="slider-container" id="sliderContainer">
+                                <input type="range" class="form-range" id="lessonsPerWeek" min="1" max="100"
+                                       value="5" step="1">
+                                <div class="slider-tooltip" id="sliderTooltip">5 lessons</div>
+                                <div class="slider-ticks">
+                                    <!-- Major ticks for every 20 lessons -->
+                                    <div class="slider-tick major"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick major"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick major"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick major"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick major"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                    <div class="slider-tick"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small>1 lesson</small>
+                                <small>100 lessons</small>
+                            </div>
+                            <div class="slider-value-display" id="sliderValueDisplay">
+                                <i class="bi bi-graph-up me-1"></i> Projected monthly income: <span
+                                    id="sliderMonthly">$360</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-white border-0 pulse-animation shadow">
+                            <div class="card-body text-center py-4">
+                                <h6 class="card-title text-muted">Estimated Monthly Income</h6>
+                                <h3 class="text-primary fw-bold mb-0" id="monthlyEarnings">$360</h3>
+                                <small class="text-muted">Based on current price</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 bg-light p-3 rounded">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="text-muted">Weekly</div>
+                            <div class="fw-bold" id="weeklyEarnings">$84.00</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-muted">Quarterly</div>
+                            <div class="fw-bold" id="quarterlyEarnings">$1,090.80</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-muted">Yearly</div>
+                            <div class="fw-bold" id="yearlyEarnings">$4,363.20</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {#    ---------------------------------- #}
+
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_pricing" data-action="prev"
+                data-step="6">
+            <i class="bi bi-arrow-left me-2"></i> Previous
+        </button>
+
+        <div>
+            <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_pricing" data-action="save"
+                    data-step="6">
+                <i class="bi bi-save me-1"></i> Save
+            </button>
+            <button type="button" class="btn btn-primary btn-next" id="btnNext_pricing" data-action="next"
+                    data-step="6">
+                Next <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+{# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #}
+{# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #}
+
+
+<!-- In your template -->
+{#<div class="mb-3">#}
+{#    <label for="lessonPrice" class="form-label">Hourly Rate ($)</label>#}
+{#    <input type="number" class="form-control" id="lessonPrice" min="10" max="100" step="0.10">#}
+{#    <div class="form-text">Your price will be automatically saved when you stop typing</div>#}
+{#</div>#}
+
+<!-- Loading indicator (optional) -->
+{#<div id="priceLoading" class="d-none">#}
+{#    <div class="spinner-border spinner-border-sm" role="status">#}
+{#        <span class="visually-hidden">Saving...</span>#}
+{#    </div>#}
+{#    <small class="ms-2">Saving price...</small>#}
+{#</div>#}

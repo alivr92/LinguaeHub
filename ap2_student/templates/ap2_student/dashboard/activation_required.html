@@ -1,0 +1,96 @@
+{% extends 'ap2_student/dashboard/dc_base.html' %}
+{% load static %}
+{% block head_title %}Student Dashboard | Home{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+{% block dashboard_main_content %}
+
+    <div class="container py-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Account Activation Required</h2>
+
+                <div class="alert alert-info">
+                    We've sent an activation link to your email address.
+                    Please check your inbox and click the link to activate your account.
+                </div>
+
+                <div id="resend-section" class="mt-4">
+                    {% if attempts_remaining > 0 %}
+                        <button id="resend-btn" class="btn btn-primary"
+                                data-url="{{ resend_url }}"
+                                {% if next_resend %}disabled{% endif %}>
+                            Resend Activation Email
+                            {% if next_resend %}
+                                (Available in <span id="countdown">{{ next_resend.seconds }}</span>s)
+                            {% endif %}
+                        </button>
+                        <p class="small text-muted mt-2">
+                            Attempts remaining: {{ attempts_remaining }}/{{ max_attempts }}
+                        </p>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            You've reached the maximum activation attempts. Please try again later.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts_vendors %}
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+{% endblock %}
+
+{% block my_scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('resend-btn');
+            if (btn && btn.dataset.url) {
+                btn.addEventListener('click', function () {
+                    fetch(btn.dataset.url, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'same-origin'
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Activation email sent!');
+                                location.reload();
+                            } else {
+                                alert(data.error || 'Error sending activation email');
+                            }
+                        });
+                });
+
+                // Handle countdown if present
+                const countdownEl = document.getElementById('countdown');
+                if (countdownEl) {
+                    let seconds = parseInt(countdownEl.textContent);
+                    const timer = setInterval(() => {
+                        seconds--;
+                        countdownEl.textContent = seconds;
+                        if (seconds <= 0) {
+                            clearInterval(timer);
+                            btn.disabled = false;
+                            countdownEl.parentNode.removeChild(countdownEl);
+                        }
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+{% endblock %}

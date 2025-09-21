@@ -1,0 +1,64 @@
+{% if current_step == 6 %}
+    <div class="card application-status-card status-review shadow-sm p-4 bg-purple bg-opacity-10">
+        <div class="text-start">
+            <div class="status-header mb-3">
+                <i class="bi bi-hourglass-split text-purple status-icon"></i>
+                <h5 class="mb-0 text-purple">Application Under Review</h5>
+            </div>
+            <div id="interview-result" class="mb-3"></div>
+            <p class="mb-0 text-secondary">Your resume and profile are currently being reviewed.
+                We
+                will update you soon.</p>
+        </div>
+    </div>
+
+{% elif current_step == 7 %}
+    <div class="card application-status-card status-accepted shadow-sm p-4 bg-success bg-opacity-10">
+        <div class="text-start">
+            <div class="status-header mb-3 text-success">
+                <i class="bi bi-check-circle-fill status-icon"></i>
+                <h5 class="mb-0 text-success">Congratulations!</h5>
+            </div>
+            <div id="interview-result" class="mb-3"></div>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item bg-transparent border-0 ps-0">
+                    🎉 You've been <strong>accepted</strong> as a {{ CFChar.site_name }} tutor!
+                </li>
+                <li class="list-group-item bg-transparent border-0 ps-0">
+                    <p class="mb-0">{{ reviewer_comment }}</p>
+                </li>
+            </ul>
+            <div class="text-center">
+                <a href="{% url 'provider:dp_home' %}" class="btn btn-success px-4 py-2">Go to
+                    Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+{% elif current_step == 8 %}
+    <div class="card application-status-card status-rejected shadow-sm p-4 bg-danger bg-opacity-10">
+        <div class="text-start">
+            <div class="status-header mb-3 text-danger">
+                <i class="bi bi-x-circle-fill status-icon"></i>
+                <h5 class="mb-0 text-danger">Application Declined</h5>
+            </div>
+            <div id="interview-result" class="mb-3"></div>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item bg-transparent border-0 ps-0">
+                    We're sorry — your application wasn't successful at this time.
+                </li>
+                <li class="list-group-item bg-transparent border-0 ps-0">
+                    <p class="mb-0">{{ reviewer_comment }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endif %}
+
+<div class="row">
+    <!-- Step 6 button -->
+    <div class="d-flex justify-content-between">
+        {#                                <button class="btn btn-secondary prev-btn mb-0">Previous</button>#}
+        {#                                <a id="btnNextSchedule" href="#" class="btn btn-primary ">Next</a>#}
+    </div>
+</div>

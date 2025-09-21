@@ -1,0 +1,78 @@
+/* STEP 5 STYLE */
+/* Highlight entire row */
+.highlight-error {
+    animation: pulse-checkbox 1.5s infinite;
+    background-color: rgba(220, 53, 69, 0.07);
+    transition: all 0.5s ease;
+    border-radius: 5px;
+}
+
+/* Checkbox-specific styling */
+.has-error .form-check-input {
+    border-color: #dc3545 !important;
+}
+
+.was-validated .form-check-input:invalid {
+    animation: pulse-checkbox 1.5s infinite;
+}
+
+@keyframes pulse-checkbox {
+    0% {
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.21);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(220, 53, 69, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+    }
+}
+
+/* CSS for custom elements */
+.icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-square {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-soft-secondary {
+    background-color: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+    border: none;
+}
+
+.btn-soft-secondary:hover {
+    background-color: rgba(108, 117, 125, 0.2);
+}
+
+.bg-purple-soft {
+    background-color: rgba(111, 66, 193, 0.1);
+}
+
+.text-purple {
+    color: #6f42c1;
+}
+
+.bg-pink-soft {
+    background-color: rgba(214, 51, 132, 0.1);
+}
+
+.bg-danger-soft {
+    background-color: rgba(214, 47, 90, 0.1);
+}
+
+.text-pink {
+    color: #d63384;
+}

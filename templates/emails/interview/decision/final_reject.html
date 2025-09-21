@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Application Status – {{ site_name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f6f6f6; padding: 20px;">
+    <table style="max-width: 600px; margin: auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+        <tr>
+            <td style="padding: 30px;">
+                <h2 style="color: #333;">Dear {{ full_name }},</h2>
+                <p style="font-size: 16px; color: #555;">
+                    Thank you for submitting your application to become a tutor at <strong>{{ site_name }}</strong>.
+                </p>
+
+                <p style="font-size: 16px; color: #555;">
+                    After a careful evaluation of your submitted video(s) and certification(s), we regret to inform you that we are unable to approve your application at this time.
+                </p>
+
+                {% if reviewer_comment %}
+                <blockquote style="border-left: 4px solid #dc3545; padding-left: 15px; color: #555; font-style: italic; margin: 20px 0;">
+                    Reviewer’s Note:<br>
+                    “{{ reviewer_comment }}”
+                </blockquote>
+                {% endif %}
+
+                <p style="font-size: 16px; color: #555;">
+                    We truly appreciate your interest and encourage you to consider reapplying in the future after further development of your materials or skills.
+                </p>
+
+                <p style="font-size: 16px; color: #555;">
+                    We wish you all the best in your continued professional journey.
+                </p>
+
+                <p style="font-size: 16px; color: #555;">
+                    Kind regards,<br>
+                    <strong>{{ site_name }} Team</strong>
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

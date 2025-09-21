@@ -1,0 +1,647 @@
+{#<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">#}
+{#    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">#}
+{#        <div class="modal-content">#}
+{#            <div class="modal-header bg-light">#}
+{#                <h2 class="modal-title fs-4" id="privacyModalLabel">#}
+{#                    <i class="bi bi-shield-lock-fill me-2 text-success"></i>#}
+{#                    Privacy Policy#}
+{#                </h2>#}
+{#                <div class="d-flex align-items-center ms-auto">#}
+{#          <span class="badge bg-success-soft text-success me-2">#}
+{#            <i class="bi bi-gdpr"></i> GDPR Compliant#}
+{#          </span>#}
+{#                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="modal-body">#}
+{#                <!-- Data Categories Tabs -->#}
+{#                <ul class="nav nav-tabs mb-4" id="privacyTabs" role="tablist">#}
+{#                    <li class="nav-item" role="presentation">#}
+{#                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#data-collection"#}
+{#                                type="button">#}
+{#                            <i class="bi bi-collection-fill me-1"></i> Data Collection#}
+{#                        </button>#}
+{#                    </li>#}
+{#                    <li class="nav-item" role="presentation">#}
+{#                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data-usage" type="button">#}
+{#                            <i class="bi bi-gear-fill me-1"></i> Usage#}
+{#                        </button>#}
+{#                    </li>#}
+{#                    <li class="nav-item" role="presentation">#}
+{#                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#data-sharing" type="button">#}
+{#                            <i class="bi bi-share-fill me-1"></i> Sharing#}
+{#                        </button>#}
+{#                    </li>#}
+{#                    <li class="nav-item" role="presentation">#}
+{#                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#user-rights" type="button">#}
+{#                            <i class="bi bi-person-check-fill me-1"></i> Your Rights#}
+{#                        </button>#}
+{#                    </li>#}
+{#                </ul>#}
+{##}
+{#                <div class="tab-content" style="max-height: 50vh; overflow-y: auto;">#}
+{#                    <!-- Data Collection Tab -->#}
+{#                    <div class="tab-pane fade show active" id="data-collection">#}
+{#                        <h3 class="h5 text-success mb-3">What We Collect</h3>#}
+{#                        <div class="row">#}
+{#                            <div class="col-md-6 mb-3">#}
+{#                                <div class="card border-success-soft h-100">#}
+{#                                    <div class="card-body">#}
+{#                                        <h4 class="h6"><i class="bi bi-person-badge-fill text-success me-2"></i>Personal#}
+{#                                            Data</h4>#}
+{#                                        <ul class="list-unstyled">#}
+{#                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Name &#}
+{#                                                contact info#}
+{#                                            </li>#}
+{#                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Payment#}
+{#                                                details#}
+{#                                            </li>#}
+{#                                            <li><i class="bi bi-check-circle-fill text-success me-2"></i> Usage data#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6 mb-3">#}
+{#                                <div class="card border-primary-soft h-100">#}
+{#                                    <div class="card-body">#}
+{#                                        <h4 class="h6"><i class="bi bi-cookie text-primary me-2"></i>Automated#}
+{#                                            Collection</h4>#}
+{#                                        <ul class="list-unstyled">#}
+{#                                            <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Cookies#}
+{#                                            </li>#}
+{#                                            <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Analytics#}
+{#                                            </li>#}
+{#                                            <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Device#}
+{#                                                info#}
+{#                                            </li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <!-- Other Tab Panes -->#}
+{#                    <div class="tab-pane fade" id="data-usage">...</div>#}
+{#                    <div class="tab-pane fade" id="data-sharing">...</div>#}
+{##}
+{#                    <!-- User Rights Tab (Most Important) -->#}
+{#                    <div class="tab-pane fade" id="user-rights">#}
+{#                        <h3 class="h5 text-success mb-3">Your Rights Under GDPR</h3>#}
+{#                        <div class="alert alert-success-soft">#}
+{#                            <i class="bi bi-info-circle-fill me-2"></i>#}
+{#                            You may contact our DPO at <a href="mailto:dpo@yourcompany.com">dpo@yourcompany.com</a>#}
+{#                        </div>#}
+{##}
+{#                        <div class="row g-3">#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="p-3 border rounded bg-light">#}
+{#                                    <h4 class="h6"><i class="bi bi-eye-fill text-success me-2"></i> Right to Access#}
+{#                                    </h4>#}
+{#                                    <p>Request copies of your personal data</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="p-3 border rounded bg-light">#}
+{#                                    <h4 class="h6"><i class="bi bi-trash-fill text-success me-2"></i> Right to#}
+{#                                        Erasure</h4>#}
+{#                                    <p>Request deletion of your data</p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- More rights... -->#}
+{#                        </div>#}
+{##}
+{#                        <div class="mt-4">#}
+{#                            <a href="#" class="btn btn-outline-success">#}
+{#                                <i class="bi bi-download me-2"></i> Download Data Request Form#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="modal-footer bg-light">#}
+{#                <div class="d-flex justify-content-between w-100">#}
+{#                    <div class="form-check form-switch">#}
+{#                        <input class="form-check-input" type="checkbox" id="cookieConsent" checked>#}
+{#                        <label class="form-check-label" for="cookieConsent">#}
+{#                            Essential Cookies#}
+{#                        </label>#}
+{#                    </div>#}
+{#                    <div>#}
+{#                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">#}
+{#                            <i class="bi bi-x-circle me-1"></i> Close#}
+{#                        </button>#}
+{#                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">#}
+{#                            <i class="bi bi-check-circle-fill me-1"></i> Acknowledge#}
+{#                        </button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+
+
+
+<!-- Enterprise Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg">
+            <!-- Modal Header -->
+            <div class="modal-header bg-success text-white">
+                <div class="d-flex align-items-center w-100">
+                    <img src="{{ CFImage.site_logo_light.url }}" alt="Lingocept" style="height: 28px;" class="me-3">
+                    <h2 class="modal-title fs-4 fw-semibold mb-0" id="privacyModalLabel">
+                        Privacy Policy
+                    </h2>
+                </div>
+                <div class="d-flex align-items-center ms-auto">
+                    <span class="badge bg-white text-primary me-3">
+                        <i class="bi bi-calendar-check me-1"></i> Effective: 01.07.2025
+                    </span>
+                    <span class="badge bg-white text-primary me-2">
+                        <i class="bi bi-shield-check me-1"></i> GDPR Compliant
+                    </span>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body p-0">
+                <div class="d-flex flex-column flex-lg-row h-100">
+                    <!-- Table of Contents -->
+                    <div class="d-none d-lg-flex flex-column col-lg-3 border-end bg-light" style="min-width: 280px;">
+                        <div class="p-4 sticky-top" style="top: 0;">
+                            <h5 class="text-uppercase text-muted small mb-3">Policy Sections</h5>
+                            <nav class="nav flex-column" id="privacyTOC">
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionController"><i class="bi bi-building me-2"></i> Data Controller</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionDataTypes"><i class="bi bi-database me-2"></i> Data Collected</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionLegalBasis"><i class="bi bi-shield-check me-2"></i> Legal Basis</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionDataUsage"><i class="bi bi-gear me-2"></i> Data Use</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionDataSharing"><i class="bi bi-share me-2"></i> Data Sharing</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionIntlTransfers"><i class="bi bi-globe me-2"></i> Int'l Transfers</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionRetention"><i class="bi bi-clock-history me-2"></i> Retention</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionUserRights"><i class="bi bi-person-check me-2"></i> Your Rights</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionCookies"><i class="bi bi-cookie me-2"></i> Cookies</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionSecurity"><i class="bi bi-lock me-2"></i> Security</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionUpdates"><i class="bi bi-arrow-repeat me-2"></i> Updates</a>
+                                <a class="nav-link py-2 px-0 text-dark" href="#sectionContact"><i class="bi bi-envelope me-2"></i> Contact</a>
+                            </nav>
+
+                            <div class="mt-auto pt-4">
+                                <button class="btn btn-sm btn-outline-primary w-100" onclick="window.print()">
+                                    <i class="bi bi-printer me-1"></i> Print Policy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy Content -->
+                    <div class="flex-grow-1 p-4 p-lg-5" style="overflow-y: auto;">
+                        <div class="document-container" style="max-width: 800px; margin: 0 auto;">
+                            <!-- Introduction -->
+                            <section class="my-4 py-2">
+                                <h1 class="h3 fw-bold text-primary mb-3">Privacy Policy – Lingocept®</h1>
+                                <p class="lead">This Privacy Policy describes how Lingocept® collects, uses, discloses, and protects your personal data in compliance with the General Data Protection Regulation (GDPR) and other applicable data protection laws.</p>
+                                <hr class="my-4">
+                            </section>
+
+                            <!-- Data Controller -->
+                            <section id="sectionController" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">1</span>
+                                    <h3 class="h5 fw-bold mb-0">Data Controller</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>Lingocept® is the data controller responsible for your personal data.</p>
+                                    <div class="card border-0 bg-light mt-3">
+                                        <div class="card-body">
+                                            <h5 class="h6 mb-3"><i class="bi bi-building text-primary me-2"></i>Contact Information</h5>
+                                            <p class="mb-1"><i class="bi bi-globe me-2"></i> www.lingocept.com</p>
+                                            <p class="mb-1"><i class="bi bi-envelope me-2"></i> contact@lingocept.com</p>
+                                            <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Berlin, Germany</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Data Collected -->
+                            <section id="sectionDataTypes" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">2</span>
+                                    <h3 class="h5 fw-bold mb-0">Types of Data Collected</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-primary-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-primary"><i class="bi bi-person-badge me-2"></i>Personal Information</h4>
+                                                    <ul class="list-icon">
+                                                        <li>Name, email address, and contact details</li>
+                                                        <li>Payment and billing information</li>
+                                                        <li>Account credentials</li>
+                                                        <li>Profile information (for tutors)</li>
+                                                        <li>Verification documents</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-success-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-success"><i class="bi bi-activity me-2"></i>Usage Data</h4>
+                                                    <ul class="list-icon">
+                                                        <li>Log files and IP addresses</li>
+                                                        <li>Session activity and preferences</li>
+                                                        <li>Device/browser information</li>
+                                                        <li>Service usage metrics</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="card border-info-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-info"><i class="bi bi-chat-square-text me-2"></i>Content Data</h4>
+                                                    <ul class="list-icon">
+                                                        <li>Messages exchanged on the platform</li>
+                                                        <li>Lesson history and feedback</li>
+                                                        <li>Uploaded teaching materials</li>
+                                                        <li>Performance assessments</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Legal Basis -->
+                            <section id="sectionLegalBasis" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">3</span>
+                                    <h3 class="h5 fw-bold mb-0">Legal Basis for Processing</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="bg-light">
+                                                <tr>
+                                                    <th>Basis</th>
+                                                    <th>Purpose</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Contractual necessity</strong></td>
+                                                    <td>Account management and service delivery</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Legitimate interests</strong></td>
+                                                    <td>Service improvement, fraud prevention</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Legal obligations</strong></td>
+                                                    <td>Tax, accounting, and regulatory requirements</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>User consent</strong></td>
+                                                    <td>Marketing communications, optional features</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Data Usage -->
+                            <section id="sectionDataUsage" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">4</span>
+                                    <h3 class="h5 fw-bold mb-0">Use of Data</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>Personal data is used to:</p>
+                                    <div class="card border-0 bg-light">
+                                        <div class="card-body">
+                                            <ul class="list-icon">
+                                                <li>Provide, maintain, and improve the Platform</li>
+                                                <li>Process payments and manage subscriptions</li>
+                                                <li>Facilitate communication between Users</li>
+                                                <li>Ensure platform security and compliance</li>
+                                                <li>Personalize user experience</li>
+                                                <li>Send service-related notices and marketing (if consented)</li>
+                                                <li>Conduct research and analytics</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Data Sharing -->
+                            <section id="sectionDataSharing" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">5</span>
+                                    <h3 class="h5 fw-bold mb-0">Data Sharing and Disclosure</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>We may share personal data with:</p>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-credit-card text-primary me-2"></i>Payment Processors</h4>
+                                                <p class="small mb-0">Stripe, PayPal (under strict DPAs)</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-cloud text-primary me-2"></i>Service Providers</h4>
+                                                <p class="small mb-0">Hosting, analytics, support (GDPR-compliant)</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-shield-lock text-primary me-2"></i>Legal Authorities</h4>
+                                                <p class="small mb-0">When required by law or legal process</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-graph-up text-primary me-2"></i>Analytics Providers</h4>
+                                                <p class="small mb-0">Only in anonymized/aggregated form</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-primary-soft mt-3">
+                                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                        <strong>We never sell your personal data</strong> to third parties.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- International Transfers -->
+                            <section id="sectionIntlTransfers" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">6</span>
+                                    <h3 class="h5 fw-bold mb-0">International Transfers</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>Personal data may be transferred outside the EU/EEA only under appropriate safeguards:</p>
+                                    <ul class="list-icon">
+                                        <li>Standard Contractual Clauses (SCCs)</li>
+                                        <li>Adequacy decisions</li>
+                                        <li>Binding Corporate Rules</li>
+                                    </ul>
+                                    <p>Detailed information about specific transfers is available upon request.</p>
+                                </div>
+                            </section>
+
+                            <!-- Data Retention -->
+                            <section id="sectionRetention" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">7</span>
+                                    <h3 class="h5 fw-bold mb-0">Data Retention</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>We retain personal data for as long as necessary to:</p>
+                                    <div class="card border-0 bg-light">
+                                        <div class="card-body">
+                                            <ul class="list-icon">
+                                                <li>Fulfill the purpose for which it was collected</li>
+                                                <li>Comply with legal obligations (typically 6-10 years for financial records)</li>
+                                                <li>Resolve disputes and enforce agreements</li>
+                                                <li>Maintain business continuity</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <p class="mt-2">Inactive accounts are anonymized after 3 years of dormancy.</p>
+                                </div>
+                            </section>
+
+                            <!-- User Rights -->
+                            <section id="sectionUserRights" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">8</span>
+                                    <h3 class="h5 fw-bold mb-0">Your Rights Under GDPR</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="alert alert-success-soft">
+                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                        Contact our Data Protection Officer at <a href="mailto:dpo@lingocept.com">dpo@lingocept.com</a> to exercise these rights
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-eye-fill text-success me-2"></i> Right to Access (Art. 15)</h4>
+                                                <p class="small mb-0">Request copies of your personal data</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-pencil-square text-success me-2"></i> Right to Rectification (Art. 16)</h4>
+                                                <p class="small mb-0">Correct inaccurate data</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-trash-fill text-success me-2"></i> Right to Erasure (Art. 17)</h4>
+                                                <p class="small mb-0">Request deletion ("right to be forgotten")</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-pause-fill text-success me-2"></i> Right to Restriction (Art. 18)</h4>
+                                                <p class="small mb-0">Limit processing in certain cases</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-file-earmark-arrow-down text-success me-2"></i> Data Portability (Art. 20)</h4>
+                                                <p class="small mb-0">Receive your data in machine-readable format</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 border rounded bg-light h-100">
+                                                <h4 class="h6"><i class="bi bi-x-circle-fill text-success me-2"></i> Right to Object (Art. 21)</h4>
+                                                <p class="small mb-0">Object to certain processing activities</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <a href="#" class="btn btn-outline-primary me-2">
+                                            <i class="bi bi-download me-1"></i> Download Request Form
+                                        </a>
+                                        <a href="#" class="btn btn-outline-secondary">
+                                            <i class="bi bi-question-circle me-1"></i> Rights FAQ
+                                        </a>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Cookies -->
+                            <section id="sectionCookies" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">9</span>
+                                    <h3 class="h5 fw-bold mb-0">Cookies and Tracking</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>We use different types of cookies:</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="bg-light">
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <th>Purpose</th>
+                                                    <th>Control</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Essential</strong></td>
+                                                    <td>Core functionality (always active)</td>
+                                                    <td>Required</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Performance</strong></td>
+                                                    <td>Analytics and improvements</td>
+                                                    <td>
+                                                        <div class="form-check form-switch mb-0">
+                                                            <input class="form-check-input" type="checkbox" id="perfCookies" checked>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Functional</strong></td>
+                                                    <td>Preferences and personalization</td>
+                                                    <td>
+                                                        <div class="form-check form-switch mb-0">
+                                                            <input class="form-check-input" type="checkbox" id="funcCookies" checked>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Marketing</strong></td>
+                                                    <td>Advertising and targeting</td>
+                                                    <td>
+                                                        <div class="form-check form-switch mb-0">
+                                                            <input class="form-check-input" type="checkbox" id="marketingCookies">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="mt-2">Manage cookies via browser settings or our <a href="#">Cookie Preference Center</a>.</p>
+                                </div>
+                            </section>
+
+                            <!-- Security -->
+                            <section id="sectionSecurity" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">10</span>
+                                    <h3 class="h5 fw-bold mb-0">Data Security</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>Lingocept® implements enterprise-grade security measures:</p>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light h-100 text-center">
+                                                <i class="bi bi-lock-fill text-primary fs-3 mb-2"></i>
+                                                <h4 class="h6">Encryption</h4>
+                                                <p class="small mb-0">TLS 1.2+ for data in transit, AES-256 for data at rest</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light h-100 text-center">
+                                                <i class="bi bi-shield-check text-primary fs-3 mb-2"></i>
+                                                <h4 class="h6">Access Controls</h4>
+                                                <p class="small mb-0">RBAC, MFA, and least-privilege principles</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light h-100 text-center">
+                                                <i class="bi bi-clipboard2-pulse text-primary fs-3 mb-2"></i>
+                                                <h4 class="h6">Monitoring</h4>
+                                                <p class="small mb-0">24/7 SIEM with anomaly detection</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-primary-soft mt-3">
+                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                        We conduct regular penetration testing and maintain ISO 27001 certification.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Updates -->
+                            <section id="sectionUpdates" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">11</span>
+                                    <h3 class="h5 fw-bold mb-0">Policy Updates</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <p>We may update this Privacy Policy to reflect:</p>
+                                    <ul class="list-icon">
+                                        <li>Changes in applicable laws</li>
+                                        <li>New service features</li>
+                                        <li>Feedback from users or regulators</li>
+                                    </ul>
+                                    <div class="alert alert-warning-soft mt-3">
+                                        <i class="bi bi-bell-fill me-2"></i>
+                                        <strong>Significant changes</strong> will be notified via email or platform notice at least 30 days in advance.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Contact -->
+                            <section id="sectionContact">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2" style="width: 28px; height: 28px; line-height: 20px;">12</span>
+                                    <h3 class="h5 fw-bold mb-0">Contact Information</h3>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-primary">
+                                        <div class="card-body">
+                                            <h4 class="h5 text-primary mb-3"><i class="bi bi-headset me-2"></i>Privacy Inquiries</h4>
+                                            <p class="mb-1"><i class="bi bi-envelope me-2"></i> <strong>General:</strong> privacy@lingocept.com</p>
+                                            <p class="mb-1"><i class="bi bi-shield-lock me-2"></i> <strong>DPO:</strong> dpo@lingocept.com</p>
+                                            <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> <strong>Postal:</strong> Lingocept GmbH, Data Protection, [Street Address], Berlin, Germany</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer bg-light">
+                <div class="d-flex justify-content-between w-100 align-items-center">
+                    <div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="essentialCookies" checked disabled>
+                            <label class="form-check-label" for="essentialCookies">
+                                Essential Cookies
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle me-1"></i> Close
+                        </button>
+                        <button type="button" class="btn btn-primary" id="acceptPrivacyBtn" data-bs-dismiss="modal">
+                            <i class="bi bi-check-circle-fill me-1"></i> Acknowledge
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

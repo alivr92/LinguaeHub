@@ -1,0 +1,24 @@
+<!-- PDF Modal -->
+<div class="modal fade" id="pdfModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PDF Viewer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center py-5" id="pdf-loading">
+                    <div class="spinner-border text-primary"></div>
+                    <p>Loading PDF...</p>
+                </div>
+                <canvas id="pdf-canvas" class="d-none"></canvas>
+                <div id="pdf-error" class="alert alert-danger d-none"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="prev-page" class="btn btn-secondary">Previous</button>
+                <span id="page-num">Page: 1</span>
+                <button id="next-page" class="btn btn-secondary">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

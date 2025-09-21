@@ -1,0 +1,47 @@
+/* Category name: default*/
+.bg-cat-uncategorized {
+    color: #fff !important;
+    background-color: #9E9E9E !important;
+}
+
+/* Category name: science*/
+.bg-cat-science,.bg-cat-design,.bg-cat-dog  {
+    color: #fff !important;
+    background-color: #0cbc87 !important;
+}
+
+/* Category name: grammar*/
+.bg-cat-sports {
+    color: #fff !important;
+    background-color: #066ac9 !important;
+}
+
+/* Category name: grammar*/
+.bg-cat-english, .bg-cat-decorating, .bg-cat-cake {
+    color: #fff !important;
+    background-color: #6f42c1 !important;
+}
+
+/* Category name: tools*/
+.bg-cat-grammar, .bg-cat-sponge-cake, .bg-cat-fondant {
+    color: #fff !important;
+    background-color: #fd7e14 !important;
+}
+
+/* Category name: tools*/
+.bg-cat-event, .bg-cat-events, .bg-cat-pumpkin, .bg-cat-frosting {
+    color: #fff !important;
+    background-color: #D6293E !important;
+}
+
+/* Category name: tools*/
+.bg-cat-wedding,.bg-cat-tools, .bg-cat-pie {
+    color: #fff !important;
+    background-color: #FFC107 !important;
+}
+
+/* Category name: pie  */
+.bg-cat-cake-tips, .bg-cat-daily-tips, .bg-cat-recipes, .bg-cat-recipe {
+    color: #fff !important;
+    background-color: #17A2BB !important;
+}

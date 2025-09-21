@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Your {{ site_name }} Account</title>
+{#    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/avr_style.css' %}">#}
+
+    <style type="text/css">
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+            }
+
+            .button {
+                width: 100% !important;
+            }
+        }
+
+    </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f5f7fa;">
+<!-- Email container -->
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center"
+       style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+    <!-- Header with logo -->
+    <tr>
+        <td style="padding: 30px 40px 20px; text-align: center; border-bottom: 1px solid #eaeaea;">
+            <img src="{{ full_logo_url }}" alt="{{ site_name }}" width="180" style="max-width: 100%; height: auto;">
+        </td>
+    </tr>
+
+    <!-- Main content -->
+    <tr>
+        <td style="padding: 40px 40px 30px;">
+            <h1 style="margin: 0 0 20px; font-size: 24px; color: #2d3748;">Activate Your Account</h1>
+
+            <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.5; color: #4a5568;">
+                Welcome to {{ site_name }}, {{ first_name }}! We're excited to have you on board.
+                To complete your registration and access all features, please verify your email address.
+            </p>
+
+            <!-- Activation button -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center"
+                   style="margin: 30px auto;">
+                <tr>
+                    <td style="background-color: #2563eb; border-radius: 4px;">
+                        <a href="{{ verification_url }}"
+                           style="display: inline-block; padding: 12px 24px; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 4px;">
+                            Activate Account
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Secondary instructions -->
+            <p style="margin: 20px 0; font-size: 14px; line-height: 1.5; color: #718096;">
+                If the button doesn't work, copy and paste this link into your browser:<br>
+                <a href="{{ verification_url }}" style="color: #2563eb; word-break: break-all;">{{ verification_url }}</a>
+            </p>
+
+            <!-- Security notice -->
+            <div style="padding: 16px; background-color: #ebf8ff; border-radius: 4px; margin: 20px 0;">
+                <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #2b6cb0;">
+                    <strong>Security notice:</strong> This link expires in 24 hours and can only be used once.
+                    If you didn't request this, please ignore this email or <a href="mailto:{{ support_email }}"
+                                                                               style="color: #2563eb;">contact
+                    support</a>.
+                </p>
+            </div>
+
+            <!-- Next steps -->
+            <h2 style="margin: 30px 0 15px; font-size: 18px; color: #2d3748;">What's Next?</h2>
+            <ul style="margin: 0 0 20px; padding-left: 20px; font-size: 16px; line-height: 1.5; color: #4a5568;">
+                <li style="margin-bottom: 8px;">Complete your profile to get personalized recommendations</li>
+                <li style="margin-bottom: 8px;">Explore our learning resources and courses</li>
+                <li style="margin-bottom: 8px;">Connect with instructors and other learners</li>
+            </ul>
+        </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+        <td style="padding: 20px 40px; background-color: #f7fafc; border-top: 1px solid #eaeaea; text-align: center;">
+            <p style="margin: 0 0 10px; font-size: 14px; color: #718096;">
+                &copy; {{ current_year }} {{ site_name }}. All rights reserved.
+            </p>
+            <p style="margin: 0; font-size: 14px; color: #718096;">
+                <a href="{{ privacy_policy_url }}" style="color: #4a5568; text-decoration: none;">Privacy Policy</a> |
+                <a href="{{ terms_url }}" style="color: #4a5568; text-decoration: none;">Terms of Service</a>
+            </p>
+            <p style="margin: 15px 0 0; font-size: 12px; color: #a0aec0;">
+                Our address: {{ company_address }}
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

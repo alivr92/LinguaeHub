@@ -1,0 +1,77 @@
+{% load static %}
+<nav id="navmenu" class="navmenu">
+    <ul>
+        <!-- Nav item 1 Demos -->
+        <li class="nav-item">
+            <a
+                    {% if request.path == '/' %}
+                        class="nav-link active text-primary"
+                    {% else %}
+                        class="nav-link"
+                    {% endif %}
+                        href="{% url 'app_pages:home' %}" id="demoMenu" aria-expanded="false">Home</a>
+        </li>
+        <!-- Nav item 02 Tutors -->
+{#        <li class="nav-item">#}
+{#            <a#}
+{#                    {% if 'tutors' in request.path %}#}
+{#                        class="nav-link active text-primary"#}
+{#                    {% else %}#}
+{#                        class="nav-link"#}
+{#                    {% endif %}#}
+{#                        href="{% url 'provider:tutor_list' %}" id="menu-tutor" aria-expanded="false">Tutors</a>#}
+{#        </li>#}
+        <!-- Nav item 03 About Us-->
+        <li class="nav-item">
+            <a
+                    {% if 'about' in request.path %}
+                        class="nav-link active text-primary"
+                    {% else %}
+                        class="nav-link"
+                    {% endif %}
+                        href="{% url 'app_pages:about' %}" id="menu-tutor" aria-expanded="false">About Us</a>
+        </li>
+        <!-- Nav item 03 Contact Us-->
+        <li class="nav-item">
+            <a
+                    {% if 'contact-us' in request.path %}
+                        class="nav-link active text-primary"
+                    {% else %}
+                        class="nav-link"
+                    {% endif %}
+                        href="{% url 'app_pages:contact_us' %}" id="menu-tutor" aria-expanded="false">Contact
+                Us</a>
+        </li>
+        <!-- Nav item 04 Blog-->
+        <li class="nav-item">
+            <a
+                    {% if 'blog' in request.path %}
+                        class="nav-link active text-primary"
+                    {% else %}
+                        class="nav-link"
+                    {% endif %}
+                        href="{% url 'blog:home' %}" id="menu-tutor" aria-expanded="false">Blog</a>
+        </li>
+{#        <li class="dropdown"><a href="#"><span>Lingocept</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>#}
+{#            <ul>#}
+{#                <li><a href="#">Courses</a></li>#}
+{#                <li class="dropdown"><a href="#"><span>Online Courses</span> <i#}
+{#                        class="bi bi-chevron-down toggle-dropdown"></i></a>#}
+{#                    <ul>#}
+{#                        <li><a href="#">Online English</a></li>#}
+{#                        <li><a href="#">Online Spanish</a></li>#}
+{#                        <li><a href="#">Online Italian</a></li>#}
+{#                        <li><a href="#">Online Germany</a></li>#}
+{#                        <li><a href="#">Online French</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+{#                <li><a href="#">Prices</a></li>#}
+{#                <li><a href="#">Classes</a></li>#}
+{#                <li><a href="#">Support</a></li>#}
+{#            </ul>#}
+{#        </li>#}
+    </ul>
+
+
+    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>

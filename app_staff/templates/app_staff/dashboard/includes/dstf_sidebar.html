@@ -1,0 +1,84 @@
+{% load static %}
+<!-- Sidebar START -->
+<nav class="navbar sidebar navbar-expand-xl navbar-dark bg-dark">
+
+  <!-- Navbar brand for xl START -->
+  <div class="d-flex align-items-center">
+    <a class="navbar-brand" href="{% url 'app_pages:home' %}">
+{#      <img class="navbar-brand-item" src="{% static 'assets/images/logo-light.svg' %}" alt="">#}
+      <img class="navbar-brand-item" src="{% static 'assets/images/logo_white_gold.png' %}" alt="">
+    </a>
+  </div>
+  <!-- Navbar brand for xl END -->
+
+  <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1" id="offcanvasSidebar">
+    <div class="offcanvas-body sidebar-content d-flex flex-column bg-dark">
+
+      <!-- Sidebar menu START -->
+      <ul class="navbar-nav flex-column" id="navbar-sidebar">
+
+        <!-- Menu item 1 -->
+        <li class="nav-item"><a class="nav-link {% if 'panel' in request.path %}active{% endif %}" href="{% url 'accounts:dashboard' %}"><i class="bi bi-house fa-fw me-2"></i>Dashboard</a></li>
+
+        <!-- Title -->
+        <li class="nav-item ms-2 my-2">Pages</li>
+
+        <!-- menu item 2 -->
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#collapsepage" role="button" aria-expanded="false" aria-controls="collapsepage">
+            <i class="bi bi-basket fa-fw me-2"></i>Courses
+          </a>
+          <!-- Submenu -->
+          <ul class="nav collapse flex-column" id="collapsepage" data-bs-parent="#navbar-sidebar">
+            <li class="nav-item"> <a class="nav-link {% if 'course-list' in request.path %}active{% endif %}" href="{% url 'staff:dstf_course_list' %}">All Courses</a></li>
+            <li class="nav-item"> <a class="nav-link {% if 'course-category' in request.path %}active{% endif %}" href="{% url 'staff:dstf_course_category' %}">Course Category</a></li>
+{#            <li class="nav-item"> <a class="nav-link {% if 'course-detail' in request.path %}active{% endif %}" href="{% url 'staff:dstf_course_detail' %}">Course Detail</a></li>#}
+          </ul>
+        </li>
+
+        <!-- Menu item 3 -->
+        <li class="nav-item"> <a class="nav-link" href="{% url 'staff:dstf_student_list' %}"><i class="fas fa-user-graduate fa-fw me-2"></i>Students</a></li>
+
+        <!-- Menu item 4 -->
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#collapseinstructors" role="button" aria-expanded="false" aria-controls="collapseinstructors">
+            <i class="fas fa-user-tie fa-fw me-2"></i>Tutors
+          </a>
+          <!-- Submenu -->
+          <ul class="nav collapse flex-column" id="collapseinstructors" data-bs-parent="#navbar-sidebar">
+            <li class="nav-item"><a class="nav-link {% if 'tutor-list' in request.path %}active{% endif %}" href="{% url 'staff:dstf_tutor_list' %}">Tutors</a></li>
+{#            <li class="nav-item"><a class="nav-link {% if 'tutor-detail' in request.path %}active{% endif %}" href="{% url 'staff:dstf_tutor_detail' user.tutor_profile.pk %}">Tutor Detail</a></li>#}
+            <li class="nav-item"><a class="nav-link {% if 'tutor-request' in request.path %}active{% endif %}" href="{% url 'staff:dstf_tutor_request' %}">Tutor requests <span class="badge text-bg-success rounded-circle ms-2">2</span></a></li>
+          </ul>
+        </li>
+
+        <!-- Menu item 5 -->
+        <li class="nav-item"> <a class="nav-link {% if 'review' in request.path %}active{% endif %}" href="{% url 'staff:dstf_review' %}"><i class="far fa-comment-dots fa-fw me-2"></i>Reviews</a></li>
+
+        <!-- Menu item 6 -->
+{#        <li class="nav-item"> <a class="nav-link {% if 'earning' in request.path %}active{% endif %}" href="{% url 'staff:dstf_earning' %}"><i class="far fa-chart-bar fa-fw me-2"></i>Earnings</a></li>#}
+
+        <!-- Menu item 7 -->
+        <li class="nav-item"> <a class="nav-link {% if 'edit' in request.path %}active{% endif %}" href="{% url 'staff:dstf_edit' user.profile.pk %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a></li>
+
+      </ul>
+      <!-- Sidebar menu end -->
+
+      <!-- Sidebar footer START -->
+      <div class="px-3 mt-auto pt-3">
+        <div class="d-flex align-items-center justify-content-between text-primary-hover">
+{#          <a class="h5 mb-0 text-body" href="{% url 'staff:dstf_settings' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Settings"><i class="bi bi-gear-fill"></i></a>#}
+          <a class="h5 mb-0 text-body" href="{% url 'app_pages:home' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Home">
+            <i class="bi bi-globe"></i>
+          </a>
+          <a class="h5 mb-0 text-body" href="{% url 'accounts:sign_out' %}" data-bs-toggle="tooltip" data-bs-placement="top" title="Sign out">
+            <i class="bi bi-power"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Sidebar footer END -->
+
+    </div>
+  </div>
+</nav>
+<!-- Sidebar END -->

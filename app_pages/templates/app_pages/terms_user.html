@@ -1,0 +1,437 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Terms of Use - Lingocept®{% endblock %}
+{% block my_style %}
+    <style>
+        html {
+            scroll-padding-top: 85px; /* Adjust this value to match your topbar height */
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+
+        <!-- =======================
+        Main Banner START -->
+        <section class="bg-light mb-0">
+            <div class="container">
+
+                <!-- Title -->
+                <div class="row position-relative pb-2">
+                    <div class="col-lg-8 position-relative">
+                        <!-- Title -->
+                        <h1>User Terms of Use</h1>
+                        <p class="lead">These Terms of Use govern your access to and use of Lingocept® services,
+                            including all platform features, learning materials, and instructional sessions.</p>
+
+                        <!-- Badges -->
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <span class="badge bg-primary">
+                                <i class="bi bi-calendar-check me-1"></i> Effective: 01.07.2025
+                            </span>
+                            <span class="badge bg-dark">
+                                <i class="bi bi-file-earmark-text me-1"></i> Compliant with German Digital Services Act
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- =======================
+        Main Banner END -->
+
+        <!-- =======================
+        Terms of Use Content START -->
+        <section class="pt-6">
+            <div class="container">
+                <div class="row">
+                    <!-- Table of Contents (Sidebar) -->
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <div class="card shadow-sm sticky-top" style="top: 85px;">
+                            <div class="card-body">
+                                <h5 class="text-uppercase text-muted small mb-3">Document Sections</h5>
+                                <nav class="nav flex-column" id="termsTOC">
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionGeneral"><i
+                                            class="bi bi-file-text me-2"></i> General Terms</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionAccount"><i
+                                            class="bi bi-person-badge me-2"></i> Account & Access</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionUsage"><i
+                                            class="bi bi-check-circle me-2"></i> Permitted Use</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionTrials"><i
+                                            class="bi bi-arrow-repeat me-2"></i> Trial Lessons</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionLimitations"><i
+                                            class="bi bi-slash-circle me-2"></i> Platform Limitations</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionResults"><i
+                                            class="bi bi-graph-up me-2"></i> Results Disclaimer</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionTermination"><i
+                                            class="bi bi-exclamation-octagon me-2"></i> Termination</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionPolicies"><i
+                                            class="bi bi-collection me-2"></i> Other Policies</a>
+                                    <a class="nav-link py-2 px-0 text-dark" href="#sectionContact"><i
+                                            class="bi bi-envelope me-2"></i> Contact</a>
+                                </nav>
+
+                                <div class="mt-4 pt-3 border-top">
+                                    <button class="btn btn-sm btn-outline-primary w-100" onclick="window.print()">
+                                        <i class="bi bi-printer me-1"></i> Print Terms
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy Content -->
+                    <div class="col-lg-9">
+                        <div class="document-container">
+                            <!-- General Terms -->
+                            <section id="sectionGeneral" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">1</span>
+                                    <h2 class="h4 fw-bold mb-0">General Terms</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-primary-soft">
+                                        <div class="card-body">
+                                            <p>These Terms of Use apply to all users ("you") accessing Lingocept®
+                                                services, including website features, learning materials, trial lessons,
+                                                instructor sessions, and account tools.</p>
+                                            <p class="mb-0"><strong>By using our platform, you accept these conditions
+                                                in full.</strong> If you disagree with any part, you must immediately
+                                                discontinue use.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Account & Access -->
+                            <section id="sectionAccount" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">2</span>
+                                    <h2 class="h4 fw-bold mb-0">Account & Access</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-success-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-success"><i class="bi bi-check-circle me-2"></i>
+                                                        Requirements</h4>
+                                                    <ul class="list-icon">
+                                                        <li>You may only create and use an account if legally capable
+                                                            under your jurisdiction
+                                                        </li>
+                                                        <li>Users under 16 require parental consent</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-danger-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-danger"><i class="bi bi-x-circle me-2"></i>
+                                                        Prohibitions</h4>
+                                                    <ul class="list-icon">
+                                                        <li>Sharing accounts or selling access</li>
+                                                        <li>Impersonating other users</li>
+                                                        <li>Using false identity information</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-primary-soft mt-3">
+                                        <i class="bi bi-shield-lock me-2"></i>
+                                        <strong>You are solely responsible</strong> for safeguarding your login
+                                        credentials and all activities under your account.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Permitted Use -->
+                            <section id="sectionUsage" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">3</span>
+                                    <h2 class="h4 fw-bold mb-0">Permitted Use</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-success-soft mb-4">
+                                        <div class="card-body">
+                                            <h4 class="h6 text-success"><i class="bi bi-check-circle me-2"></i> Allowed
+                                                Activities</h4>
+                                            <p>You may use the platform and services solely for personal educational
+                                                purposes in accordance with:</p>
+                                            <ul class="list-icon">
+                                                <li>Lingocept® AGB (Terms and Conditions)</li>
+                                                <li>Licensing Terms</li>
+                                                <li>Instructor agreements (where applicable)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="card border-danger-soft">
+                                        <div class="card-body">
+                                            <h4 class="h6 text-danger"><i class="bi bi-x-circle me-2"></i> Restricted
+                                                Activities</h4>
+                                            <p>You may <strong>not</strong>:</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <ul class="list-icon">
+                                                        <li>Reproduce, publish, resell, or share course content</li>
+                                                        <li>Use the platform for commercial teaching</li>
+                                                        <li>Conduct group sessions without authorization</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul class="list-icon">
+                                                        <li>Record lessons or communications without permission</li>
+                                                        <li>Use automation, bots, or scraping tools</li>
+                                                        <li>Reverse engineer or sublicense Lingocept® content</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Trial Lessons -->
+                            <section id="sectionTrials" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">4</span>
+                                    <h2 class="h4 fw-bold mb-0">Trial Lessons</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-warning-soft">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4 class="h6 text-warning"><i class="bi bi-info-circle me-2"></i>
+                                                        Trial Policy</h4>
+                                                    <ul class="list-icon">
+                                                        <li>One trial lesson per instructor</li>
+                                                        <li>Designed for initial assessment only</li>
+                                                        <li>Does not include full method access</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4 class="h6 text-warning"><i
+                                                            class="bi bi-exclamation-triangle me-2"></i> Limitations
+                                                    </h4>
+                                                    <ul class="list-icon">
+                                                        <li>No reusable course materials</li>
+                                                        <li>No teaching templates provided</li>
+                                                        <li>Not eligible for refunds</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Platform Limitations -->
+                            <section id="sectionLimitations" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">5</span>
+                                    <h2 class="h4 fw-bold mb-0">Platform Limitations</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-info-soft">
+                                        <div class="card-body">
+                                            <div class="d-flex">
+                                                <i class="bi bi-server text-info fs-3 me-3"></i>
+                                                <div>
+                                                    <h4 class="h6 text-info">Service Availability</h4>
+                                                    <p>Lingocept® strives for 99.5% uptime but does not guarantee
+                                                        uninterrupted service. Availability may be affected by:</p>
+                                                    <ul class="list-icon">
+                                                        <li>Scheduled maintenance windows</li>
+                                                        <li>Technical infrastructure issues</li>
+                                                        <li>Legal or regulatory requirements</li>
+                                                        <li>Force majeure events</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Results Disclaimer -->
+                            <section id="sectionResults" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">6</span>
+                                    <h2 class="h4 fw-bold mb-0">Results Disclaimer</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-secondary">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-2 text-center mb-3 mb-md-0">
+                                                    <i class="bi bi-graph-up-arrow fs-1 text-secondary"></i>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <p>While our proprietary methodology is designed to support
+                                                        significant language improvement, Lingocept® does not guarantee
+                                                        specific outcomes or fluency levels. Results vary based on:</p>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <ul class="list-icon">
+                                                                <li>Individual practice consistency</li>
+                                                                <li>Prior language knowledge</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ul class="list-icon">
+                                                                <li>Native language influence</li>
+                                                                <li>Learning style adaptation</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Termination -->
+                            <section id="sectionTermination" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">7</span>
+                                    <h2 class="h4 fw-bold mb-0">Termination</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="alert alert-danger-soft">
+                                        <i class="bi bi-exclamation-octagon-fill me-2"></i>
+                                        <strong>Violation of these terms may result in:</strong>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light h-100 text-center">
+                                                <i class="bi bi-person-x-fill text-danger fs-3 mb-2"></i>
+                                                <h4 class="h6">Account Suspension</h4>
+                                                <p class="small mb-0">Immediate restriction of platform access</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light h-100 text-center">
+                                                <i class="bi bi-cash-coin text-danger fs-3 mb-2"></i>
+                                                <h4 class="h6">Financial Impact</h4>
+                                                <p class="small mb-0">Lesson access revoked without refund</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="p-3 border rounded bg-light h-100 text-center">
+                                                <i class="bi bi-hammer text-danger fs-3 mb-2"></i>
+                                                <h4 class="h6">Legal Action</h4>
+                                                <p class="small mb-0">Pursued under AGB and applicable laws</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Other Policies -->
+                            <section id="sectionPolicies" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">8</span>
+                                    <h2 class="h4 fw-bold mb-0">Other Policies</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <p>These User Terms are complemented by and subject to:</p>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-primary-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-primary"><i
+                                                            class="bi bi-file-earmark-text me-2"></i> Core Documents
+                                                    </h4>
+                                                    <ul class="list-icon">
+                                                        <li>Lingocept® AGB (Terms and Conditions)</li>
+                                                        <li>Privacy Policy</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-primary-soft">
+                                                <div class="card-body">
+                                                    <h4 class="h6 text-primary"><i
+                                                            class="bi bi-file-earmark-lock me-2"></i> Supplementary
+                                                        Terms</h4>
+                                                    <ul class="list-icon">
+                                                        <li>Licensing & Usage Terms</li>
+                                                        <li>Code of Conduct</li>
+                                                        <li>Instructor Agreements</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info-soft mt-3">
+                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                        In case of conflict between documents, the AGB takes precedence, followed by
+                                        these User Terms.
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Contact -->
+                            <section id="sectionContact" class="my-4 py-2">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-circle me-2"
+                                          style="width: 28px; height: 28px; line-height: 20px;">9</span>
+                                    <h2 class="h4 fw-bold mb-0">Contact Information</h2>
+                                </div>
+                                <div class="ps-4">
+                                    <div class="card border-primary">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h4 class="h6 text-primary mb-3"><i class="bi bi-headset me-2"></i>General
+                                                        Inquiries</h4>
+                                                    <p class="mb-1"><i
+                                                            class="bi bi-globe me-2"></i> {{ CFURL.site_address }}</p>
+                                                    <p class="mb-1"><i
+                                                            class="bi bi-envelope me-2"></i> {{ CFEmail.email1 }}</p>
+                                                    <p class="mb-1"><i
+                                                            class="bi bi-telephone me-2"></i> {{ CFChar.phone1 }}</p>
+                                                    <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Berlin, Germany
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4 class="h6 text-primary mb-3"><i
+                                                            class="bi bi-shield-lock me-2"></i>Legal Notices</h4>
+                                                    <p class="mb-1"><i class="bi bi-envelope me-2"></i>
+                                                        legal@lingocept.com</p>
+                                                    <p class="mb-0"><i class="bi bi-send me-2"></i> Registered mail
+                                                        preferred for legal notices</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Terms of Use Content END -->
+
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}

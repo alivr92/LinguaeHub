@@ -1,0 +1,117 @@
+/* Base styles for input groups */
+.input-group {
+    transition: all 0.3s ease;
+    border-radius: 0.375rem;
+    border: 1px solid #dee2e6;
+}
+
+/* Focus state */
+.input-group:focus-within {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Success state (when input is valid) */
+.input-group.is-valid-group {
+    border-color: #198754 !important;
+}
+
+.input-group.is-valid-group:focus-within {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+}
+
+/* Invalid state */
+.input-group.is-invalid-group {
+    border-color: #dc3545 !important;
+}
+
+.input-group.is-invalid-group:focus-within {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+}
+
+/* Inner elements styling */
+.input-group .form-control {
+    border: none;
+    box-shadow: none !important;
+    background-color: transparent;
+}
+
+.input-group .input-group-text {
+    border: none;
+    background-color: transparent;
+}
+
+/* Password toggle button */
+.password-toggle {
+    cursor: pointer;
+    background-color: #f8f9fa;
+    border-left: 0;
+}
+
+.password-toggle:hover {
+    background-color: #e9ecef;
+}
+
+/* Password requirements list */
+.password-requirements {
+    margin-top: 0.5rem;
+}
+
+.requirement {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.requirement i {
+    margin-right: 0.5rem;
+    width: 1rem;
+    text-align: center;
+}
+
+.requirement.valid {
+    color: #198754;
+}
+
+.requirement.invalid {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+/* Feedback messages */
+#passwordFeedback {
+    display: inline-block;
+    margin-top: 0.25rem;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.error-message {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.show-error {
+    display: block;
+}
+
+/* Legal section styling */
+.legal-section {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid #dee2e6;
+}
+
+/* Section titles */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: #495057;
+}

@@ -1,0 +1,16 @@
+Dear Admin,
+    A new tutor application has been submitted. Here are the details:
+
+Full name: {{ full_name }},
+Email:  {{ email }}
+Phone:  {{ phone }}
+Bio:    {{ bio }}
+
+
+The applicant has also provided a photo and resume for your review. They
+        are attached to this email.
+
+Pleas check your admin panel to do suitable action on them.
+
+Best regards,
+Your {{ site_name }} LMS Team

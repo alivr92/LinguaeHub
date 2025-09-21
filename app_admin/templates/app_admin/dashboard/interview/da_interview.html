@@ -1,0 +1,32 @@
+{% extends 'app_admin/dashboard/da_base.html' %}
+{% load static %}
+{% block admin_main_content %}
+  <!-- Page main content START -->
+  <div class="page-content-wrapper border">
+
+    <!-- Title -->
+    <div class="row">
+      <div class="col-12 mb-3">
+        <h1 class="h3 mb-2 mb-sm-0">Interview Scheduling</h1>
+      </div>
+    </div>
+
+    {% include 'ap2_meeting/provider/p_manual.html' %}
+
+
+  </div>
+  <!-- Page main content END -->
+{% endblock %}
+
+{% block admin_popup_modals %}{% include 'ap2_meeting/provider/p_manual_popup.html' %}{% endblock %}
+
+{% block embed_messages %}
+    <!-- Messages from js will show here (Where embed message block defined in base)-->
+    <div id="alert-container" class="m-3"></div>
+{% endblock %}
+
+{% block embed_script %}
+    {% if user.is_authenticated %}
+        <script src="{% static 'ap2_meeting/dashboard_schedule/js/d_appointments_manual.min.js' %}"></script>
+    {% endif %}
+{% endblock %}

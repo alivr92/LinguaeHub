@@ -1,0 +1,755 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Professional Language Programs{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+{% endblock %}
+
+{% block my_style %}
+<style>
+    .program-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--hero-image);
+        background-size: cover;
+        background-position: center;
+        padding: 6rem 0;
+        color: white;
+    }
+    .individual-hero { --hero-image: url('{% static "assets/images/classes/individual-hero.jpg" %}'); }
+    .group-hero { --hero-image: url('{% static "assets/images/classes/group-hero.jpg" %}'); }
+    .corporate-hero { --hero-image: url('{% static "assets/images/classes/corporate-hero.jpg" %}'); }
+    .kids-hero { --hero-image: url('{% static "assets/images/classes/kids-hero.jpg" %}'); }
+    
+    .program-card {
+        transition: all 0.3s ease;
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        height: 100%;
+    }
+    .program-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    .program-icon {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+    }
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+    .feature-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    .feature-list li:last-child {
+        border-bottom: none;
+    }
+    .feature-icon {
+        width: 24px;
+        text-align: center;
+        margin-right: 10px;
+    }
+    .divider {
+        height: 3px;
+        background: linear-gradient(to right, rgba(13, 110, 253, 0.1), #0d6efd, rgba(13, 110, 253, 0.1));
+        width: 80px;
+        margin: 1.5rem auto;
+    }
+    .testimonial-card {
+        border-left: 4px solid #0d6efd;
+    }
+    .bg-light-gradient {
+        background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+    }
+</style>
+{% endblock %}
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <!-- Individual Programs Page -->
+        <section id="individual" class="d-none">
+            <div class="program-hero individual-hero">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 fw-bold mb-3 text-white">Individual Language Programs</h1>
+                            <p class="lead mb-4">Personalized one-on-one instruction tailored to your specific goals and pace</p>
+                            <a href="#contact" class="btn btn-primary btn-lg">Start Your Journey</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center mb-5">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="fw-bold">Tailored Learning Experience</h2>
+                            <p class="lead text-muted">Your goals, your pace, your success</p>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-primary bg-opacity-10 text-primary">
+                                        <i class="bi bi-bullseye fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Goal-Oriented Curriculum</h3>
+                                    <p>Custom learning plan designed specifically for your objectives, whether for career advancement, academic purposes, or personal enrichment.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Personalized needs assessment</li>
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Custom learning materials</li>
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Focus on your specific challenges</li>
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Regular progress evaluations</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-primary bg-opacity-10 text-primary">
+                                        <i class="bi bi-calendar-check fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Flexible Scheduling</h3>
+                                    <p>Learn at your convenience with scheduling options that work around your busy life and commitments.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Choose your lesson frequency</li>
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Morning, afternoon, or evening slots</li>
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Reschedule with 24-hour notice</li>
+                                        <li><span class="feature-icon text-primary"><i class="bi bi-check-circle-fill"></i></span> Intensive or extended program options</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-5 bg-light-gradient">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Pricing Options</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Package</th>
+                                            <th>Hours</th>
+                                            <th>Price</th>
+                                            <th>Savings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Starter</td>
+                                            <td>10</td>
+                                            <td>$850</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Standard</td>
+                                            <td>20</td>
+                                            <td>$1,600</td>
+                                            <td>$100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Professional</td>
+                                            <td>40</td>
+                                            <td>$3,000</td>
+                                            <td>$400</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mastery</td>
+                                            <td>60</td>
+                                            <td>$4,200</td>
+                                            <td>$600</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">What Our Students Say</h2>
+                            <div class="testimonial-card bg-white p-4 rounded shadow-sm mb-4">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-person-circle text-primary"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">Michael Chen</h5>
+                                        <p class="text-muted mb-0">Business Executive</p>
+                                    </div>
+                                </div>
+                                <p class="mb-0">"The personalized attention and custom curriculum helped me achieve fluency in Spanish much faster than I expected. My instructor tailored every lesson to my specific business needs."</p>
+                            </div>
+                            
+                            <div class="testimonial-card bg-white p-4 rounded shadow-sm">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-person-circle text-primary"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">Sarah Johnson</h5>
+                                        <p class="text-muted mb-0">University Student</p>
+                                    </div>
+                                </div>
+                                <p class="mb-0">"Preparing for my semester abroad was stress-free with the one-on-one lessons. My instructor focused exactly on what I needed, and the flexible scheduling worked perfectly with my classes."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Group Programs Page -->
+        <section id="group" class="d-none">
+            <div class="program-hero group-hero">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 fw-bold mb-3">Group Language Programs</h1>
+                            <p class="lead mb-4">Collaborative learning in small groups for dynamic interaction and peer support</p>
+                            <a href="#contact" class="btn btn-success btn-lg">Join a Group</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center mb-5">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="fw-bold">Learning Together, Growing Together</h2>
+                            <p class="lead text-muted">The power of collaborative language acquisition</p>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-success bg-opacity-10 text-success">
+                                        <i class="bi bi-people fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Small Class Sizes</h3>
+                                    <p>Intimate learning environments with 4-6 students max to ensure everyone gets attention while benefiting from group dynamics.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Maximum 6 students per group</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Carefully matched proficiency levels</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Diverse group composition</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Collaborative learning activities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-success bg-opacity-10 text-success">
+                                        <i class="bi bi-chat-dots fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Interactive Sessions</h3>
+                                    <p>Engaging activities, discussions, and role-plays that make learning enjoyable and effective through real communication practice.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Partner and group activities</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Real-world communication scenarios</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Peer feedback and correction</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Cultural immersion activities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-success bg-opacity-10 text-success">
+                                        <i class="bi bi-calendar-week fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Structured Programs</h3>
+                                    <p>Comprehensive 8-week programs with consistent schedules to build skills progressively and ensure measurable results.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Fixed weekly schedule</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Progressive curriculum</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Regular proficiency assessments</li>
+                                        <li><span class="feature-icon text-success"><i class="bi bi-check-circle-fill"></i></span> Certificate of completion</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-5 bg-light-gradient">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Group Program Options</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Program Level</th>
+                                            <th>Duration</th>
+                                            <th>Price per Person</th>
+                                            <th>Schedule</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Beginner</td>
+                                            <td>8 weeks (16 sessions)</td>
+                                            <td>$640</td>
+                                            <td>Mon/Wed or Tue/Thu</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Intermediate</td>
+                                            <td>8 weeks (16 sessions)</td>
+                                            <td>$680</td>
+                                            <td>Mon/Wed or Tue/Thu</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Advanced</td>
+                                            <td>8 weeks (16 sessions)</td>
+                                            <td>$720</td>
+                                            <td>Mon/Wed or Tue/Thu</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Conversation</td>
+                                            <td>4 weeks (8 sessions)</td>
+                                            <td>$360</td>
+                                            <td>Saturday intensive</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="alert alert-info mt-4">
+                                <i class="bi bi-info-circle me-2"></i> Early registration discount: 10% off when signing up 2 weeks in advance. Bring a friend and both get 15% off!
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Group Learning Benefits</h2>
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <div class="d-flex mb-3">
+                                    <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-arrow-repeat text-success"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Enhanced Motivation</h5>
+                                        <p class="mb-0">Group dynamics and peer support keep motivation high throughout the learning journey.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <div class="d-flex mb-3">
+                                    <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-mic text-success"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Diverse Practice</h5>
+                                        <p class="mb-0">Experience different accents, speaking styles, and perspectives from multiple conversation partners.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <div class="d-flex mb-3">
+                                    <div class="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-currency-dollar text-success"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Cost Effective</h5>
+                                        <p class="mb-0">Achieve quality language instruction at a more affordable price point than individual lessons.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Companies Programs Page -->
+        <section id="companies" class="d-none">
+            <div class="program-hero corporate-hero">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 fw-bold mb-3">Corporate Language Solutions</h1>
+                            <p class="lead mb-4">Comprehensive language training programs designed for business success</p>
+                            <a href="#contact" class="btn btn-purple btn-lg">Request a Proposal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center mb-5">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="fw-bold">Driving Business Growth Through Language</h2>
+                            <p class="lead text-muted">Strategic language solutions for organizational success</p>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-purple bg-opacity-10 text-purple">
+                                        <i class="bi bi-building fs-1"></i>
+                                    </div>
+                                    <h3 class="h5">Departmental Training</h3>
+                                    <p>Customized programs for specific departments: sales, customer service, HR, and more.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-3">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-purple bg-opacity-10 text-purple">
+                                        <i class="bi bi-globe fs-1"></i>
+                                    </div>
+                                    <h3 class="h5">Expatriate Programs</h3>
+                                    <p>Comprehensive language and cultural training for employees relocating internationally.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-3">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-purple bg-opacity-10 text-purple">
+                                        <i class="bi bi-chat-quote fs-1"></i>
+                                    </div>
+                                    <h3 class="h5">Client-Facing Teams</h3>
+                                    <p>Specialized training for teams that interact with international clients and partners.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-3">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-purple bg-opacity-10 text-purple">
+                                        <i class="bi bi-graph-up fs-1"></i>
+                                    </div>
+                                    <h3 class="h5">Leadership Communication</h3>
+                                    <p>Executive-level language training for global leadership and management teams.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-5 bg-light-gradient">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Our Corporate Process</h2>
+                            <div class="d-flex mb-4">
+                                <div class="bg-purple bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <span class="text-purple fw-bold">1</span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Needs Analysis</h5>
+                                    <p class="mb-0">Comprehensive assessment of your organization's language requirements and goals.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex mb-4">
+                                <div class="bg-purple bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <span class="text-purple fw-bold">2</span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Program Design</h5>
+                                    <p class="mb-0">Custom curriculum development tailored to your industry and specific needs.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex mb-4">
+                                <div class="bg-purple bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <span class="text-purple fw-bold">3</span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Implementation</h5>
+                                    <p class="mb-0">Professional delivery with expert instructors and quality materials.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex">
+                                <div class="bg-purple bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <span class="text-purple fw-bold">4</span>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Measurement & ROI</h5>
+                                    <p class="mb-0">Regular progress tracking and detailed reporting on program effectiveness.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Enterprise Solutions</h2>
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <h5 class="text-purple">On-Site Training</h5>
+                                <p>We bring our expert instructors to your location for maximum convenience and minimal disruption to workflow.</p>
+                                <ul class="feature-list">
+                                    <li><span class="feature-icon text-purple"><i class="bi bi-check-circle-fill"></i></span> At your office or facility</li>
+                                    <li><span class="feature-icon text-purple"><i class="bi bi-check-circle-fill"></i></span> Flexible scheduling options</li>
+                                    <li><span class="feature-icon text-purple"><i class="bi bi-check-circle-fill"></i></span> Dedicated classroom space available</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <h5 class="text-purple">Blended Learning</h5>
+                                <p>Combine in-person instruction with our advanced online platform for comprehensive language development.</p>
+                                <ul class="feature-list">
+                                    <li><span class="feature-icon text-purple"><i class="bi bi-check-circle-fill"></i></span> Face-to-face sessions</li>
+                                    <li><span class="feature-icon text-purple"><i class="bi bi-check-circle-fill"></i></span> Online practice and reinforcement</li>
+                                    <li><span class="feature-icon text-purple"><i class="bi bi-check-circle-fill"></i></span> Progress tracking dashboard</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Kids Programs Page -->
+        <section id="kids" class="d-none">
+            <div class="program-hero kids-hero">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 fw-bold mb-3">Kids Language Programs</h1>
+                            <p class="lead mb-4">Fun, immersive language learning designed specifically for children and teens</p>
+                            <a href="#contact" class="btn btn-warning btn-lg">Enroll Your Child</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center mb-5">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="fw-bold">Building Bilingual Futures</h2>
+                            <p class="lead text-muted">Age-appropriate language acquisition through play and discovery</p>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-warning bg-opacity-10 text-warning">
+                                        <i class="bi bi-egg-fill fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Little Linguists (Ages 4-6)</h3>
+                                    <p>Play-based introduction to language through songs, games, stories, and creative activities.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> 45-minute sessions</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Maximum 6 children per group</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Native-speaking teachers</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Thematic units (animals, family, food)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-warning bg-opacity-10 text-warning">
+                                        <i class="bi bi-book fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Junior Explorers (Ages 7-11)</h3>
+                                    <p>Engaging language immersion that combines structured learning with creative projects and cultural exploration.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> 60-minute sessions</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Maximum 8 children per group</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Project-based learning</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Cultural activities and crafts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="program-card h-100 shadow">
+                                <div class="card-body p-4 text-center">
+                                    <div class="program-icon bg-warning bg-opacity-10 text-warning">
+                                        <i class="bi bi-laptop fs-1"></i>
+                                    </div>
+                                    <h3 class="h4">Teen Globalists (Ages 12-17)</h3>
+                                    <p>Comprehensive language programs designed for teenagers, focusing on practical communication and academic success.</p>
+                                    <ul class="feature-list text-start mt-4">
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> 75-minute sessions</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Maximum 10 students per group</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Exam preparation available</li>
+                                        <li><span class="feature-icon text-warning"><i class="bi bi-check-circle-fill"></i></span> Technology-integrated learning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-5 bg-light-gradient">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Kids Program Pricing</h2>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Age Group</th>
+                                            <th>Program</th>
+                                            <th>Duration</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>4-6 years</td>
+                                            <td>Little Linguists</td>
+                                            <td>10 weeks (20 sessions)</td>
+                                            <td>$600</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7-11 years</td>
+                                            <td>Junior Explorers</td>
+                                            <td>12 weeks (24 sessions)</td>
+                                            <td>$840</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12-17 years</td>
+                                            <td>Teen Globalists</td>
+                                            <td>12 weeks (24 sessions)</td>
+                                            <td>$960</td>
+                                        </tr>
+                                        <tr>
+                                            <td>All ages</td>
+                                            <td>Private Lessons</td>
+                                            <td>Custom</td>
+                                            <td>$65/hour</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="alert alert-info mt-4">
+                                <i class="bi bi-info-circle me-2"></i> Sibling discount: 15% off for each additional child. After-school pickup service available.
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <h2 class="fw-bold mb-4">Why Start Early?</h2>
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <div class="d-flex mb-3">
+                                    <div class="bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-brain text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Cognitive Benefits</h5>
+                                        <p class="mb-0">Language learning enhances problem-solving, critical thinking, and creativity in developing minds.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm mb-4">
+                                <div class="d-flex mb-3">
+                                    <div class="bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-ear text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Natural Acquisition</h5>
+                                        <p class="mb-0">Children absorb language patterns more naturally and develop authentic pronunciation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded shadow-sm">
+                                <div class="d-flex mb-3">
+                                    <div class="bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                        <i class="bi bi-globe2 text-warning"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Cultural Awareness</h5>
+                                        <p class="mb-0">Early exposure to other languages fosters open-mindedness and global perspective.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/tiny-slider/tiny-slider.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script>
+        // Function to show specific program page
+        function showProgram(programId) {
+            // Hide all program sections first
+            document.querySelectorAll('main > section').forEach(section => {
+                section.classList.add('d-none');
+            });
+
+            // Show the selected program
+            document.getElementById(programId).classList.remove('d-none');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    easing: 'ease-in-out',
+                    once: true
+                });
+            }
+
+            // Show individual program by default
+            showProgram('individual');
+        });
+    </script>
+{% endblock %}

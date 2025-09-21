@@ -1,0 +1,416 @@
+<!-- templates/app_in_person/tutor_appointments.html -->
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static humanize %}
+
+{% block head_style_plugins %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+<style>
+.appointment-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid #6c757d;
+}
+.appointment-card.upcoming {
+    border-left-color: #0d6efd;
+    background: linear-gradient(90deg, rgba(13, 110, 253, 0.05) 0%, transparent 100%);
+}
+.appointment-card.completed {
+    border-left-color: #198754;
+    background: linear-gradient(90deg, rgba(25, 135, 84, 0.05) 0%, transparent 100%);
+}
+.appointment-card.cancelled {
+    border-left-color: #dc3545;
+    background: linear-gradient(90deg, rgba(220, 53, 69, 0.05) 0%, transparent 100%);
+}
+.appointment-card.urgent {
+    border-left-color: #fd7e14;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 rgba(253, 126, 20, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(253, 126, 20, 0); }
+    100% { box-shadow: 0 0 0 rgba(253, 126, 20, 0); }
+}
+.student-avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+}
+.revenue-badge {
+    background: linear-gradient(45deg, #198754, #20c997);
+    color: white;
+    font-weight: 600;
+}
+.calendar-highlight {
+    background: linear-gradient(45deg, #0d6efd, #6f42c1);
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+</style>
+{% endblock %}
+
+{% block dashboard_main_content %}
+<div class="col-xl-9">
+    <!-- Header Stats -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary bg-opacity-10 border-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Total Sessions</h6>
+                            <h3 class="mb-0">{{ stats.total_sessions }}</h3>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-calendar-check fs-1 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success bg-opacity-10 border-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Upcoming</h6>
+                            <h3 class="mb-0">{{ stats.upcoming }}</h3>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-clock fs-1 text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info bg-opacity-10 border-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Monthly Revenue</h6>
+                            <h3 class="mb-0">€{{ stats.monthly_revenue|floatformat:2 }}</h3>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-currency-euro fs-1 text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning bg-opacity-10 border-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0">Avg Rating</h6>
+                            <h3 class="mb-0">{{ stats.avg_rating|floatformat:1 }}/5.0</h3>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-star-fill fs-1 text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Actions -->
+    <div class="card border mb-4">
+        <div class="card-body">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="Search students or services..." id="searchInput">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control flatpickr" placeholder="Select date range" id="dateRange">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100" id="exportBtn">
+                        <i class="bi bi-download me-2"></i>Export
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointments List -->
+    <div class="card border">
+        <div class="card-header bg-transparent border-bottom">
+            <h4 class="mb-0">My Appointments</h4>
+        </div>
+        <div class="card-body">
+            {% if appointments %}
+            <div class="row g-4" id="appointmentsContainer">
+                {% for appointment in appointments %}
+                <div class="col-12">
+                    <div class="card appointment-card {{ appointment.status }} {% if appointment.is_urgent %}urgent{% endif %}">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <!-- Student Info -->
+                                <div class="col-md-3">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ appointment.student_avatar_url|default:'/static/assets/images/avatar/placeholder.jpg' }}"
+                                             class="student-avatar rounded-circle me-3" alt="{{ appointment.student_name }}">
+                                        <div>
+                                            <h6 class="mb-1">{{ appointment.student_name }}</h6>
+                                            <span class="badge bg-secondary">{{ appointment.student_level }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Session Details -->
+                                <div class="col-md-3">
+                                    <div class="d-flex flex-column">
+                                        <strong class="text-primary">{{ appointment.service_name }}</strong>
+                                        <small class="text-muted">{{ appointment.number_of_sessions }} session{{ appointment.number_of_sessions|pluralize }} × {{ appointment.duration }}h</small>
+                                        <span class="badge revenue-badge mt-1">€{{ appointment.total_payout }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Date & Time -->
+                                <div class="col-md-2">
+                                    <div class="d-flex flex-column">
+                                        <strong>{{ appointment.next_session_date|date:"M d, Y" }}</strong>
+                                        <small class="text-muted">{{ appointment.next_session_time }}</small>
+                                        {% if appointment.is_today %}
+                                        <span class="badge bg-warning mt-1">Today</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Status & Actions -->
+                                <div class="col-md-2">
+                                    <span class="badge status-badge bg-{{ appointment.status_color }}">
+                                        {{ appointment.get_status_display }}
+                                    </span>
+                                    {% if appointment.is_urgent %}
+                                    <span class="badge bg-danger mt-1">Urgent</span>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="col-md-2">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                                data-bs-toggle="modal" data-bs-target="#detailsModal{{ appointment.id }}">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        {% if appointment.status == 'upcoming' %}
+                                        <button type="button" class="btn btn-sm btn-outline-success"
+                                                onclick="confirmSession({{ appointment.id }})">
+                                            <i class="bi bi-check-lg"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                onclick="rescheduleSession({{ appointment.id }})">
+                                            <i class="bi bi-calendar-plus"></i>
+                                        </button>
+                                        {% endif %}
+                                        <button type="button" class="btn btn-sm btn-outline-info"
+                                                onclick="messageStudent({{ appointment.student_id }})">
+                                            <i class="bi bi-chat"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="bi bi-calendar-x fs-1 text-muted"></i>
+                <h5 class="text-muted mt-3">No appointments scheduled</h5>
+                <p class="text-muted">You don't have any upcoming in-person sessions.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    {% if appointments.has_other_pages %}
+    <nav class="d-flex justify-content-center mt-4">
+        <ul class="pagination">
+            {% if appointments.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ appointments.previous_page_number }}">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for i in appointments.paginator.page_range %}
+            <li class="page-item {% if appointments.number == i %}active{% endif %}">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endfor %}
+
+            {% if appointments.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ appointments.next_page_number }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<!-- Calendar View Modal -->
+<div class="modal fade" id="calendarModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Monthly Calendar View</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="appointmentsCalendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Action Buttons -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="toast-container">
+        <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-bell me-2"></i> New appointment request!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group-vertical shadow">
+        <button class="btn btn-primary rounded-circle p-3 mb-2" data-bs-toggle="modal" data-bs-target="#calendarModal">
+            <i class="bi bi-calendar-month"></i>
+        </button>
+        <button class="btn btn-success rounded-circle p-3 mb-2" onclick="syncWithCalendar()">
+            <i class="bi bi-google"></i>
+        </button>
+        <button class="btn btn-info rounded-circle p-3" onclick="showQuickStats()">
+            <i class="bi bi-graph-up"></i>
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts_vendors %}
+<script src="{% static 'assets/vendor/flatpickr/dist/flatpickr.min.js' %}"></script>
+<script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+<script src="{% static 'assets/vendor/fullcalendar/index.global.min.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize date range picker
+    flatpickr("#dateRange", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        locale: "en"
+    });
+
+    // Initialize filters
+    const statusFilter = new Choices('#statusFilter');
+
+    // Search functionality
+    $('#searchInput').on('keyup', function() {
+        const searchText = $(this).val().toLowerCase();
+        $('#appointmentsContainer .col-12').each(function() {
+            const text = $(this).text().toLowerCase();
+            $(this).toggle(text.includes(searchText));
+        });
+    });
+
+    // Export functionality
+    $('#exportBtn').on('click', function() {
+        const format = confirm('Export as CSV? Cancel for PDF') ? 'csv' : 'pdf';
+        exportAppointments(format);
+    });
+
+    // Initialize calendar
+    const calendarEl = document.getElementById('appointmentsCalendar');
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: [
+            {% for appointment in appointments %}
+            {
+                title: '{{ appointment.student_name }} - {{ appointment.service_name }}',
+                start: '{{ appointment.next_session_date|date:"Y-m-d" }}',
+                color: '{{ appointment.status_color }}',
+                extendedProps: {
+                    appointmentId: {{ appointment.id }}
+                }
+            },
+            {% endfor %}
+        ],
+        eventClick: function(info) {
+            const appointmentId = info.event.extendedProps.appointmentId;
+            $('#detailsModal' + appointmentId).modal('show');
+        }
+    });
+    calendar.render();
+});
+
+function exportAppointments(format) {
+    // Implement export logic
+    console.log('Exporting as', format);
+}
+
+function confirmSession(appointmentId) {
+    if (confirm('Mark this session as completed?')) {
+        // API call to update status
+        fetch(`/api/appointments/${appointmentId}/complete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                location.reload();
+            }
+        });
+    }
+}
+
+function rescheduleSession(appointmentId) {
+    // Implement reschedule logic
+    console.log('Rescheduling appointment', appointmentId);
+}
+
+function messageStudent(studentId) {
+    window.location.href = `/messages/new/?student_id=${studentId}`;
+}
+
+function syncWithCalendar() {
+    // Google Calendar sync logic
+    console.log('Syncing with Google Calendar');
+}
+
+function showQuickStats() {
+    // Show quick statistics modal
+    console.log('Showing quick stats');
+}
+</script>
+{% endblock %}

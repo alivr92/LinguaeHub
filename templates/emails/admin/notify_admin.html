@@ -1,0 +1,28 @@
+<html>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; background-color: #f9f9f9; margin: 0; padding: 20px;">
+<div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 20px;">
+    <h2 style="color: #4CAF50; text-align: center;">New Tutor Application</h2>
+    <p style="font-size: 16px; color: #333;">Dear Admin,</p>
+    <p style="font-size: 16px; color: #333;">A new tutor application has been submitted. Here are the details:</p>
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; color: #555;">Full Name:</td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{{ full_name }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; color: #555;">Email:</td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{{ email }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; font-weight: bold; color: #555;">Phone:</td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{{ phone }}</td>
+        </tr>
+    </table>
+    <p style="font-size: 16px; color: #333;"><strong>Bio:</strong></p>
+    <p style="background-color: #f2f2f2; padding: 10px; border-radius: 5px; color: #333;">{{ bio }}</p>
+    <p style="font-size: 16px; color: #333;">The applicant has also provided a photo and resume for your review. They
+        are attached to this email.</p>
+    <p style="font-size: 16px; color: #333;">Best regards,<br>Your {{ site_name }}LMS Team</p>
+</div>
+</body>
+</html>

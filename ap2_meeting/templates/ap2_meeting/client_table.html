@@ -1,0 +1,128 @@
+<div id="alert-container" class="m-3"></div>
+{#<h4>Weekly Schedule of <span#}
+{#  style="color: #00bcd4">{{ tutor_single.profile.user.first_name }} {{ tutor_single.profile.user.last_name }}</span>#}
+{#</h4>#}
+
+<div class="container-fluid mt-3 mb-3 px-1">
+    <div class="row g-3 align-items-end">
+
+        <!-- Week Navigation Buttons -->
+        <div class="col-12 ">
+            <div class="row">
+                <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+                    <label for="startDayOfWeek" class="form-label"> &nbsp;</label>
+                    <button id="prev-week" class="btn btn-primary-soft w-100">
+                        <i class="fas fa-angle-left"></i> Previous
+                    </button>
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+                    <label for="startDayOfWeek" class="form-label"> &nbsp;</label>
+                    <button id="current-week" class="btn btn-orange-soft w-100 px-2">
+                        Current Week
+                    </button>
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 col-lg-2">
+                    <label for="startDayOfWeek" class="form-label"> &nbsp;</label>
+                    <button id="next-week" class="btn btn-primary-soft w-100">
+                        Next <i class="fas fa-angle-right"></i>
+                    </button>
+                </div>
+
+                <!-- Start Day Dropdown -->
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                    <label for="startDayOfWeek" class="form-label">Start day of week</label>
+                    <select id="startDayOfWeek" name="startDayOfWeek" class="form-select">
+                        <option value="0">Sunday</option>
+                        <option value="1">Monday</option>
+                        <option value="2">Tuesday</option>
+                        <option value="3">Wednesday</option>
+                        <option value="4">Thursday</option>
+                        <option value="5">Friday</option>
+                        <option value="6">Saturday</option>
+                    </select>
+                </div>
+
+                <!-- Timezone Dropdown -->
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                    <label for="timezone-select" class="form-label">Time Zone</label>
+                    <select id="timezone-select" class="form-select">
+                        <option value="UTC">UTC</option>
+                        <option value="Europe/London">London (GMT)</option>
+                        <option value="Asia/Tehran">Tehran (IRST)</option>
+                        <option value="Europe/Berlin">Berlin (DST)</option>
+                        <option value="America/New_York">New York (EST)</option>
+                        <option value="Asia/Tokyo">Tokyo (JST)</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- Legend (Guide Box)-->
+        <div class="col-12">
+            <div class="d-flex flex-wrap gap-3 px-4 py-2 bg-secondary bg-opacity-10 rounded-3 shadow-sm border-opacity-10  border-warning">
+                <div class="guide-item d-flex align-items-center">
+                    <span class="guide-booked me-2"></span>
+                    <label class="mb-0">Booked</label>
+                </div>
+                <div class="guide-item d-flex align-items-center">
+                    <span class="guide-booked-temp me-2"></span>
+                    <label class="mb-0">Temp Book</label>
+                </div>
+                <div class="guide-item d-flex align-items-center">
+                    <span class="guide-disabled me-2"></span>
+                    <label class="mb-0">Unavailable</label>
+                </div>
+                <div class="guide-item d-flex align-items-center">
+                    <span class="guide-tutor-available me-2"></span>
+                    <label class="mb-0">Available</label>
+                </div>
+                <div class="guide-item d-flex align-items-center">
+                    <span class="guide-selected me-2"></span>
+                    <label class="mb-0">Selected</label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<form id="schedule-form" action="#" method="post">
+    {% csrf_token %}
+    {% if 'dashboard' in request.path %}
+        <input type="hidden" id="providerUId" value="{{ request.user.pk }}">
+    {% elif 'interview' in request.path %}
+        <input type="hidden" id="providerUId" value="{{ reviewerUId }}">
+        <input type="hidden" id="isInterview" value="True">
+    {% else %}
+        <input type="hidden" id="providerUId" value="{{ tutor_single.id }}">
+        <input type="hidden" id="isInterview" value="False">
+        <input type="hidden" id="providerSessionPeriod" value="{{ providerSessionPeriod }}">
+        <input type="hidden" id="maxSelectableSessions" value="{{ maxSelectableSessions }}">
+    {% endif %}
+    <input type="hidden" id="subject" value="{{ subject }}">
+    <input type="hidden" id="session_cost" value="{{ session_cost }}">
+    <input type="hidden" id="session_type" value="{{ session_type }}">
+    <input type="hidden" id="currency" value="{{ currency }}">
+    <input type="hidden" id="discount" value="{{ discount }}">
+    <input type="hidden" id="vat" value="{{ vat }}">
+    <table id="schedule-table">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <!-- Weekday headers will be generated by JavaScript -->
+        </tr>
+        </thead>
+        <tbody style="max-height: 200px; width: auto">
+        <!-- Time slots will be generated by JavaScript -->
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between mt-3">
+        <button id="clear-button" type="button" class="btn btn-sm btn-danger-soft mb-3">Clear Selection</button>
+{#                <button id="btnSubmit" type="button" class="btn btn-sm btn-primary mb-3">Confirm</button>#}
+    </div>
+</form>

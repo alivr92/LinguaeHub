@@ -1,0 +1,421 @@
+{% extends 'ap2_tutor/wizard/dp_wizard_base.html' %}
+{% load static %}
+{% load tz %}
+{% load custom_filters %}
+{% load my_custom_filters %}
+
+{% block my_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/decision.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+{#{% if current_step == 6 %}#}
+{#    <div class="card application-status-card status-review shadow-sm p-4 bg-purple bg-opacity-10">#}
+{#        <div class="text-start">#}
+{#            <div class="status-header mb-3">#}
+{#                <i class="bi bi-hourglass-split text-purple status-icon"></i>#}
+{#                <h5 class="mb-0 text-purple">Application Under Review</h5>#}
+{#            </div>#}
+{#            <div id="interview-result" class="mb-3"></div>#}
+{#            <p class="mb-0 text-secondary">Your resume and profile are currently being#}
+{#                reviewed. We will update you soon.</p>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% elif current_step == 7 %}#}
+{#    <div class="card application-status-card status-accepted shadow-sm p-4 bg-success bg-opacity-10">#}
+{#        <div class="text-start">#}
+{#            <div class="status-header mb-3 text-success">#}
+{#                <i class="bi bi-check-circle-fill status-icon"></i>#}
+{#                <h5 class="mb-0 text-success">Congratulations!</h5>#}
+{#            </div>#}
+{#            <div id="interview-result" class="mb-3"></div>#}
+{#            <ul class="list-group list-group-flush mb-3">#}
+{#                <li class="list-group-item bg-transparent border-0 ps-0">#}
+{#                    🎉 You've been <strong>accepted</strong> as a {{ CFChar.site_name }} tutor!#}
+{#                </li>#}
+{#                <li class="list-group-item bg-transparent border-0 ps-0">#}
+{#                    <p class="mb-0">{{ reviewer_comment }}</p>#}
+{#                </li>#}
+{#            </ul>#}
+{#            <div class="text-center">#}
+{#                <a href="{% url 'provider:dp_home' %}" class="btn btn-success px-4 py-2">Go to Dashboard</a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% elif current_step == 8 %}#}
+{#    <div class="card application-status-card status-rejected shadow-sm p-4 bg-danger bg-opacity-10">#}
+{#        <div class="text-start">#}
+{#            <div class="status-header mb-3 text-danger">#}
+{#                <i class="bi bi-x-circle-fill status-icon"></i>#}
+{#                <h5 class="mb-0 text-danger">Application Declined</h5>#}
+{#            </div>#}
+{#            <div id="interview-result" class="mb-3"></div>#}
+{#            <ul class="list-group list-group-flush mb-3">#}
+{#                <li class="list-group-item bg-transparent border-0 ps-0">#}
+{#                    We're sorry — your application wasn't successful at this time.#}
+{#                </li>#}
+{#                <li class="list-group-item bg-transparent border-0 ps-0">#}
+{#                    <p class="mb-0">{{ reviewer_comment }}</p>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endif %}#}
+
+
+{# ---------------------------------- #}
+{#{% if current_step == 6 %}#}
+{#<!-- Application Under Review - Matched Style -->#}
+{#<div class="card application-status-card status-review border-start border-4 border-primary shadow-sm mb-4">#}
+{#    <div class="card-header bg-primary bg-opacity-100 border-bottom-0 d-flex align-items-center py-3">#}
+{#        <div class="status-icon bg-primary bg-opacity-10 rounded-circle p-2 me-3">#}
+{#            <i class="bi bi-hourglass fs-4 text-white"></i>#}
+{#        </div>#}
+{#        <div>#}
+{#            <h5 class="mb-0 fw-semibold text-white">Application Under Review</h5>#}
+{#            <p class="small text-white text-opacity-75 mb-0">Status: In Process</p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="card-body">#}
+{#        <div class="d-flex">#}
+{#            <div class="flex-grow-1">#}
+{#                <div class="alert alert-primary border-primary bg-white mb-4">#}
+{#                    <div class="d-flex">#}
+{#                        <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>#}
+{#                        <div>#}
+{#                            <p class="mb-2 fw-medium">Your application is being processed</p>#}
+{#                            <p class="mb-0">We'll notify you via email within 3-5 business days</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="bg-light rounded-3 p-3 mb-4">#}
+{#                    <h6 class="fw-semibold mb-3 text-primary">#}
+{#                        <i class="bi bi-clock-history me-2"></i>Current Status#}
+{#                    </h6>#}
+{#                    <ul class="mb-0 ps-3">#}
+{#                        <li class="mb-2">All documents received and verified</li>#}
+{#                        <li class="mb-2">Under final quality review</li>#}
+{#                        <li>Decision pending</li>#}
+{#                    </ul>#}
+{#                </div>#}
+{##}
+{#                <div class="d-flex align-items-center">#}
+{#                    <i class="bi bi-envelope-check text-primary me-2"></i>#}
+{#                    <small class="text-muted">Confirmation sent to {{ request.user.email }}</small>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#{% elif current_step == 7 %}#}
+{#<!-- Application Accepted -->#}
+{#<div class="card application-status-card status-accepted border-start border-4 border-success shadow-sm mb-4">#}
+{#    <div class="card-header bg-success bg-opacity-5 border-bottom-0 d-flex align-items-center py-3">#}
+{#        <div class="status-icon bg-success bg-opacity-10 rounded-circle p-2 me-3">#}
+{#            <i class="bi bi-check-circle fs-4 text-white"></i>#}
+{#        </div>#}
+{#        <div>#}
+{#            <h5 class="mb-0 fw-semibold text-white">Congratulations!</h5>#}
+{#            <p class="small text-muted mb-0">Welcome to {{ CFChar.site_name }}</p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="card-body">#}
+{#        <div class="d-flex">#}
+{#            <div class="flex-grow-1">#}
+{#                <div class="alert alert-success border-success bg-white mb-4">#}
+{#                    <div class="d-flex">#}
+{#                        <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>#}
+{#                        <div>#}
+{#                            <p class="mb-2 fw-medium">You've been accepted as a {{ CFChar.site_name }} tutor!</p>#}
+{#                            <p class="mb-0">{{ reviewer_comment }}</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="row g-3 mb-4">#}
+{#                    <div class="col-md-6">#}
+{#                        <div class="p-3 bg-light rounded">#}
+{#                            <h6 class="fw-semibold text-success mb-3">#}
+{#                                <i class="bi bi-rocket me-2"></i>Get Started#}
+{#                            </h6>#}
+{#                            <ul class="mb-0">#}
+{#                                <li class="mb-2">Complete your tutor profile</li>#}
+{#                                <li class="mb-2">Set your availability</li>#}
+{#                                <li>Create your first course</li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-md-6">#}
+{#                        <div class="p-3 bg-light rounded">#}
+{#                            <h6 class="fw-semibold text-success mb-3">#}
+{#                                <i class="bi bi-lightbulb me-2"></i>Tips for Success#}
+{#                            </h6>#}
+{#                            <ul class="mb-0">#}
+{#                                <li class="mb-2">Upload a professional profile photo</li>#}
+{#                                <li class="mb-2">Write a compelling bio</li>#}
+{#                                <li>Set competitive pricing</li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="d-grid gap-2 d-md-flex justify-content-md-start">#}
+{#                    <a href="{% url 'provider:dp_home' %}" class="btn btn-success px-4">#}
+{#                        <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard#}
+{#                    </a>#}
+{#                    <a href="#" class="btn btn-outline-success px-4">#}
+{#                        <i class="bi bi-book me-2"></i> Tutor Guide#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#{% elif current_step == 8 %}#}
+{#<!-- Application Rejected -->#}
+{#<div class="card application-status-card status-rejected border-start border-4 border-danger shadow-sm mb-4">#}
+{#    <div class="card-header bg-danger bg-opacity-100 border-bottom-0 d-flex align-items-center py-3">#}
+{#        <div class="status-icon bg-danger bg-opacity-10 rounded-circle p-2 me-3">#}
+{#            <i class="bi bi-x-circle fs-4 text-white"></i>#}
+{#        </div>#}
+{#        <div>#}
+{#            <h5 class="mb-0 fw-semibold text-white">Application Not Approved</h5>#}
+{#            <p class="small text-muted mb-0">Status updated: {{ current_date|date:"F j, Y" }}</p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="card-body">#}
+{#        <div class="d-flex">#}
+{#            <div class="flex-grow-1">#}
+{#                <div class="alert alert-danger border-danger bg-white mb-4">#}
+{#                    <div class="d-flex">#}
+{#                        <i class="bi bi-exclamation-triangle-fill text-danger me-2 mt-1"></i>#}
+{#                        <div>#}
+{#                            <p class="mb-2 fw-medium">We couldn't approve your application at this time</p>#}
+{#                            <p class="mb-0">{{ reviewer_comment }}</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="mb-4">#}
+{#                    <h6 class="fw-semibold mb-3">Suggestions for Improvement:</h6>#}
+{#                    <ul class="list-group list-group-flush">#}
+{#                        <li class="list-group-item bg-transparent border-bottom-0 d-flex align-items-start px-0 py-2">#}
+{#                            <i class="bi bi-check-circle text-muted me-2 mt-1"></i>#}
+{#                            <span>Strengthen qualifications in noted areas</span>#}
+{#                        </li>#}
+{#                        <li class="list-group-item bg-transparent border-bottom-0 d-flex align-items-start px-0 py-2">#}
+{#                            <i class="bi bi-check-circle text-muted me-2 mt-1"></i>#}
+{#                            <span>Gain additional teaching experience</span>#}
+{#                        </li>#}
+{#                        <li class="list-group-item bg-transparent border-bottom-0 d-flex align-items-start px-0 py-2">#}
+{#                            <i class="bi bi-check-circle text-muted me-2 mt-1"></i>#}
+{#                            <span>Consider reapplying in 3-6 months</span>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </div>#}
+{##}
+{#                <div class="d-grid gap-2 d-md-flex justify-content-md-start">#}
+{#                    <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-danger px-4">#}
+{#                        <i class="bi bi-pencil me-2"></i> Improve Profile#}
+{#                    </a>#}
+{#                    <a href="#" class="btn btn-danger px-4">#}
+{#                        <i class="bi bi-question-circle me-2"></i> Contact Support#}
+{#                    </a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#{% endif %}#}
+
+{# ---------------------------------- #}
+{#{% if current_step == 8 %}#}
+{% if user.profile.tutor_profile.status == 'decision' %}
+    <!-- Application Under Review -->
+    <div class="card application-status-card status-review border-start border-4 border-primary shadow-sm mb-4 px-0">
+        <div class="card-header bg-primary bg-opacity-100 border-bottom-0 d-flex align-items-center py-3">
+            <div class="status-icon bg-primary bg-opacity-10 rounded-circle p-2 me-3">
+                <i class="bi bi-hourglass fs-4 text-white"></i>
+            </div>
+            <div>
+                <h5 class="mb-0 fw-semibold text-white">Application Under Review</h5>
+                <p class="small text-white text-opacity-75 mb-0">Submitted on {{ submission_date|date:"F j, Y" }}</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-primary border-primary bg-white mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                    <div>
+                        <p class="mb-2 fw-medium">Review In Progress</p>
+                        <p class="mb-0">Our team is carefully evaluating your application</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item mb-4">
+                <h6 class="fw-semibold mb-3 d-flex align-items-center">
+                    <span class="badge bg-primary bg-opacity-10 text-primary me-2">1</span>
+                    Estimated Timeline
+                </h6>
+                <div class="ps-4">
+                    <p class="mb-1"><i class="bi bi-calendar-week me-2"></i> 3-5 business days review period</p>
+                    <p class="mb-0 text-muted small">You'll receive an email when complete</p>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mt-4">
+                <i class="bi bi-envelope text-primary me-2"></i>
+                <small class="text-muted">Confirmation #{{ confirmation_number }} sent
+                    to {{ request.user.email }}</small>
+            </div>
+        </div>
+    </div>
+
+    {#{% elif current_step == 9 %}#}
+{% elif user.profile.tutor_profile.status == 'accepted' %}
+    <!-- Application Accepted -->
+    <div class="card application-status-card status-accepted border-start border-4 border-success shadow-sm mb-4 px-0">
+        <div class="card-header bg-success bg-opacity-100 border-bottom-0 d-flex align-items-center py-3">
+            <div class="status-icon bg-success bg-opacity-10 rounded-circle p-2 me-3">
+                <i class="bi bi-check-circle fs-4 text-white"></i>
+            </div>
+            <div>
+                <h5 class="mb-0 fw-semibold text-white">Congratulations!</h5>
+                <p class="small text-white text-opacity-75 mb-0">Approved on {{ approval_date|date:"F j, Y" }}</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-success border-success bg-white mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                    <div>
+                        <p class="mb-2 fw-medium">Welcome to {{ CFChar.site_name }} Tutors!</p>
+                        <p class="mb-0">Your application has been approved</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviewer Comments Section -->
+            {% if reviewer_comment %}
+                <div class="reviewer-notes bg-light-success rounded-3 p-3 mb-4">
+                    <h6 class="fw-semibold text-success mb-2 d-flex align-items-center">
+                        <i class="bi bi-chat-square-text me-2"></i>Reviewer Notes
+                    </h6>
+                    <div class="bg-white p-3 rounded-2 border border-success border-opacity-10">
+                        <p class="mb-0">{{ reviewer_comment }}</p>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded h-100">
+                        <h6 class="fw-semibold text-success mb-3">
+                            <i class="bi bi-rocket me-2"></i>Next Steps
+                        </h6>
+                        <ul class="mb-0">
+                            <li class="mb-2">Complete your tutor profile</li>
+                            <li class="mb-2">Set your availability schedule</li>
+                            <li>Create your first course listing</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-light rounded h-100">
+                        <h6 class="fw-semibold text-success mb-3">
+                            <i class="bi bi-lightbulb me-2"></i>Pro Tips
+                        </h6>
+                        <ul class="mb-0">
+                            <li class="mb-2">Upload a professional headshot</li>
+                            <li class="mb-2">Add video introduction</li>
+                            <li>Set competitive pricing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'provider:dp_home' %}" class="btn btn-success px-4">
+                    <i class="bi bi-speedometer2 me-2"></i> Go to Dashboard
+                </a>
+                <a href="#" class="btn btn-outline-success px-4">
+                    <i class="bi bi-book me-2"></i> Tutor Guide
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {#{% elif current_step == 10 %}#}
+{% elif user.profile.tutor_profile.status == 'rejected' %}
+
+    <!-- Application Rejected -->
+    <div class="card application-status-card status-rejected border-start border-4 border-danger shadow-sm mb-4 px-0">
+        <div class="card-header bg-danger bg-opacity-100 border-bottom-0 d-flex align-items-center py-3">
+            <div class="status-icon bg-danger bg-opacity-10 rounded-circle p-2 me-3">
+                <i class="bi bi-x-circle fs-4 text-white"></i>
+            </div>
+            <div>
+                <h5 class="mb-0 fw-semibold text-white">Application Not Approved</h5>
+                <p class="small text-white text-opacity-75 mb-0">Decision made on {{ rejection_date|date:"F j, Y" }}</p>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-danger border-danger bg-white mb-4">
+                <div class="d-flex">
+                    <i class="bi bi-exclamation-triangle-fill text-danger me-2 mt-1"></i>
+                    <div>
+                        <p class="mb-2 fw-medium">Thank you for your interest</p>
+                        <p class="mb-0">We couldn't approve your application this time</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviewer Comments Section -->
+            {% if reviewer_comment %}
+                <div class="reviewer-notes bg-light-danger rounded-3 p-3 mb-4">
+                    <h6 class="fw-semibold text-danger mb-2 d-flex align-items-center">
+                        <i class="bi bi-chat-square-text me-2"></i>Reviewer Feedback
+                    </h6>
+                    <div class="bg-white p-3 rounded-2 border border-danger border-opacity-10">
+                        <p class="mb-0">{{ reviewer_comment }}</p>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="improvement-tips mb-4">
+                <h6 class="fw-semibold mb-3">Suggestions for Improvement:</h6>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-transparent border-bottom-0 d-flex align-items-start px-0 py-2">
+                        <i class="bi bi-check-circle text-muted me-2 mt-1"></i>
+                        <span>Strengthen qualifications in noted areas</span>
+                    </li>
+                    <li class="list-group-item bg-transparent border-bottom-0 d-flex align-items-start px-0 py-2">
+                        <i class="bi bi-check-circle text-muted me-2 mt-1"></i>
+                        <span>Gain additional relevant experience</span>
+                    </li>
+                    <li class="list-group-item bg-transparent border-bottom-0 d-flex align-items-start px-0 py-2">
+                        <i class="bi bi-check-circle text-muted me-2 mt-1"></i>
+                        <span>Consider reapplying in {{ reapply_after_months }} months</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-danger px-4">
+                    <i class="bi bi-pencil me-2"></i> Improve Profile
+                </a>
+                <a href="#" class="btn btn-danger px-4">
+                    <i class="bi bi-question-circle me-2"></i> Appeal Decision
+                </a>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

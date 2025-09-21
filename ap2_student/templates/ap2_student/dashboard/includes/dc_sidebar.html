@@ -1,0 +1,37 @@
+{% load static %}
+<!-- Left sidebar START -->
+<div class="col-xl-3">
+    <!-- Responsive offcanvas body START -->
+    <div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+        <!-- Offcanvas header -->
+        <div class="offcanvas-header bg-light">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">My profile</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasSidebar"
+                    aria-label="Close"></button>
+        </div>
+        <!-- Offcanvas body -->
+        <div class="offcanvas-body p-3 p-xl-0">
+            <div class="bg-dark border rounded-3 p-3 w-100">
+                <!-- Dashboard menu -->
+                <div class="list-group list-group-dark list-group-borderless collapse-list">
+                    <a class="list-group-item {% if 'panel' in request.path %}active{% endif %}" href="{% url 'client:dc_home' %}"><i class="bi bi-ui-checks-grid fa-fw me-2"></i>Dashboard</a>
+                {% if user.profile.is_active %}
+                    <a class="list-group-item {% if 'subscription' in request.path %}active{% endif %}" href="{% url 'client:dc_subscription' %}"><i class="bi bi-card-checklist fa-fw me-2"></i>My Subscription</a>
+                    <a class="list-group-item {% if 'class-list' in request.path %}active{% endif %}" href="{% url 'client:dc_class_list' %}"><i class="bi bi-laptop fa-fw me-2"></i>My Classes</a>
+                    <a class="list-group-item {% if 'course-resume' in request.path %}active{% endif %}" href="{% url 'client:dc_course_resume' %}"><i class="far fa-fw fa-file-alt me-2"></i>Course Resume</a>
+                    <a class="list-group-item {% if 'quiz' in request.path %}active{% endif %}" href="{% url 'client:dc_quiz' %}"><i class="bi bi-question-diamond fa-fw me-2"></i>Quiz</a>
+                    <a class="list-group-item {% if 'payment-info' in request.path %}active{% endif %}" href="{% url 'client:dc_payment_info' %}"><i class="bi bi-credit-card-2-front fa-fw me-2"></i>Payment Info</a>
+                    <a class="list-group-item {% if 'bookmark' in request.path %}active{% endif %}" href="{% url 'client:dc_bookmark' %}"><i class="bi bi-heart fa-fw me-2"></i>My Favorite Tutors</a>
+{#                    <a class="list-group-item {% if 'edit' in request.path %}active{% endif %}" href="{% url 'client:dc_edit' user.profile.student_profile.pk %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>#}
+                    <a class="list-group-item {% if 'setting' in request.path %}active{% endif %}" href="{% url 'client:dc_setting' %}"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
+                    <a class="list-group-item {% if 'in-person' in request.path %}active{% endif %}" href="{% url 'client:dc_in_person' %}"><i class="bi bi-geo fa-fw me-2"></i>In-Person Class</a>
+{#                    <a class="list-group-item {% if 'delete-account' in request.path %}active{% endif %}" href="{% url 'client:dc_delete_account' user.profile.student_profile.pk %}"><i class="bi bi-trash fa-fw me-2"></i>Delete Profile</a>#}
+                {% endif %}
+                    <a class="list-group-item text-danger bg-danger-soft-hover" href="{% url 'accounts:sign_out' %}"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Responsive offcanvas body END -->
+</div>
+<!-- Left sidebar END -->

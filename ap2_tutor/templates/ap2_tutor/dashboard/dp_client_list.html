@@ -1,0 +1,235 @@
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+{% endblock %}
+
+
+{% block dashboard_main_content %}
+
+  <!-- Main content START -->
+  <div class="col-xl-9">
+    <!-- Card START -->
+    <div class="card border bg-transparent rounded-3">
+      <!-- Card header START -->
+      <div class="card-header bg-transparent border-bottom">
+        <h3 class="mb-0">My Students</h3>
+      </div>
+      <!-- Card header END -->
+
+      <!-- Card body START -->
+      <div class="card-body">
+
+        <!-- Search and select START -->
+        <div class="row g-3 align-items-center justify-content-between mb-4">
+          <!-- Search -->
+          <div class="col-md-8">
+            <form class="rounded position-relative">
+              <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+              <button
+                class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
+                type="submit">
+                <i class="fas fa-search fs-6 "></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Select option -->
+          <div class="col-md-3">
+            <!-- Short by filter -->
+            <form>
+              <select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm">
+                <option value="">Sort by</option>
+                <option>Free</option>
+                <option>Newest</option>
+                <option>Oldest</option>
+              </select>
+            </form>
+          </div>
+        </div>
+        <!-- Search and select END -->
+
+        <!-- Student list table START -->
+        <div class="table-responsive border-0">
+          <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+            <!-- Table head -->
+            <thead>
+            <tr>
+              <th scope="col" class="border-0 rounded-start">Student name</th>
+              <th scope="col" class="border-0">Remained to start</th>
+              <th scope="col" class="border-0">Status</th>
+              <th scope="col" class="border-0">Course Title</th>
+              <th scope="col" class="border-0">Enrolled date</th>
+              <th scope="col" class="border-0 rounded-end">Action</th>
+            </tr>
+            </thead>
+
+            <!-- Table body START -->
+            <tbody>
+            {% for session in session_list %}
+              <!-- Table item -->
+              <tr>
+                <!-- Table data -->
+                <td>
+                  {% for student in session.students.all %}
+                  <div class="d-flex align-items-center position-relative">
+                    <!-- Image -->
+
+                      <div class="avatar avatar-md mb-2 mb-md-0">
+                        <img src="{{ student.profile.photo.url }}" class="rounded" alt="">
+                      </div>
+
+                    <div class="mb-0 ms-2">
+                      <!-- Title -->
+                      <h6 class="mb-0"><a href="#" class="stretched-link">{{ student.profile.user.first_name }} {{ student.profile.user.last_name }}</a></h6>
+                      <!-- Address -->
+                      <span class="text-body small"><i class="fas fa-fw fa-map-marker-alt me-1 mt-1"></i>{{ student.profile.country }}</span>
+                    </div>
+                  </div>
+                    {% endfor %}
+                </td>
+
+                <!-- Table data -->
+                <td class="text-center text-sm-start">
+                  <div class=" overflow-hidden">
+                    <h6 class="mb-0">4 days</h6>
+                    <div class="progress progress-sm bg-primary bg-opacity-10">
+                      <div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right"
+                           data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out"
+                           style="width: 40%"
+                           aria-valuenow="4" aria-valuemin="0" aria-valuemax="10">
+                      </div>
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Table data -->
+                <td>{{ session.status }}</td>
+
+                <td>{{ session.subject }}</td>
+
+                <!-- Table data -->
+                <td>{{ session.start_session_utc|date }}</td>
+
+                <!-- Table data -->
+                <td>
+                  <a href="#" class="btn btn-success-soft btn-xs me-1 mb-0" data-bs-toggle="tooltip"
+                     data-bs-placement="top" title="Reschedule">
+                    <i class="far fa-calendar-alt"></i>
+                    <a href="#" class="btn btn-success-soft btn-xs me-1 mb-0" data-bs-toggle="tooltip"
+                       data-bs-placement="top" title="Reschedule">
+{#                      <svg width="16" height="16" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg" class="ps-fill-ghost-blue" aria-hidden="true">#}
+                      <svg width="16" height="16" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-success-soft" aria-hidden="true">
+                        <path d="M50.512 30.098a2.617 2.617 0 1 0 0-5.235 2.617 2.617 0 0 0 0 5.235Z" fill="green"></path>
+                        <path d="M52.629 5.234v.5h3.902c5.497 0 9.969 4.473 9.969 9.97V30.62a2.117 2.117 0 1 1-4.234 0V15.703A5.74 5.74 0 0 0 56.53 9.97H52.63v3.117a2.117 2.117 0 1 1-4.234 0V9.969H35.486v3.117a2.117 2.117 0 1 1-4.234 0V9.969H18.475v3.117a2.117 2.117 0 1 1-4.235 0V9.969H10.47a5.74 5.74 0 0 0-5.735 5.734v40.828a5.74 5.74 0 0 0 5.735 5.735H30.49a2.117 2.117 0 1 1 0 4.234H10.47C4.972 66.5.5 62.028.5 56.531V15.703c0-5.496 4.472-9.969 9.969-9.969h3.771V2.617a2.117 2.117 0 1 1 4.235 0v3.117h12.777V2.617a2.117 2.117 0 1 1 4.234 0v3.117h12.909V2.617a2.117 2.117 0 1 1 4.234 0v2.617Z" fill="green" stroke="#fff"></path>
+                        <path d="M35.832 51.166c0-8.455 6.88-15.334 15.334-15.334 8.455 0 15.334 6.88 15.334 15.334 0 8.455-6.88 15.334-15.334 15.334-8.455 0-15.334-6.88-15.334-15.334Zm4.234 0c0 6.12 4.98 11.1 11.1 11.1 6.12 0 11.1-4.98 11.1-11.1 0-6.12-4.98-11.1-11.1-11.1-6.12 0-11.1 4.98-11.1 11.1Z" fill="green" stroke="#fff"></path>
+                        <path d="M53.281 48.549v.5h1.678a2.117 2.117 0 1 1 0 4.234h-3.795a2.117 2.117 0 0 1-2.117-2.117v-5.365a2.117 2.117 0 1 1 4.234 0v2.748Z" fill="green" stroke="#fff"></path>
+                        <path d="M39.125 30.098a2.617 2.617 0 1 0 0-5.235 2.617 2.617 0 0 0 0 5.235ZM27.742 41.482a2.617 2.617 0 1 0 0-5.234 2.617 2.617 0 0 0 0 5.234ZM16.36 30.098a2.617 2.617 0 1 0 0-5.235 2.617 2.617 0 0 0 0 5.235ZM16.36 41.482a2.617 2.617 0 1 0 0-5.234 2.617 2.617 0 0 0 0 5.234ZM16.36 52.867a2.617 2.617 0 1 0 0-5.234 2.617 2.617 0 0 0 0 5.234ZM27.742 52.867a2.617 2.617 0 1 0 0-5.234 2.617 2.617 0 0 0 0 5.234ZM27.742 30.098a2.617 2.617 0 1 0 0-5.235 2.617 2.617 0 0 0 0 5.235Z" fill="green"></path>
+                      </svg>
+                    </a>
+
+
+
+                  </a>
+                  <button class="btn btn-danger-soft btn-xs mb-0" data-bs-toggle="tooltip" data-bs-placement="top"
+                          title="Cancel"><i class="fas bi-x-lg"></i></button>
+                </td>
+              </tr>
+            {% endfor %}
+
+
+            </tbody>
+            <!-- Table body END -->
+          </table>
+        </div>
+        <!-- Student list table END -->
+
+        <!-- Pagination START -->
+        <div class="d-sm-flex justify-content-sm-between align-items-sm-center mt-4 mt-sm-3">
+          <!-- Content -->
+          <p class="mb-0 text-center text-sm-start">Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries</p>
+
+          <!-- Pagination -->
+          <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+            {% if page_obj.has_other_pages %}
+              <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                {% if page_obj.has_previous %}
+                  <li class="page-item mb-0"><a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                                                tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
+                {% else %}
+                  <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i
+                    class="fas fa-angle-left" style="color: #d3d3d3;"></i></a></li>
+                {% endif %}
+
+                {% for p in page_obj.paginator.page_range %}
+                  {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                    {% if p == page_obj.number %}
+                      <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a></li>
+                    {% else %}
+                      <li class="page-item mb-0"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                    {% endif %}
+                  {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                    <li class="page-item mb-0"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+                  {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                    <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
+                  {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                  <li class="page-item mb-0"><a class="page-link" href="?page={{ page_obj.next_page_number }}"><i
+                    class="fas fa-angle-right"></i></a></li>
+                {% else %}
+                  <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i class="fas fa-angle-right"
+                                                                                       style="color: #d3d3d3;"></i></a>
+                  </li>
+                {% endif %}
+              </ul>
+            {% endif %}
+          </nav>
+
+        </div>
+        <!-- Pagination END -->
+
+      </div>
+      <!-- Card body START -->
+    </div>
+    <!-- Card END -->
+  </div>
+  <!-- Main content END -->
+
+{% endblock %}
+
+
+{% block scripts_vendors %}
+  <!-- Vendors -->
+  <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+{% endblock %}
+
+{% block my_scripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/tutor-periods/')
+        .then(response => response.json())
+        .then(periods => {
+          displayPeriodsOnDashboard(periods);
+        })
+        .catch(err => console.error('Error fetching periods:', err));
+    });
+
+    function displayPeriodsOnDashboard(periods) {
+      const dashboard = document.getElementById('tutor-dashboard');
+
+      periods.forEach(period => {
+        const periodElem = document.createElement('div');
+        periodElem.textContent = `Day: ${period.day} - Time: ${period.time}`;
+        dashboard.appendChild(periodElem);
+      });
+    }
+  </script>
+{% endblock %}

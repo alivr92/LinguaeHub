@@ -1,0 +1,75 @@
+{% load static %}
+<div id="bg-video-wrapper">
+    <video autoplay muted loop id="bg-video">
+              <source src="{% static 'assets/videos/course-video.mp4' %}" type="video/mp4" />
+{#        <source src="{% static 'assets/videos/whiteIP.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/city_night1.mp4' %}" type="video/mp4" />#}
+        {#      <source src="{% static 'assets/videos/city_night2.mp4' %}" type="video/mp4" />#}
+        {#      <source src="{% static 'assets/videos/bridge.mp4' %}" type="video/mp4" />#}
+        {#      <source src="{% static 'assets/videos/city_night1.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/city_night2.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/bridge.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/211204.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/268230_small.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/230745_small.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/225948_medium.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/215475_tiny.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/215475_small.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/215470.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/211204_medium.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/206779_tiny.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/206779_small.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/159028-818026299_medium.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/124256-730503327_medium.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/159028-818026299_medium.mp4' %}" type="video/mp4"/>#}
+        {#      <source src="{% static 'assets/videos/230745_small.mp4' %}" type="video/mp4"/>#}
+    </video>
+</div>
+<div id="overlay"></div>
+<!-- Your section content goes here -->
+
+<style>
+    #bg-video-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    #bg-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+    }
+
+    #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Change to 'rgba(255, 255, 255, 0.5)' for a white overlay */
+    {#background-color: rgba(255, 255, 255, 0.45); /* Change to 'rgba(255, 255, 255, 0.5)' for a white overlay */#} z-index: 0;
+    }
+
+    .hero.section {
+        position: relative;
+        z-index: 1;
+        /* Add any padding or margins you need here */
+    }
+
+    /* Ensure your content is above the overlay */
+    .hero.section > * {
+        position: relative;
+        z-index: 2;
+    }
+
+
+</style>

@@ -1,0 +1,8 @@
+Hello {{ full_name }},
+
+Thank you for submitting your application!
+
+We are currently reviewing your application and will get back to you within 48 hours. Please keep an eye on your inbox for our updates and next steps.
+
+Best regards,
+{{ site_name }} Team

@@ -1,0 +1,38 @@
+{
+  "name": "LinguaeHub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "libphonenumber-js": "^1.12.10",
+    "quill": "^2.0.3",
+    "quill-delta-to-html": "^0.12.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-phone-number-input": "^3.4.12"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "babel-loader": "^10.0.0",
+    "javascript-obfuscator": "^4.1.1",
+    "terser-webpack-plugin": "^4.2.3",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alivr92/LinguaeHub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alivr92/LinguaeHub/issues"
+  },
+  "homepage": "https://github.com/alivr92/LinguaeHub#readme",
+  "description": ""
+}

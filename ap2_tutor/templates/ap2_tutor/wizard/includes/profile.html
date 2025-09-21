@@ -1,0 +1,376 @@
+{% load static %}
+{#{{ profile_basic_form.media.css }}#}
+<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="container py-4">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 15%;" aria-valuenow="15"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+            <!-- Progress Bar -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Step 1 of 7</span>
+                    <span class="text-muted">15% complete</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 15%;" aria-valuenow="15"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+
+
+            <!-- Page Header -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Basic Information</h2>
+                <p class="text-muted">Tell us about yourself - this will appear on your public profile</p>
+            </div>
+
+            <!-- Form Container -->
+            <form id="profileForm" class="needs-validation" method="POST" action="{% url 'provider:submit_profile' %}"
+                  enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="profile_form">
+                <input type="hidden" name="step" value="1">
+
+                <!-- ========== PROFILE SECTION ========== -->
+                <div class=" border-0 shadow-sm mb-4">
+                    <div class="card-header bg-primary-soft d-flex align-items-center py-2">
+                        <div class="icon-circle bg-primary-soft text-primary me-3">
+                            <i class="bi bi-person-lines-fill fs-5"></i>
+                        </div>
+                        <h5 class="mb-0 text-primary">Personal Details</h5>
+                    </div>
+                    <div class="card-body ">
+
+
+                        <!-- Profile Picture -->
+                        <div class="col-12 justify-content-center align-items-center mb-3">
+                            <label class="form-label">Profile picture <span class="text-danger">*</span></label>
+                            <i class="bi bi-info-circle text-primary"
+                               data-bs-toggle="tooltip"
+                               title="{{ CFChar.tooltip_photo }}"></i>
+
+                            <div class="d-flex align-items-center">
+                                <!-- Single Preview Element (will update after cropping) -->
+                                <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+            <span class="avatar avatar-xl">
+                <img id="uploadfile-1-preview"
+                     class="avatar-img rounded-circle border border-white border-3 shadow"
+                     src="{{ profile_basic_form.photo.value.url }}"
+                     alt="Profile" width="120" height="120">
+            </span>
+                                    <!-- Remove button -->
+                                    <button type="button" class="uploadremove"><i class="bi bi-x text-white"></i>
+                                    </button>
+                                </label>
+
+                                <!-- Upload button -->
+                                <label class="btn btn-primary-soft " for="uploadfile-1">Change</label>
+                                <input id="uploadfile-1" class="form-control d-none" type="file" name="photo"
+                                       accept="image/*">
+                                <input type="hidden" id="delete-photo" name="delete_photo" value="false">
+
+                                <button type="button" class="btn btn-outline-dark mx-3" data-bs-toggle="modal"
+                                        data-bs-target="#photoGuidelinesModal">
+                                    <i class="bi bi-question-circle me-2"></i>Guidelines
+                                </button>
+                            </div>
+
+                            {% for error in profile_basic_form.photo.errors %}
+                                <div class="alert alert-danger alert-dismissible">{{ error }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+
+                        <!-- Name Fields -->
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name <span class="text-danger">*</span></label>
+                                {{ profile_basic_form.first_name }}
+                                {% for error in profile_basic_form.first_name.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                                {{ profile_basic_form.last_name }}
+                                {% for error in profile_basic_form.last_name.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Gender & Title -->
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                {{ profile_basic_form.gender }}
+                                {% for error in profile_basic_form.gender.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                                {#                    {% for error in profile_basic_form.gender.errors %}#}
+                                {#            <div class="alert alert-danger alert-dismissible">{{ error }}#}
+                                {#                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span#}
+                                {#                        aria-hidden="true">&times;</span></button>#}
+                                {#            </div>#}
+                                {#        {% endfor %}#}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Professional Title <i class="bi bi-info-circle text-primary"
+                                                                                data-bs-toggle="tooltip"
+                                                                                title="{{ CFChar.tooltip_title }}"></i></label>
+                                {{ profile_basic_form.title }}
+                                {% for error in profile_basic_form.title.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Professional biography <span data-bs-toggle="tooltip"
+                                                                     title="{{ CFChar.tooltip_bio }}">
+              <i class="bi bi-info-circle text-primary"></i></span></label>
+                            {{ profile_basic_form.bio }}
+                            <div class="form-text">Write a brief introduction that highlights your teaching experience
+                                and
+                                approach.
+                            </div>
+                            {% for error in profile_basic_form.bio.errors %}
+                                <div class="invalid-feedback d-block">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ========== CONTACT SECTION ========== -->
+                <div class=" border-0 shadow-sm mb-4">
+                    <div class="card-header bg-primary-soft d-flex align-items-center py-2">
+                        <div class="icon-circle bg-primary-soft text-primary me-3">
+                            <i class="bi bi-envelope-plus-fill fs-5"></i>
+                        </div>
+                        <h5 class="mb-0 text-primary">Contact Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                                <label class="form-label">Email <span class="text-danger">*</span></label>
+                                {{ profile_basic_form.email }}
+                                <small class="form-text text-muted">
+                                    You chose this during registration. It cannot be changed now.
+                                </small>
+
+                                {% for error in profile_basic_form.email.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Username -->
+                            <div class="col-md-6">
+                                <label class="form-label">Username <span class="text-danger">*</span> <i
+                                        class="bi bi-info-circle text-primary"
+                                        data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_username }}"></i></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">{{ CFChar.site_name }}@</span>
+                                    {{ profile_basic_form.username }}
+                                </div>
+                                <small class="form-text text-muted">
+                                    You chose this during registration. It cannot be changed now.
+                                </small>
+
+                                {% for error in profile_basic_form.username.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Phone MIX (forms.py + JS styling) appearance is 100% ok -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <div class="input-group border rounded">
+                                    <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center border-0 bg-opacity-10"
+                                            type="button" id="countrySelector">
+                                        <span class="fi fi-us me-2" id="selectedFlag"></span>
+                                        <span id="selectedCountryCode">+1</span>
+                                    </button>
+                                    {{ profile_basic_form.phone_display }}
+                                </div>
+
+                                <div class="dropdown-menu w-100 p-0" id="countryDropdown">
+                                    <div class="p-2 sticky-top bg-white">
+                                        <input type="text" class="form-control form-control-sm border-0"
+                                               id="countrySearch" placeholder="Search countries...">
+                                    </div>
+                                    <div class="overflow-auto" style="max-height: 300px;">
+                                        <ul class="list-unstyled mb-0" id="countryList"></ul>
+                                    </div>
+                                </div>
+
+                                <!-- Hidden fields that will actually be submitted -->
+                                {{ profile_basic_form.phone_country_code }}
+                                {{ profile_basic_form.phone_number }}
+
+
+                                <!-- Error display -->
+                                <div class="invalid-feedback" id="phoneError" style="display: none;"></div>
+                                <!-- Error display -->
+                                {% if profile_basic_form.phone_country_code.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ profile_basic_form.phone_country_code.errors.0 }}
+                                    </div>
+                                {% endif %}
+                                {% if profile_basic_form.phone_number.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ profile_basic_form.phone_number.errors.0 }}
+                                    </div>
+                                {% endif %}
+                                {% if profile_basic_form.non_field_errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ profile_basic_form.non_field_errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Phone (JS) 100% OK-->
+                            {#                            <div class="col-md-6 mb-3">#}
+                            {#                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>#}
+                            {#                                <div class="input-group border rounded">#}
+                            {#                                    <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center border-0  bg-opacity-10"#}
+                            {#                                            type="button" id="countrySelector">#}
+                            {#                                        <span class="fi fi-us me-2" id="selectedFlag"></span>#}
+                            {#                                        <span id="selectedCountryCode">+1</span>#}
+                            {#                                    </button>#}
+                            {#                                    <input type="tel" class="form-control border-0"#}
+                            {#                                           id="phoneNumber" placeholder="123456789"#}
+                            {#                                           name="phone" required pattern="[0-9]{8,15}"#}
+                            {#                                           title="Please enter 8-15 digits">#}
+                            {#                                </div>#}
+                            {##}
+                            {#                                <div class="dropdown-menu w-100 p-0" id="countryDropdown">#}
+                            {#                                    <div class="p-2 sticky-top bg-white">#}
+                            {#                                        <input type="text" class="form-control form-control-sm border-0"#}
+                            {#                                               id="countrySearch" placeholder="Search countries...">#}
+                            {#                                    </div>#}
+                            {#                                    <div class="overflow-auto" style="max-height: 300px;">#}
+                            {#                                        <ul class="list-unstyled mb-0" id="countryList"></ul>#}
+                            {#                                    </div>#}
+                            {#                                </div>#}
+                            {#                                <div class="invalid-feedback">Please enter a valid phone number</div>#}
+                            {#                                <input type="hidden" id="fullPhoneNumber" name="full_phone_number">#}
+                            {#                            </div>#}
+
+
+                            <!-- Location (Country) -->
+                            <div class="col-md-6">
+                                <label class="form-label">Location (Country) <span class="text-danger">*</span></label>
+                                <i
+                                        class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_location }}"></i>
+                                {{ profile_basic_form.country }}
+                                <div class="invalid-feedback">Please select a country.</div>
+                                {% for error in profile_basic_form.country.errors %}
+                                    <div class="alert alert-danger alert-dismissible">{{ error }}
+                                        <button type="button" class="close" data-dismiss="alert"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">&times;</span></button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ========== LANGUAGE SECTION ========== -->
+                <div class="border-0 shadow-sm mb-4">
+                    <div class="card-header bg-primary-soft d-flex align-items-center py-2">
+                        <div class="icon-circle bg-primary-soft text-primary me-3">
+                            <i class="bi bi-translate fs-5"></i>
+                        </div>
+                        <h5 class="mb-0 text-primary">Language Proficiency</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+
+                            <!-- Native Language -->
+                            <div class="col-md-6">
+                                <label class="form-label">Native Language <span class="text-danger">*</span> <i
+                                        class="bi bi-info-circle text-primary"
+                                        data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_native_language }}"></i></label>
+                                {{ profile_basic_form.lang_native }}
+                                {% for error in profile_basic_form.lang_native.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- Spoken Language -->
+                            <div class="col-md-6">
+                                <label class="form-label">Spoken Languages <span class="text-danger">*</span> <i
+                                        class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"
+                                        title="{{ CFChar.tooltip_spoken_languages }}"></i>
+                                </label>
+                                {{ profile_basic_form.lang_speak }}
+                                {% for error in profile_basic_form.lang_speak.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ========== BIOGRAPHY SECTION ========== -->
+{#                <div class=" border-0 shadow-sm mb-4">#}
+{#                    <div class="card-header bg-primary-soft d-flex align-items-center py-2">#}
+{#                        <div class="icon-circle bg-primary-soft text-primary me-3">#}
+{#                            <i class="bi bi-pencil-square fs-5"></i>#}
+{#                        </div>#}
+{#                        <h5 class="mb-0 text-primary">Professional Biography</h5>#}
+{#                    </div>#}
+                    {#                    <div class="card-body">#}
+                    {#                        <div class="mb-3">#}
+                    {#                            <label class="form-label">About Me <span data-bs-toggle="tooltip"#}
+                    {#                                                                     title="{{ CFChar.tooltip_bio }}">#}
+                    {#              <i class="bi bi-info-circle text-primary"></i></span></label>#}
+                    {#                            {{ profile_basic_form.bio }}#}
+                    {#                            <div class="form-text">Write a brief introduction that highlights your teaching experience#}
+                    {#                                and#}
+                    {#                                approach.#}
+                    {#                            </div>#}
+                    {#                            {% for error in profile_basic_form.bio.errors %}#}
+                    {#                                <div class="invalid-feedback d-block">{{ error }}</div>#}
+                    {#                            {% endfor %}#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+{#                </div>#}
+
+                <!-- Navigation Buttons Step 1 -->
+                <div class="d-flex justify-content-end mt-3">
+{#                    <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_profile"#}
+{#                            data-action="prev" data-step="1"><i class="bi bi-arrow-left me-2"></i>Previous#}
+{#                    </button>#}
+                    <div>
+                        <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_profile"
+                                data-action="save" data-step="1"><i class="bi bi-save me-1"></i>Save
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-next" id="btnNext_profile"
+                                data-action="next" data-step="1">Next <i class="bi bi-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,329 @@
+{% extends 'ap2_student/dashboard/dc_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/stepper/css/bs-stepper.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/leaflet/leaflet.css' %}">
+    <style>
+        .location-preview {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #0d6efd;
+        }
+
+        .summary-card {
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .summary-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+    </style>
+{% endblock %}
+{% block embed_style %}
+    <!-- Load Open Street Maps CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'app_in_person/css/inp_style.css' %}">
+
+{% endblock %}
+
+{% block dashboard_main_content %}
+    <div class="col-xl-9">
+        <!-- Wizard Card START -->
+        <div class="card border">
+            <div class="card-header bg-light border-bottom">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-geo-alt-fill text-primary me-2"></i>Request In-Person Sessions
+                </h3>
+                <p class="text-muted mb-0">Complete these steps to find the perfect tutor for face-to-face learning</p>
+            </div>
+
+            <div class="card-body">
+                <div id="requestStepper" class="bs-stepper">
+                    <!-- Step Header -->
+                    <div class="bs-stepper-header bg-light rounded p-3 mb-4">
+                        <div class="step" data-target="#step-location">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab">
+                                <span class="bs-stepper-circle">1</span>
+                                <span class="bs-stepper-label">Location</span>
+                            </button>
+                        </div>
+                        <div class="line"></div>
+
+                        <div class="step" data-target="#step-details">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab">
+                                <span class="bs-stepper-circle">2</span>
+                                <span class="bs-stepper-label">Session Details</span>
+                            </button>
+                        </div>
+                        <div class="line"></div>
+
+                        <div class="step" data-target="#step-review">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab">
+                                <span class="bs-stepper-circle">3</span>
+                                <span class="bs-stepper-label">Review & Confirm</span>
+                            </button>
+                        </div>
+                        <div class="line"></div>
+
+                        <div class="step" data-target="#step-payment">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab">
+                                <span class="bs-stepper-circle">4</span>
+                                <span class="bs-stepper-label">Payment</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step Content -->
+                    <div class="bs-stepper-content">
+                        <form method="POST" id="inPersonRequestForm">
+                            {% csrf_token %}
+
+                            <!-- Step 1: Location -->
+                            <div id="step-location" class="content" role="tabpanel">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    Set your preferred meeting location to find tutors in your area
+                                </div>
+
+                                    {% include 'app_in_person/dashboard/in_person_settings.html' %}
+
+                                <div class="d-flex justify-content-end mt-4">
+                                    <button type="button" class="btn btn-primary next-btn">Continue to Details</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Session Details -->
+                            <div id="step-details" class="content" role="tabpanel">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">What do you want to learn?</label>
+                                        <select class="form-select" name="service" required>
+                                            <option value="">Select a service...</option>
+                                            {% for service in services %}
+                                                <option value="{{ service.id }}"
+                                                        data-price="{{ service.student_price_per_hour }}">
+                                                    {{ service.name }} (€{{ service.student_price_per_hour }}/h)
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Number of Sessions</label>
+                                        <input type="number" class="form-control" name="number_of_sessions" min="1"
+                                               max="20" value="4" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Session Duration</label>
+                                        <select class="form-select" name="session_duration" required>
+                                            <option value="1">1 hour</option>
+                                            <option value="1.5" selected>1.5 hours</option>
+                                            <option value="2">2 hours</option>
+                                            <option value="2.5">2.5 hours</option>
+                                            <option value="3">3 hours</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Preferred Start Date</label>
+                                        <input type="date" class="form-control" name="start_date" required
+                                               min="{{ today|date:'Y-m-d' }}">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label fw-bold">Learning Goals & Notes</label>
+                                        <textarea class="form-control" name="student_notes" rows="4"
+                                                  placeholder="Please describe what you want to achieve, any specific topics you want to cover, or special requirements for the tutor..."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+                                    <button type="button" class="btn btn-primary next-btn">Review Request</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Review -->
+                            <div id="step-review" class="content" role="tabpanel">
+                                <h5 class="text-center mb-4">Review Your Request</h5>
+
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <div class="summary-card p-4">
+                                            <h6 class="text-primary mb-3"><i class="bi bi-geo-alt me-2"></i>Location
+                                                Details</h6>
+                                            <p><strong>Meeting Point:</strong> <span id="review-location">Not set</span>
+                                            </p>
+                                            <p><strong>Max Distance:</strong> <span id="review-distance">10 km</span>
+                                            </p>
+                                            <p><strong>Meeting Type:</strong> <span
+                                                    id="review-meeting-type">Flexible</span></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="summary-card p-4">
+                                            <h6 class="text-primary mb-3"><i class="bi bi-clock me-2"></i>Session
+                                                Details</h6>
+                                            <p><strong>Service:</strong> <span id="review-service">Not selected</span>
+                                            </p>
+                                            <p><strong>Sessions:</strong> <span id="review-sessions">4</span> x <span
+                                                    id="review-duration">1.5</span> hours</p>
+                                            <p><strong>Start Date:</strong> <span
+                                                    id="review-start-date">{{ today|date:'M j, Y' }}</span></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="summary-card p-4">
+                                            <h6 class="text-primary mb-3"><i class="bi bi-chat-dots me-2"></i>Learning
+                                                Goals</h6>
+                                            <p id="review-notes" class="text-muted">No notes provided</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="summary-card p-4 bg-light">
+                                            <h6 class="text-success mb-3"><i class="bi bi-currency-euro me-2"></i>Pricing
+                                                Summary</h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p><strong>Hourly Rate:</strong> €<span
+                                                            id="review-hourly-rate">0.00</span></p>
+                                                    <p><strong>Total Hours:</strong> <span
+                                                            id="review-total-hours">0</span> hours</p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h4 class="text-success">Total: €<span
+                                                            id="review-total-price">0.00</span></h4>
+                                                    <small class="text-muted">Payment due upon tutor acceptance</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" id="terms-agree" required>
+                                    <label class="form-check-label" for="terms-agree">
+                                        I agree to the <a href="#">terms and conditions</a> and understand that tutors
+                                        have 48 hours to respond to my request
+                                    </label>
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+                                    <button type="button" class="btn btn-success next-btn">Proceed to Payment</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Payment -->
+                            <div id="step-payment" class="content" role="tabpanel">
+                                <div class="text-center mb-4">
+                                    <i class="bi bi-shield-check text-success" style="font-size: 3rem;"></i>
+                                    <h4 class="text-success mt-2">Secure Payment</h4>
+                                    <p class="text-muted">Your payment will only be processed when a tutor accepts your
+                                        request</p>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <!-- Payment form would go here - Stripe, PayPal, etc. -->
+                                                <div class="alert alert-info">
+                                                    <i class="bi bi-info-circle me-2"></i>
+                                                    Payment integration would be implemented here with your preferred
+                                                    payment gateway
+                                                </div>
+
+                                                <div class="text-center mt-4">
+                                                    <button type="submit" class="btn btn-primary btn-lg">
+                                                        <i class="bi bi-lock-fill me-2"></i>Submit Request Securely
+                                                    </button>
+                                                    <p class="text-muted mt-2 small">
+                                                        You won't be charged until a tutor accepts your request
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button" class="btn btn-outline-secondary prev-btn">Back</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wizard Card END -->
+    </div>
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/stepper/js/bs-stepper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/leaflet/leaflet.js' %}"></script>
+    <script>
+        // Initialize stepper
+        const stepper = new Stepper(document.querySelector('#requestStepper'), {
+            linear: true,
+            animation: true
+        });
+
+        // Initialize map
+        {#function initMap() {#}
+        {#  const map = L.map('locationMap').setView([51.505, -0.09], 13);#}
+        {#  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {#}
+        {#    attribution: '© OpenStreetMap contributors'#}
+        {#  }).addTo(map);#}
+        {##}
+        {#  let marker = null;#}
+        {##}
+        {#  map.on('click', function(e) {#}
+        {#    if (marker) {#}
+        {#      map.removeLayer(marker);#}
+        {#    }#}
+        {##}
+        {#    marker = L.marker(e.latlng).addTo(map)#}
+        {#      .bindPopup('Meeting location').openPopup();#}
+        {##}
+        {#    // Update hidden fields#}
+        {#    document.getElementById('latitude').value = e.latlng.lat;#}
+        {#    document.getElementById('longitude').value = e.latlng.lng;#}
+        {#    document.getElementById('coordinatesDisplay').textContent =#}
+        {#      e.latlng.lat.toFixed(4) + ', ' + e.latlng.lng.toFixed(4);#}
+        {##}
+        {#    // Reverse geocode would be implemented here#}
+        {#    document.getElementById('addressDisplay').textContent = 'Fetching address...';#}
+        {#  });#}
+        {# }#}
+
+        // Form validation and navigation logic would be implemented here
+        document.addEventListener('DOMContentLoaded', function () {
+            stepper;
+            initMap();
+            // Additional JavaScript for form handling, validation, and step navigation
+        });
+    </script>
+{% endblock %}
+{% block embed_script %}
+    <!-- Load Open Street Maps API -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="{% static 'assets/js/map/openStreet.min.js' %}" type="module"></script>
+    <script src="{% static 'assets/js/map/showLocationSection.min.js' %}" type="module"></script>
+
+{% endblock %}

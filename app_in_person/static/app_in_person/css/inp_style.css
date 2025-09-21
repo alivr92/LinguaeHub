@@ -1,0 +1,100 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-header {
+    background: linear-gradient(45deg, #f8f9fa, #e9ecef) !important;
+}
+
+.stats-box {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+}
+
+.stats-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.method-card {
+    transition: all 0.3s ease;
+    border: 2px solid #c1ecfa;
+    cursor: pointer;
+    height: 100%;
+}
+
+.method-card:hover, .method-card.selected {
+    border-color: #0d6efd;
+    box-shadow: 0 0 15px rgba(13, 110, 253, 0.1);
+}
+
+.method-card.selected {
+    background-color: #f0f7ff;
+}
+
+.form-check-input {
+    cursor: pointer;
+}
+
+.hidden-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.info-icon {
+    color: #0dcaf0;
+}
+
+.map-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.highlight {
+    color: #d63384;
+    font-weight: 600;
+}
+
+.benefit-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.benefit-list li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.benefit-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #198754;
+    font-weight: bold;
+}
+
+.security-badge {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.btn-soft {
+    opacity: 0.9;
+    transition: all 0.2s ease;
+}
+
+.btn-soft:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+

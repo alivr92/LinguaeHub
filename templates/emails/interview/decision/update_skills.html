@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Tutor Skills Have Been Updated – {{ site_name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+    <table style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.05);">
+        <tr>
+            <td style="padding: 30px;">
+                <h2 style="color: #2b2b2b;">✅ New Skill(s) Approved</h2>
+                <p style="font-size: 16px; color: #444;">
+                    Hello {{ full_name }},
+                </p>
+
+                <p style="font-size: 16px; color: #444;">
+                    We’re excited to let you know that the following new skill(s) have been reviewed and approved on your tutor profile:
+                </p>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                    <thead>
+                        <tr>
+                            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f1f1f1; color: #555;">Skill</th>
+                            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f1f1f1; color: #555;">Level</th>
+                            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f1f1f1; color: #555;">Certified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for uSkill in approved_uSkills %}
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{{ uSkill.skill }}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{{ uSkill.level }}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd; color: #333;">{% if uSkill.is_certified %}✅{% else %}N/A{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <p style="font-size: 16px; color: #444;">
+                    These skills are now visible on your tutor profile. You may continue managing your services via your dashboard.
+                </p>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="{{ dashboard_uri }}" style="background-color: #007bff; color: white; padding: 12px 24px; border-radius: 5px; text-decoration: none;">Go to Dashboard</a>
+                </div>
+
+                <p style="font-size: 14px; color: #888;">
+                    If you have any questions, please don’t hesitate to contact us.
+                </p>
+
+                <p style="font-size: 16px; color: #444;">
+                    Best regards,<br>
+                    <strong>The {{ site_name }} Team</strong>
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

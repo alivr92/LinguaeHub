@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Booking Confirmation - {{ site_name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
+<table role="presentation" style="max-width: 650px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <tr>
+        <td style="padding: 40px 30px;">
+            <h1 style="color: #2b6cb0; margin: 0 0 20px 0; font-size: 24px;">{{ site_name }}</h1>
+            <h2 style="color: #047857; margin-top: 0;">Booking Confirmed</h2>
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                Hello {{ offer.tutor.first_name }},
+            </p>
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                This email confirms that you have accepted the in-person teaching request for <strong>{{ request.service.name }}</strong>. The student has been notified.
+            </p>
+
+            <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 25px 0; background-color: #f9fafc; border-radius: 6px;">
+                <tr>
+                    <td style="padding: 20px; border: 1px solid #e5e7eb;">
+                        <h3 style="color: #374151; margin-top: 0;">Booking Summary</h3>
+                        <table role="presentation" style="width: 100%;">
+                            <tr><td style="padding: 8px 0; color: #6b7280; width: 40%;"><strong>Student:</strong></td><td style="padding: 8px 0; color: #111827;">{{ request.student.get_full_name }}</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Service:</strong></td><td style="padding: 8px 0; color: #111827;">{{ request.service.name }}</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Sessions:</strong></td><td style="padding: 8px 0; color: #111827;">{{ offer.number_of_sessions }} x {{ offer.session_duration_hours }}h</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Your Payout:</strong></td><td style="padding: 8px 0; color: #1d4ed8;"><strong>€{{ offer.total_payout }}</strong></td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Student's Goal:</strong></td><td style="padding: 8px 0; color: #111827;">{{ request.student_notes }}</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                <strong>Next Step:</strong> The student must now confirm this booking within 24 hours. You will receive a final confirmation email with the student's contact details and the meeting location once they do.
+            </p>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ tutor_dashboard_uri }}"
+                   style="background-color: #10b981; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
+                    View My Upcoming Lessons
+                </a>
+            </div>
+
+            <p style="font-size: 14px; color: #888;">
+                If the student does not confirm, this booking will be automatically released, and you will be notified.
+            </p>
+            <p style="font-size: 16px; color: #444;">
+                Best regards,<br>
+                <strong>The {{ site_name }} Team</strong>
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

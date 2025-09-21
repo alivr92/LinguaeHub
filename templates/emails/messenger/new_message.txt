@@ -1,0 +1,19 @@
+New Message Notification
+=======================
+
+Hello {{ recipient.get_full_name|default:recipient.username }},
+
+You've received a new message from {{ sender.get_full_name|default:sender.username }} on {{ site_name }}:
+
+{{ message.content }}
+
+To view and reply to this message, please visit:
+{{ message_url }}
+
+---
+Note: This notification was sent because you have email notifications enabled in your account settings.
+You can manage your notification preferences here: {{ settings_url }}
+
+© {% now "Y" %} {{ site_name }}. All rights reserved.
+Privacy Policy: {{ privacy_url }}
+Terms of Service: {{ terms_url }}

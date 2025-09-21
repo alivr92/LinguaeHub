@@ -1,0 +1,45 @@
+{% extends 'app_pages/base.html' %}
+
+{% block content %}
+<div class="help-category">
+    <div class="category-header">
+        <h1>{{ category.title }}</h1>
+        <p class="lead">{{ category.description }}</p>
+    </div>
+
+    <!-- Featured Articles -->
+    {% if featured_articles %}
+    <div class="featured-articles">
+        <h2>Featured Articles</h2>
+        <div class="row">
+            {% for article in featured_articles %}
+            <div class="col-md-6">
+                <div class="card featured-card">
+                    <div class="card-body">
+                        <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+                        <p>{{ article.content|striptags|truncatewords:25 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Sections -->
+    <div class="category-sections">
+        {% for section in category.sections.all %}
+        <div class="section">
+            <h2>{{ section.title }}</h2>
+            {% if section.description %}<p>{{ section.description }}</p>{% endif %}
+
+            <ul class="article-list">
+                {% for article in section.articles.all %}
+                <li><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

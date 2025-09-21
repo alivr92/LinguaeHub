@@ -1,0 +1,215 @@
+<div class="alert alert-warning m-2 alert-dismissible">
+    <i class="bi bi-info-circle me-2"></i>
+    Carefully review your information. Use the <strong>Previous</strong> button to make changes.
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+</div>
+
+<!-- Content -->
+<div class="container my-5">
+    <!-- 👤 Profile Photo and Identity -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">👤 Profile & Identity</h5>
+        </div>
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-4 flex-wrap mb-4">
+                <img src="{{ profile_basic_form.photo.value.url }}" class="rounded-circle border shadow-sm"
+                     width="100" height="100" alt="Profile Picture">
+                <div>
+                    <h5 class="mb-1">{{ profile_basic_form.first_name.value }} {{ profile_basic_form.last_name.value }}</h5>
+                    <p class="mb-0 text-muted">{{ CFChar.site_name }}@{{ profile_basic_form.username.value }}</p>
+                </div>
+            </div>
+
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Gender:</strong> {{ profile_basic_form.gender.value }}</div>
+                <div class="col-md-6"><strong>Title:</strong> {{ profile_basic_form.title.value|default:"—" }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✉️ Contact Information -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">✉️Contact Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Email:</strong> {{ profile_basic_form.email.value }}</div>
+                <div class="col-md-6"><strong>Phone:</strong> {{ profile_basic_form.phone.value|default:"—" }}
+                </div>
+                <div class="col-md-6"><strong>Country:</strong> {{ profile_basic_form.country.value }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 Language Proficiency -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">🌐 Language Proficiency</h5>
+        </div>
+        <div class="card-body">
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Native Language:</strong> {{ profile_basic_form.lang_native.value }}</div>
+                <div class="col-md-6"><strong>Spoken
+                    Languages:</strong> {{ profile_basic_form.lang_speak.value|join:", " }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 💰 Pricing Details -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">💰 Pricing & Availability</h5>
+        </div>
+        <div class="card-body">
+            <div class="row gy-2">
+                <div class="col-md-6"><strong>Hourly Rate:</strong>
+                    ${{ profile_basic_form.cost_hourly.value }}</div>
+                <div class="col-md-6"><strong>Trial Rate:</strong> ${{ profile_basic_form.cost_trial.value }}
+                </div>
+                {% if profile_basic_form.discount.value %}
+                    <div class="col-md-6">
+                        <strong>Discount:</strong> {{ profile_basic_form.discount.value }}%
+                        <small class="text-muted">(until {{ profile_basic_form.discount_deadline.value }})
+                        </small>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 📝 Bio -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">📝 Tutor Bio</h5>
+        </div>
+        <div class="card-body">
+            <div class="border rounded p-3 bg-light text-break">{{ profile_basic_form.bio.value }}</div>
+        </div>
+    </div>
+
+    <!-- 📚 Teaching Skills Overview -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">📚 Teaching Skills Overview</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table" id="skillsTable_review">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Skill</th>
+                        <th>Level</th>
+                        <th>Certificate</th>
+                        <th>Video</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <!-- Existing skills -->
+                    {% for uSkill in user.skills.all %}
+                        <tr class="m-0 p-0">
+                            <td>{{ uSkill.skill }}</td>
+                            <td>{{ uSkill.level }}</td>
+                            <td>
+                                <!-- Certificate -->
+                                {% if uSkill.certificate %}
+                                    <a href="{{ uSkill.certificate.url }}"
+                                       class="btn btn-primary-soft btn-round"
+                                       target="_blank"
+                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                       title="Download"><i
+                                            class="bi bi-download"></i></a>
+                                {% else %}
+                                    <span class="p-2"> NA</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <!-- Video button -->
+                                {% if uSkill.video %}
+                                    <a data-glightbox data-gallery="office-tour"
+                                       href="{{ uSkill.video.url }}"
+                                       class="btn btn-round btn-primary-soft overflow-visible"
+                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                       title="Skill Video">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                {% else %}
+                                    <span class="p-2"> NA</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 📢 Submission Note -->
+    <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+        <i class="bi bi-info-circle-fill"></i>
+        <div>
+            <strong>Note:</strong> Your application will only be submitted once you click
+            <strong>"Submit Application"</strong>.
+        </div>
+    </div>
+    <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+        <i class="bi bi-info-circle-fill"></i>
+        <div>
+            <strong>Note:</strong> After submission you cannot change till our team announce you the result. but after
+            account activation you can easily edit your profile!
+        </div>
+    </div>
+
+    <!-- 🚀 Action Buttons -->
+    <div class="d-flex justify-content-between">
+        <button type="button" class="btn btn-outline-secondary" data-action="prev" data-step="5">
+            <i class="bi bi-arrow-left me-1"></i>Previous
+        </button>
+        <button type="submit" class="btn btn-success px-4" id="btnFinalSubmit" data-action="submit" data-step="5">
+            <i class="bi bi-check-circle me-2"></i>Submit Application
+        </button>
+    </div>
+
+</div>
+
+
+<template id="review-row-template">
+    <tr class="skill-row">
+        <td>
+            <div class="" name="skill" id="review_skill"></div>
+        </td>
+        <td>
+            <div class="" name="level" id="review_skill_level"></div>
+        </td>
+        <td>
+            <input type="file"
+                   id="template_skill_video"
+                   class="form-control"
+                   name="skill_video"
+                   accept=".mp4">
+        </td>
+        <td>
+            <div class="input-group">
+                <input type="file"
+                       id="template_skill_certificate"
+                       class="form-control"
+                       name="certificate"
+                       accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+            </div>
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-sm btn-outline-danger remove-skill">
+                <i class="bi bi-trash-fill"></i>
+            </button>
+        </td>
+    </tr>
+</template>

@@ -1,0 +1,34 @@
+{% extends 'ap2_student/dashboard/dc_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+{% block embed_style %}
+    <!-- Load Open Street Maps CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+            <link rel="stylesheet" type="text/css" href="{% static 'app_in_person/css/inp_style.css' %}">
+
+{% endblock %}
+{% block dashboard_main_content %}
+    <!-- Main content START -->
+    {% include 'app_in_person/dashboard/in_person_settings.html' %}
+{% endblock %}
+
+{% block scripts_vendors %}
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+
+{% endblock %}
+{% block embed_script %}
+    <!-- Load Open Street Maps API -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="{% static 'assets/js/map/openStreet.min.js' %}" type="module"></script>
+    <script src="{% static 'assets/js/map/showLocationSection.min.js' %}" type="module"></script>
+
+{% endblock %}

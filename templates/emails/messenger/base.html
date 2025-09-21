@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block email_title %}{{ site_name }}{% endblock %}</title>
+    {% block email_style %}{% endblock %}
+    <style>
+        /* Consistent styling across all emails */
+        .button { /* ... */ }
+        /* etc. */
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f7f7f7; margin: 0; padding: 0;">
+    {% block email_content %}{% endblock %}
+
+    {% if tracking_pixel_url %}
+    <img src="{{ tracking_pixel_url }}" width="1" height="1" alt="">
+    {% endif %}
+</body>
+</html>

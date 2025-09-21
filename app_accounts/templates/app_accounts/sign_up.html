@@ -1,0 +1,372 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block head_title %}User Sign Up{% endblock %}
+{% block head_script %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+
+{% endblock %}
+{% block my_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app_accounts/css/sign_up_style.css' %}">
+{% endblock %}
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
+            <div class="container-fluid">
+                <div class="row d-flex align-items-stretch">
+                    <!-- left -->
+                    <div class="col-12 col-lg-6 d-md-flex align-items-center justify-content-center bg-primary bg-opacity-10">
+                        <div class="p-3 p-lg-5">
+                            <!-- Title -->
+                            <div class="text-center">
+                                <h2 class="fw-bold">Welcome to our largest community</h2>
+                                <p class="mb-0 h6 fw-light">Let's learn something new today!</p>
+                            </div>
+                            <!-- SVG Image -->
+                            <img src="{% static 'assets/images/element/02.svg' %}" class="mt-5" alt="">
+                            <!-- Info -->
+                            <div class="d-sm-flex mt-5 align-items-center justify-content-center">
+                                <ul class="avatar-group mb-2 mb-sm-0">
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/01.jpg' %}"
+                                                                      alt="avatar"></li>
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/02.jpg' %}"
+                                                                      alt="avatar"></li>
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/03.jpg' %}"
+                                                                      alt="avatar"></li>
+                                    <li class="avatar avatar-sm"><img class="avatar-img rounded-circle"
+                                                                      src="{% static 'assets/images/avatar/04.jpg' %}"
+                                                                      alt="avatar"></li>
+                                </ul>
+                                <!-- Content -->
+                                <p class="mb-0 h6 fw-light ms-0 ms-sm-3">4k+ Students joined us, now it's your turn.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right -->
+                    <div class="col-12 col-lg-6">
+                        <div class="row my-3 p-3 m-3 p-sm-1 m-sm-1 p-md-1 m-md-1 p-lg-1 m-lg-1">
+                            <div class="col-sm-10 col-xl-8 mx-auto px-0">
+                                <!-- Title -->
+{#                                <img src="{% static 'assets/images/element/03.svg' %}"#}
+{#                                     class="h-40px mb-2 protected-image" alt="">#}
+                                <h2>Sign up as a <span class="text-primary">student</span>!</h2>
+                                {#                                <p class="lead mb-4">Nice to see you! Please Sign up with your account.</p>#}
+
+                                {% include 'includes/messages.html' %}
+                                <!-- Form START -->
+                                <form class="needs-validation" novalidate method="POST"
+                                      action="{% url 'accounts:sign_up' %}" id="registrationForm">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="utype" value="student">
+
+                                    <div class="row g-3 ">
+                                        <!-- Personal Information Section -->
+                                        {#                                        <div class="col-12">#}
+                                        {#                                            <h5 class="border-bottom pb-2 mb-3">#}
+                                        {#                                                <i class="fas fa-user me-2"></i>Personal Information#}
+                                        {#                                            </h5>#}
+                                        {#                                        </div>#}
+
+                                        <!-- Name Fields -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">First Name *</label>
+                                            <div class="input-group  {% if form.first_name.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user"></i>
+                                                </span>
+                                                <input type="text"
+                                                       name="{{ form.first_name.name }}"
+                                                       class="form-control ps-2 py-2 {% if form.first_name.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.first_name.value|default:'' }}"
+                                                       placeholder="First Name"
+                                                       required>
+                                            </div>
+                                            {% if form.first_name.errors %}
+                                                <div class="error-message invalid-feedback d-block" id="first-name-error">
+                                                    {{ form.first_name.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label">Last Name *</label>
+                                            <div class="input-group  {% if form.last_name.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-user"></i>
+                                                </span>
+                                                <input type="text"
+                                                       name="{{ form.last_name.name }}"
+                                                       class="form-control ps-2 py-2 {% if form.last_name.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.last_name.value|default:'' }}"
+                                                       placeholder="Last Name"
+                                                       required>
+                                            </div>
+                                            {% if form.last_name.errors %}
+                                                <div class="error-message" id="last-name-error">
+                                                    {{ form.last_name.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Username -->
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label">Username *</label>
+                                            <div class="input-group  {% if form.username.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                                                <input type="text"
+                                                       name="{{ form.username.name }}"
+                                                       class="form-control ps-2 py-2 {% if form.username.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.username.value|default:'' }}"
+                                                       placeholder="Username"
+                                                       required>
+                                            </div>
+                                            {% if form.username.errors %}
+                                                <div class="error-message" id="username-error">
+                                                    {{ form.username.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Email -->
+                                        <div class="col-12 col-md-6">
+                                            <label class="form-label">Email Address *</label>
+                                            <div class="input-group  {% if form.email.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                                <input type="email"
+                                                       name="{{ form.email.name }}"
+                                                       class="form-control ps-2 py-2 {% if form.email.errors %}is-invalid{% endif %}"
+                                                       value="{{ form.email.value|default:'' }}"
+                                                       placeholder="Email Address"
+                                                       required>
+                                            </div>
+                                            {% if form.email.errors %}
+                                                <div class="error-message" id="email-error">
+                                                    {{ form.email.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            {#                                            <div class="form-text">We'll use this as your username</div>#}
+                                        </div>
+
+                                        <!-- Security Section -->
+                                        {#                                        <div class="col-12 mt-4">#}
+                                        {#                                            <h5 class="border-bottom pb-2 mb-3">#}
+                                        {#                                                <i class="fas fa-lock me-2"></i>Account Security#}
+                                        {#                                            </h5>#}
+                                        {#                                        </div>#}
+
+                                        <!-- Password Fields -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Password *</label>
+                                            <div class="input-group  password-input-group {% if form.password1.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                                <input type="password"
+                                                       name="{{ form.password1.name }}"
+                                                       id="password1"
+                                                       class="form-control ps-2 py-2 {% if form.password1.errors %}is-invalid{% endif %}"
+                                                       placeholder="Password"
+                                                       required
+                                                       minlength="8">
+                                                <span class="input-group-text password-toggle"
+                                                      title="Reveal password" data-toggle="password1">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </span>
+                                            </div>
+                                            {% if form.password1.errors %}
+                                                <div class="error-message" id="password1-error">
+                                                    {{ form.password1.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            <div class="form-text">Minimum 8 characters with numbers/symbols</div>
+                                        </div>
+
+                                        <!-- Password Confirm Fields -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Confirm Password *</label>
+                                            <div class="input-group  password-input-group {% if form.password2.errors %}is-invalid-group{% endif %}">
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-lock"></i>
+                                                </span>
+                                                <input type="password"
+                                                       name="{{ form.password2.name }}"
+                                                       id="password2"
+                                                       class="form-control ps-2 py-2 {% if form.password2.errors %}is-invalid{% endif %}"
+                                                       placeholder="Confirm Password"
+                                                       required>
+                                                <span class="input-group-text password-toggle"
+                                                      title="Reveal password" data-toggle="password2">
+                                                    <i class="bi bi-eye-fill"></i>
+                                                </span>
+                                            </div>
+                                            {% if form.password2.errors %}
+                                                <div class="error-message" id="password2-error">
+                                                    {{ form.password2.errors|join:", " }}
+                                                </div>
+                                            {% endif %}
+                                            <div class="error-message" id="mismatch-error" style="display: none;">
+                                                Passwords do not match
+                                            </div>
+                                        </div>
+
+                                        <!-- Password Strength Meter -->
+                                        <div class="my-3">
+                                            <div class="progress mb-2" style="height: 6px;">
+                                                <div class="progress-bar" id="passwordStrength"
+                                                     role="progressbar"></div>
+                                            </div>
+                                            <small id="passwordFeedback" class="text-muted"></small>
+                                        </div>
+                                        <!-- Password Requirements -->
+                                        <div class="row col-12 password-requirements mb-3">
+                                            <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="requirement invalid" id="req-length">
+                                                    <i class="bi bi-circle"></i> <span>At least 8 characters</span>
+                                                </div>
+                                                <div class="requirement invalid" id="req-uppercase">
+                                                    <i class="bi bi-circle"></i>
+                                                    <span>At least 1 uppercase letter</span>
+                                                </div>
+                                                <div class="requirement invalid" id="req-lowercase">
+                                                    <i class="bi bi-circle"></i>
+                                                    <span>At least 1 lowercase letter</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+
+                                                <div class="requirement invalid" id="req-number">
+                                                    <i class="bi bi-circle"></i> <span>At least 1 number</span>
+                                                </div>
+                                                <div class="requirement invalid" id="req-special">
+                                                    <i class="bi bi-circle"></i>
+                                                    <span>At least 1 special character</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Legal Section -->
+                                        {#                                        <div class="col-12 mt-4">#}
+                                        {#                                            <h5 class="border-bottom pb-2 mb-3">#}
+                                        {#                                                <i class="fas fa-shield-alt me-2"></i>Legal & Privacy#}
+                                        {#                                            </h5>#}
+                                        {#                                        </div>#}
+
+                                        <div class="legal-section ">
+                                            <div class="form-check ">
+                                                <input type="checkbox"
+                                                       class="form-check-input {% if form.terms_agreed.errors %}is-invalid{% endif %}"
+                                                       name="{{ form.terms_agreed.name }}"
+                                                       id="{{ form.terms_agreed.id_for_label }}"
+                                                       required>
+                                                <label class="form-check-label fw-semibold px-0"
+                                                       for="{{ form.terms_agreed.id_for_label }}">
+                                                    I agree to the <a href="{% url 'app_pages:terms' %}" target="_blank"
+                                                                      class="text-primary">Terms of Service</a> and
+                                                    <a href="{% url 'app_pages:privacy_policy' %}" target="_blank"
+                                                       class="text-primary">Privacy Policy</a>
+                                                    <span class="required-indicator">*</span>
+                                                </label>
+                                                {% if form.terms_agreed.errors %}
+                                                    <div class="error-message" id="terms-error">
+                                                        {{ form.terms_agreed.errors|join:", " }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input"
+                                                       name="{{ form.newsletter_optin.name }}"
+                                                       id="{{ form.newsletter_optin.id_for_label }}"
+                                                       {% if form.newsletter_optin.value %}checked{% endif %}>
+                                                <label class="form-check-label px-0"
+                                                       for="{{ form.newsletter_optin.id_for_label }}">
+                                                    Receive educational content updates and platform notifications
+                                                </label>
+                                                <div class="form-text">You can unsubscribe at any time</div>
+                                            </div>
+                                        </div>
+
+                                        <!-- CAPTCHA Section -->
+                                        {#                                        <div class="section-title">#}
+                                        {#                                            <i class="fas fa-robot me-2"></i>Security Verification#}
+                                        {#                                        </div>#}
+                                        <!-- CAPTCHA -->
+{#                                        <div class="col-12">#}
+{#                                            <div class="mb-4">#}
+{#                                                {{ form.captcha }}#}
+{#                                            </div>#}
+{#                                            {% if form.captcha.errors %}#}
+{#                                                <div class="error-message" id="captcha-error">#}
+{#                                                    {{ form.captcha.errors|join:", " }}#}
+{#                                                </div>#}
+{#                                            {% endif %}#}
+{#                                        </div>#}
+
+
+                                        <div class="col-12">
+                                            <div class="mb-4">
+                                            {{ form.captcha }}
+                                    {% for error in form.captcha.errors %}
+                                        <div class="invalid-feedback d-block">{{ error }}</div>
+                                    {% endfor %}
+{#                                                {% if form.captcha.errors %}#}
+{#                                                    <div class="error-message" id="captcha-error">#}
+{#                                                        {% for error in form.captcha.errors %}#}
+{#                                                            <div class="alert alert-danger">{{ error }}</div>#}
+{#                                                        {% endfor %}#}
+{#                                                    </div>#}
+{#                                                {% endif %}#}
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-12 mt-4">
+                                            <button class="btn btn-primary btn-lg w-100 py-3" type="submit">
+                                                <i class="fas fa-user-plus me-2"></i>Create Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Login Link -->
+                                <div class="text-center mt-4">
+                                    <p class="mb-0">Already have an account? <a href="{% url 'accounts:sign_in' %}"
+                                                                                class="fw-bold">Sign in </a></p>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <p class="mb-0">Sign up as a <a href="{% url 'provider:become_tutor' %}"
+                                                                    class="fw-bold text-purple">Tutor <i
+                                            class="fas fa-user-tie"></i></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+
+{% block my_scripts %}
+    <script src="{% static 'assets/js/zxcvbn.js' %}"></script>
+    <script src="{% static 'app_accounts/js/password_handler.min.js' %}"></script>
+{% endblock %}

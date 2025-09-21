@@ -1,0 +1,33 @@
+/* -------------------------------- My Styles for stepper ---------------------------------- */
+#steppertrigger1 {
+    pointer-events: none;
+    cursor: default;
+    color: white;
+}
+
+.bs-stepper-circle.completed-step {
+    background-color: #28a745 !important;
+}
+
+.completed-step {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+/* step 3 : file upload button style */
+
+

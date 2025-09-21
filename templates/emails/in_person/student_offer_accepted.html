@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tutor Found! - {{ site_name }}</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px;">
+<table role="presentation" style="max-width: 650px; margin: auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <tr>
+        <td style="padding: 40px 30px;">
+            <h1 style="color: #2b6cb0; margin: 0 0 20px 0; font-size: 24px;">{{ site_name }}</h1>
+            <h2 style="color: #047857; margin-top: 0;">🎉 Great News! A Tutor Has Accepted Your Request</h2>
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                Hello {{ request.student.first_name }},
+            </p>
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                We're excited to let you know that <strong>{{ tutor_name }}</strong> has accepted your in-person request for <strong>{{ request.service.name }}</strong>!
+            </p>
+
+            <table role="presentation" style="width: 100%; border-collapse: collapse; margin: 25px 0; background-color: #f9fafc; border-radius: 6px;">
+                <tr>
+                    <td style="padding: 20px; border: 1px solid #e5e7eb;">
+                        <h3 style="color: #374151; margin-top: 0;">Request Summary</h3>
+                        <table role="presentation" style="width: 100%;">
+                            <tr><td style="padding: 8px 0; color: #6b7280; width: 40%;"><strong>Your Tutor:</strong></td><td style="padding: 8px 0; color: #111827;">{{ tutor_name }}</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Service:</strong></td><td style="padding: 8px 0; color: #111827;">{{ request.service.name }}</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Sessions:</strong></td><td style="padding: 8px 0; color: #111827;">{{ offer.number_of_sessions }} x {{ offer.session_duration_hours }} hours</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Total Investment:</strong></td><td style="padding: 8px 0; color: #1d4ed8;"><strong>€{{ request.total_student_value }}</strong></td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Your Learning Goal:</strong></td><td style="padding: 8px 0; color: #111827;">{{ request.student_notes }}</td></tr>
+                            <tr><td style="padding: 8px 0; color: #6b7280;"><strong>Preferred Start:</strong></td><td style="padding: 8px 0; color: #111827;">{{ request.preferred_start_date }}</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <p style="font-size: 16px; line-height: 1.6; color: #444;">
+                <strong>Next Step:</strong> Please confirm this booking within <strong>24 hours</strong> to secure your sessions with {{ tutor_name }}. Once confirmed, we'll share your contact information with the tutor so you can coordinate the first meeting.
+            </p>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ dashboard_uri }}"
+                   style="background-color: #10b981; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin: 0 10px;">
+                    ✅ Confirm & Pay Now
+                </a>
+                <a href="{{ tutor_profile_url }}"
+                   style="background-color: #3b82f6; color: white; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; margin: 0 10px;">
+                    👀 View Tutor Profile
+                </a>
+            </div>
+
+            <div style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; margin: 20px 0; border-radius: 4px;">
+                <p style="margin: 0; color: #92400e; font-size: 14px;">
+                    <strong>Please note:</strong> This booking is only reserved for you until {{ offer.expires_at|date:"M j, Y" }} at {{ offer.expires_at|time:"H:i" }}. If not confirmed by then, it will be automatically released to other students.
+                </p>
+            </div>
+
+            <p style="font-size: 16px; color: #444;">
+                We're thrilled to help you achieve your learning goals!<br><br>
+                Best regards,<br>
+                <strong>The {{ site_name }} Team</strong>
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

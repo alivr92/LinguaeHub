@@ -1,0 +1,26 @@
+Subject: Confirmation: You've Accepted a Request for {{ request.service.name }}
+
+BOOKING CONFIRMED
+
+Hello {{ offer.user.first_name }},
+
+This email confirms that you have accepted the in-person teaching request for {{ request.service.name }}. The student has been notified.
+
+BOOKING SUMMARY:
+----------------
+Student: {{ request.user.get_full_name }}
+Service: {{ request.service.name }}
+Sessions: {{ offer.number_of_sessions }} x {{ offer.session_duration_hours }}h
+Your Payout: €{{ offer.total_payout }}
+Student's Goal: {{ request.student_notes }}
+
+NEXT STEP:
+The student must now confirm this booking within 24 hours. You will receive a final confirmation email with the student's contact details and the meeting location once they do.
+
+VIEW MY UPCOMING LESSONS:
+{{ tutor_dashboard_uri }}
+
+Note: If the student does not confirm, this booking will be automatically released, and you will be notified.
+
+Best regards,
+The {{ site_name }} Team

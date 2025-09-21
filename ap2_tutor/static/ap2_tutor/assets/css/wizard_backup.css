@@ -1,0 +1,335 @@
+.confirmation-icon {
+    font-size: 60px;
+    color: #28a745;
+}
+
+/* Fix spacing in stepper */
+.bs-stepper-content .content {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.bs-stepper-content .content h4 {
+    margin-bottom: 0.5rem;
+}
+
+.bs-stepper-content .content hr {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Review section styles */
+.confirmation-card {
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+}
+
+/*
+.confirmation-card {
+    max-width: 600px;
+    margin: 80px auto;
+    border-radius: 10px;
+}
+*/
+
+/* step 6 final decision */
+.application-status-card {
+    border-left: 6px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.status-accepted {
+    border-color: #28a745;
+}
+
+.status-rejected {
+    border-color: #dc3545;
+}
+
+.status-review {
+    border-color: #6f42c1;
+}
+
+.status-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-icon {
+    font-size: 2rem;
+}
+
+/*tooltip inner text */
+.tooltip-inner {
+    text-align: left !important;
+}
+
+/* -------------------------------- My Styles for stepper ---------------------------------- */
+#steppertrigger1 {
+    pointer-events: none;
+    cursor: default;
+    color: white;
+}
+
+.bs-stepper-circle.completed-step {
+    background-color: #28a745 !important;
+}
+
+.completed-step {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 0.25rem;
+}
+
+/*
+step 3 : file upload button style -------------------------------------------------------
+*/
+/* Remove your previous CSS and replace with this */
+/*.file-upload-container {*/
+/*width: 100%;*/
+/*}*/
+
+/*.file-upload-container .btn {*/
+/*width: 100%;*/
+/*padding: 0.375rem 0.75rem; !* Match Bootstrap's btn-sm *!*/
+/*white-space: nowrap;*/
+/*}*/
+
+/*!* For the display elements *!*/
+/*.video-display, .cert-display {*/
+/*width: 100%;*/
+/*min-width: 120px; !* Minimum width *!*/
+/*}*/
+
+/*!* Responsive table adjustments *!*/
+/*.file-upload-container {*/
+/*position: relative;*/
+/*min-height: 38px;*/
+/*}*/
+
+/*.file-upload-container .btn {*/
+/*width: 100%;*/
+/*}*/
+
+/*.file-display {*/
+/*width: 100%;*/
+/*align-items: center;*/
+/*}*/
+
+/*!* Responsive table *!*/
+/*@media (max-width: 768px) {*/
+/*#skills-table {*/
+/*display: block;*/
+/*overflow-x: auto;*/
+/*}*/
+/*}*/
+
+/* Step 3 - Skill ADD*/
+
+/*step 3: teaching skills | overflow dropdown boxes */
+/* Fix dropdown overflow */
+/*.table-responsive {*/
+/*overflow: visible !important;*/
+/*}*/
+
+/*#skills-table {*/
+/*position: relative;*/
+/*}*/
+
+.choices__list--dropdown {
+    position: absolute !important;
+    z-index: 9999 !important;
+    width: auto !important;
+    min-width: 100% !important;
+    /*border-color: #dee2e6 !important;*/
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/************** choices text alignment **************/
+.choices__list--dropdown .choices__list {
+    max-height: 300px;
+    overflow-y: auto !important;
+    text-align: left !important;
+}
+
+.choices__list--dropdown .choices__item {
+    text-align: left !important;
+}
+
+/* Choices.js overrides */
+.choices__inner {
+    background-color: #f8f9fa !important;
+    border: none !important;
+    border-radius: 0.375rem !important;
+    min-height: 38px !important;
+}
+
+.choices__item--selectable {
+    padding: 8px 12px !important;
+}
+
+.choices__item--selectable:hover {
+    background-color: #f8f9fa !important;
+}
+
+/* Skill Card Styling */
+.skill-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    background-color: white;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
+}
+
+.skill-card:hover {
+    border-color: rgba(13, 110, 253, 0.3);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.23);
+    transform: translateY(-2px);
+    z-index: 5;
+}
+
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Make buttons equal height */
+.label_skill_video,
+.label_skill_certificate {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .skill-card .col-12 {
+        margin-bottom: 1rem;
+    }
+
+    .skill-card .col-12:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* Introduction Video Section Styling ==========================================================*/
+/* Ensure proper spacing and truncation */
+/*.intro-video-display {*/
+/*gap: 0.5rem;*/
+/*}*/
+
+/*!* Responsive adjustments *!*/
+/*@media (max-width: 576px) {*/
+/*.intro-video-display .btn-group {*/
+/*margin-top: 0.5rem;*/
+/*width: 100%;*/
+/*justify-content: flex-end;*/
+/*}*/
+
+/*.intro-video-display .btn-outline-secondary {*/
+/*max-width: 100% !important;*/
+/*}*/
+/*}*/
+
+/*  nested selection box */
+/* Add some styling to make it look better */
+/* Add this to your CSS to style the optgroup headers */
+.choices__list--dropdown .choices__item--selectable[data-custom-properties*="isHeader"] {
+    font-weight: bold;
+    color: #6c757d;
+    cursor: default;
+    padding-left: 10px;
+    background-color: #f8f9fa;
+}
+
+.choices__list--dropdown .choices__item--selectable[data-custom-properties*="isHeader"]:hover {
+    background-color: #f8f9fa !important;
+    color: #6c757d !important;
+}
+
+.choices__list--dropdown .choices__item {
+    padding-left: 25px;
+}
+
+
+/*********************************** Custom CSS for Step 2 ***********************************/
+  .icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .uploadremove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    transform: translate(25%, -25%);
+  }
+
+  .bg-primary-soft {
+    background-color: rgba(13, 110, 253, 0.1);
+  }
+
+  .bg-info-soft {
+    background-color: rgba(13, 202, 240, 0.1);
+  }
+
+  .bg-warning-soft {
+    background-color: rgba(255, 193, 7, 0.1);
+  }
+
+  .bg-success-soft {
+    background-color: rgba(25, 135, 84, 0.1);
+  }
+
+
+
+/* STEP 5 STYLE */
+/* Highlight entire row */
+.highlight-error {
+    animation: pulse-checkbox 1.5s infinite;
+    background-color: rgba(220, 53, 69, 0.07);
+    transition: all 0.5s ease;
+    border-radius: 5px;
+}
+
+/* Checkbox-specific styling */
+.has-error .form-check-input {
+    border-color: #dc3545 !important;
+}
+
+.was-validated .form-check-input:invalid {
+    animation: pulse-checkbox 1.5s infinite;
+}
+
+@keyframes pulse-checkbox {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.21); }
+    70% { box-shadow: 0 0 0 8px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}

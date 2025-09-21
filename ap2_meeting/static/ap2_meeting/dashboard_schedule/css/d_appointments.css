@@ -1,0 +1,303 @@
+
+/*APPOINTMENT TABLE START*/
+html {
+  scroll-behavior: smooth;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+
+.highlight {
+  background-color: #f0e68c;
+  /*border-radius: 10px 10px 0 0;*/
+}
+
+
+.current-date {
+  background-color: peachpuff;
+}
+
+.disabled {
+  background-color: #f2f2f2;
+  pointer-events: none;
+}
+
+/* Style for odd rows */
+/*tr:nth-child(odd) {*/
+/*  background-color: #f2f2f2; !* Light gray for odd rows *!*/
+/*}*/
+
+/* Style for even rows */
+tr:nth-child(even) {
+  background-color: #ffffff; /* White for even rows */
+}
+
+/* Optional: Add hover effect for better interactivity */
+/*tr:hover {*/
+/*  background-color: #e0e0e0; !* Light gray on hover *!*/
+/*}*/
+
+
+.booked {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #8a2be2 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+
+.booked-start {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  border-radius: 10px 10px 0 0;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #8a2be2 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+.booked-end {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  border-radius: 0 0 10px 10px;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #8a2be2 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+.booked-temp {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #e96100 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+
+.booked-temp-start {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  border-radius: 10px 10px 0 0;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #e96100 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+.booked-temp-end {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  border-radius: 0 0 10px 10px;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #e96100 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+
+.disabled-cell {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.4; /* Reduce opacity */
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #aaa 20px,
+    #ccc 20px
+  ); /* Hachure pattern */
+}
+
+/* Base style for available cells */
+.tutor-available-cell{
+  background-color: rgba(25, 191, 122, 1);
+}
+
+.tutor-available-cell-start {
+  background-color: rgba(25, 191, 122, 1);
+  border-radius: 10px 10px 0 0;
+}
+
+.tutor-available-cell-end {
+  background-color: rgba(25, 191, 122, 1);
+  border-radius: 0 0 10px 10px;
+}
+
+/* Hover style for available cells */
+.tutor-available-cell.highlight,
+.tutor-available-cell:hover,
+.tutor-available-cell-start:hover,
+.tutor-available-cell-end:hover {
+  background-color: rgba(0, 166, 96, 1);
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.tutor-available-cell.selected{
+  background-color: rgba(134, 216, 232, 1);
+  /*border: 1px solid rgb(51,163,255);*/
+}
+
+.tutor-available-cell-start.selected{
+  background-color: rgba(134, 216, 232, 1);
+  /*border: 1px solid rgb(51,163,255);*/
+  border-radius: 10px 10px 0 0;
+}
+.tutor-available-cell-end.selected{
+  background-color: rgba(134, 216, 232, 1);
+  /*border: 1px solid rgb(51,163,255);*/
+  border-radius: 0 0 10px 10px;
+}
+
+/* Guide LABLES */
+/* Styles for the guide container */
+.guide-box {
+  display: flex;
+  gap: 20px; /* Space between guide items */
+  border: 1px solid #7d7a68;
+  border-radius: 10px;
+  background: rgba(250,250,250,0.5);
+  align-items: center;
+  height: 70%;
+  padding: 8px; /* Space between the colored box and label */
+  margin: 4px; /* Space below the guide */
+}
+
+/* Styles for each guide item */
+.guide-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between the colored box and label */
+}
+
+/* Styles for the colored boxes */
+.guide-item span {
+  display: inline-block;
+  width: 20px; /* Size of the colored box */
+  height: 20px; /* Size of the colored box */
+  border: 1px solid #ccc; /* Optional: Add a border */
+  alignment: center;
+
+}
+.guide-item label, label{
+  align-items: center;
+  alignment: center;
+}
+
+/*Match the styles of the table cells */
+.guide-booked {
+  /*background-color: #ffcccc;*/
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #8a2be2 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+.guide-booked-temp {
+  /*background-color: #ffcccc;*/
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.5; /* Reduce opacity */
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #e96100 15px,
+    #ccc 15px
+  ); /* Hachure pattern */
+}
+
+.guide-disabled {
+  background-color: #f0f0f0; /* Light gray background */
+  opacity: 0.4; /* Reduce opacity */
+  background-image: repeating-linear-gradient(
+    -60deg,
+    transparent,
+    transparent 8px,
+    #aaa 10px,
+    #ccc 10px
+  ); /* Hachure pattern */
+}
+
+.guide-tutor-available {
+  background-color: rgba(25, 191, 122, 1);
+}
+
+.guide-selected {
+  background-color: rgba(134, 216, 232, 1);
+}
+/******************************************** APPOINTMENT TABLE END *********************************************/
+
+/******************************************** Add time manually by TUTOR *********************************************/
+.selectedByTutor{
+  background-color: rgb(200, 222, 0);
+}
+.inactiveDay {
+  background-color: rgba(0, 0, 255, 0.4); /* Dark layer with 50% opacity */
+}
+
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa; /* Light gray background on hover */
+}
+
+.badge {
+  font-size: 0.9em;
+  padding: 0.5em 0.75em;
+}
+
+
+
+
+/* Ensure consistent spacing and alignment */
+.d-flex.flex-wrap {
+  gap: 1rem; /* Adjust spacing between items */
+}
+
+/* Ensure dropdowns and buttons are aligned */
+.d-flex.align-items-center {
+  gap: 0.5rem; /* Adjust spacing between label and dropdown/button */
+}
+
+.current-date {
+  background-color: #ffeb3b; /* Highlight color for today */
+}
+
+.disabled-date {
+  background-color: #d3d3d3; /* Disabled color for past days */
+  opacity: 0.6; /* Dark layer to show disabled effect */
+}
+
+
+/******************************************** Add time manually *********************************************/

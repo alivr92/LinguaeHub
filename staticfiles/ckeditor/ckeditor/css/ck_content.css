@@ -1,0 +1,152 @@
+/* Base styles for CKEditor content */
+.styled-ckeditor {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Headings */
+.styled-ckeditor h2,
+.styled-ckeditor h3,
+.styled-ckeditor h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
+}
+
+.styled-ckeditor h2 { font-size: 1.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+.styled-ckeditor h3 { font-size: 1.5rem; }
+.styled-ckeditor h4 { font-size: 1.3rem; }
+
+/* Paragraphs and text */
+.styled-ckeditor p {
+    margin-bottom: 1.2em;
+    font-size: 1.05rem;
+}
+
+/* Lists */
+.styled-ckeditor ul,
+.styled-ckeditor ol {
+    margin-bottom: 1.2em;
+    padding-left: 2em;
+}
+
+.styled-ckeditor li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+.styled-ckeditor table {
+    width: 100%;
+    margin-bottom: 1.5em;
+    border-collapse: collapse;
+}
+
+.styled-ckeditor table th,
+.styled-ckeditor table td {
+    padding: 0.75em;
+    border: 1px solid #dee2e6;
+}
+
+.styled-ckeditor table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Images */
+.styled-ckeditor img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+
+/* Blockquotes */
+.styled-ckeditor blockquote {
+    padding: 1em 1.5em;
+    margin: 1em 0;
+    border-left: 4px solid #0d6efd;
+    background-color: #f8f9fa;
+    font-style: italic;
+}
+
+/* Code blocks */
+.styled-ckeditor pre {
+    padding: 1em;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+}
+
+/* Links */
+.styled-ckeditor a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+.styled-ckeditor a:hover {
+    text-decoration: underline;
+}
+
+/* Custom classes from CKEditor stylesSet */
+.styled-ckeditor .lead {
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.styled-ckeditor .info-box {
+    background-color: #e7f5ff;
+    border-left: 4px solid #4dabf7;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.styled-ckeditor .warning-box {
+    background-color: #fff3bf;
+    border-left: 4px solid #ffd43b;
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 0 4px 4px 0;
+}
+
+
+
+/* ---------------------------------------  TOC Sidebar styling --------------------------------------- */
+#toc-sidebar {
+    position: sticky;
+    top: 120px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+#toc-sidebar .nav-link {
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.25rem;
+    border-radius: 4px;
+    color: #495057;
+    transition: all 0.2s;
+}
+
+#toc-sidebar .nav-link:hover,
+#toc-sidebar .nav-link:focus {
+    background-color: #f8f9fa;
+}
+
+#toc-sidebar .nav-link.active {
+    color: #0d6efd;
+    background-color: #e7f5ff;
+    font-weight: 500;
+}
+
+/* Indentation for nested items */
+#toc-sidebar .ms-3 { padding-left: 1rem; }
+#toc-sidebar .ms-4 { padding-left: 2rem; }
+/* Ensure anchors account for fixed header */
+:target::before {
+    content: "";
+    display: block;
+    height: 80px; /* Same as your header height */
+    margin: -80px 0 0; /* Negative top margin */
+}

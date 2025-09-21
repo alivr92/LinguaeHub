@@ -1,0 +1,31 @@
+Subject: Great News! A Tutor Has Accepted Your Request
+
+GREAT NEWS! A TUTOR HAS ACCEPTED YOUR REQUEST
+
+Hello {{ request.student.first_name }},
+
+We're excited to let you know that {{ tutor_name }} has accepted your in-person request for {{ request.service.name }}!
+
+REQUEST SUMMARY:
+----------------
+Your Tutor: {{ tutor_name }}
+Service: {{ request.service.name }}
+Sessions: {{ offer.number_of_sessions }} x {{ offer.session_duration_hours }} hours
+Total Investment: €{{ request.total_student_value }}
+Your Learning Goal: {{ request.student_notes }}
+Preferred Start: {{ request.preferred_start_date }}
+
+NEXT STEP:
+Please confirm this booking within 24 hours to secure your sessions with {{ tutor_name }}. Once confirmed, we'll share your contact information with the tutor so you can coordinate the first meeting.
+
+ACTIONS:
+✅ Confirm & Pay Now: {{ dashboard_uri }}
+👀 View Tutor Profile: {{ tutor_profile_url }}
+
+IMPORTANT NOTE:
+This booking is only reserved for you until {{ offer.expires_at|date:"M j, Y" }} at {{ offer.expires_at|time:"H:i" }}. If not confirmed by then, it will be automatically released to other students.
+
+We're thrilled to help you achieve your learning goals!
+
+Best regards,
+The {{ site_name }} Team

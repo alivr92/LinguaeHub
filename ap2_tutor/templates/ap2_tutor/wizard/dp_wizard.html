@@ -1,0 +1,438 @@
+{% extends 'ap2_tutor/wizard/dp_wizard_base.html' %}
+{% load static %}
+{% load tz %}
+{% load custom_filters %}
+{% load my_custom_filters %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/glightbox/css/glightbox.css' %}">
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/quill/css/quill.snow.css' %}">#}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+
+    <!-- Add this script to load the Stepper CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/stepper/css/bs-stepper.min.css' %}">
+    {#    <link href="https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">#}
+
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %}">#}
+{% endblock %}
+{% block embed_style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.0.0/css/flag-icons.min.css">
+
+    <!-- Load Open Street Maps CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'app_in_person/css/inp_style.css' %}">
+
+
+{% endblock %}
+{% block my_style %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/wizard.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/phone.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/basic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/skills.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/method.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/dashboard_schedule/css/d_appointments.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/availability.css' %}">
+{#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/pricing.css' %}">#}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/pricing2.css' %}">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/pricing3.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/review.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/decision.css' %}">
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/terms_instructors.css' %}">#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/privacy_policy.css' %}">#}
+{% endblock %}
+
+{% block dashboard_main_content %}
+    <!-- =======================
+    Steps START -->
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <!-- Content -->
+            <p class="text-center">
+                {#                        Use this interface to complete your profile and book the best suitable time#}
+                {#                        for interview.#}
+                {#                        Once you are done you will be in our waiting list of our examiner interview. If approved, your#}
+                {#                        profile will appear in {{ CFChar.site_name }} tutor portal#}
+                {#                        and you will be informed by email that you have been accepted.#}
+
+                Complete your profile using this interface and schedule the most convenient time for your
+                interview. Once submitted, your application will be added to our interview waiting list for
+                examiner review. Upon approval, your profile will be featured on the {{ CFChar.site_name }}
+                tutor portal, and you will receive an email notification confirming your acceptance.
+            </p>
+        </div>
+    </div>
+
+
+    <input type="hidden" id="currentStep" value="{{ current_step }}">
+    <input type="hidden" id="applicantUId" value="{{ applicantUId }}">
+    <input type="hidden" id="isVIP" value="{{ isVIP }}">
+    <input type="hidden" id="maxEntries" value="{{ maxEntries }}">
+
+    <div class="card bg-transparent border rounded-3 mb-5 px-0">
+        <div id="stepper" class="bs-stepper stepper-outline">
+            <!-- Card header -->
+            <div class="card-header bg-light border-bottom px-lg-5">
+                <!-- Step Buttons START -->
+                <div class="bs-stepper-header" role="tablist">
+                    <!-- Step 1 -->
+                    <div class="step" data-target="#step-1">
+                        <div class="d-grid text-center align-items-center">
+                            <!-- Step trigger in header -->
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger1" aria-controls="step-1">
+                                <span class="bs-stepper-circle">1</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Profile</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 2 -->
+                    <div class="step" data-target="#step-2">
+                        <div class="d-grid text-center align-items-center">
+                            <!-- Step trigger in header -->
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger2" aria-controls="step-2">
+                                <span class="bs-stepper-circle">2</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Skills</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 3 -->
+                    <div class="step" data-target="#step-3">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger3" aria-controls="step-3">
+                                <span class="bs-stepper-circle">3</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Methods</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 4 -->
+                    <div class="step" data-target="#step-4">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger4" aria-controls="step-4">
+                                <span class="bs-stepper-circle">4</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Education</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 5 -->
+                    <div class="step" data-target="#step-5">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger5" aria-controls="step-5">
+                                <span class="bs-stepper-circle">5</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Availability</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 6 -->
+                    <div class="step" data-target="#step-6">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger6" aria-controls="step-6">
+                                <span class="bs-stepper-circle">6</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Pricing</h6>
+                        </div>
+                    </div>
+                    <div class="line"></div>
+
+                    <!-- Step 7 -->
+                    <div class="step" data-target="#step-7">
+                        <div class="d-grid text-center align-items-center">
+                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"
+                                    id="steppertrigger7" aria-controls="step-7">
+                                <span class="bs-stepper-circle">7</span>
+                            </button>
+                            <h6 class="bs-stepper-label d-none d-md-block">Review</h6>
+                        </div>
+                    </div>
+{#                    <div class="line"></div>#}
+
+                    <!-- Step 8 -->
+{#                    <div class="step" data-target="#step-8">#}
+{#                        <div class="d-grid text-center align-items-center">#}
+{#                            <button type="button" class="btn btn-link step-trigger mb-0" role="tab"#}
+{#                                    id="steppertrigger8" aria-controls="step-8">#}
+{#                                <span class="bs-stepper-circle">8</span>#}
+{#                            </button>#}
+{#                            <h6 class="bs-stepper-label d-none d-md-block">Result</h6>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+                <!-- Step Buttons END -->
+            </div>
+            <!-- Bootstrap Alert container -->
+            <div id="alert-container" class="m-2"></div>
+
+            <!-- Card body START -->
+            <div class="card-body">
+                <!-- Step content START -->
+                <div class="bs-stepper-content">
+
+                    <!-- Step: profile  -->
+                    <div id="step-1" role="tabpanel" class="content fade" aria-labelledby="steppertrigger1">
+                        {% include 'ap2_tutor/wizard/includes/profile.html' %}
+                    </div>
+
+                    <!-- Step: Teaching Skill  -->
+                    <div id="step-2" role="tabpanel" class="content fade" aria-labelledby="steppertrigger2">
+                        {% include 'ap2_tutor/wizard/includes/skills.html' %}
+                    </div>
+
+                    <!-- Step: Teaching Methods -->
+                    <div id="step-3" role="tabpanel" class="content fade" aria-labelledby="steppertrigger3">
+                        {% include 'ap2_tutor/wizard/includes/methods.html' %}
+                    </div>
+
+                    <!-- Step: Education -->
+                    <div id="step-4" role="tabpanel" class="content fade" aria-labelledby="steppertrigger4">
+                        {% include 'ap2_tutor/wizard/includes/education.html' %}
+                    </div>
+
+                    <!-- Step: Availability -->
+                    <div id="step-5" role="tabpanel" class="content fade" aria-labelledby="steppertrigger5">
+                        {% include 'ap2_tutor/wizard/includes/availability.html' %}
+                    </div>
+
+                    <!-- Step: Pricing -->
+                    <div id="step-6" role="tabpanel" class="content fade" aria-labelledby="steppertrigger6">
+                        {% include 'ap2_tutor/wizard/includes/pricing.html' %}
+{#                        {% include 'ap2_tutor/wizard/includes/pricing2.html' %}#}
+{#                        {% include 'ap2_tutor/wizard/includes/pricing3.html' %}#}
+                    </div>
+
+                    <!-- Step: Review -->
+                    <div id="step-7" role="tabpanel" class="content fade" aria-labelledby="steppertrigger7">
+                        {% include 'ap2_tutor/wizard/includes/review.html' %}
+                    </div>
+
+                    <!-- Step: Result content START -->
+{#                    <div id="step-8" role="tabpanel" class="content fade" aria-labelledby="steppertrigger8">#}
+{#                        {% include 'ap2_tutor/wizard/includes/result.html' %}#}
+{#                    </div>#}
+                </div>
+            </div>
+            <!-- Card body END -->
+        </div>
+    </div>
+    <!-- ======================= Steps END -->
+{% endblock %}
+
+{% block dt_modal %}
+    {% include 'modals/guideline_photo.html' %}
+    {% include 'modals/guideline_video.html' %}
+    <!-- Modal Trigger in your form -->
+    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a>
+    <!-- Cropping Modal -->
+    {% include 'modals/cropping_photo.html' %}
+    <!-- Terms and Conditions Modal -->
+    {% include 'modals/terms_instructors.html' %}
+    <!-- Privacy Policy Modal -->
+    {% include 'modals/privacy_policy.html' %}
+
+    <div class="modal fade" id="uploadProgressModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Uploading Files</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="progress mb-3" style="height: 24px;">
+                        <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p id="uploadProgressText" class="text-center mb-0">Preparing upload...</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelUploadBtn" type="button" class="btn btn-danger">Cancel Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Progress Modal -->
+<div class="modal fade" id="uploadProgressModal2222222" tabindex="-1" aria-labelledby="uploadModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalTitle">Uploading Files</h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress" style="height: 25px;">
+                    <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                         role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div id="uploadProgressText" class="text-center mt-2 small text-muted">
+                    Preparing upload... 0%
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelUploadBtn" class="btn btn-secondary">
+                    <i class="bi bi-x-circle"></i> Cancel Upload
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Upload Progress Modal -->
+<div class="modal fade" id="uploadProgressModal33" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Uploading Files</h5>
+            </div>
+            <div class="modal-body">
+                <div class="progress" style="height: 20px;">
+                    <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                         role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div id="uploadProgressText" class="text-center mt-2 small">Preparing upload... 0%</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelUploadBtn" class="btn btn-secondary">Cancel Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Popup modal for Confirm selections START -->
+    <div class="modal fade" id="confirmWeek" tabindex="-1" aria-labelledby="confirmWeekLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-white" id="confirmWeekLabel">Confirmation</h5>
+                    <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                            aria-label="Close"><i
+                            class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row text-start g-3">
+                        <!-- Course name -->
+                        <div class="col-12 text-center">
+                            <label class="form-label"><h4>Do you confirm your changes?</h4></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" id="btnNo" class="btn btn-danger my-0" data-bs-dismiss="modal">Discard
+                    </button>
+                    <button type="button" id="btnYes" class="btn btn-success my-0">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup modal for Confirm selections END -->
+
+
+    <!-- Save Price Modal -->
+    <div class="modal fade" id="savePriceModal" tabindex="-1" aria-labelledby="savePriceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="savePriceModalLabel">Save Hourly Rate</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+{#            <form method="post" action="{% url 'my_admin:save_tutor_price' %}">#}
+            <form method="post" action="#">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <p>Your hourly rate will be updated to: <strong id="modalPriceValue">$24.00</strong></p>
+                    <input type="hidden" name="hourly_rate" id="modalPriceInput" value="24">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="updateAllCourses" name="update_all_courses">
+                        <label class="form-check-label" for="updateAllCourses">
+                            Apply this rate to all my existing courses
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/js/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/stepper/js/bs-stepper.min.js' %}"></script>
+    {#    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>#}
+{% endblock %}
+{% block embed_script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="{% static 'assets/js/cropper.min.js' %}"></script>
+
+    <!-- Load Google Maps API -->
+    {#<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap" async defer></script>#}
+
+    <!-- Load Open Street Maps API -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="{% static 'assets/js/map/openStreet_onboarding.min.js' %}" type="module"></script>
+    <script src="{% static 'assets/js/map/showLocationSection.min.js' %}" type="module"></script>
+
+
+
+{% endblock %}
+
+{% block my_scripts %}
+    <!------------------------ Wizard Stepper Scripts ------------------------>
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/wizard.js' %}"></script>#}
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/phone.js' %}"></script>#}
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/phone.min.js' %}"></script>#}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/profile.min.js' %}"></script>
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/skills.min.js' %}"></script>#}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/skills.js' %}"></script>
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/edu.js' %}"></script>#}
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/edu.min.js' %}"></script>#}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/method.min.js' %}"></script>
+
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/availability.js' %}"></script>
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/availability.min.js' %}"></script>#}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/pricing.min.js' %}"></script>
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/pricing2.js' %}"></script>#}
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/pricing3.js' %}"></script>#}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/review.min.js' %}"></script>
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/wizard.min.js' %}"></script>#}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/wizard.js' %}"></script>
+
+    <!------------------------ Terms and Condition + Privacy Policy  ------------------------>
+    {#    <script src="{% static 'assets/js/terms_instructors.min.js' %}" type="module"></script>#}
+    {#    <script src="{% static 'assets/js/min/terms_instructors.bundle.js' %}" type="module" defer></script> #}
+    {#    <script src="{% static 'assets/js/privacy_policy.min.js' %}" type="module"></script>#}
+    {#    <script src="{% static 'assets/js/min/privacy_policy.bundle.js' %}" type="module" defer></script>#}
+{% endblock %}

@@ -1,0 +1,445 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}AGB{% endblock %}
+{% block my_style %}
+
+    <!-- Embedded CSS -->
+    <style>
+        .list-icon {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .list-icon li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-icon li:before {
+            content: "•";
+            color: var(--bs-primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Color variants */
+        .bg-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1);
+            border-color: rgba(13, 110, 253, 0.2);
+        }
+
+        .bg-success-soft {
+            background-color: rgba(25, 135, 84, 0.1);
+            border-color: rgba(25, 135, 84, 0.2);
+        }
+
+        .bg-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .bg-info-soft {
+            background-color: rgba(13, 202, 240, 0.1);
+            border-color: rgba(13, 202, 240, 0.2);
+        }
+
+        .bg-danger-soft {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.2);
+        }
+
+        .alert-primary-soft {
+            background-color: rgba(13, 110, 253, 0.1);
+            border-color: rgba(13, 110, 253, 0.2);
+            color: var(--bs-primary);
+        }
+
+        .alert-warning-soft {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: rgba(255, 193, 7, 0.2);
+            color: #664d03;
+        }
+
+        .alert-danger-soft {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-color: rgba(220, 53, 69, 0.2);
+            color: #58151c;
+        }
+
+        .border-primary-soft {
+            border-color: rgba(13, 110, 253, 0.3) !important;
+        }
+
+        .border-success-soft {
+            border-color: rgba(25, 135, 84, 0.3) !important;
+        }
+
+        .border-danger-soft {
+            border-color: rgba(220, 53, 69, 0.3) !important;
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <!-- Terms and Conditions (AGB) Page -->
+    <main class="bg-light">
+        <!-- =======================
+        Page Banner START -->
+        <section class="pt-3 pb-4 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-xl-6 text-center mx-auto">
+                        <h1 class="mb-3">Terms and Conditions (AGB)</h1>
+                        <div class="d-flex justify-content-center gap-3">
+                        <span class="badge bg-primary">
+                            <i class="bi bi-calendar-check me-1"></i> Effective: 01.07.2025
+                        </span>
+                            <span class="badge bg-secondary">
+                            Version: 1.0
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Page Banner END -->
+
+        <!-- =======================
+        Content START -->
+        <section class="pt-4 pb-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xl-8">
+                        <!-- Terms Card -->
+                        <div class="card shadow-sm border-0 overflow-hidden">
+                            <div class="card-header bg-primary text-white py-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="h5 mb-0"><i class="bi bi-file-text-fill me-2"></i> General Terms</h2>
+                                    <button class="btn btn-sm btn-outline-light" onclick="window.print()">
+                                        <i class="bi bi-printer me-1"></i> Print
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <!-- Scope -->
+                                <section id="sectionScope" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">1</span>
+                                        <h3 class="h5 fw-bold mb-0">Scope and Applicability</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <p>These Terms and Conditions ("Terms") govern all access to and use of the
+                                            Lingocept® platform ("Platform") by individuals and entities ("Users"),
+                                            including language learners ("Learners") and language professionals
+                                            ("Instructors"). The Platform is operated by Lingocept® and accessible via
+                                            web, mobile apps, and APIs.</p>
+                                        <div class="alert alert-primary-soft mt-3">
+                                            <i class="bi bi-info-circle-fill me-2"></i>
+                                            Use of the Platform constitutes acceptance of these Terms.
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Services -->
+                                <section id="sectionServices" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">2</span>
+                                        <h3 class="h5 fw-bold mb-0">Services Offered</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="card border-primary-soft mb-3">
+                                            <div class="card-body">
+                                                <h4 class="h6 text-primary"><i class="bi bi-people-fill me-2"></i>
+                                                    Language Learning Platform</h4>
+                                                <p>Lingocept® offers a mediated marketplace where Learners can book
+                                                    sessions and access educational content. Lingocept® facilitates
+                                                    account creation, scheduling, payment, and communication.</p>
+                                            </div>
+                                        </div>
+                                        <div class="card border-primary-soft mb-3">
+                                            <div class="card-body">
+                                                <h4 class="h6 text-primary"><i class="bi bi-box-seam-fill me-2"></i>
+                                                    Proprietary Product</h4>
+                                                <p>Lingocept® provides a proprietary learning product ("Product")
+                                                    including structured digital content and learning frameworks.
+                                                    Purchase grants a personal, non-transferable license.</p>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-warning-soft">
+                                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                            <strong>Role Disclaimer:</strong> Lingocept® is not a party to the contracts
+                                            between Learners and Instructors.
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Eligibility -->
+                                <section id="sectionEligibility" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">3</span>
+                                        <h3 class="h5 fw-bold mb-0">Eligibility and Registration</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <ul class="list-icon">
+                                            <li>Users must be 18+, or 13+ with verifiable parental consent</li>
+                                            <li>Accurate personal and payment data must be submitted</li>
+                                            <li>Each User may register one account per role unless explicitly
+                                                authorized
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+
+                                <!-- Account Security -->
+                                <section id="sectionAccount" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">4</span>
+                                        <h3 class="h5 fw-bold mb-0">Account Security</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <p>Users are responsible for maintaining the confidentiality of login
+                                            credentials. Unauthorized use must be reported immediately.</p>
+                                        <div class="alert alert-danger-soft">
+                                            <i class="bi bi-shield-exclamation me-2"></i>
+                                            Lingocept® reserves the right to suspend or terminate accounts in case of
+                                            violations or fraud.
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- User Conduct -->
+                                <section id="sectionConduct" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">5</span>
+                                        <h3 class="h5 fw-bold mb-0">User Conduct</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <p class="fw-bold text-danger">Strictly prohibited:</p>
+                                        <div class="card border-danger-soft mb-3">
+                                            <div class="card-body">
+                                                <ul class="list-icon">
+                                                    <li>Sharing private contact information before trial completion</li>
+                                                    <li>Circumventing payments or conducting off-platform sessions</li>
+                                                    <li>Sharing or republishing Product content</li>
+                                                    <li>Using bots or scrapers without prior written consent</li>
+                                                    <li>Harassment, discrimination, or unlawful behavior</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p class="text-danger">Violations may result in suspension, termination, or
+                                            legal consequences.</p>
+                                    </div>
+                                </section>
+
+                                <!-- Instructor Obligations -->
+                                <section id="sectionInstructors" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">6</span>
+                                        <h3 class="h5 fw-bold mb-0">Instructor Obligations</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="card border-primary-soft mb-3">
+                                            <div class="card-body">
+                                                <h4 class="h6 text-primary">Basic Requirements</h4>
+                                                <ul class="list-icon">
+                                                    <li>Hold relevant qualifications</li>
+                                                    <li>Maintain truthful and updated profiles</li>
+                                                    <li>Provide lessons professionally and ethically</li>
+                                                    <li>Comply with the Tutor Code of Conduct</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Instructor Code of Conduct -->
+                                        <div class="card border-warning mb-4">
+                                            <div class="card-header bg-warning-soft">
+                                                <h4 class="h6 mb-0"><i class="bi bi-list-check me-2"></i> Code of
+                                                    Conduct and Operational Standards</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <p>To ensure consistent educational quality and learner satisfaction,
+                                                    all Instructors are required to adhere to the following
+                                                    standards:</p>
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i
+                                                                    class="bi bi-person-check text-warning me-2"></i>
+                                                                Professional Standards</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>Appropriate dress and professional behavior</li>
+                                                                <li>Stable internet connection on PC/laptop</li>
+                                                                <li>Quiet, well-lit teaching space</li>
+                                                                <li>Webcam must remain on during sessions</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i class="bi bi-clock text-warning me-2"></i>
+                                                                Operational Requirements</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>Punctuality for all sessions</li>
+                                                                <li>No off-platform engagement</li>
+                                                                <li>Strict privacy and confidentiality</li>
+                                                                <li>Attendance at required training</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="alert alert-danger-soft mt-3">
+                                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                                    <strong>Zero Tolerance:</strong> Any misconduct may result in
+                                                    immediate termination.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Learner Code of Conduct -->
+                                        <div class="card border-info">
+                                            <div class="card-header bg-info-soft">
+                                                <h4 class="h6 mb-0"><i class="bi bi-people-fill me-2"></i> Code of
+                                                    Conduct for Learners</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i
+                                                                    class="bi bi-chat-square-heart text-info me-2"></i>
+                                                                Interaction Standards</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>Treat all with courtesy and respect</li>
+                                                                <li>No abusive or offensive language</li>
+                                                                <li>Camera use as requested</li>
+                                                                <li>Quiet participation environment</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="p-3 border rounded bg-light h-100">
+                                                            <h5 class="h6"><i
+                                                                    class="bi bi-shield-lock text-info me-2"></i>
+                                                                Platform Rules</h5>
+                                                            <ul class="small mb-0">
+                                                                <li>No off-platform contact</li>
+                                                                <li>No session recording without consent</li>
+                                                                <li>No solicitation of unrelated services</li>
+                                                                <li>No impersonation or law violation</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- Payment Terms -->
+                                <section id="sectionPayment" class="my-4 py-2">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">7</span>
+                                        <h3 class="h5 fw-bold mb-0">Payment Terms</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <div class="card h-100 border-success-soft">
+                                                    <div class="card-body">
+                                                        <h4 class="h6 text-success"><i
+                                                                class="bi bi-person-video2 me-2"></i> Learners</h4>
+                                                        <ul class="small">
+                                                            <li>Subscription or pay-as-you-go credit models</li>
+                                                            <li>Credits valid during billing cycle</li>
+                                                            <li>Pricing in EUR € (incl. VAT)</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card h-100 border-primary-soft">
+                                                    <div class="card-body">
+                                                        <h4 class="h6 text-primary"><i
+                                                                class="bi bi-person-video me-2"></i> Instructors</h4>
+                                                        <ul class="small">
+                                                            <li>70-85% of lesson revenue</li>
+                                                            <li>Commission rates may vary</li>
+                                                            <li>Trial lessons may be unpaid</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!-- More sections continue with same pattern... -->
+
+                                <!-- Contact -->
+                                <section id="sectionContact">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle me-2"
+                                              style="width: 28px; height: 28px; line-height: 20px;">19</span>
+                                        <h3 class="h5 fw-bold mb-0">Contact</h3>
+                                    </div>
+                                    <div class="ps-4">
+                                        <div class="card border-primary">
+                                            <div class="card-body">
+                                                <h4 class="h5 text-primary mb-3"><i class="bi bi-headset me-2"></i>
+                                                    Lingocept®</h4>
+                                                <p class="mb-1"><i class="bi bi-globe me-2"></i> www.lingocept.com</p>
+                                                <p class="mb-1"><i class="bi bi-envelope me-2"></i>
+                                                    contact@lingocept.com</p>
+                                                <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Berlin, Germany</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="card-footer bg-light">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="small text-muted mb-0">Last updated: July 1, 2025</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-download me-1"></i> Download PDF
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Acceptance Section -->
+                        <div class="card shadow-sm border-primary mt-4">
+                            <div class="card-body text-center">
+                                <h3 class="h5 mb-3">Acceptance of Terms</h3>
+                                <p class="mb-4">By using our platform, you acknowledge that you have read and agree to
+                                    these Terms and Conditions.</p>
+                                <div class="d-flex justify-content-center gap-3">
+                                    <a href="{% url 'app_pages:home' %}" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-left me-1"></i> Back to Home
+                                    </a>
+                                    <button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#acceptTermsModal">
+                                        <i class="bi bi-check-circle-fill me-1"></i> I Accept
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Content END -->
+    </main>
+
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}

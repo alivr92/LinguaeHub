@@ -1,0 +1,195 @@
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+{% endblock %}
+{% block embed_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'ap2_meeting/dashboard_schedule/css/d_appointments.css' %}">
+
+{% endblock %}
+
+{% block dashboard_main_content %}
+
+
+  <!-- Main content START -->
+  <div class="col-xl-9">
+
+    <!-- Appointment Settings START -->
+    <div class="card bg-transparent border rounded-3">
+      <!-- Card header -->
+      <div class="card-header bg-transparent border-bottom">
+        <h3 class="card-header-title mb-0">Appointment Settings</h3>
+      </div>
+      <!-- Card body START -->
+      <div class="card-body">
+        {#        <!-- Form -->#}
+        {#        <form class="row g-4">#}
+        {#          <!-- Session length Dropdown -->#}
+        {#          <div class="col-md-6">#}
+        {#            <label class="form-label">Session length: </label>#}
+        {#            <select id="sessionLength" name="sessionLength" class="form-control form-select " required>#}
+        {#              <option value="1">30 min</option>#}
+        {#              <option value="2">1 hour</option>#}
+        {#              <option value="3">90 min</option>#}
+        {#              <option value="4">2 hours</option>#}
+        {#              <option value="6">3 hours</option>#}
+        {#            </select>#}
+        {#          </div>#}
+        {##}
+        {#          <!-- Time Zone -->#}
+        {#          <div class="col-md-6">#}
+        {#            <label for="timezone-select" class="form-label">Time Zone</label>#}
+        {#            <select id="timezone-select" name="tutor_timezone" class="form-control form-select" required>#}
+        {#              <option value="UTC">UTC</option>#}
+        {#              <option value="Europe/Berlin">Berlin (DST)</option>#}
+        {#              <option value="Asia/Tehran">Tehran (IRST)</option>#}
+        {#              <option value="Europe/London">London (GMT)</option>#}
+        {#              <option value="America/New_York">New York (EST)</option>#}
+        {#              <option value="Asia/Tokyo">Tokyo (JST)</option>#}
+        {#            </select>#}
+        {#          </div>#}
+        {##}
+        {#          <!-- Start Day of week Dropdown -->#}
+        {#          <div class="col-md-6">#}
+        {#            <label class="form-label">Start day of week</label>#}
+        {#            <select id="startDayOfWeek" name="startDayOfWeek" class="form-control form-select form-select-sm" required>#}
+        {#              <option value="0">Sunday</option>#}
+        {#              <option value="1">Monday</option>#}
+        {#              <option value="2">Tuesday</option>#}
+        {#              <option value="3">Wednesday</option>#}
+        {#              <option value="4">Thursday</option>#}
+        {#              <option value="5">Friday</option>#}
+        {#              <option value="6">Saturday</option>#}
+        {#            </select>#}
+        {#          </div>#}
+        {##}
+        {#          <!-- Skills -->#}
+        {#          <div class="col-md-6">#}
+        {#            <label class="form-label">Teaching skill</label>#}
+        {#            <select name="tutor_skill" class="form-select js-choice border-0 z-index-9 bg-transparent" required#}
+        {#                    aria-label=".form-select-sm" data-search-enabled="false" data-remove-item-button="true">#}
+        {#              <option value="english">English</option>#}
+        {#              <option value="french">French</option>#}
+        {#            </select>#}
+        {#          </div>#}
+        {##}
+        {##}
+        {##}
+        {##}
+        {#          <!-- Buttons -->#}
+        {#          <div class="col-md-4">#}
+        {#            <label for="end-time" class="form-label">Class type</label><br>#}
+        {#            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">#}
+        {#              <!-- Free button -->#}
+        {#              <input type="radio" class="btn-check" name="options" id="option1" checked>#}
+        {#              <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option1">Individual</label>#}
+        {#              <!-- Disable button -->#}
+        {#              <input type="radio" class="btn-check" name="options" id="option2">#}
+        {#              <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option2">Group</label>#}
+        {#            </div>#}
+        {#          </div>#}
+        {##}
+        {##}
+        {#          <!-- Save button -->#}
+        {#          <div class="d-sm-flex justify-content-end">#}
+        {#            <button type="button" class="btn btn-primary mb-0">Save changes</button>#}
+        {#          </div>#}
+        {#        </form>#}
+
+        <!-- Form -->
+        <form method="POST" class="row g-4" action="{% url 'meeting:d_appointments_settings' %}">
+          {% csrf_token %}
+
+          <!-- Session length Dropdown -->
+          <div class="col-md-6">
+            <label class="form-label" for="id_session_length">Session length:</label>
+            {{ form.session_length }}
+          </div>
+
+          <!-- Time Zone -->
+          <div class="col-md-6">
+            <label class="form-label" for="id_provider_timezone">Time Zone</label>
+            {{ form.timezone }}
+          </div>
+
+          <!-- Start Day of week Dropdown -->
+          <div class="col-md-6">
+            <label class="form-label" for="id_week_start">Start day of week</label>
+            {{ form.week_start }}
+          </div>
+
+          <!-- Session Type (Class type) -->
+          <div class="col-md-4">
+            <label for="end-time" class="form-label">Class type</label><br>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="session_type" id="option3" value="trial"
+                     {% if form.session_type.value == 'trial' %}checked{% endif %}>
+              <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option3">Trial</label>
+              <input type="radio" class="btn-check" name="session_type" id="option1" value="private"
+                     {% if form.session_type.value == 'private' %}checked{% endif %}>
+              <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option1">Individual</label>
+              <input type="radio" class="btn-check" name="session_type" id="option2" value="group"
+                     {% if form.session_type.value == 'group' %}checked{% endif %}>
+              <label class="btn btn-sm btn-light btn-primary-soft-check border-0 m-0" for="option2">Group</label>
+            </div>
+          </div>
+
+          <!-- Save button -->
+          <div class="d-sm-flex justify-content-end">
+            <button type="submit" class="btn btn-primary mb-0">Save changes</button>
+          </div>
+        </form>
+
+
+      </div>
+      <!-- Card body END -->
+    </div>
+    <!-- Appointment Settings END -->
+
+  </div>
+  <!-- Main content END -->
+
+
+
+
+
+{% endblock %}
+{% block embed_messages %}
+  <!-- Messages from js will show here (Where embed message block defined in base)-->
+  <div id="alert-container" class="m-3"></div>
+{% endblock %}
+{% block embed_content %}
+  {#  {% include 'ap2_meeting/dashboard/d_table.html' %}#}
+{% endblock %}
+
+{% block scripts_vendors %}
+  <!-- Vendors -->
+  <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+{% endblock %}
+{% block embed_script %}
+  {% if user.is_authenticated %}
+    <script src="{% static 'ap2_meeting/dashboard_schedule/js/d_appointments.min.js' %}"></script>
+  {% endif %}
+{% endblock %}
+{% block embed_script_inHead %}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const timezoneInput = document.createElement('input');
+      timezoneInput.type = 'hidden';
+      timezoneInput.name = 'detected_timezone';
+      timezoneInput.value = userTimezone;
+      document.forms[0].appendChild(timezoneInput);
+    });
+  </script>
+{% endblock %}
+{% block my_scripts %}
+
+{% endblock %}

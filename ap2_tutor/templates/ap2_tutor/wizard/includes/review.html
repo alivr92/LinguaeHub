@@ -1,0 +1,1136 @@
+{#<div class="container py-4">#}
+{#  <!-- Introduction Video -->#}
+{#  <div class="card border-0 shadow-sm mb-4">#}
+{#    <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center">#}
+{#      <h5 class="mb-0"><i class="bi bi-camera-video me-2 text-primary"></i>Introduction Video</h5>#}
+{#      <a href="#edit-video" class="btn btn-sm btn-outline-secondary">Edit</a>#}
+{#    </div>#}
+{#    <div class="card-body">#}
+{#      <div class="d-flex flex-column flex-md-row align-items-center gap-4">#}
+{#        <div class="ratio ratio-16x9" style="width: 300px;">#}
+{#          <video controls class="rounded shadow-sm">#}
+{#            <source src="{{ intro_video_url }}" type="video/mp4">#}
+{#            Your browser does not support the video tag.#}
+{#          </video>#}
+{#        </div>#}
+{#        <div>#}
+{#          <h5 class="mb-2">Your Introduction</h5>#}
+{#          <p class="text-muted">This video will be displayed on your public profile to help students get to know you.</p>#}
+{#          <div class="d-flex gap-2">#}
+{#            <span class="badge bg-light text-dark">#}
+{#              <i class="bi bi-check-circle-fill text-success me-1"></i>Uploaded#}
+{#            </span>#}
+{#            <span class="badge bg-light text-dark">#}
+{#              <i class="bi bi-clock-fill text-warning me-1"></i>Pending Approval#}
+{#            </span>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<!-- Terms Modal -->#}
+{#<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-lg">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>#}
+{#        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#        <!-- Terms content would go here -->#}
+{#        <p>This is where your terms of service content would be displayed...</p>#}
+{#      </div>#}
+{#      <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<!-- Privacy Modal -->#}
+{#<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">#}
+{#  <div class="modal-dialog modal-lg">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>#}
+{#        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#        <!-- Privacy policy content would go here -->#}
+{#        <p>This is where your privacy policy content would be displayed...</p>#}
+{#      </div>#}
+{#      <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#<!-- JavaScript -->#}
+{#<script>#}
+{#document.addEventListener('DOMContentLoaded', function() {#}
+{#  // Enable submit button when terms are agreed to#}
+{#  const termsCheckbox = document.getElementById('termsAgreement');#}
+{#  const consentCheckbox = document.getElementById('consentAgreement');#}
+{#  const submitButton = document.getElementById('btn-submit');#}
+{##}
+{#  function checkAgreements() {#}
+{#    submitButton.disabled = !(termsCheckbox.checked && consentCheckbox.checked);#}
+{#  }#}
+{##}
+{#  termsCheckbox.addEventListener('change', checkAgreements);#}
+{#  consentCheckbox.addEventListener('change', checkAgreements);#}
+{##}
+{#  // Confirmation before submission#}
+{#  submitButton.addEventListener('click', function(e) {#}
+{#    if (!confirm('Are you sure you want to submit your application? You won\'t be able to make changes until it\'s reviewed.')) {#}
+{#      e.preventDefault();#}
+{#    }#}
+{#  });#}
+{# });#}
+{#</script>#}
+
+
+<div class="container py-4">
+    <!-- Progress Bar -->
+    <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Step 7 of 7</span>
+            <span class="text-muted">100% complete</span>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Review Your Application</h2>
+        <p class="text-muted">Verify all information before submitting your application</p>
+    </div>
+
+    <!-- Important Alert -->
+    <div class="alert alert-warning bg-light-warning border-warning border-0 shadow-sm mb-5">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle-fill fs-4 text-warning me-3"></i>
+            <div>
+                <h5 class="alert-heading mb-2">Final Review Required</h5>
+                <p class="mb-0">Please verify all information carefully. Use the <strong>Previous</strong> button to
+                    make corrections.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <!-- Profile Section -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-primary-soft text-primary me-3">
+                    <i class="bi bi-person-gear fs-4"></i>
+                </div>
+                <h4 class="mb-0">Profile Information</h4>
+            </div>
+            {#            <a href="#edit-profile" class="btn btn-sm btn-soft-secondary">#}
+            {#                <i class="bi bi-pencil-square me-1"></i>Edit#}
+            {#            </a>#}
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-column flex-md-row align-items-center gap-4 mb-4">
+                <div class="position-relative">
+                    <img src="{{ profile_basic_form.photo.value.url }}" class="rounded-circle border shadow-sm"
+                         width="120" height="120" alt="Profile Picture">
+                    {#                    <span class="position-absolute bottom-0 end-0 bg-success rounded-circle p-2 border border-3 border-white"><i class="bi bi-check text-white"></i></span>#}
+                    {% if user.profile.is_vip %}
+                        <span class="position-absolute bottom-0 end-0 translate-end">
+                            <i class="bi bi-patch-check-fill text-primary fs-4  p-0 rounded-0"></i>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="text-center text-md-start">
+                    <h3 class="mb-2">{{ profile_basic_form.first_name.value }} {{ profile_basic_form.last_name.value }}</h3>
+                    <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
+            <span class="badge bg-light text-secondary">
+              <i class="bi bi-gender-{{ profile_basic_form.gender.value|lower }} me-1"></i>{{ profile_basic_form.gender.value|capfirst }}
+            </span>
+                        <span class="badge bg-light text-secondary">
+              <i class="bi bi-award me-1"></i>{{ profile_basic_form.title.value|default:"No title" }}
+            </span>
+                        <span class="badge bg-light text-secondary">
+              <i class="bi bi-at me-1"></i>{{ profile_basic_form.username.value }}
+            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-info-soft text-info me-3">
+                    <i class="bi bi-envelope-at fs-4"></i>
+                </div>
+                <h4 class="mb-0">Contact Details</h4>
+            </div>
+            {#            <a href="#edit-contact" class="btn btn-sm btn-soft-secondary">#}
+            {#                <i class="bi bi-pencil-square me-1"></i>Edit#}
+            {#            </a>#}
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-envelope-fill text-info"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Email Address</h6>
+                            <p class="mb-0">{{ profile_basic_form.email.value }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-telephone-fill text-info"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Phone Number</h6>
+                            <p class="mb-0">{{ user.profile.full_phone|default:"Not provided" }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-globe2 text-info"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Country</h6>
+                            <p class="mb-0">{{ profile_basic_form.country.value }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-warning-soft text-warning me-3">
+                    <i class="bi bi-translate fs-4"></i>
+                </div>
+                <h4 class="mb-0">Language Proficiency</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Native Language</h6>
+                            <p class="mb-0">{{ profile_basic_form.lang_native.value }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-chat-left-text-fill text-warning"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Spoken Languages</h6>
+                            {#                            <p class="mb-0">{{ profile_basic_form.lang_speak.get_name_display|join:", " }}</p>#}
+                            <p class="mb-0">
+                                {% for lang in user.profile.lang_speak.all %}
+                                    {{ lang.name }}{% if not forloop.last %}, {% endif %}
+                                {% empty %}
+                                    No languages selected
+                                {% endfor %}
+                            </p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bio -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-purple-soft text-purple me-3">
+                    <i class="bi bi-file-text fs-4"></i>
+                </div>
+                <h4 class="mb-0">Your Bio</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="bg-light p-4 rounded">
+                <p class="mb-0">{{ profile_basic_form.bio.value }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teaching Skills -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-danger-soft text-danger me-3">
+                    <i class="bi bi-book fs-4"></i>
+                </div>
+                <h4 class="mb-0">Teaching Skills</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Skill</th>
+                        <th>Level</th>
+                        <th>Video</th>
+                        <th>Thumbnail</th>
+                        <th>Document</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for uSkill in user.skills.all %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                  <span class="badge bg-primary-soft text-primary rounded-circle p-2 me-3">
+                    <i class="bi bi-check-lg"></i>
+                  </span>
+                                    <span class="fw-medium">{{ uSkill.skill }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-info-soft text-info">{{ uSkill.level }}</span>
+                            </td>
+                            <td>
+                                {% if uSkill.video %}
+                                    {#                                    <a href="{{ uSkill.video.url }}"#}
+                                    {#                                       class="btn btn-sm btn-outline-primary glightbox"#}
+                                    {#                                       data-glightbox data-gallery="office-tour"#}
+                                    {#                                       title="Skill Video">#}
+                                    {#                                        <i class="bi bi-play-circle me-1"></i>Video#}
+                                    {#                                    </a>#}
+                                    <a data-glightbox data-gallery="office-tour"
+                                       href="{{ uSkill.video.url }}"
+                                       class="btn btn-round btn-primary-soft overflow-visible"
+                                       data-bs-toggle="tooltip" data-bs-placement="top"
+                                       title="Play">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted small">No video</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if uSkill.thumbnail %}
+                                    {% with uSkill.thumbnail.name|lower as filename %}
+                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                            <!-- Image Lightbox -->
+                                            <a href="{{ uSkill.thumbnail.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               data-glightbox="file-gallery"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="View"><i class="bi bi-image"></i>
+                                            </a>
+                                        {% else %}
+                                            <!-- Other Files: fallback download link -->
+                                            <a href="{{ uSkill.thumbnail.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               target="_blank"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Download">
+                                                {#                                                <i class="bi bi-download"></i>#}
+                                                <i class="bi bi-file-earmark-text"></i>
+                                            </a>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="text-muted small">No thumbnail</span>
+                                {% endif %}
+
+
+                            </td>
+                            <td>
+                                {% if uSkill.certificate %}
+                                    {% with uSkill.certificate.name|lower as filename %}
+                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                            <!-- Image Lightbox -->
+                                            <a href="{{ uSkill.certificate.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               data-glightbox="file-gallery"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="View"><i class="bi bi-image"></i>
+                                            </a>
+                                        {% else %}
+                                            <!-- Other Files: fallback download link -->
+                                            <a href="{{ uSkill.certificate.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               target="_blank"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Download">
+                                                {#                                                <i class="bi bi-download"></i>#}
+                                                <i class="bi bi-file-earmark-text"></i>
+                                            </a>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="text-muted small">No certificate</span>
+                                {% endif %}
+
+
+                            </td>
+
+                            {#                            <td>#}
+                            {#                <span class="badge bg-warning-soft text-warning">#}
+                            {#                  <i class="bi bi-clock-history me-1"></i>Pending {{ uSkill.status }}#}
+                            {#                </span>#}
+                            {#                            </td>#}
+                            <td>
+                                {% if uSkill.status == 'approved' %}
+                                    <span class="badge bg-success-soft text-success">
+                                <i class="bi bi-check-circle-fill me-1"></i>Approved
+                            </span>
+                                {% elif uSkill.status == 'need_interview' %}
+                                    <span class="badge bg-primary-soft text-primary">
+                                <i class="bi bi-info-circle-fill me-1"></i>Interview Required
+                            </span>
+                                {% elif uSkill.status == 'rejected' %}
+                                    <span class="badge bg-danger-soft text-danger">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>Rejected
+                            </span>
+                                {% else %}
+                                    <span class="badge bg-warning-soft text-warning">
+                                <i class="bi bi-clock-history me-1"></i>Pending
+                            </span>
+                                {% endif %}
+                            </td>
+
+
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="bi bi-book fs-1 text-muted mb-2"></i>
+                                    <h5 class="text-muted">No skills added</h5>
+                                    <p class="text-muted small">Add your skills to enhance your profile</p>
+                                    {#                                    <a href="#add-skill" class="btn btn-sm btn-primary mt-2">#}
+                                    {#                                        <i class="bi bi-plus-lg me-1"></i>Add Skill#}
+                                    {#                                    </a>#}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Formal Education -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-info-soft text-info me-3">
+                    <i class="bi bi-mortarboard fs-4"></i>
+                </div>
+                <h4 class="mb-0">Formal Education</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Degree</th>
+                        <th>Field of Study</th>
+                        <th>Institution</th>
+                        <th>Years</th>
+                        <th>Description</th>
+                        <th>Document</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for edu in user.educations.all %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <span class="badge bg-info-soft text-info rounded-circle p-2 me-3">
+                                    <i class="bi bi-mortarboard-fill"></i>
+                                </span>
+                                    <div>
+                                        <h6 class="mb-0">{{ edu.degree }}</h6>
+                                        {% if edu.is_certified %}
+                                            <small class="text-success">Certified</small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ edu.field_of_study }}</td>
+                            <td>{{ edu.institution }}</td>
+                            <td>
+                                {% if edu.start_year %}
+                                    {{ edu.start_year }} - {{ edu.end_year }}
+                                {% else %}
+                                    {{ edu.end_year }}
+                                {% endif %}
+                            </td>
+                            <td>{{ edu.description }}</td>
+                            <td>
+                                {% if edu.document %}
+                                    {% with edu.document.name|lower as filename %}
+                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                            <!-- Image Lightbox -->
+                                            <a href="{{ edu.document.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               data-glightbox="file-gallery"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="View">
+                                                <i class="bi bi-image"></i>
+                                            </a>
+                                        {% else %}
+                                            <!-- Other Files: fallback download link -->
+                                            <a href="{{ edu.document.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               target="_blank"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Download"><i
+                                                    class="bi bi-download"></i></a>
+
+                                        {% endif %}
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="text-muted small">No certificate</span>
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {% if edu.is_certified %}
+                                    <span class="badge bg-success-soft text-success">
+                                <i class="bi bi-check-circle-fill me-1"></i>Verified
+                            </span>
+                                {% elif edu.needs_interview %}
+                                    <span class="badge bg-danger-soft text-danger">
+                                <i class="bi bi-exclamation-triangle-fill me-1"></i>Interview Required
+                            </span>
+                                {% else %}
+                                    <span class="badge bg-warning-soft text-warning">
+                                <i class="bi bi-clock-history me-1"></i>Pending
+                            </span>
+                                {% endif %}
+                            </td>
+                            {#                            <td>#}
+                            {#                                <div class="dropdown">#}
+                            {#                                    <button class="btn btn-sm btn-soft-secondary dropdown-toggle" type="button"#}
+                            {#                                            data-bs-toggle="dropdown" aria-expanded="false">#}
+                            {#                                        <i class="bi bi-three-dots-vertical"></i>#}
+                            {#                                    </button>#}
+                            {#                                    <ul class="dropdown-menu dropdown-menu-end">#}
+                            {#                                        <li><a class="dropdown-item" href="#edit-edu-{{ edu.id }}">#}
+                            {#                                            <i class="bi bi-pencil-square me-2"></i>Edit#}
+                            {#                                        </a></li>#}
+                            {#                                        <li><a class="dropdown-item" href="#verify-edu-{{ edu.id }}">#}
+                            {#                                            <i class="bi bi-shield-check me-2"></i>Request Verification#}
+                            {#                                        </a></li>#}
+                            {#                                        {% if edu.needs_interview %}#}
+                            {#                                            <li><a class="dropdown-item" href="#schedule-interview">#}
+                            {#                                                <i class="bi bi-calendar-check me-2"></i>Schedule Interview#}
+                            {#                                            </a></li>#}
+                            {#                                        {% endif %}#}
+                            {#                                        <li>#}
+                            {#                                            <hr class="dropdown-divider">#}
+                            {#                                        </li>#}
+                            {#                                        <li><a class="dropdown-item text-danger" href="#delete-edu-{{ edu.id }}">#}
+                            {#                                            <i class="bi bi-trash me-2"></i>Delete#}
+                            {#                                        </a></li>#}
+                            {#                                    </ul>#}
+                            {#                                </div>#}
+                            {#                            </td>#}
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="7" class="text-center py-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="bi bi-mortarboard fs-1 text-muted mb-2"></i>
+                                    <h5 class="text-muted">No education records added</h5>
+                                    <p class="text-muted small">Add your formal education to complete your profile</p>
+                                    {#                                    <a href="#add-education" class="btn btn-sm btn-primary mt-2">#}
+                                    {#                                        <i class="bi bi-plus-lg me-1"></i>Add Education#}
+                                    {#                                    </a>#}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Teaching Skills TEST-------------------- -->
+    {#    <div class="card border-0 shadow-sm mb-4">#}
+    {#        <div class="card-header bg-light border-bottom d-flex justify-content-between align-items-center">#}
+    {#            <h5 class="mb-0"><i class="bi bi-book me-2 text-primary"></i>Teaching Skills</h5>#}
+    {#            <a href="#edit-skills" class="btn btn-sm btn-outline-secondary">Edit</a>#}
+    {#        </div>#}
+    {#        <div class="card-body">#}
+    {#            <div class="table-responsive">#}
+    {#                <table class="table table-hover">#}
+    {#                    <thead class="table-light">#}
+    {#                    <tr>#}
+    {#                        <th>Skill</th>#}
+    {#                        <th>Level</th>#}
+    {#                        <th>Materials</th>#}
+    {#                        <th>Status</th>#}
+    {#                    </tr>#}
+    {#                    </thead>#}
+    {#                    <tbody>#}
+    {#                    {% for uSkill in user.skills.all %}#}
+    {#                        <tr>#}
+    {#                            <td>#}
+    {#                                <div class="d-flex align-items-center">#}
+    {#                  <span class="badge bg-primary-soft text-primary rounded-circle p-2 me-2">#}
+    {#                    <i class="bi bi-check-lg"></i>#}
+    {#                  </span>#}
+    {#                                    <span>{{ uSkill.skill }}</span>#}
+    {#                                </div>#}
+    {#                            </td>#}
+    {#                            <td><span class="badge bg-info-soft text-info">{{ uSkill.level }}</span></td>#}
+    {#                            <td>#}
+    {#                                <div class="d-flex gap-2">#}
+    {#                                    {% if uSkill.certificate %}#}
+    {#                                        <a href="{{ uSkill.certificate.url }}" class="btn btn-sm btn-outline-primary"#}
+    {#                                           target="_blank">#}
+    {#                                            <i class="bi bi-file-earmark-text me-1"></i>Certificate#}
+    {#                                        </a>#}
+    {#                                    {% else %}#}
+    {#                                        <span class="text-muted">No certificate</span>#}
+    {#                                    {% endif %}#}
+    {##}
+    {#                                    {% if uSkill.video %}#}
+    {#                                        <a href="{{ uSkill.video.url }}"#}
+    {#                                           class="btn btn-sm btn-outline-primary glightbox">#}
+    {#                                            <i class="bi bi-play-circle me-1"></i>Video#}
+    {#                                        </a>#}
+    {#                                    {% else %}#}
+    {#                                        <span class="text-muted">No video</span>#}
+    {#                                    {% endif %}#}
+    {#                                </div>#}
+    {#                            </td>#}
+    {#                            <td>#}
+    {#                                <span class="badge bg-warning-soft text-warning">{{ uSkill.status }}</span>#}
+    {#                            </td>#}
+    {#                        </tr>#}
+    {#                    {% endfor %}#}
+    {#                    </tbody>#}
+    {#                </table>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+    <!-- Teaching Certifications -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-primary-soft text-primary me-3">
+                    <i class="bi bi-award fs-4"></i>
+                </div>
+                <h4 class="mb-0">Teaching Certifications</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Certification</th>
+                        <th>Organization</th>
+                        <th>Year</th>
+                        <th>Document</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cert in user.certificates.all %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                <span class="badge bg-primary-soft text-primary rounded-circle p-2 me-3">
+                                    <i class="bi bi-award-fill"></i>
+                                </span>
+                                    <div>
+                                        <h6 class="mb-0">{{ cert.get_name_display }}</h6>
+                                        {% if cert.is_verified %}
+                                            <small class="text-success">
+                                                Verified {{ cert.verified_at|date:"M Y" }}</small>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ cert.issuing_organization }}</td>
+                            <td>{{ cert.completion_date }}</td>
+                            <td>
+                                {% if cert.document %}
+                                    {% with cert.document.name|lower as filename %}
+                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".gif" in filename %}
+                                            <!-- Image Lightbox -->
+                                            <a href="{{ cert.document.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               data-glightbox="file-gallery"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="View">
+                                                <i class="bi bi-image"></i>
+                                                {#                                                <img src="{{ cert.document.url }}" alt="Preview" class="img-thumbnail" style="max-width: 60px;"/> #}
+                                            </a>
+                                        {% else %}
+                                            <!-- Other Files: fallback download link -->
+                                            <a href="{{ cert.document.url }}"
+                                               class="btn btn-primary-soft btn-round"
+                                               target="_blank"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Download"><i
+                                                    class="bi bi-download"></i></a>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% else %}
+                                    <span class="text-muted small">No certificate</span>
+                                {% endif %}
+
+
+                            </td>
+                            <td>
+                                {% if cert.is_verified %}
+                                    <span class="badge bg-success-soft text-success">
+                                <i class="bi bi-check-circle-fill me-1"></i>Verified
+                            </span>
+                                {% else %}
+                                    <span class="badge bg-warning-soft text-warning">
+                                <i class="bi bi-clock-history me-1"></i>Pending
+                            </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="bi bi-award fs-1 text-muted mb-2"></i>
+                                    <h5 class="text-muted">No certifications added</h5>
+                                    <p class="text-muted small">Add your teaching certifications to enhance your
+                                        profile</p>
+                                    {#                                    <a href="#add-certification" class="btn btn-sm btn-primary mt-2">#}
+                                    {#                                        <i class="bi bi-plus-lg me-1"></i>Add Certification#}
+                                    {#                                    </a>#}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{# ======================================================================= #}
+<!-- NEW: Pricing Section -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-success-soft text-success me-3">
+                    <i class="bi bi-currency-dollar fs-4"></i>
+                </div>
+                <h4 class="mb-0">Pricing Information</h4>
+            </div>
+{#            <a href="{% url 'meeting:d_appointments_settings' %}" class="btn btn-sm btn-soft-secondary">#}
+{#                <i class="bi bi-pencil-square me-1"></i>Edit#}
+{#            </a>#}
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-clock-fill text-success"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Lesson Price</h6>
+                            <p class="mb-0">${{ lesson_price }} per 60-minute lesson</p>
+                            {% if follows_recommendation %}
+                                <span class="badge bg-success-soft text-success mt-1">
+                                    <i class="bi bi-check-circle-fill me-1"></i>Following recommendation
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-percent text-success"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Commission Rate</h6>
+                            <p class="mb-0">{{ commission_rate|floatformat:0 }}% </p>
+                            <small class="text-muted">Decreases with more teaching hours</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- NEW: Availability Section -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-info-soft text-info me-3">
+                    <i class="bi bi-calendar-check fs-4"></i>
+                </div>
+                <h4 class="mb-0">Availability Schedule</h4>
+            </div>
+{#            <a href="{% url 'meeting:d_appointments' %}" class="btn btn-sm btn-soft-secondary">#}
+{#                <i class="bi bi-pencil-square me-1"></i>Edit#}
+{#            </a>#}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-clock text-info"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Time Zone</h6>
+                            <p class="mb-0">{{ user_timezone }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-clock-history text-info"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Session Length</h6>
+                            <p class="mb-0">{{ session_length }} minutes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Availability -->
+            <h6 class="fw-semibold mb-3">Weekly Schedule</h6>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Day</th>
+                            <th>Availability</th>
+                            <th>Time Slots</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for day in week_schedule %}
+                        <tr>
+                            <td class="fw-medium">{{ day.name }}</td>
+                            <td>
+                                {% if day.available %}
+                                    <span class="badge bg-success-soft text-success">
+                                        <i class="bi bi-check-circle-fill me-1"></i>Available
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary-soft text-secondary">
+                                        <i class="bi bi-x-circle-fill me-1"></i>Not Available
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if day.time_slots %}
+                                    {% for slot in day.time_slots %}
+                                        <span class="badge bg-primary-soft text-primary mb-1">
+                                            {{ slot.start_time|time:"H:i" }} - {{ slot.end_time|time:"H:i" }}
+                                        </span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="text-muted">No time slots</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Availability Summary -->
+            <div class="mt-3 p-3 bg-light rounded">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold">Availability Summary</h6>
+                        <p class="mb-2">
+                            <i class="bi bi-calendar-week me-2"></i>
+                            <strong>{{ total_available_days }}</strong> days available per week
+                        </p>
+                        <p class="mb-0">
+                            <i class="bi bi-clock me-2"></i>
+                            <strong>{{ total_time_slots }}</strong> time slots total
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-info mb-0">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Students will see your availability converted to their local time zone.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# ======================================================================= #}
+
+    <!-- Teaching Information -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">
+            <div class="d-flex align-items-center">
+                <div class="icon-circle bg-primary-soft text-primary me-3">
+                    <i class="bi bi-mortarboard fs-4"></i>
+                </div>
+                <h4 class="mb-0">Teaching Information</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <!-- Years of Teaching Experience -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-clock-history text-primary"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 text-muted">Years of Experience</h6>
+                            <p class="mb-0">
+                                {% if tutor.years_experience %}
+                                    {{ tutor.get_years_experience_display }} year{{ tutor.years_experience|pluralize }}
+                                {% else %}
+                                    Not specified
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teaching Special Fields -->
+                <div class="col-md-6">
+                    <div class="d-flex align-items-start">
+                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">
+                            <i class="bi bi-tags-fill text-primary"></i>
+                        </div>
+                        <div class="w-100">
+                            <h6 class="mb-2 text-muted">Teaching Specializations</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                {% if tutor.teaching_tags.all %}
+                                    {% for tag in tutor.teaching_tags.all %}
+                                        <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10 py-2 px-3 rounded-pill">
+                            <i class="bi bi-tag-fill me-1"></i>
+                            {{ tag.name }}
+                        </span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="text-muted fst-italic">No specializations selected</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Introduction Video -->
+    {#    <div class="card border-0 shadow-sm mb-4">#}
+    {#        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">#}
+    {#            <div class="d-flex align-items-center">#}
+    {#                <div class="icon-circle bg-pink-soft text-pink me-3">#}
+    {#                    <i class="bi bi-camera-video fs-4"></i>#}
+    {#                </div>#}
+    {#                <h4 class="mb-0">Introduction Video</h4>#}
+    {#            </div>#}
+    {#            <a href="#edit-video" class="btn btn-sm btn-soft-secondary">#}
+    {#                <i class="bi bi-pencil-square me-1"></i>Edit#}
+    {#            </a>#}
+    {#        </div>#}
+    {#        <div class="card-body">#}
+    {#            <div class="d-flex flex-column flex-lg-row align-items-center gap-4">#}
+    {#                <div class="ratio ratio-16x9" style="width: 300px;">#}
+    {#                    <video controls class="rounded shadow-sm">#}
+    {#                        <source src="{{ intro_video_url }}" type="video/mp4">#}
+    {#                        Your browser does not support the video tag.#}
+    {#                    </video>#}
+    {#                </div>#}
+    {#                <div>#}
+    {#                    <h5 class="mb-2">Your Introduction Video</h5>#}
+    {#                    <p class="text-muted">This video will be displayed on your public profile to help students get to#}
+    {#                        know you.</p>#}
+    {#                    <div class="d-flex flex-wrap gap-2">#}
+    {#            <span class="badge bg-success-soft text-success">#}
+    {#              <i class="bi bi-check-circle-fill me-1"></i>Uploaded#}
+    {#            </span>#}
+    {#                        <span class="badge bg-warning-soft text-warning">#}
+    {#              <i class="bi bi-clock-fill me-1"></i>Pending Approval#}
+    {#            </span>#}
+    {#                        <span class="badge bg-light text-dark">#}
+    {#              <i class="bi bi-info-circle-fill me-1"></i>1-3 minutes recommended#}
+    {#            </span>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+
+    <!-- Pricing -->
+    {#    <div class="card border-0 shadow-sm mb-4">#}
+    {#        <div class="card-header bg-light d-flex align-items-center justify-content-between py-3">#}
+    {#            <div class="d-flex align-items-center">#}
+    {#                <div class="icon-circle bg-success-soft text-success me-3">#}
+    {#                    <i class="bi bi-currency-dollar fs-4"></i>#}
+    {#                </div>#}
+    {#                <h4 class="mb-0">Formal Education</h4>#}
+    {#            </div>#}
+    {#            <a href="#edit-pricing" class="btn btn-sm btn-soft-secondary">#}
+    {#                <i class="bi bi-pencil-square me-1"></i>Edit#}
+    {#            </a>#}
+    {#        </div>#}
+    {#        <div class="card-body">#}
+    {#            <div class="row g-3">#}
+    {#                <div class="col-md-4">#}
+    {#                    <div class="d-flex align-items-start">#}
+    {#                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">#}
+    {#                            <i class="bi bi-clock-fill text-success"></i>#}
+    {#                        </div>#}
+    {#                        <div>#}
+    {#                            <h6 class="mb-1 text-muted">Hourly Rate</h6>#}
+    {#                            <p class="mb-0">${{ profile_basic_form.cost_hourly.value }}</p>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="col-md-4">#}
+    {#                    <div class="d-flex align-items-start">#}
+    {#                        <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">#}
+    {#                            <i class="bi bi-gift-fill text-success"></i>#}
+    {#                        </div>#}
+    {#                        <div>#}
+    {#                            <h6 class="mb-1 text-muted">Trial Rate</h6>#}
+    {#                            <p class="mb-0">${{ profile_basic_form.cost_trial.value }}</p>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                {% if profile_basic_form.discount.value %}#}
+    {#                    <div class="col-md-4">#}
+    {#                        <div class="d-flex align-items-start">#}
+    {#                            <div class="icon-square bg-light text-dark rounded-circle flex-shrink-0 me-3">#}
+    {#                                <i class="bi bi-percent text-success"></i>#}
+    {#                            </div>#}
+    {#                            <div>#}
+    {#                                <h6 class="mb-1 text-muted">Discount</h6>#}
+    {#                                <p class="mb-0">{{ profile_basic_form.discount.value }}%#}
+    {#                                    (until {{ profile_basic_form.discount_deadline.value }})</p>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                {% endif %}#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
+    <!-- ========== END MAIN CONTENT ========== -->
+
+    <!-- Submission Notes -->
+    <div class="alert alert-info bg-light-info border-info border-0 shadow-sm mb-4">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-info-circle-fill fs-4 text-info me-3"></i>
+            <div>
+                <h5 class="alert-heading mb-2">Application Process</h5>
+                <p class="mb-2">Your application will be reviewed within <strong>3-5 business days</strong>. You'll
+                    receive an email notification once a decision has been made.</p>
+                <p class="mb-0"><strong>Note:</strong> After submission, profile changes will be locked until your
+                    account is activated.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+
+            <form id="agreement-form" method="POST" action="{% url 'provider:wizard_submit_final' %}"
+                  class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="form-check mb-3 {% if AgreementForm.terms_agreed.errors %}has-error{% endif %}"
+                     id="terms_container">
+                    {#                    <input class="form-check-input" type="checkbox" name="terms_agreed" id="terms_agreed1" required>#}
+                    {{ AgreementForm.terms_agreed }}
+                    <label class="form-check-label" for="terms_agreed1">
+                        I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of
+                        Service</a>
+                        and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                    </label>
+                    {% if AgreementForm.terms_agreed.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ AgreementForm.terms_agreed.errors.0 }}
+                        </div>
+                    {% endif %}
+
+                </div>
+                <div class="form-check">
+                    {#                    <input class="form-check-input" type="checkbox" name="email_consent" id="email_consent1">#}
+                    {{ AgreementForm.email_consent }}
+                    <label class="form-check-label" for="email_consent1">
+                        I consent to receiving important notifications and updates via email
+                    </label>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <!-- Step 5 Navigation buttons -->
+    <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-outline-secondary btn-prev px-4" id="btnPrev_review" data-action="prev"
+                data-step="7">
+            <i class="bi bi-arrow-left me-2"></i> Previous
+        </button>
+
+        <div>
+            <button type="submit" form="agreement-form" class="btn btn-success px-4" id="btn-submit">
+                <i class="bi bi-check-circle me-2"></i>Submit Application
+            </button>
+        </div>
+    </div>
+
+
+</div>

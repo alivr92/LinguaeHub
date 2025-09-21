@@ -1,0 +1,325 @@
+import {showAlert} from './utils.js';
+
+const lessonPriceInput = document.getElementById('lessonPrice');
+const followRecommendation = document.getElementById('followRecommendation');
+const yourEarnings = document.getElementById('yourEarnings');
+const platformFee = document.getElementById('platformFee');
+const commissionRate = document.getElementById('commissionRate');
+// const progressText = document.getElementById('progressText');
+
+// Monthly earnings projection elements
+const lessonsPerWeekSlider = document.getElementById('lessonsPerWeek');
+const lessonsValue = document.getElementById('lessonsValue');
+const monthlyEarnings = document.getElementById('monthlyEarnings');
+const weeklyEarnings = document.getElementById('weeklyEarnings');
+const quarterlyEarnings = document.getElementById('quarterlyEarnings');
+const yearlyEarnings = document.getElementById('yearlyEarnings');
+const sliderTooltip = document.getElementById('sliderTooltip');
+const defaultPrice = 25;
+
+// UPDATED: More competitive commission tiers
+const commissionTiers = [
+    {hours: 0, rate: 0.30},    // 30% for beginners
+    {hours: 20, rate: 0.25},   // 25% after 20 hours
+    {hours: 50, rate: 0.22},   // 22% after 50 hours
+    {hours: 100, rate: 0.19},  // 19% after 100 hours
+    {hours: 200, rate: 0.15}   // 15% after 200 hours (top tier)
+];
+
+// For demonstration, we'll use the starting rate (30%)
+let currentCommissionRate = commissionTiers[0].rate;
+let currentTierIndex = 0;
+let completedHours = 0; // For demonstration, start with 0 hours
+
+// Update price display with calculations
+function updatePriceDisplay() {
+    const price = parseFloat(lessonPriceInput.value) || defaultPrice;
+    const commissionAmount = price * currentCommissionRate;
+    const earnings = price - commissionAmount;
+
+    commissionRate.textContent = `${Math.round(currentCommissionRate * 100)}%`;
+    yourEarnings.textContent = `$${earnings.toFixed(2)}`;
+    platformFee.textContent = `$${commissionAmount.toFixed(2)}`;
+
+    // Update progress bar
+    const progressBar = document.querySelector('.progress-bar');
+    let progressPercentage = 0;
+
+    if (currentTierIndex < commissionTiers.length - 1) {
+        const nextTierHours = commissionTiers[currentTierIndex + 1].hours;
+        progressPercentage = Math.min(100, (completedHours / nextTierHours) * 100);
+        // progressText.textContent = `${completedHours}/${nextTierHours} hours`;
+    } else {
+        progressPercentage = 100;
+        // progressText.textContent = "Maximum tier reached!";
+    }
+
+    progressBar.style.width = `${progressPercentage}%`;
+    progressBar.setAttribute('aria-valuenow', progressPercentage);
+
+    // Also update the commission table with new calculations
+    updateCommissionTable(price);
+    updateMonthlyEarnings();
+}
+
+// NEW: Update commission table with dynamic calculations
+function updateCommissionTable(price) {
+    const rows = document.querySelectorAll('#commissionTable tbody tr');
+
+    commissionTiers.forEach((tier, index) => {
+        if (rows[index]) {
+            const commissionAmount = price * tier.rate;
+            const earnings = price - commissionAmount;
+
+            // Update earnings column
+            const earningsCell = rows[index].cells[2];
+            if (earningsCell) {
+                earningsCell.textContent = `$${earnings.toFixed(2)} per lesson`;
+            }
+
+            // Highlight current tier
+            if (tier.rate === currentCommissionRate) {
+                rows[index].classList.add('table-primary');
+            } else {
+                rows[index].classList.remove('table-primary');
+            }
+        }
+    });
+}
+
+function updateMonthlyEarnings() {
+    const price = parseFloat(lessonPriceInput.value) || defaultPrice;
+    const lessons = parseInt(lessonsPerWeekSlider.value);
+    const weeklyEarningsValue = (price * (1 - currentCommissionRate)) * lessons;
+    const monthly = weeklyEarningsValue * 4.33; // Average weeks in month
+    const quarterly = monthly * 3;
+    const yearly = monthly * 12;
+
+    lessonsValue.textContent = `${lessons} lesson${lessons !== 1 ? 's' : ''}`;
+    monthlyEarnings.textContent = `$${Math.round(monthly)}`;
+    weeklyEarnings.textContent = `$${weeklyEarningsValue.toFixed(2)}`;
+    quarterlyEarnings.textContent = `$${Math.round(quarterly)}`;
+    yearlyEarnings.textContent = `$${Math.round(yearly)}`;
+
+    // Add animation to monthly earnings card
+    monthlyEarnings.parentElement.parentElement.classList.add('pulse-animation');
+    setTimeout(() => {
+        monthlyEarnings.parentElement.parentElement.classList.remove('pulse-animation');
+    }, 1000);
+}
+
+lessonsPerWeekSlider.addEventListener('input', function () {
+    lessonsValue.textContent = `${this.value} lesson${this.value !== '1' ? 's' : ''}`;
+    sliderTooltip.textContent = `${this.value} lessons`;
+    sliderTooltip.style.left = `${(this.value / this.max) * 100}%`;
+    updateMonthlyEarnings();
+});
+
+lessonsPerWeekSlider.addEventListener('mousedown', function () {
+    sliderTooltip.style.opacity = '1';
+});
+
+lessonsPerWeekSlider.addEventListener('mouseup', function () {
+    setTimeout(() => {
+        sliderTooltip.style.opacity = '0';
+    }, 1000);
+});
+
+// Follow recommendation handler
+followRecommendation.addEventListener('change', function () {
+    if (this.checked) {
+        lessonPriceInput.value = defaultPrice;
+        updatePriceDisplay();
+
+        // Add highlight animation to price input
+        lessonPriceInput.classList.add('highlight-change');
+        setTimeout(() => {
+            lessonPriceInput.classList.remove('highlight-change');
+        }, 1000);
+    }
+});
+
+// Price input handler
+lessonPriceInput.addEventListener('input', updatePriceDisplay);
+
+// Validate price range
+lessonPriceInput.addEventListener('change', function () {
+    let price = parseFloat(this.value);
+
+    if (isNaN(price) || price < 10) {
+        this.value = 10;
+    } else if (price > 100) {
+        this.value = 100;
+    }
+
+    // Uncheck recommendation if user changes price
+    if (price !== defaultPrice) {
+        followRecommendation.checked = false;
+    }
+
+    updatePriceDisplay();
+
+    // Add highlight animation
+    this.classList.add('highlight-change');
+    setTimeout(() => {
+        this.classList.remove('highlight-change');
+    }, 1000);
+});
+
+// For demonstration: Simulate completing hours to show tier progression
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowUp') {
+        completedHours += 5;
+        updateTier();
+        updatePriceDisplay();
+    } else if (e.key === 'ArrowDown' && completedHours > 0) {
+        completedHours -= 5;
+        updateTier();
+        updatePriceDisplay();
+    }
+});
+
+function updateTier() {
+    // Find the appropriate tier based on completed hours
+    for (let i = commissionTiers.length - 1; i >= 0; i--) {
+        if (completedHours >= commissionTiers[i].hours) {
+            currentCommissionRate = commissionTiers[i].rate;
+            currentTierIndex = i;
+            break;
+        }
+    }
+}
+
+// Utility function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Function to fetch current pricing from server
+async function fetchCurrentPricing() {
+    try {
+        const response = await fetch('/tutor/get-pricing/', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch pricing data');
+        }
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            // Update the input field with current pricing
+            document.getElementById('lessonPrice').value = data.cost_hourly;
+            // Also update any other calculations that depend on the price
+            updatePriceDisplay();
+            return data.cost_hourly;
+        } else {
+            console.error('Error fetching pricing:', data.message);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error in fetchCurrentPricing:', error);
+        return null;
+    }
+}
+
+// Function to update pricing via AJAX
+export async function updatePricing(newPrice) {
+    if (!newPrice) {
+        newPrice = lessonPriceInput.value;
+    }
+    try {
+        const response = await fetch('/tutor/update-pricing/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({cost_hourly: newPrice}),
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            // Show success message
+            showAlert('Your Hourly Price saved successfully!', 'success');
+            return true;
+        } else {
+            // Show error message
+            showAlert('Error updating price: ' + data.message, 'error');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error in updatePricing:', error);
+        showAlert('Network error while updating price', 'error');
+        return false;
+    }
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Initialize price display
+    fetchCurrentPricing();
+    updatePriceDisplay();
+    updateMonthlyEarnings();
+});
+
+
+// Initialize when document is ready
+// document.addEventListener('DOMContentLoaded', function () {
+//     // Fetch current pricing when page loads
+//     fetchCurrentPricing();
+//
+//     // Set up event listener for price changes
+//     const lessonPriceInput = document.getElementById('lessonPrice');
+//     let updateTimeout;
+//
+//     lessonPriceInput.addEventListener('input', function () {
+//         // Clear previous timeout
+//         clearTimeout(updateTimeout);
+//
+//         // Set new timeout to update after user stops typing (500ms delay)
+//         updateTimeout = setTimeout(async () => {
+//             const newPrice = parseFloat(lessonPriceInput.value);
+//
+//             // Validate price
+//             if (isNaN(newPrice) || newPrice < 10 || newPrice > 100) {
+//                 showNotification('Please enter a valid price between $10 and $100', 'error');
+//                 // Revert to previous value or fetch from server again
+//                 fetchCurrentPricing();
+//                 return;
+//             }
+//
+//             // Update via AJAX
+//             const success = await updatePricing(newPrice);
+//
+//             if (success) {
+//                 // Update local calculations
+//                 updatePriceDisplay();
+//             } else {
+//                 // If update failed, refetch the current price from server
+//                 fetchCurrentPricing();
+//             }
+//         }, 500); // 500ms delay
+//     });
+// });

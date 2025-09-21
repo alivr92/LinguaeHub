@@ -1,0 +1,311 @@
+{% extends 'ap2_student/dashboard/dc_base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">#}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+
+    <style>
+        .is-valid ~ .choices .choices__inner {
+            border-color: #28a745 !important; /* Green border for valid state */
+        }
+
+        .is-invalid ~ .choices .choices__inner {
+            border-color: #dc3545 !important; /* Red border for invalid state */
+        }
+    </style>
+{% endblock %}
+
+
+{% block dashboard_main_content %}
+    <!-- Main content START -->
+    <div class="col-xl-9">
+        <!-- Edit profile START -->
+        <div class="card bg-transparent border rounded-3">
+            <!-- Card header -->
+            <div class="card-header bg-transparent border-bottom">
+                <h3 class="card-header-title mb-0">Edit Profile</h3>
+            </div>
+            <!-- ################################################################### -->
+
+
+            <!-- Card body START -->
+            <div class="card-body">
+
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Form profile_form -->
+                <form class="row g-4 needs-validation"  method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="profile_form">
+                    <!-- Profile picture -->
+                    <div class="col-12 justify-content-center align-items-center">
+                        <label class="form-label">Profile picture</label>
+                        <div class="d-flex align-items-center">
+                            <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
+                                <!-- Avatar place holder -->
+                                <span class="avatar avatar-xl">
+                                        <img id="uploadfile-1-preview"
+                                             class="avatar-img rounded-circle border border-white border-3 shadow"
+                                             src="{{ form.photo.value.url }}" alt="">
+                                </span>
+                                <!-- Remove btn -->
+                                <button type="button" class="uploadremove"><i class="bi bi-x text-white"></i></button>
+                            </label>
+                            <!-- Upload button -->
+                            <label class="btn btn-primary-soft mb-0" for="uploadfile-1">Change</label>
+                            <input id="uploadfile-1" class="form-control d-none" type="file" name="photo">
+                            <!-- Hidden input to indicate photo deletion -->
+                            <input type="hidden" id="delete-photo" name="delete_photo" value="false">
+                        </div>
+                    </div>
+
+                    <!-- Full name -->
+                    <div class="col-12">
+                        <label class="form-label">Full name</label>
+                        <div class="input-group">
+                            {{ form.first_name }}
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+
+                    <!-- Gender -->
+                    <div class="col-md-6">
+                        <label class="form-label">Gender<b> *</b></label>
+                        {{ form.gender }}
+                    </div>
+
+                    <!-- Title -->
+                    <div class="col-md-6">
+                        <label class="form-label">Title</label>
+                        {{ form.title }}
+                    </div>
+
+                    <!-- Username ----------------------------- CHECK LATER?-->
+                    <div class="col-md-6">
+                        <label class="form-label">Username<b> *</b></label>
+                        <div class="input-group">
+                            <span class="input-group-text">{{ CFChar.site_name }}@</span>
+                            {{ form.username }}
+                        </div>
+                        {% for error in form.username.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+
+                    <!-- Email id -->
+                    <div class="col-md-6">
+                        <label class="form-label">Email id<b> *</b></label>
+                        {{ form.email }}
+                        {% for error in form.email.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Phone number -->
+                    <div class="col-md-6">
+                        <label class="form-label">Phone number</label>
+                        {{ form.phone }}
+                        <div class="invalid-feedback">
+                            Please provide a valid phone number.
+                        </div>
+                        {% for error in form.phone.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Location (Country) -->
+                    <div class="col-md-6">
+                        <label class="form-label">Location (Country)<b> *</b></label>
+                        {{ form.country }}
+                        <div class="invalid-feedback">
+                            Please select a country.
+                        </div>
+                        {% for error in form.country.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+
+                    <!-- Native Language -->
+                    <div class="col-md-6">
+                        <label class="form-label">Native Language<b> *</b></label>
+                        {{ form.lang_native }}
+                        {% for error in form.lang_native.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Speaking Languages (SelectMultiple) -->
+                    <div class="col-md-6">
+                        <label class="form-label">Speaking Languages<b> *</b></label>
+                        {{ form.lang_speak }}
+                        <div class="invalid-feedback">
+                            Please select at least one language.
+                        </div>
+                        {% for error in form.lang_speak.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+
+                    <!-- About me -->
+                    <div class="col-12">
+                        <label class="form-label">About me</label>
+                        {{ form.bio }}
+                        <div class="form-text">Brief description for your profile.</div>
+                        {% for error in form.bio.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Save button -->
+                    <div class="d-sm-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary mb-0">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Card body END -->
+
+        </div>
+        <!-- Edit profile END -->
+
+    </div>
+    <!-- Main content END -->
+{% endblock %}
+{% block scripts_vendors %}
+    {#    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>#}
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+{% endblock %}
+
+{% block my_scripts %}
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to validate a single field
+            function validateField(field) {
+                if (field.required && !field.value.trim()) {
+                    field.classList.add('is-invalid');  // Add invalid class
+                    return false;  // Field is invalid
+                } else {
+                    field.classList.remove('is-invalid');  // Remove invalid class
+                    return true;  // Field is valid
+                }
+            }
+
+            // Function to validate all required fields in a form
+            function validateForm(form) {
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+                requiredFields.forEach(function (field) {
+                    if (!validateField(field)) {
+                        isValid = false;  // Form is invalid
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Attach validation to form submission
+            const forms = document.querySelectorAll('.needs-validation');
+            forms.forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!validateForm(form)) {
+                        event.preventDefault();  // Prevent form submission
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');  // Show validation feedback
+                }, false);
+            });
+
+            // Handle Choices.js fields
+            const choiceSelects = document.querySelectorAll('.js-choice');
+            choiceSelects.forEach(function (select) {
+                const choices = new Choices(select, {
+                    removeItemButton: true,
+                    searchEnabled: true,
+                    placeholderValue: 'Select an option',
+                    shouldSort: false,
+                    allowHTML: true,
+                });
+
+                // Sync validation state with Bootstrap
+                select.addEventListener('change', function () {
+                    validateField(select);  // Validate the field on change
+                });
+            });
+        });
+        // JavaScript for Bootstrap validation
+        (function () {
+            'use strict';
+
+            // Fetch all forms with the .needs-validation class
+            var forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission if invalid
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        // Manually trigger validation for Choices.js fields
+                        var customSelects = form.querySelectorAll('.js-choice');
+                        customSelects.forEach(function (select) {
+                            if (!select.validity.valid) {
+                                select.classList.add('is-invalid');
+                            }
+                        });
+                    }
+
+                    // Add the 'was-validated' class to show validation feedback
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+        document.getElementById('uploadfile-1').addEventListener('change', function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('uploadfile-1-preview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+
+        document.querySelector('.uploadremove').addEventListener('click', function () {
+            var output = document.getElementById('uploadfile-1-preview');
+            var fileInput = document.getElementById('uploadfile-1');
+            var deletePhotoInput = document.getElementById('delete-photo');
+
+
+            // Set the image source to a placeholder or empty value
+            output.src = '{% static 'app_accounts/img/avatar/default.png' %}';
+
+            // Clear the file input value
+            fileInput.value = '';
+
+            // Indicate that the photo should be deleted
+            deletePhotoInput.value = 'true';
+        });
+
+
+    </script>
+{% endblock %}

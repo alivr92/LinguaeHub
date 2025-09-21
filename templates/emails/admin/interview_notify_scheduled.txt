@@ -1,0 +1,15 @@
+New Applicant Ready for Interview
+
+Dear Admin,
+
+The applicant {{ full_name }} has successfully completed all pre-interview requirements on {{ site_name }} and scheduled their interview session.
+
+Please review their profile and prepare accordingly.
+
+You can view the applicant details here:
+{{ admin_dashboard_url }}
+
+This notification was generated automatically.
+
+Thank you,
+{{ site_name }} System

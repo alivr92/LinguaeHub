@@ -1,0 +1,16 @@
+.lead {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+.info-box {
+    background: #f8f9fa;
+    border-left: 4px solid #17a2b8;
+    padding: 10px;
+    margin: 10px 0;
+}
+.warning-box {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px;
+    margin: 10px 0;
+}

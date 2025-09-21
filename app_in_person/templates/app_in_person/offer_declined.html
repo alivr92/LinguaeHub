@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Declined - {{ site_name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="bg-blue-500 py-4 px-6">
+            <h1 class="text-white text-2xl font-bold text-center">Offer Not Accepted</h1>
+        </div>
+        <div class="p-6">
+            <div class="text-center mb-4">
+                <svg class="w-16 h-16 text-blue-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-gray-800 text-center mb-2">Thank you for your response</h2>
+            <p class="text-gray-600 text-center mb-6">
+                You have declined the request for <strong>{{ offer.request.service.name }}</strong>.
+                We have noted your decision and will continue our search for a suitable tutor for the student.
+            </p>
+            <p class="text-sm text-gray-500 text-center mb-6">
+                Don't worry, new teaching opportunities matching your profile will be offered to you soon.
+            </p>
+            <div class="text-center">
+                <a href="{% url 'provider:dp_home' %}" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition duration-200">
+                    Find Other Opportunities
+                </a>
+            </div>
+        </div>
+        <div class="bg-gray-100 py-4 px-6 border-t border-gray-200">
+            <p class="text-xs text-gray-500 text-center">
+                <a href="mailto:support@lingocept.com" class="text-blue-500 hover:underline">Contact support</a> if this was a mistake.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

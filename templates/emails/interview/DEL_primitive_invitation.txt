@@ -1,0 +1,13 @@
+Hello {{ full_name }},
+
+We're pleased to inform you that your tutor application has been accepted!
+
+To proceed, please complete your registration using the link below:
+{{ registration_url }}
+
+Once registered, log in to your account to book your interview session.
+
+Note: This link is valid for 7 days.
+
+Best regards,
+{{ site_name }} Team

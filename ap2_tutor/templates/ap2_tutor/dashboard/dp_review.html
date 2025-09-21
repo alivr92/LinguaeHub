@@ -1,0 +1,112 @@
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+{% load my_custom_filters %}
+
+{% block head_style_plugins %}
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+			<!-- Main content START -->
+			<div class="col-xl-9">
+				<!-- Student review START -->
+				<div class="card border bg-transparent rounded-3">
+					<!-- Header START -->
+					<div class="card-header bg-transparent border-bottom">
+						<div class="row justify-content-between align-middle">
+							<!-- Title -->
+							<div class="col-sm-6">
+								<h3 class="card-header-title mb-2 mb-sm-0">Student review</h3>
+							</div>
+							
+							<!-- Short by filter -->
+							<div class="col-sm-4">
+								<form>
+									<select class="form-select js-choice z-index-9 bg-white" aria-label=".form-select-sm">
+										<option value="">Sort by</option>
+										<option>★★★★★ (5/5)</option>
+										<option>★★★★☆ (4/5)</option>
+										<option>★★★☆☆ (3/5)</option>
+										<option>★★☆☆☆ (2/5)</option>
+										<option>★☆☆☆☆ (1/5)</option>
+									</select>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- Header END -->
+
+					<!-- Reviews START -->
+					<div class="card-body mt-2 mt-sm-4">
+                        {% for review in review_list %}
+                            <!-- Review item START -->
+                            <div class="d-sm-flex">
+                                <!-- Avatar image -->
+                                <img class="avatar avatar-lg rounded-circle float-start me-3" src="{{ review.student.profile.photo.url }}" alt="avatar">
+                                <div>
+                                    <div class="mb-3 d-sm-flex justify-content-sm-between align-items-center">
+                                        <!-- Title -->
+                                        <div>
+                                            <h5 class="m-0">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</h5>
+                                            <span class="me-3 small">{{ review.create_date|date }} at {{ review.create_date|time }} </span>
+                                        </div>
+                                        <!-- Review star -->
+                                        <ul class="list-inline ">
+                                            {% with rating=review.rate_tutor %}
+                                                {% for i in range %}
+                                                    <li class="list-inline-item me-0 small">
+                                                        {% if i <= rating %}
+                                                            <i class="fas fa-star text-warning"></i>
+                                                        {% elif  i|float_sub:0.5 <= rating %}
+                                                            <i class="fas fa-star-half-alt text-warning"></i>
+                                                        {% else %}
+                                                            <i class="far fa-star text-warning"></i>
+                                                        {% endif %}
+                                                    </li>
+                                                {% endfor %}
+                                                <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>
+                                            {% endwith %}
+                                        </ul>
+                                    </div>
+                                    <!-- Content -->
+                                    <h6><span class="text-body fw-light">Review on:</span> {{ review.session.subject }}</h6>
+                                    <p>{{ review.message }}</p>
+                                </div>
+                            </div>
+                            <!-- Divider -->
+                            <hr>
+                            <!-- Review item END -->
+                        {% endfor %}
+					</div>
+					<!-- Reviews END -->
+
+					<div class="card-footer border-top">
+						<!-- Pagination START -->
+						<div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+							<!-- Content -->
+							<p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
+							<!-- Pagination -->
+							<nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+								<ul class="pagination pagination-sm pagination-primary-soft my-0 py-0">
+									<li class="page-item my-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
+									<li class="page-item my-0"><a class="page-link" href="#">1</a></li>
+									<li class="page-item my-0 active"><a class="page-link" href="#">2</a></li>
+									<li class="page-item my-0"><a class="page-link" href="#">3</a></li>
+									<li class="page-item my-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
+								</ul>
+							</nav>
+						</div>
+						<!-- Pagination END -->
+					</div>
+				</div>
+				<!-- Student review END -->
+			</div>
+			<!-- Main content END -->
+{% endblock %}
+{% block scripts_vendors %}
+<!-- Vendors -->
+<script src="{% static 'assets/vendor/choices/js/choices.min.js"></script>
+{% endblock %}

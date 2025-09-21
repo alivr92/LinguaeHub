@@ -1,0 +1,45 @@
+{% extends "messenger/inbox.html" %}
+
+{% block admin_main_content %}
+
+{#{% block thread_content %}#}
+<div class="thread-container">
+    <div class="thread-header">
+        <div class="thread-user">
+            <img src="{{ other_user.profile.photo.url }}" alt="{{ other_user.username }}">
+            <h4>{{ other_user.get_full_name|default:other_user.username }}</h4>
+        </div>
+        <div class="thread-actions">
+            <a href="{% url 'messenger:delete_thread' thread.id %}" class="btn btn-sm btn-outline-danger">
+                Delete
+            </a>
+        </div>
+    </div>
+
+    <div class="message-list" id="message-list">
+        {% for message in thread.messages.all %}
+            <div class="message {% if message.sender == request.user %}sent{% else %}received{% endif %}">
+                <div class="message-content">
+                    <p>{{ message.content }}</p>
+                    <small class="message-time">
+                        {{ message.sent_at|timesince }} ago
+                        {% if message.is_read and message.sender == request.user %}
+                            <i class="bi bi-check-all read-receipt"></i>
+                        {% elif message.sender == request.user %}
+                            <i class="bi bi-check read-receipt"></i>
+                        {% endif %}
+                    </small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="message-form">
+        <form method="post" id="message-form">
+            {% csrf_token %}
+            {{ form.content }}
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

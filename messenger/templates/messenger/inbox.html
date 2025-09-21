@@ -1,0 +1,55 @@
+{% extends "messenger/base.html" %}
+
+{% block admin_main_content %}
+    <div class="messaging-container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="inbox-header">
+                    <h2>Messages</h2>
+                    <a href="{% url 'messenger:new_message' %}" class="btn btn-primary">
+                        New Message
+                    </a>
+                </div>
+
+                <div class="inbox-list">
+                    {% for thread in threads %}
+                        <a href="{% url 'messenger:thread_detail' thread.id %}"
+                           class="thread-preview {% if thread.messages.last.recipient == request.user and not thread.messages.last.is_read %}unread{% endif %}">
+                            <div class="thread-avatar">
+                                <img src="{{ thread.get_other_participant.request.user.profile.photo.url }}"
+                                     alt="{{ thread.get_other_participant.request.user.username }}">
+                            </div>
+                            <div class="thread-info">
+                                <h5>{{ thread.get_other_participant.request.user.get_full_name|default:thread.get_other_participant.request.user.username }}</h5>
+                                <p class="text-muted">{{ thread.messages.last.content|truncatechars:50 }}</p>
+                            </div>
+                            <div class="thread-meta">
+                                <small class="text-muted">{{ thread.messages.last.sent_at|timesince }} ago</small>
+                                {% if thread.messages.last.recipient == request.user and not thread.messages.last.is_read %}
+                                    <span class="badge bg-primary">New</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% empty %}
+                        <div class="empty-inbox">
+                            <p>No messages yet</p>
+                            <a href="{% url 'messenger:new_message' %}" class="btn btn-outline-primary">
+                                Start a conversation
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                {% block thread_content %}
+                    <div class="empty-thread">
+                        <i class="bi bi-chat-square-text"></i>
+                        <h4>Select a conversation</h4>
+                        <p>Choose an existing conversation or start a new one</p>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

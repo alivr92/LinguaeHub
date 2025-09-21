@@ -1,0 +1,442 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+
+{% block head_title %}Help Center{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <!-- =======================
+        Page Banner START -->
+        <section class="bg-primary bg-opacity-10">
+            <div class="container">
+                <div class="row">
+                    <!-- Content START -->
+                    <div class="col-lg-8 mx-auto text-center">
+                        <!-- Title -->
+                        <h1 class="display-6">Search Solution. Get Support</h1>
+                        <p class="mb-0">Search here to get answers to your questions.</p>
+                        <!-- Search bar -->
+                        <form class="bg-body rounded p-2 mt-4">
+                            <div class="input-group">
+                                <input class="form-control border-0 me-1" type="text" placeholder="Search question...">
+                                <button type="button" class="btn btn-dark mb-0 rounded">Search</button>
+                            </div>
+                        </form>
+
+                        <!-- Popular questions START -->
+                        <div class="row mt-4 align-items-center">
+                            <div class="col-12">
+                                <h5 class="mb-3">Popular questions</h5>
+                                <!-- Questions List START -->
+                                <div class="list-group list-group-horizontal gap-2 justify-content-center flex-wrap mb-0 border-0">
+                                    <a class="btn btn-white btn-sm fw-light" href="#"> How can we help?</a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> How to
+                                        upload data to the system? </a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html">
+                                        Installation Guide? </a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> How to view
+                                        expired course? </a>
+                                    <a class="btn btn-white btn-sm fw-light" href="help-center-detail.html"> What's are
+                                        the difference between a social?</a>
+                                    <a class="btn btn-primary-soft btn-sm fw-light" href="#!">View all question</a>
+                                </div>
+                                <!-- Questions list END -->
+                            </div>
+                        </div>
+                        <!-- Popular questions END -->
+
+
+                        <!-- Popular questions section (dynamic) -->
+                        <div class="list-group list-group-horizontal gap-2 justify-content-center flex-wrap mb-0 border-0">
+                            {% for article in popular_questions %}
+                                <a class="btn btn-white btn-sm fw-light"
+                                   href="{% url 'app_pages:help_article' category_slug=article.section.category.slug section_slug=article.section.slug article_slug=article.slug %}">
+                                    {{ article.title }}
+                                </a>
+                            {% endfor %}
+                            <a class="btn btn-primary-soft btn-sm fw-light" href="{% url 'app_pages:help_center' %}">View all
+                                questions</a>
+                        </div>
+
+
+                    </div>
+                    <!-- Content END -->
+
+                    <!-- Image -->
+                    <div class="col-12 mt-6">
+                        <img src="{% static 'assets/images/element/help-center.svg' %}" class="w-100" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Page Banner END -->
+
+        <!-- =======================
+        Recommended topics START -->
+        <section>
+            <div class="container">
+                <!-- Titles -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="text-center mb-4">Recommended Topics</h2>
+                    </div>
+                </div>
+
+                <!-- Row START -->
+                <div class="row g-4">
+                    <div class="col-md-6 col-xl-3">
+                        <!-- Card START -->
+                        <div class="card bg-light h-100">
+                            <!-- Title -->
+                            <div class="card-header bg-light pb-0 border-0">
+                                <i class="bi bi-emoji-smile fs-1 text-success"></i>
+                                <h5 class="card-title mb-0 mt-2">Get started </h5>
+                            </div>
+                            <!-- List -->
+                            <div class="card-body">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Gulp and Customization</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Color Scheme and Logo
+                                        Settings</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Dark mode, RTL Version
+                                        and Lazy Load</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Sources, Credits and
+                                        Changelog</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Updates and
+                                        Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <!-- Card START -->
+                        <div class="card bg-light h-100">
+                            <!-- Title -->
+                            <div class="card-header bg-light pb-0 border-0">
+                                <i class="bi bi-layers fs-1 text-warning"></i>
+                                <h5 class="card-title mb-0 mt-2">Account Setup</h5>
+                            </div>
+                            <!-- List -->
+                            <div class="card-body">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Connecting to your
+                                        Account</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Edit your profile
+                                        information</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Connecting to other
+                                        Social Media Accounts</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Adding your profile
+                                        picture</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Describing your store</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <!-- Card START -->
+                        <div class="card bg-light h-100">
+                            <!-- Title -->
+                            <div class="card-header bg-light pb-0 border-0">
+                                <i class="bi bi-info-circle fs-1 text-orange"></i>
+                                <h5 class="card-title mb-0 mt-2">Other Topics </h5>
+                            </div>
+                            <!-- List -->
+                            <div class="card-body">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Security &amp; Privacy</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Author, Publisher
+                                        &amp; Admin Guides</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Pricing plans</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Sales Tax &amp;
+                                        Regulatory Fees</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 me-2"></i>Promotions &amp; Deals</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+
+                    <div class="col-md-6 col-xl-3">
+                        <!-- Card START -->
+                        <div class="card bg-light h-100">
+                            <!-- Title START -->
+                            <div class="card-header bg-light pb-0 border-0">
+                                <i class="bi bi-house fs-1 text-purple"></i>
+                                <h5 class="card-title mb-0 mt-2">Advanced Usage </h5>
+                            </div>
+                            <!-- List -->
+                            <div class="card-body">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 fa-fw me-2"></i>Admin &amp;
+                                        Billing</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 fa-fw me-2"></i>Become a Pro</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 fa-fw me-2"></i>Mobile
+                                        application</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 fa-fw me-2"></i>Guide</a></li>
+                                    <li class="nav-item"><a class="nav-link d-flex" href="help-center-detail.html"><i
+                                            class="fas fa-angle-right text-primary pt-1 fa-fw me-2"></i>Promotions &amp;
+                                        Deals</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+                </div>
+                <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Recommended topics END -->
+
+
+    <!-- Recommended topics (dynamic) -->
+    <section>
+<div class="row g-4">
+    {% for category in categories %}
+    <div class="col-md-6 col-xl-3">
+        <div class="card bg-light h-100">
+            <div class="card-header bg-light pb-0 border-0">
+                <i class="bi {{ category.icon }} fs-1 text-{{ category.color }}"></i>
+                <h5 class="card-title mb-0 mt-2">{{ category.title }}</h5>
+            </div>
+            <div class="card-body">
+                <ul class="nav flex-column">
+                    {% for article in category.articles.all|slice:":5" %}
+                    <li class="nav-item">
+                        <a class="nav-link d-flex" href="{% url 'app_pages:help_article' category_slug=category.slug section_slug=article.section.slug article_slug=article.slug %}">
+                            <i class="fas fa-angle-right text-primary pt-1 me-2"></i>
+                            {{ article.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    </section>
+
+        <!-- =======================
+        Popular articles START -->
+        <section>
+            <div class="container">
+                <!-- Titles -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h2 class="text-center mb-4">Popular Articles</h2>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-xl-6">
+                        <!-- Card item START -->
+                        <div class="card card-body border p-4 h-100">
+                            <!-- Title -->
+                            <h4 class="card-title mb-4"><a href="#" class="stretched-link">The installation part</a>
+                            </h4>
+
+                            <!-- Avatar group and content -->
+                            <div class="d-sm-flex align-items-center">
+                                <!-- Avatar group -->
+                                <ul class="avatar-group mb-2 mb-sm-0">
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/01.jpg' %}" alt="avatar">
+                                    </li>
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/02.jpg' %}" alt="avatar">
+                                    </li>
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/03.jpg' %}" alt="avatar">
+                                    </li>
+                                </ul>
+                                <!-- Content -->
+                                <div class="ms-sm-2">
+                                    <h6 class="mb-1">10 articles in this collection</h6>
+                                    <p class="mb-0">Written by <b>Carolyn Ortiz</b> ,<b>Billy Vasquez</b> and <b>Larry
+                                        Lawson</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+
+                    <div class="col-xl-6">
+                        <!-- Card item START -->
+                        <div class="card card-body border p-4 h-100">
+                            <!-- Title -->
+                            <h4 class="card-title mb-4"><a href="#" class="stretched-link">Supporting Customer With
+                                Inbox</a></h4>
+
+                            <!-- Avatar group and content -->
+                            <div class="d-sm-flex align-items-center">
+                                <!-- Avatar group -->
+                                <ul class="avatar-group mb-2 mb-sm-0">
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/08.jpg' %}" alt="avatar">
+                                    </li>
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/04.jpg' %}" alt="avatar">
+                                    </li>
+                                </ul>
+                                <!-- Content -->
+                                <div class="ms-sm-2">
+                                    <h6 class="mb-1">5 articles in this collection</h6>
+                                    <p class="mb-0">Written by <b>Dennis Barrett</b> and <b>Louis Ferguson</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+
+                    <div class="col-xl-6">
+                        <!-- Card item START -->
+                        <div class="card card-body border p-4 h-100">
+                            <!-- Title -->
+                            <h4 class="card-title mb-4"><a href="#" class="stretched-link">Sending Effective Emails </a>
+                            </h4>
+
+                            <!-- Avatar group and content -->
+                            <div class="d-sm-flex align-items-center">
+                                <!-- Avatar group -->
+                                <ul class="avatar-group mb-2 mb-sm-0">
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/05.jpg' %}" alt="avatar">
+                                    </li>
+                                </ul>
+                                <!-- Content -->
+                                <div class="ms-sm-2">
+                                    <h6 class="mb-1">4 articles in this collection</h6>
+                                    <p class="mb-0">Written by <b>Jacqueline Miller</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+
+                    <div class="col-xl-6">
+                        <!-- Card item START -->
+                        <div class="card card-body border p-4 h-100">
+                            <!-- Title -->
+                            <h4 class="card-title mb-4"><a href="#" class="stretched-link">Connect With Customers</a>
+                            </h4>
+
+                            <!-- Avatar group and content -->
+                            <div class="d-sm-flex align-items-center">
+                                <!-- Avatar group -->
+                                <ul class="avatar-group mb-2 mb-sm-0">
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/09.jpg' %}" alt="avatar">
+                                    </li>
+                                    <li class="avatar avatar-md">
+                                        <img class="avatar-img rounded-circle border-white"
+                                             src="{% static 'assets/images/avatar/10.jpg' %}" alt="avatar">
+                                    </li>
+                                </ul>
+                                <!-- Content -->
+                                <div class="ms-sm-2">
+                                    <h6 class="mb-1">11 articles in this collection</h6>
+                                    <p class="mb-0">Written by <b>Lori Stevens</b> and <b>Samuel Bishop</b></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+
+                </div> <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Popular articles END -->
+
+        <!-- =======================
+        Action boxes START -->
+        <section>
+            <div class="container">
+                <div class="row g-4">
+
+                    <!-- Action box item -->
+                    <div class="col-lg-4">
+                        <div class="bg-info bg-opacity-10 rounded-3 p-5">
+                            <!-- Icon -->
+                            <h2 class="display-5 text-info"><i class="bi bi-headset"></i></h2>
+                            <!-- Title -->
+                            <h3>Contact Support?</h3>
+                            <p>Delay death ask to style Me mean able conviction For every delay death ask to style</p>
+                            <!-- Button -->
+                            <a href="#" class="btn btn-dark mb-0">Contact Us</a>
+                        </div>
+                    </div>
+
+                    <!-- Action box item -->
+                    <div class="col-lg-4">
+                        <div class="bg-purple bg-opacity-10 rounded-3 p-5">
+                            <!-- Icon -->
+                            <h2 class="display-5 text-purple"><i class="fas fa-ticket-alt"></i></h2>
+                            <!-- Title -->
+                            <h3>Submit a Ticket</h3>
+                            <p>Prosperous impression had conviction For every delay death ask to style Me mean able</p>
+                            <!-- Button -->
+                            <a href="#" class="btn btn-dark mb-0">Submit Ticket</a>
+                        </div>
+                    </div>
+
+                    <!-- Action box item -->
+                    <div class="col-lg-4">
+                        <div class="bg-warning bg-opacity-15 rounded-3 p-5">
+                            <!-- Icon -->
+                            <h2 class="display-5 text-warning"><i class="bi bi-envelope-fill"></i></h2>
+                            <!-- Title -->
+                            <h3>Request a feature</h3>
+                            <p>Prosperous impression had conviction For every delay death ask to style Me mean able</p>
+                            <!-- Button -->
+                            <a href="#" class="btn btn-dark mb-0">Request</a>
+                        </div>
+                    </div>
+
+                </div> <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Action boxes ENd -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
