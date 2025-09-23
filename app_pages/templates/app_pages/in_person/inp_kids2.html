@@ -1,0 +1,710 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Kids' Programs - Fun & Engaging Learning for Children{% endblock %}
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+{% block my_style %}
+    <style>
+        .bg-light-custom {
+            background-color: #f8f9fa !important;
+        }
+
+        .benefit-card {
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .bg-primary-light {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+
+        .bg-success-light {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+
+        .bg-warning-light {
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+
+        .bg-info-light {
+            background-color: rgba(13, 202, 240, 0.1);
+        }
+
+        .bg-purple-light {
+            background-color: rgba(111, 66, 193, 0.1);
+        }
+
+        .bg-pink-light {
+            background-color: rgba(214, 51, 132, 0.1);
+        }
+
+        .program-card {
+            border-radius: 15px;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            height: 100%;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .age-group-card {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 15px;
+            border-left: 5px solid #4dabf7;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #fff9db 0%, #fff3bf 100%);
+            border-radius: 15px;
+            border-left: 5px solid #ffd43b;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            border-radius: 15px;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .kid-friendly-header {
+            background: linear-gradient(135deg, #74c0fc 0%, #4dabf7 25%, #339af0 50%, #228be6 75%, #1c7ed6 100%);
+        }
+
+        .learning-path {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .learning-path:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #40c057;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .age-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .fun-element {
+            background: linear-gradient(135deg, #d0ebff 0%, #a5d8ff 100%);
+            border-radius: 20px;
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+
+        <!-- =======================
+        Page Banner START -->
+        <section class="kid-friendly-header py-5 position-relative overflow-hidden text-white">
+            <!-- SVG decoration -->
+            <figure class="fill-white opacity-1 position-absolute top-50 end-0 me-n6 d-none d-sm-block">
+                <svg width="211px" height="211px">
+                    <path d="M210.030,105.011 C210.030,163.014 163.010,210.029 105.012,210.029 C47.013,210.029 -0.005,163.014 -0.005,105.011 C-0.005,47.015 47.013,-0.004 105.012,-0.004 C163.010,-0.004 210.030,47.015 210.030,105.011 Z"/>
+                </svg>
+            </figure>
+
+            <!-- SVG decoration -->
+            <figure class="fill-white position-absolute top-50 start-100 translate-middle ms-n7 mt-7 d-none d-sm-block">
+                <svg class="opacity-3" enable-background="new 0 0 160.7 159.8" height="180px">
+                    <path d="m153.2 114.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m116.4 114.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <!-- Additional SVG paths would continue here -->
+                </svg>
+            </figure>
+
+            <div class="container position-relative">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-6">
+                        <!-- Title -->
+                        <h1 class="text-white">Kids' Programs</h1>
+                        <h5 class="text-white">Where Learning Meets Fun!</h5>
+                        <p class="text-white">Spark your child's love for learning through engaging, age-appropriate programs designed to build confidence, creativity, and communication skills. Our certified educators make learning an adventure!</p>
+
+                        <!-- Key Benefits -->
+                        <div class="pt-3">
+                            <h5 class="text-white">Why Kids Love Learning With Us:</h5>
+                            <ul class="list-unstyled text-white">
+                                <li class="mb-2"><i class="bi bi-star-fill text-warning me-2"></i>Interactive games and activities</li>
+                                <li class="mb-2"><i class="bi bi-star-fill text-warning me-2"></i>Certified child-friendly tutors</li>
+                                <li class="mb-2"><i class="bi bi-star-fill text-warning me-2"></i>Safe and supportive environment</li>
+                                <li class="mb-2"><i class="bi bi-star-fill text-warning me-2"></i>Progress tracking for parents</li>
+                            </ul>
+                        </div>
+
+                        <!-- Button -->
+                        <a href="#explore-programs" class="btn btn-warning mb-0 px-4">Explore Kids' Programs</a>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <!-- Image -->
+                        <img src="{% static 'assets/images/inperson/kids-learning.jpg' %}"
+                             class="h-300px h-xl-400px protected-image" alt="Kids Learning Illustration">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Page Banner END -->
+
+        <!-- =======================
+        Age Groups START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Programs for Every Age Group</h2>
+                    <p class="lead">Tailored learning experiences designed for different developmental stages</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Little Explorers (3-6 years) -->
+                    <div class="col-lg-4">
+                        <div class="age-group-card p-4 h-100">
+                            <div class="text-center mb-4">
+                                <span class="age-badge">Ages 3-6</span>
+                                <h3 class="mt-3">Little Explorers</h3>
+                            </div>
+                            <div class="feature-icon bg-warning-light">
+                                <i class="bi bi-palette-fill text-warning fs-1"></i>
+                            </div>
+                            <h5 class="text-center">Play-Based Learning</h5>
+                            <p>Introduction to languages through songs, stories, and creative play. Focus on basic vocabulary, colors, numbers, and simple phrases.</p>
+                            <ul class="list-unstyled">
+                                <li class="learning-path mb-2">Interactive storytelling sessions</li>
+                                <li class="learning-path mb-2">Colorful visual materials</li>
+                                <li class="learning-path mb-2">Movement and music activities</li>
+                                <li class="learning-path">Parent participation options</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Junior Scholars (7-11 years) -->
+                    <div class="col-lg-4">
+                        <div class="age-group-card p-4 h-100">
+                            <div class="text-center mb-4">
+                                <span class="age-badge bg-success">Ages 7-11</span>
+                                <h3 class="mt-3">Junior Scholars</h3>
+                            </div>
+                            <div class="feature-icon bg-success-light">
+                                <i class="bi bi-journal-text text-success fs-1"></i>
+                            </div>
+                            <h5 class="text-center">Structured Learning</h5>
+                            <p>Building foundation skills through engaging activities, games, and project-based learning. Emphasis on conversation and reading skills.</p>
+                            <ul class="list-unstyled">
+                                <li class="learning-path mb-2">Thematic project-based learning</li>
+                                <li class="learning-path mb-2">Interactive digital tools</li>
+                                <li class="learning-path mb-2">Group collaboration activities</li>
+                                <li class="learning-path">Regular progress assessments</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Teen Achievers (12-17 years) -->
+                    <div class="col-lg-4">
+                        <div class="age-group-card p-4 h-100">
+                            <div class="text-center mb-4">
+                                <span class="age-badge bg-primary">Ages 12-17</span>
+                                <h3 class="mt-3">Teen Achievers</h3>
+                            </div>
+                            <div class="feature-icon bg-primary-light">
+                                <i class="bi bi-laptop text-primary fs-1"></i>
+                            </div>
+                            <h5 class="text-center">Advanced Skills Development</h5>
+                            <p>Preparation for academic success and real-world communication. Focus on fluency, cultural understanding, and practical application.</p>
+                            <ul class="list-unstyled">
+                                <li class="learning-path mb-2">Academic preparation support</li>
+                                <li class="learning-path mb-2">Real-world conversation practice</li>
+                                <li class="learning-path mb-2">Cultural immersion activities</li>
+                                <li class="learning-path">College and career readiness</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Age Groups END -->
+
+        <!-- =======================
+        Program Features START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <!-- Title -->
+                <div class="row mb-5">
+                    <div class="col-sm-10 col-xl-8 text-center mx-auto">
+                        <h2>What Makes Our Kids' Programs Special</h2>
+                        <p class="mb-0">Designed by childhood education experts to make learning engaging and effective</p>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="row g-4">
+                    <!-- Feature 1 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="program-card p-4 bg-white text-center">
+                            <div class="feature-icon bg-info-light">
+                                <i class="bi bi-heart-fill text-info fs-1"></i>
+                            </div>
+                            <h4>Certified & Caring Tutors</h4>
+                            <p class="mb-0">All our tutors are certified in childhood education and trained to create a nurturing, supportive learning environment.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="program-card p-4 bg-white text-center">
+                            <div class="feature-icon bg-warning-light">
+                                <i class="bi bi-controller text-warning fs-1"></i>
+                            </div>
+                            <h4>Game-Based Learning</h4>
+                            <p class="mb-0">Learning through play with educational games, interactive activities, and rewards that keep children motivated.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="program-card p-4 bg-white text-center">
+                            <div class="feature-icon bg-success-light">
+                                <i class="bi bi-phone-fill text-success fs-1"></i>
+                            </div>
+                            <h4>Child-Safe Technology</h4>
+                            <p class="mb-0">Secure platform with parental controls, safe chat features, and content designed specifically for young learners.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="program-card p-4 bg-white text-center">
+                            <div class="feature-icon bg-purple-light">
+                                <i class="bi bi-graph-up-arrow text-purple fs-1"></i>
+                            </div>
+                            <h4>Progress Tracking</h4>
+                            <p class="mb-0">Regular progress reports and parent-teacher meetings to ensure your child is meeting learning milestones.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="program-card p-4 bg-white text-center">
+                            <div class="feature-icon bg-pink-light">
+                                <i class="bi bi-people-fill text-pink fs-1"></i>
+                            </div>
+                            <h4>Small Group Classes</h4>
+                            <p class="mb-0">Intimate class sizes (max 6 students) ensuring personalized attention while promoting social learning.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="program-card p-4 bg-white text-center">
+                            <div class="feature-icon bg-primary-light">
+                                <i class="bi bi-award-fill text-primary fs-1"></i>
+                            </div>
+                            <h4>Certification & Rewards</h4>
+                            <p class="mb-0">Celebrate achievements with certificates, badges, and recognition that build confidence and motivation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Program Features END -->
+
+        <!-- =======================
+        Interactive Fun Element START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="fun-element p-4 p-md-5 text-center">
+                    <h3>Learning Adventure Awaits!</h3>
+                    <p class="lead mb-4">Every lesson is a new adventure with exciting themes and activities</p>
+                    <div class="row">
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="bg-white rounded-circle p-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="bi bi-binoculars-fill text-primary fs-2"></i>
+                            </div>
+                            <p class="mb-0 fw-bold">Discovery Themes</p>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="bg-white rounded-circle p-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="bi bi-music-note-beamed text-success fs-2"></i>
+                            </div>
+                            <p class="mb-0 fw-bold">Music & Songs</p>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="bg-white rounded-circle p-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="bi bi-puzzle-fill text-warning fs-2"></i>
+                            </div>
+                            <p class="mb-0 fw-bold">Puzzles & Games</p>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div class="bg-white rounded-circle p-3 mx-auto" style="width: 80px; height: 80px;">
+                                <i class="bi bi-brush-fill text-info fs-2"></i>
+                            </div>
+                            <p class="mb-0 fw-bold">Creative Arts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Interactive Fun Element END -->
+
+        <!-- =======================
+        Parent Testimonials START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 text-center mx-auto">
+                        <h2>What Parents Are Saying</h2>
+                        <p class="lead">Hear from families who've seen their children thrive in our programs</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Testimonial 1 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/01.jpg' %}" class="rounded-circle" width="60" height="60" alt="Parent Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Maria Rodriguez</h5>
+                                    <p class="mb-0 text-muted">Parent of 7-year-old</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"My daughter was hesitant about learning a new language, but the fun activities and patient tutors completely changed her attitude. She now looks forward to her classes and even teaches us Spanish words at dinner!"</p>
+                            <div class="mt-3">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/02.jpg' %}" class="rounded-circle" width="60" height="60" alt="Parent Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">David Chen</h5>
+                                    <p class="mb-0 text-muted">Parent of 10-year-old</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"The progress reports and regular communication with tutors give us peace of mind. Our son has not only improved his French but also gained confidence in speaking up in class. The small group setting is perfect!"</p>
+                            <div class="mt-3">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle" width="60" height="60" alt="Parent Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Sarah Johnson</h5>
+                                    <p class="mb-0 text-muted">Parent of 5-year-old</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"As working parents, the flexibility of scheduling is invaluable. The interactive lessons keep our preschooler engaged, and we love seeing her excitement when she recognizes words from her lessons in everyday life."</p>
+                            <div class="mt-3">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/05.jpg' %}" class="rounded-circle" width="60" height="60" alt="Parent Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Michael Thompson</h5>
+                                    <p class="mb-0 text-muted">Parent of 14-year-old</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"The teen program has been fantastic for preparing our daughter for high school language requirements. The tutors understand how to make learning relevant to teenagers' interests and communication styles."</p>
+                            <div class="mt-3">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Parent Testimonials END -->
+
+        <!-- =======================
+        Safety & Security START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h2>Your Child's Safety Comes First</h2>
+                        <p class="lead">We maintain the highest standards of safety and security</p>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-shield-check text-success fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Background-Checked Tutors</h5>
+                                <p class="mb-0">All tutors undergo comprehensive background checks and child safety training.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-eye-fill text-primary fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Parent Monitoring Options</h5>
+                                <p class="mb-0">Parents can observe sessions and access recordings with full transparency.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-chat-dots-fill text-info fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Safe Communication</h5>
+                                <p class="mb-0">All communication is monitored and follows strict child protection guidelines.</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-lock-fill text-warning fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5>Secure Platform</h5>
+                                <p class="mb-0">Enterprise-grade security protecting your child's data and privacy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                        <img src="{% static 'assets/images/inperson/kids-safety-1.jpg' %}" class="img-fluid" alt="Child Safety Illustration" style="max-height: 400px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Safety & Security END -->
+
+        <!-- =======================
+        CTA START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="cta-section p-4 p-sm-5 text-white position-relative overflow-hidden">
+                    <!-- SVG decoration -->
+                    <figure class="position-absolute top-0 end-0 mt-5 me-n5 opacity-50">
+                        <svg width="357px" height="300px">
+                            <path class="fill-white" d="M315.6,213.9c-19.2,24.9-46.9,43.3-78.7,51.5c-31.8,8.2-66.1,5.6-96.5-7.3c-30.4-12.9-55.5-34.2-71.7-60.8 c-16.2-26.6-22.6-57.1-18.1-86.9c4.5-29.8,19.8-57.3,43.5-77.8c23.7-20.5,54.3-32.7,86-34.6c31.7-1.9,63.4,6.7,89.8,24.5 c26.4,17.8,46.2,43.7,56.3,73.7c10.1,30,10.1,62.5,0,92.5c-10.1,30-29.9,55.9-56.3,73.7c-26.4,17.8-58.1,26.4-89.8,24.5 c-31.7-1.9-62.3-14.1-86-34.6c-23.7-20.5-39-48-43.5-77.8c-4.5-29.8,1.9-60.3,18.1-86.9c16.2-26.6,41.3-47.9,71.7-60.8 c30.4-12.9,64.7-15.5,96.5-7.3c31.8,8.2,59.5,26.6,78.7,51.5c19.2,24.9,28.8,54.9,27.5,85.2C344.4,159,334.8,189,315.6,213.9z"/>
+                        </svg>
+                    </figure>
+
+                    <div class="row position-relative align-items-center">
+                        <div class="col-lg-8">
+                            <h3 class="text-white">Start Your Child's Learning Adventure Today!</h3>
+                            <p class="text-white mb-3 mb-lg-0">Give your child the gift of language and confidence in a fun, safe, and engaging environment.</p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end">
+                            <a href="#free-trial" class="btn btn-lg btn-light mb-0" id="explore-programs">Book a Free Trial Class</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        CTA END -->
+
+        <!-- =======================
+        FAQ START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="text-center mb-5">
+                            <h2>Frequently Asked Questions</h2>
+                            <p class="lead">Common questions from parents about our kids' programs</p>
+                        </div>
+
+                        <!-- Accordion -->
+                        <div class="accordion" id="faqAccordion">
+                            <!-- Item 1 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        What is the ideal age to start language learning?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Children can start as early as 3 years old! Our Little Explorers program is specifically designed for preschoolers, using play-based learning that aligns with their developmental stage. Research shows that early exposure to languages enhances cognitive development.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        How long are the sessions and how frequent?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Session length varies by age group: 30 minutes for ages 3-6, 45 minutes for ages 7-11, and 60 minutes for teens. We recommend 2-3 sessions per week for optimal progress, but offer flexible scheduling to accommodate busy family routines.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Can parents observe the classes?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Absolutely! We encourage parental involvement, especially for younger children. Parents can observe sessions, and we provide regular progress updates. All sessions are recorded and accessible to parents for review.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        What if my child misses a class?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        We understand that schedules can change. You can reschedule sessions with 24 hours notice. Missed sessions are recorded and accessible for review. We also provide make-up sessions when possible.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 5 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        How do you handle different learning paces?
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Our small group sizes (max 6 students) allow tutors to provide individualized attention. We regularly assess each child's progress and adjust pacing accordingly. For significant differences, we may recommend switching to a more suitable group.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        FAQ END -->
+
+        <!-- =======================
+        Final CTA START -->
+        <section class="py-5">
+            <div class="container position-relative">
+                <div class="bg-warning p-4 p-sm-5 rounded-3">
+                    <div class="row justify-content-center position-relative">
+                        <!-- Action box -->
+                        <div class="col-11 position-relative">
+                            <div class="row align-items-center">
+                                <!-- Title -->
+                                <div class="col-lg-7">
+                                    <h3>Ready to Spark Your Child's Love for Learning?</h3>
+                                    <p class="mb-3 mb-lg-0">Join thousands of families who have discovered the joy of learning through our engaging kids' programs.</p>
+                                </div>
+                                <!-- Button -->
+                                <div class="col-lg-5 text-lg-end">
+                                    <a href="#" id="free-trial"
+                                       class="btn btn-lg btn-primary mb-0">Book Your Free Trial Today!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Final CTA END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}

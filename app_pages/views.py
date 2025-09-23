@@ -170,16 +170,28 @@ class InPerson2(TemplateView):
 
 
 class InPersonIndividual(TemplateView):
-    template_name = 'app_pages/in_person/in-person-individual.html'
+    template_name = 'app_pages/in_person/private_class.html'
 
 
 class InPersonGruop(TemplateView):
     template_name = 'app_pages/in_person/in-person-group.html'
 
 
-class InPersonCompanies(TemplateView):
-    template_name = 'app_pages/in_person/in-person-companies.html'
+class InPersonGruop2(TemplateView):
+    template_name = 'app_pages/in_person/inp_group2.html'
+
+
+class InPersonCorporate(TemplateView):
+    template_name = 'app_pages/in_person/inp_companies.html'
+
+
+class InPersonCorporate2(TemplateView):
+    template_name = 'app_pages/in_person/inp_corporate.html'
 
 
 class InPersonKids(TemplateView):
     template_name = 'app_pages/in_person/in-person-kids.html'
+
+
+class InPersonKids2(TemplateView):
+    template_name = 'app_pages/in_person/inp_kids2.html'

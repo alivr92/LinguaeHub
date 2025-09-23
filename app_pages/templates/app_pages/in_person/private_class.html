@@ -1,0 +1,586 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Private Classes (1:1) - Personalized Learning{% endblock %}
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+{% block my_style %}
+    <style>
+        .bg-light-custom {
+            background-color: #f8f9fa !important;
+        }
+
+        .benefit-card {
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .bg-primary-light {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+
+        .bg-success-light {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+
+        .bg-warning-light {
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+
+        .bg-info-light {
+            background-color: rgba(13, 202, 240, 0.1);
+        }
+
+        .bg-purple-light {
+            background-color: rgba(111, 66, 193, 0.1);
+        }
+
+        .bg-pink-light {
+            background-color: rgba(214, 51, 132, 0.1);
+        }
+
+        .learning-path-card {
+            border-left: 4px solid #0d6efd;
+            transition: all 0.3s;
+        }
+
+        .learning-path-card:hover {
+            border-left: 8px solid #0d6efd;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+            border-radius: 15px;
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+
+        <!-- =======================
+        Page Banner START -->
+        <section class="bg-light py-5 position-relative overflow-hidden">
+            <!-- SVG decoration -->
+            <figure class="fill-primary opacity-1 position-absolute top-50 end-0 me-n6 d-none d-sm-block">
+                <svg width="211px" height="211px">
+                    <path d="M210.030,105.011 C210.030,163.014 163.010,210.029 105.012,210.029 C47.013,210.029 -0.005,163.014 -0.005,105.011 C-0.005,47.015 47.013,-0.004 105.012,-0.004 C163.010,-0.004 210.030,47.015 210.030,105.011 Z"/>
+                </svg>
+            </figure>
+
+            <!-- SVG decoration -->
+            <figure class="fill-primary position-absolute top-50 start-100 translate-middle ms-n7 mt-7 d-none d-sm-block">
+                <svg class="opacity-5" enable-background="new 0 0 160.7 159.8" height="180px">
+                    <path d="m153.2 114.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m116.4 114.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m134.8 114.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m135.1 96.9c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m153.5 96.9c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m98.3 96.9c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <ellipse cx="116.7" cy="99.1" rx="2.1" ry="2.2"></ellipse>
+                    <path d="m153.2 149.8c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.3 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m135.1 132.2c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2 0-1.3 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m153.5 132.2c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.3 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m80.2 79.3c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2z"></path>
+                    <path d="m117 79.3c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m98.6 79.3c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m135.4 79.3c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m153.8 79.3c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m80.6 61.7c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <ellipse cx="98.9" cy="63.9" rx="2.1" ry="2.2"></ellipse>
+                    <path d="m117.3 61.7c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <ellipse cx="62.2" cy="63.9" rx="2.1" ry="2.2"></ellipse>
+                    <ellipse cx="154.1" cy="63.9" rx="2.1" ry="2.2"></ellipse>
+                    <path d="m135.7 61.7c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m154.4 44.1c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m80.9 44.1c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m44.1 44.1c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m99.2 44.1c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2z"></path>
+                    <ellipse cx="117.6" cy="46.3" rx="2.1" ry="2.2"></ellipse>
+                    <path d="m136 44.1c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m62.5 44.1c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m154.7 26.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <path d="m62.8 26.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <ellipse cx="136.3" cy="28.6" rx="2.1" ry="2.2"></ellipse>
+                    <path d="m99.6 26.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m117.9 26.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2z"></path>
+                    <path d="m81.2 26.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2-0.1-1.2 0.9-2.2 2.1-2.2z"></path>
+                    <path d="m26 26.5c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2c-1.2 0-2.1-1-2.1-2.2s0.9-2.2 2.1-2.2z"></path>
+                    <ellipse cx="44.4" cy="28.6" rx="2.1" ry="2.2"></ellipse>
+                    <path d="m136.6 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2 0.1 1.2-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m155 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2 0.1 1.2-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m26.3 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2s-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m81.5 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2s-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m63.1 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2s-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m44.7 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2s-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m118.2 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2 0.1 1.2-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m7.9 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2 0.1 1.2-0.9 2.2-2.1 2.2z"></path>
+                    <path d="m99.9 13.2c-1.2 0-2.1-1-2.1-2.2s1-2.2 2.1-2.2c1.2 0 2.1 1 2.1 2.2s-1 2.2-2.1 2.2z"></path>
+                </svg>
+            </figure>
+
+
+            <div class="container position-relative">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-6">
+                        <!-- Title -->
+                        <h1>Private Classes (1:1)</h1>
+                        <h5>Personalized Learning for Maximum Impact</h5>
+                        <p>Experience the power of one-on-one instruction tailored specifically to your goals, learning style, and pace. Our private classes offer undivided attention from expert tutors who adapt to your unique needs, ensuring faster progress and deeper understanding.</p>
+
+                        <!-- Benefits section -->
+                        <div class="pt-3">
+                            <h5>Why Choose Private Classes?</h5>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Customized curriculum based on your objectives</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Flexible scheduling that works for you</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Direct feedback and immediate clarification</li>
+                            </ul>
+                        </div>
+
+                        <!-- Button -->
+                        <a href="#sign-up-private" class="btn btn-primary mb-0 px-4">Start Your Private Class</a>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <!-- Image -->
+                        <img src="{% static 'assets/images/bg/09.jpg' %}"
+                             class="h-300px h-xl-400px protected-image position-relative z-n1" alt="Private Tutoring Illustration">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Page Banner END -->
+
+        <!-- Benefits Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Why Private Classes Deliver Better Results</h2>
+                    <p class="lead">Experience learning that's designed around you</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Column 1 -->
+                    <div class="col-lg-4 d-flex flex-column">
+                        <!-- Personalized Attention -->
+                        <div class="benefit-card p-4 rounded shadow-sm flex-grow-1">
+                            <div class="icon-wrapper bg-primary-light">
+                                <i class="bi bi-person-check text-primary fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">100% Focused on You</h5>
+                            <p class="mb-0">Your tutor's attention is entirely dedicated to your progress, with lessons tailored to your specific strengths, weaknesses, and learning preferences.</p>
+                        </div>
+
+                        <!-- Flexible Pace -->
+                        <div class="benefit-card p-4 rounded shadow-sm mt-3 flex-grow-1">
+                            <div class="icon-wrapper bg-success-light">
+                                <i class="bi bi-speedometer2 text-success fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Learn at Your Perfect Pace</h5>
+                            <p class="mb-0">Spend more time on challenging concepts and breeze through familiar material. No waiting for others or feeling left behind.</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="col-lg-4 d-flex flex-column ">
+                    <!-- Custom Curriculum -->
+                        <div class="benefit-card p-4 rounded shadow-sm flex-grow-1">
+                            <div class="icon-wrapper bg-warning-light">
+                                <i class="bi bi-journal-text text-warning fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Tailored Curriculum</h5>
+                            <p class="mb-0">Lessons are designed specifically for your goals, whether you're preparing for exams, improving professional skills, or learning for personal enrichment.</p>
+                        </div>
+
+                        <!-- Immediate Feedback -->
+                        <div class="benefit-card p-4 rounded shadow-sm mt-3 flex-grow-1">
+                            <div class="icon-wrapper bg-info-light">
+                                <i class="bi bi-chat-dots text-info fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Instant Feedback & Correction</h5>
+                            <p class="mb-0">Get immediate answers to your questions and real-time correction, accelerating your learning curve and building confidence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="col-lg-4 d-flex flex-column">
+                    <!-- Flexible Scheduling -->
+                        <div class="benefit-card p-4 rounded shadow-sm flex-grow-1">
+                            <div class="icon-wrapper bg-purple-light">
+                                <i class="bi bi-calendar-week text-purple fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Flexible Scheduling</h5>
+                            <p class="mb-0">Book sessions when it's convenient for you. Change your schedule as needed without affecting other learners.</p>
+                        </div>
+
+                        <!-- Confidence Building -->
+                        <div class="benefit-card p-4 rounded shadow-sm mt-4 flex-grow-1">
+                            <div class="icon-wrapper bg-pink-light">
+                                <i class="bi bi-arrow-up-right-circle text-pink fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Build Confidence Safely</h5>
+                            <p class="mb-0">Practice and make mistakes in a private, supportive environment where you can build skills without self-consciousness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =======================
+        Learning Path START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <!-- Title -->
+                <div class="row mb-5">
+                    <div class="col-sm-10 col-xl-8 text-center mx-auto">
+                        <h2>Your Personalized Learning Journey</h2>
+                        <p class="mb-0">Every private class follows a customized path designed specifically for your success</p>
+                    </div>
+                </div>
+
+                <!-- Learning path -->
+                <div class="row g-4 g-md-5">
+                    <!-- Item -->
+                    <div class="col-md-6">
+                        <div class="learning-path-card p-4 bg-white rounded h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary rounded-circle p-2 me-3">1</span>
+                                <h4 class="mb-0">Initial Assessment</h4>
+                            </div>
+                            <p>We begin with a comprehensive evaluation of your current level, learning objectives, and preferred learning style to create a baseline for your personalized program.</p>
+                            <ul class="mb-0">
+                                <li>Skill level evaluation</li>
+                                <li>Goal identification</li>
+                                <li>Learning preference assessment</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="col-md-6">
+                        <div class="learning-path-card p-4 bg-white rounded h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary rounded-circle p-2 me-3">2</span>
+                                <h4 class="mb-0">Custom Learning Plan</h4>
+                            </div>
+                            <p>Based on your assessment, we develop a tailored curriculum that addresses your specific needs and aligns with your timeline and objectives.</p>
+                            <ul class="mb-0">
+                                <li>Personalized curriculum design</li>
+                                <li>Milestone setting</li>
+                                <li>Progress tracking system</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="col-md-6">
+                        <div class="learning-path-card p-4 bg-white rounded h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary rounded-circle p-2 me-3">3</span>
+                                <h4 class="mb-0">One-on-One Sessions</h4>
+                            </div>
+                            <p>Engage in focused learning sessions with your dedicated tutor, who adapts teaching methods in real-time based on your comprehension and engagement.</p>
+                            <ul class="mb-0">
+                                <li>Interactive learning activities</li>
+                                <li>Real-time feedback and adjustment</li>
+                                <li>Flexible pacing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="col-md-6">
+                        <div class="learning-path-card p-4 bg-white rounded h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary rounded-circle p-2 me-3">4</span>
+                                <h4 class="mb-0">Progress Evaluation & Adjustment</h4>
+                            </div>
+                            <p>Regular assessments ensure you're on track to meet your goals, with adjustments made to your learning plan as needed to optimize results.</p>
+                            <ul class="mb-0">
+                                <li>Ongoing progress monitoring</li>
+                                <li>Curriculum refinement</li>
+                                <li>Goal achievement celebration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> <!-- Row END -->
+            </div>
+        </section>
+        <!-- =======================
+        Learning Path END -->
+
+        <!-- =======================
+        Testimonials START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 text-center mx-auto">
+                        <h2>Success Stories from Our Private Students</h2>
+                        <p class="lead">Hear from learners who transformed their skills through personalized instruction</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Testimonial 1 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/01.jpg' %}" class="rounded-circle" width="60" height="60" alt="Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Sarah Johnson</h5>
+                                    <p class="mb-0 text-muted">Professional Development</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"The personalized attention I received in my private classes helped me advance my career faster than I ever thought possible. My tutor understood exactly what I needed to focus on for my specific industry."</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/02.jpg' %}" class="rounded-circle" width="60" height="60" alt="Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Michael Chen</h5>
+                                    <p class="mb-0 text-muted">Exam Preparation</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"I was struggling with advanced mathematics until I started private sessions. Having a tutor who could explain concepts in multiple ways until I understood made all the difference. I aced my exams!"</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle" width="60" height="60" alt="Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">Emma Rodriguez</h5>
+                                    <p class="mb-0 text-muted">Language Learning</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"As a busy professional, the flexibility of private classes was essential. My tutor worked around my schedule and customized lessons based on my business needs. I became conversational in Spanish in just 3 months!"</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="col-md-6">
+                        <div class="testimonial-card p-4 h-100">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <img src="{% static 'assets/images/avatar/04.jpg' %}" class="rounded-circle" width="60" height="60" alt="Avatar">
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h5 class="mb-1">David Thompson</h5>
+                                    <p class="mb-0 text-muted">Skill Development</p>
+                                </div>
+                            </div>
+                            <p class="mb-0">"The one-on-one format allowed me to ask questions without hesitation. My tutor identified gaps in my knowledge I didn't even know I had and created exercises specifically to address them. Highly recommended!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Testimonials END -->
+
+        <!-- =======================
+        CTA START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="cta-section p-4 p-sm-5 text-white position-relative overflow-hidden">
+                    <!-- SVG decoration -->
+                    <figure class="position-absolute top-0 end-0 mt-5 me-n5 opacity-50">
+                        <svg width="357px" height="300px">
+                            <path class="fill-white" d="M315.6,213.9c-19.2,24.9-46.9,43.3-78.7,51.5c-31.8,8.2-66.1,5.6-96.5-7.3c-30.4-12.9-55.5-34.2-71.7-60.8 c-16.2-26.6-22.6-57.1-18.1-86.9c4.5-29.8,19.8-57.3,43.5-77.8c23.7-20.5,54.3-32.7,86-34.6c31.7-1.9,63.4,6.7,89.8,24.5 c26.4,17.8,46.2,43.7,56.3,73.7c10.1,30,10.1,62.5,0,92.5c-10.1,30-29.9,55.9-56.3,73.7c-26.4,17.8-58.1,26.4-89.8,24.5 c-31.7-1.9-62.3-14.1-86-34.6c-23.7-20.5-39-48-43.5-77.8c-4.5-29.8,1.9-60.3,18.1-86.9c16.2-26.6,41.3-47.9,71.7-60.8 c30.4-12.9,64.7-15.5,96.5-7.3c31.8,8.2,59.5,26.6,78.7,51.5c19.2,24.9,28.8,54.9,27.5,85.2C344.4,159,334.8,189,315.6,213.9z"/>
+                        </svg>
+                    </figure>
+
+                    <div class="row position-relative align-items-center">
+                        <div class="col-lg-8">
+                            <h3 class="text-white">Ready for Personalized Learning?</h3>
+                            <p class="text-white mb-3 mb-lg-0">Take the first step toward achieving your goals with one-on-one instruction designed specifically for you.</p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end">
+                            <a href="#sign-up-private" class="btn btn-lg btn-light mb-0">Start Your Private Class Today</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        CTA END -->
+
+        <!-- =======================
+        FAQ START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="text-center mb-5">
+                            <h2>Frequently Asked Questions</h2>
+                            <p class="lead">Get answers to common questions about our private classes</p>
+                        </div>
+
+                        <!-- Accordion -->
+                        <div class="accordion" id="faqAccordion">
+                            <!-- Item 1 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        How are private classes different from group classes?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Private classes offer undivided attention from your tutor, with lessons customized to your specific needs, pace, and learning style. Unlike group classes where the curriculum is standardized, private sessions are tailored to help you achieve your personal objectives more efficiently.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Can I choose my own tutor?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Yes! We match you with a tutor based on your learning goals, schedule, and preferences. You can review tutor profiles, specialties, and reviews before making your selection. If you're not satisfied with your match, we'll help you find a better fit.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        How flexible is the scheduling?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Very flexible! You and your tutor agree on a schedule that works for both of you. You can book sessions week-to-week or set a regular schedule. We require 24 hours notice for cancellations to respect our tutors' time.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        What if I need to focus on a very specific topic?
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Private classes are perfect for specialized learning! Whether you need to prepare for a specific exam, master a technical skill for work, or focus on a particular aspect of a language, your tutor will design lessons specifically around that topic.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Item 5 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        How do I track my progress?
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Your tutor provides regular progress reports and assessments. You'll also have access to our learning platform where you can track your achievements, review lesson materials, and see how you're progressing toward your goals.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        FAQ END -->
+
+        <!-- =======================
+        Final CTA START -->
+        <section class="py-5">
+            <div class="container position-relative">
+                <!-- SVG -->
+                <figure class="position-absolute top-50 start-50 translate-middle ps-3">
+                    <svg class="fill-white opacity-2">
+                        <path d="m496 22.999c0 10.493-8.506 18.999-18.999 18.999s-19-8.506-19-18.999 8.507-18.999 19-18.999 18.999 8.506 18.999 18.999z"/>
+                        <path d="m775 102.5c0 5.799-4.701 10.5-10.5 10.5-5.798 0-10.499-4.701-10.499-10.5 0-5.798 4.701-10.499 10.499-10.499 5.799 0 10.5 4.701 10.5 10.499z"/>
+                        <path d="m192 102c0 6.626-5.373 11.999-12 11.999s-11.999-5.373-11.999-11.999c0-6.628 5.372-12 11.999-12s12 5.372 12 12z"/>
+                        <path d="m20.499 10.25c0 5.66-4.589 10.249-10.25 10.249-5.66 0-10.249-4.589-10.249-10.249-0-5.661 4.589-10.25 10.249-10.25 5.661-0 10.25 4.589 10.25 10.25z"/>
+                    </svg>
+                </figure>
+
+                <div class="bg-primary p-4 p-sm-5 rounded-3">
+                    <div class="row justify-content-center position-relative">
+                        <!-- Svg -->
+                        <figure class="position-absolute top-50 start-0 translate-middle-y">
+                            <svg width="141px" height="141px">
+                                <path class="fill-white opacity-1"
+                                      d="M140.520,70.258 C140.520,109.064 109.062,140.519 70.258,140.519 C31.454,140.519 -0.004,109.064 -0.004,70.258 C-0.004,31.455 31.454,-0.003 70.258,-0.003 C109.062,-0.003 140.520,31.455 140.520,70.258 Z"/>
+                            </svg>
+                        </figure>
+                        <!-- Action box -->
+                        <div class="col-11 position-relative">
+                            <div class="row align-items-center">
+                                <!-- Title -->
+                                <div class="col-lg-7">
+                                    <h3 class="text-white">Start Your Personalized Learning Journey Today</h3>
+                                    <p class="text-white mb-3 mb-lg-0">Don't settle for one-size-fits-all education. Experience the difference that personalized, one-on-one instruction can make in achieving your learning goals.</p>
+                                </div>
+                                <!-- Button -->
+                                <div class="col-lg-5 text-lg-end">
+                                    <a href="#" id="sign-up-private"
+                                       class="btn btn-lg btn-light mb-0">Begin Your Private Class</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Final CTA END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}

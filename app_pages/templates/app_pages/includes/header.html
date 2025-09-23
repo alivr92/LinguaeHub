@@ -104,7 +104,7 @@
 {#                                    href="{% url 'provider:tutor_list' %}" id="menu-tutor" aria-expanded="false">Tutors</a>#}
 {#                    </li>#}
 {##}
-{#                    <!-- Nav item: About Us -->#}
+{#                    <!-- Nav item: About -->#}
 {#                    <li class="nav-item">#}
 {#                        <a#}
 {#                                {% if 'about' in request.path %}#}
@@ -440,44 +440,53 @@
                            href="{% url 'app_pages:home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{% if 'about' in request.path %} active text-primary{% endif %}"
-                           href="{% url 'app_pages:about' %}">About Us</a>
+                        <a class="nav-link{% if 'online' in request.path %} active text-primary{% endif %}"
+                           href="#">Online Learning</a>
+                    </li>
+                    <!-- Nav item: In-Person -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link {% if 'in-person' in request.path %}active text-primary{% endif %} dropdown-toggle" href="{% url 'app_pages:in_person' %}" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="demoMenu">
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person' %}">In-Person classes 1</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person2' %}">Individual Classes</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_individual' %}">Private Classes (1:1)</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop' %}">Group classes</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop2' %}">Group classes 2</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_corporate' %}">Corporate Training</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_corporate2' %}">Corporate Training 2</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_kids' %}">Kids Programs</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_kids2' %}">Kids Programs2</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link{% if 'contact-us' in request.path %} active text-primary{% endif %}"
-                           href="{% url 'app_pages:contact_us' %}">Contact</a>
+                        <a class="nav-link{% if 'for-business' in request.path %} active text-primary{% endif %}"
+                           href="#">For Business</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link{% if 'products' in request.path %} active text-primary{% endif %}"
+                           href="#">Products</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link{% if 'become-tutor' in request.path %} active text-primary{% endif %}"
                            href="{% url 'provider:become_tutor' %}">Become a Tutor</a>
                     </li>
-                <!-- Nav item: In-Person -->
-					<li class="nav-item dropdown">
-						<a class="nav-link {% if 'in-person' in request.path %}active text-primary{% endif %} dropdown-toggle" href="{% url 'app_pages:in_person' %}" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">In person</a>
-						<ul class="dropdown-menu" aria-labelledby="demoMenu">
-							<li> <a class="dropdown-item" href="{% url 'app_pages:in_person' %}">In-Person classes 1</a></li>
-							<li> <a class="dropdown-item" href="{% url 'app_pages:in_person2' %}">In-Person classes 2</a></li>
-							<li> <a class="dropdown-item" href="{% url 'app_pages:in_person_individual' %}">Individual classes</a></li>
-							<li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop' %}">Group classes</a></li>
-							<li> <a class="dropdown-item" href="{% url 'app_pages:in_person_companies' %}">Companies</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_kids' %}">Kids</a></li>
-						</ul>
-					</li>
+
                 </ul>
 
                 <!-- Right Side Elements -->
                 <div class="d-flex align-items-center">
                     <!-- Search Bar -->
-                    <div class="nav-item me-2 me-xl-3">
-                        <form class="position-relative">
-                            <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search"
-                                   aria-label="Search">
-                            <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"
-                                    type="submit">
-                                <i class="fas fa-search fs-6"></i>
-                            </button>
-                        </form>
-                    </div>
+{#                    <div class="nav-item me-2 me-xl-3">#}
+{#                        <form class="position-relative">#}
+{#                            <input class="form-control pe-5 bg-transparent" type="search" placeholder="Search"#}
+{#                                   aria-label="Search">#}
+{#                            <button class="bg-transparent p-2 position-absolute top-50 end-0 translate-middle-y border-0 text-primary-hover text-reset"#}
+{#                                    type="submit">#}
+{#                                <i class="fas fa-search fs-6"></i>#}
+{#                            </button>#}
+{#                        </form>#}
+{#                    </div>#}
 
 
                     <!-- Notification dropdown START -->

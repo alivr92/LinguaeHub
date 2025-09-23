@@ -1014,7 +1014,7 @@ class UserConsentLog(models.Model):
     CONSENT_TYPE_CHOICES = [
         ('terms', 'Terms of Service'),
         ('privacy', 'Privacy Policy'),
-        ('nda', 'Instructor NDA'),
+        ('nda', 'Tutor NDA'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='consent_logs')

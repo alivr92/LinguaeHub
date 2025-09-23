@@ -12,6 +12,56 @@
 {% block embed_style %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 {% endblock %}
+{% block my_style %}
+    <style>
+        .bg-light-custom {
+            background-color: #f8f9fa !important;
+        }
+
+        .benefit-card {
+            transition: transform 0.3s;
+        {#height: 100%;#}
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .bg-primary-light {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+
+        .bg-success-light {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+
+        .bg-warning-light {
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+
+        .bg-info-light {
+            background-color: rgba(13, 202, 240, 0.1);
+        }
+
+        .bg-purple-light {
+            background-color: rgba(111, 66, 193, 0.1);
+        }
+
+        .bg-pink-light {
+            background-color: rgba(214, 51, 132, 0.1);
+        }
+    </style>
+{% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
@@ -89,11 +139,21 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6">
                         <!-- Title -->
-                        <h1>Apply as Instructor</h1>
-                        <p>Satisfied conveying a dependent contented he gentleman agreeable do be. Delivered dejection
-                            necessary objection do Mr prevailed. Mr feeling does chiefly cordial in do.</p>
+                        <h1>Become a Tutor!</h1>
+                        <h5>Shape the Future and Turn Your Expertise Into Impact</h5>
+                        <p>Education transforms lives — and so can you. By joining {{ CFChar.site_name }} as a tutor, you’ll inspire
+                            learners, expand your professional influence, and be part of a global community redefining
+                            the future of education. It's about leadership, impact, and growth at a global space.</p>
+
+                        <!-- Your Next Step section -->
+                        <div class="pt-5">
+                            <h3>Your Next Step</h3>
+                            <p>Ready to make a difference? Apply today and join an enterprise-level community of tutors
+                                building the future of education.</p>
+                        </div>
+
                         <!-- Button -->
-                        <a href="#sign-up-tutor" class="btn btn-primary mb-0">Start Teaching today</a>
+                        <a href="#sign-up-tutor" class="btn btn-primary mb-0 px-4">Apply Now</a>
                     </div>
 
                     <div class="col-md-6 text-center">
@@ -106,6 +166,91 @@
         </section>
         <!-- =======================
         Page Banner END -->
+
+        <!-- Why Join Us Section -->
+        <section class="py-2">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2>Why Join Us?</h2>
+                    <p class="lead">Discover the benefits of becoming a {{ CFChar.site_name }} tutor</p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Column 1 -->
+                    <div class="col-lg-4">
+                        <!-- Global Reach -->
+                        <div class="benefit-card p-4 rounded shadow-sm">
+                            <div class="icon-wrapper bg-primary-light">
+                                <i class="bi bi-globe text-primary fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Global Reach</h5>
+                            <p class="mb-0">Connect with motivated learners from around the world and make your
+                                knowledge truly borderless.</p>
+                        </div>
+
+                        <!-- Professional Growth -->
+                        <div class="benefit-card p-4 rounded shadow-sm mt-2">
+                            <div class="icon-wrapper bg-success-light">
+                                <i class="bi bi-graph-up-arrow text-success fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Professional Growth</h5>
+                            <p class="mb-0">Elevate your career with enterprise-grade tools, recognition, and access to
+                                a thriving educator community.</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="col-lg-4">
+                        <!-- Fair & Competitive Rewards -->
+                        <div class="benefit-card p-4 rounded shadow-sm">
+                            <div class="icon-wrapper bg-warning-light">
+                                <i class="bi bi-currency-dollar text-warning fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Fair & Competitive Rewards</h5>
+                            <p class="mb-0">Earn competitively for your time and expertise, with transparent
+                                compensation and growth opportunities.</p>
+                        </div>
+
+                        <!-- Seamless Technology -->
+                        <div class="benefit-card p-4 rounded shadow-sm mt-4">
+                            <div class="icon-wrapper bg-info-light">
+                                <i class="bi bi-laptop text-info fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Seamless Technology</h5>
+                            <p class="mb-0">Deliver outstanding learning experiences through our powerful, intuitive
+                                platform.</p>
+                        </div>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="col-lg-4">
+                        <!-- Community of Excellence -->
+                        <div class="benefit-card p-4 rounded shadow-sm">
+                            <div class="icon-wrapper bg-purple-light">
+                                <i class="bi bi-people-fill text-purple fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Community of Excellence</h5>
+                            <p class="mb-0">Collaborate with world-class tutors, share insights, and shape the future of
+                                learning together.</p>
+                        </div>
+
+                        <!-- Start Your Application -->
+                        <div class="benefit-card p-4 rounded shadow-sm mt-4">
+                            <div class="icon-wrapper bg-pink-light">
+                                <i class="bi bi-rocket-takeoff text-pink fs-3"></i>
+                            </div>
+                            <h5 class="mb-3">Quick & Easy Onboarding</h5>
+                            <p class="mb-0">Get started quickly with our streamlined application process and begin
+                                teaching in no time.</p>
+                            {#                            <div class="mt-3">#}
+                            {#                                <a href="#sign-up-tutor" class="btn btn-primary">Start Your Application</a>#}
+                            {#                            </div>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <!-- =======================
         Work START -->
@@ -167,7 +312,8 @@
                 <div class="bg-orange bg-opacity-10 p-4 p-sm-5 rounded position-relative overflow-hidden">
                     <!-- SVG decoration -->
                     <figure class="position-absolute top-50 end-0 translate-middle-y me-n7">
-                        <svg class="fill-white opacity-8 rotate-193" width="676px" height="161.3px" viewBox="0 0 676 161.3" style="enable-background:new 0 0 676 161.3;" xml:space="preserve">
+                        <svg class="fill-white opacity-8 rotate-193" width="676px" height="161.3px"
+                             viewBox="0 0 676 161.3" style="enable-background:new 0 0 676 161.3;" xml:space="preserve">
 					<path d="M53.6,18.8c28.6,8.8,50.3,27.3,70.9,48c19.9,19.9,39.5,40.8,65.3,53c53.3,24.9,116,12.4,168.2-9.1 c58.4-23.9,113.2-59.8,176.2-70.3c30.9-5.1,64.1-2.6,90.9,14.7c22.4,14.4,34.4,36.9,39.5,62.4c2.9,14.5,3.9,29.2,4.6,43.9h6.8 c-0.2-4.2-0.5-8.3-0.8-12.5c-1.7-24.1-4.9-49.1-17.6-70.3c-14.5-23.9-40-39.2-67-44.8c-32.9-6.8-67.2-0.3-98.5,10.2 c-30.3,10-59,24.2-87.7,38.1c-54.8,26.4-115.5,53.1-177.9,42c-14.5-2.6-28.7-7.4-41.7-14.7c-12.8-7.3-23.9-16.7-34.6-26.7 c-20.7-19.6-39.4-42-64.1-56.8c-25.6-15.4-56.4-22.2-86-19H0v6.9C17.9,11.8,36.3,13.5,53.6,18.8z"/>
 				</svg>
                     </figure>
@@ -198,7 +344,7 @@
                                     data-purecounter-end="25" data-purecounter-delay="200">0</h4>
                                 <span class="display-6 text-orange mb-0">K</span>
                             </div>
-                            <h6 class="mb-0 fw-bold">Total Instructors</h6>
+                            <h6 class="mb-0 fw-bold">Total Tutors</h6>
                         </div>
 
                         <!-- Counter item -->
@@ -229,299 +375,170 @@
 
         <!-- =======================
         Form and Tabs START -->
-        {% include 'includes/messages.html' %}
-        <section>
+        <section class="py-5">
             <div class="container">
-                <div class="row">
-
-                    <!-- Left Content START -->
-                    <div class="col-lg-5 position-relative mt-xl-0" id="fill-instructor-form">
-
-                        <!-- SVG decoration -->
-                        <figure class="position-absolute top-0 start-50 mt-n3 ms-5 d-none d-sm-block z-index-1">
-                            <svg width="192.5px" height="89.4px" viewBox="0 0 192.5 89.4">
-                                <path class="fill-warning"
-                                      d="M170.2,0.5c-0.1,0-0.2,0-0.4,0c-2.6-0.1-5.2-0.4-7.8-0.5c-2.9-0.1-5.8,0-8.6,0.2c-1.4,0.1-2.9,0.3-4.3,0.5 c-0.5,0.1-1,0-1.5,0c-1-0.1-1.9,0.2-2.9,0.3c-5.6,0.9-11.1,2.1-16.5,3.6c-2.7,0.7-5.4,1.6-8.1,2.5c-0.6,0.2-1.2,0.4-1.8,0.5 c-0.4,0-0.8,0-1.2,0.1c-1.5,0.2-3,1.1-4.3,1.8c-3,1.5-5.9,3.2-8.6,5.2c-2,1.5-3.8,3.1-5.6,4.8c-0.9,0.9-1.7,1.8-2.5,2.7 c-0.4,0.4-1.1,0.7-1.4,1.2c-0.3,0.4-0.6,0.9-0.9,1.4c-0.9,1.2-1.7,2.3-2.7,3.4c-0.3,0.4-0.7,0.6-1.2,0.6c-1.4,0.1-2.8-0.1-4.2-0.1 c-0.7,0-1.2,0.2-1.9,0.2c-3.3,0.4-6.6,0.7-9.8,1.6c-1.7,0.5-3.4,0.9-5.1,1.4c-5.4,1.5-11,2.9-16,5.4c-4.6,2.2-8.7,5.2-12.7,8.3 c-2,1.6-4,3.2-5.9,4.9c-0.8,0.7-1.6,1.2-2.5,1.6c-0.9,0.5-1.7,1.3-2.4,2c-1.4,1.3-2.9,2.6-4.3,3.9c-1.2,1.1-2.5,2.1-3.6,3.3 c-0.9,1-2,1.9-3,2.8c-1,0.9-2.1,1.9-3.1,2.8c-0.8,0.7-1.6,1.2-2.3,1.9c-0.9,0.9-1.7,1.9-2.7,2.7c0-0.7,0.2-1.3,0.2-2 c0-1.8-0.2-3.7-0.7-5.5c-0.2-0.9-0.5-1.8-1.1-2.4c-0.6-0.7-1.7-1-2.4-0.6c-0.1,0.1-0.3,0.2-0.4,0.3c-0.1,0.2-0.1,0.4,0,0.6 c0.7,3.7,1.2,7.4,0.7,11.1c-0.2,2.4-0.9,4.9-2,7c-0.5,1-1.2,1.9-1.7,3c-0.4,1-1.4,1.8-2.1,2.7C0.3,86,0.1,86.3,0,86.6 c-0.1,0.4,0.1,0.7,0.2,1.1c0.3,0.8,0.8,1.6,1.6,1.7c0.5,0,0.9-0.2,1.3-0.5c0.9-0.5,1.7-1.1,2.6-1.6c0.4-0.2,0.7-0.5,1.1-0.7 c1.7-1.3,3.7-2.3,5.7-3.1c4.3-1.7,9.1-2.4,13.8-1.7c0.2,0,0.4,0.1,0.7,0c0.7-0.2,0.9-1.2,0.4-1.8c-0.4-0.6-1.2-0.8-1.9-1 c-2.7-0.8-5.4-1.5-8.2-1.8c-0.7-0.1-1.4-0.1-2.1-0.2c-0.3,0-0.6,0-0.8,0c-0.3,0-0.9,0.2-1.2,0.1C13,77,13,77.1,13,76.8 c0-0.4,0.6-0.8,0.9-1c0.5-0.4,0.9-0.8,1.4-1.2c1.1-1,2.3-1.9,3.4-2.9c0.6-0.5,1.1-1,1.7-1.5c0.3-0.3,0.5-0.7,0.9-1 c1.2-1.1,2.7-1.7,3.9-2.8c0.4-0.4,0.8-0.8,1.2-1.2c0.8-0.8,1.7-1.5,2.6-2.2c1-0.8,2.1-1.6,3.1-2.3c0.9-0.6,1.9-1.1,2.6-2 c0.8-1,2.1-1.7,3.1-2.5c1.1-0.9,2.2-1.8,3.3-2.6c3.9-3.1,7.9-6.2,12.3-8.6c5.2-2.7,10.6-4.9,16.3-6.4c5.5-1.4,11.2-1.8,16.8-2.7 c0.2,0,0.3-0.1,0.5-0.1c1.4-0.2,2.3-0.4,2,1.5c-0.8,4.9,2.3,7.5,5.8,9.8c4,2.5,8,5,12.7,5.8c5.2,0.9,10.4,2.7,15.9,0.8 c3-1,6.3-5,6.2-7.6c0-1.7-0.3-3.5-1-5.1c-0.6-1.4-1.5-3-2.8-3.7c-1-0.5-1.9-1.5-2.8-2.2c-1.1-0.8-2.2-1.5-3.3-2.1 c-2.3-1.2-4.8-2.1-7.3-2.8c-3.5-0.9-7.2-1.4-10.8-1.8c-0.9-0.1-1.7-0.2-2.6-0.2c-0.2,0-1.4,0-1.4-0.2c-0.1-0.2,0.3-0.5,0.4-0.6 c0.8-0.9,1.7-1.8,2.5-2.6c1.7-1.7,3.6-3.3,5.5-4.8c2-1.6,4.2-3,6.4-4.1c1.1-0.6,2.3-1.1,3.5-1.5c0.6-0.2,1.2-0.4,1.8-0.6 c0.4-0.2,0.7-0.5,1.1-0.7c1.2-0.6,2.7-0.9,4-1.3c1.4-0.4,2.8-0.8,4.2-1.2c2.8-0.8,5.6-1.5,8.4-2.2c3.4-0.8,6.9-1.6,10.3-2.4 c7.9-1.7,15.9-2.4,24-1.7c4.4,0.4,8.9,0.9,13.2,2.1c1.3,0.4,2.5,0.8,3.9,1.1c0.7,0.1,1.4,0.5,2,0.9c0.9,0.5,1.7,0.9,2.6,1.4 c0.3,0.2,0.7,0.3,0.9,0.1c0.1-0.1,0.1-0.3,0.1-0.4c0-0.9-0.4-1.8-1-2.5c-0.5-0.6-1.2-1.4-1.9-1.8c-0.9-0.6-2.2-0.9-3.3-1.3 c-1.1-0.4-2.2-0.7-3.3-1c-2.8-0.8-5.6-1.4-8.5-1.9C173.1,0.9,171.6,0.6,170.2,0.5z M106.8,36c5,0.8,11.2,2,16.2,6.2 c1.1,0.9,2.8,1.6,2.3,3.4c-0.4,1.7-2.1,1.8-3.5,2.3c-5,1.5-9.9,0-14.5-1.2c-4.9-1.2-9.7-3.3-13.5-7c-0.6-0.6-1.2-1.3-1.5-2.1 c-0.1-0.3-0.1-0.7-0.2-1c-0.1-0.3-0.3-0.6,0-0.9c0.2-0.2,0.5-0.3,0.9-0.3c2.4-0.4,4.9-0.6,7.4-0.5c0.9,0,1.8,0.4,2.7,0.5 C104.5,35.6,105.7,35.8,106.8,36z"/>
-                            </svg>
-                        </figure>
-
-                        <div class="card card-body shadow p-4">
-                            <!-- Title -->
-                            <h3>Please fill this form</h3>
-                            <!-- Form START -->
-{#                            <form class="row g-3 mt-2 position-relative z-index-9" method="POST"#}
-{#                                  enctype="multipart/form-data">#}
-{#                                {% csrf_token %}#}
-{##}
-{#                                <!-- Profile picture -->#}
-{#                                <div class="col-12 justify-content-center align-items-center">#}
-{#                                    <label class="form-label">Profile picture (Optional) Max: 1MB</label> <i#}
-{#                                        class="bi bi-info-circle text-primary"#}
-{#                                        data-bs-toggle="tooltip"#}
-{#                                        title="{{ CFChar.tooltip_photo }}"></i>#}
-{#                                    <div class="d-flex align-items-center">#}
-{#                                        <label class="position-relative me-4" for="uploadfile-1"#}
-{#                                               title="Replace this pic">#}
-{#                                            <!-- Avatar place holder -->#}
-{#                                            <span class="avatar avatar-xl">#}
-{#                                        <img id="uploadfile-1-preview"#}
-{#                                             class="avatar-img rounded-circle border border-white border-3 shadow protected-image"#}
-{#                                             src="{% static 'app_accounts/img/avatar/default.png' %}" alt="">#}
-{#                                </span>#}
-{#                                            <!-- Remove btn -->#}
-{#                                            <button type="button" class="uploadremove"><i#}
-{#                                                    class="bi bi-x text-white"></i></button>#}
-{#                                        </label>#}
-{#                                        <!-- Upload button -->#}
-{#                                        <label class="btn btn-primary-soft mb-0" for="uploadfile-1">Change</label>#}
-{#                                        <input id="uploadfile-1" class="form-control d-none" type="file" name="photo">#}
-{#                                        <!-- Hidden input to indicate photo deletion -->#}
-{#                                        <input type="hidden" id="delete-photo" name="delete_photo" value="false">#}
-{#                                    </div>#}
-{#                                    {% for error in form.photo.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{##}
-{##}
-{#                                <!-- Full name -->#}
-{#                                <div class="col-12">#}
-{#                                    <label class="form-label">Full name *</label>#}
-{#                                    <div class="input-group">#}
-{#                                        {{ form.first_name }}#}
-{#                                        {% for error in form.first_name.errors %}#}
-{#                                            <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                                <button type="button" class="close" data-dismiss="alert"#}
-{#                                                        aria-label="Close"><span#}
-{#                                                        aria-hidden="true">&times;</span></button>#}
-{#                                            </div>#}
-{#                                        {% endfor %}#}
-{#                                        {{ form.last_name }}#}
-{#                                        {% for error in form.last_name.errors %}#}
-{#                                            <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                                <button type="button" class="close" data-dismiss="alert"#}
-{#                                                        aria-label="Close"><span#}
-{#                                                        aria-hidden="true">&times;</span></button>#}
-{#                                            </div>#}
-{#                                        {% endfor %}#}
-{#                                    </div>#}
-{#                                </div>#}
-{##}
-{#                                <!-- Email -->#}
-{#                                <div class="col-lg-6">#}
-{#                                    <label class="form-label">Email *</label>#}
-{#                                    {{ form.email }}#}
-{#                                    {% for error in form.email.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                                <!-- Number -->#}
-{#                                <div class="col-lg-6">#}
-{#                                    <label class="form-label">Phone Number *</label>#}
-{#                                    {{ form.phone }}#}
-{#                                    {% for error in form.phone.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                                <!-- Native Language -->#}
-{#                                <div class="col-lg-12">#}
-{#                                    <label class="form-label">Native Language *</label> <i#}
-{#                                        class="bi bi-info-circle text-primary"#}
-{#                                        data-bs-toggle="tooltip"#}
-{#                                        title="{{ CFChar.tooltip_native_languages }}"></i>#}
-{#                                    {{ form.lang_native }}#}
-{#                                    {% for error in form.lang_native.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{#                                <!-- Teaching Skills -->#}
-{#                                <div class="col-lg-12">#}
-{#                                    <label class="form-label">Teaching Skills *</label> <i#}
-{#                                        class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"#}
-{#                                        title="{{ CFChar.tooltip_teaching_skill }}"></i>#}
-{#                                    {{ form.skills }}#}
-{#                                    {% for error in form.skills.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{##}
-{#                                <!-- Resume -->#}
-{#                                <div class="col-lg-12">#}
-{#                                    <label class="form-label">Resume or Certifications (Optional) Max: 1MB</label>#}
-{#                                    <div class="input-group mb-3">#}
-{#                                        {{ form.resume }}#}
-{#                                        <label class="input-group-text">pdf, doc, docx</label>#}
-{#                                    </div>#}
-{#                                    {% for error in form.resume.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{##}
-{#                                <!-- Textarea -->#}
-{#                                <div class="col-12">#}
-{#                                    <label class="form-label">Add Summary *</label> <i#}
-{#                                        class="bi bi-info-circle text-primary" data-bs-toggle="tooltip"#}
-{#                                        title="{{ CFChar.tooltip_bio }}"></i>#}
-{#                                    {{ form.bio }}#}
-{#                                    <div class="form-text">Brief description about you and your teaching skills. (Max:#}
-{#                                        500 Chars)#}
-{#                                    </div>#}
-{#                                    {% for error in form.bio.errors %}#}
-{#                                        <div class="alert alert-danger alert-dismissible">{{ error }}#}
-{#                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-{#                                                <span aria-hidden="true">&times;</span></button>#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                </div>#}
-{##}
-{##}
-{#                                {{ form.captcha }}#}
-{#                                {% for error in form.captcha.errors %}#}
-{#                                    <div class="invalid-feedback d-block">{{ error }}</div>#}
-{#                                {% endfor %}#}
-{##}
-{##}
-{#                                <!-- Button -->#}
-{#                                <div class="col-12">#}
-{#                                    <button type="submit" class="btn btn-primary mb-0">Submit form</button>#}
-{#                                </div>#}
-{#                            </form>#}
-                            <!-- Form END -->
-                        </div>
+                <div class="row align-items-center">
+                    <!-- Left Side - Image -->
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <img src="{% static 'assets/images/element/instructor-course.svg' %}"
+                             class="img-fluid rounded" alt="Tutor teaching students">
                     </div>
-                    <!-- Left Content END -->
 
-                    <!-- Tabs START -->
-                    <div class="col-lg-7 z-index-9 mt-5 mt-xl-0">
-                        <h3>How to become an Instructor?</h3>
-                        <ul class="nav nav-pills nav-pill-soft my-4" id="course-pills-tab" role="tablist">
-                            <!-- Tab item -->
-                            <li class="nav-item me-2 me-lg-4" role="presentation">
-                                <button class="nav-link mb-2 mb-xl-0 active" id="course-pills-tab-1"
-                                        data-bs-toggle="pill" data-bs-target="#course-pills-1" type="button" role="tab"
-                                        aria-controls="course-pills-1" aria-selected="true">Become an Instructor
+                    <!-- Right Side - Tabs -->
+                    <div class="col-lg-7">
+                        <h2 class="mb-4">Who We're Looking For?</h2>
+
+                        <!-- Tabs Navigation -->
+                        <ul class="nav nav-pills nav-pill-soft mb-4" id="tutor-pills-tab" role="tablist">
+                            <!-- Tab 1 -->
+                            <li class="nav-item me-3" role="presentation">
+                                <button class="nav-link active" id="tutor-pills-tab-1" data-bs-toggle="pill"
+                                        data-bs-target="#tutor-pills-1" type="button" role="tab"
+                                        aria-controls="tutor-pills-1" aria-selected="true">
+                                    Ideal Candidates
                                 </button>
                             </li>
-                            <!-- Tab item -->
-                            <li class="nav-item me-2 me-lg-4" role="presentation">
-                                <button class="nav-link mb-2 mb-xl-0" id="course-pills-tab-2" data-bs-toggle="pill"
-                                        data-bs-target="#course-pills-2" type="button" role="tab"
-                                        aria-controls="course-pills-2" aria-selected="false">Instructor Role
+                            <!-- Tab 2 -->
+                            <li class="nav-item me-3" role="presentation">
+                                <button class="nav-link" id="tutor-pills-tab-2" data-bs-toggle="pill"
+                                        data-bs-target="#tutor-pills-2" type="button" role="tab"
+                                        aria-controls="tutor-pills-2" aria-selected="false">
+                                    Our LMS Platform
                                 </button>
                             </li>
-                            <!-- Tab item -->
-                            <li class="nav-item me-2 me-lg-4" role="presentation">
-                                <button class="nav-link mb-2 mb-xl-0" id="course-pills-tab-3" data-bs-toggle="pill"
-                                        data-bs-target="#course-pills-3" type="button" role="tab"
-                                        aria-controls="course-pills-3" aria-selected="false">Start with Course
+                            <!-- Tab 3 -->
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="tutor-pills-tab-3" data-bs-toggle="pill"
+                                        data-bs-target="#tutor-pills-3" type="button" role="tab"
+                                        aria-controls="tutor-pills-3" aria-selected="false">
+                                    Application Process
                                 </button>
                             </li>
                         </ul>
 
-                        <!-- Tab contents START -->
-                        <div class="tab-content" id="pills-tabContent">
-                            <!-- Content -->
-                            <div class="tab-pane fade show active" id="course-pills-1" role="tabpanel"
-                                 aria-labelledby="course-pills-tab-1">
-                                <h6>Become an Instructor</h6>
-                                <p>As it so contrasted oh estimating instrument. Size like body someone had. Are conduct
-                                    viewing boy minutes warrant the expense? Tolerably behavior may admit daughters
-                                    offending her ask own. Praise effect wishes change way and any wanted. Lively use
-                                    looked latter regard had. Do he it part more last in. Merits ye if Mr narrow points.
-                                    Melancholy particular Devonshire alteration it favorable appearance up.</p>
-                                <p>Size like body someone had. Are conduct viewing boy minutes warrant the expense?
-                                    Tolerably behavior may admit daughters offending her ask own. Praise effect wishes
-                                    change way and any wanted. Lively use looked latter regard had. Do he it part more
-                                    last in. Merits ye if Mr narrow points. Melancholy particular Devonshire alteration
-                                    it favorable appearance up.</p>
-                                <p>Are conduct viewing boy minutes warrant the expense? Tolerably behavior may admit
-                                    daughters offending her ask own. Praise effect wishes change way and any wanted.
-                                    Lively use looked latter regard had. Do he it part more last in. Merits ye if Mr
-                                    narrow points. Melancholy particular Devonshire alteration it favorable appearance
-                                    up.</p>
+                        <!-- Tab Contents -->
+                        <div class="tab-content" id="tutor-pills-tabContent">
+                            <!-- Tab 1 Content -->
+                            <div class="tab-pane fade show active" id="tutor-pills-1" role="tabpanel"
+                                 aria-labelledby="tutor-pills-tab-1">
+                                <h5>We welcome Tutors who are...</h5>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Experts in their subject areas</strong> with deep knowledge of requested
+                                        topics
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Passionate about teaching and mentoring</strong> with a genuine desire
+                                        to help others learn
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Committed to delivering high-quality experiences</strong> and student
+                                        success
+                                    </li>
+                                </ul>
+                                <p class="lead">If that sounds like you, we'd love to hear from you.</p>
                             </div>
 
-                            <!-- Content -->
-                            <div class="tab-pane fade" id="course-pills-2" role="tabpanel"
-                                 aria-labelledby="course-pills-tab-2">
-                                <h6>Role of Instructor</h6>
-                                <p>satisfied conveying a dependent contented he gentleman agreeable do be. Water timed
-                                    folly right aware if oh truth. Imprudence attachment him his for sympathize. Large
-                                    above be to means. Dashwood does provide stronger is. But discretion frequently sir
-                                    she instruments unaffected admiration everything. Meant balls it if up doubt small
-                                    purse. Required his you put the outlived answered position. A pleasure exertion if
-                                    believed provided to. All led out world this music while asked. Paid mind even sons
-                                    does he door no. Attended overcame repeated it is perceived Marianne in. I think on
-                                    style child of. Servants moreover in sensible it ye possible.</p>
+                            <!-- Tab 2 Content -->
+                            <div class="tab-pane fade" id="tutor-pills-2" role="tabpanel"
+                                 aria-labelledby="tutor-pills-tab-2">
+                                <h5>Our LMS Platform</h5>
+                                <p>Before applying, here's what you should know about our Learning Management
+                                    System:</p>
 
-                                <!-- Info -->
-                                <ul class="list-group list-group-borderless mb-3">
-                                    <li class="list-group-item">
-                                        <i class="fas fa-check-circle text-success me-2"></i>The copy warned the Little
-                                        blind text
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-3">
+                                        <i class="bi bi-laptop text-primary me-2"></i>
+                                        <strong>Intuitive Interface:</strong> Easy-to-use platform for both tutors and
+                                        students
                                     </li>
-                                    <li class="list-group-item d-flex">
-                                        <i class="fas fa-check-circle text-success me-2 mt-1"></i>Thar where it came
-                                        from it would have been rewritten a thousand times and everything that was left
-                                        from origin would be the world
+                                    <li class="mb-3">
+                                        <i class="bi bi-clock text-primary me-2"></i>
+                                        <strong>Flexible Scheduling:</strong> Set your own availability and teaching
+                                        hours
                                     </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-check-circle text-success me-2"></i>Return to it's own,safe
-                                        country
+                                    <li class="mb-3">
+                                        <i class="bi bi-graph-up text-primary me-2"></i>
+                                        <strong>Performance Analytics:</strong> Track student progress and your teaching
+                                        impact
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-chat-dots text-primary me-2"></i>
+                                        <strong>Communication Tools:</strong> Built-in messaging and video conferencing
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-file-earmark-text text-primary me-2"></i>
+                                        <strong>Resource Library:</strong> Access to teaching materials and curriculum
+                                        guides
                                     </li>
                                 </ul>
                             </div>
 
-                            <!-- Content -->
-                            <div class="tab-pane fade" id="course-pills-3" role="tabpanel"
-                                 aria-labelledby="course-pills-tab-3">
-                                <h6>Start with a Courses</h6>
-                                <p>Large above be to means. Dashwood does provide stronger is. Warrant private blushes
-                                    removed an in equally totally if. Delivered dejection necessary objection do Mr
-                                    prevailed. Mr feeling does chiefly cordial in do. <img
-                                            src="{% static 'assets/images/element/instructor-course.svg' %}"
-                                            class="rounded float-start me-3 h-200px my-3 protected-image" alt="..."> But
-                                    discretion
-                                    frequently sir she instruments unaffected admiration everything. Meant balls it if
-                                    up doubt small purse. Required his you put the outlived answered position. A
-                                    pleasure exertion if believed provided to. All led out world this music while asked.
-                                    Paid mind even sons does he door no. Attended overcame repeated it is perceived
-                                    Marianne in. I think on style child of. Servants moreover in sensible it ye
-                                    possible. Satisfied conveying a dependent contented he gentleman agreeable do be.
-                                    Water timed folly right aware if oh truth. Imprudence attachment him his for
-                                    sympathize. Large above be to means. Dashwood does provide stronger is.
-                                    <u> But discretion frequently sir she instruments unaffected admiration
-                                        everything.</u> Meant balls it if up doubt small purse. Required his you put the
-                                    outlived answered position. A pleasure exertion if believed provided to. All led out
-                                    world this music while asked. Paid mind even sons does he door no. </p>
+                            <!-- Tab 3 Content -->
+                            <div class="tab-pane fade" id="tutor-pills-3" role="tabpanel"
+                                 aria-labelledby="tutor-pills-tab-3">
+                                <h5>Application Process</h5>
+                                <p>Here's how to become a tutor with {{ CFChar.site_name }}:</p>
+
+                                <div class="d-flex mb-3">
+                                    <div class="flex-shrink-0">
+                                        <span class="badge bg-primary rounded-circle p-2 me-3">1</span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6>Submit Your Application</h6>
+                                        <p class="mb-0">Complete our online form with your details and
+                                            qualifications.</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mb-3">
+                                    <div class="flex-shrink-0">
+                                        <span class="badge bg-primary rounded-circle p-2 me-3">2</span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6>Interview & Demo</h6>
+                                        <p class="mb-0">Participate in a short interview and teaching demonstration.</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mb-3">
+                                    <div class="flex-shrink-0">
+                                        <span class="badge bg-primary rounded-circle p-2 me-3">3</span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6>Onboarding & Training</h6>
+                                        <p class="mb-0">Complete our orientation and platform training program.</p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <span class="badge bg-primary rounded-circle p-2 me-3">4</span>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6>Start Teaching</h6>
+                                        <p class="mb-0">Begin connecting with students and building your tutoring
+                                            profile.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- Tab contents END -->
+
+                        <!-- Call to Action -->
+                        {#                        <div class="mt-5 p-4 bg-light rounded">#}
+                        {#                            <h5>Ready to make a difference?</h5>#}
+                        {#                            <p class="mb-3">Apply today and join an enterprise-level community of tutors building the future of education.</p>#}
+                        {#                            <a href="#sign-up-tutor" class="btn btn-primary">Apply Now</a>#}
+                        {#                        </div>#}
                     </div>
-                    <!-- Tabs END -->
                 </div>
             </div>
         </section>
         <!-- =======================
-        Form and Tabs END -->
+            Form and Tabs END -->
 
         <!-- =======================
         Action box START -->
@@ -551,7 +568,7 @@
                             <div class="row align-items-center">
                                 <!-- Title -->
                                 <div class="col-lg-7">
-                                    <h3 class="text-white">Become an Instructor!</h3>
+                                    <h3 class="text-white">Become a Tutor!</h3>
                                     <p class="text-white mb-3 mb-lg-0">Speedily say has suitable disposal add boy. On
                                         forth doubt miles of child. Exercise joy man children rejoiced. Yet uncommonly
                                         his ten who diminution astonished.</p>
@@ -573,21 +590,8 @@
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
 {% endblock %}
-{% block modals %}
-    <!-- Cropping Modal -->
-    {% include 'modals/cropping_photo.html' %}
-{% endblock %}
-
-
 {% block scripts_vendors %}
     <!-- Vendors -->
     <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
-{% endblock %}
-{% block embed_scripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-{% endblock %}
-{% block my_scripts %}
-    {#    <script src="{% static 'assets/js/avr_set_profile_photo.js' %}"></script>#}
-    <script src="{% static 'assets/js/cropper.min.js' %}"></script>
 {% endblock %}
