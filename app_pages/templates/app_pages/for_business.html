@@ -1,0 +1,741 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Enterprise Language Solutions - Business Communication Training{% endblock %}
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+{% block embed_style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+{% endblock %}
+{% block my_style %}
+    <style>
+        .bg-light-custom {
+            background-color: #f8f9fa !important;
+        }
+
+        .enterprise-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            height: 100%;
+        }
+
+        .enterprise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-color: #0d6efd;
+        }
+
+        .icon-wrapper-enterprise {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #5b21b6 100%);
+        }
+
+        .solution-badge {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .timeline-item:nth-child(1):before { content: "1"; }
+        .timeline-item:nth-child(2):before { content: "2"; }
+        .timeline-item:nth-child(3):before { content: "3"; }
+        .timeline-item:nth-child(4):before { content: "4"; }
+
+        .client-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+        .client-logo-grid img {
+            border-radius: 10px;
+            max-height: 150px;
+            min-height: 150px;
+            max-width: 240px;
+            min-width: 240px;
+            filter: grayscale(1) opacity(0.7);
+            transition: all 0.4s ease;
+            transform: scale(1);
+        }
+
+        .client-logo-grid img:hover {
+            filter: none;
+            opacity: 1;
+            transform: scale(1.05) translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .case-study-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-tier {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-tier.featured {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.15);
+        }
+
+        .pricing-tier.featured:before {
+            content: "Most Popular";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-bottom-left-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tech-stack-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-stack-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .floating-shape-1 {
+            top: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background: #3b82f6;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+
+        .floating-shape-2 {
+            bottom: 20%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: #10b981;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+
+        .stat-box {
+            transition: all 0.4s ease;
+            transform: scale(1);
+            border-radius: 12px;
+            padding: 2rem 1rem;
+            background-color: #fff;
+        }
+
+        .stat-box:hover {
+            transform: scale(1.05) translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main class="position-relative">
+
+        <!-- Floating Background Shapes -->
+        <div class="floating-shape floating-shape-1"></div>
+        <div class="floating-shape floating-shape-2"></div>
+
+        <!-- =======================
+        Enterprise Hero START -->
+{#        <section class="gradient-bg py-5 position-relative overflow-hidden text-white">#}
+        <section class="py-5 position-relative overflow-hidden text-white" style="background: url('{% static "assets/images/bg/ai_company.png" %}') no-repeat center center; background-size: cover;">
+            <div class="container position-relative z-1">
+                <div class="row align-items-center min-vh-60">
+                    <div class="col-lg-6">
+                        <div class="solution-badge">Enterprise Language Solutions</div>
+                        <h1 class="display-4 fw-bold mb-4 text-white">Global Communication,<br>Local Impact</h1>
+                        <p class="lead mb-4">Transform your organization's communication capabilities with tailored language training solutions that drive international business success.</p>
+
+                        <div class="d-flex flex-wrap gap-3 mb-4">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
+                                <span>92% Client Retention Rate</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
+                                <span>Enterprise-Grade Security</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle-fill text-warning me-2 fs-5"></i>
+                                <span>Customized Learning Paths</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <a href="#consultation" class="btn btn-warning btn-lg px-4">Request Enterprise Demo</a>
+                            <a href="#solutions" class="btn btn-outline-light btn-lg px-4">Explore Solutions</a>
+                        </div>
+                    </div>
+{#                    <div class="col-lg-6 text-center mt-5 mt-lg-0">#}
+{#                        <img src="{% static 'assets/images/bg/enterprise-hero.svg' %}"#}
+{#                        <img src="{% static 'assets/images/bg/ai_company.png' %}"#}
+{#                             class="img-fluid" alt="Enterprise Communication" style="max-height: 500px;">#}
+{#                    </div>#}
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Enterprise Hero END -->
+
+        <!-- =======================
+        Client Logos START -->
+        <section class="py-4 bg-white">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <p class="text-muted mb-0">Trusted by industry leaders worldwide</p>
+                </div>
+                <div class="client-logo-grid">
+{#                    <img src="{% static 'assets/images/clients/tech-company.svg' %}" alt="Tech Company" class="img-fluid" style="filter: grayscale(1) opacity(0.7);">#}
+                    <img src="{% static 'assets/images/bg/tech-company-4.jpg' %}" alt="Tech Company" class="img-fluid" >
+                    <img src="{% static 'assets/images/client/finance-group.jpg' %}" alt="Finance Group" class="img-fluid" >
+                    <img src="{% static 'assets/images/client/healthcare-system.jpg' %}" alt="Healthcare System" class="img-fluid" >
+                    <img src="{% static 'assets/images/client/manufacturing-corp.jpg' %}" alt="Manufacturing Corp" class="img-fluid" >
+                    <img src="{% static 'assets/images/client/retail-chain.jpg' %}" alt="Retail Chain" class="img-fluid" >
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Client Logos END -->
+
+        <!-- =======================
+        Business Impact START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2>Drive Measurable Business Outcomes</h2>
+                        <p class="lead">Language proficiency directly correlates with key business metrics</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-3 text-center stat-box">
+                        <div class="stat-number">47%</div>
+                        <h5>Faster Market Expansion</h5>
+                        <p class="text-secondary">Accelerated international growth with localized communication</p>
+                    </div>
+                    <div class="col-md-3 text-center stat-box">
+                        <div class="stat-number">63%</div>
+                        <h5>Improved Client Satisfaction</h5>
+                        <p class="text-secondary">Enhanced customer experience through native language support</p>
+                    </div>
+                    <div class="col-md-3 text-center stat-box">
+                        <div class="stat-number">35%</div>
+                        <h5>Cost Reduction</h5>
+                        <p class="text-secondary">Decreased reliance on external translation services</p>
+                    </div>
+                    <div class="col-md-3 text-center stat-box">
+                        <div class="stat-number">89%</div>
+                        <h5>Employee Retention</h5>
+                        <p class="text-secondary">Higher satisfaction among globally-focused teams</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Business Impact END -->
+
+        <!-- =======================
+        Solutions Grid START -->
+        <section class="py-5" id="solutions">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2>Comprehensive Enterprise Solutions</h2>
+                        <p class="lead">Tailored programs for every business need and scale</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Executive Communication -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white">
+                            <div class="icon-wrapper-enterprise bg-primary bg-opacity-10">
+                                <i class="bi bi-person-badge text-primary fs-1"></i>
+                            </div>
+                            <h4>Executive Communication</h4>
+                            <p class="text-muted">C-level language training for global leadership, negotiations, and international relations.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>One-on-one coaching</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Cultural intelligence training</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Confidential sessions</li>
+                                <li><i class="bi bi-check text-success me-2"></i>Flexible scheduling</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Team Proficiency -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white">
+                            <div class="icon-wrapper-enterprise bg-success bg-opacity-10">
+                                <i class="bi bi-people-fill text-success fs-1"></i>
+                            </div>
+                            <h4>Team Proficiency</h4>
+                            <p class="text-muted">Department-specific language training for sales, customer service, and technical teams.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Role-specific curriculum</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Group learning dynamics</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Progress analytics</li>
+                                <li><i class="bi bi-check text-success me-2"></i>Team performance tracking</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-success mt-3">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Global Deployment -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white">
+                            <div class="icon-wrapper-enterprise bg-warning bg-opacity-10">
+                                <i class="bi bi-globe text-warning fs-1"></i>
+                            </div>
+                            <h4>Global Deployment</h4>
+                            <p class="text-muted">Enterprise-wide language initiatives for multinational organizations.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Multi-language support</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Centralized management</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Local compliance adherence</li>
+                                <li><i class="bi bi-check text-success me-2"></i>24/7 global support</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-warning mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Solutions Grid END -->
+
+        <!-- ======================= Industry Solutions START -->
+{#        <section class="py-5 bg-dark text-white" style="background: url('{% static 'assets/images/bg/industry-solutions-1.jpg' %}') no-repeat center center; background-size: cover; ">#}
+        <section class="py-5 position-relative overflow-hidden text-white"
+                 style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                         url('{% static "assets/images/bg/industry-solutions-3.jpg" %}') no-repeat center center;
+                         background-size: cover;">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+                 style="background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+            <div class="container position-relative z-2">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="text-white">Industry-Specific Language Solutions</h2>
+                        <p class="lead">Tailored programs addressing unique sector challenges</p>
+                    </div>
+                </div>
+
+                <div class="industry-grid">
+                    <!-- Technology -->
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-cpu-fill text-primary fs-1 me-3"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white">Technology & SaaS</h4>
+                            <p>Technical documentation, developer communication, and client support in multiple languages.</p>
+                            <span class="badge bg-primary">API Documentation</span>
+                            <span class="badge bg-primary">Technical Support</span>
+                            <span class="badge bg-primary">Agile Methodology</span>
+                        </div>
+                    </div>
+
+                    <!-- Finance -->
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-graph-up-arrow text-success fs-1 me-3"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white">Financial Services</h4>
+                            <p>Compliance communication, client relations, and international banking terminology.</p>
+                            <span class="badge bg-success">Regulatory Compliance</span>
+                            <span class="badge bg-success">Wealth Management</span>
+                            <span class="badge bg-success">Risk Assessment</span>
+                        </div>
+                    </div>
+
+                    <!-- Healthcare -->
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-heart-pulse text-danger fs-1 me-3"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white">Healthcare & Pharma</h4>
+                            <p>Medical terminology, patient communication, and clinical research documentation.</p>
+                            <span class="badge bg-danger">Medical Terminology</span>
+                            <span class="badge bg-danger">Patient Care</span>
+                            <span class="badge bg-danger">Clinical Trials</span>
+                        </div>
+                    </div>
+
+                    <!-- Manufacturing -->
+                    <div class="d-flex align-items-start">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-gear-fill text-warning fs-1 me-3"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white">Manufacturing & Logistics</h4>
+                            <p>Supply chain communication, safety protocols, and international trade terminology.</p>
+                            <span class="badge bg-warning">Supply Chain</span>
+                            <span class="badge bg-warning">Quality Control</span>
+                            <span class="badge bg-warning">Safety Compliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ======================= Industry Solutions END -->
+
+        <!-- =======================
+        Implementation Process START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2>Seamless Enterprise Implementation</h2>
+                        <p class="lead">From assessment to ROI measurement - we handle the entire process</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="timeline-item">
+                            <h4>Needs Assessment & Strategy</h4>
+                            <p>Comprehensive analysis of organizational goals, skill gaps, and learning objectives with key stakeholders.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Custom Program Design</h4>
+                            <p>Development of tailored curriculum, learning paths, and success metrics aligned with business objectives.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Platform Integration</h4>
+                            <p>Seamless integration with existing HR systems, single sign-on, and enterprise security protocols.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Continuous Optimization</h4>
+                            <p>Ongoing program evaluation, performance analytics, and strategic adjustments for maximum impact.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Implementation Process END -->
+
+        <!-- =======================
+        Case Studies START -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2>Enterprise Success Stories</h2>
+                        <p class="lead">Real-world results from global organizations</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Case Study 1 -->
+                    <div class="col-lg-4">
+                        <div class="case-study-card">
+                            <div class="p-4">
+                                <div class="solution-badge bg-success">Technology Sector</div>
+                                <h4>Global Tech Expansion</h4>
+                                <p class="text-muted">Enabled rapid market entry into Latin America through Spanish proficiency training for 200+ employees.</p>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="stat-number" style="font-size: 2rem;">6M</div>
+                                        <small>Revenue Increase</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-number" style="font-size: 2rem;">89%</div>
+                                        <small>Team Proficiency</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 2 -->
+                    <div class="col-lg-4">
+                        <div class="case-study-card">
+                            <div class="p-4">
+                                <div class="solution-badge bg-primary">Financial Services</div>
+                                <h4>Compliance Excellence</h4>
+                                <p class="text-muted">Multilingual compliance training across 15 countries, reducing regulatory risks by 75%.</p>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="stat-number" style="font-size: 2rem;">75%</div>
+                                        <small>Risk Reduction</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-number" style="font-size: 2rem;">100%</div>
+                                        <small>Compliance Rate</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case Study 3 -->
+                    <div class="col-lg-4">
+                        <div class="case-study-card">
+                            <div class="p-4">
+                                <div class="solution-badge bg-warning">Manufacturing</div>
+                                <h4>Supply Chain Optimization</h4>
+                                <p class="text-muted">Cross-border communication training improving supply chain efficiency by 40% across Asian markets.</p>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="stat-number" style="font-size: 2rem;">40%</div>
+                                        <small>Efficiency Gain</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="stat-number" style="font-size: 2rem;">3.2x</div>
+                                        <small>ROI</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Case Studies END -->
+
+        <!-- =======================
+        Technology Stack START -->
+        <section class="py-5 bg-dark text-white">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="text-white">Enterprise-Grade Technology Platform</h2>
+                        <p class="lead">Secure, scalable, and integrated learning infrastructure</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-3 col-6">
+                        <div class="tech-stack-item">
+                            <i class="bi bi-shield-lock fs-1 text-primary mb-2"></i>
+                            <h6>Enterprise Security</h6>
+                            <small>SOC 2 Compliant</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="tech-stack-item">
+                            <i class="bi bi-plug fs-1 text-success mb-2"></i>
+                            <h6>API Integration</h6>
+                            <small>HRIS Compatible</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="tech-stack-item">
+                            <i class="bi bi-graph-up fs-1 text-warning mb-2"></i>
+                            <h6>Advanced Analytics</h6>
+                            <small>Real-time Dashboards</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="tech-stack-item">
+                            <i class="bi bi-phone fs-1 text-info mb-2"></i>
+                            <h6>Mobile Learning</h6>
+                            <small>Offline Capable</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Technology Stack END -->
+
+        <!-- =======================
+        Pricing Tiers START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2>Scalable Enterprise Pricing</h2>
+                        <p class="lead">Flexible solutions for organizations of all sizes</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Team Tier -->
+                    <div class="col-lg-4">
+                        <div class="pricing-tier text-center">
+                            <h4>Team</h4>
+                            <div class="my-4">
+                                <span class="h1 fw-bold">$99</span>
+                                <span class="text-muted">/user/month</span>
+                            </div>
+                            <p>Ideal for departments and small teams</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Up to 50 users</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Basic analytics</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Standard support</li>
+                                <li><i class="bi bi-check text-success me-2"></i>5 languages</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Start Team Trial</a>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Tier -->
+                    <div class="col-lg-4">
+                        <div class="pricing-tier featured text-center">
+                            <h4>Enterprise</h4>
+                            <div class="my-4">
+                                <span class="h1 fw-bold">Custom</span>
+                            </div>
+                            <p>Complete solution for large organizations</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Unlimited users</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Advanced analytics</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Dedicated support</li>
+                                <li><i class="bi bi-check text-success me-2"></i>25+ languages</li>
+                            </ul>
+                            <a href="#consultation" class="btn btn-primary w-100">Request Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Global Tier -->
+                    <div class="col-lg-4">
+                        <div class="pricing-tier text-center">
+                            <h4>Global</h4>
+                            <div class="my-4">
+                                <span class="h1 fw-bold">$199</span>
+                                <span class="text-muted">/user/month</span>
+                            </div>
+                            <p>Multinational deployment ready</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>500+ users</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Custom reporting</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>24/7 support</li>
+                                <li><i class="bi bi-check text-success me-2"></i>50+ languages</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Pricing Tiers END -->
+
+        <!-- =======================
+        Final CTA START -->
+        <section class="py-5 gradient-bg text-white">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold mb-3 text-warning">Ready to Transform Your Global Communication?</h2>
+                        <p class="lead mb-4">Join 500+ enterprises that trust us with their language training needs.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="#consultation" id="consultation" class="btn btn-warning btn-lg px-4">Schedule Enterprise Demo</a>
+                            <a href="#" class="btn btn-outline-light btn-lg px-4">Download ROI Calculator</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center mt-4 mt-lg-0">
+                        <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                            <i class="bi bi-telephone-fill fs-1 text-warning mb-2"></i>
+                            <h5>Enterprise Hotline</h5>
+                            <p class="mb-2">Speak with our solutions team</p>
+                            <h4 class="text-warning">1-800-ENTERPRISE</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Final CTA END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}

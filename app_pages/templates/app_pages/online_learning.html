@@ -1,0 +1,1271 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Online Learning Platform - Advanced LMS for Modern Education{% endblock %}
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <!-- Additional LMS-specific plugins -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/plyr/plyr.css' %}">
+{% endblock %}
+{% block embed_style %}
+    <style>
+        :root {
+            --lms-primary: #6366f1;
+            --lms-secondary: #8b5cf6;
+            --lms-accent: #06b6d4;
+            --lms-success: #10b981;
+            --lms-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+        }
+
+        .animated-background {
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48cGF0dGVybiBpZD0iY2lyY2xlcyIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIxNSIgY3k9IjE1IiByPSIxIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0idXJsKCNjaXJjbGVzKSIvPjwvc3ZnPg==');
+            animation: float 20s infinite linear;
+        }
+
+        .lms-hero-bg {
+            background: var(--lms-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lms-hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('{% static "assets/images/patterns/circuit-board.svg" %}') center/cover;
+            opacity: 0.1;
+        }
+
+        .platform-feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #f1f5f9;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .platform-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--lms-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .platform-feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(99, 102, 241, 0.15);
+        }
+
+        .platform-feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon-lms {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: var(--lms-gradient);
+            color: white;
+            font-size: 2rem;
+        }
+
+        .lms-badge {
+            background: var(--lms-gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .classroom-preview {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-player {
+            background: #0f172a;
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid #334155;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--lms-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .pricing-tier-lms {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-tier-lms.featured {
+            border-color: var(--lms-primary);
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.15);
+        }
+
+        .pricing-tier-lms.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--lms-gradient);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-bottom-left-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .floating-element-1 {
+            top: 20%;
+            left: 5%;
+            width: 200px;
+            height: 200px;
+            background: var(--lms-primary);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element-2 {
+            bottom: 10%;
+            right: 8%;
+            width: 150px;
+            height: 150px;
+            background: var(--lms-accent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .demo-tabs .nav-link {
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 10px;
+            margin: 0 0.5rem;
+        }
+
+        .demo-tabs .nav-link.active {
+            background: var(--lms-gradient);
+            color: white;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .integration-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-carousel {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .mobile-preview {
+            background: var(--lms-gradient);
+            border-radius: 30px;
+            padding: 2rem;
+            position: relative;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+
+    {#hero section style#}
+    <style>
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-badge .badge {
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-image-container {
+            perspective: 1000px;
+        }
+
+        .hero-dashboard {
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image-container:hover .hero-dashboard {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .floating-card {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card-1 {
+            top: -20px;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 30px;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        .floating-card-3 {
+            bottom: -20px;
+            right: 30px;
+            animation-delay: 2s;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            animation: pulse 2s ease-out infinite;
+        }
+
+        .pulse-2 {
+            animation-delay: 1s;
+        }
+
+        .floating-particles .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: particle-float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-40px) translateX(20px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            cursor: pointer;
+        }
+
+        .mouse {
+            width: 26px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        .arrow {
+            width: 6px;
+            height: 6px;
+            border-right: 2px solid rgba(255, 255, 255, 0.8);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+            transform: rotate(45deg);
+            margin: 5px auto 0;
+            animation: arrow-bounce 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(12px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes arrow-bounce {
+            0%, 100% {
+                transform: rotate(45deg) translateY(0);
+            }
+            50% {
+                transform: rotate(45deg) translateY(5px);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero-section {
+                text-align: center;
+                min-height: auto;
+                padding: 4rem 0;
+            }
+
+            .display-3 {
+                font-size: 2.5rem;
+            }
+
+            .hero-dashboard {
+                transform: none;
+                max-height: 300px;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+    </style>
+
+
+    <style>
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .integration-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .integration-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .integration-card:hover .position-absolute:last-child {
+            opacity: 0.15 !important;
+        }
+
+        .integration-logo {
+            transition: transform 0.3s ease;
+        }
+
+        .integration-card:hover .integration-logo {
+            transform: scale(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .integration-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .integration-card {
+                min-height: 180px;
+            }
+        }
+    </style>
+
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main class="position-relative">
+
+        <!-- Floating Background Elements -->
+        <div class="floating-element floating-element-1"></div>
+        <div class="floating-element floating-element-2"></div>
+
+        <!-- ======================= Hero Section START -->
+        <section class="hero-section position-relative overflow-hidden text-white"
+                 style="background: linear-gradient(rgba(99, 102, 241, 0.85), rgba(139, 92, 246, 0.8)),
+                         url('#') no-repeat center center;
+                         background-size: cover;
+                         background-attachment: fixed;">
+
+            <!-- Animated background overlay -->
+            <div class="position-absolute top-0 start-0 w-100 h-100 animated-background"></div>
+
+                <!-- Floating particles -->
+                <div class="floating-particles">
+                    <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+                    <div class="particle" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+                    <div class="particle" style="top: 40%; left: 60%; animation-delay: 2s;"></div>
+                    <div class="particle" style="top: 80%; left: 30%; animation-delay: 3s;"></div>
+                </div>
+
+                <div class="container position-relative z-2">
+                    <div class="row align-items-center min-vh-100 py-5">
+                        <div class="col-lg-6">
+                            <div class="hero-badge mb-4">
+                    <span class="badge bg-warning text-dark fs-6 px-3 py-2 rounded-pill">
+                        <i class="bi bi-rocket-takeoff me-2"></i>Next-Generation Learning Platform
+                    </span>
+                            </div>
+
+                            <h1 class="display-3 fw-bold mb-4" style="text-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                                Transform Education with Our
+                                <span class="text-warning">Advanced LMS</span>
+                            </h1>
+
+                            <p class="lead mb-4 fs-5 opacity-90" style="text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                Experience the future of online learning with our cutting-edge Learning Management
+                                System
+                                designed for engagement, scalability, and exceptional learning outcomes.
+                            </p>
+
+                            <!-- Features list -->
+                            <div class="d-flex flex-wrap gap-4 mb-5">
+                                <div class="d-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-2">
+                                    <i class="bi bi-lightning-fill text-warning me-2 fs-5"></i>
+                                    <span class="fw-medium">99.9% Platform Uptime</span>
+                                </div>
+                                <div class="d-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-2">
+                                    <i class="bi bi-shield-check text-warning me-2 fs-5"></i>
+                                    <span class="fw-medium">Enterprise-Grade Security</span>
+                                </div>
+                                <div class="d-flex align-items-center bg-white bg-opacity-10 rounded-pill px-3 py-2">
+                                    <i class="bi bi-infinity text-warning me-2 fs-5"></i>
+                                    <span class="fw-medium">Unlimited Scalability</span>
+                                </div>
+                            </div>
+
+                            <!-- CTA Buttons -->
+                            <div class="d-flex flex-column flex-sm-row gap-3">
+                                <a href="#platform-demo" class="btn btn-warning btn-lg px-4 py-3 fw-bold shadow-lg">
+                                    <i class="bi bi-play-circle me-2"></i>Live Platform Demo
+                                </a>
+                                <a href="#features" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold border-2">
+                                    <i class="bi bi-grid-3x3-gap me-2"></i>Explore Features
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 text-center mt-5 mt-lg-0">
+                            <div class="hero-image-container position-relative">
+                                <!-- Main dashboard image with 3D effect -->
+                                <img src="{% static 'assets/images/lms-dashobard-woman.png' %}"
+                                     class="img-fluid rounded-4 shadow-lg hero-dashboard"
+                                     alt="LMS Dashboard Preview"
+                                     style="border: 4px solid rgba(255,255,255,0.3);">
+
+                                <!-- Floating elements around the dashboard -->
+                                <div class="floating-card floating-card-1">
+                                    <i class="bi bi-graph-up-arrow text-success"></i>
+                                </div>
+                                <div class="floating-card floating-card-2">
+                                    <i class="bi bi-people-fill text-primary"></i>
+                                </div>
+                                <div class="floating-card floating-card-3">
+                                    <i class="bi bi-chat-dots text-warning"></i>
+                                </div>
+
+                                <!-- Pulse animation around the image -->
+                                <div class="pulse-ring pulse-1"></div>
+                                <div class="pulse-ring pulse-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scroll indicator -->
+                <div class="scroll-indicator position-absolute bottom-0 start-50 translate-middle-x mb-4">
+                    <div class="mouse">
+                        <div class="wheel"></div>
+                    </div>
+                    <div class="arrow"></div>
+                </div>
+        </section>
+        <!-- ======================= Hero Section END -->
+
+
+        <!-- =======================
+        Platform Stats START -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-md-3 col-6 text-center">
+                        <div class="stat-number">50K+</div>
+                        <p class="text-muted mb-0">Active Learners</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center">
+                        <div class="stat-number">98%</div>
+                        <p class="text-muted mb-0">Satisfaction Rate</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center">
+                        <div class="stat-number">24/7</div>
+                        <p class="text-muted mb-0">Global Support</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center">
+                        <div class="stat-number">99.9%</div>
+                        <p class="text-muted mb-0">Uptime Guarantee</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Platform Stats END -->
+
+        <!-- =======================
+        Core Features START -->
+        <section class="py-5 bg-light" id="features">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Powerful Learning Platform Features</h2>
+                        <p class="lead">Designed for modern education with cutting-edge technology</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Feature 1: Virtual Classroom -->
+                    <div class="col-lg-4">
+                        <div class="platform-feature-card">
+                            <div class="feature-icon-lms">
+                                <i class="bi bi-camera-video"></i>
+                            </div>
+                            <h4>Advanced Virtual Classroom</h4>
+                            <p class="text-muted">HD video conferencing with interactive whiteboards, breakout rooms,
+                                and real-time collaboration tools.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Live interactive
+                                    sessions
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Screen sharing &
+                                    annotation
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Breakout rooms</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Recording & playback</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2: Course Management -->
+                    <div class="col-lg-4">
+                        <div class="platform-feature-card">
+                            <div class="feature-icon-lms">
+                                <i class="bi bi-journal-bookmark"></i>
+                            </div>
+                            <h4>Smart Course Management</h4>
+                            <p class="text-muted">Intuitive course creation with drag-and-drop builder, multimedia
+                                support, and automated grading.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Drag-and-drop
+                                    builder
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Multimedia content
+                                    support
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Automated
+                                    assessments
+                                </li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Progress tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3: Analytics Dashboard -->
+                    <div class="col-lg-4">
+                        <div class="platform-feature-card">
+                            <div class="feature-icon-lms">
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </div>
+                            <h4>Advanced Analytics</h4>
+                            <p class="text-muted">Comprehensive analytics dashboard with real-time insights into learner
+                                progress and engagement.</p>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Real-time analytics
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Engagement metrics
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Custom reports</li>
+                                <li><i class="bi bi-check-circle text-success me-2"></i>Predictive analytics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Core Features END -->
+
+        <!-- =======================
+        Interactive Demo START -->
+        <section class="py-5" id="platform-demo">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Experience Our Platform</h2>
+                        <p class="lead">Interactive demo showcasing key platform capabilities</p>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="nav demo-tabs mb-4" id="demoTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="virtual-class-tab" data-bs-toggle="tab"
+                                            data-bs-target="#virtual-class" type="button" role="tab">
+                                        Virtual Classroom
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="content-tab" data-bs-toggle="tab"
+                                            data-bs-target="#content" type="button" role="tab">
+                                        Content Management
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="analytics-tab" data-bs-toggle="tab"
+                                            data-bs-target="#analytics" type="button" role="tab">
+                                        Analytics
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" id="demoTabsContent">
+                                <div class="tab-pane fade show active" id="virtual-class" role="tabpanel">
+                                    <h4>Seamless Virtual Learning</h4>
+                                    <p>Experience our high-quality video conferencing with interactive features designed
+                                        specifically for education.</p>
+                                    <div class="demo-player">
+                                        <div class="ratio ratio-16x9">
+                                            <video poster="{% static 'assets/images/demo/classroom-preview.jpg' %}"
+                                                   controls>
+                                                <source src="{% static 'assets/videos/classroom-demo.mp4' %}"
+                                                        type="video/mp4">
+                                            </video>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="content" role="tabpanel">
+                                    <h4>Rich Content Creation</h4>
+                                    <p>Create engaging courses with our intuitive content management system supporting
+                                        various media formats.</p>
+                                    <img src="{% static 'assets/images/demo/content-builder.jpg' %}"
+                                         class="img-fluid rounded" alt="Content Builder">
+                                </div>
+                                <div class="tab-pane fade" id="analytics" role="tabpanel">
+                                    <h4>Data-Driven Insights</h4>
+                                    <p>Monitor learner progress with comprehensive analytics and reporting tools.</p>
+                                    <img src="{% static 'assets/images/demo/analytics-dashboard.jpg' %}"
+                                         class="img-fluid rounded" alt="Analytics Dashboard">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="classroom-preview text-white">
+                                <h3 class="text-warning mb-3">Live Classroom Features</h3>
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-camera-video-fill text-success me-2"></i>
+                                            <span>HD Video Quality</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-mic-fill text-success me-2"></i>
+                                            <span>Crystal Clear Audio</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-chat-dots-fill text-success me-2"></i>
+                                            <span>Real-time Chat</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-people-fill text-success me-2"></i>
+                                            <span>Breakout Rooms</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-file-earmark-text-fill text-success me-2"></i>
+                                            <span>File Sharing</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-record-circle-fill text-success me-2"></i>
+                                            <span>Session Recording</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <h5 class="text-warning">Upcoming Session</h5>
+                                    <div class="bg-dark bg-opacity-50 rounded p-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="mb-1 text-white">Advanced JavaScript Workshop</h6>
+                                                <small class="text-muted">Starts in 15 minutes</small>
+                                            </div>
+                                            <button class="btn btn-warning btn-sm">Join Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Interactive Demo END -->
+
+        <!-- =======================
+        Technology Stack START -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Built with Modern Technology</h2>
+                        <p class="lead">Enterprise-grade infrastructure for reliable performance</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack-grid">
+                    <div class="tech-item">
+                        <i class="bi bi-cloud-check fs-1 text-primary mb-2"></i>
+                        <h6>AWS Cloud</h6>
+                        <small>Scalable Infrastructure</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="bi bi-shield-lock fs-1 text-success mb-2"></i>
+                        <h6>SSL/TLS 1.3</h6>
+                        <small>Bank-Level Security</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="bi bi-lightning-charge fs-1 text-warning mb-2"></i>
+                        <h6>WebRTC</h6>
+                        <small>Real-time Communication</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="bi bi-database fs-1 text-info mb-2"></i>
+                        <h6>PostgreSQL</h6>
+                        <small>Reliable Database</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="bi bi-phone fs-1 text-purple mb-2"></i>
+                        <h6>PWA Ready</h6>
+                        <small>Mobile Experience</small>
+                    </div>
+                    <div class="tech-item">
+                        <i class="bi bi-graph-up fs-1 text-danger mb-2"></i>
+                        <h6>AI/ML</h6>
+                        <small>Smart Analytics</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Technology Stack END -->
+
+        <!-- =======================
+        Mobile Experience START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h2 class="display-5 fw-bold mb-3">Learn Anywhere, Anytime</h2>
+                        <p class="lead mb-4">Fully responsive design with native mobile app experience.</p>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-phone text-primary fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0">Mobile App</h5>
+                                        <small>iOS & Android</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-download text-success fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0">Offline Mode</h5>
+                                        <small>Learn without internet</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-bell text-warning fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0">Push Notifications</h5>
+                                        <small>Stay updated</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-cloud-arrow-down text-info fs-3 me-3"></i>
+                                    <div>
+                                        <h5 class="mb-0">Cloud Sync</h5>
+                                        <small>Seamless experience</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-dark btn-lg">
+                                <i class="bi bi-apple me-2"></i>App Store
+                            </a>
+                            <a href="#" class="btn btn-success btn-lg">
+                                <i class="bi bi-google-play me-2"></i>Play Store
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div class="mobile-preview">
+                            <img src="{% static 'assets/images/mobile-app-preview.jpg' %}"
+                                 class="img-fluid" alt="Mobile App Preview"
+                                 style="max-height: 500px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Mobile Experience END -->
+
+        <!-- =======================
+        Integration Ecosystem START -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Seamless Integrations</h2>
+                        <p class="lead">Connect with your favorite tools and platforms</p>
+                    </div>
+                </div>
+
+                <div class="integration-grid">
+                    <!-- Google Workspace Card -->
+                    <div class="integration-card position-relative rounded-4 overflow-hidden"
+                         style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                                 url('{% static 'assets/images/integrations/google-workspace.jpg' %}') no-repeat center center;
+                                 background-size: cover;
+                                 min-height: 200px;">
+
+                        <!-- Gradient overlay for better text readability -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                             style="background: linear-gradient(135deg, rgba(234, 67, 53, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+                        <!-- Content container -->
+                        <div class="position-relative z-2 text-white p-4 h-100 d-flex flex-column justify-content-center">
+                            <div class="integration-logo mb-3">
+                                <i class="bi bi-google fs-1 text-white opacity-90"></i>
+                            </div>
+                            <h4 class="fw-bold mb-2 text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Google
+                                Workspace</h4>
+                            <p class="mb-0 text-light opacity-90" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                                Single sign-on and calendar integration
+                            </p>
+                        </div>
+
+                        <!-- Hover effect overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-danger opacity-0 transition-all"
+                             style="transition: opacity 0.3s ease;"></div>
+                    </div>
+
+                    <!-- Microsoft Teams Card -->
+                    <div class="integration-card position-relative rounded-4 overflow-hidden"
+                         style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                                 url('{% static 'assets/images/integrations/microsoft-teams.jpg' %}') no-repeat center center;
+                                 background-size: cover;
+                                 min-height: 200px;">
+
+                        <!-- Gradient overlay for better text readability -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                             style="background: linear-gradient(135deg, rgba(32, 80, 180, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+                        <!-- Content container -->
+                        <div class="position-relative z-2 text-white p-4 h-100 d-flex flex-column justify-content-center">
+                            <div class="integration-logo mb-3">
+                                <i class="bi bi-microsoft fs-1 text-white opacity-90"></i>
+                            </div>
+                            <h4 class="fw-bold mb-2 text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                                Microsoft Teams</h4>
+                            <p class="mb-0 text-light opacity-90" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                                Direct integration for enterprise collaboration
+                            </p>
+                        </div>
+
+                        <!-- Hover effect overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-0 transition-all"
+                             style="transition: opacity 0.3s ease;"></div>
+                    </div>
+
+                    <!-- Salesforce Card -->
+                    <div class="integration-card position-relative rounded-4 overflow-hidden"
+                         style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                                 url('{% static 'assets/images/integrations/salesforce.jpg' %}') no-repeat center center;
+                                 background-size: cover;
+                                 min-height: 200px;">
+
+                        <!-- Gradient overlay for better text readability -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                             style="background: linear-gradient(135deg, rgba(0, 161, 223, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+                        <!-- Content container -->
+                        <div class="position-relative z-2 text-white p-4 h-100 d-flex flex-column justify-content-center">
+                            <div class="integration-logo mb-3">
+                                <i class="bi bi-cloud fs-1 text-white opacity-90"></i>
+                            </div>
+                            <h4 class="fw-bold mb-2 text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                                Salesforce</h4>
+                            <p class="mb-0 text-light opacity-90" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                                CRM integration for sales training
+                            </p>
+                        </div>
+
+                        <!-- Hover effect overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-info opacity-0 transition-all"
+                             style="transition: opacity 0.3s ease;"></div>
+                    </div>
+
+                    <!-- Zapier Card -->
+                    <div class="integration-card position-relative rounded-4 overflow-hidden"
+                         style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                                 url('{% static 'assets/images/integrations/zapier.jpg' %}') no-repeat center center;
+                                 background-size: cover;
+                                 min-height: 200px;">
+
+                        <!-- Gradient overlay for better text readability -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                             style="background: linear-gradient(135deg, rgba(255, 82, 82, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+                        <!-- Content container -->
+                        <div class="position-relative z-2 text-white p-4 h-100 d-flex flex-column justify-content-center">
+                            <div class="integration-logo mb-3">
+                                <i class="bi bi-plug fs-1 text-white opacity-90"></i>
+                            </div>
+                            <h4 class="fw-bold mb-2 text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                                Zapier</h4>
+                            <p class="mb-0 text-light opacity-90" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                                Connect with 3000+ apps
+                            </p>
+                        </div>
+
+                        <!-- Hover effect overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-warning opacity-0 transition-all"
+                             style="transition: opacity 0.3s ease;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =======================
+        Integration Ecosystem END -->
+
+
+        <!-- =======================
+        Pricing Tiers START -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Flexible Pricing Plans</h2>
+                        <p class="lead">Choose the plan that fits your learning needs</p>
+                    </div>
+                </div>
+
+                <div class="row g-4 justify-content-center">
+                    <!-- Basic Tier -->
+                    <div class="col-lg-4">
+                        <div class="pricing-tier-lms">
+                            <h4>Starter</h4>
+                            <div class="my-4">
+                                <span class="h1 fw-bold">$29</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                            <p>Perfect for individual instructors</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Up to 50 students</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Basic virtual classroom
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Course creation tools</li>
+                                <li class="mb-2"><i class="bi bi-x text-muted me-2"></i>Advanced analytics</li>
+                                <li><i class="bi bi-x text-muted me-2"></i>API access</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Get Started</a>
+                        </div>
+                    </div>
+
+                    <!-- Professional Tier -->
+                    <div class="col-lg-4">
+                        <div class="pricing-tier-lms featured">
+                            <h4>Professional</h4>
+                            <div class="my-4">
+                                <span class="h1 fw-bold">$99</span>
+                                <span class="text-muted">/month</span>
+                            </div>
+                            <p>Ideal for growing institutions</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Up to 500 students</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Advanced virtual classroom
+                                </li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Full analytics suite</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Custom branding</li>
+                                <li><i class="bi bi-check text-success me-2"></i>API access</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100">Start Free Trial</a>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise Tier -->
+                    <div class="col-lg-4">
+                        <div class="pricing-tier-lms">
+                            <h4>Enterprise</h4>
+                            <div class="my-4">
+                                <span class="h1 fw-bold">Custom</span>
+                            </div>
+                            <p>For large organizations</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Unlimited students</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>White-label solution</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>Dedicated support</li>
+                                <li class="mb-2"><i class="bi bi-check text-success me-2"></i>SLA guarantee</li>
+                                <li><i class="bi bi-check text-success me-2"></i>Custom development</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Pricing Tiers END -->
+
+        <!-- =======================
+        Final CTA START -->
+        <section class="py-5 lms-hero-bg text-white">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="display-5 fw-bold mb-3">Ready to Transform Your Online Learning?</h2>
+                        <p class="lead mb-4">Join thousands of educators and institutions using our platform to deliver
+                            exceptional learning experiences.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="#" class="btn btn-warning btn-lg px-4 py-3">Start Free Trial</a>
+                            <a href="#" class="btn btn-outline-light btn-lg px-4 py-3">Schedule Demo</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-center mt-4 mt-lg-0">
+                        <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                            <i class="bi bi-award-fill fs-1 text-warning mb-2"></i>
+                            <h5>Award-Winning Platform</h5>
+                            <p class="mb-0">2023 Best LMS Solution</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Final CTA END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/plyr/plyr.js' %}"></script>
+    <script>
+        // Initialize video player
+        document.addEventListener('DOMContentLoaded', function () {
+            const player = new Plyr('video');
+
+            // Tab functionality for demo section
+            const demoTabs = document.querySelectorAll('#demoTabs .nav-link');
+            demoTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    demoTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Animate stats counting
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                let current = 0;
+                const increment = target / 100;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + (counter.textContent.includes('%') ? '%' : '');
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + (counter.textContent.includes('%') ? '%' : '');
+                    }
+                };
+
+                // Start counting when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+
+                observer.observe(counter);
+            });
+        });
+    </script>
+{% endblock %}

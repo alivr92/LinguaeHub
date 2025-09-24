@@ -182,11 +182,17 @@ class InPersonGruop2(TemplateView):
 
 
 class InPersonCorporate(TemplateView):
-    template_name = 'app_pages/in_person/inp_companies.html'
+    template_name = 'app_pages/in_person/inp_corporate.html'
 
 
 class InPersonCorporate2(TemplateView):
-    template_name = 'app_pages/in_person/inp_corporate.html'
+    template_name = 'app_pages/in_person/inp_corporate2.html'
+
+class ForBusiness(TemplateView):
+    template_name = 'app_pages/for_business.html'
+
+class OnlineLearning(TemplateView):
+    template_name = 'app_pages/online_learning.html'
 
 
 class InPersonKids(TemplateView):
