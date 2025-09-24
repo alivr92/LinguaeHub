@@ -342,10 +342,12 @@
                                 <div class="row g-0" style="max-height: 225px;min-height: 225px">
                                     <!-- Image -->
                                     <div class="col-md-4">
-                                        <img src="{{ tutor.profile.photo.url }}"
-                                             class="rounded-3 w-100 h-100 object-fit-cover"
-                                             style="max-height: 225px; min-height: 225px"
-                                             alt="{{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}">
+                                        <a href="{% url 'provider:tutor_detail' tutor.pk %}">
+                                            <img src="{{ tutor.profile.photo.url }}"
+                                                 class="rounded-3 w-100 h-100 object-fit-cover"
+                                                 style="max-height: 225px; min-height: 225px"
+                                                 alt="{{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}">
+                                        </a>
                                     </div>
 
                                     <!-- Card body -->
@@ -429,6 +431,7 @@
                                 <li class="page-item mb-0"><a class="page-link" href="?
 
 
+
                                         {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
                                                               tabindex="-1"><i class="fas fa-angle-double-left"></i></a>
                                 </li>
@@ -445,11 +448,13 @@
                                         <li class="page-item mb-0"><a class="page-link" href="?
 
 
+
                                                 {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
                                         </li>
                                     {% endif %}
                                 {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
                                     <li class="page-item mb-0"><a class="page-link" href="?
+
 
 
                                             {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
@@ -461,6 +466,7 @@
 
                             {% if page_obj.has_next %}
                                 <li class="page-item mb-0"><a class="page-link" href="?
+
 
 
                                         {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"><i

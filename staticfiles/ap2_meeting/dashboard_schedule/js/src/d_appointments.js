@@ -776,7 +776,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // In Dashboard Selected sessions will send to availabilities of Instructor
+  // In Dashboard Selected sessions will send to availabilities of Tutor
   submitButton.addEventListener('click', () => {
     const available_sessions = selectedSessions.map(session => ({
       startTime: session.start, // Start date and time of the session

@@ -378,13 +378,8 @@
         <section class="py-5">
             <div class="container">
                 <div class="row align-items-center">
-                    <!-- Left Side - Image -->
-                    <div class="col-lg-5 mb-5 mb-lg-0">
-                        <img src="{% static 'assets/images/element/instructor-course.svg' %}"
-                             class="img-fluid rounded" alt="Tutor teaching students">
-                    </div>
 
-                    <!-- Right Side - Tabs -->
+                    <!-- Left Side - Tabs -->
                     <div class="col-lg-7">
                         <h2 class="mb-4">Who We're Looking For?</h2>
 
@@ -534,58 +529,77 @@
                         {#                            <a href="#sign-up-tutor" class="btn btn-primary">Apply Now</a>#}
                         {#                        </div>#}
                     </div>
+
+                    <!-- Right Side - Image -->
+                    <div class="col-lg-5 mb-5 mb-lg-0">
+                        <img src="{% static 'assets/images/element/instructor-course.svg' %}"
+                             class="img-fluid rounded" alt="Tutor teaching students">
+                    </div>
+
                 </div>
             </div>
         </section>
         <!-- =======================
             Form and Tabs END -->
 
-        <!-- =======================
-        Action box START -->
-        <section class="pt-0">
-            <div class="container position-relative">
-                <!-- SVG -->
-                <figure class="position-absolute top-50 start-50 translate-middle ps-3">
-                    <svg class="fill-white opacity-2">
-                        <path d="m496 22.999c0 10.493-8.506 18.999-18.999 18.999s-19-8.506-19-18.999 8.507-18.999 19-18.999 18.999 8.506 18.999 18.999z"/>
-                        <path d="m775 102.5c0 5.799-4.701 10.5-10.5 10.5-5.798 0-10.499-4.701-10.499-10.5 0-5.798 4.701-10.499 10.499-10.499 5.799 0 10.5 4.701 10.5 10.499z"/>
-                        <path d="m192 102c0 6.626-5.373 11.999-12 11.999s-11.999-5.373-11.999-11.999c0-6.628 5.372-12 11.999-12s12 5.372 12 12z"/>
-                        <path d="m20.499 10.25c0 5.66-4.589 10.249-10.25 10.249-5.66 0-10.249-4.589-10.249-10.249-0-5.661 4.589-10.25 10.249-10.25 5.661-0 10.25 4.589 10.25 10.25z"/>
-                    </svg>
-                </figure>
 
-                <div class="bg-dark p-4 p-sm-5 rounded-3">
-                    <div class="row justify-content-center position-relative">
-                        <!-- Svg -->
-                        <figure class="position-absolute top-50 start-0 translate-middle-y">
-                            <svg width="141px" height="141px">
-                                <path class="fill-white opacity-1"
-                                      d="M140.520,70.258 C140.520,109.064 109.062,140.519 70.258,140.519 C31.454,140.519 -0.004,109.064 -0.004,70.258 C-0.004,31.455 31.454,-0.003 70.258,-0.003 C109.062,-0.003 140.520,31.455 140.520,70.258 Z"/>
-                            </svg>
-                        </figure>
-                        <!-- Action box -->
-                        <div class="col-11 position-relative">
-                            <div class="row align-items-center">
+        <!-- Action box START -->
+        <section class="py-0 pt-lg-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 position-relative z-index-1">
+                        <!-- Image -->
+                        <div class="d-none d-lg-block position-absolute bottom-0 start-0 ms-3 ms-xl-5">
+                            <img src="{% static 'assets/images/element/01.png' %}" alt="" class="protected-image">
+                        </div>
+                        <!-- Pencil and cap SVG -->
+                        <div class="position-absolute top-0 end-0 mt-n4 me-5">
+                            <img src="{% static 'assets/images/client/pencil.svg' %}" alt="" class="protected-image">
+                        </div>
+                        <div class="position-absolute bottom-0 start-50 mb-n4">
+                            <img src="{% static 'assets/images/client/graduated.svg' %}" class="rotate-74 protected-image" alt="">
+                        </div>
+
+                        <div class="bg-grad-pink p-4 p-sm-5 rounded position-relative z-index-n1 overflow-hidden">
+                            <!-- SVG decoration -->
+                            <figure class="position-absolute top-0 start-0 mt-3 ms-n3 opacity-5">
+                                <svg width="818.6px" height="235.1px" viewBox="0 0 818.6 235.1">
+                                    <path class="fill-white"
+                                          d="M735,226.3c-5.7,0.6-11.5,1.1-17.2,1.7c-66.2,6.8-134.7,13.7-192.6-16.6c-34.6-18.1-61.4-47.9-87.3-76.7 c-21.4-23.8-43.6-48.5-70.2-66.7c-53.2-36.4-121.6-44.8-175.1-48c-13.6-0.8-27.5-1.4-40.9-1.9c-46.9-1.9-95.4-3.9-141.2-16.5 C8.3,1.2,6.2,0.6,4.2,0H0c3.3,1,6.6,2,10,3c46,12.5,94.5,14.6,141.5,16.5c13.4,0.6,27.3,1.1,40.8,1.9 c53.4,3.2,121.5,11.5,174.5,47.7c26.5,18.1,48.6,42.7,70,66.5c26,28.9,52.9,58.8,87.7,76.9c58.3,30.5,127,23.5,193.3,16.7 c5.8-0.6,11.5-1.2,17.2-1.7c26.2-2.6,55-4.2,83.5-2.2v-1.2C790,222,761.2,223.7,735,226.3z"></path>
+                                </svg>
+                            </figure>
+                            <!-- SVG decoration -->
+                            <figure class="position-absolute top-50 start-0 translate-middle-y ms-5">
+                                <svg width="473px" height="234px">
+                                    <path fill-rule="evenodd" opacity="0.051" fill="rgb(255, 255, 255)"
+                                          d="M0.004,222.303 L364.497,-0.004 L472.998,32.563 L100.551,233.991 L0.004,222.303 Z"/>
+                                </svg>
+                            </figure>
+                            <!-- SVG decoration -->
+                            <figure class="position-absolute top-50 end-0 translate-middle-y">
+                                <svg width="355.6px" height="396.1px">
+                                    <path class="fill-danger rotate-10"
+                                          d="M32.8,364.1c16.1-14.7,36-21.5,56.8-26.7c20-5.1,40.5-9.7,57.8-21.4c35.7-24.3,51.1-68.5,57.2-109.4 c6.8-45.7,4.6-93.7,21.6-137.5c8.3-21.4,22.3-41.4,43.3-51.9c17.4-8.7,36.2-7.9,54.2-1.5c10.2,3.6,19.8,8.5,29.4,13.5l2.5-4.3 c-2.7-1.4-5.4-2.8-8.2-4.2c-15.8-8-32.9-15.3-50.9-15.2C276,5.6,256.9,16,243.3,31c-16.6,18.3-25.3,42.2-30.5,66 c-5,22.9-6.8,46.3-8.8,69.6c-3.9,44.4-9.7,92.8-40.1,128c-7.1,8.2-15.4,15.4-24.9,20.8c-9.3,5.4-19.5,8.9-29.8,11.8 c-20.2,5.7-41.3,9.1-59.9,19.2c-19.3,10.4-35.1,27.2-44.2,47.1c0,0,0,0.1,0,0.1l4.4,2.6C15,384,22.9,373.1,32.8,364.1z"/>
+                                </svg>
+                            </figure>
+
+                            <div class="row g-3 align-items-center justify-content-lg-end position-relative py-4">
                                 <!-- Title -->
-                                <div class="col-lg-7">
-                                    <h3 class="text-white">Become a Tutor!</h3>
-                                    <p class="text-white mb-3 mb-lg-0">Speedily say has suitable disposal add boy. On
-                                        forth doubt miles of child. Exercise joy man children rejoiced. Yet uncommonly
-                                        his ten who diminution astonished.</p>
+                                <div class="col-md-6">
+                                    <h2 class="text-white">Become a Tutor!</h2>
+                                    <p class="text-white mb-0">Teach thousands of students and earn money with ease!</p>
                                 </div>
                                 <!-- Button -->
-                                <div class="col-lg-5 text-lg-end">
-                                    <a href="{% url 'accounts:sign_up_tutor' %}" id="sign-up-tutor"
-                                       class="btn btn-lg btn-white mb-0">Register as a Tutor</a>
+                                <div class="col-md-6 col-lg-3 text-md-end">
+                                    <a href="{% url 'accounts:sign_up_tutor' %}" class="btn btn-lg  btn-white mb-0">Register as a Tutor</a>
                                 </div>
-                            </div>
+                            </div> <!-- Row END -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- =======================
-        Action box END -->
+        <!-- Action box END -->
 
     </main>
     <!-- **************** MAIN CONTENT END **************** -->

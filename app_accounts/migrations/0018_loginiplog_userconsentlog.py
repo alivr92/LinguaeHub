@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='UserConsentLog',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('consent_type', models.CharField(choices=[('terms', 'Terms of Service'), ('privacy', 'Privacy Policy'), ('nda', 'Instructor NDA')], max_length=20)),
+                ('consent_type', models.CharField(choices=[('terms', 'Terms of Service'), ('privacy', 'Privacy Policy'), ('nda', 'Tutor NDA')], max_length=20)),
                 ('consent_version', models.CharField(help_text='Version ID of legal document (e.g. v1.2)', max_length=20)),
                 ('agreed', models.BooleanField(default=False)),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
