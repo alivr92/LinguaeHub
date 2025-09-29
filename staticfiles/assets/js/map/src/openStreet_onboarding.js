@@ -139,7 +139,9 @@ document.addEventListener('DOMContentLoaded', function () {
         updateLocation({lat: initialLat, lng: initialLng});
     }
 });
+// =================================================================
 
+// =================================================================
 
 // ---------------------- Google Map ----------------------
 // Initialize Map

@@ -1,0 +1,1 @@
+default_app_config = 'ap2_meeting.apps.Ap2MeetingConfig'

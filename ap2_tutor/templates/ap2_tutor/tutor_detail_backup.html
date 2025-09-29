@@ -1037,16 +1037,16 @@
                                                         <!-- Avatar -->
                                                         <div class="avatar avatar-xl me-4 flex-shrink-0">
                                                             <img class="avatar-img rounded-circle"
-                                                                 src="{{ review.student.profile.photo.url }}"
+                                                                 src="{{ review.client.profile.photo.url }}"
                                                                  alt="avatar">
                                                         </div>
                                                         <!-- Text -->
                                                         <div>
                                                             <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                                                <h5 class="me-3 mb-0">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</h5>
+                                                                <h5 class="me-3 mb-0">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</h5>
                                                                 <!-- Review star -->
                                                                 <ul class="list-inline mb-0">
-                                                                    {% with rating=review.rate_tutor %}
+                                                                    {% with rating=review.rate_provider %}
                                                                         {% for i in range %}
                                                                             <li class="list-inline-item me-0">
                                                                                 {% if i <= rating %}

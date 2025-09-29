@@ -80,14 +80,14 @@
                   <div class="d-flex align-items-center position-relative">
                     <!-- Image -->
                       <div class="avatar avatar-md mb-2 mb-md-0">
-                        <img src="{{ review.student.profile.photo.url }}" class="rounded" alt="">
+                        <img src="{{ review.client.profile.photo.url }}" class="rounded" alt="">
                       </div>
 
                     <div class="mb-0 ms-2">
                       <!-- Title -->
-                      <h6 class="mb-0"><a href="#" class="stretched-link">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</a></h6>
+                      <h6 class="mb-0"><a href="#" class="stretched-link">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</a></h6>
                       <!-- Address -->
-                      <span class="text-body small"><i class="fas fa-fw fa-map-marker-alt me-1 mt-1"></i>{{ review.student.profile.country }}</span>
+                      <span class="text-body small"><i class="fas fa-fw fa-map-marker-alt me-1 mt-1"></i>{{ review.client.profile.country }}</span>
                     </div>
                   </div>
 {#                    {% endfor %}#}
@@ -99,7 +99,7 @@
                 <td style="max-width: 300px;">{{ review.message }}</td>
 
                 <!-- Table data -->
-                <td>{{ review.rate_tutor }} <i class="bi-star-fill text-warning"></i></td>
+                <td>{{ review.rate_provider }} <i class="bi-star-fill text-warning"></i></td>
                 <td>{{ review.last_modified|timesince }}</td>
 
                 <!-- Table data -->

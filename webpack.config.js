@@ -1,23 +1,20 @@
 const path = require('path');
-const JavaScriptObfuscator = require('javascript-obfuscator');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: 'production',
     entry: {
-        // wizard: './frontend/src/wizard.js',
-        // edu: './frontend/src/edu.js',
-        // phone: './frontend/src/phone.js',
-        // method: './frontend/src/method.js',
-        // pricing: './frontend/src/pricing.js',
-        // review: './frontend/src/review.js',
-        // skills: './frontend/src/skills.js',
-        profile: './frontend/src/profile.js',
-        availability: './frontend/src/availability.js',
+        // Dynamic entry - automatically picks up all JS files
+        // This will create separate files for each JS file
+        // but you need to specify them manually for better control
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].min.js',
+        library: {
+            type: 'var', // Export as global variables
+            name: '[name]'
+        }
     },
     module: {
         rules: [
@@ -27,7 +24,10 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env'],
+                        plugins: [
+                            '@babel/plugin-transform-modules-umd' // Universal Module Definition
+                        ]
                     }
                 },
             }
@@ -35,31 +35,14 @@ module.exports = {
     },
     optimization: {
         minimizer: [
-            new TerserPlugin(),
-            new (class {
-                apply(compiler) {
-                    compiler.hooks.emit.tap('Obfuscator', (compilation) => {
-                        Object.keys(compilation.assets).forEach(name => {
-                            if (name.endsWith('.js')) {
-                                const asset = compilation.assets[name];
-                                const obfuscated = JavaScriptObfuscator.obfuscate(
-                                    asset.source(),
-                                    {
-                                        rotateStringArray: true,
-                                        controlFlowFlattening: true,
-                                        stringArray: true,
-                                        stringArrayThreshold: 0.75
-                                    }
-                                );
-                                compilation.assets[name] = {
-                                    source: () => obfuscated.getObfuscatedCode(),
-                                    size: () => obfuscated.getObfuscatedCode().length
-                                };
-                            }
-                        });
-                    });
+            new TerserPlugin({
+                terserOptions: {
+                    mangle: false, // Safe option for future files
+                    compress: {
+                        drop_console: false
+                    }
                 }
-            })()
+            })
         ]
     },
     devtool: false

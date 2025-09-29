@@ -1,0 +1,639 @@
+{% extends 'ap2_tutor/wizard/dp_wizard_base.html' %}
+{% load static %}
+{% load tz %}
+{% load custom_filters %}
+{% load my_custom_filters %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/aos/aos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/glightbox/css/glightbox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/overlay-scrollbar/css/overlayscrollbars.min.css' %}">
+
+    <!-- Add this script to load the Stepper CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/stepper/css/bs-stepper.min.css' %}">
+{% endblock %}
+{% block embed_style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.0.0/css/flag-icons.min.css">
+
+    <!-- Load Open Street Maps CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'app_in_person/css/inp_style.css' %}">
+
+{% endblock %}
+{% block my_style %}{% endblock %}
+{% block dashboard_main_content %}
+<div class="container py-4">
+    <!-- Progress Bar -->
+    <div class="mb-4">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="text-muted">Step 3 of 7</span>
+            <span class="text-muted">45% complete</span>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: 45%;" aria-valuenow="45"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Your Teaching Methods</h2>
+        <p class="text-muted">Choose how you want to connect with students</p>
+    </div>
+
+    <!-- Important Information Card -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-light border-bottom d-flex align-items-center">
+            <i class="bi bi-people-fill text-primary me-2"></i>
+            <h5 class="mb-0">Maximize Your Student Reach</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info bg-light border-0 mb-3">
+                <div class="d-flex">
+                    <i class="bi bi-graph-up-arrow text-warning me-3 mt-1"></i>
+                    <div>
+                        <p class="mb-1"><strong>Flexible tutors get 3x more student inquiries</strong></p>
+                        <p class="mb-0">Your teaching method choice significantly impacts your visibility to potential students.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span><strong>Hybrid tutors</strong> appear in <strong>both online and local searches</strong></span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span><strong>Online-only tutors</strong> can teach students <strong>worldwide</strong></span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-check-circle-fill text-success me-2 mt-1"></i>
+                            <span><strong>In-person tutors</strong> can charge <strong>premium rates</strong> for local sessions</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>You can <strong>change your method later</strong> based on your experience</span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>Each method has different <strong>student matching algorithms</strong></span>
+                        </li>
+                        <li class="mb-2 d-flex">
+                            <i class="bi bi-info-circle-fill text-primary me-2 mt-1"></i>
+                            <span>Consider your <strong>location, schedule, and teaching style</strong> when choosing</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="border rounded-3 shadow-sm bg-white">
+        <div class="row">
+            <div class="col-12">
+                <!-- Card START -->
+                <div class="card bg-transparent border-0">
+                    <!-- Card header START -->
+                    <div class="card-header bg-transparent border-bottom">
+                        <h3 class="card-header-title text-primary mb-0">
+                            <i class="bi bi-people-fill fs-3 mx-2"></i> / <i class="bi bi-geo-alt-fill me-2"></i>Teaching Method & Student Matching
+                        </h3>
+                    </div>
+                    <!-- Card header END -->
+
+                    <!-- Card body START -->
+                    <div class="card-body">
+                        <form id="providerLocationForm" class="needs-validation" method="POST" action="{% url 'provider:submit_teaching_method' %}"
+                              enctype="multipart/form-data" novalidate>
+                            {% csrf_token %}
+                            <div class="card-body">
+                                <!-- Method Selection -->
+                                <div class="mb-4">
+                                    <h5 class="fw-semibold mb-3">How Do You Want to Teach?</h5>
+                                    <p class="text-muted mb-4">Your choice determines which students can find you and how you'll be matched</p>
+                                    <div class="row g-4">
+                                        <!-- Online Only Option -->
+                                        <div class="col-md-4">
+                                            <div class="method-card card h-100 " data-method="online">
+                                                <div class="card-body text-center d-flex flex-column justify-content-between">
+                                                    <div>
+                                                        <div class="mb-3 d-flex justify-content-center align-items-center"
+                                                             style="height: 60px;">
+                                                            <i class="bi bi-laptop text-primary fs-1"></i>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center align-items-center mb-2">
+                                                            <input class="form-check-input me-2 hidden-radio " type="radio"
+                                                                   name="meeting_method" id="method_online"
+                                                                   value="online"
+                                                                   {% if location_form.meeting_method.value == 'online' %}checked{% endif %}>
+                                                            <h6 class="card-title fw-bold mb-0">Online Only</h6>
+                                                        </div>
+                                                        <p class="card-text small text-secondary mb-2">Teach students from anywhere</p>
+                                                        <div class="student-reach-badge bg-info text-white rounded-pill px-2 py-1 small">
+                                                            <i class="bi bi-globe me-1"></i> Global Reach
+                                                        </div>
+                                                        <div class="mt-2">
+                                                            <small class="text-muted d-block">• Appear in worldwide searches</small>
+                                                            <small class="text-muted d-block">• No location restrictions</small>
+                                                            <small class="text-muted d-block">• Higher volume of potential students</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Hybrid Option -->
+                                        <div class="col-md-4">
+                                            <div class="method-card card h-100 " data-method="hybrid">
+                                                <div class="card-body text-center d-flex flex-column justify-content-between">
+                                                    <div>
+                                                        <div class="mb-3 d-flex justify-content-center align-items-center position-relative"
+                                                             style="height: 60px;">
+                                                            <span class="badge bg-success position-absolute top-0 start-1 translate-middle ">Recommended</span>
+                                                            <i class="bi bi-laptop text-primary fs-3 me-1"></i>
+                                                            <i class="bi bi-plus small mx-1"></i>
+                                                            <i class="bi bi-people-fill text-success fs-3 ms-1"></i>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center align-items-center mb-2">
+                                                            <input class="form-check-input me-2 hidden-radio" type="radio"
+                                                                   name="meeting_method" id="method_hybrid"
+                                                                   value="hybrid"
+                                                                   {% if location_form.meeting_method.value == 'hybrid' %}checked{% endif %}>
+                                                            <h6 class="card-title fw-bold mb-0">Hybrid</h6>
+                                                        </div>
+                                                        <p class="card-text small text-secondary mb-2">Both online and in-person</p>
+                                                        <div class="student-reach-badge bg-success text-white rounded-pill px-2 py-1 small">
+                                                            <i class="bi bi-bullseye me-1"></i> Maximum Reach
+                                                        </div>
+                                                        <div class="mt-2">
+                                                            <small class="text-muted d-block">• Appear in both local and online searches</small>
+                                                            <small class="text-muted d-block">• 65% more matching opportunities</small>
+                                                            <small class="text-muted d-block">• Flexibility to choose session types</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- In-Person Only Option -->
+                                        <div class="col-md-4">
+                                            <div class="method-card card h-100 " data-method="in_person">
+                                                <div class="card-body text-center d-flex flex-column justify-content-between">
+                                                    <div>
+                                                        <div class="mb-3 d-flex justify-content-center align-items-center"
+                                                             style="height: 60px;">
+                                                            <i class="bi bi-people-fill text-success fs-1"></i>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center align-items-center mb-2">
+                                                            <input class="form-check-input me-2 hidden-radio" type="radio"
+                                                                   name="meeting_method" id="method_in_person"
+                                                                   value="in_person"
+                                                                   {% if location_form.meeting_method.value == 'in_person' %}checked{% endif %}>
+                                                            <h6 class="card-title fw-bold mb-0">In-Person Only</h6>
+                                                        </div>
+                                                        <p class="card-text small text-secondary mb-2">Local face-to-face sessions</p>
+                                                        <div class="student-reach-badge bg-warning text-dark rounded-pill px-2 py-1 small">
+                                                            <i class="bi bi-geo-alt me-1"></i> Local Focus
+                                                        </div>
+                                                        <div class="mt-2">
+                                                            <small class="text-muted d-block">• Appear in local area searches only</small>
+                                                            <small class="text-muted d-block">• Potential for premium pricing</small>
+                                                            <small class="text-muted d-block">• Stronger student connections</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Dynamic Method Hint -->
+                                    <div class="alert alert-info mt-3 d-flex align-items-center" id="methodHint">
+                                        <i class="bi bi-lightbulb-fill me-2 fs-5 text-warning"></i>
+                                        <div>
+                                            <strong>Hybrid Teaching - Maximize Your Opportunities</strong>
+                                            <ul class="benefit-list mt-2 mb-0">
+                                                <li><span class="highlight">Appear in both online and local searches</span> - double your visibility to potential students</li>
+                                                <li><span class="highlight">Flexibility to accept both remote and local students</span> based on your schedule and preferences</li>
+                                                <li><span class="highlight">Automatic fallback option</span> - if local students aren't available, you'll still get online opportunities</li>
+                                                <li><span class="highlight">Higher acceptance rate</span> - students prefer tutors with multiple options</li>
+                                            </ul>
+                                            <p class="mt-2 mb-0">
+                                                <small>Tutors who choose hybrid typically get their first student <span class="highlight">2x faster</span> and maintain <span class="highlight">40% more consistent bookings</span>.</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- In-Person Details (Conditional) -->
+                                <div id="inPersonLocationSection">
+                                    <hr class="my-4">
+                                    <h5 class="fw-semibold text-success mb-3">
+                                        <i class="bi bi-pin-map-fill me-2"></i>Set Your Local Teaching Area
+                                    </h5>
+
+                                    <!-- Location Explanation Card -->
+                                    <div class="card bg-light border-0 mb-4">
+                                        <div class="card-body">
+                                            <h6 class="card-title fw-semibold mb-3">
+                                                <i class="bi bi-geo me-2 text-primary"></i>
+                                                How Location Affects Your Student Matching
+                                            </h6>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-3 d-flex">
+                                                            <i class="bi bi-search text-primary me-2 mt-1"></i>
+                                                            <div>
+                                                                <strong>Precise Location = Better Matches</strong>
+                                                                <small class="d-block text-muted">Students search for tutors in specific areas</small>
+                                                            </div>
+                                                        </li>
+                                                        <li class="mb-3 d-flex">
+                                                            <i class="bi bi-people text-primary me-2 mt-1"></i>
+                                                            <div>
+                                                                <strong>Travel Distance Matters</strong>
+                                                                <small class="d-block text-muted">Students prefer tutors within 5-10km</small>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-3 d-flex">
+                                                            <i class="bi bi-clock-history text-primary me-2 mt-1"></i>
+                                                            <div>
+                                                                <strong>Faster Matching</strong>
+                                                                <small class="d-block text-muted">Accurate location leads to quicker student connections</small>
+                                                            </div>
+                                                        </li>
+                                                        <li class="mb-3 d-flex">
+                                                            <i class="bi bi-star text-primary me-2 mt-1"></i>
+                                                            <div>
+                                                                <strong>Higher Visibility</strong>
+                                                                <small class="d-block text-muted">You'll appear higher in local search results</small>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-3">
+
+                                            <h6 class="card-title fw-semibold mb-2">Setting Your Location</h6>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="d-flex">
+                                                        <i class="bi bi-geo-alt text-success me-2 mt-1"></i>
+                                                        <div>
+                                                            <strong>Search for your area</strong>
+                                                            <small class="d-block text-muted">Use the search box to find your city or neighborhood</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <div class="d-flex">
+                                                        <i class="bi bi-cursor text-primary me-2 mt-1"></i>
+                                                        <div>
+                                                            <strong>Click on the map</strong>
+                                                            <small class="d-block text-muted">Pinpoint your exact location for optimal matching</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <!-- Map Location Picker -->
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold">Your Teaching Location <span
+                                                    class="text-danger">*</span></label>
+                                            <p class="text-muted small mb-3">This determines which local students can find you</p>
+
+                                            <!-- Search Box -->
+                                            {#                                            <div class="input-group mb-3">#}
+                                            {#                                                <span class="input-group-text bg-transparent"><i class="bi bi-search"></i></span>#}
+                                            {#                                                <input type="text" id="locationSearch" class="form-control"#}
+                                            {#                                                       placeholder="Search for your city or area..." autocomplete="off">#}
+                                            {#                                                <button class="btn btn-outline-secondary" type="button" id="clearSearch">#}
+                                            {#                                                    <i class="bi bi-x"></i> Clear#}
+                                            {#                                                </button>#}
+                                            {#                                            </div>#}
+
+                                            <!-- Map Container -->
+                                            <div id="osmMap" class="map-container" style="height: 350px; width: 100%;"
+                                                 class="border rounded mb-2"></div>
+
+
+                                            <!-- Location Display -->
+                                            <div class="d-flex justify-content-between align-items-center mt-2 p-3 bg-light rounded">
+                                                <div>
+                                                    <div class="d-flex align-items-center mb-1">
+                                                        <i class="bi bi-geo me-1 text-muted"></i>
+                                                        <small class="text-muted">Coordinates: <span
+                                                                id="coordinatesDisplay">
+                                                                            {% if location_form.latitude.value and location_form.longitude.value %}
+                                                                                {{ location_form.latitude.value|floatformat:4 }},
+                                                                                {{ location_form.longitude.value|floatformat:4 }}
+                                                                            {% else %}
+                                                                                Not set
+                                                                            {% endif %}
+                                                                        </span></small>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-pin-map me-1 text-muted"></i>
+                                                        <small class="text-muted">Service Area:
+                                                            <span id="displayCity">
+                                    {% if location_form.city.value %}
+                                        {{ location_form.city.value }}
+                                    {% else %}
+                                        Not detected
+                                    {% endif %}
+                                </span>,
+                                                            <span id="displayCountry">
+                                    {% if location_form.country.value %}
+                                        {{ location_form.country.value }}
+                                    {% else %}
+                                        Not detected
+                                    {% endif %}
+                                </span>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <button type="button" id="resetLocation"
+                                                        class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-x-circle me-1"></i> Reset Location
+                                                </button>
+                                            </div>
+
+                                            <!-- Hidden Fields -->
+                                            <input type="hidden" name="latitude" id="osmLat" value="35.6893">
+                                            <input type="hidden" name="longitude" id="osmLng" value="51.3896">
+                                            <input type="hidden" name="country" id="mapCountry"
+                                                   value="{{ location_form.country.value|default_if_none:'' }}">
+                                            <input type="hidden" name="city" id="mapCity"
+                                                   value="{{ location_form.city.value|default_if_none:'' }}">
+                                            <input type="hidden" name="offers_in_person" id="offersInPerson"
+                                                   value="{% if location_form.offers_in_person.value %}true{% else %}false{% endif %}">
+                                        </div>
+
+
+                                        <!-- Meeting Radius -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Maximum Travel Distance
+                                                <i class="bi bi-info-circle text-primary"
+                                                   data-bs-toggle="tooltip"
+                                                   title="We'll only match you with students within this radius">
+                                                </i>
+                                            </label>
+                                            <div class="input-group border-radius-1">
+                                                {{ location_form.meeting_radius }}
+                                                <span class="input-group-text">km</span>
+                                            </div>
+                                            <div class="form-text">Smaller radius = higher quality matches, but fewer students</div>
+                                            {% for error in location_form.meeting_radius.errors %}
+                                                <div class="invalid-feedback d-block">{{ error }}</div>
+                                            {% endfor %}
+                                        </div>
+
+                                        <!-- Meeting Preferences -->
+                                        <div class="col-md-6">
+                                            <label class="form-label">Preferred Meeting Locations</label>
+                                            {% if location_form.meeting_location %}
+                                                {{ location_form.meeting_location|default_if_none:'any' }}
+                                                {% for error in location_form.meeting_location.errors %}
+                                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                                {% endfor %}
+                                            {% endif %}
+                                            <div class="form-text">Students appreciate knowing your location preferences</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Security Note -->
+                                <div class="mt-4 p-3 security-badge rounded" id="privacyHint">
+                                    <div class="d-flex">
+                                        <i class="bi bi-shield-check text-success me-2 fs-5"></i>
+                                        <div>
+                                            <strong>Privacy Protection:</strong> Your exact location is stored securely and
+                                            will only be shared with students after they've been accepted and you've
+                                            confirmed the session. You maintain full control over your location privacy.
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        <!-- Teaching Method Section End -->
+                    </div>
+                    <!-- Card body END -->
+                </div>
+                <!-- Card END -->
+            </div>
+            <!-- Privacy END -->
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between mt-3">
+        <button type="button" class="btn btn-outline-secondary btn-prev" id="btnPrev_method" data-action="prev" data-step="3">
+            <i class="bi bi-arrow-left me-2"></i> Previous
+        </button>
+
+        <div>
+            <button type="button" class="btn btn-outline-success btn-save me-2" id="btnSave_method" data-action="save" data-step="3">
+                <i class="bi bi-save me-1"></i> Save
+            </button>
+            <button type="button" class="btn btn-primary btn-next" id="btnNext_method" data-action="next" data-step="3">
+                Next <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block dt_modal %}
+    {% include 'modals/guideline_photo.html' %}
+    {% include 'modals/guideline_video.html' %}
+    <!-- Modal Trigger in your form -->
+    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a>
+    <!-- Cropping Modal -->
+    {% include 'modals/cropping_photo.html' %}
+    <!-- Terms and Conditions Modal -->
+    {% include 'modals/terms_instructors.html' %}
+    <!-- Privacy Policy Modal -->
+    {% include 'modals/privacy_policy.html' %}
+
+    <div class="modal fade" id="uploadProgressModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Uploading Files</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="progress mb-3" style="height: 24px;">
+                        <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <p id="uploadProgressText" class="text-center mb-0">Preparing upload...</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelUploadBtn" type="button" class="btn btn-danger">Cancel Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Progress Modal -->
+    <div class="modal fade" id="uploadProgressModal2222222" tabindex="-1" aria-labelledby="uploadModalTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalTitle">Uploading Files</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="progress" style="height: 25px;">
+                        <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div id="uploadProgressText" class="text-center mt-2 small text-muted">
+                        Preparing upload... 0%
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelUploadBtn" class="btn btn-secondary">
+                        <i class="bi bi-x-circle"></i> Cancel Upload
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Progress Modal -->
+    <div class="modal fade" id="uploadProgressModal33" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Uploading Files</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="progress" style="height: 20px;">
+                        <div id="uploadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+                    <div id="uploadProgressText" class="text-center mt-2 small">Preparing upload... 0%</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelUploadBtn" class="btn btn-secondary">Cancel Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup modal for Confirm selections START -->
+    <div class="modal fade" id="confirmWeek" tabindex="-1" aria-labelledby="confirmWeekLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title text-white" id="confirmWeekLabel">Confirmation</h5>
+                    <button type="button" class="btn btn-sm btn-light mb-0 ms-auto" data-bs-dismiss="modal"
+                            aria-label="Close"><i
+                            class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row text-start g-3">
+                        <!-- Course name -->
+                        <div class="col-12 text-center">
+                            <label class="form-label"><h4>Do you confirm your changes?</h4></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" id="btnNo" class="btn btn-danger my-0" data-bs-dismiss="modal">Discard
+                    </button>
+                    <button type="button" id="btnYes" class="btn btn-success my-0">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup modal for Confirm selections END -->
+
+    <!-- Save Price Modal -->
+    <div class="modal fade" id="savePriceModal" tabindex="-1" aria-labelledby="savePriceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="savePriceModalLabel">Save Hourly Rate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                {#            <form method="post" action="{% url 'my_admin:save_tutor_price' %}">#}
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <p>Your hourly rate will be updated to: <strong id="modalPriceValue">$24.00</strong></p>
+                        <input type="hidden" name="hourly_rate" id="modalPriceInput" value="24">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="updateAllCourses"
+                                   name="update_all_courses">
+                            <label class="form-check-label" for="updateAllCourses">
+                                Apply this rate to all my existing courses
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/js/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/stepper/js/bs-stepper.min.js' %}"></script>
+{% endblock %}
+{% block embed_script %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="{% static 'assets/js/cropper.min.js' %}"></script>
+
+    <!-- Load Open Street Maps API -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="{% static 'assets/js/map/src/openStreet_onboarding.js' %}" type="module"></script>
+    <script src="{% static 'assets/js/map/src/showLocationSection.js' %}" type="module"></script>
+{% endblock %}
+
+{% block my_scripts %}
+    <!------------------------ Wizard Stepper Scripts ------------------------>
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/src/method.js' %}"></script>
+    <script type="module" src="{% static 'ap2_tutor/assets/js/wizard/wizard.bundle.js' %}"></script>
+
+{% endblock %}

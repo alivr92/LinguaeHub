@@ -32,6 +32,7 @@ urlpatterns = [
     path('become-tutor/', views.BecomeTutor.as_view(), name='become_tutor'),
     path('wizard/submit/', views.SuccessSubmit.as_view(), name='success_submit'),
     path('wizard/result/', views.DPWizardResult.as_view(), name='dp_wizard_result'),
+    path('wizard/test/', views.DPWizardTest.as_view(), name='dp_wizard_test'),
 
     # ---------------------- functions -------------------------------------------------------
     path('wizard/submit-profile/', views.submit_profile, name='submit_profile'),

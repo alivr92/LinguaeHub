@@ -98,3 +98,20 @@ body {
     transform: scale(1.05);
 }
 
+#osmMap {
+    width: 100% !important;
+    height: 350px !important;
+    min-height: 350px;
+}
+
+.leaflet-container {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* --- On boarding --- */
+.student-reach-badge {
+    font-size: 0.7rem;
+    display: inline-block;
+    margin-bottom: 8px;
+}

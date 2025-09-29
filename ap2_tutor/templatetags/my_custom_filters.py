@@ -61,3 +61,8 @@ def timeuntil(deadline):
 @register.filter
 def status(queryset, status):
     return queryset.filter(status=status)
+
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

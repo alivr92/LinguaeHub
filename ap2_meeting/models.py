@@ -210,7 +210,7 @@ class Review(models.Model):
     like_count = models.PositiveIntegerField(null=True, blank=True, default=0)
     dislike_count = models.PositiveIntegerField(null=True, blank=True, default=0)
     message = models.TextField(blank=True, max_length=300)
-    status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='free')
+    status = models.CharField(max_length=20, choices=REVIEW_STATUS_CHOICES, default='pending')
     is_published = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(default=timezone.now, blank=True)
@@ -228,7 +228,49 @@ class Review(models.Model):
             self.status = 'published'
         else:
             self.status = 'pending'
+
+        is_new = self.pk is None  # Check if this is a new review
+
+        # Call the original save method first
         super().save(*args, **kwargs)
+
+        # Update provider's rating after saving
+        self.update_provider_rating()
+
+    def delete(self, *args, **kwargs):
+        # Store provider reference before deletion
+        provider = self.provider
+
+        # Delete the review
+        super().delete(*args, **kwargs)
+
+        # Update provider's rating after deletion
+        if provider:
+            self._update_provider_rating(provider)
+
+    def update_provider_rating(self):
+        """Update the provider's average rating"""
+        self._update_provider_rating(self.provider)
+
+    @staticmethod
+    def _update_provider_rating(provider):
+        """Static method to update rating for a given provider"""
+        from django.db.models import Avg, Count
+
+        # Get all published reviews for this provider
+        reviews = Review.objects.filter(provider=provider, is_published=True)
+
+        # Calculate new average rating and count
+        rating_data = reviews.aggregate(
+            avg_rating=Avg('rate_provider'),
+            total_reviews=Count('id')
+        )
+
+        # Update the provider's profile
+        provider_profile = provider.profile
+        provider_profile.rating = rating_data['avg_rating'] or 0.0
+        provider_profile.reviews_count = rating_data['total_reviews'] or 0
+        provider_profile.save()
 
 
 class InterviewSessionInfo(models.Model):

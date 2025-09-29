@@ -137,6 +137,20 @@
             }
         }
     </style>
+
+{#    fpr share buttons #}
+    <style>
+        .share-url-input {
+            font-size: 0.8rem;
+            background: #f8f9fa;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1055;
+        }
+    </style>
 {% endblock %}
 
 
@@ -182,129 +196,218 @@
                                             <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>
                                         {% endwith %}
                                     </ul>
+
+                                    <!-- Info -->
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Price and time -->
+                                        <div>
+                                            {% if discount_valid %}
+                                                <div class="d-flex align-items-center">
+                                                    <h3 class="fw-bold mb-0 me-2">
+                                                        ${{ discounted_price|format_decimal:2 }}
+                                                    </h3>
+                                                    <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>
+                                                    <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>
+                                                </div>
+                                                {% if remaining_time %}
+                                                    <p class="mb-0 text-danger"><i
+                                                            class="fas fa-stopwatch me-2"></i>{{ remaining_time }}
+                                                        left at this price</p>
+                                                {% endif %}
+                                            {% else %}
+                                                <div class="d-flex align-items-center">
+                                                    <h3 class="fw-bold mb-0 me-2">
+                                                        ${{ tutor_single.cost_hourly }}
+                                                    </h3>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Share button with dropdown -->
+                                        <div class="dropdown">
+                                            <!-- Share button -->
+                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"
+                                               id="dropdownShare"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-fw fa-share-alt"></i>
+                                            </a>
+                                            <!-- dropdown button -->
+                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"
+                                                aria-labelledby="dropdownShare">
+                                                <li>
+                                                    <a class="dropdown-item share-option" href="#" data-platform="twitter">
+                                                        <i class="fab fa-twitter-square text-info me-2"></i>Twitter
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item share-option" href="#" data-platform="facebook">
+                                                        <i class="fab fa-facebook-square text-primary me-2"></i>Facebook
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item share-option" href="#" data-platform="linkedin">
+                                                        <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn
+                                                    </a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="#"><i
+                                                        class="fas fa-copy me-2"></i>Copy link</a></li>
+                                            </ul>
+                                        </div>
+
+{# ------------------------------  Shared buttons START  ---------------------------------------- #}
+                                        <!-- Hidden URL for copying https://your-lms.com/tutor/john-smith-123 -->
+                                        <input type="text" id="tutorShareUrl" value="https://{{ request.get_host }}{% url 'provider:tutor_detail' tutor_single.id %}"
+                                               class="form-control share-url-input mt-2" readonly style="display: none;">
+                                        <!-- Toast Notification -->
+                                        <div class="toast align-items-center text-white bg-success border-0" id="copyToast">
+                                            <div class="d-flex">
+                                                <div class="toast-body">
+                                                    Link copied to clipboard!
+                                                </div>
+                                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                                            </div>
+                                        </div>
+{#                                    Shared buttons END ------------------------------------------------------------- #}
+
+
+
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="mt-3 d-sm-flex justify-content-sm-between">
+                                        {% if tutor_single.cost_trial != 0 %}
+                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for
+                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>
+                                        {% else %}
+                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>
+                                        {% endif %}
+                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"
+                                           class="btn btn-success mb-0">Reserve Class</a>
+                                    </div>
                                 </div>
+
                             </div>
                             <!-- Tutor image END -->
+
                             <!-- Video START -->
-                            {#                            <div class="col-md-6 col-lg-12">#}
-                            {#                                <div class="card shadow p-2 mb-4 z-index-9">#}
-                            {#                                    <div class="overflow-hidden rounded-3" id="tutor-container">#}
-                            {#                                        <div id="tutor-image-wrapper">#}
-                            {#                                            <img src="{{ tutor_single.profile.photo.url }}" class="card-img"#}
-                            {#                                                 alt="course image"#}
-                            {#                                                 id="tutor-image">#}
-                            {#                                            <!-- Overlay -->#}
-                            {#                                            <div class="bg-overlay bg-dark opacity-6"></div>#}
-                            {#                                            <div class="card-img-overlay d-flex align-items-start flex-column p-3">#}
-                            {#                                                <!-- Video button and link -->#}
-                            {#                                                <div class="m-auto">#}
-                            {#                                                    <a href="#"#}
-                            {#                                                       class="btn btn-lg text-danger btn-round btn-white-shadow mb-0"#}
-                            {#                                                       onclick="showEmbedVideo(); return false;">#}
-                            {#                                                        <i class="fas fa-play"></i>#}
-                            {#                                                    </a>#}
-                            {#                                                </div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                  </div>#}
+{#                                                        <div class="col-md-6 col-lg-12">#}
+{#                                                            <div class="card shadow p-2 mb-4 z-index-9">#}
+{#                                                                <div class="overflow-hidden rounded-3" id="tutor-container">#}
+{#                                                                    <div id="tutor-image-wrapper">#}
+{#                                                                        <img src="{{ tutor_single.profile.photo.url }}" class="card-img"#}
+{#                                                                             alt="course image"#}
+{#                                                                             id="tutor-image">#}
+{#                                                                        <!-- Overlay -->#}
+{#                                                                        <div class="bg-overlay bg-dark opacity-6"></div>#}
+{#                                                                        <div class="card-img-overlay d-flex align-items-start flex-column p-3">#}
+{#                                                                            <!-- Video button and link -->#}
+{#                                                                            <div class="m-auto">#}
+{#                                                                                <a href="#"#}
+{#                                                                                   class="btn btn-lg text-danger btn-round btn-white-shadow mb-0"#}
+{#                                                                                   onclick="showEmbedVideo(); return false;">#}
+{#                                                                                    <i class="fas fa-play"></i>#}
+{#                                                                                </a>#}
+{#                                                                            </div>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{##}
+                                                                {#                  </div>#}
                             {#                </div>#}
-                            {##}
-                            {##}
-                            {#                                    <!-- APARAT EMBED VIDEO END -->#}
-                            {##}
-                            {##}
-                            {#                                    <!-- Card body -->#}
-                            {#                                    <div class="card-body px-3 cent">#}
-                            {##}
-                            {#                                        <div class="text-center">#}
-                            {#                                            <!-- Rating -->#}
-                            {#                                            <ul class="list-inline ">#}
-                            {#                                                {% with rating=tutor_single.profile.rating %}#}
-                            {#                                                    {% for i in range %}#}
-                            {#                                                        <li class="list-inline-item me-0 small">#}
-                            {#                                                            {% if i <= rating %}#}
-                            {#                                                                <i class="fas fa-star text-warning"></i>#}
-                            {#                                                            {% elif  i|float_sub:0.5 <= rating %}#}
-                            {#                                                                <i class="fas fa-star-half-alt text-warning"></i>#}
-                            {#                                                            {% else %}#}
-                            {#                                                                <i class="far fa-star text-warning"></i>#}
-                            {#                                                            {% endif %}#}
-                            {#                                                        </li>#}
-                            {#                                                    {% endfor %}#}
-                            {#                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
-                            {#                                                {% endwith %}#}
-                            {#                                            </ul>#}
-                            {##}
-                            {#                                        </div>#}
-                            {##}
-                            {#                                        <!-- Info -->#}
-                            {#                                        <div class="d-flex justify-content-between align-items-center">#}
-                            {#                                            <!-- Price and time -->#}
-                            {#                                            <div>#}
-                            {#                                                {% if discount_valid %}#}
-                            {#                                                    <div class="d-flex align-items-center">#}
-                            {#                                                        <h3 class="fw-bold mb-0 me-2">#}
-                            {#                                                            ${{ discounted_price|format_decimal:2 }}#}
-                            {#                                                        </h3>#}
-                            {#                                                        <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>#}
-                            {#                                                        <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>#}
-                            {#                                                    </div>#}
-                            {#                                                    {% if remaining_time %}#}
-                            {#                                                        <p class="mb-0 text-danger"><i#}
-                            {#                                                                class="fas fa-stopwatch me-2"></i>{{ remaining_time }}#}
-                            {#                                                            left at this price</p>#}
-                            {#                                                    {% endif %}#}
-                            {#                                                {% else %}#}
-                            {#                                                    <div class="d-flex align-items-center">#}
-                            {#                                                        <h3 class="fw-bold mb-0 me-2">#}
-                            {#                                                            ${{ tutor_single.cost_hourly }}#}
-                            {#                                                        </h3>#}
-                            {#                                                    </div>#}
-                            {#                                                {% endif %}#}
-                            {#                                            </div>#}
-                            {##}
-                            {#                                            <!-- Share button with dropdown -->#}
-                            {#                                            <div class="dropdown">#}
-                            {#                                                <!-- Share button -->#}
-                            {#                                                <a href="#" class="btn btn-sm btn-light rounded small" role="button"#}
-                            {#                                                   id="dropdownShare"#}
-                            {#                                                   data-bs-toggle="dropdown" aria-expanded="false">#}
-                            {#                                                    <i class="fas fa-fw fa-share-alt"></i>#}
-                            {#                                                </a>#}
-                            {#                                                <!-- dropdown button -->#}
-                            {#                                                <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"#}
-                            {#                                                    aria-labelledby="dropdownShare">#}
-                            {#                                                    <li><a class="dropdown-item" href="#"><i#}
-                            {#                                                            class="fab fa-twitter-square me-2"></i>Twitter</a>#}
-                            {#                                                    </li>#}
-                            {#                                                    <li><a class="dropdown-item" href="#"><i#}
-                            {#                                                            class="fab fa-facebook-square me-2"></i>Facebook</a></li>#}
-                            {#                                                    <li><a class="dropdown-item" href="#"><i#}
-                            {#                                                            class="fab fa-linkedin me-2"></i>LinkedIn</a>#}
-                            {#                                                    </li>#}
-                            {#                                                    <li><a class="dropdown-item" href="#"><i#}
-                            {#                                                            class="fas fa-copy me-2"></i>Copy link</a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {##}
-                            {#                                        <!-- Buttons -->#}
-                            {#                                        <div class="mt-3 d-sm-flex justify-content-sm-between">#}
-                            {#                                            {% if tutor_single.cost_trial != 0 %}#}
-                            {#                                                <a href="#" class="btn btn-outline-primary mb-0">Trial Session for#}
-                            {#                                                    ${{ tutor_single.cost_trial|floatformat:0 }}</a>#}
-                            {#                                            {% else %}#}
-                            {#                                                <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>#}
-                            {#                                            {% endif %}#}
-                            {#                                            <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"#}
-                            {#                                               class="btn btn-success mb-0">Reserve Class</a>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {##}
-                            {##}
-                            {#                                </div>#}
-                            {#                            </div>#}
+{##}
+{##}
+{#                                                                <!-- APARAT EMBED VIDEO END -->#}
+{#                                                                <!-- Card body -->#}
+{#                                                                <div class="card-body px-3 cent">#}
+{##}
+{#                                                                    <div class="text-center">#}
+{#                                                                        <!-- Rating -->#}
+{#                                                                        <ul class="list-inline ">#}
+{#                                                                            {% with rating=tutor_single.profile.rating %}#}
+{#                                                                                {% for i in range %}#}
+{#                                                                                    <li class="list-inline-item me-0 small">#}
+{#                                                                                        {% if i <= rating %}#}
+{#                                                                                            <i class="fas fa-star text-warning"></i>#}
+{#                                                                                        {% elif  i|float_sub:0.5 <= rating %}#}
+{#                                                                                            <i class="fas fa-star-half-alt text-warning"></i>#}
+{#                                                                                        {% else %}#}
+{#                                                                                            <i class="far fa-star text-warning"></i>#}
+{#                                                                                        {% endif %}#}
+{#                                                                                    </li>#}
+{#                                                                                {% endfor %}#}
+{#                                                                                <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+{#                                                                            {% endwith %}#}
+{#                                                                        </ul>#}
+{##}
+{#                                                                    </div>#}
+{##}
+{#                                                                    <!-- Info -->#}
+{#                                                                    <div class="d-flex justify-content-between align-items-center">#}
+{#                                                                        <!-- Price and time -->#}
+{#                                                                        <div>#}
+{#                                                                            {% if discount_valid %}#}
+{#                                                                                <div class="d-flex align-items-center">#}
+{#                                                                                    <h3 class="fw-bold mb-0 me-2">#}
+{#                                                                                        ${{ discounted_price|format_decimal:2 }}#}
+{#                                                                                    </h3>#}
+{#                                                                                    <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>#}
+{#                                                                                    <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>#}
+{#                                                                                </div>#}
+{#                                                                                {% if remaining_time %}#}
+{#                                                                                    <p class="mb-0 text-danger"><i#}
+{#                                                                                            class="fas fa-stopwatch me-2"></i>{{ remaining_time }}#}
+{#                                                                                        left at this price</p>#}
+{#                                                                                {% endif %}#}
+{#                                                                            {% else %}#}
+{#                                                                                <div class="d-flex align-items-center">#}
+{#                                                                                    <h3 class="fw-bold mb-0 me-2">#}
+{#                                                                                        ${{ tutor_single.cost_hourly }}#}
+{#                                                                                    </h3>#}
+{#                                                                                </div>#}
+{#                                                                            {% endif %}#}
+{#                                                                        </div>#}
+{##}
+{#                                                                        <!-- Share button with dropdown -->#}
+{#                                                                        <div class="dropdown">#}
+{#                                                                            <!-- Share button -->#}
+{#                                                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"#}
+{#                                                                               id="dropdownShare"#}
+{#                                                                               data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                                                                                <i class="fas fa-fw fa-share-alt"></i>#}
+{#                                                                            </a>#}
+{#                                                                            <!-- dropdown button -->#}
+{#                                                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"#}
+{#                                                                                aria-labelledby="dropdownShare">#}
+{#                                                                                <li><a class="dropdown-item" href="#"><i#}
+{#                                                                                        class="fab fa-twitter-square me-2"></i>Twitter</a>#}
+{#                                                                                </li>#}
+{#                                                                                <li><a class="dropdown-item" href="#"><i#}
+{#                                                                                        class="fab fa-facebook-square me-2"></i>Facebook</a></li>#}
+{#                                                                                <li><a class="dropdown-item" href="#"><i#}
+{#                                                                                        class="fab fa-linkedin me-2"></i>LinkedIn</a>#}
+{#                                                                                </li>#}
+{#                                                                                <li><a class="dropdown-item" href="#"><i#}
+{#                                                                                        class="fas fa-copy me-2"></i>Copy link</a></li>#}
+{#                                                                            </ul>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{##}
+{#                                                                    <!-- Buttons -->#}
+{#                                                                    <div class="mt-3 d-sm-flex justify-content-sm-between">#}
+{#                                                                        {% if tutor_single.cost_trial != 0 %}#}
+{#                                                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for#}
+{#                                                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>#}
+{#                                                                        {% else %}#}
+{#                                                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>#}
+{#                                                                        {% endif %}#}
+{#                                                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"#}
+{#                                                                           class="btn btn-success mb-0">Reserve Class</a>#}
+{#                                                                    </div>#}
+{#                                                                </div>#}
+{##}
+{##}
+{#                                                            </div>#}
+{#                                                        </div>#}
                             <!-- Video END -->
 
 
@@ -580,7 +683,7 @@
                                     <div class="ms-3">
                                         <div class="d-flex">
                                             <h5 class="purecounter mb-0 fw-bold" data-purecounter-start="0"
-                                                data-purecounter-end="{{ tutor_single.profile.user.skills|status:'approved'|length }}"
+                                                data-purecounter-end="{{ tutor_single.profile.user.skills|default:''|status:'approved'|length }}"
                                                 data-purecounter-delay="200">0</h5>
                                             <span class="mb-0 h5">+</span>
                                         </div>
@@ -883,6 +986,257 @@
                                         <!-- Content END -->
 
                                         <!-- Reviews Content START -->
+{#                                        <div class="tab-pane fade" id="course-pills-4" role="tabpanel"#}
+{#                                             aria-labelledby="course-pills-tab-4">#}
+{#                                            <!-- Review START -->#}
+{#                                            <div class="row mb-4">#}
+{#                                                <h5 class="mb-4">Our Student Reviews</h5>#}
+{##}
+{#                                                <!-- Rating info -->#}
+{#                                                <div class="col-md-4 mb-3 mb-md-0">#}
+{#                                                    <div class="text-center">#}
+{#                                                        {% with rating=tutor_single.profile.rating %}#}
+{#                                                            <!-- Info -->#}
+{#                                                            <h2 class="mb-0">{{ rating|floatformat:1 }}</h2>#}
+{#                                                            <!-- Star -->#}
+{#                                                            <ul class="list-inline ">#}
+{##}
+{#                                                            {% for i in range %}#}
+{#                                                                <li class="list-inline-item me-0 small">#}
+{#                                                                    {% if i <= rating %}#}
+{#                                                                        <i class="fas fa-star text-warning"></i>#}
+{#                                                                    {% elif  i|float_sub:0.5 <= rating %}#}
+{#                                                                        <i class="fas fa-star-half-alt text-warning"></i>#}
+{#                                                                    {% else %}#}
+{#                                                                        <i class="far fa-star text-warning"></i>#}
+{#                                                                    {% endif %}#}
+{#                                                                </li>#}
+{#                                                            {% endfor %}#}
+                                                            {#                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+{#                                                        {% endwith %}#}
+{#                                                        </ul>#}
+{#                                                        <p class="mb-0">(Based on students reviews)</p>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{##}
+{#                                                <!-- Progress-bar and star -->#}
+{#                                                <div class="col-md-8">#}
+{#                                                    <div class="row align-items-center">#}
+{#                                                        <!-- Progress bar and Rating -->#}
+{#                                                        <div class="col-6 col-sm-8">#}
+{#                                                            <!-- Progress item -->#}
+{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+{#                                                                     style="width: 100%"#}
+{#                                                                     aria-valuenow="100" aria-valuemin="0"#}
+{#                                                                     aria-valuemax="100"></div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <div class="col-6 col-sm-4">#}
+{#                                                            <!-- Star item -->#}
+{#                                                            <ul class="list-inline mb-0">#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <!-- Progress bar and Rating -->#}
+{#                                                        <div class="col-6 col-sm-8">#}
+{#                                                            <!-- Progress item -->#}
+{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+{#                                                                     style="width: 80%"#}
+{#                                                                     aria-valuenow="80" aria-valuemin="0"#}
+{#                                                                     aria-valuemax="100"></div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <div class="col-6 col-sm-4">#}
+{#                                                            <!-- Star item -->#}
+{#                                                            <ul class="list-inline mb-0">#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <!-- Progress bar and Rating -->#}
+{#                                                        <div class="col-6 col-sm-8">#}
+{#                                                            <!-- Progress item -->#}
+{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+{#                                                                     style="width: 60%"#}
+{#                                                                     aria-valuenow="60" aria-valuemin="0"#}
+{#                                                                     aria-valuemax="100"></div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <div class="col-6 col-sm-4">#}
+{#                                                            <!-- Star item -->#}
+{#                                                            <ul class="list-inline mb-0">#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <!-- Progress bar and Rating -->#}
+{#                                                        <div class="col-6 col-sm-8">#}
+{#                                                            <!-- Progress item -->#}
+{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+{#                                                                     style="width: 40%"#}
+{#                                                                     aria-valuenow="40" aria-valuemin="0"#}
+{#                                                                     aria-valuemax="100"></div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <div class="col-6 col-sm-4">#}
+{#                                                            <!-- Star item -->#}
+{#                                                            <ul class="list-inline mb-0">#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <!-- Progress bar and Rating -->#}
+{#                                                        <div class="col-6 col-sm-8">#}
+{#                                                            <!-- Progress item -->#}
+{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+{#                                                                     style="width: 20%"#}
+{#                                                                     aria-valuenow="20" aria-valuemin="0"#}
+{#                                                                     aria-valuemax="100"></div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{##}
+{#                                                        <div class="col-6 col-sm-4">#}
+{#                                                            <!-- Star item -->#}
+{#                                                            <ul class="list-inline mb-0">#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="fas fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                                <li class="list-inline-item me-0 small"><i#}
+{#                                                                        class="far fa-star text-warning"></i></li>#}
+{#                                                            </ul>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <!-- Review END -->#}
+{##}
+{#                                            {% for review in reviews %}#}
+{#                                                <!-- Student review START -->#}
+{#                                                <div class="row">#}
+{#                                                    <!-- Review item START -->#}
+{#                                                    <div class="d-md-flex my-4">#}
+{#                                                        <!-- Avatar -->#}
+{#                                                        <div class="avatar avatar-xl me-4 flex-shrink-0">#}
+{#                                                            <img class="avatar-img rounded-circle"#}
+{#                                                                 src="{{ review.client.profile.photo.url }}"#}
+{#                                                                 alt="{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}">#}
+{#                                                        </div>#}
+{#                                                        <!-- Text -->#}
+{#                                                        <div>#}
+{#                                                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center">#}
+{#                                                                <h5 class="me-3 mb-0">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</h5>#}
+{#                                                                <!-- Review star -->#}
+{#                                                                <ul class="list-inline mb-0">#}
+{#                                                                    {% with rating=review.rate_provider %}#}
+{#                                                                        {% for i in range %}#}
+{#                                                                            <li class="list-inline-item me-0">#}
+{#                                                                                {% if i <= rating %}#}
+                                                                                    {#                                            <i class="fas fa-star text-warning"></i>#}
+{#                                                                                    <i class="fas fa-star text-warning"></i>#}
+{#                                                                                    </li>#}
+                                                                                    {#                                          {% elif  i|float_sub:0.5 <= rating %}#}
+                                                                                    {#                                            <i class="fas fa-star-half-alt text-warning"></i>#}
+{#                                                                                {% else %}#}
+                                                                                    {#                                            <i class="far fa-star text-warning"></i>#}
+{#                                                                                    <i class="far fa-star text-warning"></i>#}
+{#                                                                                    </li>#}
+{#                                                                                {% endif %}#}
+{#                                                                            </li>#}
+{#                                                                        {% endfor %}#}
+{#                                                                        <li class="list-inline-item ms-2 h6 fw-light mb-0"></li>#}
+{#                                                                    {% endwith %}#}
+{#                                                                </ul>#}
+{#                                                            </div>#}
+{#                                                            <!-- Info -->#}
+{#                                                            <p class="small mb-2">#}
+                                                                {#                                  {% timezone user_timezone %}#}
+{#                                                                {{ review.create_date|timesince }} ago#}
+                                                                {#                                  {% endtimezone %}#}
+{#                                                            </p>#}
+{#                                                            <p class="mb-2">{{ review.message }} </p>#}
+{#                                                            <!-- Like and dislike button -->#}
+{#                                                            <div class="btn-group" role="group"#}
+{#                                                                 aria-label="Basic radio toggle button group">#}
+{#                                                                <!-- Like button -->#}
+{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+{#                                                                       id="btnradio1">#}
+{#                                                                <label class="btn btn-outline-light btn-sm mb-0"#}
+{#                                                                       for="btnradio1"><i#}
+{#                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}#}
+{#                                                                </label>#}
+{#                                                                <!-- Dislike button -->#}
+{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+{#                                                                       id="btnradio2">#}
+{#                                                                <label class="btn btn-outline-light btn-sm mb-0"#}
+{#                                                                       for="btnradio2"> <i#}
+{#                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}#}
+{#                                                                </label>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <!-- Review item END -->#}
+{#                                                    <!-- Divider -->#}
+{#                                                    <hr>#}
+{#                                                </div>#}
+{#                                                <!-- Student review END -->#}
+{#                                            {% endfor %}#}
+{##}
+{#                                        </div>#}
+                                        <!-- Content END -->
+
+
+                                        <!-- Reviews Content START -->
                                         <div class="tab-pane fade" id="course-pills-4" role="tabpanel"
                                              aria-labelledby="course-pills-tab-4">
                                             <!-- Review START -->
@@ -897,167 +1251,66 @@
                                                             <h2 class="mb-0">{{ rating|floatformat:1 }}</h2>
                                                             <!-- Star -->
                                                             <ul class="list-inline ">
-
-                                                            {% for i in range %}
-                                                                <li class="list-inline-item me-0 small">
-                                                                    {% if i <= rating %}
-                                                                        <i class="fas fa-star text-warning"></i>
-                                                                    {% elif  i|float_sub:0.5 <= rating %}
-                                                                        <i class="fas fa-star-half-alt text-warning"></i>
-                                                                    {% else %}
-                                                                        <i class="far fa-star text-warning"></i>
-                                                                    {% endif %}
-                                                                </li>
-                                                            {% endfor %}
-                                                            {#                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+                                                                {% for i in range %}
+                                                                    <li class="list-inline-item me-0 small">
+                                                                        {% if i <= rating %}
+                                                                            <i class="fas fa-star text-warning"></i>
+                                                                        {% elif  i|float_sub:0.5 <= rating %}
+                                                                            <i class="fas fa-star-half-alt text-warning"></i>
+                                                                        {% else %}
+                                                                            <i class="far fa-star text-warning"></i>
+                                                                        {% endif %}
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                            <p class="mb-0">Based on {{ total_reviews }} review{{ total_reviews|pluralize }}</p>
                                                         {% endwith %}
-                                                        </ul>
-                                                        <p class="mb-0">(Based on students reviews)</p>
                                                     </div>
                                                 </div>
 
                                                 <!-- Progress-bar and star -->
                                                 <div class="col-md-8">
                                                     <div class="row align-items-center">
-                                                        <!-- Progress bar and Rating -->
-                                                        <div class="col-6 col-sm-8">
-                                                            <!-- Progress item -->
-                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                     style="width: 100%"
-                                                                     aria-valuenow="100" aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                        </div>
+                                                        <!-- Loop through ratings 5 to 1 -->
+                                                        {% for star in "54321" %}
+                                                            {% with star_num=star|add:0 %}
+                                                                {% with dist=rating_distribution|get_item:star_num %}
+                                                                    <!-- Progress bar and Rating -->
+                                                                    <div class="col-6 col-sm-8">
+                                                                        <!-- Progress item -->
+                                                                        <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                                 style="width: {{ dist.percentage }}%"
+                                                                                 aria-valuenow="{{ dist.percentage }}" aria-valuemin="0"
+                                                                                 aria-valuemax="100"></div>
+                                                                        </div>
+                                                                    </div>
 
-                                                        <div class="col-6 col-sm-4">
-                                                            <!-- Star item -->
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- Progress bar and Rating -->
-                                                        <div class="col-6 col-sm-8">
-                                                            <!-- Progress item -->
-                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                     style="width: 80%"
-                                                                     aria-valuenow="80" aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-6 col-sm-4">
-                                                            <!-- Star item -->
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- Progress bar and Rating -->
-                                                        <div class="col-6 col-sm-8">
-                                                            <!-- Progress item -->
-                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                     style="width: 60%"
-                                                                     aria-valuenow="60" aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-6 col-sm-4">
-                                                            <!-- Star item -->
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- Progress bar and Rating -->
-                                                        <div class="col-6 col-sm-8">
-                                                            <!-- Progress item -->
-                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                     style="width: 40%"
-                                                                     aria-valuenow="40" aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-6 col-sm-4">
-                                                            <!-- Star item -->
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                            </ul>
-                                                        </div>
-
-                                                        <!-- Progress bar and Rating -->
-                                                        <div class="col-6 col-sm-8">
-                                                            <!-- Progress item -->
-                                                            <div class="progress progress-sm bg-warning bg-opacity-15">
-                                                                <div class="progress-bar bg-warning" role="progressbar"
-                                                                     style="width: 20%"
-                                                                     aria-valuenow="20" aria-valuemin="0"
-                                                                     aria-valuemax="100"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-6 col-sm-4">
-                                                            <!-- Star item -->
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="fas fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                                <li class="list-inline-item me-0 small"><i
-                                                                        class="far fa-star text-warning"></i></li>
-                                                            </ul>
-                                                        </div>
+                                                                    <div class="col-6 col-sm-4">
+                                                                        <!-- Star item -->
+                                                                        <ul class="list-inline mb-0">
+                                                                            {% for i in range %}
+                                                                                <li class="list-inline-item me-0 small">
+                                                                                    {% if i <= star_num %}
+                                                                                        <i class="fas fa-star text-warning"></i>
+                                                                                    {% else %}
+                                                                                        <i class="far fa-star text-warning"></i>
+                                                                                    {% endif %}
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                            <!-- Optional: Show count -->
+                                                                            <li class="list-inline-item ms-2 small text-muted">({{ dist.count }})</li>
+                                                                        </ul>
+                                                                    </div>
+                                                                {% endwith %}
+                                                            {% endwith %}
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- Review END -->
 
+                                            <!-- Rest of your reviews loop remains the same -->
                                             {% for review in reviews %}
                                                 <!-- Student review START -->
                                                 <div class="row">
@@ -1066,60 +1319,49 @@
                                                         <!-- Avatar -->
                                                         <div class="avatar avatar-xl me-4 flex-shrink-0">
                                                             <img class="avatar-img rounded-circle"
-                                                                 src="{{ review.student.profile.photo.url }}"
-                                                                 alt="avatar">
+                                                                 src="{{ review.client.profile.photo.url }}"
+                                                                 alt="{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}">
                                                         </div>
                                                         <!-- Text -->
                                                         <div>
                                                             <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                                                <h5 class="me-3 mb-0">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</h5>
+                                                                <h5 class="me-3 mb-0">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</h5>
                                                                 <!-- Review star -->
                                                                 <ul class="list-inline mb-0">
-                                                                    {% with rating=review.rate_tutor %}
+                                                                    {% with rating=review.rate_provider %}
                                                                         {% for i in range %}
                                                                             <li class="list-inline-item me-0">
                                                                                 {% if i <= rating %}
-                                                                                    {#                                            <i class="fas fa-star text-warning"></i>#}
                                                                                     <i class="fas fa-star text-warning"></i>
-                                                                                    </li>
-                                                                                    {#                                          {% elif  i|float_sub:0.5 <= rating %}#}
-                                                                                    {#                                            <i class="fas fa-star-half-alt text-warning"></i>#}
                                                                                 {% else %}
-                                                                                    {#                                            <i class="far fa-star text-warning"></i>#}
                                                                                     <i class="far fa-star text-warning"></i>
-                                                                                    </li>
                                                                                 {% endif %}
                                                                             </li>
                                                                         {% endfor %}
-                                                                        <li class="list-inline-item ms-2 h6 fw-light mb-0"></li>
                                                                     {% endwith %}
                                                                 </ul>
                                                             </div>
                                                             <!-- Info -->
-                                                            <p class="small mb-2">
-                                                                {#                                  {% timezone user_timezone %}#}
-                                                                {{ review.create_date|timesince }} ago
-                                                                {#                                  {% endtimezone %}#}
-                                                            </p>
+                                                            <p class="small mb-2">{{ review.create_date|timesince }} ago</p>
                                                             <p class="mb-2">{{ review.message }} </p>
                                                             <!-- Like and dislike button -->
-                                                            <div class="btn-group" role="group"
-                                                                 aria-label="Basic radio toggle button group">
-                                                                <!-- Like button -->
-                                                                <input type="radio" class="btn-check" name="btnradio"
-                                                                       id="btnradio1">
-                                                                <label class="btn btn-outline-light btn-sm mb-0"
-                                                                       for="btnradio1"><i
-                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}
-                                                                </label>
-                                                                <!-- Dislike button -->
-                                                                <input type="radio" class="btn-check" name="btnradio"
-                                                                       id="btnradio2">
-                                                                <label class="btn btn-outline-light btn-sm mb-0"
-                                                                       for="btnradio2"> <i
-                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}
-                                                                </label>
-                                                            </div>
+{#                                                            <div class="btn-group" role="group"#}
+{#                                                                 aria-label="Basic radio toggle button group">#}
+{#                                                                <!-- Like button -->#}
+{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+{#                                                                       id="btnradio-{{ review.id }}">#}
+{#                                                                <label class="btn btn-outline-success btn-sm mb-0"#}
+{#                                                                       for="btnradio-{{ review.id }}"><i#}
+{#                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}#}
+{#                                                                </label>#}
+{#                                                                <!-- Dislike button -->#}
+{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+{#                                                                       id="btnradio-{{ review.id }}">#}
+{#                                                                <label class="btn btn-outline-danger btn-sm mb-0"#}
+{#                                                                       for="btnradio-{{ review.id }}"> <i#}
+{#                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}#}
+{#                                                                </label>#}
+{#                                                            </div>#}
                                                         </div>
                                                     </div>
                                                     <!-- Review item END -->
@@ -1128,9 +1370,9 @@
                                                 </div>
                                                 <!-- Student review END -->
                                             {% endfor %}
-
                                         </div>
                                         <!-- Content END -->
+
 
                                         <!-- FAQs Content START -->
 {#                                        <div class="tab-pane fade" id="course-pills-5" role="tabpanel"#}
@@ -1539,5 +1781,85 @@
                 console.error('Element not found');
             }
         }
+    </script>
+
+{#    Script for share button#}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tutorUrl = document.getElementById('tutorShareUrl').value;
+            const tutorName = "John Smith"; // Dynamic from your backend
+            const shareText = `Check out ${tutorName} on our platform!`;
+
+            // Social Media Sharing
+            document.querySelectorAll('.share-social').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const platform = this.getAttribute('data-platform');
+
+                    let shareUrl;
+
+                    switch(platform) {
+                        case 'twitter':
+                            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(tutorUrl)}`;
+                            break;
+                        case 'facebook':
+                            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(tutorUrl)}`;
+                            break;
+                        case 'linkedin':
+                            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(tutorUrl)}`;
+                            break;
+                        case 'whatsapp':
+                            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + tutorUrl)}`;
+                            break;
+                    }
+
+                    if (shareUrl) {
+                        window.open(shareUrl, '_blank', 'width=600,height=400');
+                    }
+                });
+            });
+
+            // Copy Link Functionality
+            document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const urlInput = document.getElementById('tutorShareUrl');
+                urlInput.style.display = 'block';
+                urlInput.select();
+                urlInput.setSelectionRange(0, 99999);
+
+                navigator.clipboard.writeText(urlInput.value).then(() => {
+                    // Show success message
+                    const toast = new bootstrap.Toast(document.getElementById('copyToast'));
+                    toast.show();
+                    urlInput.style.display = 'none';
+                }).catch(err => {
+                    console.error('Copy failed: ', err);
+                    // Fallback for older browsers
+                    urlInput.style.display = 'block';
+                    urlInput.select();
+                    document.execCommand('copy');
+                    urlInput.style.display = 'none';
+                    alert('Link copied to clipboard!');
+                });
+            });
+
+            // Native Sharing (Mobile)
+            document.getElementById('shareNativeBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: tutorName + ' - Tutor Profile',
+                        text: shareText,
+                        url: tutorUrl,
+                    })
+                        .catch(error => console.log('Error sharing:', error));
+                } else {
+                    // Fallback to copy link
+                    document.getElementById('copyLinkBtn').click();
+                }
+            });
+        });
     </script>
 {% endblock %}

@@ -46,12 +46,12 @@
                                 <div class="d-flex align-items-center position-relative">
                                     <!-- Image -->
                                     <div class="avatar avatar-xs mb-2 mb-md-0">
-                                        <img src="{{ review.student.profile.photo.url }}" class="rounded-circle" alt="">
+                                        <img src="{{ review.client.profile.photo.url }}" class="rounded-circle" alt="">
                                     </div>
                                     <div class="mb-0 ms-2">
                                         <!-- Title -->
                                         <h6 class="mb-0"><a href="#"
-                                                            class="stretched-link">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</a>
+                                                            class="stretched-link">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</a>
                                         </h6>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                             <!-- Table data -->
                             <td>
                                 <ul class="list-inline ">
-                                    {% with rating=review.rate_tutor %}
+                                    {% with rating=review.rate_provider %}
                                         {% for i in range %}
                                             <li class="list-inline-item me-0 small">
                                                 {% if i <= rating %}
@@ -585,16 +585,16 @@
                     <div class="d-md-flex">
                         <!-- Avatar -->
                         <div class="avatar avatar-md me-4 flex-shrink-0">
-                            <img class="avatar-img rounded-circle" src="{{ review.student.profile.photo.url }}"
+                            <img class="avatar-img rounded-circle" src="{{ review.client.profile.photo.url }}"
                                  alt="avatar">
                         </div>
                         <!-- Text -->
                         <div>
                             <div class="d-sm-flex mt-1 mt-md-0 align-items-center">
-                                <h5 class="me-3 mb-0">{{ review.student.profile.user.first_name }} {{ review.student.profile.user.last_name }}</h5>
+                                <h5 class="me-3 mb-0">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</h5>
                                 <!-- Review star -->
                                 <ul class="list-inline ">
-                                    {% with rating=review.rate_tutor %}
+                                    {% with rating=review.rate_provider %}
                                         {% for i in range %}
                                             <li class="list-inline-item me-0 small">
                                                 {% if i <= rating %}

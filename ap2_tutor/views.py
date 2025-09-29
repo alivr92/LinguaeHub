@@ -177,8 +177,15 @@ class TutorDetailView(DetailView):
         # Get the tutor ID from self.object or self.kwargs
         tutor = self.object  # or self.kwargs['pk']
         context = super().get_context_data(**kwargs)
-        context['reviews'] = Review.objects.filter(provider=tutor.profile.user, is_published=True).order_by(
-            '-create_date')
+        # Get published reviews for this tutor
+        reviews = Review.objects.filter(provider=tutor.profile.user, is_published=True)
+        context['reviews'] = reviews.order_by('-create_date')
+
+        # Calculate rating distribution
+        rating_distribution = self._calculate_rating_distribution(reviews)
+        context['rating_distribution'] = rating_distribution
+        context['total_reviews'] = reviews.count()
+
         context['discounted_price'] = self._calculate_discounted_price(tutor.cost_hourly, tutor.discount)
         if tutor.discount != 0:  # Check if discount is available
             context['is_deadline_set'] = bool(tutor.discount_deadline)
@@ -221,6 +228,31 @@ class TutorDetailView(DetailView):
     def _calculate_discounted_price(self, original_price, discount):
         return original_price * (1 - Decimal(discount) / 100)
 
+    def _calculate_rating_distribution(self, reviews):
+        """Calculate the distribution of ratings (1-5 stars)"""
+        # Initialize distribution dictionary
+        distribution = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0}
+
+        # Count each rating
+        for review in reviews:
+            rating = review.rate_provider
+            if 1 <= rating <= 5:
+                distribution[rating] += 1
+
+        # Calculate percentages
+        total_reviews = reviews.count()
+        if total_reviews > 0:
+            for rating in distribution:
+                distribution[rating] = {
+                    'count': distribution[rating],
+                    'percentage': (distribution[rating] / total_reviews) * 100
+                }
+        else:
+            # If no reviews, set all to 0
+            for rating in distribution:
+                distribution[rating] = {'count': 0, 'percentage': 0}
+
+        return distribution
 
 class TutorReserveView(DetailView):
     model = Tutor
@@ -1985,6 +2017,10 @@ class DPWizardResult(LoginRequiredMixin, EmailVerificationRequiredMixin, RoleReq
             return redirect('provider:dp_wizard')
         return super().dispatch(request, *args, **kwargs)
 
+
+class DPWizardTest(TemplateView, RoleRequiredMixin):
+    allowed_roles = ['tutor']
+    template_name = 'ap2_tutor/inp_test.html'  # change and adapt this to dashboard panel of Tutor
 
 class SuccessSubmit(TemplateView, RoleRequiredMixin):
     allowed_roles = ['tutor']
