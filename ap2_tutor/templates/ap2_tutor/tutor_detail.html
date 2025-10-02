@@ -5,6 +5,29 @@
 {% block head_title %}Tutor: {{ tutor_single.profile.user.first_name }}
     {{ tutor_single.profile.user.last_name }}{% endblock %}
 
+{% block og_meta_tags%}
+    {% with absolute_domain="https://"|add:request.get_host %}
+        <!-- Open Graph Tags -->
+        <meta property="og:type" content="profile" />
+        <meta property="og:title" content="Learn {{ tutor_single.profile.user.skills.first|status:'approved' }} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+        <meta property="og:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}" />
+
+        {% if tutor_single.profile.photo %}
+            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}" />
+        {% else %}
+            <meta property="og:image" content="{{ absolute_domain }}{% static 'assets/images/default.png' %}" />
+        {% endif %}
+
+        <meta property="og:url" content="{{ absolute_domain }}{% url 'provider:tutor_detail' tutor_single.id %}" />
+        <meta property="og:site_name" content="{{ CFChar.site_name }}" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Learn {{ tutor_single.profile.user.skills.first|status:'approved' }} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}">
+        <meta name="twitter:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}">
+        <meta name="twitter:image" content="{{ absolute_domain }}{% if tutor_single.profile.photo %}{{ tutor_single.profile.photo.url }}{% else %}{% static 'images/default-tutor-og-1200x630.jpg' %}{% endif %}">
+    {% endwith %}
+{% endblock %}
 {% block head_style_plugins %}
     <!-- Plugins CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
