@@ -19,9 +19,10 @@
         <meta property="og:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}" />
 
         {% if tutor_single.profile.photo %}
-            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}" />
+            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}?v={{ tutor_single.profile.last_modified|date:'U' }}" />
+{#            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}?v={{ tutor_single.profile.last_modified|date:'U' }}" />#}
         {% else %}
-            <meta property="og:image" content="{{ absolute_domain }}{% static 'assets/images/default.png' %}" />
+            <meta property="og:image" content="{{ absolute_domain }}{% static 'assets/images/default.png' %}?v={{ tutor_single.profile.last_modified|date:'U' }}" />
         {% endif %}
 
         <meta property="og:url" content="{{ absolute_domain }}{% url 'provider:tutor_detail' tutor_single.id %}" />
@@ -31,13 +32,13 @@
         <meta name="twitter:card" content="summary_large_image">
         {% with skills_list=approved_skills|slice:":3" %}
             {% if skills_list %}
-                <meta property="twitter:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+                <meta name="twitter:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
             {% else %}
-                <meta property="twitter:title" content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!" />
+                <meta name="twitter:title" content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!" />
             {% endif %}
         {% endwith %}
         <meta name="twitter:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}">
-        <meta name="twitter:image" content="{{ absolute_domain }}{% if tutor_single.profile.photo %}{{ tutor_single.profile.photo.url }}{% else %}{% static 'images/default-tutor-og-1200x630.jpg' %}{% endif %}">
+        <meta name="twitter:image" content="{{ absolute_domain }}{% if tutor_single.profile.photo %}{{ tutor_single.profile.photo.url }}{% else %}{% static 'assets/images/default.png' %}{% endif %}?v={{ tutor_single.profile.last_modified|date:'U' }}">
     {% endwith %}
 {% endblock %}
 {% block head_style_plugins %}
@@ -354,16 +355,16 @@
                                     </div>
 
                                     <!-- Buttons -->
-                                    <div class="mt-3 d-sm-flex justify-content-sm-between">
-                                        {% if tutor_single.cost_trial != 0 %}
-                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for
-                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>
-                                        {% else %}
-                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>
-                                        {% endif %}
-                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"
-                                           class="btn btn-success mb-0">Reserve Class</a>
-                                    </div>
+{#                                    <div class="mt-3 d-sm-flex justify-content-sm-between">#}
+{#                                        {% if tutor_single.cost_trial != 0 %}#}
+{#                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for#}
+{#                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>#}
+{#                                        {% else %}#}
+{#                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>#}
+{#                                        {% endif %}#}
+{#                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"#}
+{#                                           class="btn btn-success mb-0">Reserve Class</a>#}
+{#                                    </div>#}
                                 </div>
 
                             </div>
