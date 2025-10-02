@@ -8,6 +8,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
 {% endblock %}
+{% block embed_style %}
+    <!-- range slider (noUiSlider) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css" />
+{% endblock %}
+{% block my_style %}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/tutor_filters.css' %}">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/range_slider.css' %}">
+{% endblock %}
 
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
@@ -43,295 +51,7 @@
         <section class="pt-4">
             <div class="container">
 
-                <!-- Filter bar START -->
-                {#        <form class="bg-light border p-4 rounded-3 my-4 z-index-9 position-relative">#}
-                {#          <div class="row g-3">#}
-                {#            <!-- Input -->#}
-                {#            <div class="col-xl-3">#}
-                {#              <input class="form-control me-1" type="search" placeholder="Enter keyword">#}
-                {#            </div>#}
-                {##}
-                {#            <!-- First row of select items -->#}
-                {#            <div class="col-xl-8">#}
-                {#              <div class="row g-3">#}
-                {#                <!-- Select items -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Categories</option>#}
-                {#                    <option>All</option>#}
-                {#                    <option>Development</option>#}
-                {#                    <option>Design</option>#}
-                {#                    <option>Accounting</option>#}
-                {#                    <option>Translation</option>#}
-                {#                    <option>Finance</option>#}
-                {#                    <option>Legal</option>#}
-                {#                    <option>Photography</option>#}
-                {#                    <option>Writing</option>#}
-                {#                    <option>Marketing</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Search item -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Price level</option>#}
-                {#                    <option>All</option>#}
-                {#                    <option>Free</option>#}
-                {#                    <option>Paid</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Search item -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Skill level</option>#}
-                {#                    <option>All levels</option>#}
-                {#                    <option>Beginner</option>#}
-                {#                    <option>Intermediate</option>#}
-                {#                    <option>Advanced</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Search item -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Language</option>#}
-                {#                    <option>English</option>#}
-                {#                    <option>Francas</option>#}
-                {#                    <option>Russian</option>#}
-                {#                    <option>Hindi</option>#}
-                {#                    <option>Bengali</option>#}
-                {#                    <option>Spanish</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {#              </div> #}
-                {#              <!-- First Row END -->#}
-                {##}
-                {#              <!-- Second row of select items -->#}
-                {#              <div class="row g-3 mt-2">#}
-                {#                <!-- Additional filter options -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Duration</option>#}
-                {#                    <option>All</option>#}
-                {#                    <option>Short (0-1 hour)</option>#}
-                {#                    <option>Medium (1-3 hours)</option>#}
-                {#                    <option>Long (3+ hours)</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Additional filter options -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Rating</option>#}
-                {#                    <option>All</option>#}
-                {#                    <option>5 Stars</option>#}
-                {#                    <option>4 Stars & up</option>#}
-                {#                    <option>3 Stars & up</option>#}
-                {#                    <option>2 Stars & up</option>#}
-                {#                    <option>1 Star & up</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Additional filter options -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Format</option>#}
-                {#                    <option>All</option>#}
-                {#                    <option>Video</option>#}
-                {#                    <option>Text</option>#}
-                {#                    <option>Audio</option>#}
-                {#                    <option>Interactive</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {##}
-                {#                <!-- Additional filter options -->#}
-                {#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
-                {#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
-                {#                    <option value="">Certification</option>#}
-                {#                    <option>All</option>#}
-                {#                    <option>Yes</option>#}
-                {#                    <option>No</option>#}
-                {#                  </select>#}
-                {#                </div>#}
-                {#              </div> #}
-                {#              <!-- Second Row END -->#}
-                {#            </div>#}
-                {##}
-                {#            <!-- Button -->#}
-                {#            <div class="col-xl-1">#}
-                {#              <button type="button" class="btn btn-primary mb-0 rounded z-index-1 w-100"><i class="fas fa-search"></i></button>#}
-                {#            </div>#}
-                {#          </div> <!-- Row END -->#}
-                {#        </form>#}
-                <!-- Filter bar END -->
-
-
-                <!-- Filter bar START -->
-                <form id="fSearch" class="bg-light border p-4 rounded-3 my-4 z-index-9 position-relative"
-                      action="{% url 'provider:tutor_list' %}" method="GET">
-                    {% csrf_token %}
-                    <div class="row g-3">
-                        <!-- Input -->
-                        {#            <div class="col-xl-3">#}
-                        {#              <input class="form-control me-1" type="search" placeholder="Enter keyword">#}
-                        {#            </div>#}
-
-                        <!-- First row of select items -->
-                        <div class="col-xl-12">
-                            <div class="row g-3">
-
-                                <!-- Search item: Skills -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select name="skills" class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Teaching Skills</option>
-                                        {% for skill in s_skills %}
-                                            <option value="{{ skill }}">{{ skill }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-
-                                <!-- Search item: Skill level -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select name="sSkillLevel" class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Skill level</option>
-                                        {% for level in s_language_levels %}
-                                            <option value="{{ level }}">{{ level.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <!-- Search item: cost_hourly -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select name="sHprice" class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Hourly Price</option>
-                                        {% for cost in s_cost_hourly %}
-                                            <option value="{{ cost }}">{{ cost }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <!-- Search item: cost_trial -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Trial Cost</option>
-                                        {% for cost in s_cost_trial %}
-                                            <option value="{{ cost }}">{{ cost }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <!-- filter options: Gender -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select id="gender" name="gender" class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Gender</option>
-                                        {% for gender in s_gender %}
-                                            <option value="{{ gender }}">{{ gender|capfirst }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <!-- Search item -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    {#                  <div class="col-xl-3">#}
-                                    <input class="form-control me-1" type="search" name="keySearch"
-                                           placeholder="Enter keyword">
-                                    {#                  </div>#}
-                                </div>
-
-
-                            </div>
-                            <!-- First Row END -->
-
-                            <!-- Second row of select items -->
-                            <div class="row g-3 mt-2">
-                                <!-- Additional filter options -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Duration</option>
-                                        <option>All</option>
-                                        <option>Short (0-1 hour)</option>
-                                        <option>Medium (1-3 hours)</option>
-                                        <option>Long (3+ hours)</option>
-                                    </select>
-                                </div>
-
-                                <!-- Additional filter options -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select id="sRate" name="sRate" class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Rating</option>
-                                        <option value="5">5 Stars 5</option>
-                                        <option value="4">4 Stars & up</option>
-                                        <option value="3">3 Stars & up</option>
-                                        <option value="2">2 Stars & up</option>
-                                        <option value="1">1 Star & up</option>
-                                    </select>
-                                </div>
-
-                                <!-- filter options: session_count -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Session Number</option>
-                                        <option>All</option>
-                                        <option>Video</option>
-                                        <option>Text</option>
-                                        <option>Audio</option>
-                                        <option>Interactive</option>
-                                    </select>
-                                </div>
-
-                                <!-- filter options: student_count -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Student Number</option>
-                                        <option>All</option>
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-                                </div>
-                                <!--filter options: course_count -->
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <select class="form-select form-select-sm js-choice"
-                                            aria-label=".form-select-sm example">
-                                        <option value="">Course Number</option>
-                                        <option>All</option>
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                                    <button type="submit" class="btn btn-primary mb-0 rounded z-index-1 w-100"><i
-                                            class="fas fa-search"></i></button>
-                                </div>
-                            </div>
-                            <!-- Second Row END -->
-
-                            <!-- Button -->
-                            {#              <div class="col-xl-1">#}
-                            {#                <button type="button" class="btn btn-primary mb-0 rounded z-index-1 w-100"><i class="fas fa-search"></i></button>#}
-                            {#              </div>#}
-
-                        </div>
-
-                        <!-- Button -->
-                        {#            <div class="col-xl-1">#}
-                        {#              <button type="button" class="btn btn-primary mb-0 rounded z-index-1 w-100"><i class="fas fa-search"></i></button>#}
-                        {#            </div>#}
-
-                    </div> <!-- Row END -->
-                </form>
-                <!-- Filter bar END -->
+                {% include 'ap2_tutor/search_filters.html' %}
 
                 <!-- Tutor list START -->
                 <div class="row g-4 justify-content-center">
@@ -487,8 +207,7 @@
         <!-- =======================
         Inner part END -->
 
-        <!-- =======================
-        Action box START -->
+        <!-- ======================= Action box START -->
         <section class="pt-0">
             <div class="container position-relative">
                 <!-- SVG -->
@@ -540,8 +259,7 @@
                 </div>
             </div>
         </section>
-        <!-- =======================
-        Action box END -->
+        <!-- ======================= Action box END -->
 
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
@@ -551,6 +269,226 @@
     <!-- Vendors -->
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
 {% endblock %}
+{% block embed_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
 
-</body>
-</html>
+{% endblock %}
+{% block my_scripts %}
+{#    <script src="{% static 'ap2_tutor/assets/js/tutor_filters.js' %}"></script>#}
+    <script src="{% static 'ap2_tutor/assets/js/range_slider.js' %}"></script>
+    <script>
+        // Global filter state
+        const activeFilters = {};
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePriceSlider();
+            initializeFilterTracking();
+        });
+
+        function initializePriceSlider() {
+            const minPrice = {{ min_price }};
+            const maxPrice = {{ max_price }};
+
+            // Get DOM elements
+            const priceSlider = document.getElementById('priceSlider');
+            const minPriceEdit = document.getElementById('minPriceEdit');
+            const maxPriceEdit = document.getElementById('maxPriceEdit');
+            {#const minPriceDisplay = document.getElementById('minPriceDisplay');#}
+            {#const maxPriceDisplay = document.getElementById('maxPriceDisplay');#}
+            const minPriceInput = document.getElementById('minPriceInput');
+            const maxPriceInput = document.getElementById('maxPriceInput');
+
+            // Initialize noUiSlider
+            noUiSlider.create(priceSlider, {
+                start: [minPrice, maxPrice],
+                connect: true,
+                range: {
+                    'min': minPrice,
+                    'max': maxPrice
+                },
+                step: 1,
+                behaviour: 'drag-tap',
+                tooltips: false
+            });
+
+            // Update all displays when slider changes
+            priceSlider.noUiSlider.on('update', function(values) {
+                const minVal = Math.round(values[0]);
+                const maxVal = Math.round(values[1]);
+
+                // Update displays
+                {#minPriceDisplay.textContent = '$' + minVal;#}
+                {#maxPriceDisplay.textContent = '$' + maxVal;#}
+
+                // Update editable inputs
+                minPriceEdit.value = minVal;
+                maxPriceEdit.value = maxVal;
+
+                // Update hidden form inputs
+                minPriceInput.value = minVal;
+                maxPriceInput.value = maxVal;
+            });
+
+            // Update slider when manual inputs change
+            minPriceEdit.addEventListener('change', function() {
+                const minVal = parseInt(this.value) || minPrice;
+                const maxVal = parseInt(maxPriceEdit.value) || maxPrice;
+
+                // Validate
+                const validatedMin = Math.max(minPrice, Math.min(maxPrice, minVal));
+                const validatedMax = Math.max(validatedMin, Math.min(maxPrice, maxVal));
+
+                this.value = validatedMin;
+                maxPriceEdit.value = validatedMax;
+
+                priceSlider.noUiSlider.set([validatedMin, validatedMax]);
+            });
+
+            maxPriceEdit.addEventListener('change', function() {
+                const minVal = parseInt(minPriceEdit.value) || minPrice;
+                const maxVal = parseInt(this.value) || maxPrice;
+
+                // Validate
+                const validatedMin = Math.max(minPrice, Math.min(maxPrice, minVal));
+                const validatedMax = Math.max(validatedMin, Math.min(maxPrice, maxVal));
+
+                minPriceEdit.value = validatedMin;
+                this.value = validatedMax;
+
+                priceSlider.noUiSlider.set([validatedMin, validatedMax]);
+            });
+
+            // Initialize values
+            minPriceEdit.value = minPrice;
+            maxPriceEdit.value = maxPrice;
+            minPriceInput.value = minPrice;
+            maxPriceInput.value = maxPrice;
+            {#minPriceDisplay.textContent = '$' + minPrice;#}
+            {#maxPriceDisplay.textContent = '$' + maxPrice;#}
+        }
+
+        function applyPriceRange() {
+            const minPriceEdit = document.getElementById('minPriceEdit');
+            const maxPriceEdit = document.getElementById('maxPriceEdit');
+            const priceRangeDropdown = document.getElementById('priceRangeDropdown');
+
+            const minVal = minPriceEdit.value;
+            const maxVal = maxPriceEdit.value;
+            const minPrice = {{ min_price }};
+            const maxPrice = {{ max_price }};
+
+            // Update dropdown button text
+            if (minVal == minPrice && maxVal == maxPrice) {
+                priceRangeDropdown.textContent = 'Hourly Price';
+                removeFilter('priceRange');
+            } else {
+                priceRangeDropdown.textContent = `Price: $${minVal} - $${maxVal}`;
+                addFilter('priceRange', `Price: $${minVal} - $${maxVal}`);
+            }
+
+            // Close dropdown
+            const dropdownElement = document.querySelector('[data-bs-toggle="dropdown"]');
+            const dropdown = bootstrap.Dropdown.getInstance(dropdownElement);
+            if (dropdown) {
+                dropdown.hide();
+            }
+
+            triggerFiltering();
+        }
+
+        function resetPriceRange() {
+            const minPrice = {{ min_price }};
+            const maxPrice = {{ max_price }};
+            const priceSlider = document.getElementById('priceSlider');
+
+            // Reset slider
+            priceSlider.noUiSlider.set([minPrice, maxPrice]);
+
+            // Reset dropdown text
+            const priceRangeDropdown = document.getElementById('priceRangeDropdown');
+            priceRangeDropdown.textContent = 'Hourly Price';
+
+            // Remove from active filters
+            removeFilter('priceRange');
+        }
+
+        // Filter Management Functions
+        function initializeFilterTracking() {
+            // Track all select filters
+            document.querySelectorAll('select[name]').forEach(element => {
+                element.addEventListener('change', function() {
+                    if (this.value && this.name !== 'min_price' && this.name !== 'max_price') {
+                        addFilter(this.name, this.options[this.selectedIndex].text);
+                    } else {
+                        removeFilter(this.name);
+                    }
+                    triggerFiltering();
+                });
+            });
+        }
+
+        function addFilter(name, value) {
+            activeFilters[name] = value;
+            updateActiveFiltersDisplay();
+        }
+
+        function removeFilter(name) {
+            delete activeFilters[name];
+
+            // Reset the corresponding form element
+            const element = document.querySelector(`[name="${name}"]`);
+            if (element) {
+                element.value = '';
+            }
+
+            updateActiveFiltersDisplay();
+            triggerFiltering();
+        }
+
+        function updateActiveFiltersDisplay() {
+            const container = document.getElementById('activeFiltersContainer');
+            const filtersContainer = container.querySelector('.d-flex');
+
+            // Remove existing filter tags (keep the "Active filters" text)
+            const filterTags = filtersContainer.querySelectorAll('.filter-tag');
+            filterTags.forEach(tag => tag.remove());
+
+            // Add current active filters
+            Object.entries(activeFilters).forEach(([name, value]) => {
+                if (value) {
+                    const filterTag = document.createElement('span');
+                    filterTag.className = 'filter-tag';
+                    filterTag.innerHTML = `
+                ${value}
+                <span class="remove-filter" onclick="removeFilter('${name}')">×</span>
+            `;
+                    filtersContainer.appendChild(filterTag);
+                }
+            });
+
+            // Show/hide container
+            container.style.display = Object.keys(activeFilters).some(key => activeFilters[key]) ? 'block' : 'none';
+        }
+
+        function triggerFiltering() {
+            // Submit the form or make AJAX call
+            console.log('Active filters:', activeFilters);
+            console.log('Price range:', {
+                min: document.getElementById('minPriceInput').value,
+                max: document.getElementById('maxPriceInput').value
+            });
+
+            // Uncomment to auto-submit form:
+            // document.querySelector('form').submit();
+
+            // Or for AJAX filtering:
+            // const formData = new FormData(document.querySelector('form'));
+            // fetch('/your-filter-endpoint/', {
+            //     method: 'POST',
+            //     body: formData
+            // }).then(response => response.json())
+            //   .then(data => updateResults(data));
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,420 @@
+<!-- Filter bar START  MAIN -->
+<form id="fSearch" class="bg-light border p-4 rounded-3 my-4 z-index-9 position-relative"
+      action="{% url 'provider:tutor_list' %}" method="GET">
+    <div class="row g-3">
+        <!-- Input -->
+{#        <div class="col-xl-3">#}
+{#            <input class="form-control me-1" type="search" placeholder="Enter keyword">#}
+{#        </div>#}
+
+        <!-- First row of select items -->
+        <div class="col-xl-12">
+            <div class="row g-3">
+
+                <!-- Search item: Skills -->
+                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
+                    <select name="skills" class="form-select form-select-sm js-choice"
+                            aria-label=".form-select-sm example">
+                        <option value="">Teaching Skills</option>
+                        {% for skill in s_skills %}
+                            <option value="{{ skill }}">{{ skill }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <!-- Search item: Skill level -->
+                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
+                    <select name="sSkillLevel" class="form-select form-select-sm js-choice"
+                            aria-label=".form-select-sm example">
+                        <option value="">Skill level</option>
+                        {% for level in s_language_levels %}
+                            <option value="{{ level }}">{{ level.name|capfirst }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Search item: cost_hourly -->
+                <!-- Range Slider Dropdown 1 -->
+{#                <div class="col-sm-6 col-md-2 pb-2 pb-md-0 position-relative">#}
+{#                    <!-- Dropdown Button -->#}
+{#                    <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle"#}
+{#                            type="button"#}
+{#                            data-bs-toggle="dropdown"#}
+{#                            aria-expanded="false"#}
+{#                            id="priceRangeDropdown">#}
+{#                        Hourly Price#}
+{#                    </button>#}
+{##}
+{#                    <!-- Dropdown Menu with Range Slider -->#}
+{#                    <div class="dropdown-menu p-3" style="min-width: 300px;">#}
+{#                        <div class="d-flex justify-content-between align-items-center mb-3">#}
+{#                            <h6 class="mb-0">Hourly Price Range</h6>#}
+{#                            <button type="button" class="btn-close" data-bs-dismiss="dropdown" aria-label="Close"></button>#}
+{#                        </div>#}
+{##}
+{#                        <!-- Range Slider Container -->#}
+{#                        <div class="price-range-slider mb-3">#}
+{#                            <!-- Hidden inputs for form submission -->#}
+{#                            <input type="hidden" name="min_price" id="minPriceInput" value="{{ min_price }}">#}
+{#                            <input type="hidden" name="max_price" id="maxPriceInput" value="{{ max_price }}">#}
+{##}
+{#                            <!-- Slider Track -->#}
+{#                            <div class="slider-track"></div>#}
+{##}
+{#                            <!-- Range Inputs -->#}
+{#                            <input type="range" class="form-range range-min" min="{{ min_price }}" max="{{ max_price }}" value="{{ min_price }}" step="1">#}
+{#                            <input type="range" class="form-range range-max" min="{{ min_price }}" max="{{ max_price }}" value="{{ max_price }}" step="1">#}
+{#                        </div>#}
+{##}
+{#                        <!-- Editable Price Inputs -->#}
+{#                        <div class="row g-2 mb-3">#}
+{#                            <div class="col-6">#}
+{#                                <label class="form-label small">Min Price</label>#}
+{#                                <div class="input-group input-group-sm">#}
+{#                                    <span class="input-group-text">$</span>#}
+{#                                    <input type="number" class="form-control" id="minPriceEdit"#}
+{#                                           min="{{ min_price }}" max="{{ max_price }}" value="{{ min_price }}">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-6">#}
+{#                                <label class="form-label small">Max Price</label>#}
+{#                                <div class="input-group input-group-sm">#}
+{#                                    <span class="input-group-text">$</span>#}
+{#                                    <input type="number" class="form-control" id="maxPriceEdit"#}
+{#                                           min="{{ min_price }}" max="{{ max_price }}" value="{{ max_price }}">#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <!-- Apply Button -->#}
+{#                        <div class="d-flex justify-content-between align-items-center">#}
+{#                            <div class="price-display">#}
+{#                                <span class="badge bg-light text-dark" id="minPriceDisplay">${{ min_price }}</span>#}
+{#                                <span class="mx-2">-</span>#}
+{#                                <span class="badge bg-light text-dark" id="maxPriceDisplay">${{ max_price }}</span>#}
+{#                            </div>#}
+{#                            <button type="button" class="btn btn-primary btn-sm" onclick="applyPriceRange()">#}
+{#                                Apply#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+
+
+
+                <!-- Range Slider Dropdown -->
+                <div class="col-sm-6 col-md-2 pb-2 pb-md-0 position-relative">
+                    <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            data-bs-auto-close="outside"
+                            id="priceRangeDropdown">
+                        Hourly Price
+                    </button>
+
+                    <div class="dropdown-menu p-3" style="min-width: 320px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="mb-0">Hourly Price Range</h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="dropdown" aria-label="Close"></button>
+                        </div>
+
+                        <!-- noUiSlider Container -->
+                        <div id="priceSlider" class="mb-3 pe-3"></div>
+
+
+
+                        <!-- Editable Inputs -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <label class="form-label small text-muted">Min Price</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="minPriceEdit"
+                                           min="{{ min_price }}" max="{{ max_price }}">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label small text-muted">Max Price</label>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="maxPriceEdit"
+                                           min="{{ min_price }}" max="{{ max_price }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Display -->
+{#                        <div class="d-flex justify-content-center align-items-center mb-3">#}
+{#                            <div>#}
+{#                                <span class="badge bg-light text-dark border" id="minPriceDisplay">$0</span>#}
+{#                                <span class="mx-2 text-muted">to</span>#}
+{#                                <span class="badge bg-light text-dark border" id="maxPriceDisplay">$100</span>#}
+{#                            </div>#}
+{#                        </div>#}
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="resetPriceRange()">
+                                Reset
+                            </button>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="applyPriceRange()">
+                                Apply
+                            </button>
+                        </div>
+
+                        <!-- Hidden inputs for form submission -->
+                        <input type="hidden" name="min_price" id="minPriceInput">
+                        <input type="hidden" name="max_price" id="maxPriceInput">
+                    </div>
+                </div>
+
+                <!-- Search item: cost_trial -->
+{#                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">#}
+{#                    <select class="form-select form-select-sm js-choice"#}
+{#                            aria-label=".form-select-sm example">#}
+{#                        <option value="">Trial Cost</option>#}
+{#                        {% for cost in s_cost_trial %}#}
+{#                            <option value="{{ cost }}">{{ cost }}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </div>#}
+
+                <!-- filter options: Gender -->
+                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
+                    <select id="gender" name="gender" class="form-select form-select-sm js-choice"
+                            aria-label=".form-select-sm example">
+                        <option value="">Gender</option>
+                        {% for gender in s_gender %}
+                            <option value="{{ gender }}">{{ gender|capfirst }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Additional filter options -->
+                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
+                    <select id="sRate" name="sRate" class="form-select form-select-sm js-choice"
+                            aria-label=".form-select-sm example">
+                        <option value="">Rating</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars & up</option>
+                        <option value="3">3 Stars & up</option>
+                        <option value="2">2 Stars & up</option>
+                        <option value="1">1 Star & up</option>
+                    </select>
+                </div>
+
+                <!-- Search item -->
+                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
+                    <div class="col-xl-3">
+                        <input class="form-control me-1" type="search" name="keySearch"
+                               placeholder="Enter keyword">
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- First Row END -->
+
+            <!-- Second row of select items -->
+            <div class="row g-3 mt-2">
+                <!-- Additional filter options -->
+{#                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">#}
+{#                    <select class="form-select form-select-sm js-choice"#}
+{#                            aria-label=".form-select-sm example">#}
+{#                        <option value="">Duration</option>#}
+{#                        <option>All</option>#}
+{#                        <option>Short (0-1 hour)</option>#}
+{#                        <option>Medium (1-3 hours)</option>#}
+{#                        <option>Long (3+ hours)</option>#}
+{#                    </select>#}
+{#                </div>#}
+
+
+
+                <!-- filter options: session_count -->
+{#                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">#}
+{#                    <select class="form-select form-select-sm js-choice"#}
+{#                            aria-label=".form-select-sm example">#}
+{#                        <option value="">Session Number</option>#}
+{#                        <option>All</option>#}
+{#                        <option>Video</option>#}
+{#                        <option>Text</option>#}
+{#                        <option>Audio</option>#}
+{#                        <option>Interactive</option>#}
+{#                    </select>#}
+{#                </div>#}
+
+                <!-- filter options: student_count -->
+{#                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">#}
+{#                    <select class="form-select form-select-sm js-choice"#}
+{#                            aria-label=".form-select-sm example">#}
+{#                        <option value="">Student Number</option>#}
+{#                        <option>All</option>#}
+{#                        <option>Yes</option>#}
+{#                        <option>No</option>#}
+{#                    </select>#}
+{#                </div>#}
+                <!--filter options: course_count -->
+{#                <div class="col-sm-6 col-md-2 pb-2 pb-md-0">#}
+{#                    <select class="form-select form-select-sm js-choice"#}
+{#                            aria-label=".form-select-sm example">#}
+{#                        <option value="">Course Number</option>#}
+{#                        <option>All</option>#}
+{#                        <option>Yes</option>#}
+{#                        <option>No</option>#}
+{#                    </select>#}
+{#                </div>#}
+
+
+                <!-- Active Filters Display Area -->
+                <div class="row mt-3" id="activeFiltersContainer" style="display: none;">
+                    <div class="col-12">
+                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                            <small class="text-muted me-2">Active filters:</small>
+                            <!-- Active filters will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="col-xl-1">
+                    <button type="submit" class="btn btn-primary mb-0 rounded z-index-1 w-100"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <!-- Second Row END -->
+
+
+
+        </div>
+
+
+    </div> <!-- Row END -->
+</form>
+<!-- Filter bar END MAIN -->
+
+
+<!-- Filter bar START -->
+{#        <form class="bg-light border p-4 rounded-3 my-4 z-index-9 position-relative">#}
+{#          <div class="row g-3">#}
+{#            <!-- Input -->#}
+{#            <div class="col-xl-3">#}
+{#              <input class="form-control me-1" type="search" placeholder="Enter keyword">#}
+{#            </div>#}
+{##}
+{#            <!-- First row of select items -->#}
+{#            <div class="col-xl-8">#}
+{#              <div class="row g-3">#}
+{#                <!-- Select items -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Categories</option>#}
+{#                    <option>All</option>#}
+{#                    <option>Development</option>#}
+{#                    <option>Design</option>#}
+{#                    <option>Accounting</option>#}
+{#                    <option>Translation</option>#}
+{#                    <option>Finance</option>#}
+{#                    <option>Legal</option>#}
+{#                    <option>Photography</option>#}
+{#                    <option>Writing</option>#}
+{#                    <option>Marketing</option>#}
+{#                  </select>#}
+{#                </div>#}
+{##}
+{#                <!-- Search item -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Price level</option>#}
+{#                    <option>All</option>#}
+{#                    <option>Free</option>#}
+{#                    <option>Paid</option>#}
+{#                  </select>#}
+{#                </div>#}
+{##}
+{#                <!-- Search item -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Skill level</option>#}
+{#                    <option>All levels</option>#}
+{#                    <option>Beginner</option>#}
+{#                    <option>Intermediate</option>#}
+{#                    <option>Advanced</option>#}
+{#                  </select>#}
+{#                </div>#}
+{##}
+{#                <!-- Search item -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Language</option>#}
+{#                    <option>English</option>#}
+{#                    <option>Francas</option>#}
+{#                    <option>Russian</option>#}
+{#                    <option>Hindi</option>#}
+{#                    <option>Bengali</option>#}
+{#                    <option>Spanish</option>#}
+{#                  </select>#}
+{#                </div>#}
+{#              </div> #}
+{#              <!-- First Row END -->#}
+{##}
+{#              <!-- Second row of select items -->#}
+{#              <div class="row g-3 mt-2">#}
+{#                <!-- Additional filter options -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Duration</option>#}
+{#                    <option>All</option>#}
+{#                    <option>Short (0-1 hour)</option>#}
+{#                    <option>Medium (1-3 hours)</option>#}
+{#                    <option>Long (3+ hours)</option>#}
+{#                  </select>#}
+{#                </div>#}
+{##}
+{#                <!-- Additional filter options -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Rating</option>#}
+{#                    <option>All</option>#}
+{#                    <option>5 Stars</option>#}
+{#                    <option>4 Stars & up</option>#}
+{#                    <option>3 Stars & up</option>#}
+{#                    <option>2 Stars & up</option>#}
+{#                    <option>1 Star & up</option>#}
+{#                  </select>#}
+{#                </div>#}
+{##}
+{#                <!-- Additional filter options -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Format</option>#}
+{#                    <option>All</option>#}
+{#                    <option>Video</option>#}
+{#                    <option>Text</option>#}
+{#                    <option>Audio</option>#}
+{#                    <option>Interactive</option>#}
+{#                  </select>#}
+{#                </div>#}
+{##}
+{#                <!-- Additional filter options -->#}
+{#                <div class="col-sm-6 col-md-3 pb-2 pb-md-0">#}
+{#                  <select class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">#}
+{#                    <option value="">Certification</option>#}
+{#                    <option>All</option>#}
+{#                    <option>Yes</option>#}
+{#                    <option>No</option>#}
+{#                  </select>#}
+{#                </div>#}
+{#              </div> #}
+{#              <!-- Second Row END -->#}
+{#            </div>#}
+{##}
+{#            <!-- Button -->#}
+{#            <div class="col-xl-1">#}
+{#              <button type="button" class="btn btn-primary mb-0 rounded z-index-1 w-100"><i class="fas fa-search"></i></button>#}
+{#            </div>#}
+{#          </div> <!-- Row END -->#}
+{#        </form>#}
+<!-- Filter bar END -->

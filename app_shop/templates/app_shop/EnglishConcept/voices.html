@@ -1,0 +1,301 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}{{ CFChar.site_name }} Products{% endblock %}
+
+
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+
+{% block embed_style %}
+    <style>
+        :root {
+            --lms-primary: #6366f1;
+            --lms-secondary: #8b5cf6;
+            --lms-accent: #06b6d4;
+            --lms-success: #10b981;
+            --lms-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+        }
+
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+
+        .demo-tabs .nav-link {
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 10px;
+            margin: 0 0.5rem;
+        }
+
+        .demo-tabs .nav-link.active {
+            background: var(--lms-gradient);
+            color: white;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .integration-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+        .integration-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+
+        .integration-card:hover .position-absolute:last-child {
+            {#opacity: 0.15 !important;#}
+            opacity: 0.95 !important;
+        }
+
+        .integration-logo {
+            transition: transform 0.3s ease;
+        }
+
+        .integration-card:hover .integration-logo {
+            transform: scale(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .integration-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .integration-card {
+                min-height: 180px;
+            }
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+
+        <!--  Page Banner START -->
+        <section class="py-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bg-light p-4 rounded-3 position-relative overflow-hidden">
+
+                            <!-- Svg decoration -->
+                            <figure class="position-absolute top-0 end-0 mt-5">
+                                <svg width="566.3px" height="353.7px" viewBox="0 0 566.3 353.7">
+                                    <path stroke="#17a2b8" fill="none"
+                                          d="M525.1,4c8.1,0.7,14.9,7.2,17.9,14.8c3,7.6,3,16,2.1,24.1c-4.7,44.3-32.1,84.7-69.4,108.9 c-37.4,24.2-83.7,32.8-127.9,27.6c-32.3-3.8-63.5-14.5-95.9-16.6c-21.6-1.4-45.6,2.1-60.1,18.3c-7.7,8.5-11.8,19.6-14.8,30.7 c-7.9,29.5-9,60.8-19.7,89.5c-5.5,14.8-14,29.1-27.1,38c-15.6,10.5-35.6,12-54.2,9.5c-18.6-2.5-36.5-8.6-55-12.1"/>
+                                    <path stroke="#F99D2B" fill="none"
+                                          d="M560.7,0.2c10,18.3,3.7,41.1-5,60.1c-11.8,25.9-28,50.3-50.2,68.2c-29,23.3-66.3,34-103.2,38.6 c-36.9,4.6-74.3,3.8-111.3,7.2c-22.3,2-45.3,5.9-63.5,19c-26.8,19.2-39,55.3-68.3,70.4c-38.2,19.6-89.7-4.9-125.6,18.8 c-22.6,15-30.7,44.2-33.3,71.2"/>
+                                </svg>
+                            </figure>
+
+                            <div class="row position-relative align-items-center">
+
+                                <!-- Content -->
+                                <div class="col-md-6 px-md-5">
+                                    <!-- Title -->
+                                    <h1 class="mb-3">Welcome to English Concept</h1>
+                                    <p class="mb-3">Choose your voice first. </p>
+                                </div>
+
+                                <!-- Image -->
+                                <div class="col-md-6 text-center">
+                                    <img src="{% static 'assets/images/book/book-bg.svg' %}" alt="">
+                                </div>
+                            </div> <!-- Row END -->
+                        </div>
+                    </div>
+                </div> <!-- Row END -->
+            </div>
+        </section>
+        <!--  Page Banner END -->
+
+        <!--  Integration Ecosystem START -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Voices</h2>
+                        <p class="lead">Connect with your favorite tools and platforms</p>
+                    </div>
+                </div>
+
+                <div class="integration-grid">
+
+                    <!-- Active Voice Card -->
+                    <div class="integration-card position-relative rounded-4 overflow-hidden"
+                         style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                                 url('{% static 'assets/images/integrations/microsoft-teams.jpg' %}') no-repeat center center;
+                                 background-size: cover;
+                                 min-height: 200px;">
+
+                        <!-- Gradient overlay for better text readability -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                             style="background: linear-gradient(135deg, rgba(32, 80, 180, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+                        <!-- Content container -->
+                        <div class="position-relative z-2 text-white p-4 h-100 d-flex flex-column justify-content-center">
+                            <div class="integration-logo mb-3">
+                                <i class="bi bi-person-walking  text-white opacity-90" style="font-size: 4rem;"></i>
+                            </div>
+                            <a href="{% url 'shop:english_concept_active' %}">
+                            <h4 class="fw-bold mb-2 text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                                Active Voice</h4>
+                            </a>
+                            <p class="mb-0 text-light opacity-90" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                                Active Voice (36 Videos)
+                            </p>
+                        </div>
+
+                        <!-- Hover effect overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-0 transition-all"
+                             style="transition: opacity 0.3s ease;"></div>
+                    </div>
+
+                    <!-- Passive Voice Card -->
+                    <div class="integration-card position-relative rounded-4 overflow-hidden"
+                         style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+                                 url('{% static 'assets/images/integrations/salesforce.jpg' %}') no-repeat center center;
+                                 background-size: cover;
+                                 min-height: 200px;">
+
+                        <!-- Gradient overlay for better text readability -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                             style="background: linear-gradient(135deg, rgba(0, 161, 223, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
+
+                        <!-- Content container -->
+                        <div class="position-relative z-2 text-white p-4 h-100 d-flex flex-column justify-content-center">
+                            <div class="integration-logo mb-3">
+                                <i class="bi bi-person  text-white opacity-90" style="font-size: 4rem;"></i>
+                            </div>
+                            <a href="{% url 'shop:english_concept_passive' %}">
+                            <h4 class="fw-bold mb-2 text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                                Passive Voice</h4>
+                            </a>
+                            <p class="mb-0 text-light opacity-90" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                                Passive Voice (36 Videos)
+                            </p>
+                        </div>
+
+                        <!-- Hover effect overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-info opacity-0 transition-all"
+                             style="transition: opacity 0.3s ease;"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!--  Integration Ecosystem END -->
+
+        <!--  Action box START -->
+        <section class="pt-0">
+            <div class="container">
+                <div class="row g-4">
+
+                    <!-- Action box item START -->
+                    <div class="col-lg-6">
+                        <div class="bg-purple bg-opacity-10 rounded-3 p-5 h-100">
+
+                            <!-- Content -->
+                            <div class="row g-3 align-items-center">
+                                <!-- Image -->
+                                <div class="col-sm-5 col-lg-12 col-xl-5">
+                                    <img src="{% static 'assets/images/book/01.jpg' %}" alt="">
+                                </div>
+
+                                <!-- Content -->
+                                <div class="col-sm-7 col-lg-12 col-xl-7">
+                                    <!-- Title -->
+                                    <h3 class="mb-2">Best selling book of the month</h3>
+                                    <!-- Rating star -->
+                                    <ul class="list-inline mb-2">
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item me-0 small"><i
+                                                class="fas fa-star-half-alt text-warning"></i></li>
+                                    </ul>
+
+                                    <!-- Title and price -->
+                                    <h6 class="lead fw-bold mb-2">HTML and CSS: Design and Build Websites
+                                        (Paperback)</h6>
+                                    <!-- Button -->
+                                    <a href="#" class="btn btn-sm btn-purple mb-0">Buy now</a>
+                                </div>
+                            </div> <!-- Row END -->
+                        </div>
+                    </div>
+                    <!-- Action box item END -->
+
+                    <!-- Action box item START -->
+                    <div class="col-lg-6">
+                        <div class="bg-warning rounded-3 bg-opacity-15 p-5 h-100">
+
+                            <!-- Content -->
+                            <div class="row g-3 align-items-center my-auto">
+                                <!-- Content -->
+                                <div class="col-sm-7 col-lg-12 col-xl-7">
+                                    <h2 class="mb-1 fs-1">50%OFF</h2>
+                                    <p class="mb-3 h5 fw-light lead">Enroll now in the most popular and best-rated
+                                        Books.</p>
+                                    <a href="#" class="btn btn-dark mb-0">View Books</a>
+                                </div>
+
+                                <!-- Image -->
+                                <div class="col-sm-5 col-lg-12 col-xl-5">
+                                    <img src="{% static 'assets/images/element/29.svg' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Action box item END -->
+                </div>
+            </div>
+        </section>
+        <!--  Action box END -->
+
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+{% endblock %}
+{% block scripts_vendors %}{% endblock %}

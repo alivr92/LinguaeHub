@@ -16,8 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.mixins import RoleRequiredMixin, EmailVerificationRequiredMixin, ActivationRequiredMixin, VIPRequiredMixin
 from django.contrib.auth.models import User
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
-from django.db.models import Count, Q
-
+from django.db.models import Count, Q, Min, Max, Avg
 from decimal import Decimal
 
 # -----------------------custom utils ---------------------------
@@ -103,7 +102,7 @@ class BecomeTutor(FormView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class TutorListView(ListView):
+class TutorListView_DELETE(ListView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_list.html'
     # context_object_name = 'tutors'  # Name of the variable in the template
@@ -132,12 +131,22 @@ class TutorListView(ListView):
         if skills:
             # Assuming skills is a comma-separated list of skill names
             skills_list = skills.split(',')
-            queryset = queryset.filter(skills__name__in=skills_list).distinct()
+            queryset = UserSkill.objects.filter(skill__name__in=skills_list).distinct()
+            # queryset = queryset.filter(skills__name__in=skills_list).distinct()
 
         sLevel = self.request.GET.get('sLevel')
         if sLevel:
             sLevel = sLevel.split(',')
-            queryset = queryset.filter(skill_level__name__in=sLevel).distinct()
+            queryset = UserSkill.objects.filter(level__name__in=sLevel).distinct()
+
+        # PRICE RANGE FILTER - Add this
+        min_price = self.request.GET.get('min_price')
+        max_price = self.request.GET.get('max_price')
+        if min_price and max_price:
+            queryset = Tutor.objects.filter(
+                cost_hourly__gte=min_price,
+                cost_hourly__lte=max_price
+            )
 
         # Return the filtered queryset
         return queryset
@@ -161,6 +170,155 @@ class TutorListView(ListView):
         context['s_student_count'] = s_student_count
 
         context['search_gender'] = self.request.GET.get('gender', '')
+
+        # Get min/max prices from database
+        price_stats = Tutor.objects.aggregate(
+            min_price=Min('cost_hourly'),
+            max_price=Max('cost_hourly')
+        )
+
+        min_price = price_stats['min_price'] or 0
+        max_price = price_stats['max_price'] or 100
+
+        # Handle all filters
+        tutors = Tutor.objects.all()
+
+        # Price range filter
+        min_price_filter = self.request.GET.get('min_price')
+        max_price_filter = self.request.GET.get('max_price')
+
+        if min_price_filter and max_price_filter:
+            tutors = tutors.filter(
+                cost_hourly__gte=min_price_filter,
+                cost_hourly__lte=max_price_filter
+            )
+
+        # Other filters
+        skills_filter = self.request.GET.get('skills')
+        if skills_filter:
+            tutors = tutors.filter(teaching_tags__name=skills_filter)
+
+        # skill_level_filter = self.request.GET.get('sSkillLevel')
+        # if skill_level_filter:
+        #     tutors = tutors.filter(profile__lang_speak__level=skill_level_filter)
+
+        gender_filter = self.request.GET.get('gender')
+        if gender_filter:
+            tutors = tutors.filter(profile__gender=gender_filter)
+
+        rating_filter = self.request.GET.get('sRate')
+        if rating_filter:
+            tutors = tutors.filter(profile__rating__gte=rating_filter)
+
+        context['min_price'] = min_price
+        context['max_price'] = max_price
+        context['tutors'] = tutors
+
+        # ---------------------
+
+        return context
+
+
+class TutorListView(ListView):
+    model = Tutor
+    template_name = 'ap2_tutor/tutor_list.html'
+    ordering = ['-profile__create_date']
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset().select_related('profile').prefetch_related(
+            'teaching_tags', 'profile__user__skills'
+        )
+
+        # Apply filters based on request parameters
+        gender = self.request.GET.get('gender')
+        if gender:
+            queryset = queryset.filter(profile__gender__iexact=gender)
+
+        keySearch = self.request.GET.get('keySearch')
+        if keySearch:
+            queryset = queryset.filter(
+                Q(profile__user__first_name__icontains=keySearch) |
+                Q(profile__user__last_name__icontains=keySearch)
+            )
+
+        sRate = self.request.GET.get('sRate')
+        if sRate:
+            queryset = queryset.filter(profile__rating__gte=sRate)
+
+        # ✅ CORRECT: Filter Tutors who have specific UserSkills
+        skills = self.request.GET.get('skills')
+        if skills:
+            # Get user IDs who have the specified skill
+            user_ids_with_skill = UserSkill.objects.filter(
+                skill__name=skills,
+                user__profile__user_type='tutor'  # Only tutors
+            ).values_list('user_id', flat=True)
+
+            # Filter tutors whose users have these skills
+            queryset = queryset.filter(profile__user_id__in=user_ids_with_skill)
+
+        # ✅ CORRECT: Filter Tutors by skill level in UserSkills
+        sSkillLevel = self.request.GET.get('sSkillLevel')
+        if sSkillLevel:
+            # Get user IDs who have the specified skill level
+            user_ids_with_level = UserSkill.objects.filter(
+                level__name=sSkillLevel,
+                user__profile__user_type='tutor'  # Only tutors
+            ).values_list('user_id', flat=True)
+
+            # Filter tutors whose users have this skill level
+            queryset = queryset.filter(profile__user_id__in=user_ids_with_level)
+
+        # ✅ CORRECT: Price range filter
+        min_price = self.request.GET.get('min_price')
+        max_price = self.request.GET.get('max_price')
+        if min_price and max_price:
+            queryset = queryset.filter(
+                cost_hourly__gte=min_price,
+                cost_hourly__lte=max_price
+            )
+
+        return queryset.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get ALL tutors (unfiltered) for filter options and price range calculation
+        all_tutors = Tutor.objects.all()
+
+        # Get min/max prices from ALL tutors in the database
+        price_stats = all_tutors.aggregate(
+            min_price=Min('cost_hourly'),
+            max_price=Max('cost_hourly')
+        )
+
+        context['min_price'] = price_stats['min_price'] or 0
+        context['max_price'] = price_stats['max_price'] or 100
+
+        # Your existing context data
+        context['tutors_accepted'] = all_tutors.filter(status='accepted')
+        context['s_gender'] = s_gender
+        context['s_country'] = s_country
+        context['s_lang_native'] = s_lang_native
+        context['s_lang_speak'] = s_lang_speak
+        context['s_rating'] = s_rating
+        context['s_reviews_count'] = s_reviews_count
+        context['s_skills'] = s_skills
+        context['s_language_levels'] = s_language_levels
+        context['s_cost_trial'] = s_cost_trial
+        context['s_cost_hourly'] = s_cost_hourly
+        context['s_session_count'] = s_session_count
+        context['s_student_count'] = s_student_count
+        context['search_gender'] = self.request.GET.get('gender', '')
+
+        # Add current filter values to maintain form state
+        context['current_skills'] = self.request.GET.get('skills', '')
+        context['current_skill_level'] = self.request.GET.get('sSkillLevel', '')
+        context['current_rating'] = self.request.GET.get('sRate', '')
+        context['current_min_price'] = self.request.GET.get('min_price', '')
+        context['current_max_price'] = self.request.GET.get('max_price', '')
+
         return context
 
 
@@ -253,6 +411,7 @@ class TutorDetailView(DetailView):
                 distribution[rating] = {'count': 0, 'percentage': 0}
 
         return distribution
+
 
 class TutorReserveView(DetailView):
     model = Tutor
@@ -459,7 +618,7 @@ class BasicProfile(LoginRequiredMixin, RoleRequiredMixin, EmailVerificationRequi
         return render(request, self.template_name, context)
 
 
-class DPWizard(BasicProfile, LoginRequiredMixin,  RoleRequiredMixin, EmailVerificationRequiredMixin,  TemplateView):
+class DPWizard(BasicProfile, LoginRequiredMixin, RoleRequiredMixin, EmailVerificationRequiredMixin, TemplateView):
     allowed_roles = ['tutor']
     need_activation = False
     template_name = 'ap2_tutor/wizard/dp_wizard.html'
@@ -1126,13 +1285,13 @@ def save_skills_main(request):
                         if not validate_file_extension(skill_videos[i].name, video_allowed_extensions):
                             return JsonResponse(
                                 {
-                                    'error': f'Invalid video format for skill {i+1}. Only {video_allowed_extensions} are allowed.'},
+                                    'error': f'Invalid video format for skill {i + 1}. Only {video_allowed_extensions} are allowed.'},
                                 status=400)
 
                     # Validate certificate if exists
                     if i < len(certificates):
                         if not validate_file_extension(certificates[i].name, certificate_allowed_extensions):
-                            return JsonResponse({'error': f'Invalid certificate format for skill {i+1}'}, status=400)
+                            return JsonResponse({'error': f'Invalid certificate format for skill {i + 1}'}, status=400)
 
                     # Validate skill and level exist
                     # Get related objects
@@ -1175,7 +1334,7 @@ def save_skills_main(request):
 
 
                 except (Skill.DoesNotExist, Level.DoesNotExist):
-                    return JsonResponse({'error': f'Invalid skill or level for row {i+1}'}, status=400)
+                    return JsonResponse({'error': f'Invalid skill or level for row {i + 1}'}, status=400)
 
             # ... your save logic ...
 
@@ -1339,7 +1498,7 @@ def save_skills(request):
                     saved_skills.append(user_skill.id)
 
                 except Exception as e:
-                    print(f"Error processing skill {i+1}: {str(e)}")
+                    print(f"Error processing skill {i + 1}: {str(e)}")
                     continue
 
             # Update application status
@@ -1581,9 +1740,9 @@ def save_educations(request):
 
                 # Validate years
                 if start_year < 1900 or start_year > max_year or end_year < 1900 or end_year > max_year:
-                    raise ValueError(f"Invalid year for education entry {i+1}")
+                    raise ValueError(f"Invalid year for education entry {i + 1}")
                 if end_year < start_year:
-                    raise ValueError(f"Graduation year must be >= start year for education entry {i+1}")
+                    raise ValueError(f"Graduation year must be >= start year for education entry {i + 1}")
 
                 if card_id in education_new:
                     # Create new education
@@ -1621,7 +1780,7 @@ def save_educations(request):
                 saved_educations.append(education.id)
 
             except (DegreeLevel.DoesNotExist, UserEducation.DoesNotExist, ValueError) as e:
-                print(f"Error processing education {i+1}: {str(e)}")
+                print(f"Error processing education {i + 1}: {str(e)}")
                 continue
 
         # ===== 4. PROCESS CERTIFICATION ENTRIES =====
@@ -1636,7 +1795,7 @@ def save_educations(request):
             try:
                 cert_year = int(cert_years[i])
                 if cert_year < 1900 or cert_year > max_year:
-                    raise ValueError(f"Invalid year for certification entry {i+1}")
+                    raise ValueError(f"Invalid year for certification entry {i + 1}")
 
                 if card_id in certification_new:
                     # Create new certification
@@ -1668,7 +1827,7 @@ def save_educations(request):
                 saved_certifications.append(certification.id)
 
             except (TeachingCertificate.DoesNotExist, ValueError) as e:
-                print(f"Error processing certification {i+1}: {str(e)}")
+                print(f"Error processing certification {i + 1}: {str(e)}")
                 continue
 
         # Update application status
@@ -2021,6 +2180,7 @@ class DPWizardResult(LoginRequiredMixin, EmailVerificationRequiredMixin, RoleReq
 class DPWizardTest(TemplateView, RoleRequiredMixin):
     allowed_roles = ['tutor']
     template_name = 'ap2_tutor/inp_test.html'  # change and adapt this to dashboard panel of Tutor
+
 
 class SuccessSubmit(TemplateView, RoleRequiredMixin):
     allowed_roles = ['tutor']

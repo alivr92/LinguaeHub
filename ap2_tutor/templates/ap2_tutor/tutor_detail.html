@@ -224,37 +224,82 @@
                                         </div>
 
                                         <!-- Share button with dropdown -->
+{#                                        <div class="dropdown">#}
+{#                                            <!-- Share button -->#}
+{#                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"#}
+{#                                               id="dropdownShare"#}
+{#                                               data-bs-toggle="dropdown" aria-expanded="false">#}
+{#                                                <i class="fas fa-fw fa-share-alt"></i>#}
+{#                                            </a>#}
+{#                                            <!-- dropdown button -->#}
+{#                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"#}
+{#                                                aria-labelledby="dropdownShare">#}
+{#                                                <li>#}
+{#                                                    <a class="dropdown-item share-option" href="#" data-platform="twitter">#}
+{#                                                        <i class="fab fa-twitter-square text-info me-2"></i>Twitter#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                                <li>#}
+{#                                                    <a class="dropdown-item share-option" href="#" data-platform="facebook">#}
+{#                                                        <i class="fab fa-facebook-square text-primary me-2"></i>Facebook#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                                <li>#}
+{#                                                    <a class="dropdown-item share-option" href="#" data-platform="linkedin">#}
+{#                                                        <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn#}
+{#                                                    </a>#}
+{#                                                </li>#}
+{#                                                <li><a class="dropdown-item" href="#"><i#}
+{#                                                        class="fas fa-copy me-2"></i>Copy link</a></li>#}
+{#                                            </ul>#}
+{#                                        </div>#}
+
+{# ------------------------------  Shared buttons START  ---------------------------------------- #}
+                                        <!-- Share button with dropdown -->
                                         <div class="dropdown">
                                             <!-- Share button -->
                                             <a href="#" class="btn btn-sm btn-light rounded small" role="button"
                                                id="dropdownShare"
                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-fw fa-share-alt"></i>
+                                                <i class="fas fa-fw fa-share-alt"></i> Share
                                             </a>
-                                            <!-- dropdown button -->
+                                            <!-- dropdown menu -->
                                             <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"
                                                 aria-labelledby="dropdownShare">
                                                 <li>
-                                                    <a class="dropdown-item share-option" href="#" data-platform="twitter">
-                                                        <i class="fab fa-twitter-square text-info me-2"></i>Twitter
+                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="twitter">
+                                                        <i class="fab fa-twitter text-info me-2"></i>Twitter
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item share-option" href="#" data-platform="facebook">
-                                                        <i class="fab fa-facebook-square text-primary me-2"></i>Facebook
+                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="facebook">
+                                                        <i class="fab fa-facebook text-primary me-2"></i>Facebook
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item share-option" href="#" data-platform="linkedin">
+                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="linkedin">
                                                         <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn
                                                     </a>
                                                 </li>
-                                                <li><a class="dropdown-item" href="#"><i
-                                                        class="fas fa-copy me-2"></i>Copy link</a></li>
+                                                <li>
+                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="whatsapp">
+                                                        <i class="fab fa-whatsapp text-success me-2"></i>WhatsApp
+                                                    </a>
+                                                </li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a class="dropdown-item share-btn" href="#" id="copyLinkBtn">
+                                                        <i class="fas fa-copy me-2"></i>Copy link
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" id="shareNativeBtn">
+                                                        <i class="fas fa-share-alt me-2"></i>Share via...
+                                                    </a>
+                                                </li>
                                             </ul>
                                         </div>
 
-{# ------------------------------  Shared buttons START  ---------------------------------------- #}
                                         <!-- Hidden URL for copying https://your-lms.com/tutor/john-smith-123 -->
                                         <input type="text" id="tutorShareUrl" value="https://{{ request.get_host }}{% url 'provider:tutor_detail' tutor_single.id %}"
                                                class="form-control share-url-input mt-2" readonly style="display: none;">
@@ -1241,7 +1286,7 @@
                                              aria-labelledby="course-pills-tab-4">
                                             <!-- Review START -->
                                             <div class="row mb-4">
-                                                <h5 class="mb-4">Our Student Reviews</h5>
+                                                <h5 class="mb-4">Student Reviews</h5>
 
                                                 <!-- Rating info -->
                                                 <div class="col-md-4 mb-3 mb-md-0">
@@ -1744,8 +1789,7 @@
     </script>
 {% endblock %}
 
-
-{% block scripts %}
+{% block embed_scripts1 %}
     <script>
         function showEmbedVideo() {
             var container = document.getElementById('tutor-container');
@@ -1783,83 +1827,36 @@
         }
     </script>
 
+{% endblock %}
+{% block my_scripts %}
+
 {#    Script for share button#}
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tutorUrl = document.getElementById('tutorShareUrl').value;
-            const tutorName = "John Smith"; // Dynamic from your backend
-            const shareText = `Check out ${tutorName} on our platform!`;
-
-            // Social Media Sharing
-            document.querySelectorAll('.share-social').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const platform = this.getAttribute('data-platform');
-
-                    let shareUrl;
-
-                    switch(platform) {
-                        case 'twitter':
-                            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(tutorUrl)}`;
-                            break;
-                        case 'facebook':
-                            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(tutorUrl)}`;
-                            break;
-                        case 'linkedin':
-                            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(tutorUrl)}`;
-                            break;
-                        case 'whatsapp':
-                            shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + tutorUrl)}`;
-                            break;
-                    }
-
-                    if (shareUrl) {
-                        window.open(shareUrl, '_blank', 'width=600,height=400');
-                    }
-                });
-            });
-
-            // Copy Link Functionality
-            document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+        // SIMPLEST POSSIBLE SOLUTION
+        const tutorUrl = window.location.href; // Gets current page URL
+        const shareText = "Check out this amazing tutor!";
+        // Social sharing
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
-
-                const urlInput = document.getElementById('tutorShareUrl');
-                urlInput.style.display = 'block';
-                urlInput.select();
-                urlInput.setSelectionRange(0, 99999);
-
-                navigator.clipboard.writeText(urlInput.value).then(() => {
-                    // Show success message
-                    const toast = new bootstrap.Toast(document.getElementById('copyToast'));
-                    toast.show();
-                    urlInput.style.display = 'none';
-                }).catch(err => {
-                    console.error('Copy failed: ', err);
-                    // Fallback for older browsers
-                    urlInput.style.display = 'block';
-                    urlInput.select();
-                    document.execCommand('copy');
-                    urlInput.style.display = 'none';
-                    alert('Link copied to clipboard!');
-                });
-            });
-
-            // Native Sharing (Mobile)
-            document.getElementById('shareNativeBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-
-                if (navigator.share) {
-                    navigator.share({
-                        title: tutorName + ' - Tutor Profile',
-                        text: shareText,
-                        url: tutorUrl,
-                    })
-                        .catch(error => console.log('Error sharing:', error));
-                } else {
-                    // Fallback to copy link
-                    document.getElementById('copyLinkBtn').click();
-                }
+                const platform = this.getAttribute('data-platform');
+                const urls = {
+                    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(tutorUrl)}`,
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(tutorUrl)}`,
+                    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(tutorUrl)}`,
+                    whatsapp: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + tutorUrl)}`
+                };
+                if (urls[platform]) window.open(urls[platform], '_blank');
             });
         });
+
+        // Copy link
+        document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(tutorUrl);
+            alert('Link copied!'); // Simple feedback
+        });
     </script>
+
+
 {% endblock %}

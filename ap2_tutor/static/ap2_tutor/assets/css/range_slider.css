@@ -1,0 +1,142 @@
+/* Custom noUiSlider Styles */
+#priceSlider {
+    margin: 15px 0;
+}
+
+/* Slider track */
+.noUi-target {
+    background: #dee2e6;
+    border: none;
+    box-shadow: none;
+    height: 6px;
+}
+
+/* Connected track between handles */
+.noUi-connect {
+    background: #007bff;
+}
+
+/* Slider handles */
+
+/* Premium Glass Morphism Thumbs */
+/*.noUi-handle {*/
+/*    width: 24px !important;*/
+/*    height: 24px !important;*/
+/*    background: rgba(255, 255, 255, 0.95) !important;*/
+/*    backdrop-filter: blur(10px) !important;*/
+/*    border: 2px solid rgba(0, 123, 255, 0.8) !important;*/
+/*    border-radius: 50% !important;*/
+/*    box-shadow:*/
+/*            0 4px 15px rgba(0, 123, 255, 0.3),*/
+/*            inset 0 1px 2px rgba(255, 255, 255, 0.8),*/
+/*            0 0 0 1px rgba(255, 255, 255, 0.5) !important;*/
+/*    cursor: pointer;*/
+/*    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);*/
+/*}*/
+
+/*.noUi-handle:hover {*/
+/*    transform: scale(1.2);*/
+/*    background: rgba(255, 255, 255, 1) !important;*/
+/*    border-color: #0056b3 !important;*/
+/*    box-shadow:*/
+/*            0 6px 20px rgba(0, 123, 255, 0.4),*/
+/*            inset 0 1px 3px rgba(255, 255, 255, 0.9),*/
+/*            0 0 0 2px rgba(255, 255, 255, 0.6) !important;*/
+/*}*/
+
+/*.noUi-handle:active {*/
+/*    transform: scale(1.1);*/
+/*    background: rgba(245, 247, 250, 0.95) !important;*/
+/*}*/
+/*------------- Sleek component design ----------------*/
+/* Sleek Corporate Design - Rounded Square */
+.noUi-handle {
+    width: 18px !important;
+    height: 18px !important;
+    background: #ffffff !important;
+    border: 2px solid #007bff !important;
+    border-radius: 4px !important;
+    box-shadow:
+            0 2px 6px rgba(0, 0, 0, 0.15),
+            0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    transform: rotate(45deg);
+}
+
+.noUi-handle:hover {
+    transform: rotate(45deg) scale(1.3);
+    background: #007bff !important;
+    box-shadow:
+            0 4px 12px rgba(0, 123, 255, 0.4),
+            0 2px 6px rgba(0, 123, 255, 0.3) !important;
+}
+
+.noUi-handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 6px;
+    height: 6px;
+    background: #007bff;
+    border-radius: 1px;
+    transition: all 0.2s ease;
+}
+
+.noUi-handle:hover::before {
+    background: #ffffff;
+}
+/*-----------------------------------------------*/
+
+/* Enhanced Track Styling */
+.noUi-target {
+    background: #e9ecef !important;
+    border: none !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+    height: 6px !important;
+}
+
+.noUi-connect {
+    background: linear-gradient(90deg, #007bff 0%, #0056b3 100%) !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Optional: Add subtle animation to connect area */
+.noUi-connect {
+    transition: background 0.3s ease;
+}
+
+/* Active Filter Tags */
+.filter-tag {
+    background: #e9ecef;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.filter-tag:hover {
+    background: #dee2e6;
+}
+
+.filter-tag .remove-filter {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+.filter-tag .remove-filter:hover {
+    opacity: 1;
+    color: #dc3545;
+}

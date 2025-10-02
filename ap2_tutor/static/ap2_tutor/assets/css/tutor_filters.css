@@ -1,0 +1,113 @@
+/*!* Range Slider Styles *!*/
+.price-range-slider {
+    position: relative;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.slider-track {
+    position: absolute;
+    height: 6px;
+    background-color: #dee2e6;
+    width: 100%;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.slider-track::before {
+    content: '';
+    position: absolute;
+    height: 6px;
+    background: #007bff;
+    border-radius: 3px;
+    left: var(--min-percent, 0%);
+    right: calc(100% - var(--max-percent, 100%));
+    z-index: 1;
+}
+
+.range-min, .range-max {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: transparent;
+    pointer-events: none;
+    -webkit-appearance: none;
+    /*z-index: 3; !* Increased z-index *!*/
+    margin: 0;
+    /*top: 50%;*/
+    /*transform: translateY(-50%);*/
+}
+.range-min {
+    top: 49%;
+    transform: translateY(-50%);
+}
+
+.range-max {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Webkit Thumb Styles */
+.range-min::-webkit-slider-thumb, .range-max::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #007bff;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    -webkit-appearance: none;
+    position: relative;
+    z-index: 4;
+}
+
+/* Firefox Thumb Styles */
+.range-min::-moz-range-thumb, .range-max::-moz-range-thumb {
+    pointer-events: all;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #007bff;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    position: relative;
+    z-index: 4;
+}
+
+/* Active Filter Tags */
+.filter-tag {
+    background: #e9ecef;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-tag .remove-filter {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.filter-tag .remove-filter:hover {
+    opacity: 1;
+    color: #dc3545;
+}
+
+.price-display .badge {
+    font-size: 0.8rem;
+    padding: 0.35em 0.65em;
+}
+
+/* Ensure proper input sizing */
+.input-group-sm .form-control {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
