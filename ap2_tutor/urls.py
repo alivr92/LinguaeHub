@@ -6,8 +6,8 @@ app_name = 'provider'
 urlpatterns = [
     # ---------------------- PROVIDER FRONT PAGES
     path('', views.TutorListView.as_view(), name='tutor_list'),
-    path('tutor-detail/instructor_<int:pk>/', views.TutorDetailView.as_view(), name='tutor_detail'),
-    path('tutor-reserve/instructor_<int:pk>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
+    path('detail/<int:pk>/', views.TutorDetailView.as_view(), name='tutor_detail'),
+    path('reserve/<int:pk>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
 
     # ---------------------- PROVIDER DASHBOARD
     path('dashboard/panel/', views.DPHome.as_view(), name='dp_home'),

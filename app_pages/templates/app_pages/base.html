@@ -15,7 +15,7 @@
         <meta property="og:title" content="{{ CFChar.site_name }} - {{ CFText.og_site_title }}" />
         <meta property="og:description" content="{{ CFChar.site_name }} {{ CFText.og_site_description }}" />
 {#        <meta property="og:image" content="https://lingocept.com/images/og-homepage-1200x630.jpg" />#}
-        <meta property="og:image" content="https://{{ request.get_host }}{% static 'assets/images/integrations/salesforce.jpg' %}?v={{ current_time }}" />
+        <meta property="og:image" content="https://{{ request.get_host }}{% static 'assets/images/integrations/salesforce.jpg' %}?v={% now 'U' %}" />
         <meta property="og:url" content="{{ CFURL.site_address }}" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="{{ CFChar.site_name }}" />
@@ -24,7 +24,7 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="{{ CFChar.site_name }} - {{ CFText.og_site_title }}">
         <meta name="twitter:description" content="{{ CFChar.site_name }} {{ CFText.og_site_description }}">
-        <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'assets/images/integrations/salesforce.jpg' %}?v={{ current_time }} " />
+        <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'assets/images/integrations/salesforce.jpg' %}?v={% now 'U' %}" />
         {#        <meta name="twitter:image" content="https://lingocept.com/images/og-homepage-1200x630.jpg">#}
     {% endblock %}
 
