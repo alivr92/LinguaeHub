@@ -9,7 +9,13 @@
     {% with absolute_domain="https://"|add:request.get_host %}
         <!-- Open Graph Tags -->
         <meta property="og:type" content="profile" />
-        <meta property="og:title" content="Learn {{ tutor_single.profile.user.skills.first|status:'approved' }} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+        {% with skills_list=approved_skills|slice:":3" %}
+            {% if skills_list %}
+                <meta property="og:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+            {% else %}
+                <meta property="og:title" content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!" />
+            {% endif %}
+        {% endwith %}
         <meta property="og:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}" />
 
         {% if tutor_single.profile.photo %}
@@ -23,7 +29,13 @@
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Learn {{ tutor_single.profile.user.skills.first|status:'approved' }} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}">
+        {% with skills_list=approved_skills|slice:":3" %}
+            {% if skills_list %}
+                <meta property="twitter:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+            {% else %}
+                <meta property="twitter:title" content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!" />
+            {% endif %}
+        {% endwith %}
         <meta name="twitter:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}">
         <meta name="twitter:image" content="{{ absolute_domain }}{% if tutor_single.profile.photo %}{{ tutor_single.profile.photo.url }}{% else %}{% static 'images/default-tutor-og-1200x630.jpg' %}{% endif %}">
     {% endwith %}
