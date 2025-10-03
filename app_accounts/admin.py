@@ -134,7 +134,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display_links = ('user', 'thumbnail',)
     list_editable = ('is_active', 'is_vip', 'is_email_verified')
     list_filter = (
-        'user_type', 'gender', 'rating', 'is_vip', 'country', 'lang_speak__name',
+        'user', 'user_type', 'gender', 'rating', 'is_vip', 'country', 'lang_speak__name',
         'meeting_method', 'phone_verified', 'is_email_verified', 'availability'
     )
     search_fields = (
@@ -242,6 +242,7 @@ class UserSkillAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'skill', 'level', 'is_certified', 'status', 'is_notified']
     list_display_links = ['user', ]
     list_editable = ['level', 'status', 'is_certified', 'is_notified']
+    list_filter = ['user', 'skill', 'level', 'is_certified', 'status', 'is_notified']
     ordering = ('skill',)
 
 

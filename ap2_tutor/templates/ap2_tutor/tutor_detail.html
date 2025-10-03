@@ -5,40 +5,49 @@
 {% block head_title %}Tutor: {{ tutor_single.profile.user.first_name }}
     {{ tutor_single.profile.user.last_name }}{% endblock %}
 
-{% block og_meta_tags%}
+{% block og_meta_tags %}
     {% with absolute_domain="https://"|add:request.get_host %}
         <!-- Open Graph Tags -->
-        <meta property="og:type" content="profile" />
+        <meta property="og:type" content="profile"/>
         {% with skills_list=approved_skills|slice:":3" %}
             {% if skills_list %}
-                <meta property="og:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+                <meta property="og:title" content="Learn
+                        {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}"/>
             {% else %}
-                <meta property="og:title" content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!" />
+                <meta property="og:title"
+                      content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!"/>
             {% endif %}
         {% endwith %}
-        <meta property="og:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}" />
+        <meta property="og:description"
+              content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}"/>
 
         {% if tutor_single.profile.photo %}
-            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}?v={{ tutor_single.profile.last_modified|date:'U' }}" />
-{#            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}?v={{ tutor_single.profile.last_modified|date:'U' }}" />#}
+            <meta property="og:image" content="
+                    {{ absolute_domain }}{{ tutor_single.profile.photo.url }}?v={{ tutor_single.profile.last_modified|date:'U' }}"/>
+            {#            <meta property="og:image" content="{{ absolute_domain }}{{ tutor_single.profile.photo.url }}?v={{ tutor_single.profile.last_modified|date:'U' }}" />#}
         {% else %}
-            <meta property="og:image" content="{{ absolute_domain }}{% static 'assets/images/default.png' %}?v={{ tutor_single.profile.last_modified|date:'U' }}" />
+            <meta property="og:image" content="
+                    {{ absolute_domain }}{% static 'assets/images/default.png' %}?v={{ tutor_single.profile.last_modified|date:'U' }}"/>
         {% endif %}
 
-        <meta property="og:url" content="{{ absolute_domain }}{% url 'provider:tutor_detail' tutor_single.id %}" />
-        <meta property="og:site_name" content="{{ CFChar.site_name }}" />
+        <meta property="og:url" content="{{ absolute_domain }}{% url 'provider:tutor_detail' tutor_single.id %}"/>
+        <meta property="og:site_name" content="{{ CFChar.site_name }}"/>
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image">
         {% with skills_list=approved_skills|slice:":3" %}
             {% if skills_list %}
-                <meta name="twitter:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}" />
+                <meta name="twitter:title" content="Learn
+                        {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}"/>
             {% else %}
-                <meta name="twitter:title" content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!" />
+                <meta name="twitter:title"
+                      content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!"/>
             {% endif %}
         {% endwith %}
-        <meta name="twitter:description" content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}">
-        <meta name="twitter:image" content="{{ absolute_domain }}{% if tutor_single.profile.photo %}{{ tutor_single.profile.photo.url }}{% else %}{% static 'assets/images/default.png' %}{% endif %}?v={{ tutor_single.profile.last_modified|date:'U' }}">
+        <meta name="twitter:description"
+              content="{{ tutor_single.profile.bio|default:'Expert tutor on Lingocept platform'|truncatewords:25 }}">
+        <meta name="twitter:image" content="
+                {{ absolute_domain }}{% if tutor_single.profile.photo %}{{ tutor_single.profile.photo.url }}{% else %}{% static 'assets/images/default.png' %}{% endif %}?v={{ tutor_single.profile.last_modified|date:'U' }}">
     {% endwith %}
 {% endblock %}
 {% block head_style_plugins %}
@@ -174,12 +183,13 @@
         }
     </style>
 
-{#    fpr share buttons #}
+    {#    fpr share buttons #}
     <style>
         .share-url-input {
             font-size: 0.8rem;
             background: #f8f9fa;
         }
+
         .toast {
             position: fixed;
             bottom: 20px;
@@ -194,29 +204,23 @@
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
 
-        <!-- =======================
-        Page content START -->
+        <!-- Page content START -->
         <section class="pt-5 pb-0">
             <div class="container">
                 <div class="row g-0 g-lg-5">
 
-                    <!-- Left sidebar START -->
-                    <div class="col-lg-4">
-                        <div class="row">
-
-
-                            <!-- Tutor image START -->
-                            <div class="card shadow p-2 mb-4 text-center">
-                                <div class="rounded-3">
-                                    <!-- Image -->
-                                    <img src="{{ tutor_single.profile.photo.url }}" class="card-img"
-                                         alt="{{ tutor_single.profile.user.first_name }} {{ tutor_single.profile.user.last_name }}">
-                                </div>
-
-                                <!-- Card body -->
-                                <div class="card-body px-3">
+                    <!-- Main content START -->
+                    <div class="col-lg-8">
+                        <div class="row align-items-center">
+                            <!-- Image Column -->
+                            <div class="col-md-4 text-center">
+                                <div class="card shadow p-2 mb-4">
+                                    <div class="rounded-3 overflow-hidden">
+                                        <img src="{{ tutor_single.profile.photo.url }}" class="img-fluid rounded"
+                                             alt="{{ tutor_single.profile.user.first_name }} {{ tutor_single.profile.user.last_name }}">
+                                    </div>
                                     <!-- Rating -->
-                                    <ul class="list-inline ">
+                                    <ul class="list-inline mt-3">
                                         {% with rating=tutor_single.profile.rating %}
                                             {% for i in range %}
                                                 <li class="list-inline-item me-0 small">
@@ -232,495 +236,19 @@
                                             <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>
                                         {% endwith %}
                                     </ul>
-
-                                    <!-- Info -->
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <!-- Price and time -->
-                                        <div>
-                                            {% if discount_valid %}
-                                                <div class="d-flex align-items-center">
-                                                    <h3 class="fw-bold mb-0 me-2">
-                                                        ${{ discounted_price|format_decimal:2 }}
-                                                    </h3>
-                                                    <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>
-                                                    <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>
-                                                </div>
-                                                {% if remaining_time %}
-                                                    <p class="mb-0 text-danger"><i
-                                                            class="fas fa-stopwatch me-2"></i>{{ remaining_time }}
-                                                        left at this price</p>
-                                                {% endif %}
-                                            {% else %}
-                                                <div class="d-flex align-items-center">
-                                                    <h3 class="fw-bold mb-0 me-2">
-                                                        ${{ tutor_single.cost_hourly }}
-                                                    </h3>
-                                                </div>
-                                            {% endif %}
-                                        </div>
-
-                                        <!-- Share button with dropdown -->
-{#                                        <div class="dropdown">#}
-{#                                            <!-- Share button -->#}
-{#                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"#}
-{#                                               id="dropdownShare"#}
-{#                                               data-bs-toggle="dropdown" aria-expanded="false">#}
-{#                                                <i class="fas fa-fw fa-share-alt"></i>#}
-{#                                            </a>#}
-{#                                            <!-- dropdown button -->#}
-{#                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"#}
-{#                                                aria-labelledby="dropdownShare">#}
-{#                                                <li>#}
-{#                                                    <a class="dropdown-item share-option" href="#" data-platform="twitter">#}
-{#                                                        <i class="fab fa-twitter-square text-info me-2"></i>Twitter#}
-{#                                                    </a>#}
-{#                                                </li>#}
-{#                                                <li>#}
-{#                                                    <a class="dropdown-item share-option" href="#" data-platform="facebook">#}
-{#                                                        <i class="fab fa-facebook-square text-primary me-2"></i>Facebook#}
-{#                                                    </a>#}
-{#                                                </li>#}
-{#                                                <li>#}
-{#                                                    <a class="dropdown-item share-option" href="#" data-platform="linkedin">#}
-{#                                                        <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn#}
-{#                                                    </a>#}
-{#                                                </li>#}
-{#                                                <li><a class="dropdown-item" href="#"><i#}
-{#                                                        class="fas fa-copy me-2"></i>Copy link</a></li>#}
-{#                                            </ul>#}
-{#                                        </div>#}
-
-{# ------------------------------  Shared buttons START  ---------------------------------------- #}
-                                        <!-- Share button with dropdown -->
-                                        <div class="dropdown">
-                                            <!-- Share button -->
-                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"
-                                               id="dropdownShare"
-                                               data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-fw fa-share-alt"></i> Share
-                                            </a>
-                                            <!-- dropdown menu -->
-                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"
-                                                aria-labelledby="dropdownShare">
-                                                <li>
-                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="twitter">
-                                                        <i class="fab fa-twitter text-info me-2"></i>Twitter
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="facebook">
-                                                        <i class="fab fa-facebook text-primary me-2"></i>Facebook
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="linkedin">
-                                                        <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item share-social share-btn" href="#" data-platform="whatsapp">
-                                                        <i class="fab fa-whatsapp text-success me-2"></i>WhatsApp
-                                                    </a>
-                                                </li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li>
-                                                    <a class="dropdown-item share-btn" href="#" id="copyLinkBtn">
-                                                        <i class="fas fa-copy me-2"></i>Copy link
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a class="dropdown-item" href="#" id="shareNativeBtn">
-                                                        <i class="fas fa-share-alt me-2"></i>Share via...
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <!-- Hidden URL for copying https://your-lms.com/tutor/john-smith-123 -->
-                                        <input type="text" id="tutorShareUrl" value="https://{{ request.get_host }}{% url 'provider:tutor_detail' tutor_single.id %}"
-                                               class="form-control share-url-input mt-2" readonly style="display: none;">
-                                        <!-- Toast Notification -->
-                                        <div class="toast align-items-center text-white bg-success border-0" id="copyToast">
-                                            <div class="d-flex">
-                                                <div class="toast-body">
-                                                    Link copied to clipboard!
-                                                </div>
-                                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-                                            </div>
-                                        </div>
-{#                                    Shared buttons END ------------------------------------------------------------- #}
-
-
-
-                                    </div>
-
-                                    <!-- Buttons -->
-{#                                    <div class="mt-3 d-sm-flex justify-content-sm-between">#}
-{#                                        {% if tutor_single.cost_trial != 0 %}#}
-{#                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for#}
-{#                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>#}
-{#                                        {% else %}#}
-{#                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>#}
-{#                                        {% endif %}#}
-{#                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"#}
-{#                                           class="btn btn-success mb-0">Reserve Class</a>#}
-{#                                    </div>#}
                                 </div>
+
 
                             </div>
-                            <!-- Tutor image END -->
-
-                            <!-- Video START -->
-{#                                                        <div class="col-md-6 col-lg-12">#}
-{#                                                            <div class="card shadow p-2 mb-4 z-index-9">#}
-{#                                                                <div class="overflow-hidden rounded-3" id="tutor-container">#}
-{#                                                                    <div id="tutor-image-wrapper">#}
-{#                                                                        <img src="{{ tutor_single.profile.photo.url }}" class="card-img"#}
-{#                                                                             alt="course image"#}
-{#                                                                             id="tutor-image">#}
-{#                                                                        <!-- Overlay -->#}
-{#                                                                        <div class="bg-overlay bg-dark opacity-6"></div>#}
-{#                                                                        <div class="card-img-overlay d-flex align-items-start flex-column p-3">#}
-{#                                                                            <!-- Video button and link -->#}
-{#                                                                            <div class="m-auto">#}
-{#                                                                                <a href="#"#}
-{#                                                                                   class="btn btn-lg text-danger btn-round btn-white-shadow mb-0"#}
-{#                                                                                   onclick="showEmbedVideo(); return false;">#}
-{#                                                                                    <i class="fas fa-play"></i>#}
-{#                                                                                </a>#}
-{#                                                                            </div>#}
-{#                                                                        </div>#}
-{#                                                                    </div>#}
-{#                                                                </div>#}
-{##}
-                                                                {#                  </div>#}
-                            {#                </div>#}
-{##}
-{##}
-{#                                                                <!-- APARAT EMBED VIDEO END -->#}
-{#                                                                <!-- Card body -->#}
-{#                                                                <div class="card-body px-3 cent">#}
-{##}
-{#                                                                    <div class="text-center">#}
-{#                                                                        <!-- Rating -->#}
-{#                                                                        <ul class="list-inline ">#}
-{#                                                                            {% with rating=tutor_single.profile.rating %}#}
-{#                                                                                {% for i in range %}#}
-{#                                                                                    <li class="list-inline-item me-0 small">#}
-{#                                                                                        {% if i <= rating %}#}
-{#                                                                                            <i class="fas fa-star text-warning"></i>#}
-{#                                                                                        {% elif  i|float_sub:0.5 <= rating %}#}
-{#                                                                                            <i class="fas fa-star-half-alt text-warning"></i>#}
-{#                                                                                        {% else %}#}
-{#                                                                                            <i class="far fa-star text-warning"></i>#}
-{#                                                                                        {% endif %}#}
-{#                                                                                    </li>#}
-{#                                                                                {% endfor %}#}
-{#                                                                                <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
-{#                                                                            {% endwith %}#}
-{#                                                                        </ul>#}
-{##}
-{#                                                                    </div>#}
-{##}
-{#                                                                    <!-- Info -->#}
-{#                                                                    <div class="d-flex justify-content-between align-items-center">#}
-{#                                                                        <!-- Price and time -->#}
-{#                                                                        <div>#}
-{#                                                                            {% if discount_valid %}#}
-{#                                                                                <div class="d-flex align-items-center">#}
-{#                                                                                    <h3 class="fw-bold mb-0 me-2">#}
-{#                                                                                        ${{ discounted_price|format_decimal:2 }}#}
-{#                                                                                    </h3>#}
-{#                                                                                    <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>#}
-{#                                                                                    <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>#}
-{#                                                                                </div>#}
-{#                                                                                {% if remaining_time %}#}
-{#                                                                                    <p class="mb-0 text-danger"><i#}
-{#                                                                                            class="fas fa-stopwatch me-2"></i>{{ remaining_time }}#}
-{#                                                                                        left at this price</p>#}
-{#                                                                                {% endif %}#}
-{#                                                                            {% else %}#}
-{#                                                                                <div class="d-flex align-items-center">#}
-{#                                                                                    <h3 class="fw-bold mb-0 me-2">#}
-{#                                                                                        ${{ tutor_single.cost_hourly }}#}
-{#                                                                                    </h3>#}
-{#                                                                                </div>#}
-{#                                                                            {% endif %}#}
-{#                                                                        </div>#}
-{##}
-{#                                                                        <!-- Share button with dropdown -->#}
-{#                                                                        <div class="dropdown">#}
-{#                                                                            <!-- Share button -->#}
-{#                                                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"#}
-{#                                                                               id="dropdownShare"#}
-{#                                                                               data-bs-toggle="dropdown" aria-expanded="false">#}
-{#                                                                                <i class="fas fa-fw fa-share-alt"></i>#}
-{#                                                                            </a>#}
-{#                                                                            <!-- dropdown button -->#}
-{#                                                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"#}
-{#                                                                                aria-labelledby="dropdownShare">#}
-{#                                                                                <li><a class="dropdown-item" href="#"><i#}
-{#                                                                                        class="fab fa-twitter-square me-2"></i>Twitter</a>#}
-{#                                                                                </li>#}
-{#                                                                                <li><a class="dropdown-item" href="#"><i#}
-{#                                                                                        class="fab fa-facebook-square me-2"></i>Facebook</a></li>#}
-{#                                                                                <li><a class="dropdown-item" href="#"><i#}
-{#                                                                                        class="fab fa-linkedin me-2"></i>LinkedIn</a>#}
-{#                                                                                </li>#}
-{#                                                                                <li><a class="dropdown-item" href="#"><i#}
-{#                                                                                        class="fas fa-copy me-2"></i>Copy link</a></li>#}
-{#                                                                            </ul>#}
-{#                                                                        </div>#}
-{#                                                                    </div>#}
-{##}
-{#                                                                    <!-- Buttons -->#}
-{#                                                                    <div class="mt-3 d-sm-flex justify-content-sm-between">#}
-{#                                                                        {% if tutor_single.cost_trial != 0 %}#}
-{#                                                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for#}
-{#                                                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>#}
-{#                                                                        {% else %}#}
-{#                                                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>#}
-{#                                                                        {% endif %}#}
-{#                                                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"#}
-{#                                                                           class="btn btn-success mb-0">Reserve Class</a>#}
-{#                                                                    </div>#}
-{#                                                                </div>#}
-{##}
-{##}
-{#                                                            </div>#}
-{#                                                        </div>#}
-                            <!-- Video END -->
-
-
-                            <div id="skillVideoCarousel" class="carousel slide mb-5" data-bs-ride="false">
-                                <!-- Main video slides -->
-                                <div class="carousel-inner ratio ratio-16x9">
-                                    {% for skill in tutor_single.profile.user.skills.all|status:'approved' %}
-                                        <div class="carousel-item {% if forloop.first %}active{% endif %}"
-                                             data-bs-slide-to="{{ forloop.counter0 }}">
-                                            <video controls crossorigin="anonymous" playsinline
-                                                   poster="
-                                                               {% if skill.thumbnail %}
-                                                                    {{ skill.thumbnail.url }}
-                                                                {% else %}
-                                                                    {{ tutor_single.profile.photo.url }}
-                                                                {% endif %}">
-                                                <source src="{% if skill.video %}{{ skill.video.url }}{% endif %}"
-                                                        type="video/mp4">
-                                            </video>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-
-                                <!-- Thumbnail navigation -->
-                                <div class="carousel-indicators-section">
-                                    <button class="thumbnail-nav thumbnail-prev">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                    <button class="thumbnail-nav thumbnail-next">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-
-                                    <div class="carousel-thumbnails">
-                                        {% for skill in tutor_single.profile.user.skills.all|status:'approved' %}
-                                            <!-- thumbnail -->
-                                            <div class="thumbnail-item {% if forloop.first %}active{% endif %}"
-                                                 data-bs-target="#skillVideoCarousel"
-                                                 data-bs-slide-to="{{ forloop.counter0 }}"
-                                                 data-bs-toggle="tooltip"
-                                                 data-bs-placement="bottom"
-                                                 title="{{ skill.skill }}">
-                                                <img src="
-                                                            {% if skill.thumbnail %}
-                                                                {{ skill.thumbnail.url }}
-                                                            {% else %}
-                                                                {{ tutor_single.profile.photo.url }}
-                                                            {% endif %}"
-                                                     alt="{{ skill.skill }}"
-                                                     loading="lazy">
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
+                            <!-- Text Column -->
+                            <div class="col-md-8">
+                                <h5 class="mb-0">Hi, I am</h5>
+                                <h1 class="mb-0">{{ tutor_single.profile.user.first_name }} {{ tutor_single.profile.user.last_name }}</h1>
+                                <p>{{ tutor_single.profile.title }}</p>
+                                <p class="mt-4">{{ tutor_single.profile.bio|safe }}</p>
                             </div>
 
-
-                            <!-- Video Temperary AVR1 ------------------------------------------------ -->
-
-
-                            <!-- Tutor image START -->
-                            {#                <div class="col-md-6 col-lg-12">#}
-                            {#                  <div class="card shadow p-2 mb-4 text-center">#}
-                            {#                    <div class="rounded-3">#}
-                            {#                      <!-- Image -->#}
-                            {#                      <img src="{{ tutor_single.profile.photo.url }}" class="card-img" alt="course image">#}
-                            {#                    </div>#}
-                            {##}
-                            {#                    <!-- Card body -->#}
-                            {#                    <div class="card-body px-3">#}
-                            {#                      <!-- Rating -->#}
-                            {#                      <ul class="list-inline">#}
-                            {#                        {% with rating=tutor_single.profile.rating %}#}
-                            {#                          {% for i in range %}#}
-                            {#                            <li class="list-inline-item me-0 small">#}
-                            {#                              {% if i <= rating %}#}
-                            {#                                <i class="fas fa-star text-warning"></i>#}
-                            {#                              {% elif  i|float_sub:0.5 <= rating %}#}
-                            {#                                <i class="fas fa-star-half-alt text-warning"></i>#}
-                            {#                              {% else %}#}
-                            {#                                <i class="far fa-star text-warning"></i>#}
-                            {#                              {% endif %}#}
-                            {#                            </li>#}
-                            {#                          {% endfor %}#}
-                            {#                          <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
-                            {#                        {% endwith %}#}
-                            {#                      </ul>#}
-                            {##}
-                            {#                      <!-- Social media button -->#}
-                            {#                      <ul class="list-inline mb-0">#}
-                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-facebook"#}
-                            {#                                                        href="{{ tutor_single.profile.url_facebook }}"><i#}
-                            {#                          class="fab fa-fw fa-facebook-f"></i></a></li>#}
-                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-instagram-gradient"#}
-                            {#                                                        href="{{ tutor_single.profile.url_insta }}"><i#}
-                            {#                          class="fab fa-fw fa-instagram"></i></a></li>#}
-                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-twitter"#}
-                            {#                                                        href="{{ tutor_single.profile.url_twitter }}"><i#}
-                            {#                          class="fab fa-fw fa-twitter"></i></a></li>#}
-                            {#                        <li class="list-inline-item"><a class="btn px-2 btn-sm bg-linkedin"#}
-                            {#                                                        href="{{ tutor_single.profile.url_linkedin }}"><i#}
-                            {#                          class="fab fa-fw fa-linkedin-in"></i></a></li>#}
-                            {#                      </ul>#}
-                            {#                    </div>#}
-                            {##}
-                            {#                  </div>#}
-                            {#                </div>#}
-                            <!-- Tutor image END -->
-
-
-                            <div class="col-md-6 col-lg-12">
-                                <div class="card card-body shadow p-4 mb-4">
-
-                                    {% if approved_educations.count > 0 %}
-                                        <!-- Education START -->
-                                        <!-- Title -->
-                                        <h4 class="mb-3">Education</h4>
-                                        {% for edu in tutor_single.profile.user.educations.all %}
-                                            {% if edu.status == 'approved' %}
-                                                <!-- Education item -->
-                                                <div class="d-flex align-items-center mb-4">
-                                        <span class="icon-md mb-0 bg-light rounded-3"><i
-                                                class="fas fa-graduation-cap"></i></span>
-                                                    <div class="ms-3">
-                                                        <h6 class="mb-0">{{ edu.institution }}</h6>
-                                                        <p class="mb-0 small">{{ edu.degree }}
-                                                            in {{ edu.field_of_study }}</p>
-                                                    </div>
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                        <!-- Education END -->
-                                        <hr> <!-- Divider -->
-                                    {% endif %}
-
-
-                                    <!-- Skills START -->
-                                    <h4 class="mb-3">Skills</h4>
-                                    {% for skill in tutor_single.profile.user.skills.all %}
-                                        {% if skill.status == 'approved' %}
-                                            <!-- Progress item -->
-                                            <div class="overflow-hidden mb-4">
-                                                <h6 class="uppercase">{{ skill.skill }} </h6>
-                                                <div class="progress progress-sm bg-primary bg-opacity-10">
-                                                    <div class="progress-bar aos" role="progressbar"
-                                                         data-aos="slide-right"
-                                                         data-aos-delay="200" data-aos-duration="1000"
-                                                         data-aos-easing="ease-in-out"
-                                                         style="width: {{ skill.progress_percent }}%; background-color: {{ skill.progress_color }};"
-                                                         aria-valuenow="90" aria-valuemin="0"
-                                                         aria-valuemax="100">
-                                                        <span class="progress-percent-simple h6 mb-0">{{ skill.level.name|capfirst }}</span>
-                                                        <span class="progress-percent-simple h6 mb-0"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                    <!-- Skills END -->
-
-
-                                    <!-- Social Media START -->
-                                    <!-- Title -->
-                                    {#                                    <h4 class="mb-3">Social Media</h4>#}
-
-                                    <!-- Social media buttons -->
-                                    {#                                    <div class="text-center">#}
-                                    {#                                        <ul class="list-inline mb-0">#}
-                                    {#                                            <li class="list-inline-item"><a class="btn px-2 btn-sm bg-facebook"#}
-                                    {#                                                                            href="{{ tutor_single.profile.url_facebook }}"><i#}
-                                    {#                                                    class="fab fa-fw fa-facebook-f"></i></a></li>#}
-                                    {#                                            <li class="list-inline-item"><a#}
-                                    {#                                                    class="btn px-2 btn-sm bg-instagram-gradient"#}
-                                    {#                                                    href="{{ tutor_single.profile.url_insta }}"><i#}
-                                    {#                                                    class="fab fa-fw fa-instagram"></i></a></li>#}
-                                    {#                                            <li class="list-inline-item"><a class="btn px-2 btn-sm bg-twitter"#}
-                                    {#                                                                            href="{{ tutor_single.profile.url_twitter }}"><i#}
-                                    {#                                                    class="fab fa-fw fa-twitter"></i></a></li>#}
-                                    {#                                            <li class="list-inline-item"><a class="btn px-2 btn-sm bg-linkedin"#}
-                                    {#                                                                            href="{{ tutor_single.profile.url_linkedin }}"><i#}
-                                    {#                                                    class="fab fa-fw fa-linkedin-in"></i></a></li>#}
-                                    {#                                        </ul>#}
-                                    {#                                    </div>#}
-                                    <!-- Social media END -->
-
-
-                                </div>
-                            </div>
                         </div>
-                        <!-- Row End -->
-                    </div>
-                    <!-- Left sidebar END -->
-
-                    <!-- Main content START -->
-                    <div class="col-lg-8">
-
-                        <!-- Title -->
-                        <h5 class="mb-0">Hi, I am</h5>
-                        <h1 class="mb-0">{{ tutor_single.profile.user.first_name }} {{ tutor_single.profile.user.last_name }}</h1>
-                        <p>{{ tutor_single.profile.title }}</p>
-                        <!-- Content -->
-
-                        <p class="mt-4">{{ tutor_single.profile.bio|safe }}</p>
-                        <p>We focus a great deal on the understanding of behavioral psychology and influence triggers
-                            which are
-                            crucial for becoming a well-rounded Digital Marketer. We understand that theory is important
-                            to build a
-                            solid foundation, we understand that theory alone isn’t going to get the job done so that’s
-                            why this
-                            course is packed with practical hands-on examples that you can follow step by step.</p>
-                        <!-- Personal info -->
-{#                        <ul class="list-group list-group-borderless">#}
-{#                            <li class="list-group-item px-0">#}
-{#                                <span class="h6 fw-light"><i#}
-{#                                        class="fas fa-fw fa-map-marker-alt text-primary me-1 me-sm-3"></i>Location:</span>#}
-{#                                <span>{{ tutor_single.profile.country }}</span>#}
-{#                            </li>#}
-{#                            <li class="list-group-item px-0">#}
-{#                      <span class="h6 fw-light"><i#}
-{#                              class="fas fa-fw fa-envelope text-primary me-1 me-sm-3"></i>Email:</span>#}
-{#                                <span>{{ tutor_single.profile.user.email }}</span>#}
-{#                            </li>#}
-{#                            <li class="list-group-item px-0">#}
-{#                                <span class="h6 fw-light"><i#}
-{#                                        class="fas fa-fw fa-headphones text-primary me-1 me-sm-3"></i>Phone number:</span>#}
-{#                                <span>{{ tutor_single.profile.phone }}</span>#}
-{#                            </li>#}
-{#                            <li class="list-group-item px-0">#}
-{#                      <span class="h6 fw-light"><i#}
-{#                              class="fas fa-fw fa-globe text-primary me-1 me-sm-3"></i>Website:</span>#}
-{#                                <span>{{ CFURL.site_url }}</span>#}
-{#                            </li>#}
-{#                        </ul>#}
 
                         <!-- Counter START -->
                         <div class="row mt-4 g-3">
@@ -788,154 +316,6 @@
                         <!-- Course END ---------------------------------------------------------------------->
 
 
-                        <!-- Student review START -->
-                        {#            <div class="card border bg-transparent rounded-3 mt-5">#}
-                        {#              <!-- Header START -->#}
-                        {#              <div class="card-header bg-transparent border-bottom">#}
-                        {#                <div class="row justify-content-between align-middle">#}
-                        {#                  <!-- Title -->#}
-                        {#                  <div class="col-sm-6">#}
-                        {#                    <h3 class="card-header-title mb-2 mb-sm-0">Student review</h3>#}
-                        {#                  </div>#}
-                        {##}
-                        {#                  <!-- Short by filter -->#}
-                        {#                  <div class="col-sm-4">#}
-                        {#                    <form>#}
-                        {#                    <select class="form-select js-choice z-index-9 bg-white" aria-label=".form-select-sm">#}
-                        {#                      <select class="form-select z-index-9 bg-white" aria-label=".form-select-sm">#}
-                        {#                        <option value="">Sort by</option>#}
-                        {#                        <option>★★★★★ (5/5)</option>#}
-                        {#                        <option>★★★★☆ (4/5)</option>#}
-                        {#                        <option>★★★☆☆ (3/5)</option>#}
-                        {#                        <option>★★☆☆☆ (2/5)</option>#}
-                        {#                        <option>★☆☆☆☆ (1/5)</option>#}
-                        {#                      </select>#}
-                        {#                    </form>#}
-                        {#                  </div>#}
-                        {#                </div>#}
-                        {#              </div>#}
-                        {#              <!-- Header END -->#}
-                        {##}
-                        {#              <!-- Reviews START -->#}
-                        {#              <div class="card-body mt-2 mt-sm-4">#}
-                        {##}
-                        {#                <!-- Review item START -->#}
-                        {#                <div class="d-sm-flex">#}
-                        {#                  <!-- Avatar image -->#}
-                        {#                  <img class="avatar avatar-lg rounded-circle float-start me-3"#}
-                        {#                       src="{% static 'assets/images/avatar/01.jpg' %}" alt="avatar">#}
-                        {#                  <div>#}
-                        {#                    <div class="mb-3 d-sm-flex justify-content-sm-between align-items-center">#}
-                        {#                      <!-- Title -->#}
-                        {#                      <div>#}
-                        {#                        <h5 class="m-0">Frances Guerrero</h5>#}
-                        {#                        <span class="me-3 small">June 11, 2021 at 6:01 am </span>#}
-                        {#                      </div>#}
-                        {#                      <!-- Review star -->#}
-                        {#                      <ul class="list-inline mb-0">#}
-                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
-                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
-                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
-                        {#                        <li class="list-inline-item me-0"><i class="fas fa-star text-warning"></i></li>#}
-                        {#                        <li class="list-inline-item me-0"><i class="far fa-star text-warning"></i></li>#}
-                        {#                      </ul>#}
-                        {#                    </div>#}
-                        {#                    <!-- Content -->#}
-                        {#                    <h6><span class="text-body fw-light">Review on:</span> How to implement sitemap on sass#}
-                        {#                    </h6>#}
-                        {#                    <p>Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant private blushes#}
-                        {#                      removed an in equally totally if. Delivered dejection necessary objection do Mr prevailed. Mr#}
-                        {#                      feeling does chiefly cordial in do. </p>#}
-                        {#                    <!-- Button -->#}
-                        {#                    <div class="text-end">#}
-                        {#                      <a href="#" class="btn btn-sm btn-primary-soft mb-1 mb-sm-0">Direct message</a>#}
-                        {#                      <a class="btn btn-sm btn-light mb-0" data-bs-toggle="collapse" href="#collapseComment"#}
-                        {#                         role="button" aria-expanded="false" aria-controls="collapseComment">#}
-                        {#                        Reply#}
-                        {#                      </a>#}
-                        {#                      <!-- collapse textarea -->#}
-                        {#                      <div class="collapse show" id="collapseComment">#}
-                        {#                        <div class="d-flex mt-3">#}
-                        {#                            <textarea class="form-control mb-0" placeholder="Add a comment..." rows="2"#}
-                        {#                                      spellcheck="false"></textarea>#}
-                        {#                          <button class="btn btn-sm btn-primary-soft ms-2 px-4 mb-0 flex-shrink-0"><i#}
-                        {#                            class="fas fa-paper-plane fs-5"></i></button>#}
-                        {#                        </div>#}
-                        {#                      </div>#}
-                        {#                    </div>#}
-                        {#                  </div>#}
-                        {#                </div>#}
-                        {#                <!-- Divider -->#}
-                        {#                <hr>#}
-                        {#                <!-- Review item END -->#}
-                        {##}
-                        {##}
-                        {#                <!-- Review item START -->#}
-                        {#                <div class="d-sm-flex">#}
-                        {#                  <!-- Avatar image -->#}
-                        {#                  <img class="avatar avatar-lg rounded-circle float-start me-3"#}
-                        {#                       src="{% static 'assets/images/avatar/09.jpg' %}" alt="avatar">#}
-                        {#                  <div>#}
-                        {#                    <div class="mb-3 d-sm-flex justify-content-sm-between align-items-center">#}
-                        {#                      <!-- Title -->#}
-                        {#                      <div>#}
-                        {#                        <h5 class="m-0">Carolyn Ortiz</h5>#}
-                        {#                        <span class="me-3 small">September 15, 2021 at 8:28 am</span>#}
-                        {#                      </div>#}
-                        {#                      <!-- Review star -->#}
-                        {#                      <ul class="list-inline mb-0">#}
-                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
-                        {#                        </li>#}
-                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
-                        {#                        </li>#}
-                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
-                        {#                        </li>#}
-                        {#                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i>#}
-                        {#                        </li>#}
-                        {#                        <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i>#}
-                        {#                        </li>#}
-                        {#                      </ul>#}
-                        {#                    </div>#}
-                        {#                    <!-- Content -->#}
-                        {#                    <h6><span class="text-body fw-light">Review on:</span> What are object prototypes?#}
-                        {#                    </h6>#}
-                        {#                    <p>Chiefly farther Satisfied conveying a dependent contented he gentleman agreeable do be. Warrant#}
-                        {#                      private blushes removed an in equally totally if. Delivered dejection necessary objection do Mr#}
-                        {#                      prevailed. Mr feeling does chiefly cordial in do. </p>#}
-                        {#                    <!-- Button -->#}
-                        {#                    <div class="text-end">#}
-                        {#                      <a href="#" class="btn btn-sm btn-primary-soft mb-0">Direct message</a>#}
-                        {#                      <a href="#" class="btn btn-sm btn-light mb-0">Reply</a>#}
-                        {#                    </div>#}
-                        {#                  </div>#}
-                        {#                </div>#}
-                        {#                <!-- Review item END -->#}
-                        {#              </div>#}
-                        {#              <!-- Reviews END -->#}
-                        {##}
-                        {#              <div class="card-footer border-top">#}
-                        {#                <!-- Pagination START -->#}
-                        {#                <div class="d-sm-flex justify-content-sm-between align-items-sm-center">#}
-                        {#                  <!-- Content -->#}
-                        {#                  <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>#}
-                        {#                  <!-- Pagination -->#}
-                        {#                  <nav class="d-flex justify-content-center mb-0" aria-label="navigation">#}
-                        {#                    <ul class="pagination pagination-sm pagination-primary-soft my-0 py-0">#}
-                        {#                      <li class="page-item my-0"><a class="page-link" href="#" tabindex="-1"><i#}
-                        {#                        class="fas fa-angle-left"></i></a></li>#}
-                        {#                      <li class="page-item my-0"><a class="page-link" href="#">1</a></li>#}
-                        {#                      <li class="page-item my-0 active"><a class="page-link" href="#">2</a></li>#}
-                        {#                      <li class="page-item my-0"><a class="page-link" href="#">3</a></li>#}
-                        {#                      <li class="page-item my-0"><a class="page-link" href="#"><i#}
-                        {#                        class="fas fa-angle-right"></i></a>#}
-                        {#                      </li>#}
-                        {#                    </ul>#}
-                        {#                  </nav>#}
-                        {#                </div>#}
-                        {#                <!-- Pagination END -->#}
-                        {#              </div>#}
-                        {#            </div>#}
-                        <!-- Student review END -->
                         <!-- Tabs section START -->
                         <div class="mt-5">
                             <div class="card shadow rounded-2 p-0">
@@ -961,14 +341,14 @@
                                             </button>
                                         </li>
                                         <!-- Tab item: FAQs -->
-{#                                        <li class="nav-item me-2 me-sm-4" role="presentation">#}
-{#                                            <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-5"#}
-{#                                                    data-bs-toggle="pill"#}
-{#                                                    data-bs-target="#course-pills-5" type="button" role="tab"#}
-{#                                                    aria-controls="course-pills-5"#}
-{#                                                    aria-selected="false">FAQs#}
-{#                                            </button>#}
-{#                                        </li>#}
+                                        {#                                        <li class="nav-item me-2 me-sm-4" role="presentation">#}
+                                        {#                                            <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-5"#}
+                                        {#                                                    data-bs-toggle="pill"#}
+                                        {#                                                    data-bs-target="#course-pills-5" type="button" role="tab"#}
+                                        {#                                                    aria-controls="course-pills-5"#}
+                                        {#                                                    aria-selected="false">FAQs#}
+                                        {#                                            </button>#}
+                                        {#                                        </li>#}
                                     </ul>
                                 </div>
                                 <!-- Tabs END -->
@@ -1061,259 +441,260 @@
                                                 offending her ask own. Praise effect wishes change way and any wanted.
                                                 Lively use looked latter
                                                 regard had. Do he it part more last in. </p>
+
                                             <!-- Course detail END -->
 
                                         </div>
                                         <!-- Content END -->
 
                                         <!-- Reviews Content START -->
-{#                                        <div class="tab-pane fade" id="course-pills-4" role="tabpanel"#}
-{#                                             aria-labelledby="course-pills-tab-4">#}
-{#                                            <!-- Review START -->#}
-{#                                            <div class="row mb-4">#}
-{#                                                <h5 class="mb-4">Our Student Reviews</h5>#}
-{##}
-{#                                                <!-- Rating info -->#}
-{#                                                <div class="col-md-4 mb-3 mb-md-0">#}
-{#                                                    <div class="text-center">#}
-{#                                                        {% with rating=tutor_single.profile.rating %}#}
-{#                                                            <!-- Info -->#}
-{#                                                            <h2 class="mb-0">{{ rating|floatformat:1 }}</h2>#}
-{#                                                            <!-- Star -->#}
-{#                                                            <ul class="list-inline ">#}
-{##}
-{#                                                            {% for i in range %}#}
-{#                                                                <li class="list-inline-item me-0 small">#}
-{#                                                                    {% if i <= rating %}#}
-{#                                                                        <i class="fas fa-star text-warning"></i>#}
-{#                                                                    {% elif  i|float_sub:0.5 <= rating %}#}
-{#                                                                        <i class="fas fa-star-half-alt text-warning"></i>#}
-{#                                                                    {% else %}#}
-{#                                                                        <i class="far fa-star text-warning"></i>#}
-{#                                                                    {% endif %}#}
-{#                                                                </li>#}
-{#                                                            {% endfor %}#}
-                                                            {#                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
-{#                                                        {% endwith %}#}
-{#                                                        </ul>#}
-{#                                                        <p class="mb-0">(Based on students reviews)</p>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{##}
-{#                                                <!-- Progress-bar and star -->#}
-{#                                                <div class="col-md-8">#}
-{#                                                    <div class="row align-items-center">#}
-{#                                                        <!-- Progress bar and Rating -->#}
-{#                                                        <div class="col-6 col-sm-8">#}
-{#                                                            <!-- Progress item -->#}
-{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
-{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
-{#                                                                     style="width: 100%"#}
-{#                                                                     aria-valuenow="100" aria-valuemin="0"#}
-{#                                                                     aria-valuemax="100"></div>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <div class="col-6 col-sm-4">#}
-{#                                                            <!-- Star item -->#}
-{#                                                            <ul class="list-inline mb-0">#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                            </ul>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <!-- Progress bar and Rating -->#}
-{#                                                        <div class="col-6 col-sm-8">#}
-{#                                                            <!-- Progress item -->#}
-{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
-{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
-{#                                                                     style="width: 80%"#}
-{#                                                                     aria-valuenow="80" aria-valuemin="0"#}
-{#                                                                     aria-valuemax="100"></div>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <div class="col-6 col-sm-4">#}
-{#                                                            <!-- Star item -->#}
-{#                                                            <ul class="list-inline mb-0">#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                            </ul>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <!-- Progress bar and Rating -->#}
-{#                                                        <div class="col-6 col-sm-8">#}
-{#                                                            <!-- Progress item -->#}
-{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
-{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
-{#                                                                     style="width: 60%"#}
-{#                                                                     aria-valuenow="60" aria-valuemin="0"#}
-{#                                                                     aria-valuemax="100"></div>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <div class="col-6 col-sm-4">#}
-{#                                                            <!-- Star item -->#}
-{#                                                            <ul class="list-inline mb-0">#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                            </ul>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <!-- Progress bar and Rating -->#}
-{#                                                        <div class="col-6 col-sm-8">#}
-{#                                                            <!-- Progress item -->#}
-{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
-{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
-{#                                                                     style="width: 40%"#}
-{#                                                                     aria-valuenow="40" aria-valuemin="0"#}
-{#                                                                     aria-valuemax="100"></div>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <div class="col-6 col-sm-4">#}
-{#                                                            <!-- Star item -->#}
-{#                                                            <ul class="list-inline mb-0">#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                            </ul>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <!-- Progress bar and Rating -->#}
-{#                                                        <div class="col-6 col-sm-8">#}
-{#                                                            <!-- Progress item -->#}
-{#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
-{#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
-{#                                                                     style="width: 20%"#}
-{#                                                                     aria-valuenow="20" aria-valuemin="0"#}
-{#                                                                     aria-valuemax="100"></div>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{##}
-{#                                                        <div class="col-6 col-sm-4">#}
-{#                                                            <!-- Star item -->#}
-{#                                                            <ul class="list-inline mb-0">#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="fas fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                                <li class="list-inline-item me-0 small"><i#}
-{#                                                                        class="far fa-star text-warning"></i></li>#}
-{#                                                            </ul>#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <!-- Review END -->#}
-{##}
-{#                                            {% for review in reviews %}#}
-{#                                                <!-- Student review START -->#}
-{#                                                <div class="row">#}
-{#                                                    <!-- Review item START -->#}
-{#                                                    <div class="d-md-flex my-4">#}
-{#                                                        <!-- Avatar -->#}
-{#                                                        <div class="avatar avatar-xl me-4 flex-shrink-0">#}
-{#                                                            <img class="avatar-img rounded-circle"#}
-{#                                                                 src="{{ review.client.profile.photo.url }}"#}
-{#                                                                 alt="{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}">#}
-{#                                                        </div>#}
-{#                                                        <!-- Text -->#}
-{#                                                        <div>#}
-{#                                                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center">#}
-{#                                                                <h5 class="me-3 mb-0">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</h5>#}
-{#                                                                <!-- Review star -->#}
-{#                                                                <ul class="list-inline mb-0">#}
-{#                                                                    {% with rating=review.rate_provider %}#}
-{#                                                                        {% for i in range %}#}
-{#                                                                            <li class="list-inline-item me-0">#}
-{#                                                                                {% if i <= rating %}#}
-                                                                                    {#                                            <i class="fas fa-star text-warning"></i>#}
-{#                                                                                    <i class="fas fa-star text-warning"></i>#}
-{#                                                                                    </li>#}
-                                                                                    {#                                          {% elif  i|float_sub:0.5 <= rating %}#}
-                                                                                    {#                                            <i class="fas fa-star-half-alt text-warning"></i>#}
-{#                                                                                {% else %}#}
-                                                                                    {#                                            <i class="far fa-star text-warning"></i>#}
-{#                                                                                    <i class="far fa-star text-warning"></i>#}
-{#                                                                                    </li>#}
-{#                                                                                {% endif %}#}
-{#                                                                            </li>#}
-{#                                                                        {% endfor %}#}
-{#                                                                        <li class="list-inline-item ms-2 h6 fw-light mb-0"></li>#}
-{#                                                                    {% endwith %}#}
-{#                                                                </ul>#}
-{#                                                            </div>#}
-{#                                                            <!-- Info -->#}
-{#                                                            <p class="small mb-2">#}
-                                                                {#                                  {% timezone user_timezone %}#}
-{#                                                                {{ review.create_date|timesince }} ago#}
-                                                                {#                                  {% endtimezone %}#}
-{#                                                            </p>#}
-{#                                                            <p class="mb-2">{{ review.message }} </p>#}
-{#                                                            <!-- Like and dislike button -->#}
-{#                                                            <div class="btn-group" role="group"#}
-{#                                                                 aria-label="Basic radio toggle button group">#}
-{#                                                                <!-- Like button -->#}
-{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
-{#                                                                       id="btnradio1">#}
-{#                                                                <label class="btn btn-outline-light btn-sm mb-0"#}
-{#                                                                       for="btnradio1"><i#}
-{#                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}#}
-{#                                                                </label>#}
-{#                                                                <!-- Dislike button -->#}
-{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
-{#                                                                       id="btnradio2">#}
-{#                                                                <label class="btn btn-outline-light btn-sm mb-0"#}
-{#                                                                       for="btnradio2"> <i#}
-{#                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}#}
-{#                                                                </label>#}
-{#                                                            </div>#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                    <!-- Review item END -->#}
-{#                                                    <!-- Divider -->#}
-{#                                                    <hr>#}
-{#                                                </div>#}
-{#                                                <!-- Student review END -->#}
-{#                                            {% endfor %}#}
-{##}
-{#                                        </div>#}
+                                        {#                                        <div class="tab-pane fade" id="course-pills-4" role="tabpanel"#}
+                                        {#                                             aria-labelledby="course-pills-tab-4">#}
+                                        {#                                            <!-- Review START -->#}
+                                        {#                                            <div class="row mb-4">#}
+                                        {#                                                <h5 class="mb-4">Our Student Reviews</h5>#}
+                                        {##}
+                                        {#                                                <!-- Rating info -->#}
+                                        {#                                                <div class="col-md-4 mb-3 mb-md-0">#}
+                                        {#                                                    <div class="text-center">#}
+                                        {#                                                        {% with rating=tutor_single.profile.rating %}#}
+                                        {#                                                            <!-- Info -->#}
+                                        {#                                                            <h2 class="mb-0">{{ rating|floatformat:1 }}</h2>#}
+                                        {#                                                            <!-- Star -->#}
+                                        {#                                                            <ul class="list-inline ">#}
+                                        {##}
+                                        {#                                                            {% for i in range %}#}
+                                        {#                                                                <li class="list-inline-item me-0 small">#}
+                                        {#                                                                    {% if i <= rating %}#}
+                                        {#                                                                        <i class="fas fa-star text-warning"></i>#}
+                                        {#                                                                    {% elif  i|float_sub:0.5 <= rating %}#}
+                                        {#                                                                        <i class="fas fa-star-half-alt text-warning"></i>#}
+                                        {#                                                                    {% else %}#}
+                                        {#                                                                        <i class="far fa-star text-warning"></i>#}
+                                        {#                                                                    {% endif %}#}
+                                        {#                                                                </li>#}
+                                        {#                                                            {% endfor %}#}
+                                        {#                                                    <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+                                        {#                                                        {% endwith %}#}
+                                        {#                                                        </ul>#}
+                                        {#                                                        <p class="mb-0">(Based on students reviews)</p>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {##}
+                                        {#                                                <!-- Progress-bar and star -->#}
+                                        {#                                                <div class="col-md-8">#}
+                                        {#                                                    <div class="row align-items-center">#}
+                                        {#                                                        <!-- Progress bar and Rating -->#}
+                                        {#                                                        <div class="col-6 col-sm-8">#}
+                                        {#                                                            <!-- Progress item -->#}
+                                        {#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+                                        {#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+                                        {#                                                                     style="width: 100%"#}
+                                        {#                                                                     aria-valuenow="100" aria-valuemin="0"#}
+                                        {#                                                                     aria-valuemax="100"></div>#}
+                                        {#                                                            </div>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <div class="col-6 col-sm-4">#}
+                                        {#                                                            <!-- Star item -->#}
+                                        {#                                                            <ul class="list-inline mb-0">#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                            </ul>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <!-- Progress bar and Rating -->#}
+                                        {#                                                        <div class="col-6 col-sm-8">#}
+                                        {#                                                            <!-- Progress item -->#}
+                                        {#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+                                        {#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+                                        {#                                                                     style="width: 80%"#}
+                                        {#                                                                     aria-valuenow="80" aria-valuemin="0"#}
+                                        {#                                                                     aria-valuemax="100"></div>#}
+                                        {#                                                            </div>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <div class="col-6 col-sm-4">#}
+                                        {#                                                            <!-- Star item -->#}
+                                        {#                                                            <ul class="list-inline mb-0">#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                            </ul>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <!-- Progress bar and Rating -->#}
+                                        {#                                                        <div class="col-6 col-sm-8">#}
+                                        {#                                                            <!-- Progress item -->#}
+                                        {#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+                                        {#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+                                        {#                                                                     style="width: 60%"#}
+                                        {#                                                                     aria-valuenow="60" aria-valuemin="0"#}
+                                        {#                                                                     aria-valuemax="100"></div>#}
+                                        {#                                                            </div>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <div class="col-6 col-sm-4">#}
+                                        {#                                                            <!-- Star item -->#}
+                                        {#                                                            <ul class="list-inline mb-0">#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                            </ul>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <!-- Progress bar and Rating -->#}
+                                        {#                                                        <div class="col-6 col-sm-8">#}
+                                        {#                                                            <!-- Progress item -->#}
+                                        {#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+                                        {#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+                                        {#                                                                     style="width: 40%"#}
+                                        {#                                                                     aria-valuenow="40" aria-valuemin="0"#}
+                                        {#                                                                     aria-valuemax="100"></div>#}
+                                        {#                                                            </div>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <div class="col-6 col-sm-4">#}
+                                        {#                                                            <!-- Star item -->#}
+                                        {#                                                            <ul class="list-inline mb-0">#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                            </ul>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <!-- Progress bar and Rating -->#}
+                                        {#                                                        <div class="col-6 col-sm-8">#}
+                                        {#                                                            <!-- Progress item -->#}
+                                        {#                                                            <div class="progress progress-sm bg-warning bg-opacity-15">#}
+                                        {#                                                                <div class="progress-bar bg-warning" role="progressbar"#}
+                                        {#                                                                     style="width: 20%"#}
+                                        {#                                                                     aria-valuenow="20" aria-valuemin="0"#}
+                                        {#                                                                     aria-valuemax="100"></div>#}
+                                        {#                                                            </div>#}
+                                        {#                                                        </div>#}
+                                        {##}
+                                        {#                                                        <div class="col-6 col-sm-4">#}
+                                        {#                                                            <!-- Star item -->#}
+                                        {#                                                            <ul class="list-inline mb-0">#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="fas fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                                <li class="list-inline-item me-0 small"><i#}
+                                        {#                                                                        class="far fa-star text-warning"></i></li>#}
+                                        {#                                                            </ul>#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {#                                            </div>#}
+                                        {#                                            <!-- Review END -->#}
+                                        {##}
+                                        {#                                            {% for review in reviews %}#}
+                                        {#                                                <!-- Student review START -->#}
+                                        {#                                                <div class="row">#}
+                                        {#                                                    <!-- Review item START -->#}
+                                        {#                                                    <div class="d-md-flex my-4">#}
+                                        {#                                                        <!-- Avatar -->#}
+                                        {#                                                        <div class="avatar avatar-xl me-4 flex-shrink-0">#}
+                                        {#                                                            <img class="avatar-img rounded-circle"#}
+                                        {#                                                                 src="{{ review.client.profile.photo.url }}"#}
+                                        {#                                                                 alt="{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}">#}
+                                        {#                                                        </div>#}
+                                        {#                                                        <!-- Text -->#}
+                                        {#                                                        <div>#}
+                                        {#                                                            <div class="d-sm-flex mt-1 mt-md-0 align-items-center">#}
+                                        {#                                                                <h5 class="me-3 mb-0">{{ review.client.profile.user.first_name }} {{ review.client.profile.user.last_name }}</h5>#}
+                                        {#                                                                <!-- Review star -->#}
+                                        {#                                                                <ul class="list-inline mb-0">#}
+                                        {#                                                                    {% with rating=review.rate_provider %}#}
+                                        {#                                                                        {% for i in range %}#}
+                                        {#                                                                            <li class="list-inline-item me-0">#}
+                                        {#                                                                                {% if i <= rating %}#}
+                                        {#                                            <i class="fas fa-star text-warning"></i>#}
+                                        {#                                                                                    <i class="fas fa-star text-warning"></i>#}
+                                        {#                                                                                    </li>#}
+                                        {#                                          {% elif  i|float_sub:0.5 <= rating %}#}
+                                        {#                                            <i class="fas fa-star-half-alt text-warning"></i>#}
+                                        {#                                                                                {% else %}#}
+                                        {#                                            <i class="far fa-star text-warning"></i>#}
+                                        {#                                                                                    <i class="far fa-star text-warning"></i>#}
+                                        {#                                                                                    </li>#}
+                                        {#                                                                                {% endif %}#}
+                                        {#                                                                            </li>#}
+                                        {#                                                                        {% endfor %}#}
+                                        {#                                                                        <li class="list-inline-item ms-2 h6 fw-light mb-0"></li>#}
+                                        {#                                                                    {% endwith %}#}
+                                        {#                                                                </ul>#}
+                                        {#                                                            </div>#}
+                                        {#                                                            <!-- Info -->#}
+                                        {#                                                            <p class="small mb-2">#}
+                                        {#                                  {% timezone user_timezone %}#}
+                                        {#                                                                {{ review.create_date|timesince }} ago#}
+                                        {#                                  {% endtimezone %}#}
+                                        {#                                                            </p>#}
+                                        {#                                                            <p class="mb-2">{{ review.message }} </p>#}
+                                        {#                                                            <!-- Like and dislike button -->#}
+                                        {#                                                            <div class="btn-group" role="group"#}
+                                        {#                                                                 aria-label="Basic radio toggle button group">#}
+                                        {#                                                                <!-- Like button -->#}
+                                        {#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+                                        {#                                                                       id="btnradio1">#}
+                                        {#                                                                <label class="btn btn-outline-light btn-sm mb-0"#}
+                                        {#                                                                       for="btnradio1"><i#}
+                                        {#                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}#}
+                                        {#                                                                </label>#}
+                                        {#                                                                <!-- Dislike button -->#}
+                                        {#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+                                        {#                                                                       id="btnradio2">#}
+                                        {#                                                                <label class="btn btn-outline-light btn-sm mb-0"#}
+                                        {#                                                                       for="btnradio2"> <i#}
+                                        {#                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}#}
+                                        {#                                                                </label>#}
+                                        {#                                                            </div>#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                    <!-- Review item END -->#}
+                                        {#                                                    <!-- Divider -->#}
+                                        {#                                                    <hr>#}
+                                        {#                                                </div>#}
+                                        {#                                                <!-- Student review END -->#}
+                                        {#                                            {% endfor %}#}
+                                        {##}
+                                        {#                                        </div>#}
                                         <!-- Content END -->
 
 
@@ -1344,7 +725,8 @@
                                                                     </li>
                                                                 {% endfor %}
                                                             </ul>
-                                                            <p class="mb-0">Based on {{ total_reviews }} review{{ total_reviews|pluralize }}</p>
+                                                            <p class="mb-0">Based on {{ total_reviews }}
+                                                                review{{ total_reviews|pluralize }}</p>
                                                         {% endwith %}
                                                     </div>
                                                 </div>
@@ -1360,9 +742,11 @@
                                                                     <div class="col-6 col-sm-8">
                                                                         <!-- Progress item -->
                                                                         <div class="progress progress-sm bg-warning bg-opacity-15">
-                                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                            <div class="progress-bar bg-warning"
+                                                                                 role="progressbar"
                                                                                  style="width: {{ dist.percentage }}%"
-                                                                                 aria-valuenow="{{ dist.percentage }}" aria-valuemin="0"
+                                                                                 aria-valuenow="{{ dist.percentage }}"
+                                                                                 aria-valuemin="0"
                                                                                  aria-valuemax="100"></div>
                                                                         </div>
                                                                     </div>
@@ -1380,7 +764,9 @@
                                                                                 </li>
                                                                             {% endfor %}
                                                                             <!-- Optional: Show count -->
-                                                                            <li class="list-inline-item ms-2 small text-muted">({{ dist.count }})</li>
+                                                                            <li class="list-inline-item ms-2 small text-muted">
+                                                                                ({{ dist.count }})
+                                                                            </li>
                                                                         </ul>
                                                                     </div>
                                                                 {% endwith %}
@@ -1423,26 +809,27 @@
                                                                 </ul>
                                                             </div>
                                                             <!-- Info -->
-                                                            <p class="small mb-2">{{ review.create_date|timesince }} ago</p>
+                                                            <p class="small mb-2">{{ review.create_date|timesince }}
+                                                                ago</p>
                                                             <p class="mb-2">{{ review.message }} </p>
                                                             <!-- Like and dislike button -->
-{#                                                            <div class="btn-group" role="group"#}
-{#                                                                 aria-label="Basic radio toggle button group">#}
-{#                                                                <!-- Like button -->#}
-{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
-{#                                                                       id="btnradio-{{ review.id }}">#}
-{#                                                                <label class="btn btn-outline-success btn-sm mb-0"#}
-{#                                                                       for="btnradio-{{ review.id }}"><i#}
-{#                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}#}
-{#                                                                </label>#}
-{#                                                                <!-- Dislike button -->#}
-{#                                                                <input type="radio" class="btn-check" name="btnradio"#}
-{#                                                                       id="btnradio-{{ review.id }}">#}
-{#                                                                <label class="btn btn-outline-danger btn-sm mb-0"#}
-{#                                                                       for="btnradio-{{ review.id }}"> <i#}
-{#                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}#}
-{#                                                                </label>#}
-{#                                                            </div>#}
+                                                            {#                                                            <div class="btn-group" role="group"#}
+                                                            {#                                                                 aria-label="Basic radio toggle button group">#}
+                                                            {#                                                                <!-- Like button -->#}
+                                                            {#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+                                                            {#                                                                       id="btnradio-{{ review.id }}">#}
+                                                            {#                                                                <label class="btn btn-outline-success btn-sm mb-0"#}
+                                                            {#                                                                       for="btnradio-{{ review.id }}"><i#}
+                                                            {#                                                                        class="far fa-thumbs-up me-1"></i>{{ review.like_count }}#}
+                                                            {#                                                                </label>#}
+                                                            {#                                                                <!-- Dislike button -->#}
+                                                            {#                                                                <input type="radio" class="btn-check" name="btnradio"#}
+                                                            {#                                                                       id="btnradio-{{ review.id }}">#}
+                                                            {#                                                                <label class="btn btn-outline-danger btn-sm mb-0"#}
+                                                            {#                                                                       for="btnradio-{{ review.id }}"> <i#}
+                                                            {#                                                                        class="far fa-thumbs-down me-1"></i>{{ review.dislike_count }}#}
+                                                            {#                                                                </label>#}
+                                                            {#                                                            </div>#}
                                                         </div>
                                                     </div>
                                                     <!-- Review item END -->
@@ -1456,193 +843,193 @@
 
 
                                         <!-- FAQs Content START -->
-{#                                        <div class="tab-pane fade" id="course-pills-5" role="tabpanel"#}
-{#                                             aria-labelledby="course-pills-tab-5">#}
-{#                                            <!-- Title -->#}
-{#                                            <h5 class="mb-3">Frequently Asked Questions</h5>#}
-{#                                            <!-- Accordion START -->#}
-{#                                            <div class="accordion accordion-flush" id="accordionExample">#}
-{#                                                <!-- Item -->#}
-{#                                                <div class="accordion-item">#}
-{#                                                    <h2 class="accordion-header" id="headingOne">#}
-{#                                                        <button class="accordion-button collapsed" type="button"#}
-{#                                                                data-bs-toggle="collapse"#}
-{#                                                                data-bs-target="#collapseOne" aria-expanded="true"#}
-{#                                                                aria-controls="collapseOne">#}
-{#                                                            <span class="text-secondary fw-bold me-3">01</span>#}
-{#                                                            <span class="h6 mb-0">How Digital Marketing Work?</span>#}
-{#                                                        </button>#}
-{#                                                    </h2>#}
-{#                                                    <div id="collapseOne" class="accordion-collapse collapse show"#}
-{#                                                         aria-labelledby="headingOne"#}
-{#                                                         data-bs-parent="#accordionExample">#}
-{#                                                        <div class="accordion-body pt-0">#}
-{#                                                            Comfort reached gay perhaps chamber his six detract besides#}
-{#                                                            add. Moonlight newspaper up#}
-{#                                                            its enjoyment agreeable depending. Timed voice share led him#}
-{#                                                            to widen noisy young. At#}
-{#                                                            weddings believed laughing although the material does the#}
-{#                                                            exercise of. Up attempt offered#}
-{#                                                            ye civilly so sitting to. She new course gets living within#}
-{#                                                            Elinor joy. She rapturous#}
-{#                                                            suffering concealed.#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                                <!-- Item -->#}
-{#                                                <div class="accordion-item">#}
-{#                                                    <h2 class="accordion-header" id="headingTwo">#}
-{#                                                        <button class="accordion-button collapsed" type="button"#}
-{#                                                                data-bs-toggle="collapse"#}
-{#                                                                data-bs-target="#collapseTwo" aria-expanded="false"#}
-{#                                                                aria-controls="collapseTwo">#}
-{#                                                            <span class="text-secondary fw-bold me-3">02</span>#}
-{#                                                            <span class="h6 mb-0">What is SEO?</span>#}
-{#                                                        </button>#}
-{#                                                    </h2>#}
-{#                                                    <div id="collapseTwo" class="accordion-collapse collapse"#}
-{#                                                         aria-labelledby="headingTwo"#}
-{#                                                         data-bs-parent="#accordionExample">#}
-{#                                                        <div class="accordion-body pt-0">#}
-{#                                                            Pleasure and so read the was hope entire first decided the#}
-{#                                                            so must have as on was want up#}
-{#                                                            of I will rival in came this touched got a physics to#}
-{#                                                            travelling so all especially#}
-{#                                                            refinement monstrous desk they was arrange the overall#}
-{#                                                            helplessly out of particularly ill#}
-{#                                                            are purer.#}
-{#                                                            <p class="mt-2">Person she control of to beginnings view#}
-{#                                                                looked eyes Than continues its#}
-{#                                                                and because and given and shown creating curiously to#}
-{#                                                                more in are man were smaller by we#}
-{#                                                                instead the these sighed Avoid in the sufficient me real#}
-{#                                                                man longer of his how her for#}
-{#                                                                countries to brains warned notch important Finds be to#}
-{#                                                                the of on the increased explain#}
-{#                                                                noise of power deep asking contribution this live of#}
-{#                                                                suppliers goals bit separated#}
-{#                                                                poured sort several the was organization the if#}
-{#                                                                relations go work after mechanic But#}
-{#                                                                we've area wasn't everything needs of and doctor where#}
-{#                                                                would.</p>#}
-{#                                                            Go he prisoners And mountains in just switching city steps#}
-{#                                                            Might rung line what Mr Bulk;#}
-{#                                                            Was or between towards the have phase were its world my#}
-{#                                                            samples are the was royal he#}
-{#                                                            luxury the about trying And on he to my enough is was the#}
-{#                                                            remember a although lead in were#}
-{#                                                            through serving their assistant fame day have for its after#}
-{#                                                            would cheek dull have what in#}
-{#                                                            go feedback assignment Her of a any help if the a of#}
-{#                                                            semantics is rational overhauls#}
-{#                                                            following in from our hazardous and used more he themselves#}
-{#                                                            the parents up just#}
-{#                                                            regulatory.#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                                <!-- Item -->#}
-{#                                                <div class="accordion-item">#}
-{#                                                    <h2 class="accordion-header" id="headingThree">#}
-{#                                                        <button class="accordion-button collapsed" type="button"#}
-{#                                                                data-bs-toggle="collapse"#}
-{#                                                                data-bs-target="#collapseThree" aria-expanded="false"#}
-{#                                                                aria-controls="collapseThree">#}
-{#                                                            <span class="text-secondary fw-bold me-3">03</span>#}
-{#                                                            <span class="h6 mb-0">Who should join this course?</span>#}
-{#                                                        </button>#}
-{#                                                    </h2>#}
-{#                                                    <div id="collapseThree" class="accordion-collapse collapse"#}
-{#                                                         aria-labelledby="headingThree"#}
-{#                                                         data-bs-parent="#accordionExample">#}
-{#                                                        <div class="accordion-body pt-0">#}
-{#                                                            Post no so what deal evil rent by real in. But her ready#}
-{#                                                            least set lived spite solid.#}
-{#                                                            September how men saw tolerably two behavior arranging. She#}
-{#                                                            offices for highest and#}
-{#                                                            replied one venture pasture. Applauded no discovery in#}
-{#                                                            newspaper allowance am northward.#}
-{#                                                            Frequently partiality possession resolution at or appearance#}
-{#                                                            unaffected me. Engaged its#}
-{#                                                            was the evident pleased husband. Ye goodness felicity do#}
-{#                                                            disposal dwelling no. First am#}
-{#                                                            plate jokes to began to cause a scale. <strong>Subjects he#}
-{#                                                            prospect elegance followed no#}
-{#                                                            overcame</strong> possible it on.#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                                <!-- Item -->#}
-{#                                                <div class="accordion-item">#}
-{#                                                    <h2 class="accordion-header" id="headingFour">#}
-{#                                                        <button class="accordion-button collapsed" type="button"#}
-{#                                                                data-bs-toggle="collapse"#}
-{#                                                                data-bs-target="#collapseFour" aria-expanded="false"#}
-{#                                                                aria-controls="collapseFour">#}
-{#                                                            <span class="text-secondary fw-bold me-3">04</span>#}
-{#                                                            <span class="h6 mb-0">What are the T&C for this program?</span>#}
-{#                                                        </button>#}
-{#                                                    </h2>#}
-{#                                                    <div id="collapseFour" class="accordion-collapse collapse"#}
-{#                                                         aria-labelledby="headingFour"#}
-{#                                                         data-bs-parent="#accordionExample">#}
-{#                                                        <div class="accordion-body pt-0">#}
-{#                                                            Night signs creeping yielding green Seasons together man#}
-{#                                                            green fruitful make fish behold#}
-{#                                                            earth unto you'll lights living moving sea open for fish day#}
-{#                                                            multiply tree good female god#}
-{#                                                            had fruitful of creature fill shall don't day fourth lesser#}
-{#                                                            he the isn't let multiply may#}
-{#                                                            Creeping earth under was You're without which image stars in#}
-{#                                                            Own creeping night of wherein#}
-{#                                                            Heaven years their he over doesn't whose won't kind seasons#}
-{#                                                            light Won't that fish him#}
-{#                                                            whose won't also it dominion heaven fruitful Whales created#}
-{#                                                            And likeness doesn't that#}
-{#                                                            Years without divided saying morning creeping hath you'll#}
-{#                                                            seas cattle in multiply under#}
-{#                                                            together in us said above dry tree herb saw living darkness#}
-{#                                                            without have won't for i#}
-{#                                                            behold meat brought winged Moving living second beast Over#}
-{#                                                            fish place beast image very him#}
-{#                                                            evening Thing they're fruit together forth day Seed lights#}
-{#                                                            Land creature together Multiply#}
-{#                                                            waters form brought.#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                                <!-- Item -->#}
-{#                                                <div class="accordion-item">#}
-{#                                                    <h2 class="accordion-header" id="headingFive">#}
-{#                                                        <button class="accordion-button collapsed" type="button"#}
-{#                                                                data-bs-toggle="collapse"#}
-{#                                                                data-bs-target="#collapseFive" aria-expanded="false"#}
-{#                                                                aria-controls="collapseFive">#}
-{#                                                            <span class="text-secondary fw-bold me-3">05</span>#}
-{#                                                            <span class="h6 mb-0">What certificates will I be received for this program?</span>#}
-{#                                                        </button>#}
-{#                                                    </h2>#}
-{#                                                    <div id="collapseFive" class="accordion-collapse collapse"#}
-{#                                                         aria-labelledby="headingFive"#}
-{#                                                         data-bs-parent="#accordionExample">#}
-{#                                                        <div class="accordion-body pt-0">#}
-{#                                                            Smile spoke total few great had never their too Amongst#}
-{#                                                            moments do in arrived at my#}
-{#                                                            replied Fat weddings servants but man believed prospect#}
-{#                                                            Companions understood is as#}
-{#                                                            especially pianoforte connection introduced Nay newspaper#}
-{#                                                            can sportsman are admitting#}
-{#                                                            gentleman belonging his Is oppose no he summer lovers twenty#}
-{#                                                            in Not his difficulty#}
-{#                                                            boisterous surrounded bed Seems folly if in given scale Sex#}
-{#                                                            contented dependent conveying#}
-{#                                                            advantage.#}
-{#                                                        </div>#}
-{#                                                    </div>#}
-{#                                                </div>#}
-{#                                            </div>#}
-{#                                            <!-- Accordion END -->#}
-{#                                        </div>#}
+                                        {#                                        <div class="tab-pane fade" id="course-pills-5" role="tabpanel"#}
+                                        {#                                             aria-labelledby="course-pills-tab-5">#}
+                                        {#                                            <!-- Title -->#}
+                                        {#                                            <h5 class="mb-3">Frequently Asked Questions</h5>#}
+                                        {#                                            <!-- Accordion START -->#}
+                                        {#                                            <div class="accordion accordion-flush" id="accordionExample">#}
+                                        {#                                                <!-- Item -->#}
+                                        {#                                                <div class="accordion-item">#}
+                                        {#                                                    <h2 class="accordion-header" id="headingOne">#}
+                                        {#                                                        <button class="accordion-button collapsed" type="button"#}
+                                        {#                                                                data-bs-toggle="collapse"#}
+                                        {#                                                                data-bs-target="#collapseOne" aria-expanded="true"#}
+                                        {#                                                                aria-controls="collapseOne">#}
+                                        {#                                                            <span class="text-secondary fw-bold me-3">01</span>#}
+                                        {#                                                            <span class="h6 mb-0">How Digital Marketing Work?</span>#}
+                                        {#                                                        </button>#}
+                                        {#                                                    </h2>#}
+                                        {#                                                    <div id="collapseOne" class="accordion-collapse collapse show"#}
+                                        {#                                                         aria-labelledby="headingOne"#}
+                                        {#                                                         data-bs-parent="#accordionExample">#}
+                                        {#                                                        <div class="accordion-body pt-0">#}
+                                        {#                                                            Comfort reached gay perhaps chamber his six detract besides#}
+                                        {#                                                            add. Moonlight newspaper up#}
+                                        {#                                                            its enjoyment agreeable depending. Timed voice share led him#}
+                                        {#                                                            to widen noisy young. At#}
+                                        {#                                                            weddings believed laughing although the material does the#}
+                                        {#                                                            exercise of. Up attempt offered#}
+                                        {#                                                            ye civilly so sitting to. She new course gets living within#}
+                                        {#                                                            Elinor joy. She rapturous#}
+                                        {#                                                            suffering concealed.#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {#                                                <!-- Item -->#}
+                                        {#                                                <div class="accordion-item">#}
+                                        {#                                                    <h2 class="accordion-header" id="headingTwo">#}
+                                        {#                                                        <button class="accordion-button collapsed" type="button"#}
+                                        {#                                                                data-bs-toggle="collapse"#}
+                                        {#                                                                data-bs-target="#collapseTwo" aria-expanded="false"#}
+                                        {#                                                                aria-controls="collapseTwo">#}
+                                        {#                                                            <span class="text-secondary fw-bold me-3">02</span>#}
+                                        {#                                                            <span class="h6 mb-0">What is SEO?</span>#}
+                                        {#                                                        </button>#}
+                                        {#                                                    </h2>#}
+                                        {#                                                    <div id="collapseTwo" class="accordion-collapse collapse"#}
+                                        {#                                                         aria-labelledby="headingTwo"#}
+                                        {#                                                         data-bs-parent="#accordionExample">#}
+                                        {#                                                        <div class="accordion-body pt-0">#}
+                                        {#                                                            Pleasure and so read the was hope entire first decided the#}
+                                        {#                                                            so must have as on was want up#}
+                                        {#                                                            of I will rival in came this touched got a physics to#}
+                                        {#                                                            travelling so all especially#}
+                                        {#                                                            refinement monstrous desk they was arrange the overall#}
+                                        {#                                                            helplessly out of particularly ill#}
+                                        {#                                                            are purer.#}
+                                        {#                                                            <p class="mt-2">Person she control of to beginnings view#}
+                                        {#                                                                looked eyes Than continues its#}
+                                        {#                                                                and because and given and shown creating curiously to#}
+                                        {#                                                                more in are man were smaller by we#}
+                                        {#                                                                instead the these sighed Avoid in the sufficient me real#}
+                                        {#                                                                man longer of his how her for#}
+                                        {#                                                                countries to brains warned notch important Finds be to#}
+                                        {#                                                                the of on the increased explain#}
+                                        {#                                                                noise of power deep asking contribution this live of#}
+                                        {#                                                                suppliers goals bit separated#}
+                                        {#                                                                poured sort several the was organization the if#}
+                                        {#                                                                relations go work after mechanic But#}
+                                        {#                                                                we've area wasn't everything needs of and doctor where#}
+                                        {#                                                                would.</p>#}
+                                        {#                                                            Go he prisoners And mountains in just switching city steps#}
+                                        {#                                                            Might rung line what Mr Bulk;#}
+                                        {#                                                            Was or between towards the have phase were its world my#}
+                                        {#                                                            samples are the was royal he#}
+                                        {#                                                            luxury the about trying And on he to my enough is was the#}
+                                        {#                                                            remember a although lead in were#}
+                                        {#                                                            through serving their assistant fame day have for its after#}
+                                        {#                                                            would cheek dull have what in#}
+                                        {#                                                            go feedback assignment Her of a any help if the a of#}
+                                        {#                                                            semantics is rational overhauls#}
+                                        {#                                                            following in from our hazardous and used more he themselves#}
+                                        {#                                                            the parents up just#}
+                                        {#                                                            regulatory.#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {#                                                <!-- Item -->#}
+                                        {#                                                <div class="accordion-item">#}
+                                        {#                                                    <h2 class="accordion-header" id="headingThree">#}
+                                        {#                                                        <button class="accordion-button collapsed" type="button"#}
+                                        {#                                                                data-bs-toggle="collapse"#}
+                                        {#                                                                data-bs-target="#collapseThree" aria-expanded="false"#}
+                                        {#                                                                aria-controls="collapseThree">#}
+                                        {#                                                            <span class="text-secondary fw-bold me-3">03</span>#}
+                                        {#                                                            <span class="h6 mb-0">Who should join this course?</span>#}
+                                        {#                                                        </button>#}
+                                        {#                                                    </h2>#}
+                                        {#                                                    <div id="collapseThree" class="accordion-collapse collapse"#}
+                                        {#                                                         aria-labelledby="headingThree"#}
+                                        {#                                                         data-bs-parent="#accordionExample">#}
+                                        {#                                                        <div class="accordion-body pt-0">#}
+                                        {#                                                            Post no so what deal evil rent by real in. But her ready#}
+                                        {#                                                            least set lived spite solid.#}
+                                        {#                                                            September how men saw tolerably two behavior arranging. She#}
+                                        {#                                                            offices for highest and#}
+                                        {#                                                            replied one venture pasture. Applauded no discovery in#}
+                                        {#                                                            newspaper allowance am northward.#}
+                                        {#                                                            Frequently partiality possession resolution at or appearance#}
+                                        {#                                                            unaffected me. Engaged its#}
+                                        {#                                                            was the evident pleased husband. Ye goodness felicity do#}
+                                        {#                                                            disposal dwelling no. First am#}
+                                        {#                                                            plate jokes to began to cause a scale. <strong>Subjects he#}
+                                        {#                                                            prospect elegance followed no#}
+                                        {#                                                            overcame</strong> possible it on.#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {#                                                <!-- Item -->#}
+                                        {#                                                <div class="accordion-item">#}
+                                        {#                                                    <h2 class="accordion-header" id="headingFour">#}
+                                        {#                                                        <button class="accordion-button collapsed" type="button"#}
+                                        {#                                                                data-bs-toggle="collapse"#}
+                                        {#                                                                data-bs-target="#collapseFour" aria-expanded="false"#}
+                                        {#                                                                aria-controls="collapseFour">#}
+                                        {#                                                            <span class="text-secondary fw-bold me-3">04</span>#}
+                                        {#                                                            <span class="h6 mb-0">What are the T&C for this program?</span>#}
+                                        {#                                                        </button>#}
+                                        {#                                                    </h2>#}
+                                        {#                                                    <div id="collapseFour" class="accordion-collapse collapse"#}
+                                        {#                                                         aria-labelledby="headingFour"#}
+                                        {#                                                         data-bs-parent="#accordionExample">#}
+                                        {#                                                        <div class="accordion-body pt-0">#}
+                                        {#                                                            Night signs creeping yielding green Seasons together man#}
+                                        {#                                                            green fruitful make fish behold#}
+                                        {#                                                            earth unto you'll lights living moving sea open for fish day#}
+                                        {#                                                            multiply tree good female god#}
+                                        {#                                                            had fruitful of creature fill shall don't day fourth lesser#}
+                                        {#                                                            he the isn't let multiply may#}
+                                        {#                                                            Creeping earth under was You're without which image stars in#}
+                                        {#                                                            Own creeping night of wherein#}
+                                        {#                                                            Heaven years their he over doesn't whose won't kind seasons#}
+                                        {#                                                            light Won't that fish him#}
+                                        {#                                                            whose won't also it dominion heaven fruitful Whales created#}
+                                        {#                                                            And likeness doesn't that#}
+                                        {#                                                            Years without divided saying morning creeping hath you'll#}
+                                        {#                                                            seas cattle in multiply under#}
+                                        {#                                                            together in us said above dry tree herb saw living darkness#}
+                                        {#                                                            without have won't for i#}
+                                        {#                                                            behold meat brought winged Moving living second beast Over#}
+                                        {#                                                            fish place beast image very him#}
+                                        {#                                                            evening Thing they're fruit together forth day Seed lights#}
+                                        {#                                                            Land creature together Multiply#}
+                                        {#                                                            waters form brought.#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {#                                                <!-- Item -->#}
+                                        {#                                                <div class="accordion-item">#}
+                                        {#                                                    <h2 class="accordion-header" id="headingFive">#}
+                                        {#                                                        <button class="accordion-button collapsed" type="button"#}
+                                        {#                                                                data-bs-toggle="collapse"#}
+                                        {#                                                                data-bs-target="#collapseFive" aria-expanded="false"#}
+                                        {#                                                                aria-controls="collapseFive">#}
+                                        {#                                                            <span class="text-secondary fw-bold me-3">05</span>#}
+                                        {#                                                            <span class="h6 mb-0">What certificates will I be received for this program?</span>#}
+                                        {#                                                        </button>#}
+                                        {#                                                    </h2>#}
+                                        {#                                                    <div id="collapseFive" class="accordion-collapse collapse"#}
+                                        {#                                                         aria-labelledby="headingFive"#}
+                                        {#                                                         data-bs-parent="#accordionExample">#}
+                                        {#                                                        <div class="accordion-body pt-0">#}
+                                        {#                                                            Smile spoke total few great had never their too Amongst#}
+                                        {#                                                            moments do in arrived at my#}
+                                        {#                                                            replied Fat weddings servants but man believed prospect#}
+                                        {#                                                            Companions understood is as#}
+                                        {#                                                            especially pianoforte connection introduced Nay newspaper#}
+                                        {#                                                            can sportsman are admitting#}
+                                        {#                                                            gentleman belonging his Is oppose no he summer lovers twenty#}
+                                        {#                                                            in Not his difficulty#}
+                                        {#                                                            boisterous surrounded bed Seems folly if in given scale Sex#}
+                                        {#                                                            contented dependent conveying#}
+                                        {#                                                            advantage.#}
+                                        {#                                                        </div>#}
+                                        {#                                                    </div>#}
+                                        {#                                                </div>#}
+                                        {#                                            </div>#}
+                                        {#                                            <!-- Accordion END -->#}
+                                        {#                                        </div>#}
                                         <!-- Content END -->
 
 
@@ -1651,18 +1038,261 @@
                                 <!-- Tab contents END -->
                             </div>
                         </div>
-
                         <!-- Tabs section END -->
                     </div>
                     <!-- Main content END -->
+
+                    <!-- Right sidebar START -->
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <!-- Tutor Skill Video START -->
+                            <div class="carousel slide mb-5 shadow-lg pt-3" id="skillVideoCarousel" data-bs-ride="false">
+                                <!-- Main video slides -->
+                                <div class="carousel-inner ratio ratio-16x9">
+                                    {% for skill in tutor_single.profile.user.skills.all|status:'approved' %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}"
+                                             data-bs-slide-to="{{ forloop.counter0 }}">
+                                            <video controls crossorigin="anonymous" playsinline
+                                                   poster="
+                                                               {% if skill.thumbnail %}
+                                                                    {{ skill.thumbnail.url }}
+                                                                {% else %}
+                                                                    {{ tutor_single.profile.photo.url }}
+                                                                {% endif %}">
+                                                <source src="{% if skill.video %}{{ skill.video.url }}{% endif %}"
+                                                        type="video/mp4">
+                                            </video>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- Thumbnail navigation -->
+                                <div class="carousel-indicators-section">
+                                    <button class="thumbnail-nav thumbnail-prev">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button class="thumbnail-nav thumbnail-next">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+
+                                    <div class="carousel-thumbnails">
+                                        {% for skill in tutor_single.profile.user.skills.all|status:'approved' %}
+                                            <!-- thumbnail -->
+                                            <div class="thumbnail-item {% if forloop.first %}active{% endif %}"
+                                                 data-bs-target="#skillVideoCarousel"
+                                                 data-bs-slide-to="{{ forloop.counter0 }}"
+                                                 data-bs-toggle="tooltip"
+                                                 data-bs-placement="bottom"
+                                                 title="{{ skill.skill }}">
+                                                <img src="
+                                                            {% if skill.thumbnail %}
+                                                                {{ skill.thumbnail.url }}
+                                                            {% else %}
+                                                                {{ tutor_single.profile.photo.url }}
+                                                            {% endif %}"
+                                                     alt="{{ skill.skill }}"
+                                                     loading="lazy">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <!-- Card body -->
+                                <div class="card-body px-4 py-4 mt-3  ">
+                                    <!-- Rating -->
+{#                                    <ul class="list-inline text-center">#}
+{#                                        {% with rating=tutor_single.profile.rating %}#}
+{#                                            {% for i in range %}#}
+{#                                                <li class="list-inline-item me-0 small">#}
+{#                                                    {% if i <= rating %}#}
+{#                                                        <i class="fas fa-star text-warning"></i>#}
+{#                                                    {% elif  i|float_sub:0.5 <= rating %}#}
+{#                                                        <i class="fas fa-star-half-alt text-warning"></i>#}
+{#                                                    {% else %}#}
+{#                                                        <i class="far fa-star text-warning"></i>#}
+{#                                                    {% endif %}#}
+{#                                                </li>#}
+{#                                            {% endfor %}#}
+{#                                            <li class="list-inline-item ms-2 h6 fw-light mb-0">{{ rating }}/5.0</li>#}
+{#                                        {% endwith %}#}
+{#                                    </ul>#}
+
+                                    <!-- Info -->
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <!-- Price and time -->
+                                        <div>
+                                            {% if discount_valid %}
+                                                <div class="d-flex align-items-center">
+                                                    <h3 class="fw-bold mb-0 me-2">
+                                                        ${{ discounted_price|format_decimal:2 }}
+                                                    </h3>
+                                                    <span class="text-decoration-line-through mb-0 me-2">${{ tutor_single.cost_hourly }}</span>
+                                                    <span class="badge text-bg-danger mb-0">{{ tutor_single.discount }}% off</span>
+                                                </div>
+                                                {% if remaining_time %}
+                                                    <p class="mb-0 text-danger"><i
+                                                            class="fas fa-stopwatch me-2"></i>{{ remaining_time }}
+                                                        left at this price</p>
+                                                {% endif %}
+                                            {% else %}
+                                                <div class="d-flex align-items-center">
+                                                    <h3 class="fw-bold mb-0 me-2">
+                                                        ${{ tutor_single.cost_hourly }}
+                                                    </h3>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                        <!-- Share button with dropdown -->
+                                        <div class="dropdown">
+                                            <!-- Share button -->
+                                            <a href="#" class="btn btn-sm btn-light rounded small" role="button"
+                                               id="dropdownShare"
+                                               data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="fas fa-fw fa-share-alt"></i> Share
+                                            </a>
+                                            <!-- dropdown menu -->
+                                            <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded"
+                                                aria-labelledby="dropdownShare">
+                                                <li>
+                                                    <a class="dropdown-item share-social share-btn" href="#"
+                                                       data-platform="twitter">
+                                                        <i class="fab fa-twitter text-info me-2"></i>Twitter
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item share-social share-btn" href="#"
+                                                       data-platform="facebook">
+                                                        <i class="fab fa-facebook text-primary me-2"></i>Facebook
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item share-social share-btn" href="#"
+                                                       data-platform="linkedin">
+                                                        <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item share-social share-btn" href="#"
+                                                       data-platform="whatsapp">
+                                                        <i class="fab fa-whatsapp text-success me-2"></i>WhatsApp
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item share-btn" href="#" id="copyLinkBtn">
+                                                        <i class="fas fa-copy me-2"></i>Copy link
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" id="shareNativeBtn">
+                                                        <i class="fas fa-share-alt me-2"></i>Share via...
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <!-- Hidden URL for copying https://your-lms.com/tutor/john-smith-123 -->
+                                        <input type="text" id="tutorShareUrl" value="https://
+                                                {{ request.get_host }}{% url 'provider:tutor_detail' tutor_single.id %}"
+                                               class="form-control share-url-input mt-2" readonly
+                                               style="display: none;">
+                                        <!-- Toast Notification -->
+                                        <div class="toast align-items-center text-white bg-success border-0"
+                                             id="copyToast">
+                                            <div class="d-flex">
+                                                <div class="toast-body">
+                                                    Link copied to clipboard!
+                                                </div>
+                                                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                                        data-bs-dismiss="toast"></button>
+                                            </div>
+                                        </div>
+                                        {#                                    Shared buttons END ------------------------------------------------------------- #}
+
+
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="mt-3 d-sm-flex justify-content-sm-between">
+                                        {% if tutor_single.cost_trial != 0 %}
+                                            <a href="#" class="btn btn-outline-primary mb-0">Trial Session for
+                                                ${{ tutor_single.cost_trial|floatformat:0 }}</a>
+                                        {% else %}
+                                            <a href="#" class="btn btn-outline-primary mb-0">Free Trial</a>
+                                        {% endif %}
+                                        <a href="{% url 'provider:tutor_reserve' tutor_single.pk %}"
+                                           class="btn btn-success mb-0">Reserve Class</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tutor Skill Video END -->
+
+                            <!-- Education & Skills START -->
+                            <div class="col-md-6 col-lg-12 px-0">
+                                <div class="card card-body shadow p-4 mb-4">
+                                    <!-- Education START -->
+                                    {% if approved_educations.count > 0 %}
+                                        <!-- Title -->
+                                        <h4 class="mb-3">Education</h4>
+                                        {% for edu in tutor_single.profile.user.educations.all %}
+                                            {% if edu.status == 'approved' %}
+                                                <!-- Education item -->
+                                                <div class="d-flex align-items-center mb-4">
+                                        <span class="icon-md mb-0 bg-light rounded-3"><i
+                                                class="fas fa-graduation-cap"></i></span>
+                                                    <div class="ms-3">
+                                                        <h6 class="mb-0">{{ edu.institution }}</h6>
+                                                        <p class="mb-0 small">{{ edu.degree }}
+                                                            in {{ edu.field_of_study }}</p>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <hr> <!-- Divider -->
+                                    {% endif %}
+                                    <!-- Education END -->
+
+
+                                    <!-- Skills START -->
+                                    <h4 class="mb-3">Skills</h4>
+                                    {% for skill in tutor_single.profile.user.skills.all %}
+                                        {% if skill.status == 'approved' %}
+                                            <!-- Progress item -->
+                                            <div class="overflow-hidden mb-4">
+                                                <h6 class="uppercase">{{ skill.skill }} </h6>
+                                                <div class="progress progress-sm bg-primary bg-opacity-10">
+                                                    <div class="progress-bar aos" role="progressbar"
+                                                         data-aos="slide-right"
+                                                         data-aos-delay="200" data-aos-duration="1000"
+                                                         data-aos-easing="ease-in-out"
+                                                         style="width: {{ skill.progress_percent }}%; background-color: {{ skill.progress_color }};"
+                                                         aria-valuenow="90" aria-valuemin="0"
+                                                         aria-valuemax="100">
+                                                        <span class="progress-percent-simple h6 mb-0">{{ skill.level.name|capfirst }}</span>
+                                                        <span class="progress-percent-simple h6 mb-0"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!-- Skills END -->
+                                </div>
+                            </div>
+                            <!-- Education & Skills END -->
+                        </div>
+                        <!-- Row End -->
+                    </div>
+                    <!-- Right sidebar END -->
 
 
                 </div>
                 <!-- Row END -->
             </div>
         </section>
-        <!-- =======================
-        Page content END -->
+        <!-- Page content END -->
 
 
         <!-- =======================
@@ -1866,14 +1496,14 @@
 {% endblock %}
 {% block my_scripts %}
 
-{#    Script for share button#}
+    {#    Script for share button#}
     <script>
         // SIMPLEST POSSIBLE SOLUTION
         const tutorUrl = window.location.href; // Gets current page URL
         const shareText = "Check out this amazing tutor!";
         // Social sharing
         document.querySelectorAll('.share-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 const platform = this.getAttribute('data-platform');
                 const urls = {
@@ -1887,7 +1517,7 @@
         });
 
         // Copy link
-        document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+        document.getElementById('copyLinkBtn').addEventListener('click', function (e) {
             e.preventDefault();
             navigator.clipboard.writeText(tutorUrl);
             alert('Link copied!'); // Simple feedback
