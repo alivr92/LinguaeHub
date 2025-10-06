@@ -19,4 +19,4 @@ def page_404(request, exception):
         'err_message': 'The page you requested does not exist.',
         'err_code': 404
     }
-    return render(request, 'pages/errors/error2.html', context, status=404)
+    return render(request, 'pages/errors/error_404.html', context, status=404)

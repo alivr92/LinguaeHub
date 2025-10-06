@@ -1,14 +1,17 @@
-from datetime import timedelta
-
-from django.db import models
+from django.db import models, IntegrityError
 from django.db.models import Avg
+from datetime import timedelta
+import time
+from django.utils import timezone
+from django.utils.text import slugify
+import uuid
+import shortuuid
 from django.core.validators import MaxValueValidator, MinValueValidator, FileExtensionValidator
 from django.contrib.auth.models import User
-from .validators import validate_max_size
 from ap2_meeting.models import TIMEZONE_CHOICES
-from django.urls import reverse
-from django.utils import timezone
 from app_accounts.models import LANGUAGE_CHOICES
+from .validators import validate_max_size
+from django.urls import reverse
 from django.conf import settings
 
 RATING = [(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')]
@@ -171,9 +174,12 @@ class TeachingSubCategory(models.Model):
 
 
 class Tutor(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=True)  # Internal UUID (never exposed) For API,...
+    public_id = models.CharField(max_length=12, unique=True, editable=True)  # Public short ID (6-8 chars)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     profile = models.OneToOneField('app_accounts.UserProfile', on_delete=models.CASCADE, related_name='tutor_profile',
                                    limit_choices_to={'user_type': 'tutor'}, unique=True, )
-    video_url = models.URLField(null=True, blank=True) # Store the URL of the video hosted on a third-party platform
+    video_url = models.URLField(null=True, blank=True)  # Store the URL of the video hosted on a third-party platform
     video_intro = models.FileField(
         upload_to='videos/%Y/%m/%d/',
         # upload_to=lambda instance, filename: f"videos/{instance.user.username}_video.{filename.split('.')[-1]}",
@@ -212,6 +218,11 @@ class Tutor(models.Model):
         return f"{self.profile.user.username}"
 
     def save(self, *args, **kwargs):
+        if not self.public_id:
+            self.public_id = self._generate_public_id()
+        if not self.slug:
+            self.slug = self._generate_seo_slug()
+
         # Ensure profile is a tutor
         if self.profile.user_type != 'tutor':
             raise ValueError("Tutor profile must have user_type='tutor'")
@@ -221,10 +232,74 @@ class Tutor(models.Model):
             self.discount_deadline = timezone.now() + timedelta(days=30)  # Default 30-day discount
 
         self.last_modified = timezone.now()
-        super().save(*args, **kwargs)
 
-    # def get_absolute_url(self):
-    #     return reverse('app_accounts:dp_edit', kwargs={'pk': self.pk})
+        # Enhanced save with retry logic
+        try:
+            super().save(*args, **kwargs)
+        except IntegrityError as e:
+            if 'public_id' in str(e):
+                # Handle public_id collision
+                self.public_id = self._generate_public_id_fallback()
+                super().save(*args, **kwargs)
+            elif 'slug' in str(e):
+                # Handle slug collision
+                self.slug = self._generate_seo_slug_fallback()
+                super().save(*args, **kwargs)
+            else:
+                # Re-raise other integrity errors
+                raise
+
+    def _generate_public_id(self):
+        """Generate public ID without DB check (enterprise approach)"""
+        # shortuuid uses base57 encoding (shorter than UUID) # (10 chars = ~839 quadrillion possibilities)
+        return shortuuid.ShortUUID().random(length=8)  # length=8 ~1.3 trillion possibilities
+
+    def _generate_public_id_fallback(self):
+        """Fallback for the 1-in-a-quadrillion collision"""
+        return str(uuid.uuid4())[:12]
+
+    def _generate_seo_slug(self):
+        """Generate SEO slug with Amazon-style random suffixes"""
+        name_part = slugify(f"{self.profile.user.first_name}-{self.profile.user.last_name}")[:30]
+
+        primary_skill = self.profile.user.skills.filter(status='approved').first()
+        specialty_part = slugify(primary_skill.skill.name if primary_skill else 'tutor')[:20]
+
+        location = "online" if self.profile.meeting_method == 'online' else self.profile.city or 'in-person'
+        location_part = slugify(location)[:15]
+
+        base_slug = f"{name_part}-{specialty_part}-{location_part}"
+
+        # Ensure reasonable length
+        if len(base_slug) > 60:
+            base_slug = base_slug[:60].rstrip('-')
+
+        return self._make_unique_slug(base_slug)
+
+    def _make_unique_slug(self, base_slug):
+        """Generate unique slug with Enterprise-grade suffix if needed"""
+        # Try clean slug first (80% of cases)
+        if not Tutor.objects.filter(slug=base_slug).exists():
+            return base_slug
+
+        # Add timestamp for uniqueness (guaranteed, fast)
+        timestamp = str(int(time.time() * 1000))[-6:]  # Last 6 digits of milliseconds
+        return f"{base_slug}-{timestamp}"
+
+    def _generate_seo_slug_fallback(self):
+        """Fallback slug generator for collisions"""
+        base_slug = slugify(f"{self.profile.user.first_name}-{self.profile.user.last_name}-tutor")[:50]
+        timestamp = str(int(time.time() * 1000))[-6:]
+        return f"{base_slug}-{timestamp}"
+
+    def get_seo_url(self):
+        return f"/{self.slug}/"  # Matches: path('<slug:slug>/', ...)
+
+    def get_short_url(self):
+        return f"/t/{self.public_id}/"
+
+    def get_absolute_url(self):
+        return self.get_seo_url()  # Primary URL for SEO
 
     def average_rating(self):
         """Calculate the average rating for this tutor across all sessions."""

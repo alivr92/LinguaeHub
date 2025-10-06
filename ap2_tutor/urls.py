@@ -1,13 +1,20 @@
-from django.urls import path
+from django.urls import path, re_path
+from django.views.generic import RedirectView
 from . import views
-
 app_name = 'provider'
 
 urlpatterns = [
     # ---------------------- PROVIDER FRONT PAGES
     path('', views.TutorListView.as_view(), name='tutor_list'),
-    path('<int:pk>/', views.TutorDetailView.as_view(), name='tutor_detail'),
     path('reserve/<int:pk>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
+
+    # SEO-friendly URL (primary - should come FIRST)
+    path('<slug:slug>/', views.TutorDetailView.as_view(), name='tutor_detail'),
+    # Short URL (redirects to SEO version)
+    path('t/<str:public_id>/', views.TutorShortRedirectView.as_view(), name='tutor_short'),
+    # Legacy URL (redirects to SEO version) - keep for existing links
+    path('id/<int:pk>/', views.TutorLegacyRedirectView.as_view(), name='tutor_legacy'),
+
 
     # ---------------------- PROVIDER DASHBOARD
     path('dashboard/panel/', views.DPHome.as_view(), name='dp_home'),

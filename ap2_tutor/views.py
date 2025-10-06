@@ -5,7 +5,7 @@ import json
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, TemplateView, ListView, DetailView, DeleteView, FormView, UpdateView
+from django.views.generic import View, TemplateView, ListView, DetailView, DeleteView, FormView, RedirectView
 from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.utils import timezone
@@ -102,7 +102,7 @@ class BecomeTutor(FormView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class TutorListView_DELETE(ListView):
+class TutorListView1(ListView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_list.html'
     # context_object_name = 'tutors'  # Name of the variable in the template
@@ -226,9 +226,13 @@ class TutorListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset().select_related('profile').prefetch_related(
+        # Start with only accepted tutors
+        queryset = Tutor.objects.filter(status='accepted').select_related('profile').prefetch_related(
             'teaching_tags', 'profile__user__skills'
         )
+
+        # Apply ordering
+        queryset = queryset.order_by('-profile__create_date')
 
         # Apply filters based on request parameters
         gender = self.request.GET.get('gender')
@@ -246,31 +250,18 @@ class TutorListView(ListView):
         if sRate:
             queryset = queryset.filter(profile__rating__gte=sRate)
 
-        # ✅ CORRECT: Filter Tutors who have specific UserSkills
         skills = self.request.GET.get('skills')
         if skills:
-            # Get user IDs who have the specified skill
-            user_ids_with_skill = UserSkill.objects.filter(
-                skill__name=skills,
-                user__profile__user_type='tutor'  # Only tutors
-            ).values_list('user_id', flat=True)
+            queryset = queryset.filter(
+                profile__user__skills__skill__name=skills
+            )
 
-            # Filter tutors whose users have these skills
-            queryset = queryset.filter(profile__user_id__in=user_ids_with_skill)
-
-        # ✅ CORRECT: Filter Tutors by skill level in UserSkills
         sSkillLevel = self.request.GET.get('sSkillLevel')
         if sSkillLevel:
-            # Get user IDs who have the specified skill level
-            user_ids_with_level = UserSkill.objects.filter(
-                level__name=sSkillLevel,
-                user__profile__user_type='tutor'  # Only tutors
-            ).values_list('user_id', flat=True)
+            queryset = queryset.filter(
+                profile__user__skills__level__name=sSkillLevel
+            )
 
-            # Filter tutors whose users have this skill level
-            queryset = queryset.filter(profile__user_id__in=user_ids_with_level)
-
-        # ✅ CORRECT: Price range filter
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
         if min_price and max_price:
@@ -284,40 +275,38 @@ class TutorListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Get ALL tutors (unfiltered) for filter options and price range calculation
+        # Get ALL tutors (unfiltered) for filter options
         all_tutors = Tutor.objects.all()
 
-        # Get min/max prices from ALL tutors in the database
+        # Get min/max prices from ALL tutors
         price_stats = all_tutors.aggregate(
             min_price=Min('cost_hourly'),
             max_price=Max('cost_hourly')
         )
 
-        context['min_price'] = price_stats['min_price'] or 0
-        context['max_price'] = price_stats['max_price'] or 100
-
-        # Your existing context data
-        context['tutors_accepted'] = all_tutors.filter(status='accepted')
-        context['s_gender'] = s_gender
-        context['s_country'] = s_country
-        context['s_lang_native'] = s_lang_native
-        context['s_lang_speak'] = s_lang_speak
-        context['s_rating'] = s_rating
-        context['s_reviews_count'] = s_reviews_count
-        context['s_skills'] = s_skills
-        context['s_language_levels'] = s_language_levels
-        context['s_cost_trial'] = s_cost_trial
-        context['s_cost_hourly'] = s_cost_hourly
-        context['s_session_count'] = s_session_count
-        context['s_student_count'] = s_student_count
-        context['search_gender'] = self.request.GET.get('gender', '')
-
-        # Add current filter values to maintain form state
-        context['current_skills'] = self.request.GET.get('skills', '')
-        context['current_skill_level'] = self.request.GET.get('sSkillLevel', '')
-        context['current_rating'] = self.request.GET.get('sRate', '')
-        context['current_min_price'] = self.request.GET.get('min_price', '')
-        context['current_max_price'] = self.request.GET.get('max_price', '')
+        context.update({
+            'min_price': price_stats['min_price'] or 0,
+            'max_price': price_stats['max_price'] or 100,
+            'tutors_accepted': all_tutors.filter(status='accepted'),
+            's_gender': s_gender,
+            's_country': s_country,
+            's_lang_native': s_lang_native,
+            's_lang_speak': s_lang_speak,
+            's_rating': s_rating,
+            's_reviews_count': s_reviews_count,
+            's_skills': s_skills,
+            's_language_levels': s_language_levels,
+            's_cost_trial': s_cost_trial,
+            's_cost_hourly': s_cost_hourly,
+            's_session_count': s_session_count,
+            's_student_count': s_student_count,
+            'search_gender': self.request.GET.get('gender', ''),
+            'current_skills': self.request.GET.get('skills', ''),
+            'current_skill_level': self.request.GET.get('sSkillLevel', ''),
+            'current_rating': self.request.GET.get('sRate', ''),
+            'current_min_price': self.request.GET.get('min_price', ''),
+            'current_max_price': self.request.GET.get('max_price', ''),
+        })
 
         return context
 
@@ -326,18 +315,25 @@ class TutorDetailView(DetailView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_detail.html'
     context_object_name = 'tutor_single'
+    slug_field = 'slug'  # Database field to search
+    slug_url_kwarg = 'slug'  # URL parameter name
 
+    # Get object by slug instead of pk
     # we must show the tutors who are completely accepted
-    def get_object(self, queryset=None):
-        return get_object_or_404(Tutor, pk=self.kwargs['pk'], status='accepted')
+    # def get_object(self, queryset=None):
+    #     slug = self.kwargs.get('slug')
+    #     return get_object_or_404(Tutor, slug=slug, status='accepted')
+    def get_queryset(self):
+        return Tutor.objects.filter(status='accepted')
 
     def get_context_data(self, **kwargs):
-        # Get the tutor ID from self.object or self.kwargs
-        tutor = self.object  # or self.kwargs['pk']
         context = super().get_context_data(**kwargs)
+        tutor = self.object  # This now gets the tutor from slug lookup
+
         # Get published reviews for this tutor
         reviews = Review.objects.filter(provider=tutor.profile.user, is_published=True)
         context['reviews'] = reviews.order_by('-create_date')
+        context['week_schedule'] = get_week_schedule(user=tutor.profile.user)
 
         # Calculate rating distribution
         rating_distribution = self._calculate_rating_distribution(reviews)
@@ -411,6 +407,24 @@ class TutorDetailView(DetailView):
                 distribution[rating] = {'count': 0, 'percentage': 0}
 
         return distribution
+
+
+class TutorShortRedirectView(RedirectView):
+    permanent = True  # HTTP 301 (good for SEO)
+
+    def get_redirect_url(self, *args, **kwargs):
+        public_id = kwargs['public_id']  # 1. Extract public_id from URL parameters
+        tutor = get_object_or_404(Tutor, public_id=public_id)  # 2. Find tutor by public_id (or return 404)
+        return tutor.get_seo_url()  # 3. Return the destination URL for redirect "/tutor/slug-here/"
+
+
+class TutorLegacyRedirectView(RedirectView):
+    permanent = True
+
+    def get_redirect_url(self, *args, **kwargs):
+        pk = kwargs['pk']  # 1. Extract pk (primary key) from URL
+        tutor = get_object_or_404(Tutor, pk=pk)
+        return tutor.get_seo_url()  # Returns "/tutor/slug-here/"
 
 
 class TutorReserveView(DetailView):
@@ -803,7 +817,8 @@ class DPWizard(BasicProfile, LoginRequiredMixin, RoleRequiredMixin, EmailVerific
             commission_rate = user.profile.tutor_profile.get_commission_rate()
             context['commission_rate'] = commission_rate * 100
             context['session_length'] = int(session_length) * 30
-            context['week_schedule'] = week_schedule
+            # context['week_schedule'] = week_schedule
+            context['week_schedule'] = get_week_schedule(user=user)
             context['total_available_days'] = total_available_days
             context['total_time_slots'] = total_time_slots
 
@@ -2323,3 +2338,52 @@ class DPInterview(BasicProfile, RoleRequiredMixin, EmailVerificationRequiredMixi
         }
 
         return status_step_mapping.get(applicant_status, 0)  # default to 0 if not found
+
+
+def get_week_schedule(user, tz=None):
+    # Get availability information
+    available_rules = AvailableRule.objects.filter(user=user, is_available=True)
+    try:
+        user_timezone = user.appointment_settings.timezone
+        session_length = user.appointment_settings.session_length
+    except AttributeError:
+        user_timezone = 'UTC'
+        session_length = 2
+
+# Create week schedule data
+    days_of_week = [
+        {'id': '0', 'name': 'Sunday'},
+        {'id': '1', 'name': 'Monday'},
+        {'id': '2', 'name': 'Tuesday'},
+        {'id': '3', 'name': 'Wednesday'},
+        {'id': '4', 'name': 'Thursday'},
+        {'id': '5', 'name': 'Friday'},
+        {'id': '6', 'name': 'Saturday'},
+    ]
+
+    week_schedule = []
+    total_available_days = 0
+    total_time_slots = 0
+
+    for day in days_of_week:
+        day_rules = available_rules.filter(weekday=day['id'])
+        time_slots = []
+
+        for rule in day_rules:
+            time_slots.append({
+                'start_time': rule.start_time_utc,
+                'end_time': rule.end_time_utc
+            })
+            total_time_slots += 1
+
+        week_schedule.append({
+            'id': day['id'],
+            'name': day['name'],
+            'available': len(time_slots) > 0,
+            'time_slots': time_slots
+        })
+
+        if len(time_slots) > 0:
+            total_available_days += 1
+
+    return week_schedule;
