@@ -15,8 +15,6 @@ urlpatterns = [
     # Legacy URL (redirects to SEO version) - keep for existing links
     path('i/<int:pk>/', views.ProviderLegacyRedirectView.as_view(), name='provider_legacy'),
 
-    path('debug/<str:public_id>/', views.debug_urls, name='debug_urls'),
-
 
     # ---------------------- PROVIDER DASHBOARD
     path('dashboard/panel/', views.DPHome.as_view(), name='dp_home'),
