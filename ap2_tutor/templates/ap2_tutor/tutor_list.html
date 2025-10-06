@@ -91,7 +91,7 @@
                                 <div class="row g-0" style="max-height: 225px;min-height: 225px">
                                     <!-- Image -->
                                     <div class="col-md-4">
-                                        <a href="{% url 'provider:tutor_detail' tutor.slug %}">
+                                        <a href="{% url 'provider:provider_detail' tutor.slug %}">
                                             <img src="{{ tutor.profile.photo.url }}"
                                                  class="rounded-3 w-100 h-100 object-fit-cover"
                                                  style="max-height: 225px; min-height: 225px"
@@ -106,7 +106,7 @@
                                             <div class="d-sm-flex justify-content-sm-between mb-2 mb-sm-3">
                                                 <div>
                                                     <h5 class="card-title mb-0">
-                                                        <a href="{% url 'provider:tutor_detail' tutor.slug %}">
+                                                        <a href="{% url 'provider:provider_detail' tutor.slug %}">
                                                             {{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}
                                                         </a>
                                                     </h5>
@@ -136,7 +136,7 @@
                                                                 <span>{{ skill.skill }}</span> |
                                                             {% endfor %}
                                                             {% if skills|length > 3 %}
-                                                                <a href="{% url 'provider:tutor_detail' tutor.profile.id %}">...</a>
+                                                                <a href="{% url 'provider:provider_detail' tutor.profile.id %}">...</a>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endwith %}

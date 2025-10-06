@@ -1,6 +1,6 @@
 import traceback
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse, HttpResponseForbidden
+from django.http import JsonResponse, HttpResponseForbidden, HttpResponseRedirect
 import json
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
@@ -311,9 +311,9 @@ class TutorListView(ListView):
         return context
 
 
-class TutorDetailView(DetailView):
+class ProviderDetailView(DetailView):
     model = Tutor
-    template_name = 'ap2_tutor/tutor_detail.html'
+    template_name = 'ap2_tutor/provider_detail.html'
     context_object_name = 'tutor_single'
     slug_field = 'slug'  # Database field to search
     slug_url_kwarg = 'slug'  # URL parameter name
@@ -409,7 +409,7 @@ class TutorDetailView(DetailView):
         return distribution
 
 
-class TutorShortRedirectView(RedirectView):
+class ProviderShortRedirectView(RedirectView):
     permanent = True  # HTTP 301 (good for SEO)
 
     def get_redirect_url(self, *args, **kwargs):
@@ -418,13 +418,14 @@ class TutorShortRedirectView(RedirectView):
         return tutor.get_seo_url()  # 3. Return the destination URL for redirect "/tutor/slug-here/"
 
 
-class TutorLegacyRedirectView(RedirectView):
+class ProviderLegacyRedirectView(RedirectView):
     permanent = True
 
     def get_redirect_url(self, *args, **kwargs):
         pk = kwargs['pk']  # 1. Extract pk (primary key) from URL
         tutor = get_object_or_404(Tutor, pk=pk)
         return tutor.get_seo_url()  # Returns "/tutor/slug-here/"
+
 
 
 class TutorReserveView(DetailView):
@@ -2350,7 +2351,7 @@ def get_week_schedule(user, tz=None):
         user_timezone = 'UTC'
         session_length = 2
 
-# Create week schedule data
+    # Create week schedule data
     days_of_week = [
         {'id': '0', 'name': 'Sunday'},
         {'id': '1', 'name': 'Monday'},

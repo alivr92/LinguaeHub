@@ -9,11 +9,13 @@ urlpatterns = [
     path('reserve/<int:pk>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
 
     # SEO-friendly URL (primary - should come FIRST)
-    path('<slug:slug>/', views.TutorDetailView.as_view(), name='tutor_detail'),
+    path('s/<slug:slug>/', views.ProviderDetailView.as_view(), name='provider_detail'),
     # Short URL (redirects to SEO version)
-    path('t/<str:public_id>/', views.TutorShortRedirectView.as_view(), name='tutor_short'),
+    path('p/<str:public_id>/', views.ProviderShortRedirectView.as_view(), name='provider_short'),
     # Legacy URL (redirects to SEO version) - keep for existing links
-    path('id/<int:pk>/', views.TutorLegacyRedirectView.as_view(), name='tutor_legacy'),
+    path('i/<int:pk>/', views.ProviderLegacyRedirectView.as_view(), name='provider_legacy'),
+
+    path('debug/<str:public_id>/', views.debug_urls, name='debug_urls'),
 
 
     # ---------------------- PROVIDER DASHBOARD

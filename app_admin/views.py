@@ -166,7 +166,7 @@ class DATutorList(LoginRequiredMixin, EmailVerificationRequiredMixin, RoleRequir
 
 class DATutorDetail(LoginRequiredMixin, EmailVerificationRequiredMixin, RoleRequiredMixin, DetailView):
     allowed_roles = ['admin']
-    template_name = 'app_admin/dashboard/da_tutor_detail.html'
+    template_name = 'app_admin/dashboard/da_provider_detail.html'
     model = Tutor
 
     def get_context_data(self, **kwargs):

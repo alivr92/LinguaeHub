@@ -47,7 +47,7 @@
           <!-- Submenu -->
           <ul class="nav collapse flex-column" id="collapseinstructors" data-bs-parent="#navbar-sidebar">
             <li class="nav-item"><a class="nav-link {% if 'tutor-list' in request.path %}active{% endif %}" href="{% url 'staff:dstf_tutor_list' %}">Tutors</a></li>
-{#            <li class="nav-item"><a class="nav-link {% if 'tutor-detail' in request.path %}active{% endif %}" href="{% url 'staff:dstf_tutor_detail' user.tutor_profile.pk %}">Tutor Detail</a></li>#}
+{#            <li class="nav-item"><a class="nav-link {% if 'tutor-detail' in request.path %}active{% endif %}" href="{% url 'staff:dstf_provider_detail' user.tutor_profile.pk %}">Tutor Detail</a></li>#}
             <li class="nav-item"><a class="nav-link {% if 'tutor-request' in request.path %}active{% endif %}" href="{% url 'staff:dstf_tutor_request' %}">Tutor requests <span class="badge text-bg-success rounded-circle ms-2">2</span></a></li>
           </ul>
         </li>

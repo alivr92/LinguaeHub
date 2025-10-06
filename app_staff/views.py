@@ -59,7 +59,7 @@ class DSTFTutorList(LoginRequiredMixin, EmailVerificationRequiredMixin, RoleRequ
 
 class DSTFTutorDetail(LoginRequiredMixin, EmailVerificationRequiredMixin, RoleRequiredMixin, DetailView):
     allowed_roles = ['staff']
-    template_name = 'app_staff/dashboard/dstf__tutor_detail.html'
+    template_name = 'app_staff/dashboard/dstf_provider_detail.html'
     model = Tutor
 
     def get_context_data(self, **kwargs):

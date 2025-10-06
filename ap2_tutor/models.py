@@ -293,10 +293,14 @@ class Tutor(models.Model):
         return f"{base_slug}-{timestamp}"
 
     def get_seo_url(self):
-        return f"/{self.slug}/"  # Matches: path('<slug:slug>/', ...)
+        # return f"tutor/s/{self.slug}/"  # Matches: path('/s/<slug:slug>/', ...)
+        return reverse('provider:provider_detail', kwargs={'slug': self.slug})
+
 
     def get_short_url(self):
-        return f"/t/{self.public_id}/"
+        # return f"p/{self.public_id}/"
+        return reverse('provider:provider_short', kwargs={'public_id': self.public_id})
+
 
     def get_absolute_url(self):
         return self.get_seo_url()  # Primary URL for SEO

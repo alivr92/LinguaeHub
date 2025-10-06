@@ -36,7 +36,7 @@
                     {{ absolute_domain }}{% static 'assets/images/default.png' %}?v={{ tutor_single.profile.last_modified|date:'U' }}"/>
         {% endif %}
 
-        <meta property="og:url" content="{{ absolute_domain }}{% url 'provider:tutor_short' tutor_single.public_id %}"/>
+        <meta property="og:url" content="{{ absolute_domain }}{% url 'provider:provider_short' tutor_single.public_id %}"/>
         <meta property="og:site_name" content="{{ CFChar.site_name }}"/>
 
         <!-- Twitter Card -->
@@ -1061,7 +1061,7 @@
 
                                         <!-- Hidden URL for copying https://your-lms.com/tutor/john-smith-123 -->
                                         <input type="text" class="form-control share-url-input mt-2" readonly
-                                               id="tutorShareUrl" value="https://{{ request.get_host }}{% url 'provider:tutor_short' tutor_single.public_id %}"
+                                               id="tutorShareUrl" value="https://{{ request.get_host }}{% url 'provider:provider_short' tutor_single.public_id %}"
                                                style="display: none;">
                                         <!-- Toast Notification -->
                                         <div class="toast align-items-center text-white bg-success border-0"
@@ -1215,7 +1215,7 @@
                                 <div class="card-body text-center">
                                     <!-- Title -->
                                     <h5 class="card-title"><a
-                                            href="{% url 'provider:tutor_detail' r_tutor.slug %}">{{ r_tutor.profile.user.first_name }} {{ r_tutor.profile.user.last_name }}</a>
+                                            href="{% url 'provider:provider_detail' r_tutor.slug %}">{{ r_tutor.profile.user.first_name }} {{ r_tutor.profile.user.last_name }}</a>
                                     </h5>
                                     <p class="mb-2">{{ r_tutor.profile.title }}</p>
                                     <!-- Rating -->

@@ -9,7 +9,7 @@ class ShortURL(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     @classmethod
-    def create_tutor_short_url(cls, tutor):
+    def create_provider_short_url(cls, tutor):
         short_code = generate_short_code()  # Your short code logic
         destination = tutor.get_seo_url()
         return cls.objects.create(

@@ -148,7 +148,7 @@ def accept_offer(request, token):
         student_context.update({
             'tutor_name': offer.user.get_full_name(),
             'tutor_profile_url': request.build_absolute_uri(
-                reverse('provider:tutor_detail', args=[offer.user.profile.tutor_profile.pk])),
+                reverse('provider:provider_detail', args=[offer.user.profile.tutor_profile.pk])),
         })
         send_dual_email(
             subject=f"Great News! A Tutor Has Accepted Your Request",
