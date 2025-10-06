@@ -427,7 +427,6 @@ class ProviderLegacyRedirectView(RedirectView):
         return tutor.get_seo_url()  # Returns "/tutor/slug-here/"
 
 
-
 class TutorReserveView(DetailView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_reserve.html'
