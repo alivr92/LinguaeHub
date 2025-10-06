@@ -174,8 +174,8 @@ class TeachingSubCategory(models.Model):
 
 
 class Tutor(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=True)  # Internal UUID (never exposed) For API,...
-    public_id = models.CharField(max_length=12, unique=True, editable=True)  # Public short ID (6-8 chars)
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)  # Internal UUID (never exposed) For API,...
+    public_id = models.CharField(max_length=12, unique=True, editable=False)  # Public short ID (6-8 chars)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     profile = models.OneToOneField('app_accounts.UserProfile', on_delete=models.CASCADE, related_name='tutor_profile',
                                    limit_choices_to={'user_type': 'tutor'}, unique=True, )
