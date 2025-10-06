@@ -32,8 +32,7 @@
         <meta name="twitter:card" content="summary_large_image">
         {% with skills_list=approved_skills|slice:":3" %}
             {% if skills_list %}
-                <meta name="twitter:title" content="Learn
-                        {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}"/>
+                <meta name="twitter:title" content="Learn {% for skill in skills_list %}{{ skill.skill.name }}{% if not forloop.last %}, {% endif %}{% endfor %} with {{ tutor_single.profile.user.get_full_name }} on {{ CFChar.site_name }}"/>
             {% else %}
                 <meta name="twitter:title"
                       content="Expert tutor available for personalized learning sessions. Book now on {{ CFChar.site_name }}!"/>
