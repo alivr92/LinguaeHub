@@ -19,6 +19,12 @@ urlpatterns = [
     path('in-person-kids-2/', views.InPersonKids2.as_view(), name='in_person_kids2'),
     path('for-business/', views.ForBusiness.as_view(), name='for_business'),
     path('online-learning/', views.OnlineLearning.as_view(), name='online_learning'),
+
+    # Form pages
+    path('request-enterprise-demo/', views.RequestEnterpriseDemoView.as_view(), name='consultation'),
+    path('explore-business-solutions/', views.ExploreBusinessSolutionsView.as_view(), name='solutions'),
+
+
     # path('contact-us/', views.saveContactUs, name='save_contact_us'),
     # path('blog/', views.Blog.as_view(), name='blog'),
     path('FAQ/', views.FAQ.as_view(), name='faq'),

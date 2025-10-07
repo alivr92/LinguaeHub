@@ -1,0 +1,368 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% block head_title %}Enterprise Language Solutions - Business Communication Training{% endblock %}
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+{% block embed_style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+{% endblock %}
+{% block my_style %}
+    <style>
+        .bg-light-custom {
+            background-color: #f8f9fa !important;
+        }
+
+        .enterprise-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            height: 100%;
+        }
+
+        .enterprise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-color: #0d6efd;
+        }
+
+        .icon-wrapper-enterprise {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 50%, #5b21b6 100%);
+        }
+
+        .solution-badge {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .timeline-item:nth-child(1):before { content: "1"; }
+        .timeline-item:nth-child(2):before { content: "2"; }
+        .timeline-item:nth-child(3):before { content: "3"; }
+        .timeline-item:nth-child(4):before { content: "4"; }
+
+        .client-logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+        .client-logo-grid img {
+            border-radius: 10px;
+            max-height: 150px;
+            min-height: 150px;
+            max-width: 240px;
+            min-width: 240px;
+            filter: grayscale(1) opacity(0.7);
+            transition: all 0.4s ease;
+            transform: scale(1);
+        }
+
+        .client-logo-grid img:hover {
+            filter: none;
+            opacity: 1;
+            transform: scale(1.05) translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .case-study-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .case-study-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-tier {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-tier.featured {
+            border-color: #3b82f6;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.15);
+        }
+
+        .pricing-tier.featured:before {
+            content: "Most Popular";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-bottom-left-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tech-stack-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-stack-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .floating-shape-1 {
+            top: 10%;
+            left: 5%;
+            width: 100px;
+            height: 100px;
+            background: #3b82f6;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+
+        .floating-shape-2 {
+            bottom: 20%;
+            right: 10%;
+            width: 150px;
+            height: 150px;
+            background: #10b981;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+
+        .stat-box {
+            transition: all 0.4s ease;
+            transform: scale(1);
+            border-radius: 12px;
+            padding: 2rem 1rem;
+            background-color: #fff;
+        }
+
+        .stat-box:hover {
+            transform: scale(1.05) translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+{% endblock %}
+{% block body_content %}
+
+    <!-- =======================
+    Consultation Form START -->
+    <section class="py-5 bg-light" id="consultation">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow-sm border-0 overflow-hidden">
+                        <div class="row g-0">
+                            <!-- Form Side -->
+                            <div class="col-lg-8">
+                                <div class="card-body p-4 p-md-5">
+                                    <div class="text-center mb-5">
+                                        <h2 class="display-6 fw-bold mb-3">Request Enterprise Consultation</h2>
+                                        <p class="text-muted">Complete the form below and our team will contact you within 24 hours</p>
+                                    </div>
+
+                                    <form>
+                                        <div class="row g-4">
+                                            <!-- Name -->
+                                            <div class="col-md-6">
+                                                <label class="form-label">Full Name *</label>
+                                                <input class="form-control" type="text" placeholder="Enter your full name" required>
+                                            </div>
+
+                                            <!-- Company Name -->
+                                            <div class="col-md-6">
+                                                <label class="form-label">Company Name *</label>
+                                                <input class="form-control" type="text" placeholder="Enter company name" required>
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="col-12">
+                                                <label class="form-label">Business Email *</label>
+                                                <input class="form-control" type="email" placeholder="Enter business email" required>
+                                            </div>
+
+                                            <!-- Number of Employees / Team Size -->
+                                            <div class="col-12">
+                                                <label class="form-label">Team Size *</label>
+                                                <select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="false" required>
+                                                    <option value="">Select team size</option>
+                                                    <option>1-10 employees</option>
+                                                    <option>11-50 employees</option>
+                                                    <option>51-200 employees</option>
+                                                    <option>201-500 employees</option>
+                                                    <option>501-1000 employees</option>
+                                                    <option>1000+ employees</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Languages of Interest -->
+                                            <div class="col-12">
+                                                <label class="form-label">Languages of Interest *</label>
+                                                <select class="form-select js-choice border-0 z-index-9 bg-transparent" multiple="multiple" aria-label=".form-select-sm" data-max-item-count="5" data-remove-item-button="true" required>
+                                                    <option value="">Select languages</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                    <option>French</option>
+                                                    <option>German</option>
+                                                    <option>Mandarin Chinese</option>
+                                                    <option>Japanese</option>
+                                                    <option>Korean</option>
+                                                    <option>Arabic</option>
+                                                    <option>Portuguese</option>
+                                                    <option>Italian</option>
+                                                    <option>Russian</option>
+                                                    <option>Hindi</option>
+                                                </select>
+                                                <div class="form-text">Select up to 5 languages</div>
+                                            </div>
+
+                                            <!-- Message / Request Details -->
+                                            <div class="col-12">
+                                                <label class="form-label">Specific Requirements</label>
+                                                <textarea class="form-control" rows="4" placeholder="Tell us about your language training needs, timeline, and any specific requirements..."></textarea>
+                                            </div>
+
+                                            <!-- Privacy Policy -->
+                                            <div class="col-12">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="privacyPolicy" required>
+                                                    <label class="form-check-label small" for="privacyPolicy">
+                                                        I agree to the <a href="#" class="text-primary">Privacy Policy</a> and consent to LINGOCEPT contacting me about enterprise language solutions.
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                                    <i class="bi bi-send-fill me-2"></i>Submit Request
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Info Side -->
+                            <div class="col-lg-4 bg-primary text-white">
+                                <div class="card-body p-4 p-md-5 h-100 d-flex flex-column">
+                                    <div class="mb-4">
+                                        <div class="icon-wrapper-enterprise bg-white bg-opacity-20 mb-3">
+                                            <i class="bi bi-headset text-white fs-1"></i>
+                                        </div>
+                                        <h4 class="text-white">What Happens Next?</h4>
+                                    </div>
+
+                                    <div class="flex-grow-1">
+                                        <div class="timeline-item text-white mb-4">
+                                            <h6 class="text-white mb-1">1. Form Review</h6>
+                                            <p class="small mb-0 opacity-75">Our team reviews your requirements within 2 hours</p>
+                                        </div>
+                                        <div class="timeline-item text-white mb-4">
+                                            <h6 class="text-white mb-1">2. Expert Match</h6>
+                                            <p class="small mb-0 opacity-75">We match you with a dedicated enterprise solutions specialist</p>
+                                        </div>
+                                        <div class="timeline-item text-white mb-4">
+                                            <h6 class="text-white mb-1">3. Custom Proposal</h6>
+                                            <p class="small mb-0 opacity-75">Receive a tailored program outline and pricing</p>
+                                        </div>
+                                        <div class="timeline-item text-white">
+                                            <h6 class="text-white mb-1">4. Implementation</h6>
+                                            <p class="small mb-0 opacity-75">Kickstart your language training program</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 pt-4 border-top border-white border-opacity-25">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-clock-history fs-4 me-3"></i>
+                                            <div>
+                                                <h6 class="text-white mb-0">Response Time</h6>
+                                                <p class="small mb-0 opacity-75">Typically within 24 hours</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+    Consultation Form END -->
+{% endblock %}
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}

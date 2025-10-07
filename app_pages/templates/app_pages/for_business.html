@@ -247,8 +247,8 @@
                         </div>
 
                         <div class="d-flex flex-column flex-sm-row gap-3">
-                            <a href="#consultation" class="btn btn-warning btn-lg px-4">Request Enterprise Demo</a>
-                            <a href="#solutions" class="btn btn-outline-light btn-lg px-4">Explore Business Solutions</a>
+                            <a href="{% url 'app_pages:consultation' %}" class="btn btn-warning btn-lg px-4">Request Enterprise Demo</a>
+                            <a href="{% url 'app_pages:solutions' %}" class="btn btn-outline-light btn-lg px-4">Explore Business Solutions</a>
                         </div>
                     </div>
 {#                    <div class="col-lg-6 text-center mt-5 mt-lg-0">#}
@@ -261,6 +261,125 @@
         </section>
         <!-- =======================
         Enterprise Hero END -->
+
+
+        <!-- =======================
+        Why Choose LINGOCEPT START -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-7 fw-bold mb-3">Why Leading Enterprises Choose <strong class="text-primary">{{ CFChar.site_name|upper }}</strong></h2>
+                        <p class="lead">Discover how our enterprise language solutions drive measurable business results for global organizations</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Global Communication Card -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white h-100">
+                            <div class="icon-wrapper-enterprise bg-primary bg-opacity-10">
+                                <i class="bi bi-globe-americas text-primary fs-1"></i>
+                            </div>
+                            <h4 class="mb-3">Global Communication, Local Expertise</h4>
+                            <p class=" mb-0">We connect your teams with certified language professionals who understand your industry, your market, and your goals.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tailored Programs Card -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white h-100">
+                            <div class="icon-wrapper-enterprise bg-success bg-opacity-10">
+                                <i class="bi bi-gear-fill text-success fs-1"></i>
+                            </div>
+                            <h4 class="mb-3">Tailored Corporate Programs</h4>
+                            <p class=" mb-0">Every learning path is customized to align with your company's objectives — ensuring measurable growth, fluency, and confidence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Trusted Organizations Card -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white h-100">
+                            <div class="icon-wrapper-enterprise bg-warning bg-opacity-10">
+                                <i class="bi bi-shield-check text-warning fs-1"></i>
+                            </div>
+                            <h4 class="mb-3">Trusted by Global Organizations</h4>
+                            <p class=" mb-0">From data security to educational quality, LINGOCEPT delivers enterprise-grade reliability trusted by international partners worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Why Choose LINGOCEPT END -->
+
+        <!-- =======================
+Why Choose LINGOCEPT START -->
+        <section class="py-5 bg-white">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="display-5 fw-bold mb-3">Why Leading Enterprises Choose LINGOCEPT</h2>
+                        <p class="lead text-muted">Discover how our enterprise language solutions drive measurable business results for global organizations</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Global Communication Card -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white h-100">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-wrapper-enterprise bg-primary bg-opacity-10 me-3">
+                                        <i class="bi bi-globe-americas text-primary fs-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-0">Global Communication, Local Expertise</h4>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">We connect your teams with certified language professionals who understand your industry, your market, and your goals.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tailored Programs Card -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white h-100">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-wrapper-enterprise bg-success bg-opacity-10 me-3">
+                                        <i class="bi bi-gear-fill text-success fs-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-0">Tailored Corporate Programs</h4>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">Every learning path is customized to align with your company's objectives — ensuring measurable growth, fluency, and confidence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Trusted Organizations Card -->
+                    <div class="col-lg-4">
+                        <div class="enterprise-card p-4 rounded-3 bg-white h-100">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-wrapper-enterprise bg-warning bg-opacity-10 me-3">
+                                        <i class="bi bi-shield-check text-warning fs-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="mb-0">Trusted by Global Organizations</h4>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">From data security to educational quality, LINGOCEPT delivers enterprise-grade reliability trusted by international partners worldwide.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Why Choose LINGOCEPT END -->
 
         <!-- =======================
         Client Logos START -->

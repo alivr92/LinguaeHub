@@ -194,6 +194,14 @@ class ForBusiness(TemplateView):
 class OnlineLearning(TemplateView):
     template_name = 'app_pages/online_learning.html'
 
+# CTA Form pages:
+class RequestEnterpriseDemoView(TemplateView):
+    template_name = 'app_pages/forms/request_enterprise_demo.html'
+
+
+class ExploreBusinessSolutionsView(TemplateView):
+    template_name = 'app_pages/forms/explore_business_solutions.html'
+
 
 class InPersonKids(TemplateView):
     template_name = 'app_pages/in_person/in-person-kids.html'
