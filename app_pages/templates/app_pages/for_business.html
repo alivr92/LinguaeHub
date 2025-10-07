@@ -16,6 +16,15 @@
             background-color: #f8f9fa !important;
         }
 
+
+        .benefit-card {
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
         .enterprise-card {
             transition: all 0.3s ease;
             border: 1px solid #e9ecef;
@@ -212,6 +221,7 @@
         }
     </style>
 
+
 {% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
@@ -224,12 +234,12 @@
         <!-- =======================
         Enterprise Hero START -->
 {#        <section class="gradient-bg py-5 position-relative overflow-hidden text-white">#}
-        <section class="py-5 position-relative overflow-hidden text-white " style="background: url('{% static "assets/images/bg/ai_company.png" %}') no-repeat center center; background-size: cover;">
+        <section class="py-5 position-relative overflow-hidden text-white " style="background: linear-gradient(90deg, rgba(0,0,0,0.58) 30%, rgba(255,255,255,0.10) 60%), url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center; background-size: cover;">
             <div class="container position-relative z-1  ">
                 <div class="row align-items-center min-vh-60">
                     <div class="col-lg-6">
-                        <div class="solution-badge">Enterprise Language Solutions</div>
-                        <h1 class="display-5 fw-bold mb-4 text-white ">Empower Your Teams<br>with Global Language Excellence</h1>
+{#                        <div class="solution-badge">Enterprise Language Solutions</div>#}
+                        <h1 class="display-5 fw-bold my-4 text-white ">Empower Your Teams with Global Language Excellence</h1>
                         <p class="lead mb-4">Transform your organization’s communication with tailored language training built for international collaboration and measurable business success.</p>
 
                         <div class="d-flex flex-wrap gap-3 mb-4">
@@ -269,8 +279,8 @@
             <div class="container">
                 <div class="row mb-5">
                     <div class="col-lg-10 mx-auto text-center">
-                        <h1 class=" fw-bold mb-3">Why Leading Enterprises Choose <br><strong class="text-primary">{{ CFChar.site_name|upper }}</strong></h1>
-                        <p class="lead text-muted mx-0 px-0">Discover how our enterprise language solutions drive measurable business results for global organizations</p>
+                        <h1 class=" fw-bold mb-3">Why Leading Enterprises <br>Choose <strong class="text-primary">{{ CFChar.site_name|upper }}</strong></h1>
+                        <p class="lead text-secondary mx-0 px-0">Discover how our enterprise language solutions drive measurable business results for global organizations</p>
                     </div>
                 </div>
 
@@ -350,42 +360,6 @@
         <!-- =======================
         Client Logos END -->
 
-        <!-- Business Impact START -->
-        <section class="py-5 bg-light">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-10 mx-auto text-center">
-                        <h2>Delivering Proven Results </h2>
-                        <h5> Measured by Our Learners’ Success</h5>
-                        <p class="lead">Empowering individuals and organizations worldwide through measurable progress and lasting impact</p>
-                    </div>
-                </div>
-
-                <div class="row g-4">
-                    <div class="col-md-3 text-center stat-box">
-                        <div class="stat-number">99%</div>
-                        <h5>Client Satisfaction Rate</h5>
-                        <p class="text-secondary">Rated “Excellent” by both individual learners and enterprise clients — a reflection of our proven quality, progress, and support.</p>
-                    </div>
-                    <div class="col-md-3 text-center stat-box">
-                        <div class="stat-number">100%</div>
-                        <h5>Method Efficiency</h5>
-                        <p class="text-secondary">{{ CFChar.site_name }}’s exclusive English Concept Method ensures full comprehension, flawless communication, and practical fluency for every learner. It helps you develop the ability to speak and understand English <strong>Simply</strong>, <strong>Accurately</strong> and <strong>Quickly</strong> and build real confidence in every conversation.</p>
-                    </div>
-                    <div class="col-md-3 text-center stat-box">
-                        <div class="stat-number">97%</div>
-                        <h5>Skill & Confidence Growth</h5>
-                        <p class="text-secondary">Learners and corporate teams report significant improvement in fluency, performance, and real-world communication confidence.</p>
-                    </div>
-                    <div class="col-md-3 text-center stat-box">
-                        <div class="stat-number">99%</div>
-                        <h5>Retention & Continued Learning</h5>
-                        <p class="text-secondary">Nearly all learners and partner organizations renew and expand their collaboration with {{ CFChar.site_name|upper }} over time.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Business Impact END -->
 
         <!-- Business Impact START -->
         <section class="py-5 bg-light">
@@ -403,7 +377,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="stat-box text-center p-4 rounded-3 bg-white h-100">
                             <div class="stat-number text-primary mb-3">99%</div>
-                            <h5 class="mb-3">Client Satisfaction Rate</h5>
+                            <h5 class="mb-3">Client Satisfaction</h5>
                             <p class="text-secondary mb-0">Rated "Excellent" by both individual learners and enterprise clients — a reflection of our proven quality, progress, and support.</p>
                         </div>
                     </div>
@@ -413,7 +387,7 @@
                         <div class="stat-box text-center p-4 rounded-3 bg-white h-100">
                             <div class="stat-number text-success mb-3">100%</div>
                             <h5 class="mb-3">Method Efficiency</h5>
-                            <p class="text-secondary mb-0">LINGOCEPT's exclusive English Concept Method ensures full comprehension, flawless communication, and practical fluency for every learner. It helps you develop the ability to speak and understand English <strong>Simply</strong>, <strong>Accurately</strong> and <strong>Quickly</strong> and build real confidence in every conversation.</p>
+                            <p class="text-secondary mb-0">Lingocept’s English Concept Method develops clarity, fluency, and confidence to speak English simply, accurately, and quickly.</p>
                         </div>
                     </div>
 
@@ -421,8 +395,8 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="stat-box text-center p-4 rounded-3 bg-white h-100">
                             <div class="stat-number text-warning mb-3">97%</div>
-                            <h5 class="mb-3">Skill & Confidence Growth</h5>
-                            <p class="text-secondary mb-0">Learners and corporate teams report significant improvement in fluency, performance, and real-world communication confidence.</p>
+                            <h5 class="mb-3">Performance Growth</h5>
+                            <p class="text-secondary mb-0 text-justify">Learners and corporate teams report significant improvement in fluency, performance, and real-world communication confidence.</p>
                         </div>
                     </div>
 
@@ -430,7 +404,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="stat-box text-center p-4 rounded-3 bg-white h-100">
                             <div class="stat-number text-info mb-3">99%</div>
-                            <h5 class="mb-3">Retention & Continued Learning</h5>
+                            <h5 class="mb-3">Continued Learning</h5>
                             <p class="text-secondary mb-0">Nearly all learners and partner organizations renew and expand their collaboration with LINGOCEPT over time.</p>
                         </div>
                     </div>
@@ -440,14 +414,15 @@
         <!-- Business Impact END -->
 
 
+
         <!-- =======================
         Solutions Grid START -->
         <section class="py-5" id="solutions">
             <div class="container">
                 <div class="row mb-5">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="text-bg-warning bg-opacity-50">Tailored Language Solutions for Global Business Excellence</h2>
-                        <p class="lead text-bg-warning bg-opacity-50">Empower your organization with specialized programs designed to enhance communication, leadership, and international performance</p>
+                    <div class="col-lg-10 mx-auto text-center">
+                        <h2 class="">Tailored Language Solutions for Business Success</h2>
+                        <p class="lead ">Empower your teams with programs that strengthen communication, leadership, and global performance.</p>
                     </div>
                 </div>
 
@@ -511,88 +486,220 @@
         <!-- =======================
         Solutions Grid END -->
 
-        {% block solutions %}
-            <!-- Industry Solutions START -->
-    {#        <section class="py-5 bg-dark text-white" style="background: url('{% static 'assets/images/bg/industry-solutions-1.jpg' %}') no-repeat center center; background-size: cover; ">#}
-            <section class="py-5 position-relative overflow-hidden text-white"
-                     style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
-                             url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
-                             background-size: cover;">
-                <div class="position-absolute top-0 start-0 w-100 h-100"
-                     style="background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);"></div>
 
-                <div class="container position-relative z-2">
-                    <div class="row mb-5">
-                        <div class="col-lg-10 mx-auto text-center">
-                            <h2 class="text-white">Industry-Specific Language Training Solutions</h2>
-    {#                        <p class="lead">Tailored programs addressing unique sector challenges</p>#}
-                            <p class="lead text-white ">Empowering professionals and teams with language fluency that drives performance across industries.</p>
+        <!-- Industry Solutions START -->
+        <section class="py-5 position-relative overflow-hidden text-white"
+                 style="background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)),url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
+                         background-size: cover;">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+                 style="background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%);"></div>
+
+            <div class="container position-relative z-2">
+                <div class="row mb-5">
+                    <div class="col-lg-10 mx-auto text-center">
+                        <h2 class="text-white display-5 fw-bold mb-3">Industry-Specific Language Training Solutions</h2>
+                        <p class="lead text-white mb-4">Empowering professionals and teams with language fluency that drives performance across industries.</p>
+                        <p class="text-white mb-0">Lingocept provides tailored language programs for individuals and corporate teams — designed to strengthen communication, enhance global collaboration, and align with the unique terminology of every industry.</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Technology -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-cpu-fill text-primary fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Technology</h4>
+                                </div>
+                            </div>
+                            <p class="text-white mb-3">Master the communication skills essential for tech professionals — from engineers to product managers.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="bi bi-dot text-primary me-2"></i>Technical and developer communication</li>
+                                <li class="mb-2"><i class="bi bi-dot text-primary me-2"></i>Client and support interaction skills</li>
+                                <li><i class="bi bi-dot text-primary me-2"></i>Agile and project collaboration terminology</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="industry-grid">
-                        <!-- Technology -->
-                        <div class="d-flex align-items-start">
-                            <div class="flex-shrink-0">
-                                <i class="bi bi-cpu-fill text-primary fs-1 me-3"></i>
+                    <!-- Financial Services -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-graph-up-arrow text-success fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Financial</h4>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-white">Technology & SaaS</h4>
-                                <p>Technical documentation, developer communication, and client support in multiple languages.</p>
-                                <span class="badge bg-primary">API Documentation</span>
-                                <span class="badge bg-primary">Technical Support</span>
-                                <span class="badge bg-primary">Agile Methodology</span>
-                            </div>
+                            <p class="text-white mb-3">Enhance accuracy and confidence in global finance communication — from client relations to compliance.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="bi bi-dot text-success me-2"></i>Banking, audit, and investment terminology</li>
+                                <li class="mb-2"><i class="bi bi-dot text-success me-2"></i>Risk and regulatory communication</li>
+                                <li><i class="bi bi-dot text-success me-2"></i>Negotiation and reporting language</li>
+                            </ul>
                         </div>
+                    </div>
 
-                        <!-- Finance -->
-                        <div class="d-flex align-items-start">
-                            <div class="flex-shrink-0">
-                                <i class="bi bi-graph-up-arrow text-success fs-1 me-3"></i>
+                    <!-- Healthcare & Pharma -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-heart-pulse text-danger fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Health</h4>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-white">Financial Services</h4>
-                                <p>Compliance communication, client relations, and international banking terminology.</p>
-                                <span class="badge bg-success">Regulatory Compliance</span>
-                                <span class="badge bg-success">Wealth Management</span>
-                                <span class="badge bg-success">Risk Assessment</span>
-                            </div>
+                            <p class="text-white mb-3">Develop clarity and empathy in patient and research communication through domain-specific training.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="bi bi-dot text-danger me-2"></i>Medical and clinical English</li>
+                                <li class="mb-2"><i class="bi bi-dot text-danger me-2"></i>Patient communication and documentation</li>
+                                <li><i class="bi bi-dot text-danger me-2"></i>Global research and compliance language</li>
+                            </ul>
                         </div>
+                    </div>
 
-                        <!-- Healthcare -->
-                        <div class="d-flex align-items-start">
-                            <div class="flex-shrink-0">
-                                <i class="bi bi-heart-pulse text-danger fs-1 me-3"></i>
+                    <!-- Manufacturing & Logistics -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-gear-fill text-warning fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Manufacturing</h4>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-white">Healthcare & Pharma</h4>
-                                <p>Medical terminology, patient communication, and clinical research documentation.</p>
-                                <span class="badge bg-danger">Medical Terminology</span>
-                                <span class="badge bg-danger">Patient Care</span>
-                                <span class="badge bg-danger">Clinical Trials</span>
-                            </div>
-                        </div>
-
-                        <!-- Manufacturing -->
-                        <div class="d-flex align-items-start">
-                            <div class="flex-shrink-0">
-                                <i class="bi bi-gear-fill text-warning fs-1 me-3"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-white">Manufacturing & Logistics</h4>
-                                <p>Supply chain communication, safety protocols, and international trade terminology.</p>
-                                <span class="badge bg-warning">Supply Chain</span>
-                                <span class="badge bg-warning">Quality Control</span>
-                                <span class="badge bg-warning">Safety Compliance</span>
-                            </div>
+                            <p class="text-white mb-3">Build communication efficiency across teams, suppliers, and global operations.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><i class="bi bi-dot text-warning me-2"></i>Safety and quality control terminology</li>
+                                <li class="mb-2"><i class="bi bi-dot text-warning me-2"></i>Supply chain and logistics communication</li>
+                                <li><i class="bi bi-dot text-warning me-2"></i>Cross-border teamwork and reporting</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- Industry Solutions END -->
-        {% endblock %}
+            </div>
+        </section>
+        <!-- Industry Solutions END -->
 
-        <!-- Industry Solutions START -->
+        <!-- =======================
+Industry Solutions START -->
+        <section class="py-5 position-relative overflow-hidden text-white"
+                 style="background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)),url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
+                         background-size: cover;">
+            <div class="position-absolute top-0 start-0 w-100 h-100"
+                 style="background: linear-gradient(135deg, rgba(0, 123, 255, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%);"></div>
+
+            <div class="container position-relative z-2">
+                <div class="row mb-5">
+                    <div class="col-lg-10 mx-auto text-center">
+                        <h2 class="text-white display-5 fw-bold mb-3">Industry-Specific Language Training Solutions</h2>
+                        <p class="lead text-white mb-4">Empowering professionals and teams with language fluency that drives performance across industries.</p>
+                        <p class="text-white mb-0">Lingocept provides tailored language programs for individuals and corporate teams — designed to strengthen communication, enhance global collaboration, and align with the unique terminology of every industry.</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Technology -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-cpu-fill text-primary fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Technology</h4>
+                                </div>
+                            </div>
+                            <p class="text-white mb-3">Master communication skills for tech professionals — from engineers to product managers.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1"><i class="bi bi-dot text-primary me-2"></i>Technical communication</li>
+                                <li class="mb-1"><i class="bi bi-dot text-primary me-2"></i>Client interaction skills</li>
+                                <li class="mb-1"><i class="bi bi-dot text-primary me-2"></i>Agile collaboration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Financial Services -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-graph-up-arrow text-success fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Financial</h4>
+                                </div>
+                            </div>
+                            <p class="text-white mb-3">Enhance accuracy in global finance communication — client relations to compliance.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1"><i class="bi bi-dot text-success me-2"></i>Banking terminology</li>
+                                <li class="mb-1"><i class="bi bi-dot text-success me-2"></i>Regulatory communication</li>
+                                <li class="mb-1"><i class="bi bi-dot text-success me-2"></i>Negotiation language</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Healthcare & Pharma -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-heart-pulse text-danger fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Health</h4>
+                                </div>
+                            </div>
+                            <p class="text-white mb-3">Develop clarity in patient and research communication through domain training.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1"><i class="bi bi-dot text-danger me-2"></i>Medical English</li>
+                                <li class="mb-1"><i class="bi bi-dot text-danger me-2"></i>Patient communication</li>
+                                <li class="mb-1"><i class="bi bi-dot text-danger me-2"></i>Research compliance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Manufacturing & Logistics -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="benefit-card bg-white bg-opacity-10 rounded-3 p-4 h-100">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="bi bi-gear-fill text-warning fs-2 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h4 class="text-white mb-0">Manufacturing</h4>
+                                </div>
+                            </div>
+                            <p class="text-white mb-3">Build communication efficiency across teams and global operations.</p>
+                            <h6 class="text-warning mb-2">Focus Areas:</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1"><i class="bi bi-dot text-warning me-2"></i>Safety terminology</li>
+                                <li class="mb-1"><i class="bi bi-dot text-warning me-2"></i>Supply chain communication</li>
+                                <li class="mb-1"><i class="bi bi-dot text-warning me-2"></i>Cross-border teamwork</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- =======================
+        Industry Solutions END -->
+
+        <!-- Industry Solutions I START -->
         <section class="py-5 position-relative overflow-hidden text-white"
                  style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
                          background-size: cover;">
@@ -681,11 +788,13 @@
         </section>
         <!-- Industry Solutions END -->
 
-        <!-- =======================
-    Industry Solutions START -->
+
+
+
+        <!-- Industry Solutions II START -->
         <section class="py-5 position-relative overflow-hidden bg-light">
             <div class="position-absolute top-0 start-0 w-100 h-100"
-                 style="background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(248,249,250,0.98) 100%),url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
+                 style="background: url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
                          background-size: cover;"
             ></div>
 
@@ -694,27 +803,27 @@
                     <div class="col-lg-10 mx-auto text-center">
                         <h2 class="display-5 fw-bold mb-3 text-dark">Industry-Specific Language Training Solutions</h2>
                         <p class="lead text-dark mb-4">Empowering professionals and teams with language fluency that drives performance across industries.</p>
-                        <p class="text-secondary mb-0">Lingocept provides tailored language programs for individuals and corporate teams — designed to strengthen communication, enhance global collaboration, and align with the unique terminology of every industry.</p>
+                        <p class="text-dark mb-0">Lingocept provides tailored language programs for individuals and corporate teams — designed to strengthen communication, enhance global collaboration, and align with the unique terminology of every industry.</p>
                     </div>
                 </div>
 
                 <div class="row g-4">
-                    <!-- Technology & SaaS -->
+                    <!-- Technology -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white rounded-4 bg-opacity-10 p-4 h-100 shadow-sm">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-75 rounded-4 p-4 h-100 shadow-sm">
                             <div class="flex-shrink-0 me-4">
                                 <div class="bg-primary bg-opacity-10 rounded-3 p-3">
                                     <i class="bi bi-cpu-fill text-primary fs-2"></i>
                                 </div>
                             </div>
                             <div class="flex-grow-1">
-                                <h4 class="text-dark mb-3">Technology & SaaS</h4>
-                                <p class="text-secondary mb-3">Master the communication skills essential for tech professionals — from engineers to product managers.</p>
+                                <h4 class="text-dark mb-3">Technology</h4>
+                                <p  style="color: black" class="mb-3">Master the communication skills essential for tech professionals — from engineers to product managers.</p>
                                 <h6 class="text-primary mb-2 fw-semibold">Focus Areas:</h6>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Technical and developer communication</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Client and support interaction skills</li>
-                                    <li><i class="bi bi-check-circle-fill text-primary me-2"></i>Agile and project collaboration terminology</li>
+                                    <li  style="color: black" class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Technical and developer communication</li>
+                                    <li  style="color: black" class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i>Client and support interaction skills</li>
+                                    <li  style="color: black"><i class="bi bi-check-circle-fill text-primary me-2"></i>Agile and project collaboration terminology</li>
                                 </ul>
                             </div>
                         </div>
@@ -722,20 +831,20 @@
 
                     <!-- Financial Services -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white rounded-4 bg-opacity-10 p-4 h-100 shadow-sm">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-75 rounded-4 p-4 h-100 shadow-sm">
                             <div class="flex-shrink-0 me-4">
                                 <div class="bg-success bg-opacity-10 rounded-3 p-3">
                                     <i class="bi bi-graph-up-arrow text-success fs-2"></i>
                                 </div>
                             </div>
                             <div class="flex-grow-1">
-                                <h4 class="text-dark mb-3">Financial Services</h4>
-                                <p class="text-secondary mb-3">Enhance accuracy and confidence in global finance communication — from client relations to compliance.</p>
+                                <h4 class="text-dark mb-3">Financial</h4>
+                                <p  style="color: black" class="mb-3">Enhance accuracy and confidence in global finance communication — from client relations to compliance.</p>
                                 <h6 class="text-success mb-2 fw-semibold">Focus Areas:</h6>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Banking, audit, and investment terminology</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Risk and regulatory communication</li>
-                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Negotiation and reporting language</li>
+                                    <li style="color: black" class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Banking, audit, and investment terminology</li>
+                                    <li style="color: black" class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Risk and regulatory communication</li>
+                                    <li style="color: black"><i class="bi bi-check-circle-fill text-success me-2"></i>Negotiation and reporting language</li>
                                 </ul>
                             </div>
                         </div>
@@ -743,20 +852,20 @@
 
                     <!-- Healthcare & Pharma -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white rounded-4 bg-opacity-10 p-4 h-100 shadow-sm">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-75 rounded-4 p-4 h-100 shadow-sm">
                             <div class="flex-shrink-0 me-4">
                                 <div class="bg-danger bg-opacity-10 rounded-3 p-3">
                                     <i class="bi bi-heart-pulse text-danger fs-2"></i>
                                 </div>
                             </div>
                             <div class="flex-grow-1">
-                                <h4 class="text-dark mb-3">Healthcare & Pharma</h4>
-                                <p class="text-secondary mb-3">Develop clarity and empathy in patient and research communication through domain-specific training.</p>
+                                <h4 class="text-dark mb-3">Healthcare</h4>
+                                <p  style="color: black" class="mb-3">Develop clarity and empathy in patient and research communication through domain-specific training.</p>
                                 <h6 class="text-danger mb-2 fw-semibold">Focus Areas:</h6>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i>Medical and clinical English</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i>Patient communication and documentation</li>
-                                    <li><i class="bi bi-check-circle-fill text-danger me-2"></i>Global research and compliance language</li>
+                                    <li  style="color: black" class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i>Medical and clinical English</li>
+                                    <li  style="color: black" class="mb-2"><i class="bi bi-check-circle-fill text-danger me-2"></i>Patient communication and documentation</li>
+                                    <li  style="color: black"><i class="bi bi-check-circle-fill text-danger me-2"></i>Global research and compliance language</li>
                                 </ul>
                             </div>
                         </div>
@@ -764,7 +873,7 @@
 
                     <!-- Manufacturing & Logistics -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white rounded-4 bg-opacity-10 p-4 h-100 shadow-sm">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-75 rounded-4 p-4 h-100 shadow-sm">
                             <div class="flex-shrink-0 me-4">
                                 <div class="bg-warning bg-opacity-10 rounded-3 p-3">
                                     <i class="bi bi-gear-fill text-warning fs-2"></i>
@@ -772,12 +881,12 @@
                             </div>
                             <div class="flex-grow-1">
                                 <h4 class="text-dark mb-3">Manufacturing & Logistics</h4>
-                                <p class="text-secondary mb-3">Build communication efficiency across teams, suppliers, and global operations.</p>
+                                <p class="text-dark mb-3">Build communication efficiency across teams, suppliers, and global operations.</p>
                                 <h6 class="text-warning mb-2 fw-semibold">Focus Areas:</h6>
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i>Safety and quality control terminology</li>
-                                    <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i>Supply chain and logistics communication</li>
-                                    <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Cross-border teamwork and reporting</li>
+                                    <li class="mb-2"  style="color: black"><i class="bi bi-check-circle-fill text-warning me-2"></i>Safety and quality control terminology</li>
+                                    <li class="mb-2" style="color: black"><i class="bi bi-check-circle-fill text-warning me-2"></i>Supply chain and logistics communication</li>
+                                    <li  style="color: black"><i class="bi bi-check-circle-fill text-warning me-2"></i>Cross-border teamwork and reporting</li>
                                 </ul>
                             </div>
                         </div>
@@ -785,11 +894,10 @@
                 </div>
             </div>
         </section>
-        <!-- =======================
-        Industry Solutions END -->
+        <!-- Industry Solutions END -->
 
 
-        <!-- Industry Solutions START -->
+        <!-- Industry Solutions III START -->
         <section class="py-5 position-relative overflow-hidden text-white"
                  style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
                          url('{% static "assets/images/bg/industry-solutions-0.jpg" %}') no-repeat center center;
@@ -809,13 +917,13 @@
                 <div class="row g-4">
                     <!-- Technology & SaaS -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
                             <div class="flex-shrink-0 me-4">
                                 <i class="bi bi-cpu-fill text-primary fs-2"></i>
                             </div>
                             <div class="flex-grow-1">
                                 <div class="d-flex align-items-center mb-3">
-                                    <h4 class="text-white mb-0 fs-3">Technology & SaaS</h4>
+                                    <h4 class="text-white mb-0 fs-3">Technology 3</h4>
                                 </div>
                                 <p class="mb-3 text-white-50">Master the communication skills essential for tech professionals — from engineers to product managers.</p>
                                 <h6 class="text-warning mb-2 fs-6">Focus Areas:</h6>
@@ -832,7 +940,7 @@
 
                     <!-- Financial Services -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
                             <div class="flex-shrink-0 me-4">
                                 <i class="bi bi-graph-up-arrow text-success fs-2"></i>
                             </div>
@@ -855,7 +963,7 @@
 
                     <!-- Healthcare & Pharma -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
                             <div class="flex-shrink-0 me-4">
                                 <i class="bi bi-heart-pulse text-danger fs-2"></i>
                             </div>
@@ -878,7 +986,7 @@
 
                     <!-- Manufacturing & Logistics -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
                             <div class="flex-shrink-0 me-4">
                                 <i class="bi bi-gear-fill text-warning fs-2"></i>
                             </div>
@@ -901,7 +1009,7 @@
 
                     <!-- Legal Services -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
                             <div class="flex-shrink-0 me-4">
                                 <i class="bi bi-balance-scale text-info fs-2"></i>
                             </div>
@@ -924,7 +1032,7 @@
 
                     <!-- Energy & Sustainability -->
                     <div class="col-lg-6">
-                        <div class="d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
+                        <div class="benefit-card d-flex align-items-start bg-white bg-opacity-10 rounded-4 p-4 h-100">
                             <div class="flex-shrink-0 me-4">
                                 <i class="bi bi-lightning-charge text-warning fs-2"></i>
                             </div>

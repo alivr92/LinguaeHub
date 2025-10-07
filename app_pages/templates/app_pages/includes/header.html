@@ -445,10 +445,8 @@
                     </li>
                     <!-- Nav item: In-Person -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link {% if 'in-person' in request.path %}active text-primary{% endif %} dropdown-toggle" href="{% url 'app_pages:in_person' %}" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programs</a>
+                        <a class="nav-link {% if 'in-person' in request.path %}active text-primary{% endif %} dropdown-toggle" href="{% url 'app_pages:in_person_individual' %}" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programs</a>
                         <ul class="dropdown-menu" aria-labelledby="demoMenu">
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person' %}">In-Person classes 1</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person2' %}">Individual Classes</a></li>
                             <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_individual' %}">Private Classes (1:1)</a></li>
                             <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop' %}">Group classes</a></li>
                             <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop2' %}">Group classes 2</a></li>

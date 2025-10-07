@@ -165,9 +165,6 @@ class InPerson(TemplateView):
     template_name = 'app_pages/in_person/in-person.html'
 
 
-class InPerson2(TemplateView):
-    template_name = 'app_pages/in_person/in-person2.html'
-
 
 class InPersonIndividual(TemplateView):
     template_name = 'app_pages/in_person/private_class.html'
