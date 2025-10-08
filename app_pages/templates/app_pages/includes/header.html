@@ -445,15 +445,11 @@
                     </li>
                     <!-- Nav item: In-Person -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link {% if 'in-person' in request.path %}active text-primary{% endif %} dropdown-toggle" href="{% url 'app_pages:in_person_individual' %}" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programs</a>
+                        <a class="nav-link {% if 'in-person' in request.path %}active text-primary{% endif %} dropdown-toggle" href="{% url 'app_pages:inp_private_course' %}" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programs</a>
                         <ul class="dropdown-menu" aria-labelledby="demoMenu">
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_individual' %}">Private Classes (1:1)</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop' %}">Group classes</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop2' %}">Group classes 2</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_corporate' %}">Corporate Training</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_corporate2' %}">Corporate Training 2</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_kids' %}">Kids Programs</a></li>
-                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_kids2' %}">Kids Programs2</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:inp_private_course' %}">Private Courses</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop' %}">Group Courses</a></li>
+                            <li> <a class="dropdown-item" href="{% url 'app_pages:in_person_gruop2' %}">Group Courses 2</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

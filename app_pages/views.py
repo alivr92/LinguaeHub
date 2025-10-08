@@ -165,9 +165,8 @@ class InPerson(TemplateView):
     template_name = 'app_pages/in_person/in-person.html'
 
 
-
-class InPersonIndividual(TemplateView):
-    template_name = 'app_pages/in_person/private_class.html'
+class PrivateCourseView(TemplateView):
+    template_name = 'app_pages/in_person/private_course.html'
 
 
 class InPersonGruop(TemplateView):
@@ -178,18 +177,13 @@ class InPersonGruop2(TemplateView):
     template_name = 'app_pages/in_person/inp_group2.html'
 
 
-class InPersonCorporate(TemplateView):
-    template_name = 'app_pages/in_person/inp_corporate.html'
-
-
-class InPersonCorporate2(TemplateView):
-    template_name = 'app_pages/in_person/inp_corporate2.html'
-
 class ForBusiness(TemplateView):
     template_name = 'app_pages/for_business.html'
 
+
 class OnlineLearning(TemplateView):
     template_name = 'app_pages/online_learning.html'
+
 
 # CTA Form pages:
 class RequestEnterpriseDemoView(TemplateView):
@@ -198,11 +192,3 @@ class RequestEnterpriseDemoView(TemplateView):
 
 class ExploreBusinessSolutionsView(TemplateView):
     template_name = 'app_pages/forms/explore_business_solutions.html'
-
-
-class InPersonKids(TemplateView):
-    template_name = 'app_pages/in_person/in-person-kids.html'
-
-
-class InPersonKids2(TemplateView):
-    template_name = 'app_pages/in_person/inp_kids2.html'

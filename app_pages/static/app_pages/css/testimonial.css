@@ -1,0 +1,74 @@
+.scrolling-wrapper {
+    height: 250px;
+    overflow: hidden;
+}
+
+.scrolling-content {
+    display: flex;
+    position: absolute;
+    white-space: nowrap;
+    gap: 1.5rem; /* Added gap between cards */
+}
+
+.scrolling-content.paused {
+    animation-play-state: paused !important;
+}
+
+.scrolling-item {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 350px; /* Adjusted width to fit content better */
+}
+
+/* First row scrolls left */
+#scrollingContent1 {
+    animation: scrollLeft 50s linear infinite;
+}
+
+/* Second row scrolls right */
+#scrollingContent2 {
+    animation: scrollRight 45s linear infinite;
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Card styles */
+.testimonial-card {
+    transition: all 0.3s ease;
+    width: 100%;
+    white-space: normal; /* Ensure text wraps properly */
+    overflow: visible; /* Ensure all content is visible */
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+/* Pause on card hover */
+.scrolling-item:hover .scrolling-content {
+    animation-play-state: paused !important;
+}
+
+/* Ensure all content is visible */
+.testimonial-card p {
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+}
