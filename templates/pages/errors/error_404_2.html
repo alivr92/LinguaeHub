@@ -1,0 +1,116 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+
+{% block head_title %}Error 404{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+{% endblock %}
+{% block my_style%}
+    <style>
+        /* Custom styling for better visual hierarchy */
+        .h-200px {
+            height: 200px;
+        }
+        .h-md-400px {
+            height: 400px;
+        }
+        @media (min-width: 768px) {
+            .h-md-400px {
+                height: 400px;
+            }
+        }
+
+        /* Smooth hover transitions */
+        .btn {
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+
+        /* Ensure proper spacing */
+        .gap-3 {
+            gap: 1rem !important;
+        }
+    </style>
+
+{% endblock %}
+{% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
+    <main>
+        <section class="pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <!-- Image -->
+                        <img src="{% static 'assets/images/element/error404-01.svg' %}" class="h-200px h-md-400px mb-4" alt="">
+                        <!-- Title -->
+                        <h1 class="display-1 text-danger mb-0">404</h1>
+                        <!-- Subtitle -->
+                        <h2>Oh no, something went wrong!</h2>
+                        <!-- info -->
+                        <p class="mb-3">Either something went wrong or this page doesn't exist anymore.</p>
+                        <p class="mb-5">But don't worry, you're still in the right place to advance your language learning journey. At
+                            {{ CFChar.site_name }}, we offer innovative tools, interactive courses, and tailored services to help learners and organizations achieve real results.</p>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 mb-4">
+                            <!-- Primary Actions -->
+                            <div class="d-flex flex-column flex-sm-row gap-3">
+                                <a href="{% url 'app_pages:home' %}" class="btn btn-primary">
+                                    <i class="bi bi-house-fill me-2"></i>Return to Homepage
+                                </a>
+                                <a href="#" class="btn btn-outline-primary">
+                                    <i class="bi bi-book-half me-2"></i>Browse Our Courses
+                                </a>
+                            </div>
+
+                            <!-- Secondary Actions -->
+                            <div class="d-flex flex-column flex-sm-row gap-3">
+                                <a href="#" class="btn btn-outline-success">
+                                    <i class="bi bi-briefcase me-2"></i>Explore Products & Services
+                                </a>
+                                <a href="{% url 'app_pages:help_center' %}" class="btn btn-outline-info">
+                                    <i class="bi bi-headset me-2"></i>Contact Support
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Alternative: Stacked layout for smaller screens -->
+                        <div class="d-flex flex-column d-sm-none gap-2 mt-3">
+                            <a href="{% url 'app_pages:home' %}" class="btn btn-primary">
+                                <i class="bi bi-house-fill me-2"></i>Return to Homepage
+                            </a>
+                            <a href="#" class="btn btn-outline-primary">
+                                <i class="bi bi-book-half me-2"></i>Browse Our Courses
+                            </a>
+                            <a href="#" class="btn btn-outline-success">
+                                <i class="bi bi-briefcase me-2"></i>Explore Products & Services
+                            </a>
+                            <a href="{% url 'app_pages:contact' %}" class="btn btn-outline-info">
+                                <i class="bi bi-headset me-2"></i>Contact Support
+                            </a>
+                        </div>
+
+                        <!-- Additional Help Text -->
+                        <div class="mt-5 pt-3 border-top">
+                            <p class="text-muted small mb-2">Need immediate assistance?</p>
+                            <p class="mb-0">
+                                <a href="mailto:support@lingocept.com" class="text-decoration-none">
+                                    <i class="bi bi-envelope me-1"></i>support@lingocept.com
+                                </a>
+                                <span class="mx-2">•</span>
+                                <a href="tel:+49123456789" class="text-decoration-none">
+                                    <i class="bi bi-telephone me-1"></i>+49 123 456 789
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- **************** MAIN CONTENT END **************** -->
+
+{% endblock %}

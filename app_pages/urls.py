@@ -9,8 +9,7 @@ urlpatterns = [
     path('about/', views.About.as_view(), name='about'),
     path('contact/', views.ContactUs.as_view(), name='contact_us'),
     path('in-person-private-course/', views.PrivateCourseView.as_view(), name='inp_private_course'),
-    path('in-person-gruop/', views.InPersonGruop.as_view(), name='in_person_gruop'),
-    path('in-person-gruop-2/', views.InPersonGruop2.as_view(), name='in_person_gruop2'),
+    path('in-person-group/', views.InPersonGroup.as_view(), name='inp_group'),
     path('for-business/', views.ForBusiness.as_view(), name='for_business'),
     path('online-learning/', views.OnlineLearning.as_view(), name='online_learning'),
 

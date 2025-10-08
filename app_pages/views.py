@@ -161,20 +161,12 @@ class ArticleView(DetailView):
         return context
 
 
-class InPerson(TemplateView):
-    template_name = 'app_pages/in_person/in-person.html'
-
-
 class PrivateCourseView(TemplateView):
     template_name = 'app_pages/in_person/private_course.html'
 
 
-class InPersonGruop(TemplateView):
-    template_name = 'app_pages/in_person/in-person-group.html'
-
-
-class InPersonGruop2(TemplateView):
-    template_name = 'app_pages/in_person/inp_group2.html'
+class InPersonGroup(TemplateView):
+    template_name = 'app_pages/in_person/inp_group.html'
 
 
 class ForBusiness(TemplateView):
