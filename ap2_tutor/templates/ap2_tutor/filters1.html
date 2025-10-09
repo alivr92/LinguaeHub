@@ -2,6 +2,8 @@
 <form id="fSearch" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-6 position-relative"
       action="{% url 'provider:tutor_list' %}" method="GET">
 
+    <input type="hidden" name="page" value="1">  <!-- Reset to page 1 on new filters -->
+
     <!-- Main Filter Row -->
     <div class="row g-3 align-items-end">
 

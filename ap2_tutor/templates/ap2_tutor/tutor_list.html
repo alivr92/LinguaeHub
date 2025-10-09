@@ -45,6 +45,7 @@
         <!-- Page Banner END -->
 
         <!-- Debug Section -->
+        <!-- Debug Section -->
         <div class="alert alert-info mt-3">
             <h6>🔍 Debug Information</h6>
             <p><strong>URL Parameters:</strong> {{ request.GET.urlencode }}</p>
@@ -57,8 +58,9 @@
                 <li>Rating: "{{ request.GET.sRate }}"</li>
                 <li>Search: "{{ request.GET.keySearch }}"</li>
             </ul>
-            <p><strong>Results Count:</strong> {{ tutors.count }}</p>
-            <p><strong>Total Tutors in DB:</strong> {{ tutors_accepted.count }}</p>
+            <p><strong>All Tutors Count:</strong> {{ all_tutors_count }}</p>
+            <p><strong>Filtered Tutors Count:</strong> {{ page_obj.paginator.count }}</p>
+            <p><strong>Current Page:</strong> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
         </div>
 
         <!-- Filter Section -->
@@ -76,11 +78,15 @@
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="alert alert-light border">
-                            <strong>{{ tutors.count }}</strong> tutors found
+{#                            <strong>{{ tutors.count }}</strong> tutors found#}
+{#                                                        {% if request.GET %}matching your filters{% endif %}#}
+                            <strong>{{ page_obj.paginator.count }}</strong> tutors found
                             {% if request.GET %}matching your filters{% endif %}
                         </div>
                     </div>
                 </div>
+
+
 
                 <!-- Tutor list START -->
                 <div class="row g-4 justify-content-center">
@@ -415,6 +421,18 @@
 {% endblock %}
 {% block my_scripts11 %}
     <script>
+
+        function triggerFiltering() {
+            // Reset to page 1 when filters change
+            const pageInput = document.querySelector('input[name="page"]');
+            if (pageInput) {
+                pageInput.value = '1';
+            }
+
+            // Submit the form
+            document.getElementById('fSearch').submit();
+        }
+
 
         function resetPriceRange() {
             const minPrice = {{ min_price }};

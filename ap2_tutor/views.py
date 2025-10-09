@@ -219,17 +219,15 @@ class TutorListView1(ListView):
         return context
 
 
-class TutorListView(ListView):
+class TutorListView_notBad(ListView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_list.html'
     ordering = ['-profile__create_date']
-    paginate_by = 10
+    paginate_by = 6
 
     def get_queryset(self):
         # Start with only accepted tutors
-        queryset = Tutor.objects.filter(status='accepted').select_related('profile').prefetch_related(
-            'teaching_tags', 'profile__user__skills'
-        )
+        queryset = Tutor.objects.filter(status='accepted')
 
         # Apply ordering
         queryset = queryset.order_by('-profile__create_date')
@@ -270,7 +268,7 @@ class TutorListView(ListView):
                 cost_hourly__lte=max_price
             )
 
-        return queryset.distinct()
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -287,7 +285,8 @@ class TutorListView(ListView):
         context.update({
             'min_price': price_stats['min_price'] or 0,
             'max_price': price_stats['max_price'] or 100,
-            'tutors_accepted': all_tutors.filter(status='accepted'),
+            'all_tutors': all_tutors,
+            'tutors': all_tutors.filter(status='accepted'),
             's_gender': s_gender,
             's_country': s_country,
             's_lang_native': s_lang_native,
@@ -300,6 +299,90 @@ class TutorListView(ListView):
             's_cost_hourly': s_cost_hourly,
             's_session_count': s_session_count,
             's_student_count': s_student_count,
+            'search_gender': self.request.GET.get('gender', ''),
+            'current_skills': self.request.GET.get('skills', ''),
+            'current_skill_level': self.request.GET.get('sSkillLevel', ''),
+            'current_rating': self.request.GET.get('sRate', ''),
+            'current_min_price': self.request.GET.get('min_price', ''),
+            'current_max_price': self.request.GET.get('max_price', ''),
+        })
+
+        return context
+
+
+class TutorListView(ListView):
+    model = Tutor
+    template_name = 'ap2_tutor/tutor_list.html'
+    ordering = ['-profile__create_date']
+    paginate_by = 6
+    context_object_name = 'tutors'  # Add this to use 'tutors' in template
+
+    def get_queryset(self):
+        # Start with only accepted tutors
+        queryset = Tutor.objects.filter(status='accepted')
+
+        # Apply ordering
+        queryset = queryset.order_by('-profile__create_date')
+
+        # Apply filters based on request parameters
+        gender = self.request.GET.get('gender')
+        if gender:
+            queryset = queryset.filter(profile__gender__iexact=gender)
+
+        keySearch = self.request.GET.get('keySearch')
+        if keySearch:
+            queryset = queryset.filter(
+                Q(profile__user__first_name__icontains=keySearch) |
+                Q(profile__user__last_name__icontains=keySearch)
+            )
+
+        sRate = self.request.GET.get('sRate')
+        if sRate:
+            queryset = queryset.filter(profile__rating__gte=sRate)
+
+        skills = self.request.GET.get('skills')
+        if skills:
+            queryset = queryset.filter(
+                profile__user__skills__skill__name=skills
+            ).distinct()  # Add distinct() to avoid duplicates
+
+        sSkillLevel = self.request.GET.get('sSkillLevel')
+        if sSkillLevel:
+            queryset = queryset.filter(
+                profile__user__skills__level__name=sSkillLevel
+            ).distinct()  # Add distinct() to avoid duplicates
+
+        min_price = self.request.GET.get('min_price')
+        max_price = self.request.GET.get('max_price')
+        if min_price and max_price:
+            queryset = queryset.filter(
+                cost_hourly__gte=min_price,
+                cost_hourly__lte=max_price
+            )
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get filtered queryset (for counts)
+        filtered_queryset = self.get_queryset()
+
+        # Get ALL tutors (unfiltered) for filter options
+        all_tutors = Tutor.objects.all()
+
+        # Get min/max prices from ALL tutors
+        price_stats = all_tutors.aggregate(
+            min_price=Min('cost_hourly'),
+            max_price=Max('cost_hourly')
+        )
+
+        context.update({
+            'min_price': price_stats['min_price'] or 0,
+            'max_price': price_stats['max_price'] or 100,
+            'all_tutors_count': all_tutors.count(),
+            'filtered_tutors_count': filtered_queryset.count(),
+            # Remove the duplicate 'tutors' context variable as it conflicts with ListView
             'search_gender': self.request.GET.get('gender', ''),
             'current_skills': self.request.GET.get('skills', ''),
             'current_skill_level': self.request.GET.get('sSkillLevel', ''),
@@ -431,6 +514,10 @@ class TutorReserveView(DetailView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_reserve.html'
     context_object_name = 'tutor_single'
+
+    def get_object(self):
+        public_id = self.kwargs['public_id']
+        return get_object_or_404(Tutor, public_id=public_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

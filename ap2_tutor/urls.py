@@ -6,7 +6,8 @@ app_name = 'provider'
 urlpatterns = [
     # ---------------------- PROVIDER FRONT PAGES
     path('', views.TutorListView.as_view(), name='tutor_list'),
-    path('reserve/<int:pk>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
+    # path('reserve/<int:pk>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
+    path('reserve/<str:public_id>/', views.TutorReserveView.as_view(), name='tutor_reserve'),
 
     # SEO-friendly URL (primary - should come FIRST)
     path('s/<slug:slug>/', views.ProviderDetailView.as_view(), name='provider_detail'),
