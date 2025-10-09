@@ -1,6 +1,6 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
-{% block head_title %}Terms of Use - Lingocept®{% endblock %}
+{% block head_title %}Terms of Use - {{ CFChar.site_name }}®{% endblock %}
 {% block my_style %}
     <style>
         html {
@@ -22,7 +22,7 @@
                     <div class="col-lg-8 position-relative">
                         <!-- Title -->
                         <h1>User Terms of Use</h1>
-                        <p class="lead">These Terms of Use govern your access to and use of Lingocept® services,
+                        <p class="lead">These Terms of Use govern your access to and use of {{ CFChar.site_name }}® services,
                             including all platform features, learning materials, and instructional sessions.</p>
 
                         <!-- Badges -->
@@ -95,7 +95,7 @@
                                 <div class="ps-4">
                                     <div class="card border-primary-soft">
                                         <div class="card-body">
-                                            <p>These Terms of Use apply to all users ("you") accessing Lingocept®
+                                            <p>These Terms of Use apply to all users ("you") accessing {{ CFChar.site_name }}®
                                                 services, including website features, learning materials, trial lessons,
                                                 instructor sessions, and account tools.</p>
                                             <p class="mb-0"><strong>By using our platform, you accept these conditions
@@ -166,7 +166,7 @@
                                             <p>You may use the platform and services solely for personal educational
                                                 purposes in accordance with:</p>
                                             <ul class="list-icon">
-                                                <li>Lingocept® AGB (Terms and Conditions)</li>
+                                                <li>{{ CFChar.site_name }}® AGB (Terms and Conditions)</li>
                                                 <li>Licensing Terms</li>
                                                 <li>Tutor agreements (where applicable)</li>
                                             </ul>
@@ -190,7 +190,7 @@
                                                     <ul class="list-icon">
                                                         <li>Record lessons or communications without permission</li>
                                                         <li>Use automation, bots, or scraping tools</li>
-                                                        <li>Reverse engineer or sublicense Lingocept® content</li>
+                                                        <li>Reverse engineer or sublicense {{ CFChar.site_name }}® content</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -249,7 +249,7 @@
                                                 <i class="bi bi-server text-info fs-3 me-3"></i>
                                                 <div>
                                                     <h4 class="h6 text-info">Service Availability</h4>
-                                                    <p>Lingocept® strives for 99.5% uptime but does not guarantee
+                                                    <p>{{ CFChar.site_name }}® strives for 99.5% uptime but does not guarantee
                                                         uninterrupted service. Availability may be affected by:</p>
                                                     <ul class="list-icon">
                                                         <li>Scheduled maintenance windows</li>
@@ -280,7 +280,7 @@
                                                 </div>
                                                 <div class="col-md-10">
                                                     <p>While our proprietary methodology is designed to support
-                                                        significant language improvement, Lingocept® does not guarantee
+                                                        significant language improvement, {{ CFChar.site_name }}® does not guarantee
                                                         specific outcomes or fluency levels. Results vary based on:</p>
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -358,7 +358,7 @@
                                                             class="bi bi-file-earmark-text me-2"></i> Core Documents
                                                     </h4>
                                                     <ul class="list-icon">
-                                                        <li>Lingocept® AGB (Terms and Conditions)</li>
+                                                        <li>{{ CFChar.site_name }}® AGB (Terms and Conditions)</li>
                                                         <li>Privacy Policy</li>
                                                     </ul>
                                                 </div>
@@ -404,7 +404,7 @@
                                                     <p class="mb-1"><i
                                                             class="bi bi-globe me-2"></i> {{ CFURL.site_address }}</p>
                                                     <p class="mb-1"><i
-                                                            class="bi bi-envelope me-2"></i> {{ CFEmail.email1 }}</p>
+                                                            class="bi bi-envelope me-2"></i> {{ CFEmail.support }}</p>
                                                     <p class="mb-1"><i
                                                             class="bi bi-telephone me-2"></i> {{ CFChar.phone1 }}</p>
                                                     <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> Berlin, Germany

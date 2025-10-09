@@ -1,6 +1,6 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
-{% block head_title %}Privacy Policy - Lingocept®{% endblock %}
+{% block head_title %}Privacy Policy - {{ CFChar.site_name }}®{% endblock %}
 {% block my_style %}
     <style>
         html {
@@ -22,7 +22,7 @@
                     <div class="col-lg-8 position-relative">
                         <!-- Title -->
                         <h1>Privacy Policy</h1>
-                        <p class="lead">This Privacy Policy describes how Lingocept® collects, uses, discloses, and protects your personal data in compliance with the General Data Protection Regulation (GDPR) and other applicable data protection laws.</p>
+                        <p class="lead">This Privacy Policy describes how {{ CFChar.site_name }}® collects, uses, discloses, and protects your personal data in compliance with the General Data Protection Regulation (GDPR) and other applicable data protection laws.</p>
 
                         <!-- Badges -->
                         <div class="d-flex flex-wrap gap-2 mt-3">
@@ -86,7 +86,7 @@
                                     <h2 class="h4 fw-bold mb-0">Data Controller</h2>
                                 </div>
                                 <div class="ps-4">
-                                    <p>Lingocept® is the data controller responsible for your personal data.</p>
+                                    <p>{{ CFChar.site_name }}® is the data controller responsible for your personal data.</p>
                                     <div class="card border-primary-soft mt-3">
                                         <div class="card-body">
                                             <h5 class="h6 mb-3"><i class="bi bi-building text-primary me-2"></i>Contact Information</h5>
@@ -418,7 +418,7 @@
                                     <h2 class="h4 fw-bold mb-0">Data Security</h2>
                                 </div>
                                 <div class="ps-4">
-                                    <p>Lingocept® implements enterprise-grade security measures:</p>
+                                    <p>{{ CFChar.site_name }}® implements enterprise-grade security measures:</p>
                                     <div class="row g-3">
                                         <div class="col-md-4">
                                             <div class="p-3 border rounded bg-light h-100 text-center">
@@ -481,7 +481,7 @@
                                             <h4 class="h5 text-primary mb-3"><i class="bi bi-headset me-2"></i>Privacy Inquiries</h4>
                                             <p class="mb-1"><i class="bi bi-envelope me-2"></i> <strong>General:</strong> privacy@lingocept.com</p>
                                             <p class="mb-1"><i class="bi bi-shield-lock me-2"></i> <strong>DPO:</strong> dpo@lingocept.com</p>
-                                            <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> <strong>Postal:</strong> Lingocept GmbH, Data Protection, [Street Address], Berlin, Germany</p>
+                                            <p class="mb-0"><i class="bi bi-geo-alt me-2"></i> <strong>Postal:</strong> {{ CFChar.site_name }} GmbH, Data Protection, [Street Address], Berlin, Germany</p>
                                         </div>
                                     </div>
                                 </div>

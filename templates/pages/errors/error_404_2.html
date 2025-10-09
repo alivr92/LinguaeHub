@@ -1,6 +1,5 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
-
 {% block head_title %}Error 404{% endblock %}
 
 {% block head_style_plugins %}
@@ -8,34 +7,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
 {% endblock %}
-{% block my_style%}
-    <style>
-        /* Custom styling for better visual hierarchy */
-        .h-200px {
-            height: 200px;
-        }
-        .h-md-400px {
-            height: 400px;
-        }
-        @media (min-width: 768px) {
-            .h-md-400px {
-                height: 400px;
-            }
-        }
 
-        /* Smooth hover transitions */
-        .btn {
-            transition: all 0.3s ease;
-            min-width: 180px;
-        }
-
-        /* Ensure proper spacing */
-        .gap-3 {
-            gap: 1rem !important;
-        }
-    </style>
-
-{% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
@@ -97,12 +69,12 @@
                         <div class="mt-5 pt-3 border-top">
                             <p class="text-muted small mb-2">Need immediate assistance?</p>
                             <p class="mb-0">
-                                <a href="mailto:support@lingocept.com" class="text-decoration-none">
-                                    <i class="bi bi-envelope me-1"></i>support@lingocept.com
+                                <a href="mailto:{{ CFEmail.support }}" class="text-decoration-none">
+                                    <i class="bi bi-envelope me-1"></i>{{ CFEmail.support }}
                                 </a>
                                 <span class="mx-2">•</span>
-                                <a href="tel:+49123456789" class="text-decoration-none">
-                                    <i class="bi bi-telephone me-1"></i>+49 123 456 789
+                                <a href="tel:{{ CFChar.phone1 }}" class="text-decoration-none">
+                                    <i class="bi bi-telephone me-1"></i>{{ CFChar.phone1 }}
                                 </a>
                             </p>
                         </div>
@@ -112,5 +84,4 @@
         </section>
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
-
 {% endblock %}
