@@ -371,11 +371,19 @@
 </p>
                         <!-- Tabs Navigation -->
                         <ul class="nav nav-pills nav-pill-soft mb-4" id="tutor-pills-tab" role="tablist">
+                            <!-- Tab 0 -->
+                            <li class="nav-item me-3" role="presentation">
+                                <button class="nav-link active" id="tutor-pills-tab-0" data-bs-toggle="pill"
+                                        data-bs-target="#tutor-pills-0" type="button" role="tab"
+                                        aria-controls="tutor-pills-0" aria-selected="true">
+                                    Ideal Candidates
+                                </button>
+                            </li>
                             <!-- Tab 1 -->
                             <li class="nav-item me-3" role="presentation">
-                                <button class="nav-link active" id="tutor-pills-tab-1" data-bs-toggle="pill"
+                                <button class="nav-link" id="tutor-pills-tab-1" data-bs-toggle="pill"
                                         data-bs-target="#tutor-pills-1" type="button" role="tab"
-                                        aria-controls="tutor-pills-1" aria-selected="true">
+                                        aria-controls="tutor-pills-1" aria-selected="false">
                                     Ideal Candidates
                                 </button>
                             </li>
@@ -384,7 +392,7 @@
                                 <button class="nav-link" id="tutor-pills-tab-2" data-bs-toggle="pill"
                                         data-bs-target="#tutor-pills-2" type="button" role="tab"
                                         aria-controls="tutor-pills-2" aria-selected="false">
-                                    Our LMS Platform
+                                    Our Platform
                                 </button>
                             </li>
                             <!-- Tab 3 -->
@@ -399,8 +407,42 @@
 
                         <!-- Tab Contents -->
                         <div class="tab-content" id="tutor-pills-tabContent">
+                            <!-- Tab 0 Content -->
+                            <div class="tab-pane fade show active" id="tutor-pills-0" role="tabpanel"
+                                 aria-labelledby="tutor-pills-tab-0">
+                                <h5>We welcome Tutors who are...</h5>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                        <strong>Experts in their field</strong> with a deep understanding of their subject and a proven ability to make complex ideas clear and engaging for learners.
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                        <strong>Passionate about education</strong> committed to helping others grow, achieve, and communicate with clarity and confidence.
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                        <strong>Dedicated to excellence</strong> consistently delivering high-quality learning experiences that inspire real progress and long-term results.
+                                    </li>
+                                    <hr> <!-- ------------------ -->
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Strong communicators and mentors</strong> skilled at creating a supportive, professional, and motivating learning environment.
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Driven by professionalism and integrity</strong> bringing reliability, accountability, and care to every interaction.
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                        <strong>Adaptive and forward-thinking</strong> open to innovation and ready to grow with {{ CFChar.site_name }}'s expanding global learning community.
+                                    </li>
+                                </ul>
+                                <p class="lead">If that sounds like you, join a platform that values professionalism, innovation, and the art of meaningful teaching.</p>
+                            </div>
+
                             <!-- Tab 1 Content -->
-                            <div class="tab-pane fade show active" id="tutor-pills-1" role="tabpanel"
+                            <div class="tab-pane fade" id="tutor-pills-1" role="tabpanel"
                                  aria-labelledby="tutor-pills-tab-1">
                                 <h5>We welcome Tutors who are...</h5>
                                 <ul class="list-unstyled mb-4">
@@ -437,13 +479,13 @@
                                         <strong>Adaptive and collaborative</strong>, ready to engage with {{ CFChar.site_name }}’s English Concept Method.
                                     </li>
                                 </ul>
-                                <p class="lead">If that sounds like you, join us and inspire confident communication worldwide.</p>
+                                <p class="lead">If that sounds like you, join a platform that values professionalism, innovation, and the art of meaningful teaching.</p>
                             </div>
 
                             <!-- Tab 2 Content -->
                             <div class="tab-pane fade" id="tutor-pills-2" role="tabpanel"
                                  aria-labelledby="tutor-pills-tab-2">
-                                <h5>Our LMS Platform</h5>
+                                <h5>Our Platform</h5>
                                 <p>Before applying, here's what you should know about our Learning Management
                                     System:</p>
 
