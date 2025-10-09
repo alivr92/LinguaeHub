@@ -48,15 +48,25 @@
     }
 }
 
+
 /* Card styles */
 .testimonial-card {
+    background: linear-gradient(135deg, #fafbff 0%, #f0f4ff 50%, #eef2ff 100%);
+    border: 1px solid rgba(99, 102, 241, 0.12);
+    border-radius: 15px;
     transition: all 0.3s ease;
     width: 100%;
-    white-space: normal; /* Ensure text wraps properly */
-    overflow: visible; /* Ensure all content is visible */
+    white-space: normal;
+    overflow: visible;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.05);
 }
 
 .testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    border-color: rgba(59, 130, 246, 0.25);
+}
+.testimonial-card1:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
 }

@@ -65,16 +65,14 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .testimonial-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-        }
 
         .cta-section {
             background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
             border-radius: 15px;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'app_pages/css/testimonial.css' %}">
+
 {% endblock %}
 {% block body_content %}
     <!-- **************** MAIN CONTENT START **************** -->
@@ -191,7 +189,7 @@
 
                     <div class="col-md-6 text-center">
                         <!-- Image -->
-                        <img src="{% static 'assets/images/bg/09.jpg' %}"
+                        <img src="{% static 'assets/images/about/07_2.jpg' %}"
                              class="img-fluid rounded-3 shadow-sm protected-image position-relative z-n1"
                              alt="Private Language Tutoring - Personalized Learning Experience">
                     </div>
@@ -479,336 +477,8 @@
         </section>
         <!-- Pricing Plans END -->
 
-        <!-- Testimonials 1111 -->
-        <section class="py-5">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8 text-center mx-auto">
-                        <h2>Success Stories from Our Private Students</h2>
-                        <p class="lead">Hear from learners who transformed their skills through personalized
-                            instruction</p>
-                    </div>
-                </div>
 
-                <div class="row g-4">
-                    <!-- Testimonial 1 -->
-                    <div class="col-md-6">
-                        <div class="testimonial-card p-4 h-100">
-                            <div class="d-flex mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/01.jpg' %}" class="rounded-circle"
-                                         width="60" height="60" alt="Avatar">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Sarah Johnson</h5>
-                                    <p class="mb-0 text-muted">Professional Development</p>
-                                </div>
-                            </div>
-                            <p class="mb-0">"The personalized attention I received in my private classes helped me
-                                advance my career faster than I ever thought possible. My tutor understood exactly what
-                                I needed to focus on for my specific industry."</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="col-md-6">
-                        <div class="testimonial-card p-4 h-100">
-                            <div class="d-flex mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/02.jpg' %}" class="rounded-circle"
-                                         width="60" height="60" alt="Avatar">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Michael Chen</h5>
-                                    <p class="mb-0 text-muted">Exam Preparation</p>
-                                </div>
-                            </div>
-                            <p class="mb-0">"I was struggling with advanced mathematics until I started private
-                                sessions. Having a tutor who could explain concepts in multiple ways until I understood
-                                made all the difference. I aced my exams!"</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="col-md-6">
-                        <div class="testimonial-card p-4 h-100">
-                            <div class="d-flex mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle"
-                                         width="60" height="60" alt="Avatar">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Emma Rodriguez</h5>
-                                    <p class="mb-0 text-muted">Language Learning</p>
-                                </div>
-                            </div>
-                            <p class="mb-0">"As a busy professional, the flexibility of private classes was essential.
-                                My tutor worked around my schedule and customized lessons based on my business needs. I
-                                became conversational in Spanish in just 3 months!"</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="col-md-6">
-                        <div class="testimonial-card p-4 h-100">
-                            <div class="d-flex mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/04.jpg' %}" class="rounded-circle"
-                                         width="60" height="60" alt="Avatar">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">David Thompson</h5>
-                                    <p class="mb-0 text-muted">Skill Development</p>
-                                </div>
-                            </div>
-                            <p class="mb-0">"The one-on-one format allowed me to ask questions without hesitation. My
-                                tutor identified gaps in my knowledge I didn't even know I had and created exercises
-                                specifically to address them. Highly recommended!"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Testimonials END -->
-
-        <!-- Testimonials START -->
-        <section class="py-5 bg-light">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-10 text-center mx-auto">
-                        <h2 class="">Success Stories from Our Professionals</h2>
-                        <p class="lead text-secondary">Hear from executives, researchers, and teams who transformed their communication through personalized training</p>
-                    </div>
-                </div>
-
-                <!-- Featured Testimonials Carousel -->
-                <div class="row mb-5">
-                    <div class="col-12">
-                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <!-- Slide 1 -->
-                                <div class="carousel-item active">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="testimonial-card p-5 text-center bg-white rounded-3 shadow-sm">
-                                                <div class="mb-4">
-                                                    <img src="{% static 'assets/images/avatar/01.jpg' %}" class="rounded-circle mx-auto" width="80" height="80" alt="Rico Hickmann">
-                                                </div>
-                                                <h5 class="mb-2">Rico Hickmann</h5>
-                                                <p class="text-muted mb-4">IT Security Consultant, Dataport AöR, Germany</p>
-                                                <blockquote class="mb-0 fs-5 text-dark">
-                                                    "The {{ CFChar.site_name }} training method enables intuitive and natural English learning. Its clear structure and logical progression help professionals master complex communication tasks with ease and confidence."
-                                                </blockquote>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 2 -->
-                                <div class="carousel-item">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="testimonial-card p-5 text-center bg-white rounded-3 shadow-sm">
-                                                <div class="mb-4">
-                                                    <img src="{% static 'assets/images/avatar/02.jpg' %}" class="rounded-circle mx-auto" width="80" height="80" alt="Andrea Surma">
-                                                </div>
-                                                <h5 class="mb-2">Andrea Surma</h5>
-                                                <p class="text-muted mb-4">IT Administrator, TU Dresden</p>
-                                                <blockquote class="mb-0 fs-5 text-dark">
-                                                    "{{ CFChar.site_name }}'s structured, analytical approach significantly improved my ability to communicate confidently in academic and professional environments. The English Concept method makes progress measurable and reliable."
-                                                </blockquote>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Slide 3 -->
-                                <div class="carousel-item">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-8">
-                                            <div class="testimonial-card p-5 text-center bg-white rounded-3 shadow-sm">
-                                                <div class="mb-4">
-                                                    <img src="{% static 'assets/images/avatar/03.jpg' %}" class="rounded-circle mx-auto" width="80" height="80" alt="Dr. Andreas Lang">
-                                                </div>
-                                                <h5 class="mb-2">Dr. Andreas Lang</h5>
-                                                <p class="text-muted mb-4">Senior Engineer, T-Systems MMS GmbH</p>
-                                                <blockquote class="mb-0 fs-5 text-dark">
-                                                    "English Concept bridges the gap between understanding and confident communication. It allows professionals to internalize grammar and vocabulary naturally, without memorization."
-                                                </blockquote>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Carousel Controls -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
-                                <span class="">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="false"></span>
-                                <span class="">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grid Testimonials -->
-                <div class="row g-4 mb-5">
-                    <!-- Testimonial 1 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/04.jpg' %}" class="rounded-circle" width="50" height="50" alt="Steffen Fuchs">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-1">Steffen Fuchs</h6>
-                                    <p class="small text-muted mb-0">Head of Work Preparation, BAM Deutschland AG</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 small">"The English Concept method helped me truly understand English grammar for the first time. Its systematic logic and practical examples made language learning efficient, clear, and motivating."</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/05.jpg' %}" class="rounded-circle" width="50" height="50" alt="Rainer Franke">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-1">Rainer Franke</h6>
-                                    <p class="small text-muted mb-0">Architect, BAM Deutschland AG</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 small">"{{ CFChar.site_name }}'s structured training system transformed our learning experience. The methodology ensures practical fluency and professional communication across all contexts."</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/06.jpg' %}" class="rounded-circle" width="50" height="50" alt="Michael Bunk">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-1">Michael Bunk</h6>
-                                    <p class="small text-muted mb-0">Head of Energy Systems, TÜV SÜD</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 small">"{{ CFChar.site_name }}'s diagnostic precision identifies individual weaknesses and provides targeted strategies for improvement. The result: measurable communication growth across teams."</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/07.jpg' %}" class="rounded-circle" width="50" height="50" alt="Reiner Hentschel">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-1">Reiner Hentschel</h6>
-                                    <p class="small text-muted mb-0">Mayor of Frauenstein, Saxony</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 small">"After years of studying English, I found that {{ CFChar.site_name }}'s method finally made the language simple, logical, and enjoyable. The system builds real confidence through clarity and consistency."</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 5 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/08.jpg' %}" class="rounded-circle" width="50" height="50" alt="Christian Friebe">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-1">Christian Friebe</h6>
-                                    <p class="small text-muted mb-0">Researcher, ILK Dresden</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 small">"The systematic structure of English Concept provides a foundation for lasting fluency. It replaces memorization with real comprehension — a method that truly works for professionals."</p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 6 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="testimonial-card p-4 bg-white rounded-3 shadow-sm h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="flex-shrink-0">
-                                    <img src="{% static 'assets/images/avatar/09.jpg' %}" class="rounded-circle" width="50" height="50" alt="Anja Dürasch">
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-1">Anja Dürasch</h6>
-                                    <p class="small text-muted mb-0">PhD Researcher, TU Dresden</p>
-                                </div>
-                            </div>
-                            <p class="mb-0 small">"{{ CFChar.site_name }}'s English Concept identifies weak points precisely and provides tailored exercises to strengthen them. The clarity and efficiency of the approach lead to fast, tangible progress."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Team Testimonials Section -->
-                <div class="row mb-4">
-                    <div class="col-12 text-center">
-                        <h4 class="text-primary mb-4">Team Success: Agentur Junges Herz</h4>
-                    </div>
-                </div>
-
-                <div class="row g-3">
-                    <!-- Team Testimonial 1 -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="testimonial-card p-3 bg-white rounded-3 shadow-sm h-100">
-                            <h6 class="mb-2">Anja Jeschke</h6>
-                            <p class="small text-muted mb-2">Chief Operating Officer</p>
-                            <p class="mb-0 small">"{{ CFChar.site_name }}'s English Concept Method empowered our entire team to communicate with accuracy, clarity, and confidence — making English a natural part of our daily work."</p>
-                        </div>
-                    </div>
-
-                    <!-- Team Testimonial 2 -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="testimonial-card p-3 bg-white rounded-3 shadow-sm h-100">
-                            <h6 class="mb-2">Julia</h6>
-                            <p class="small text-muted mb-2">Employee</p>
-                            <p class="mb-0 small">"Thanks to {{ CFChar.site_name }}, I now express ideas more clearly and naturally. English feels like a professional skill I fully own."</p>
-                        </div>
-                    </div>
-
-                    <!-- Team Testimonial 3 -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="testimonial-card p-3 bg-white rounded-3 shadow-sm h-100">
-                            <h6 class="mb-2">Lisa</h6>
-                            <p class="small text-muted mb-2">Employee</p>
-                            <p class="mb-0 small">"Our team meetings became smoother and more effective. The English Concept Method made collaboration faster and easier."</p>
-                        </div>
-                    </div>
-
-                    <!-- Team Testimonial 4 -->
-                    <div class="col-lg-3 col-md-6">
-                        <div class="testimonial-card p-3 bg-white rounded-3 shadow-sm h-100">
-                            <h6 class="mb-2">Lara-Sophie</h6>
-                            <p class="small text-muted mb-2">Employee</p>
-                            <p class="mb-0 small">"This training completely changed my confidence in English. I now communicate simply, accurately, and quickly."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View More CTA -->
-                <div class="row mt-5">
-                    <div class="col-12 text-center">
-                        <a href="#all-testimonials" class="btn btn-outline-primary btn-lg">
-                            <i class="bi bi-chat-square-quote me-2"></i>View All Success Stories
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Testimonials END -->
+{% include 'app_pages/includes/testimonials.html' %}
 
         <!-- CTA START -->
         <section class="py-5">
@@ -1292,4 +962,7 @@
     <!-- Vendors -->
     <script src="{% static 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js' %}"></script>
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}
+{% block  my_scripts %}
+    <script src="{% static 'app_pages/js/testimonials.js' %}"></script>
 {% endblock %}
