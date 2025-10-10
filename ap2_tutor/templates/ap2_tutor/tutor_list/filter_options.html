@@ -1,0 +1,449 @@
+{#<!-- Modern Enterprise Filter Design -->#}
+{#<form id="fSearch" name="fSearch" class="bg-info bg-opacity-10 border border-gray-200 rounded-xl shadow-sm p-6 mb-6 position-relative"#}
+{#      action="{% url 'provider:tutor_list' %}" method="GET">#}
+{##}
+{#    <input type="hidden" name="page" value="1">#}
+{##}
+{#    <!-- Hidden inputs for JavaScript context -->#}
+{#    <input type="hidden" id="jsMinPrice" value="{{ min_price }}">#}
+{#    <input type="hidden" id="jsMaxPrice" value="{{ max_price }}">#}
+{#    <input type="hidden" id="jsCurrentMinPrice" value="{{ request.GET.min_price|default:min_price }}">#}
+{#    <input type="hidden" id="jsCurrentMaxPrice" value="{{ request.GET.max_price|default:max_price }}">#}
+{##}
+{#    <!-- Active Filters Display -->#}
+{#    <div class="row mb-4" id="activeFiltersContainer" style="display: none;">#}
+{#        <div class="col-12">#}
+{#            <div class="d-flex flex-wrap gap-2 align-items-center">#}
+{#                <span class="text-gray-600 fw-semibold small me-2">Active filters:</span>#}
+{#                <!-- Active filters will appear here -->#}
+{#            </div>#}
+{#            <div class="d-flex justify-content-between align-items-center mt-2">#}
+{#                <small class="text-muted">Click × to remove individual filters</small>#}
+{#                <button type="button" class="btn btn-outline-danger btn-sm" onclick="filterManager.clearAllFilters()">#}
+{#                    <i class="fas fa-times me-1"></i>Clear All#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <!-- Main Filter Grid -->#}
+{#    <div class="row g-4">#}
+{##}
+{#        <!-- Search Name/Keyword -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Search Tutors</label>#}
+{#            <div class="input-group">#}
+{#                <span class="input-group-text bg-light border-end-0">#}
+{#                    <i class="fas fa-search text-muted"></i>#}
+{#                </span>#}
+{#                <input class="form-control border-start-0" type="search" name="keySearch"#}
+{#                       placeholder="Name, keyword, or specialty..." value="{{ request.GET.keySearch }}">#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Skills Filter -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Teaching Skills</label>#}
+{#            <select name="skills" class="form-select js-choice" multiple="multiple"#}
+{#                    data-max-item-count="3" data-remove-item-button="true"#}
+{#                    aria-label="Teaching Skills">#}
+{#                <option value="">All Skills</option>#}
+{#                {% for skill in s_skills %}#}
+{#                    <option value="{{ skill }}"#}
+{#                            {% if skill in request.GET.skills %}selected{% endif %}>#}
+{#                        {{ skill }}#}
+{#                    </option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#            <div class="form-text">Select up to 3 skills</div>#}
+{#        </div>#}
+{##}
+{#        <!-- Skill Level Filter -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Skill Level</label>#}
+{#            <select name="sSkillLevel" class="form-select js-choice" multiple="multiple"#}
+{#                    data-max-item-count="2" data-remove-item-button="true"#}
+{#                    aria-label="Skill Level">#}
+{#                <option value="">All Levels</option>#}
+{#                {% for level in s_language_levels %}#}
+{#                    <option value="{{ level.name }}"#}
+{#                            {% if level.name in request.GET.sSkillLevel %}selected{% endif %}>#}
+{#                        {{ level.name|capfirst }}#}
+{#                    </option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#            <div class="form-text">Select proficiency levels</div>#}
+{#        </div>#}
+{##}
+{#        <!-- Price Range Dropdown (Keep slider as before) -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label small fw-semibold text-gray-600 mb-2">Hourly Price</label>#}
+{#            <div class="dropdown">#}
+{#                <button class="btn btn-outline-gray-400 btn-md w-100 dropdown-toggle d-flex justify-content-between align-items-center"#}
+{#                        type="button"#}
+{#                        data-bs-toggle="dropdown"#}
+{#                        aria-expanded="false"#}
+{#                        data-bs-auto-close="outside"#}
+{#                        id="priceRangeDropdown">#}
+{#                    <span class="text-truncate">#}
+{#                        {% if request.GET.min_price and request.GET.max_price %}#}
+{#                            ${{ request.GET.min_price }} - ${{ request.GET.max_price }}#}
+{#                        {% else %}#}
+{#                            Price Range#}
+{#                        {% endif %}#}
+{#                    </span>#}
+{#                </button>#}
+{##}
+{#                <div class="dropdown-menu p-4 shadow-lg border-0" style="min-width: 360px;">#}
+{#                    <div class="d-flex justify-content-between align-items-center mb-3">#}
+{#                        <h6 class="mb-0 fw-semibold text-gray-800">Hourly Price Range</h6>#}
+{#                        <button type="button" class="btn-close" data-bs-dismiss="dropdown" aria-label="Close"></button>#}
+{#                    </div>#}
+{##}
+{#                    <!-- noUiSlider Container -->#}
+{#                    <div id="priceSlider" class="mb-4 mt-3"></div>#}
+{##}
+{#                    <!-- Price Inputs -->#}
+{#                    <div class="row g-3 mb-4">#}
+{#                        <div class="col-6">#}
+{#                            <label class="form-label small fw-semibold text-gray-600">Minimum</label>#}
+{#                            <div class="input-group input-group-md">#}
+{#                                <span class="input-group-text bg-gray-50 border-gray-300 text-gray-600">$</span>#}
+{#                                <input type="number" class="form-control border-gray-300 focus:border-blue-500"#}
+{#                                       id="minPriceEdit" min="{{ min_price }}" max="{{ max_price }}"#}
+{#                                       value="{{ request.GET.min_price|default:min_price }}">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-6">#}
+{#                            <label class="form-label small fw-semibold text-gray-600">Maximum</label>#}
+{#                            <div class="input-group input-group-md">#}
+{#                                <span class="input-group-text bg-gray-50 border-gray-300 text-gray-600">$</span>#}
+{#                                <input type="number" class="form-control border-gray-300 focus:border-blue-500"#}
+{#                                       id="maxPriceEdit" min="{{ min_price }}" max="{{ max_price }}"#}
+{#                                       value="{{ request.GET.max_price|default:max_price }}">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <!-- Action Buttons -->#}
+{#                    <div class="d-flex justify-content-between gap-2">#}
+{#                        <button type="button" class="btn btn-outline-gray-500 btn-sm flex-fill"#}
+{#                                onclick="priceSliderManager.resetPriceRange()">#}
+{#                            <i class="fas fa-redo me-2"></i>Reset#}
+{#                        </button>#}
+{#                        <button type="button" class="btn btn-primary btn-sm flex-fill"#}
+{#                                onclick="priceSliderManager.applyPriceRange()">#}
+{#                            <i class="fas fa-check me-2"></i>Apply#}
+{#                        </button>#}
+{#                    </div>#}
+{##}
+{#                    <input type="hidden" name="min_price" id="minPriceInput" value="{{ request.GET.min_price|default:min_price }}">#}
+{#                    <input type="hidden" name="max_price" id="maxPriceInput" value="{{ request.GET.max_price|default:max_price }}">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <!-- Rating Filter -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Minimum Rating</label>#}
+{#            <select name="sRate" class="form-select">#}
+{#                <option value="">Any Rating</option>#}
+{#                <option value="5" {% if request.GET.sRate == "5" %}selected{% endif %}>#}
+{#                    ⭐⭐⭐⭐⭐ 5 Stars & up#}
+{#                </option>#}
+{#                <option value="4.5" {% if request.GET.sRate == "4.5" %}selected{% endif %}>#}
+{#                    ⭐⭐⭐⭐ 4.5+ Stars#}
+{#                </option>#}
+{#                <option value="4" {% if request.GET.sRate == "4" %}selected{% endif %}>#}
+{#                    ⭐⭐⭐⭐ 4+ Stars#}
+{#                </option>#}
+{#                <option value="3" {% if request.GET.sRate == "3" %}selected{% endif %}>#}
+{#                    ⭐⭐⭐ 3+ Stars#}
+{#                </option>#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <!-- Gender Filter -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Gender</label>#}
+{#            <select name="gender" class="form-select">#}
+{#                <option value="">All Genders</option>#}
+{#                {% for gender in s_gender %}#}
+{#                    <option value="{{ gender }}" {% if request.GET.gender == gender %}selected{% endif %}>#}
+{#                        {{ gender|capfirst }}#}
+{#                    </option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <!-- Country Filter -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Country</label>#}
+{#            <select name="country" class="form-select js-choice" data-search-enabled="true">#}
+{#                <option value="">All Countries</option>#}
+{#                {% for code, name in countries %}#}
+{#                    <option value="{{ code }}" {% if request.GET.country == code %}selected{% endif %}>#}
+{#                        {{ name }}#}
+{#                    </option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#        <!-- Teaching Method -->#}
+{#        <div class="col-xl-3 col-lg-4 col-md-6">#}
+{#            <label class="form-label">Teaching Method</label>#}
+{#            <select name="meeting_method" class="form-select">#}
+{#                <option value="">Any Method</option>#}
+{#                <option value="online" {% if request.GET.meeting_method == "online" %}selected{% endif %}>#}
+{#                    📡 Online Only#}
+{#                </option>#}
+{#                <option value="in_person" {% if request.GET.meeting_method == "in_person" %}selected{% endif %}>#}
+{#                    👥 In-Person Only#}
+{#                </option>#}
+{#                <option value="hybrid" {% if request.GET.meeting_method == "hybrid" %}selected{% endif %}>#}
+{#                    🔄 Hybrid#}
+{#                </option>#}
+{#            </select>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <!-- Action Buttons -->#}
+{#    <div class="row mt-4">#}
+{#        <div class="col-12">#}
+{#            <div class="d-flex justify-content-between align-items-center">#}
+{#                <div>#}
+{#                    <button type="button" class="btn btn-outline-secondary me-2" onclick="filterManager.clearAllFilters()">#}
+{#                        <i class="fas fa-times me-1"></i>Reset All#}
+{#                    </button>#}
+{#                </div>#}
+{#                <div>#}
+{#                    <button type="button" class="btn btn-primary btn-lg px-4" onclick="filterManager.updateActiveFiltersDisplay()">#}
+{#                        <i class="fas fa-search me-2"></i>Search Tutors#}
+{#                    </button>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</form>#}
+
+
+
+
+<form id="fSearch" name="fSearch" class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 mb-4"
+      action="{% url 'provider:tutor_list' %}" method="GET">
+
+    <input type="hidden" name="page" value="1">
+
+    <!-- Active Filters Display -->
+    <div class="row mb-3" id="activeFiltersContainer" style="display: none;">
+        <div class="col-12">
+            <div class="d-flex flex-wrap gap-2 align-items-center">
+                <span class="text-gray-600 fw-semibold small me-2">Active filters:</span>
+                <!-- Active filters will appear here -->
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <small class="text-muted">Click × to remove individual filters</small>
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="filterManager.clearAllFilters()">
+                    <i class="fas fa-times me-1"></i>Clear All
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 align-items-end">
+        <!-- Sort Options - NEW -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Sort By</label>
+            <select name="sort_by" class="form-select form-select-md">
+                <option value="">Recommended</option>
+                <option value="newest" {% if request.GET.sort_by == "newest" %}selected{% endif %}>
+                    Newest First
+                </option>
+                <option value="oldest" {% if request.GET.sort_by == "oldest" %}selected{% endif %}>
+                    Oldest First
+                </option>
+                <option value="price_low" {% if request.GET.sort_by == "price_low" %}selected{% endif %}>
+                    Price: Low to High
+                </option>
+                <option value="price_high" {% if request.GET.sort_by == "price_high" %}selected{% endif %}>
+                    Price: High to Low
+                </option>
+                <option value="rating" {% if request.GET.sort_by == "rating" %}selected{% endif %}>
+                    Highest Rating
+                </option>
+                <option value="students" {% if request.GET.sort_by == "students" %}selected{% endif %}>
+                    Most Students
+                </option>
+                <option value="sessions" {% if request.GET.sort_by == "sessions" %}selected{% endif %}>
+                    Most Sessions
+                </option>
+                <option value="reviews" {% if request.GET.sort_by == "reviews" %}selected{% endif %}>
+                    Most Reviews
+                </option>
+            </select>
+        </div>
+
+        <!-- Search Input -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Search Tutors</label>
+            <div class="input-group input-group-md">
+                <span class="input-group-text bg-light border-end-0">
+                    <i class="fas fa-search text-muted"></i>
+                </span>
+                <input class="form-control border-start-0" type="search" name="keySearch"
+                       placeholder="Name or keyword..." value="{{ request.GET.keySearch }}">
+            </div>
+        </div>
+
+        <!-- Skills Filter -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Teaching Skills</label>
+            <select name="skills" class="form-select js-choice" multiple="multiple"
+                    data-max-item-count="3" data-remove-item-button="true">
+                <option value="">All Skills</option>
+                {% for skill in s_skills %}
+                    <option value="{{ skill }}"
+                            {% if skill in request.GET.skills %}selected{% endif %}>
+                        {{ skill }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Skill Level Filter -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Skill Level</label>
+            <select name="sSkillLevel" class="form-select js-choice" multiple="multiple"
+                    data-max-item-count="3" data-remove-item-button="true">
+                <option value="">All Levels</option>
+                {% for level in s_language_levels %}
+                    <option value="{{ level.name }}"
+                            {% if level.name in request.GET.sSkillLevel %}selected{% endif %}>
+                        {{ level.name|upper }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Price Range - KEEP EXISTING -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Hourly Price</label>
+            <div class="dropdown">
+                <button class="btn btn-outline-gray-400 btn-md w-100 dropdown-toggle d-flex justify-content-between align-items-center"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                        data-bs-auto-close="outside" id="priceRangeDropdown">
+                    <span class="text-truncate">
+                        {% if request.GET.min_price and request.GET.max_price %}
+                            ${{ request.GET.min_price }} - ${{ request.GET.max_price }}
+                        {% else %}
+                            Price Range
+                        {% endif %}
+                    </span>
+                </button>
+                <div class="dropdown-menu p-4 shadow-lg border-0" style="min-width: 360px;">
+                    <!-- Your existing price slider content -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0 fw-semibold text-gray-800">Hourly Price Range</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="dropdown" aria-label="Close"></button>
+                    </div>
+                    <div id="priceSlider" class="mb-4 mt-3"></div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <label class="form-label small fw-semibold text-gray-600">Minimum</label>
+                            <div class="input-group input-group-md">
+                                <span class="input-group-text bg-gray-50 border-gray-300 text-gray-600">$</span>
+                                <input type="number" class="form-control border-gray-300" id="minPriceEdit"
+                                       min="{{ min_price }}" max="{{ max_price }}" value="{{ request.GET.min_price|default:min_price }}">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small fw-semibold text-gray-600">Maximum</label>
+                            <div class="input-group input-group-md">
+                                <span class="input-group-text bg-gray-50 border-gray-300 text-gray-600">$</span>
+                                <input type="number" class="form-control border-gray-300" id="maxPriceEdit"
+                                       min="{{ min_price }}" max="{{ max_price }}" value="{{ request.GET.max_price|default:max_price }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between gap-2">
+                        <button type="button" class="btn btn-outline-gray-500 btn-sm flex-fill"
+                                onclick="priceSliderManager.resetPriceRange()">
+                            <i class="fas fa-redo me-2"></i>Reset
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm flex-fill"
+                                onclick="priceSliderManager.applyPriceRange()">
+                            <i class="fas fa-check me-2"></i>Apply
+                        </button>
+                    </div>
+                    <input type="hidden" name="min_price" id="minPriceInput" value="{{ request.GET.min_price|default:min_price }}">
+                    <input type="hidden" name="max_price" id="maxPriceInput" value="{{ request.GET.max_price|default:max_price }}">
+                </div>
+            </div>
+        </div>
+
+        <!-- Gender Filter - KEEP EXISTING -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Gender</label>
+            <select name="gender" class="form-select form-select-md">
+                <option value="">All Genders</option>
+                {% for gender in s_gender %}
+                    <option value="{{ gender }}" {% if request.GET.gender == gender %}selected{% endif %}>
+                        {{ gender|capfirst }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Rating Filter - KEEP EXISTING -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Minimum Rating</label>
+            <select name="sRate" class="form-select form-select-md">
+                <option value="">Any Rating</option>
+                <option value="5" {% if request.GET.sRate == "5" %}selected{% endif %}>5 Stars & up</option>
+                <option value="4.5" {% if request.GET.sRate == "4.5" %}selected{% endif %}>4.5+ Stars</option>
+                <option value="4" {% if request.GET.sRate == "4" %}selected{% endif %}>4+ Stars</option>
+                <option value="3" {% if request.GET.sRate == "3" %}selected{% endif %}>3+ Stars</option>
+            </select>
+        </div>
+
+        <!-- Teaching Method - FIX ICONS -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Teaching Method</label>
+            <select name="meeting_method" class="form-select">
+                <option value="">Any Method</option>
+                <option value="online" {% if request.GET.meeting_method == "online" %}selected{% endif %}>
+                    <i class="bi bi-laptop me-2"></i>Online Only
+                </option>
+                <option value="in_person" {% if request.GET.meeting_method == "in_person" %}selected{% endif %}>
+                    <i class="bi bi-person me-2"></i>In-Person Only
+                </option>
+                <option value="hybrid" {% if request.GET.meeting_method == "hybrid" %}selected{% endif %}>
+                    <i class="bi bi-laptop me-2"></i><i class="bi bi-person me-1"></i>Hybrid
+                </option>
+            </select>
+        </div>
+
+        <!-- Country Filter - KEEP EXISTING -->
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+            <label class="form-label small fw-semibold text-gray-600 mb-2">Country</label>
+            <select name="country" class="form-select js-choice" data-search-enabled="true">
+                <option value="">All Countries</option>
+                {% for code, name in countries %}
+                    <option value="{{ code }}" {% if request.GET.country == code %}selected{% endif %}>
+                        {{ name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Search Button - KEEP EXISTING -->
+        <div class="col-xl-auto col-lg-auto col-md-4 col-sm-6">
+            <button type="submit" class="btn btn-primary btn-md w-100 h-100 d-flex align-items-center justify-content-center">
+                <i class="fas fa-search me-2"></i>
+                <span class="d-none d-sm-inline">Search Tutors</span>
+            </button>
+        </div>
+    </div>
+</form>

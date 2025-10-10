@@ -104,7 +104,7 @@ class BecomeTutor(FormView):
 
 class TutorListView1(ListView):
     model = Tutor
-    template_name = 'ap2_tutor/tutor_list.html'
+    template_name = 'ap2_tutor/tutor_list/tutor_list.html'
     # context_object_name = 'tutors'  # Name of the variable in the template
     ordering = ['-profile__create_date']
     paginate_by = 10  # Number of items per page
@@ -219,11 +219,12 @@ class TutorListView1(ListView):
         return context
 
 
-class TutorListView_notBad(ListView):
+class TutorListView_VERYgOOD(ListView):
     model = Tutor
-    template_name = 'ap2_tutor/tutor_list.html'
+    template_name = 'ap2_tutor/tutor_list/tutor_list.html'
     ordering = ['-profile__create_date']
     paginate_by = 6
+    context_object_name = 'tutors'
 
     def get_queryset(self):
         # Start with only accepted tutors
@@ -241,158 +242,310 @@ class TutorListView_notBad(ListView):
         if keySearch:
             queryset = queryset.filter(
                 Q(profile__user__first_name__icontains=keySearch) |
-                Q(profile__user__last_name__icontains=keySearch)
+                Q(profile__user__last_name__icontains=keySearch) |
+                Q(profile__title__icontains=keySearch) |
+                Q(profile__bio__icontains=keySearch)
             )
 
         sRate = self.request.GET.get('sRate')
         if sRate:
-            queryset = queryset.filter(profile__rating__gte=sRate)
+            queryset = queryset.filter(profile__rating__gte=float(sRate))
 
-        skills = self.request.GET.get('skills')
+        skills = self.request.GET.getlist('skills')
         if skills:
             queryset = queryset.filter(
-                profile__user__skills__skill__name=skills
-            )
+                profile__user__skills__skill__name__in=skills
+            ).distinct()
 
-        sSkillLevel = self.request.GET.get('sSkillLevel')
+        sSkillLevel = self.request.GET.getlist('sSkillLevel')
         if sSkillLevel:
             queryset = queryset.filter(
-                profile__user__skills__level__name=sSkillLevel
-            )
+                profile__user__skills__level__name__in=sSkillLevel
+            ).distinct()
 
+        # PRICE FILTERING WITH DISCOUNT SUPPORT
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
+
         if min_price and max_price:
-            queryset = queryset.filter(
-                cost_hourly__gte=min_price,
-                cost_hourly__lte=max_price
-            )
+            try:
+                min_price = float(min_price)
+                max_price = float(max_price)
+
+                # We need to use annotation to calculate the actual price for each tutor
+                from django.db.models import Case, When, F, DecimalField, Value, ExpressionWrapper
+                from django.db.models.functions import Coalesce
+
+                queryset = queryset.annotate(
+                    # Calculate discounted price for tutors with active discounts
+                    actual_price=Case(
+                        # When discount is active and discount_deadline is in future (or null)
+                        When(
+                            discount__gt=0,
+                            discount_deadline__gt=timezone.now(),
+                            then=ExpressionWrapper(
+                                F('cost_hourly') * (100 - F('discount')) / 100,
+                                output_field=DecimalField(max_digits=10, decimal_places=2)
+                            )
+                        ),
+                        When(
+                            discount__gt=0,
+                            discount_deadline__isnull=True,
+                            then=ExpressionWrapper(
+                                F('cost_hourly') * (100 - F('discount')) / 100,
+                                output_field=DecimalField(max_digits=10, decimal_places=2)
+                            )
+                        ),
+                        # Default case: no active discount
+                        default=F('cost_hourly'),
+                        output_field=DecimalField(max_digits=10, decimal_places=2)
+                    )
+                ).filter(
+                    actual_price__gte=min_price,
+                    actual_price__lte=max_price
+                )
+
+            except (ValueError, TypeError):
+                # Fallback to original price filtering if there's an error
+                queryset = queryset.filter(
+                    cost_hourly__gte=min_price,
+                    cost_hourly__lte=max_price
+                )
+
+        # Other filters...
+        country = self.request.GET.get('country')
+        if country:
+            queryset = queryset.filter(profile__country=country)
+
+        meeting_method = self.request.GET.get('meeting_method')
+        if meeting_method:
+            queryset = queryset.filter(profile__meeting_method=meeting_method)
 
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # Get ALL tutors (unfiltered) for filter options
-        all_tutors = Tutor.objects.all()
-
-        # Get min/max prices from ALL tutors
-        price_stats = all_tutors.aggregate(
-            min_price=Min('cost_hourly'),
-            max_price=Max('cost_hourly')
-        )
-
-        context.update({
-            'min_price': price_stats['min_price'] or 0,
-            'max_price': price_stats['max_price'] or 100,
-            'all_tutors': all_tutors,
-            'tutors': all_tutors.filter(status='accepted'),
-            's_gender': s_gender,
-            's_country': s_country,
-            's_lang_native': s_lang_native,
-            's_lang_speak': s_lang_speak,
-            's_rating': s_rating,
-            's_reviews_count': s_reviews_count,
-            's_skills': s_skills,
-            's_language_levels': s_language_levels,
-            's_cost_trial': s_cost_trial,
-            's_cost_hourly': s_cost_hourly,
-            's_session_count': s_session_count,
-            's_student_count': s_student_count,
-            'search_gender': self.request.GET.get('gender', ''),
-            'current_skills': self.request.GET.get('skills', ''),
-            'current_skill_level': self.request.GET.get('sSkillLevel', ''),
-            'current_rating': self.request.GET.get('sRate', ''),
-            'current_min_price': self.request.GET.get('min_price', ''),
-            'current_max_price': self.request.GET.get('max_price', ''),
-        })
-
-        return context
-
-
-class TutorListView(ListView):
-    model = Tutor
-    template_name = 'ap2_tutor/tutor_list.html'
-    ordering = ['-profile__create_date']
-    paginate_by = 6
-    context_object_name = 'tutors'  # Add this to use 'tutors' in template
-
-    def get_queryset(self):
-        # Start with only accepted tutors
-        queryset = Tutor.objects.filter(status='accepted')
-
-        # Apply ordering
-        queryset = queryset.order_by('-profile__create_date')
-
-        # Apply filters based on request parameters
-        gender = self.request.GET.get('gender')
-        if gender:
-            queryset = queryset.filter(profile__gender__iexact=gender)
-
-        keySearch = self.request.GET.get('keySearch')
-        if keySearch:
-            queryset = queryset.filter(
-                Q(profile__user__first_name__icontains=keySearch) |
-                Q(profile__user__last_name__icontains=keySearch)
-            )
-
-        sRate = self.request.GET.get('sRate')
-        if sRate:
-            queryset = queryset.filter(profile__rating__gte=sRate)
-
-        skills = self.request.GET.get('skills')
-        if skills:
-            queryset = queryset.filter(
-                profile__user__skills__skill__name=skills
-            ).distinct()  # Add distinct() to avoid duplicates
-
-        sSkillLevel = self.request.GET.get('sSkillLevel')
-        if sSkillLevel:
-            queryset = queryset.filter(
-                profile__user__skills__level__name=sSkillLevel
-            ).distinct()  # Add distinct() to avoid duplicates
-
-        min_price = self.request.GET.get('min_price')
-        max_price = self.request.GET.get('max_price')
-        if min_price and max_price:
-            queryset = queryset.filter(
-                cost_hourly__gte=min_price,
-                cost_hourly__lte=max_price
-            )
-
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Get filtered queryset (for counts)
         filtered_queryset = self.get_queryset()
-
-        # Get ALL tutors (unfiltered) for filter options
         all_tutors = Tutor.objects.all()
 
-        # Get min/max prices from ALL tutors
-        price_stats = all_tutors.aggregate(
-            min_price=Min('cost_hourly'),
-            max_price=Max('cost_hourly')
+        # Calculate price stats considering discounts
+        from django.db.models import Min, Max, Case, When, F, DecimalField, Value
+        from django.db.models.functions import Coalesce
+
+        price_stats = all_tutors.annotate(
+            actual_price=Case(
+                When(
+                    discount__gt=0,
+                    discount_deadline__gt=timezone.now(),
+                    then=F('cost_hourly') * (100 - F('discount')) / 100
+                ),
+                When(
+                    discount__gt=0,
+                    discount_deadline__isnull=True,
+                    then=F('cost_hourly') * (100 - F('discount')) / 100
+                ),
+                default=F('cost_hourly'),
+                output_field=DecimalField(max_digits=10, decimal_places=2)
+            )
+        ).aggregate(
+            min_price=Min('actual_price'),
+            max_price=Max('actual_price')
         )
+
+        # Get countries for filter
+        from django_countries import countries
 
         context.update({
             'min_price': price_stats['min_price'] or 0,
             'max_price': price_stats['max_price'] or 100,
             'all_tutors_count': all_tutors.count(),
             'filtered_tutors_count': filtered_queryset.count(),
-            # Remove the duplicate 'tutors' context variable as it conflicts with ListView
+            'countries': list(countries),
             'search_gender': self.request.GET.get('gender', ''),
             'current_skills': self.request.GET.get('skills', ''),
             'current_skill_level': self.request.GET.get('sSkillLevel', ''),
             'current_rating': self.request.GET.get('sRate', ''),
             'current_min_price': self.request.GET.get('min_price', ''),
             'current_max_price': self.request.GET.get('max_price', ''),
+            's_language_levels': s_language_levels,
+            's_gender': s_gender,
+            's_skills': s_skills,
         })
 
         return context
 
+from django.db.models import Q, Min, Max, Case, When, F, DecimalField, ExpressionWrapper
+from django.db.models.functions import Coalesce
+class TutorListView(ListView):
+    model = Tutor
+    template_name = 'ap2_tutor/tutor_list/tutor_list.html'
+    paginate_by = 6
+    context_object_name = 'tutors'
+
+    def get_queryset(self):
+        # Start with only accepted tutors
+        queryset = Tutor.objects.filter(status='accepted')
+
+        # Apply ordering based on sort parameter
+        sort_by = self.request.GET.get('sort_by', '')
+        ordering = self.get_ordering(sort_by)
+        queryset = queryset.order_by(*ordering)
+
+        # Apply all existing filters
+        queryset = self.apply_filters(queryset)
+        return queryset
+
+    def get_ordering(self, sort_by):
+        ordering_map = {
+            'newest': ['-profile__create_date'],
+            'oldest': ['profile__create_date'],
+            'price_low': ['cost_hourly'],
+            'price_high': ['-cost_hourly'],
+            'rating': ['-profile__rating', '-profile__reviews_count'],
+            'students': ['-student_count', '-profile__rating'],
+            'sessions': ['-session_count', '-profile__rating'],
+            'reviews': ['-profile__reviews_count', '-profile__rating'],
+            '': ['-profile__create_date']  # default
+        }
+        return ordering_map.get(sort_by, ['-profile__create_date'])
+
+    def apply_filters(self, queryset):
+        # KEEP ALL YOUR EXISTING FILTER LOGIC EXACTLY AS IS
+        # This is just the sort functionality added on top
+
+        # Your existing filter code here...
+        gender = self.request.GET.get('gender')
+        if gender:
+            queryset = queryset.filter(profile__gender__iexact=gender)
+
+        keySearch = self.request.GET.get('keySearch')
+        if keySearch:
+            queryset = queryset.filter(
+                Q(profile__user__first_name__icontains=keySearch) |
+                Q(profile__user__last_name__icontains=keySearch) |
+                Q(profile__title__icontains=keySearch) |
+                Q(profile__bio__icontains=keySearch)
+            )
+
+        sRate = self.request.GET.get('sRate')
+        if sRate:
+            queryset = queryset.filter(profile__rating__gte=float(sRate))
+
+        skills = self.request.GET.getlist('skills')
+        if skills:
+            queryset = queryset.filter(
+                profile__user__skills__skill__name__in=skills
+            ).distinct()
+
+        sSkillLevel = self.request.GET.getlist('sSkillLevel')
+        if sSkillLevel:
+            queryset = queryset.filter(
+                profile__user__skills__level__name__in=sSkillLevel
+            ).distinct()
+
+        # Price filter with discount support
+        min_price = self.request.GET.get('min_price')
+        max_price = self.request.GET.get('max_price')
+        if min_price and max_price:
+            queryset = self.apply_price_filter(queryset, min_price, max_price)
+
+        country = self.request.GET.get('country')
+        if country:
+            queryset = queryset.filter(profile__country=country)
+
+        meeting_method = self.request.GET.get('meeting_method')
+        if meeting_method:
+            queryset = queryset.filter(profile__meeting_method=meeting_method)
+
+        return queryset
+
+    def apply_price_filter(self, queryset, min_price, max_price):
+        # Your existing price filter logic
+        try:
+            min_price = float(min_price)
+            max_price = float(max_price)
+
+            from django.db.models import Case, When, F, DecimalField, ExpressionWrapper
+
+            return queryset.annotate(
+                actual_price=Case(
+                    When(
+                        discount__gt=0,
+                        discount_deadline__gt=timezone.now(),
+                        then=ExpressionWrapper(
+                            F('cost_hourly') * (100 - F('discount')) / 100,
+                            output_field=DecimalField(max_digits=10, decimal_places=2)
+                        )
+                    ),
+                    When(
+                        discount__gt=0,
+                        discount_deadline__isnull=True,
+                        then=ExpressionWrapper(
+                            F('cost_hourly') * (100 - F('discount')) / 100,
+                            output_field=DecimalField(max_digits=10, decimal_places=2)
+                        )
+                    ),
+                    default=F('cost_hourly'),
+                    output_field=DecimalField(max_digits=10, decimal_places=2)
+                )
+            ).filter(
+                actual_price__gte=min_price,
+                actual_price__lte=max_price
+            )
+
+        except (ValueError, TypeError):
+            return queryset.filter(
+                cost_hourly__gte=min_price,
+                cost_hourly__lte=max_price
+            )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # KEEP ALL YOUR EXISTING CONTEXT DATA
+        filtered_queryset = self.get_queryset()
+        all_tutors = Tutor.objects.all()
+
+        # Your existing context code...
+        price_stats = all_tutors.annotate(
+            actual_price=Case(
+                When(
+                    discount__gt=0,
+                    discount_deadline__gt=timezone.now(),
+                    then=F('cost_hourly') * (100 - F('discount')) / 100
+                ),
+                When(
+                    discount__gt=0,
+                    discount_deadline__isnull=True,
+                    then=F('cost_hourly') * (100 - F('discount')) / 100
+                ),
+                default=F('cost_hourly'),
+                output_field=DecimalField(max_digits=10, decimal_places=2)
+            )
+        ).aggregate(
+            min_price=Min('actual_price'),
+            max_price=Max('actual_price')
+        )
+
+        from django_countries import countries
+
+        context.update({
+            'min_price': price_stats['min_price'] or 0,
+            'max_price': price_stats['max_price'] or 100,
+            'all_tutors_count': all_tutors.count(),
+            'filtered_tutors_count': filtered_queryset.count(),
+            'countries': list(countries),
+            'search_gender': self.request.GET.get('gender', ''),
+            'current_skills': self.request.GET.get('skills', ''),
+            'current_skill_level': self.request.GET.get('sSkillLevel', ''),
+            'current_rating': self.request.GET.get('sRate', ''),
+            'current_min_price': self.request.GET.get('min_price', ''),
+            'current_max_price': self.request.GET.get('max_price', ''),
+            's_language_levels': s_language_levels,
+            's_gender': s_gender,
+            's_skills': s_skills,
+        })
+
+        return context
 
 class ProviderDetailView(DetailView):
     model = Tutor

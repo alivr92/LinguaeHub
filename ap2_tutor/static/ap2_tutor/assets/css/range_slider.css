@@ -109,34 +109,3 @@
 .noUi-connect {
     transition: background 0.3s ease;
 }
-
-/* Active Filter Tags */
-.filter-tag {
-    background: #e9ecef;
-    border: 1px solid #dee2e6;
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 0.875rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
-}
-
-.filter-tag:hover {
-    background: #dee2e6;
-}
-
-.filter-tag .remove-filter {
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    font-weight: bold;
-    font-size: 1.1em;
-    line-height: 1;
-}
-
-.filter-tag .remove-filter:hover {
-    opacity: 1;
-    color: #dc3545;
-}

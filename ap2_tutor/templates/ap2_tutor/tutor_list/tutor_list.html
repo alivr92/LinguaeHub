@@ -1,0 +1,310 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+{% load my_custom_filters %}
+
+{% block head_title %}Tutor List{% endblock %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+
+{% block embed_style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"/>
+{% endblock %}
+
+{% block my_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/range_slider.css' %}">
+{#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/filters1.css' %}">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/filter_options.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/tutor_list.css' %}">
+{% endblock %}
+
+{% block body_content %}
+    <main>
+        <!-- Page Banner START -->
+        <section class="py-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bg-dark p-4 text-center rounded-3">
+                            <h1 class="text-white m-0">Tutor list</h1>
+                            <div class="d-flex justify-content-center">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb breadcrumb-dark breadcrumb-dots mb-0">
+                                        <li class="breadcrumb-item"><a href="{% url 'app_pages:home' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Tutor list</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Page Banner END -->
+
+        <!-- Debug Section -->
+{#        <div class="alert alert-info mt-3">#}
+{#            <h6>🔍 Debug Information</h6>#}
+{#            <p><strong>URL Parameters:</strong> {{ request.GET.urlencode }}</p>#}
+{#            <p><strong>Applied Filters:</strong></p>#}
+{#            <ul class="mb-2">#}
+{#                <li>Skills: "{{ request.GET.skills }}"</li>#}
+{#                <li>Skill Level: "{{ request.GET.sSkillLevel }}"</li>#}
+{#                <li>Price: {{ request.GET.min_price }} - {{ request.GET.max_price }}</li>#}
+{#                <li>Gender: "{{ request.GET.gender }}"</li>#}
+{#                <li>Rating: "{{ request.GET.sRate }}"</li>#}
+{#                <li>Search: "{{ request.GET.keySearch }}"</li>#}
+{#            </ul>#}
+{#            <p><strong>All Tutors Count:</strong> {{ all_tutors_count }}</p>#}
+{#            <p><strong>Filtered Tutors Count:</strong> {{ page_obj.paginator.count }}</p>#}
+{#            <p><strong>Current Page:</strong> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>#}
+{#        </div>#}
+
+        <!-- Filter Section -->
+        <section class="pt-4">
+            <div class="container">
+                <!-- Hidden inputs for JavaScript -->
+                <input type="hidden" id="minPrice" value="{{ min_price }}">
+                <input type="hidden" id="maxPrice" value="{{ max_price }}">
+                <input type="hidden" id="currentMin" value="{{ request.GET.min_price|default:min_price }}">
+                <input type="hidden" id="currentMax" value="{{ request.GET.max_price|default:max_price }}">
+
+{#                {% include 'ap2_tutor/filters1.html' %}#}
+                {% include 'ap2_tutor/tutor_list/filter_options.html' %}
+
+                <!-- Results Count -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="alert alert-light border">
+{#                            <strong>{{ tutors.count }}</strong> tutors found#}
+{#                                                        {% if request.GET %}matching your filters{% endif %}#}
+                            <strong>{{ page_obj.paginator.count }}</strong> tutors found
+                            {% if request.GET %}matching your filters{% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Tutor list START -->
+                <div class="row g-4 justify-content-center">
+                    {% for tutor in tutors %}
+
+{#{% include 'ap2_tutor/tutor_list/card2.html' %}#}
+                        <!-- Card item START -->
+                        <div class="col-lg-10 col-xl-6">
+                            <div class="card shadow p-2">
+                                <div class="row g-0" style="max-height: 225px;min-height: 225px">
+                                    <!-- Image -->
+                                    <div class="col-md-4 position-relative">
+                                        <a href="{% url 'provider:provider_detail' tutor.slug %}">
+                                            <img src="{{ tutor.profile.photo.url }}"
+                                                 class="rounded-3 w-100 h-100 object-fit-cover"
+                                                 style="max-height: 225px; min-height: 225px"
+                                                 alt="{{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}">
+                                            <!-- Gradient Overlay -->
+                                            <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-overlay rounded-3"></div>
+                                            <!-- Stats Overlay - Bottom Right Corner -->
+                                            <div class="position-absolute bottom-0 end-0 m-2">
+                                                <div class="d-flex flex-row gap-1">
+                                                    <a href="#" class="badge text-bg-info rounded-1" data-bs-toggle="tooltip" title="Total Students">
+                                                        <i class="fas fa-user-graduate me-1" ></i>{{ tutor.student_count }}
+                                                    </a>
+                                                    <a href="#" class="badge text-bg-orange rounded-1" data-bs-toggle="tooltip" title="Total Sessions">
+                                                        <i class="fas fa-desktop me-1" ></i>{{ tutor.session_count }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <!-- Card body -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <!-- Title -->
+                                            <div class="d-sm-flex justify-content-sm-between mb-2 mb-sm-3">
+                                                <div>
+                                                    <h5 class="card-title mb-0">
+                                                        <a href="{% url 'provider:provider_detail' tutor.slug %}">
+                                                            {{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}
+                                                        </a>
+                                                    </h5>
+                                                    <p class="small mb-2 mb-sm-0">{{ tutor.profile.title }}</p>
+                                                </div>
+                                                <div>
+                                                    <span class="h6 fw-light">
+                                                        {{ tutor.profile.rating }}<i class="fas fa-star text-warning ms-1"></i>
+                                                    </span>
+                                                    <br>
+{#                                                    <span class="h8 fw-lighter">({{ tutor.profile.reviews_count }} Votes)</span>#}
+                                                    <span class="text-muted small">
+            <i class="fas fa-vote-yea me-1" data-bs-toggle="tooltip" title="Total Votes"></i>{{ tutor.profile.reviews_count }}
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- Price Display - Moved to better location -->
+                                            <div class="mb-3">
+                                                {% if tutor.is_discount_active %}
+                                                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                                        <div class="d-flex align-items-center flex-wrap">
+                                                            <span class="h5 text-primary mb-0 me-2">${{ tutor.actual_hourly_price|floatformat:2 }}</span>
+                                                            <small class="text-muted me-2">/hour</small>
+                                                            <small class="text-secondary text-decoration-line-through me-2">${{ tutor.cost_hourly }}</small>
+                                                        </div>
+                                                        <span class="badge bg-success">{{ tutor.discount }}% OFF</span>
+                                                    </div>
+
+                                                {% else %}
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="h5 text-primary mb-0 me-2">${{ tutor.cost_hourly }}</span>
+                                                        <small class="text-muted">/hour</small>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+
+                                            <!-- Content -->
+                                            <p class="text-truncate-2 mb-3">{{ tutor.profile.bio|truncatechars:100|safe }}</p>
+                                            <!-- Skills -->
+{#                                            <div class="d-sm-flex justify-content-sm-between align-items-center">#}
+{#                                                <h6 class="text-orange mb-0">#}
+{#                                                    <i class="fas fa-tools text-orange me-2" data-bs-toggle="tooltip" title="Skills"></i>#}
+{#                                                    {% with skills=tutor.profile.user.skills.all|status:'approved' %}#}
+{#                                                        {% if skills|length == 0 %}#}
+{#                                                            <span>No skills available</span>#}
+{#                                                        {% else %}#}
+{#                                                            {% for skill in skills %}#}
+{#                                                                <span>{{ skill.skill }}</span> |#}
+{#                                                                <span class="badge bg-opacity-10 bg-orange text-orange me-1 mb-1">{{ skill.skill }}</span>#}
+{##}
+{#                                                            {% endfor %}#}
+{#                                                            {% if skills|length > 3 %}#}
+{#                                                                <a href="{% url 'provider:provider_detail' tutor.profile.id %}">...</a>#}
+{#                                                            {% endif %}#}
+{#                                                        {% endif %}#}
+{#                                                    {% endwith %}#}
+{#                                                </h6>#}
+{#                                            </div>#}
+
+                                            <div class="position-absolute bottom-0 end-0 mb-3 me-3 text-end">
+                                                <div class="d-flex flex-wrap justify-content-end align-items-center">
+                                                    <i class="fas fa-tools text-orange me-2" data-bs-toggle="tooltip" title="Skills"></i>
+                                                    {% with skills=tutor.profile.user.skills.all|status:'approved' %}
+                                                        {% if skills|length == 0 %}
+                                                            <span class="text-muted">No skills listed</span>
+                                                        {% else %}
+                                                            {% for skill in skills|slice:":3" %}
+                                                                <span class="badge bg-opacity-10 bg-orange text-orange me-1 mb-1">{{ skill.skill }}</span>
+                                                            {% endfor %}
+                                                            {% if skills|length > 3 %}
+                                                                <a href="{% url 'provider:provider_detail' tutor.profile.id %}" class="small text-decoration-none">+ more</a>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    {% empty %}
+                        <div class="col-12 text-center py-5">
+                            <div class="alert alert-info">
+                                <h5>No tutors found</h5>
+                                <p class="mb-0">Try adjusting your filters to see more results.</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Tutor list END -->
+
+                <!-- Pagination START -->
+                {% if tutors.count > 0 %}
+                    <nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item mb-0">
+                                        <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}" tabindex="-1">
+                                            <i class="fas fa-angle-double-left"></i>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled">
+                                        <a class="page-link" href="#" tabindex="-1">
+                                            <i class="fas fa-angle-double-left" style="color: #d3d3d3;"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                        {% if p == page_obj.number %}
+                                            <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a></li>
+                                        {% else %}
+                                            <li class="page-item mb-0">
+                                                <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                        <li class="page-item mb-0">
+                                            <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
+                                        </li>
+                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                        <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item mb-0">
+                                        <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item mb-0 disabled">
+                                        <a class="page-link" href="#">
+                                            <i class="fas fa-angle-double-right" style="color: #d3d3d3;"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                    </nav>
+                {% endif %}
+                <!-- Pagination END -->
+            </div>
+        </section>
+
+        <!-- Rest of your template (Action box, etc.) -->
+    </main>
+{% endblock %}
+
+{% block scripts_vendors %}
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}
+
+{% block embed_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
+{% endblock %}
+
+{% block my_scripts %}
+    <script type="module" src="{% static 'ap2_tutor/assets/js/filter_options.js' %}"> </script>
+
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/range_slider.js' %}"></script>#}
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/priceRange.js' %}"></script>#}
+{#    <script type="module" src="{% static 'ap2_tutor/assets/js/priceRangeSlider.js' %}"></script>#}
+
+
+
+{% endblock %}

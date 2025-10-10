@@ -1,27 +1,27 @@
 {% extends 'app_pages/base.html' %}
 {% load static %}
 {% load my_custom_filters %}
-
 {% block head_title %}Tutor List{% endblock %}
-
 {% block head_style_plugins %}
     <!-- Plugins CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
 {% endblock %}
-
 {% block embed_style %}
+    <!-- range slider (noUiSlider) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"/>
 {% endblock %}
-
 {% block my_style %}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/tutor_filters.css' %}">#}
     <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/range_slider.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'ap2_tutor/assets/css/filters1.css' %}">
 {% endblock %}
 
 {% block body_content %}
+    <!-- **************** MAIN CONTENT START **************** -->
     <main>
+
         <!-- Page Banner START -->
         <section class="py-0">
             <div class="container">
@@ -29,6 +29,7 @@
                     <div class="col-12">
                         <div class="bg-dark p-4 text-center rounded-3">
                             <h1 class="text-white m-0">Tutor list</h1>
+                            <!-- Breadcrumb -->
                             <div class="d-flex justify-content-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb breadcrumb-dark breadcrumb-dots mb-0">
@@ -44,8 +45,8 @@
         </section>
         <!-- Page Banner END -->
 
-        <!-- Debug Section -->
-        <!-- Debug Section -->
+
+        <!-- Debug Section - Remove after fixing -->
         <div class="alert alert-info mt-3">
             <h6>🔍 Debug Information</h6>
             <p><strong>URL Parameters:</strong> {{ request.GET.urlencode }}</p>
@@ -58,39 +59,24 @@
                 <li>Rating: "{{ request.GET.sRate }}"</li>
                 <li>Search: "{{ request.GET.keySearch }}"</li>
             </ul>
-            <p><strong>All Tutors Count:</strong> {{ all_tutors_count }}</p>
-            <p><strong>Filtered Tutors Count:</strong> {{ page_obj.paginator.count }}</p>
-            <p><strong>Current Page:</strong> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+            <p><strong>Results Count:</strong> {{ tutors.count }}</p>
+            <p><strong>Total Tutors in DB:</strong> {{ tutors_accepted.count }}</p>
         </div>
 
-        <!-- Filter Section -->
+        <!-- Inner part START -->
         <section class="pt-4">
             <div class="container">
-                <!-- Hidden inputs for JavaScript -->
+                <!-- In your template - FIXED min/max order -->
                 <input type="hidden" id="minPrice" value="{{ min_price }}">
                 <input type="hidden" id="maxPrice" value="{{ max_price }}">
                 <input type="hidden" id="currentMin" value="{{ request.GET.min_price|default:min_price }}">
                 <input type="hidden" id="currentMax" value="{{ request.GET.max_price|default:max_price }}">
-
-                {% include 'ap2_tutor/filters1.html' %}
-
-                <!-- Results Count -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="alert alert-light border">
-{#                            <strong>{{ tutors.count }}</strong> tutors found#}
-{#                                                        {% if request.GET %}matching your filters{% endif %}#}
-                            <strong>{{ page_obj.paginator.count }}</strong> tutors found
-                            {% if request.GET %}matching your filters{% endif %}
-                        </div>
-                    </div>
-                </div>
-
-
+                {#                {% include 'ap2_tutor/search_filters.html' %}#}
+                {% include 'ap2_tutor/tutor_list/filters1.html' %}
 
                 <!-- Tutor list START -->
                 <div class="row g-4 justify-content-center">
-                    {% for tutor in tutors %}
+                    {% for tutor in tutors_accepted %}
                         <!-- Card item START -->
                         <div class="col-lg-10 col-xl-6">
                             <div class="card shadow p-2">
@@ -111,28 +97,26 @@
                                             <!-- Title -->
                                             <div class="d-sm-flex justify-content-sm-between mb-2 mb-sm-3">
                                                 <div>
-                                                    <h5 class="card-title mb-0">
-                                                        <a href="{% url 'provider:provider_detail' tutor.slug %}">
-                                                            {{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}
-                                                        </a>
+                                                    <h5 class="card-title mb-0"><a
+                                                            href="{% url 'provider:provider_detail' tutor.slug %}">{{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}</a>
                                                     </h5>
-                                                    <p class="small mb-2 mb-sm-0">{{ tutor.profile.title }}</p>
-                                                    <p class="small mb-2 mb-sm-0">Students: {{ tutor.student_count }}</p>
+                                                    <p class="small mb-2 mb-sm-0">{{ tutor.title }}</p>
+                                                    <p class="small mb-2 mb-sm-0">
+                                                        Students: {{ tutor.student_count }}</p>
                                                     <p class="small mb-2 mb-sm-0">Classes: {{ tutor.session_count }}</p>
                                                 </div>
                                                 <div>
-                                                    <span class="h6 fw-light">
-                                                        {{ tutor.profile.rating }}
-                                                        <i class="fas fa-star text-warning ms-1"></i>
-                                                    </span>
-                                                    <br>
-                                                    <span class="h8 fw-lighter">({{ tutor.profile.reviews_count }} Votes)</span>
+              <span class="h6 fw-light" style="text-align: end">{{ tutor.profile.rating }}<i
+                      class="fas fa-star text-warning ms-1"></i></span><br>
+                                                    <span class="h8 fw-lighter"
+                                                          style="font-max-size: smaller">({{ tutor.profile.reviews_count }} Votes)</span>
                                                 </div>
                                             </div>
                                             <!-- Content -->
                                             <p class="text-truncate-2 mb-3">{{ tutor.profile.bio|truncatechars:100|safe }}</p>
-                                            <!-- Skills -->
+                                            <!-- Info -->
                                             <div class="d-sm-flex justify-content-sm-between align-items-center">
+                                                <!-- Title / Skills-->
                                                 <h6 class="text-orange mb-0">
                                                     {% with skills=tutor.profile.user.skills.all|status:'approved' %}
                                                         {% if skills|length == 0 %}
@@ -147,6 +131,27 @@
                                                         {% endif %}
                                                     {% endwith %}
                                                 </h6>
+
+
+                                                <!-- Social button -->
+                                                {#                        <ul class="list-inline mb-0 mt-3 mt-sm-0">#}
+                                                {#                          <li class="list-inline-item">#}
+                                                {#                            <a class="mb-0 me-1 text-facebook" href="{{ tutor.profile.url_facebook }}"><i#}
+                                                {#                              class="fab fa-fw fa-facebook-f"></i></a>#}
+                                                {#                          </li>#}
+                                                {#                          <li class="list-inline-item">#}
+                                                {#                            <a class="mb-0 me-1 text-instagram-gradient" href="{{ tutor.profile.url_insta }}"><i#}
+                                                {#                              class="fab fa-fw fa-instagram"></i></a>#}
+                                                {#                          </li>#}
+                                                {#                          <li class="list-inline-item">#}
+                                                {#                            <a class="mb-0 me-1 text-twitter" href="{{ tutor.profile.url_twitter }}"><i#}
+                                                {#                              class="fab fa-fw fa-twitter"></i></a>#}
+                                                {#                          </li>#}
+                                                {#                          <li class="list-inline-item">#}
+                                                {#                            <a class="mb-0 text-linkedin" href="{{ tutor.profile.url_linkedin }}"><i#}
+                                                {#                              class="fab fa-fw fa-linkedin-in"></i></a>#}
+                                                {#                          </li>#}
+                                                {#                        </ul>#}
                                             </div>
                                         </div>
                                     </div>
@@ -154,91 +159,148 @@
                             </div>
                         </div>
                         <!-- Card item END -->
-                    {% empty %}
-                        <div class="col-12 text-center py-5">
-                            <div class="alert alert-info">
-                                <h5>No tutors found</h5>
-                                <p class="mb-0">Try adjusting your filters to see more results.</p>
-                            </div>
-                        </div>
+
                     {% endfor %}
                 </div>
                 <!-- Tutor list END -->
 
                 <!-- Pagination START -->
-                {% if tutors.count > 0 %}
-                    <nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
-                        {% if page_obj.has_other_pages %}
-                            <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                                {% if page_obj.has_previous %}
-                                    <li class="page-item mb-0">
-                                        <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}" tabindex="-1">
-                                            <i class="fas fa-angle-double-left"></i>
-                                        </a>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item mb-0 disabled">
-                                        <a class="page-link" href="#" tabindex="-1">
-                                            <i class="fas fa-angle-double-left" style="color: #d3d3d3;"></i>
-                                        </a>
-                                    </li>
-                                {% endif %}
+                <nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
+                    {% if page_obj.has_other_pages %}
+                        <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item mb-0"><a class="page-link" href="?
 
-                                {% for p in page_obj.paginator.page_range %}
-                                    {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
-                                        {% if p == page_obj.number %}
-                                            <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a></li>
-                                        {% else %}
-                                            <li class="page-item mb-0">
-                                                <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
-                                            </li>
-                                        {% endif %}
-                                    {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
-                                        <li class="page-item mb-0">
-                                            <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
+
+
+
+                                        {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                                                              tabindex="-1"><i class="fas fa-angle-double-left"></i></a>
+                                </li>
+                            {% else %}
+                                <li class="page-item mb-0 disabled"><a class="page-link" href="#" tabindex="-1"><i
+                                        class="fas fa-angle-double-left" style="color: #d3d3d3;"></i></a></li>
+                            {% endif %}
+
+                            {% for p in page_obj.paginator.page_range %}
+                                {% if p == 1 or p == 2 or p == page_obj.paginator.num_pages or p == page_obj.paginator.num_pages|add:'-1' or p == page_obj.number %}
+                                    {% if p == page_obj.number %}
+                                        <li class="page-item mb-0 active"><a class="page-link" href="#">{{ p }}</a></li>
+                                    {% else %}
+                                        <li class="page-item mb-0"><a class="page-link" href="?
+
+
+
+
+                                                {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
                                         </li>
-                                    {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
-                                        <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
                                     {% endif %}
-                                {% endfor %}
+                                {% elif p == page_obj.number|add:'1' or p == page_obj.number|add:'-1' %}
+                                    <li class="page-item mb-0"><a class="page-link" href="?
 
-                                {% if page_obj.has_next %}
-                                    <li class="page-item mb-0">
-                                        <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">
-                                            <i class="fas fa-angle-double-right"></i>
-                                        </a>
+
+
+
+                                            {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ p }}">{{ p }}</a>
                                     </li>
-                                {% else %}
-                                    <li class="page-item mb-0 disabled">
-                                        <a class="page-link" href="#">
-                                            <i class="fas fa-angle-double-right" style="color: #d3d3d3;"></i>
-                                        </a>
-                                    </li>
+                                {% elif p == page_obj.number|add:'2' or p == page_obj.number|add:'-2' %}
+                                    <li class="page-item mb-0 disabled"><a class="page-link" href="#">...</a></li>
                                 {% endif %}
-                            </ul>
-                        {% endif %}
-                    </nav>
-                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item mb-0"><a class="page-link" href="?
+
+
+
+
+                                        {% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"><i
+                                        class="fas fa-angle-double-right"></i></a></li>
+                            {% else %}
+                                <li class="page-item mb-0 disabled"><a class="page-link" href="#"><i
+                                        class="fas fa-angle-double-right"
+                                        style="color: #d3d3d3;"></i></a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </nav>
                 <!-- Pagination END -->
+
             </div>
         </section>
+        <!-- Inner part END -->
 
-        <!-- Rest of your template (Action box, etc.) -->
+        <!-- Action box START -->
+        <section class="pt-0">
+            <div class="container position-relative">
+                <!-- SVG -->
+                <figure class="position-absolute top-50 start-50 translate-middle ms-2">
+                    <svg>
+                        <path
+                                d="m496 22.999c0 10.493-8.506 18.999-18.999 18.999s-19-8.506-19-18.999 8.507-18.999 19-18.999 18.999 8.506 18.999 18.999z"
+                                fill="#fff" fill-rule="evenodd" opacity=".502"/>
+                        <path
+                                d="m775 102.5c0 5.799-4.701 10.5-10.5 10.5-5.798 0-10.499-4.701-10.499-10.5 0-5.798 4.701-10.499 10.499-10.499 5.799 0 10.5 4.701 10.5 10.499z"
+                                fill="#fff" fill-rule="evenodd" opacity=".102"/>
+                        <path
+                                d="m192 102c0 6.626-5.373 11.999-12 11.999s-11.999-5.373-11.999-11.999c0-6.628 5.372-12 11.999-12s12 5.372 12 12z"
+                                fill="#fff" fill-rule="evenodd" opacity=".2"/>
+                        <path
+                                d="m20.499 10.25c0 5.66-4.589 10.249-10.25 10.249-5.66 0-10.249-4.589-10.249-10.249-0-5.661 4.589-10.25 10.249-10.25 5.661-0 10.25 4.589 10.25 10.25z"
+                                fill="#fff" fill-rule="evenodd" opacity=".2"/>
+                    </svg>
+                </figure>
+
+                <div class="bg-success p-4 p-sm-5 rounded-3">
+                    <div class="row justify-content-center position-relative">
+                        <!-- Svg -->
+                        <figure class="fill-white opacity-1 position-absolute top-50 start-0 translate-middle-y">
+                            <svg width="141px" height="141px">
+                                <path
+                                        d="M140.520,70.258 C140.520,109.064 109.062,140.519 70.258,140.519 C31.454,140.519 -0.004,109.064 -0.004,70.258 C-0.004,31.455 31.454,-0.003 70.258,-0.003 C109.062,-0.003 140.520,31.455 140.520,70.258 Z"/>
+                            </svg>
+                        </figure>
+                        <!-- Action box -->
+                        <div class="col-11 position-relative">
+                            <div class="row align-items-center">
+                                <!-- Title -->
+                                <div class="col-lg-7">
+                                    <h3 class="text-white">Become a Tutor!</h3>
+                                    <p class="text-white mb-3 mb-lg-0">Speedily say has suitable disposal add boy. On
+                                        forth doubt miles of
+                                        child. Exercise joy man children rejoiced. Yet uncommonly his ten who diminution
+                                        astonished.</p>
+                                </div>
+                                <!-- Button -->
+                                <div class="col-lg-5 text-lg-end">
+                                    <a href="{% url 'provider:become_tutor' %}" class="btn btn-dark mb-0">Start Teaching
+                                        today</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Action box END -->
     </main>
+
+    <!-- **************** MAIN CONTENT END **************** -->
 {% endblock %}
 
 {% block scripts_vendors %}
+    <!-- Vendors -->
     <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
 {% endblock %}
-
 {% block embed_scripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"></script>
-{% endblock %}
 
+{% endblock %}
 {% block my_scripts %}
+    {#    <script src="{% static 'ap2_tutor/assets/js/tutor_filters.js' %}"></script>#}
     <script type="module" src="{% static 'ap2_tutor/assets/js/range_slider.js' %}"></script>
     <script type="module" src="{% static 'ap2_tutor/assets/js/priceRange.js' %}"></script>
-
     <script>
         // Global filter state
         const activeFilters = {};
@@ -252,58 +314,72 @@
             const minPrice = {{ min_price }};
             const maxPrice = {{ max_price }};
 
+            // Get DOM elements
             const priceSlider = document.getElementById('priceSlider');
             const minPriceEdit = document.getElementById('minPriceEdit');
             const maxPriceEdit = document.getElementById('maxPriceEdit');
+            {#const minPriceDisplay = document.getElementById('minPriceDisplay');#}
+            {#const maxPriceDisplay = document.getElementById('maxPriceDisplay');#}
             const minPriceInput = document.getElementById('minPriceInput');
             const maxPriceInput = document.getElementById('maxPriceInput');
-
-            if (!priceSlider) {
-                console.error('Price slider not found');
-                return;
-            }
 
             // Initialize noUiSlider
             noUiSlider.create(priceSlider, {
                 start: [minPrice, maxPrice],
                 connect: true,
-                range: {'min': minPrice, 'max': maxPrice},
+                range: {
+                    'min': minPrice,
+                    'max': maxPrice
+                },
                 step: 1,
                 behaviour: 'drag-tap',
                 tooltips: false
             });
 
-            // Update inputs when slider changes
+            // Update all displays when slider changes
             priceSlider.noUiSlider.on('update', function (values) {
                 const minVal = Math.round(values[0]);
                 const maxVal = Math.round(values[1]);
 
+                // Update displays
+                {#minPriceDisplay.textContent = '$' + minVal;#}
+                {#maxPriceDisplay.textContent = '$' + maxVal;#}
+
+                // Update editable inputs
                 minPriceEdit.value = minVal;
                 maxPriceEdit.value = maxVal;
+
+                // Update hidden form inputs
                 minPriceInput.value = minVal;
                 maxPriceInput.value = maxVal;
             });
 
-            // Update slider when inputs change
+            // Update slider when manual inputs change
             minPriceEdit.addEventListener('change', function () {
                 const minVal = parseInt(this.value) || minPrice;
                 const maxVal = parseInt(maxPriceEdit.value) || maxPrice;
+
+                // Validate
                 const validatedMin = Math.max(minPrice, Math.min(maxPrice, minVal));
                 const validatedMax = Math.max(validatedMin, Math.min(maxPrice, maxVal));
 
                 this.value = validatedMin;
                 maxPriceEdit.value = validatedMax;
+
                 priceSlider.noUiSlider.set([validatedMin, validatedMax]);
             });
 
             maxPriceEdit.addEventListener('change', function () {
                 const minVal = parseInt(minPriceEdit.value) || minPrice;
                 const maxVal = parseInt(this.value) || maxPrice;
+
+                // Validate
                 const validatedMin = Math.max(minPrice, Math.min(maxPrice, minVal));
                 const validatedMax = Math.max(validatedMin, Math.min(maxPrice, maxVal));
 
                 minPriceEdit.value = validatedMin;
                 this.value = validatedMax;
+
                 priceSlider.noUiSlider.set([validatedMin, validatedMax]);
             });
 
@@ -312,6 +388,8 @@
             maxPriceEdit.value = maxPrice;
             minPriceInput.value = minPrice;
             maxPriceInput.value = maxPrice;
+            {#minPriceDisplay.textContent = '$' + minPrice;#}
+            {#maxPriceDisplay.textContent = '$' + maxPrice;#}
         }
 
         function applyPriceRange() {
@@ -333,8 +411,14 @@
                 addFilter('priceRange', `Price: $${minVal} - $${maxVal}`);
             }
 
-            // ✅ SUBMIT THE FORM
-            document.getElementById('fSearch').submit();
+            // Close dropdown
+            const dropdownElement = document.querySelector('[data-bs-toggle="dropdown"]');
+            const dropdown = bootstrap.Dropdown.getInstance(dropdownElement);
+            if (dropdown) {
+                dropdown.hide();
+            }
+
+            triggerFiltering();
         }
 
         function resetPriceRange() {
@@ -342,22 +426,16 @@
             const maxPrice = {{ max_price }};
             const priceSlider = document.getElementById('priceSlider');
 
+            // Reset slider
             priceSlider.noUiSlider.set([minPrice, maxPrice]);
 
+            // Reset dropdown text
             const priceRangeDropdown = document.getElementById('priceRangeDropdown');
             priceRangeDropdown.textContent = 'Hourly Price';
+
+            // Remove from active filters
             removeFilter('priceRange');
-
-            // ✅ SUBMIT THE FORM
-            document.getElementById('fSearch').submit();
         }
-
-        function triggerFiltering() {
-            // ✅ SUBMIT THE FORM
-            document.getElementById('fSearch').submit();
-        }
-
-        // ... rest of your filter management functions
 
         // Filter Management Functions
         function initializeFilterTracking() {
@@ -417,65 +495,24 @@
             container.style.display = Object.keys(activeFilters).some(key => activeFilters[key]) ? 'block' : 'none';
         }
 
-    </script>
-{% endblock %}
-{% block my_scripts11 %}
-    <script>
-
         function triggerFiltering() {
-            // Reset to page 1 when filters change
-            const pageInput = document.querySelector('input[name="page"]');
-            if (pageInput) {
-                pageInput.value = '1';
-            }
+            // Submit the form or make AJAX call
+            console.log('Active filters:', activeFilters);
+            console.log('Price range:', {
+                min: document.getElementById('minPriceInput').value,
+                max: document.getElementById('maxPriceInput').value
+            });
 
-            // Submit the form
-            document.getElementById('fSearch').submit();
-        }
+            // Uncomment to auto-submit form:
+            // document.querySelector('form').submit();
 
-
-        function resetPriceRange() {
-            const minPrice = {{ min_price }};
-            const maxPrice = {{ max_price }};
-            const priceSlider = document.getElementById('priceSlider');
-
-            // Reset slider
-            priceSlider.noUiSlider.set([minPrice, maxPrice]);
-
-            // Reset dropdown text
-            const priceRangeDropdown = document.getElementById('priceRangeDropdown');
-            priceRangeDropdown.textContent = 'Hourly Price';
-
-            // Remove from active filters
-            removeFilter('priceRange');
-        }
-
-        function triggerFiltering() {
-            // ✅ SUBMIT THE FORM
-            document.getElementById('fSearch').submit();
-        }
-
-        function applyPriceRange() {
-            const minPriceEdit = document.getElementById('minPriceEdit');
-            const maxPriceEdit = document.getElementById('maxPriceEdit');
-            const priceRangeDropdown = document.getElementById('priceRangeDropdown');
-
-            const minVal = minPriceEdit.value;
-            const maxVal = maxPriceEdit.value;
-            const minPrice = {{ min_price }};
-            const maxPrice = {{ max_price }};
-
-            // Update dropdown button text
-            if (minVal == minPrice && maxVal == maxPrice) {
-                priceRangeDropdown.textContent = 'Hourly Price';
-                removeFilter('priceRange');
-            } else {
-                priceRangeDropdown.textContent = `Price: $${minVal} - $${maxVal}`;
-                addFilter('priceRange', `Price: $${minVal} - $${maxVal}`);
-            }
-
-            // ✅ SUBMIT THE FORM IMMEDIATELY
-            document.getElementById('fSearch').submit();
+            // Or for AJAX filtering:
+            // const formData = new FormData(document.querySelector('form'));
+            // fetch('/your-filter-endpoint/', {
+            //     method: 'POST',
+            //     body: formData
+            // }).then(response => response.json())
+            //   .then(data => updateResults(data));
         }
     </script>
 

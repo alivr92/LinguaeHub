@@ -1,0 +1,242 @@
+{% load static %}
+{% load my_custom_filters %}
+
+<!-- Modern Card Design Alternative -->
+{#                        <div class="col-lg-10 col-xl-6">#}
+{#                            <div class="card border-0 shadow-hover h-100" style="transition: all 0.3s ease;">#}
+{#                                <div class="card-body p-0">#}
+{#                                    <div class="row g-0 h-100">#}
+{#                                        <!-- Image with Overlay -->#}
+{#                                        <div class="col-md-5 position-relative">#}
+{#                                            <div class="position-relative h-100">#}
+{#                                                <img src="{{ tutor.profile.photo.url }}"#}
+{#                                                     class="w-100 h-100 object-fit-cover rounded-start"#}
+{#                                                     style="min-height: 220px;"#}
+{#                                                     alt="{{ tutor.profile.user.first_name }}">#}
+{##}
+{#                                                <!-- Gradient Overlay -->#}
+{#                                                <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-dark rounded-start"></div>#}
+{##}
+{#                                                <!-- Content on Image -->#}
+{#                                                <div class="position-absolute bottom-0 start-0 w-100 p-3 text-white">#}
+{#                                                    <!-- Price - Most Prominent -->#}
+{#                                                    <div class="mb-2">#}
+{#                                                        {% if tutor.is_discount_active %}#}
+{#                                                            <h4 class="text-warning mb-0">${{ tutor.actual_hourly_price|floatformat:2 }}</h4>#}
+{#                                                            <small class="text-light opacity-75 text-decoration-line-through">${{ tutor.cost_hourly }}</small>#}
+{#                                                        {% else %}#}
+{#                                                            <h4 class="text-warning mb-0">${{ tutor.cost_hourly }}</h4>#}
+{#                                                        {% endif %}#}
+{#                                                        <small class="text-light opacity-75 d-block">per hour</small>#}
+{#                                                    </div>#}
+{##}
+{#                                                    <!-- Stats -->#}
+{#                                                    <div class="d-flex gap-3 text-white opacity-90">#}
+{#                                                        <div class="text-center">#}
+{#                                                            <div class="fw-bold">{{ tutor.student_count }}</div>#}
+{#                                                            <small class="opacity-75">Students</small>#}
+{#                                                        </div>#}
+{#                                                        <div class="text-center">#}
+{#                                                            <div class="fw-bold">{{ tutor.session_count }}</div>#}
+{#                                                            <small class="opacity-75">Sessions</small>#}
+{#                                                        </div>#}
+{#                                                        <div class="text-center">#}
+{#                                                            <div class="fw-bold">{{ tutor.profile.rating }}</div>#}
+{#                                                            <small class="opacity-75">Rating</small>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{##}
+{#                                                <!-- Discount Badge -->#}
+{#                                                {% if tutor.is_discount_active %}#}
+{#                                                    <div class="position-absolute top-0 start-0 m-2">#}
+{#                            <span class="badge bg-success">#}
+{#                                <i class="fas fa-bolt me-1"></i>{{ tutor.discount }}% OFF#}
+{#                            </span>#}
+{#                                                    </div>#}
+{#                                                {% endif %}#}
+{#                                            </div>#}
+{#                                        </div>#}
+{##}
+{#                                        <!-- Content -->#}
+{#                                        <div class="col-md-7">#}
+{#                                            <div class="p-3 h-100 d-flex flex-column">#}
+{#                                                <!-- Header -->#}
+{#                                                <div class="mb-2">#}
+{#                                                    <h6 class="card-title mb-1">#}
+{#                                                        <a href="{% url 'provider:provider_detail' tutor.slug %}" class="text-dark text-decoration-none">#}
+{#                                                            {{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}#}
+{#                                                        </a>#}
+{#                                                    </h6>#}
+{#                                                    {% if tutor.profile.title %}#}
+{#                                                        <p class="text-muted small mb-2">{{ tutor.profile.title }}</p>#}
+{#                                                    {% endif %}#}
+{#                                                </div>#}
+{##}
+{#                                                <!-- Bio -->#}
+{#                                                {% if tutor.profile.bio %}#}
+{#                                                    <div class="mb-3 flex-grow-1">#}
+{#                                                        <p class="small text-muted line-clamp-3">#}
+{#                                                            {{ tutor.profile.bio|striptags|truncatechars:100 }}#}
+{#                                                        </p>#}
+{#                                                    </div>#}
+{#                                                {% endif %}#}
+{##}
+{#                                                <!-- Skills -->#}
+{#                                                <div class="mb-3">#}
+{#                                                    <small class="text-muted d-block mb-1">Expert in:</small>#}
+{#                                                    <div class="d-flex flex-wrap gap-1">#}
+{#                                                        {% with skills=tutor.profile.user.skills.all|status:'approved'|slice:":3" %}#}
+{#                                                            {% for skill in skills %}#}
+{#                                                                <span class="badge bg-primary bg-opacity-10 text-primary border-0 small">#}
+{#                                            {{ skill.skill }}#}
+{#                                        </span>#}
+{#                                                            {% endfor %}#}
+{#                                                        {% endwith %}#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{##}
+{#                                                <!-- Action -->#}
+{#                                                <div class="mt-auto">#}
+{#                                                    <a href="{% url 'provider:provider_detail' tutor.slug %}"#}
+{#                                                       class="btn btn-outline-primary btn-sm w-100">#}
+{#                                                        Book Trial Lesson#}
+{#                                                    </a>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+
+
+<!-- Card item START -->
+<div class="col-lg-10 col-xl-6">
+    <div class="card shadow p-2 border-0 h-100">
+        <div class="row g-0 h-100" style="min-height: 225px;">
+            <!-- Image with Gradient Overlay -->
+            <div class="col-md-4 position-relative">
+                <a href="{% url 'provider:provider_detail' tutor.slug %}" class="d-block h-100">
+                    <img src="{{ tutor.profile.photo.url }}"
+                         class="rounded-3 w-100 h-100 object-fit-cover"
+                         style="min-height: 225px;"
+                         alt="{{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}">
+
+                    <!-- Gradient Overlay -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-overlay rounded-3"></div>
+
+                    <!-- Stats Overlay - Bottom Right (Your Style with Icons) -->
+                    <div class="position-absolute bottom-0 end-0 m-2">
+                        <div class="d-flex gap-2">
+                            <!-- Students Count -->
+                            <span class="badge text-bg-info rounded-1">
+                                <i class="fas fa-user-graduate me-1"></i>{{ tutor.student_count }}
+                            </span>
+                            <!-- Sessions Count -->
+                            <span class="badge text-bg-orange rounded-1">
+                                <i class="fas fa-clipboard-list me-1"></i>{{ tutor.session_count }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Rating Badge - Top Right -->
+                    <div class="position-absolute top-0 end-0 m-2">
+                        <span class="badge bg-warning text-dark">
+                            <i class="fas fa-star me-1"></i>{{ tutor.profile.rating }}
+                        </span>
+                    </div>
+
+                    <!-- Discount Badge - Top Left -->
+                    {% if tutor.is_discount_active %}
+                        <div class="position-absolute top-0 start-0 m-2">
+                        <span class="badge bg-success text-white">
+                            <i class="fas fa-tag me-1"></i>{{ tutor.discount }}% OFF
+                        </span>
+                        </div>
+                    {% endif %}
+                </a>
+            </div>
+
+            <!-- Card body -->
+            <div class="col-md-8">
+                <div class="card-body h-100 d-flex flex-column">
+                    <!-- Title Section -->
+                    <div class="mb-2">
+                        <h5 class="card-title mb-1">
+                            <a href="{% url 'provider:provider_detail' tutor.slug %}" class="text-decoration-none text-dark">
+                                {{ tutor.profile.user.first_name }} {{ tutor.profile.user.last_name }}
+                            </a>
+                        </h5>
+                        {% if tutor.profile.title %}
+                            <p class="small text-muted mb-2">{{ tutor.profile.title }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Price Section - Prominently Displayed -->
+                    <div class="mb-3">
+                        <div class="d-flex align-items-baseline flex-wrap">
+                            {% if tutor.is_discount_active %}
+                                <span class="h4 text-primary fw-bold me-2">${{ tutor.actual_hourly_price|floatformat:2 }}</span>
+                                <small class="text-muted me-2">/hour</small>
+                                <small class="text-muted text-decoration-line-through me-2">${{ tutor.cost_hourly }}</small>
+                            {% else %}
+                                <span class="h4 text-primary fw-bold me-2">${{ tutor.cost_hourly }}</span>
+                                <small class="text-muted">/hour</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Bio Content -->
+                    {% if tutor.profile.bio %}
+                        <div class="mb-3 flex-grow-1">
+                            <p class="card-text small text-muted text-truncate-2">
+                                {{ tutor.profile.bio|striptags|truncatechars:120 }}
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Skills Section -->
+                    <div class="mb-3">
+                        <h6 class="text-orange mb-1">Teaching Skills:</h6>
+                        <div class="d-flex flex-wrap gap-1">
+                            {% with skills=tutor.profile.user.skills.all|status:'approved' %}
+                                {% if skills %}
+                                    {% for skill in skills|slice:":4" %}
+                                        <span class="badge bg-light text-dark border small">{{ skill.skill }}</span>
+                                    {% endfor %}
+                                    {% if skills|length > 4 %}
+                                        <span class="badge bg-light text-muted border small">
+                                            +{{ skills|length|add:"-4" }} more
+                                        </span>
+                                    {% endif %}
+                                {% else %}
+                                    <span class="badge bg-light text-muted border small">No skills listed</span>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+
+                    <!-- Reviews & Action -->
+                    <div class="mt-auto pt-2 border-top">
+                        <div class="d-flex justify-content-between align-items-center">
+                            {% if tutor.profile.reviews_count > 0 %}
+                                <small class="text-muted">
+                                    <i class="fas fa-comment text-primary me-1"></i>
+                                    {{ tutor.profile.reviews_count }} review{{ tutor.profile.reviews_count|pluralize }}
+                                </small>
+                            {% else %}
+                                <small class="text-muted">No reviews yet</small>
+                            {% endif %}
+
+                            <a href="{% url 'provider:provider_detail' tutor.slug %}" class="btn btn-primary btn-sm">
+                                View Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Card item END -->

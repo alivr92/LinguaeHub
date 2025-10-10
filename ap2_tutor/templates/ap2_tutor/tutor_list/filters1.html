@@ -1,5 +1,5 @@
 <!-- Enterprise Filter Design -->
-<form id="fSearch" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-6 position-relative"
+<form id="fSearch" name="fSearch" class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-6 position-relative"
       action="{% url 'provider:tutor_list' %}" method="GET">
 
     <input type="hidden" name="page" value="1">  <!-- Reset to page 1 on new filters -->
@@ -156,7 +156,7 @@
 
         <!-- Search Button -->
         <div class="col-xl-auto col-lg-auto col-md-4 col-sm-6">
-            <button type="submit" class="btn btn-primary btn-md w-100 h-100 d-flex align-items-center justify-content-center">
+            <button type="submit" form="fSearch" class="btn btn-primary btn-md w-100 h-100 d-flex align-items-center justify-content-center">
                 <i class="fas fa-search me-2"></i>
                 <span class="d-none d-sm-inline">Search</span>
             </button>

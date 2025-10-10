@@ -1,0 +1,78 @@
+.filter-tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Active Filter Tags */
+/*.filter-tag {*/
+/*    background: #e9ecef;*/
+/*    border: 1px solid #dee2e6;*/
+/*    border-radius: 20px;*/
+/*    padding: 4px 12px;*/
+/*    font-size: 0.875rem;*/
+/*    display: inline-flex;*/
+/*    align-items: center;*/
+/*    gap: 6px;*/
+/*    transition: all 0.2s ease;*/
+/*}*/
+
+.filter-tag:hover {
+    /*background: #dee2e6;*/
+    background: linear-gradient(135deg, #667eea 0%, rgb(82, 75, 162) 100%);
+
+}
+
+.filter-tag .remove-filter {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1;
+}
+
+.filter-tag .remove-filter:hover {
+    opacity: 1;
+    /*color: #dc3545;*/
+    color: #ffffff;
+}
+.remove-filter {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0.1rem 0.3rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.2s;
+}
+
+.remove-filter:hover {
+    /*background: rgba(255, 255, 255, 0.3);*/
+    background: rgb(255, 1, 86);
+
+}
+
+.form-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.form-select, .form-control {
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.form-select:focus, .form-control:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}

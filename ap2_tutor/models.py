@@ -174,7 +174,8 @@ class TeachingSubCategory(models.Model):
 
 
 class Tutor(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)  # Internal UUID (never exposed) For API,...
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True,
+                            editable=False)  # Internal UUID (never exposed) For API,...
     public_id = models.CharField(max_length=12, unique=True, editable=False)  # Public short ID (6-8 chars)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     profile = models.OneToOneField('app_accounts.UserProfile', on_delete=models.CASCADE, related_name='tutor_profile',
@@ -296,11 +297,9 @@ class Tutor(models.Model):
         # return f"tutor/s/{self.slug}/"  # Matches: path('/s/<slug:slug>/', ...)
         return reverse('provider:provider_detail', kwargs={'slug': self.slug})
 
-
     def get_short_url(self):
         # return f"p/{self.public_id}/"
         return reverse('provider:provider_short', kwargs={'public_id': self.public_id})
-
 
     def get_absolute_url(self):
         return self.get_seo_url()  # Primary URL for SEO
@@ -312,11 +311,24 @@ class Tutor(models.Model):
             return reviews.aggregate(Avg('rating'))['rating__avg']
         return None
 
+    @property
     def is_discount_active(self):
-        """Check if the discount is still valid."""
+        """Check if discount is currently active"""
         if self.discount_deadline:
-            return timezone.now() <= self.discount_deadline  # Compare current time with deadline
-        return True  # No deadline means the discount is always active
+            return timezone.now() <= self.discount_deadline and self.discount > 0
+        return self.discount > 0  # No deadline means the discount is always active
+
+    @property
+    def actual_hourly_price(self):
+        """Calculate the actual price after discount"""
+        if self.is_discount_active:
+            discount_amount = (self.cost_hourly * self.discount) / 100
+            return self.cost_hourly - discount_amount
+        return self.cost_hourly
+
+    def get_discounted_price(self):
+        """Alias for actual_hourly_price for backward compatibility"""
+        return self.actual_hourly_price
 
     def get_commission_rate(self):
         """Calculate commission rate based on lifetime hours"""
@@ -345,6 +357,35 @@ class Tutor(models.Model):
         base_rate = self.get_commission_rate()
         performance_bonus = self.get_performance_bonus()
         return max(0.10, base_rate - performance_bonus)  # Never more than 10% minimum commission
+
+
+class TeachingCertificate(models.Model):
+    """Tutor's teaching certifications (TEFL, TESOL, etc.)"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='certificates')
+    name = models.CharField(max_length=100, choices=TEACHING_CERTIFICATES, blank=False)
+    issuing_organization = models.CharField(max_length=150)
+    completion_date = models.PositiveIntegerField(
+        validators=[MinValueValidator(1950), MaxValueValidator(timezone.now().year)],
+        null=True,
+        blank=True
+    )
+    document = models.FileField(
+        upload_to='applicants/certificates/%Y/%m/%d/',
+        null=True,
+        blank=True
+    )
+    is_certified = models.BooleanField(default=False)
+    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='cert_verifyed_by',
+                                    null=True, blank=True, )
+    verified_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-completion_date']
+
+    def __str__(self):
+        return f"{self.name} from {self.issuing_organization}"
 
 
 class ProviderApplication(models.Model):
@@ -403,7 +444,6 @@ class PNotification(models.Model):
     def __str__(self):
         return f'Tutor: {self.provider.profile.user.first_name} {self.provider.profile.user.last_name} Notification'
 
-
 # ---------------------------------------------------------------------
 
 
@@ -440,32 +480,3 @@ class PNotification(models.Model):
 #
 #     def __str__(self):
 #         return f"{self.degree} in {self.field_of_study} at {self.institution}"
-
-
-class TeachingCertificate(models.Model):
-    """Tutor's teaching certifications (TEFL, TESOL, etc.)"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='certificates')
-    name = models.CharField(max_length=100, choices=TEACHING_CERTIFICATES, blank=False)
-    issuing_organization = models.CharField(max_length=150)
-    completion_date = models.PositiveIntegerField(
-        validators=[MinValueValidator(1950), MaxValueValidator(timezone.now().year)],
-        null=True,
-        blank=True
-    )
-    document = models.FileField(
-        upload_to='applicants/certificates/%Y/%m/%d/',
-        null=True,
-        blank=True
-    )
-    is_certified = models.BooleanField(default=False)
-    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='cert_verifyed_by',
-                                    null=True, blank=True, )
-    verified_at = models.DateTimeField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['-completion_date']
-
-    def __str__(self):
-        return f"{self.name} from {self.issuing_organization}"
