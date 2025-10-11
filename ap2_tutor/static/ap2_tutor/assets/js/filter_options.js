@@ -364,7 +364,7 @@ class FilterManager {
         }
     }
 
-    updateActiveFiltersDisplay() {
+    updateActiveFiltersDisplay1() {
         const form = document.getElementById(this.formId);
         const container = document.getElementById(this.activeFiltersContainerId);
 
@@ -421,12 +421,70 @@ class FilterManager {
         container.style.display = hasActiveFilters ? 'block' : 'none';
     }
 
+    updateActiveFiltersDisplay() {
+        const form = document.getElementById(this.formId);
+        const container = document.getElementById(this.activeFiltersContainerId);
+
+        if (!form || !container) return;
+
+        const formData = new FormData(form);
+        const filtersContainer = container.querySelector('.d-flex');
+        if (!filtersContainer) return;
+
+        // Clear existing filter tags
+        filtersContainer.querySelectorAll('.filter-tag').forEach(tag => tag.remove());
+
+        let hasActiveFilters = false;
+        const processedFields = new Set();
+
+        // Process form data
+        for (let [name, value] of formData.entries()) {
+            if (value && name !== 'page' && !processedFields.has(name)) {
+
+                // Handle multiple selections for skills and levels
+                if (name === 'skills' || name === 'sSkillLevel') {
+                    const allValues = formData.getAll(name);
+                    if (allValues.length > 0) {
+                        hasActiveFilters = true;
+                        this.createMultiValueFilterTag(filtersContainer, name, allValues);
+                    }
+                    processedFields.add(name);
+                    continue;
+                }
+
+                // Handle price range - FIXED: Check if values are not empty
+                if (name === 'min_price' || name === 'max_price') {
+                    const minPrice = formData.get('min_price');
+                    const maxPrice = formData.get('max_price');
+                    // Check if both values exist and are not empty strings
+                    if (minPrice && maxPrice && minPrice.trim() !== '' && maxPrice.trim() !== '' && !processedFields.has('price_range')) {
+                        hasActiveFilters = true;
+                        this.createFilterTag(filtersContainer, 'price_range', `$${minPrice}-$${maxPrice}`);
+                        processedFields.add('price_range');
+                        processedFields.add('min_price');
+                        processedFields.add('max_price');
+                    }
+                    continue;
+                }
+
+                // Handle single values - exclude empty search terms
+                if (value && value.trim() !== '' && name !== 'search_terms') {
+                    hasActiveFilters = true;
+                    this.createFilterTag(filtersContainer, name, value);
+                    processedFields.add(name);
+                }
+            }
+        }
+
+        container.style.display = hasActiveFilters ? 'block' : 'none';
+    }
+
     createMultiValueFilterTag(container, name, values) {
         const filterTag = document.createElement('span');
         filterTag.className = 'filter-tag';
 
         let displayName = this.filterLabels[name] || name;
-        let displayValue = values.join(', ');
+        let displayValue = values.map(v => v.toUpperCase()).join(', ');
 
         filterTag.innerHTML = `
             ${displayName}: ${displayValue}
@@ -519,7 +577,7 @@ class FilterManager {
         }, 100);
     }
 
-    clearAllFilters() {
+    clearAllFilters1() {
         const form = document.getElementById(this.formId);
         if (!form) return;
 
@@ -552,6 +610,67 @@ class FilterManager {
             this.submitForm();
         }, 100);
     }
+
+    clearAllFilters() {
+        const form = document.getElementById(this.formId);
+        if (!form) return;
+
+        // Reset all single selects and inputs
+        form.querySelectorAll('select:not(.js-choice), input[type="text"], input[type="number"], input[type="search"]').forEach(element => {
+            if (element.name && element.name !== 'page') {
+                element.value = '';
+                // Trigger change event to update form state
+                element.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+
+        // Reset multi-select fields using Choices.js
+        this.choicesInstances.forEach((choicesInstance, name) => {
+            try {
+                choicesInstance.removeActiveItems();
+                // Also clear the underlying select element
+                const select = document.querySelector(`select[name="${name}"]`);
+                if (select) {
+                    Array.from(select.selectedOptions).forEach(option => {
+                        option.selected = false;
+                    });
+                }
+            } catch (error) {
+                console.error('Error clearing choices instance:', name, error);
+            }
+        });
+
+        // Reset price inputs - IMPORTANT: Clear both hidden and visible inputs
+        const minPriceInput = document.querySelector('input[name="min_price"]');
+        const maxPriceInput = document.querySelector('input[name="max_price"]');
+        const minPriceEdit = document.getElementById('minPriceEdit');
+        const maxPriceEdit = document.getElementById('maxPriceEdit');
+
+        if (minPriceInput) minPriceInput.value = '';
+        if (maxPriceInput) maxPriceInput.value = '';
+        if (minPriceEdit) minPriceEdit.value = '';
+        if (maxPriceEdit) maxPriceEdit.value = '';
+
+        // Reset slider to default values
+        if (window.priceSliderManager && typeof window.priceSliderManager.resetPriceRange === 'function') {
+            window.priceSliderManager.resetPriceRange();
+        } else {
+            // Fallback: manually reset the slider display
+            const priceRangeDropdown = document.getElementById('priceRangeDropdown');
+            if (priceRangeDropdown) {
+                priceRangeDropdown.textContent = 'Price Range';
+            }
+        }
+
+        // Force update the active filters display
+        this.updateActiveFiltersDisplay();
+
+        // Submit form after a short delay to ensure everything is cleared
+        setTimeout(() => {
+            this.submitForm();
+        }, 150);
+    }
+
 
     submitForm() {
         // Reset to page 1 when filters change
@@ -846,3 +965,6 @@ if (document.readyState === 'loading') {
         }, 100);
     }
 }
+
+
+//###############################################

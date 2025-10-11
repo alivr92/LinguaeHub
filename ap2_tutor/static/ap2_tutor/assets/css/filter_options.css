@@ -45,6 +45,7 @@
     /*color: #dc3545;*/
     color: #ffffff;
 }
+
 .remove-filter {
     cursor: pointer;
     font-weight: bold;
@@ -59,6 +60,8 @@
     background: rgb(255, 1, 86);
 
 }
+
+
 
 .form-label {
     font-weight: 600;
@@ -76,3 +79,91 @@
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
+
+
+/*    FOR LAST FILTER DESIGN    */
+
+/* Custom styles for better visual hierarchy */
+.bg-light.rounded {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+.border-primary {
+    border-color: #0d6efd !important;
+}
+
+/* Ensure consistent heights */
+.form-select, .btn, .input-group {
+    min-height: 46px;
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+    .col-sm-6 {
+        margin-bottom: 1rem;
+    }
+}
+
+
+/* *************** for search panel sort panel and buttons *************** */
+/* .form-control, .form-select, .btn {*/
+/*     height: 46px;*/
+/*     border-radius: 8px;*/
+/* }*/
+
+/*.search-section {*/
+/*    background-color: #f9fafb;*/
+/*    border: 1px solid #e5e7eb;*/
+/*    border-radius: 12px;*/
+/*    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);*/
+/*}*/
+
+/*.form-label {*/
+/*    font-size: 0.875rem;*/
+/*    font-weight: 500;*/
+/*    color: #374151;*/
+/*    margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.border-primary-subtle {*/
+/*    border-color: #dbeafe !important;*/
+/*}*/
+
+/*.input-group-text {*/
+/*    background-color: white;*/
+/*    border-right: none;*/
+/*    border-color: #dbeafe;*/
+/*}*/
+
+/*.border-start-0 {*/
+/*    border-left: none !important;*/
+/*}*/
+
+/*.btn-primary {*/
+/*    background-color: #3b82f6;*/
+/*    border-color: #3b82f6;*/
+/*    font-weight: 500;*/
+/*}*/
+
+/*.btn-primary:hover {*/
+/*    background-color: #2563eb;*/
+/*    border-color: #2563eb;*/
+/*}*/
+
+/*.btn-outline-danger {*/
+/*    font-weight: 500;*/
+/*}*/
+
+/*!* Ensure consistent heights across all elements *!*/
+/*.form-select, .form-control, .btn {*/
+/*    padding-top: 0.6rem;*/
+/*    padding-bottom: 0.6rem;*/
+/*}*/
+
+/*!* Responsive adjustments *!*/
+/*@media (max-width: 768px) {*/
+/*    .search-section .col-sm-12 {*/
+/*        margin-bottom: 1rem;*/
+/*    }*/
+/*}*/
