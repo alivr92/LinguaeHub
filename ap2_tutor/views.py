@@ -374,8 +374,11 @@ class TutorListView_VERYgOOD(ListView):
 
         return context
 
+
 from django.db.models import Q, Min, Max, Case, When, F, DecimalField, ExpressionWrapper
 from django.db.models.functions import Coalesce
+
+
 class TutorListView(ListView):
     model = Tutor
     template_name = 'ap2_tutor/tutor_list/tutor_list.html'
@@ -431,17 +434,29 @@ class TutorListView(ListView):
         if sRate:
             queryset = queryset.filter(profile__rating__gte=float(sRate))
 
-        skills = self.request.GET.getlist('skills')
-        if skills:
-            queryset = queryset.filter(
-                profile__user__skills__skill__name__in=skills
-            ).distinct()
+        # for multiple skills
+        # skills = self.request.GET.getlist('skills')
+        # if skills:
+        #     queryset = queryset.filter(
+        #         profile__user__skills__skill__name__in=skills
+        #     ).distinct()
 
-        sSkillLevel = self.request.GET.getlist('sSkillLevel')
+        # For single skill
+        skills = self.request.GET.get('skills')
+        if skills:
+            queryset = queryset.filter(profile__user__skills__skill__name=skills).distinct()
+
+        # For Multiple Levels:
+        # sSkillLevel = self.request.GET.getlist('sSkillLevel')
+        # if sSkillLevel:
+        #     queryset = queryset.filter(
+        #         profile__user__skills__level__name__in=sSkillLevel
+        #     ).distinct()
+
+        # For single skill level
+        sSkillLevel = self.request.GET.get('sSkillLevel')
         if sSkillLevel:
-            queryset = queryset.filter(
-                profile__user__skills__level__name__in=sSkillLevel
-            ).distinct()
+            queryset = queryset.filter(profile__user__skills__level__name=sSkillLevel).distinct()
 
         # Price filter with discount support
         min_price = self.request.GET.get('min_price')
@@ -546,6 +561,7 @@ class TutorListView(ListView):
         })
 
         return context
+
 
 class ProviderDetailView(DetailView):
     model = Tutor

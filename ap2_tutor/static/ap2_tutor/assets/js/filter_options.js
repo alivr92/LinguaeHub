@@ -1,270 +1,3 @@
-// class FilterManager {
-//     constructor() {
-//         this.formId = 'fSearch';
-//         this.activeFiltersContainerId = 'activeFiltersContainer';
-//         this.filterLabels = {
-//             'keySearch': 'Search',
-//             'skills': 'Skills',
-//             'sSkillLevel': 'Level',
-//             'min_price': 'Price',
-//             'max_price': 'Price',
-//             'sRate': 'Rating',
-//             'gender': 'Gender',
-//             'country': 'Country',
-//             'meeting_method': 'Method',
-//             'experience': 'Experience',
-//             'availability': 'Availability',
-//             'student_level': 'Student Level',
-//             'trial_available': 'Trial'
-//         };
-//         this.init();
-//     }
-//
-//     init() {
-//         this.initializeChoices();
-//         this.initializeFilterTracking();
-//         this.updateActiveFiltersDisplay();
-//     }
-//
-//     initializeChoices() {
-//         // Initialize Choices.js for multi-select elements
-//         if (typeof Choices !== 'undefined') {
-//             document.querySelectorAll('.js-choice').forEach(select => {
-//                 new Choices(select, {
-//                     removeItemButton: true,
-//                     searchEnabled: select.dataset.searchEnabled === 'true',
-//                     maxItemCount: parseInt(select.dataset.maxItemCount) || null,
-//                     shouldSort: false
-//                 });
-//             });
-//         }
-//     }
-//
-//     initializeFilterTracking() {
-//         // Track all form elements
-//         const form = document.getElementById(this.formId);
-//         if (form) {
-//             form.addEventListener('change', () => {
-//                 this.updateActiveFiltersDisplay();
-//             });
-//         }
-//     }
-//
-//     updateActiveFiltersDisplay() {
-//         const form = document.getElementById(this.formId);
-//         const container = document.getElementById(this.activeFiltersContainerId);
-//
-//         if (!form || !container) return;
-//
-//         const formData = new FormData(form);
-//         const filtersContainer = container.querySelector('.d-flex');
-//
-//         // Clear existing filter tags
-//         filtersContainer.querySelectorAll('.filter-tag').forEach(tag => tag.remove());
-//
-//         let hasActiveFilters = false;
-//         const processedFields = new Set();
-//
-//         // Process each form field
-//         for (let [name, value] of formData.entries()) {
-//             if (value && name !== 'page' && !processedFields.has(name)) {
-//                 // Handle price range specially
-//                 if (name === 'min_price' || name === 'max_price') {
-//                     const minPrice = formData.get('min_price');
-//                     const maxPrice = formData.get('max_price');
-//                     if (minPrice && maxPrice) {
-//                         hasActiveFilters = true;
-//                         this.createFilterTag(filtersContainer, 'min_price', `$${minPrice}-$${maxPrice}`);
-//                         processedFields.add('min_price');
-//                         processedFields.add('max_price');
-//                     }
-//                     continue;
-//                 }
-//
-//                 hasActiveFilters = true;
-//                 this.createFilterTag(filtersContainer, name, value);
-//                 processedFields.add(name);
-//             }
-//         }
-//
-//         container.style.display = hasActiveFilters ? 'block' : 'none';
-//     }
-//
-//     createFilterTag(container, name, value) {
-//         const filterTag = document.createElement('span');
-//         filterTag.className = 'filter-tag';
-//
-//         let displayName = this.filterLabels[name] || name;
-//         let displayValue = value;
-//
-//         // Format display values
-//         if (name === 'sRate') {
-//             displayValue = `${value}+ Stars`;
-//         } else if (name === 'meeting_method') {
-//             const methodLabels = {
-//                 'online': 'Online',
-//                 'in_person': 'In-Person',
-//                 'hybrid': 'Hybrid'
-//             };
-//             displayValue = methodLabels[value] || value;
-//         }
-//
-//         filterTag.innerHTML = `
-//             ${displayName}: ${displayValue}
-//             <span class="remove-filter" onclick="filterManager.removeFilter('${name}')">×</span>
-//         `;
-//         container.appendChild(filterTag);
-//     }
-//
-//     removeFilter(name) {
-//         const form = document.getElementById(this.formId);
-//
-//         if (name === 'min_price' || name === 'max_price') {
-//             // Clear both price inputs
-//             document.querySelector('input[name="min_price"]').value = '';
-//             document.querySelector('input[name="max_price"]').value = '';
-//             // Also reset the slider inputs
-//             const minPriceEdit = document.getElementById('minPriceEdit');
-//             const maxPriceEdit = document.getElementById('maxPriceEdit');
-//             if (minPriceEdit && maxPriceEdit) {
-//                 minPriceEdit.value = document.getElementById('jsMinPrice').value;
-//                 maxPriceEdit.value = document.getElementById('jsMaxPrice').value;
-//             }
-//         } else {
-//             const elements = document.querySelectorAll(`[name="${name}"]`);
-//             elements.forEach(element => {
-//                 if (element.multiple) {
-//                     // For multi-select
-//                     Array.from(element.options).forEach(option => {
-//                         option.selected = false;
-//                     });
-//                 } else {
-//                     element.value = '';
-//                 }
-//             });
-//         }
-//
-//         this.updateActiveFiltersDisplay();
-//         this.submitForm();
-//     }
-//
-//     clearAllFilters() {
-//         const form = document.getElementById(this.formId);
-//         if (!form) return;
-//
-//         // Reset all form fields
-//         form.querySelectorAll('select, input[type="text"], input[type="number"], input[type="search"]').forEach(element => {
-//             if (element.name && element.name !== 'page') {
-//                 if (element.multiple) {
-//                     // For multi-select
-//                     Array.from(element.options).forEach(option => {
-//                         option.selected = false;
-//                     });
-//                 } else {
-//                     element.value = '';
-//                 }
-//             }
-//         });
-//
-//         // Reset price inputs to default values
-//         const minPriceElement = document.querySelector('input[name="min_price"]');
-//         const maxPriceElement = document.querySelector('input[name="max_price"]');
-//         if (minPriceElement && maxPriceElement) {
-//             minPriceElement.value = '';
-//             maxPriceElement.value = '';
-//         }
-//
-//         // Reset slider if it exists
-//         if (window.priceSliderManager) {
-//             window.priceSliderManager.resetPriceRange();
-//         }
-//
-//         this.updateActiveFiltersDisplay();
-//         this.submitForm();
-//     }
-//
-//     submitForm() {
-//         // Reset to page 1 when filters change
-//         const pageInput = document.querySelector('input[name="page"]');
-//         if (pageInput) {
-//             pageInput.value = '1';
-//         }
-//
-//         // Submit the form
-//         const form = document.getElementById(this.formId);
-//         if (form) {
-//             form.submit();
-//         }
-//     }
-//
-//     saveSearchPreferences() {
-//         const form = document.getElementById(this.formId);
-//         const formData = new FormData(form);
-//         const preferences = {};
-//
-//         for (let [name, value] of formData.entries()) {
-//             if (value && name !== 'page') {
-//                 preferences[name] = value;
-//             }
-//         }
-//
-//         localStorage.setItem('tutorSearchPreferences', JSON.stringify(preferences));
-//         this.showToast('Search preferences saved!', 'success');
-//     }
-//
-//     loadSavedPreferences() {
-//         const saved = localStorage.getItem('tutorSearchPreferences');
-//         if (saved) {
-//             try {
-//                 const preferences = JSON.parse(saved);
-//                 Object.keys(preferences).forEach(name => {
-//                     const element = document.querySelector(`[name="${name}"]`);
-//                     if (element) {
-//                         if (element.multiple) {
-//                             // For multi-select
-//                             const values = Array.isArray(preferences[name]) ? preferences[name] : [preferences[name]];
-//                             values.forEach(value => {
-//                                 const option = Array.from(element.options).find(opt => opt.value === value);
-//                                 if (option) option.selected = true;
-//                             });
-//                         } else {
-//                             element.value = preferences[name];
-//                         }
-//                     }
-//                 });
-//                 this.updateActiveFiltersDisplay();
-//             } catch (e) {
-//                 console.error('Error loading saved preferences:', e);
-//             }
-//         }
-//     }
-//
-//     showToast(message, type = 'info') {
-//         const toast = document.createElement('div');
-//         toast.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 end-0 m-3`;
-//         toast.style.zIndex = '1060';
-//         toast.innerHTML = `
-//             <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>${message}
-//             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-//         `;
-//         document.body.appendChild(toast);
-//
-//         setTimeout(() => {
-//             if (toast.parentNode) {
-//                 toast.remove();
-//             }
-//         }, 3000);
-//     }
-// }
-//
-// // Initialize global instance
-// window.filterManager = new FilterManager();
-
-
-//=====================================================================================
-
-// static/ap2_tutor/assets/js/filter_options.js
-
 class FilterManager {
     constructor() {
         this.formId = 'fSearch';
@@ -286,6 +19,7 @@ class FilterManager {
             'sort_by': 'Sort By'
         };
         this.choicesInstances = new Map();
+        this.resettingPrice = false;
     }
 
     init() {
@@ -296,7 +30,6 @@ class FilterManager {
     }
 
     initializeSearchButton() {
-        // Fix form submission
         const form = document.getElementById(this.formId);
         if (form) {
             form.addEventListener('submit', (e) => {
@@ -305,7 +38,6 @@ class FilterManager {
             });
         }
 
-        // Also fix search button specifically
         const searchButton = document.querySelector('button[type="submit"]');
         if (searchButton) {
             searchButton.addEventListener('click', (e) => {
@@ -328,7 +60,6 @@ class FilterManager {
 
                     this.choicesInstances.set(select.name, choices);
 
-                    // Add change listener
                     select.addEventListener('change', () => {
                         this.updateActiveFiltersDisplay();
                     });
@@ -342,19 +73,15 @@ class FilterManager {
     }
 
     initializeFilterTracking() {
-        // Track all form elements
         const form = document.getElementById(this.formId);
         if (form) {
-            // Listen for changes on all inputs and selects
             form.addEventListener('change', (e) => {
                 this.updateActiveFiltersDisplay();
             });
 
-            // Also listen for input events on search field
             const searchInput = form.querySelector('input[name="keySearch"]');
             if (searchInput) {
                 searchInput.addEventListener('input', (e) => {
-                    // Update filters display when user types
                     clearTimeout(this.searchTimeout);
                     this.searchTimeout = setTimeout(() => {
                         this.updateActiveFiltersDisplay();
@@ -374,15 +101,44 @@ class FilterManager {
         const filtersContainer = container.querySelector('.d-flex');
         if (!filtersContainer) return;
 
-        // Clear existing filter tags
         filtersContainer.querySelectorAll('.filter-tag').forEach(tag => tag.remove());
 
         let hasActiveFilters = false;
         const processedFields = new Set();
 
-        // Process form data
         for (let [name, value] of formData.entries()) {
             if (value && name !== 'page' && !processedFields.has(name)) {
+
+                // Handle price range - only show if explicitly set by user
+                if (name === 'min_price' || name === 'max_price') {
+                    const minPrice = formData.get('min_price');
+                    const maxPrice = formData.get('max_price');
+
+                    // Only show price filter if both values are explicitly set and different from default range
+                    if (minPrice && maxPrice &&
+                        minPrice.trim() !== '' && maxPrice.trim() !== '' &&
+                        !processedFields.has('price_range')) {
+
+                        const minNum = parseFloat(minPrice);
+                        const maxNum = parseFloat(maxPrice);
+                        const {
+                            minPrice: defaultMin,
+                            maxPrice: defaultMax
+                        } = window.priceSliderManager?.getPriceValues() || {minPrice: 0, maxPrice: 100};
+
+                        // Only show if values are different from default range
+                        if (!isNaN(minNum) && !isNaN(maxNum) &&
+                            (minNum !== defaultMin || maxNum !== defaultMax)) {
+
+                            hasActiveFilters = true;
+                            this.createFilterTag(filtersContainer, 'price_range', `$${minPrice}-$${maxPrice}`);
+                            processedFields.add('price_range');
+                            processedFields.add('min_price');
+                            processedFields.add('max_price');
+                        }
+                    }
+                    continue;
+                }
 
                 // Handle multiple selections for skills and levels
                 if (name === 'skills' || name === 'sSkillLevel') {
@@ -395,22 +151,83 @@ class FilterManager {
                     continue;
                 }
 
-                // Handle price range
+                // Handle single values
+                if (value && value.trim() !== '' && name !== 'search_terms') {
+                    hasActiveFilters = true;
+                    this.createFilterTag(filtersContainer, name, value);
+                    processedFields.add(name);
+                }
+            }
+        }
+
+        container.style.display = hasActiveFilters ? 'block' : 'none';
+    }
+
+    updateActiveFiltersDisplay_ForMultipleChoices() {
+        const form = document.getElementById(this.formId);
+        const container = document.getElementById(this.activeFiltersContainerId);
+
+        if (!form || !container) return;
+
+        const formData = new FormData(form);
+        const filtersContainer = container.querySelector('.d-flex');
+        if (!filtersContainer) return;
+
+        filtersContainer.querySelectorAll('.filter-tag').forEach(tag => tag.remove());
+
+        let hasActiveFilters = false;
+        const processedFields = new Set();
+
+        // Process price range first - check if it's explicitly set
+        const minPrice = formData.get('min_price');
+        const maxPrice = formData.get('max_price');
+
+        // Check if price range is explicitly set by user (not default)
+        if (minPrice && maxPrice &&
+            minPrice.trim() !== '' && maxPrice.trim() !== '' &&
+            !processedFields.has('price_range')) {
+
+            const minNum = parseFloat(minPrice);
+            const maxNum = parseFloat(maxPrice);
+            const {
+                minPrice: defaultMin,
+                maxPrice: defaultMax
+            } = window.priceSliderManager?.getPriceValues() || {minPrice: 0, maxPrice: 100};
+
+            // Only show price filter if values are different from default range
+            if (!isNaN(minNum) && !isNaN(maxNum) &&
+                (minNum !== defaultMin || maxNum !== defaultMax)) {
+
+                hasActiveFilters = true;
+                this.createFilterTag(filtersContainer, 'price_range', `$${minPrice}-$${maxPrice}`);
+                processedFields.add('price_range');
+                processedFields.add('min_price');
+                processedFields.add('max_price');
+            }
+        }
+
+        // Process other form data
+        for (let [name, value] of formData.entries()) {
+            if (value && name !== 'page' && !processedFields.has(name)) {
+
+                // Skip price fields since we already processed them
                 if (name === 'min_price' || name === 'max_price') {
-                    const minPrice = formData.get('min_price');
-                    const maxPrice = formData.get('max_price');
-                    if (minPrice && maxPrice && !processedFields.has('price_range')) {
+                    continue;
+                }
+
+                // Handle multiple selections for skills and levels
+                if (name === 'skills' || name === 'sSkillLevel') {
+                    const allValues = formData.getAll(name);
+                    if (allValues.length > 0) {
                         hasActiveFilters = true;
-                        this.createFilterTag(filtersContainer, 'price_range', `$${minPrice}-$${maxPrice}`);
-                        processedFields.add('price_range');
-                        processedFields.add('min_price');
-                        processedFields.add('max_price');
+                        this.createMultiValueFilterTag(filtersContainer, name, allValues);
                     }
+                    processedFields.add(name);
                     continue;
                 }
 
                 // Handle single values
-                if (value && value.trim() !== '') {
+                if (value && value.trim() !== '' && name !== 'search_terms') {
                     hasActiveFilters = true;
                     this.createFilterTag(filtersContainer, name, value);
                     processedFields.add(name);
@@ -428,46 +245,61 @@ class FilterManager {
         if (!form || !container) return;
 
         const formData = new FormData(form);
+
         const filtersContainer = container.querySelector('.d-flex');
         if (!filtersContainer) return;
 
-        // Clear existing filter tags
         filtersContainer.querySelectorAll('.filter-tag').forEach(tag => tag.remove());
 
         let hasActiveFilters = false;
         const processedFields = new Set();
 
-        // Process form data
+        // Process price range first - check if it's explicitly set
+        const minPrice = formData.get('min_price');
+        const maxPrice = formData.get('max_price');
+
+        // Check if price range is explicitly set by user (not default)
+        if (minPrice && maxPrice &&
+            minPrice.trim() !== '' && maxPrice.trim() !== '' &&
+            !processedFields.has('price_range')) {
+
+            const minNum = parseFloat(minPrice);
+            const maxNum = parseFloat(maxPrice);
+            const { minPrice: defaultMin, maxPrice: defaultMax } = window.priceSliderManager?.getPriceValues() || { minPrice: 0, maxPrice: 100 };
+
+            // Only show price filter if values are different from default range
+            if (!isNaN(minNum) && !isNaN(maxNum) &&
+                (minNum !== defaultMin || maxNum !== defaultMax)) {
+
+                hasActiveFilters = true;
+                this.createFilterTag(filtersContainer, 'price_range', `$${minPrice}-$${maxPrice}`);
+                processedFields.add('price_range');
+                processedFields.add('min_price');
+                processedFields.add('max_price');
+            }
+        }
+
+        // Process other form data
         for (let [name, value] of formData.entries()) {
             if (value && name !== 'page' && !processedFields.has(name)) {
 
-                // Handle multiple selections for skills and levels
+                // Skip price fields since we already processed them
+                if (name === 'min_price' || name === 'max_price') {
+                    continue;
+                }
+
+                // Handle single selections for skills and levels (CHANGED FROM MULTIPLE)
                 if (name === 'skills' || name === 'sSkillLevel') {
-                    const allValues = formData.getAll(name);
-                    if (allValues.length > 0) {
+                    // For single selection, just check if value exists
+                    if (value && value.trim() !== '') {
                         hasActiveFilters = true;
-                        this.createMultiValueFilterTag(filtersContainer, name, allValues);
+                        this.createFilterTag(filtersContainer, name, value); // Use createFilterTag instead of createMultiValueFilterTag
                     }
                     processedFields.add(name);
                     continue;
                 }
 
-                // Handle price range - FIXED: Check if values are not empty
-                if (name === 'min_price' || name === 'max_price') {
-                    const minPrice = formData.get('min_price');
-                    const maxPrice = formData.get('max_price');
-                    // Check if both values exist and are not empty strings
-                    if (minPrice && maxPrice && minPrice.trim() !== '' && maxPrice.trim() !== '' && !processedFields.has('price_range')) {
-                        hasActiveFilters = true;
-                        this.createFilterTag(filtersContainer, 'price_range', `$${minPrice}-$${maxPrice}`);
-                        processedFields.add('price_range');
-                        processedFields.add('min_price');
-                        processedFields.add('max_price');
-                    }
-                    continue;
-                }
-
-                // Handle single values - exclude empty search terms
+                // Handle other single values
                 if (value && value.trim() !== '' && name !== 'search_terms') {
                     hasActiveFilters = true;
                     this.createFilterTag(filtersContainer, name, value);
@@ -484,7 +316,8 @@ class FilterManager {
         filterTag.className = 'filter-tag';
 
         let displayName = this.filterLabels[name] || name;
-        let displayValue = values.map(v => v.toUpperCase()).join(', ');
+        // let displayValue = values.map(v => v.toUpperCase()).join(', ');
+        let displayValue = values.map(v => v.charAt(0).toUpperCase() + v.slice(1)).join(', ');
 
         filterTag.innerHTML = `
             ${displayName}: ${displayValue}
@@ -498,9 +331,10 @@ class FilterManager {
         filterTag.className = 'filter-tag';
 
         let displayName = this.filterLabels[name] || name;
-        let displayValue = value;
+        // let displayValue = value;
+        let displayValue = value.charAt(0).toUpperCase() + value.slice(1);
 
-        // Format display values
+
         if (name === 'sRate') {
             displayValue = `${value}+ Stars`;
         } else if (name === 'meeting_method') {
@@ -533,37 +367,81 @@ class FilterManager {
         container.appendChild(filterTag);
     }
 
-    removeFilter(name) {
+    removeFilter_ForMultipleChoices(name) {
         console.log('Removing filter:', name);
 
         if (name === 'min_price' || name === 'max_price' || name === 'price_range') {
-            // Clear price inputs
             const minInput = document.querySelector('input[name="min_price"]');
             const maxInput = document.querySelector('input[name="max_price"]');
             if (minInput) minInput.value = '';
             if (maxInput) maxInput.value = '';
 
-            // Reset slider
             if (window.priceSliderManager && typeof window.priceSliderManager.resetPriceRange === 'function') {
-                window.priceSliderManager.resetPriceRange();
+                if (!this.resettingPrice) {
+                    this.resettingPrice = true;
+                    window.priceSliderManager.resetPriceRange();
+                    this.resettingPrice = false;
+                }
             }
         } else if (name === 'skills' || name === 'sSkillLevel') {
-            // Clear multi-select fields
             const choicesInstance = this.choicesInstances.get(name);
             if (choicesInstance) {
                 choicesInstance.removeActiveItems();
             } else {
-                // Fallback: clear select manually
                 const select = document.querySelector(`select[name="${name}"]`);
                 if (select) {
                     Array.from(select.selectedOptions).forEach(option => {
                         option.selected = false;
                     });
-                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    select.dispatchEvent(new Event('change', {bubbles: true}));
                 }
             }
         } else {
-            // Clear single select/input
+            const element = document.querySelector(`[name="${name}"]`);
+            if (element) {
+                element.value = '';
+                element.dispatchEvent(new Event('change', {bubbles: true}));
+            }
+        }
+
+        this.updateActiveFiltersDisplay();
+        setTimeout(() => {
+            this.submitForm();
+        }, 100);
+    }
+
+    removeFilter(name) {
+        console.log('Removing filter:', name);
+
+        if (name === 'min_price' || name === 'max_price' || name === 'price_range') {
+            const minInput = document.querySelector('input[name="min_price"]');
+            const maxInput = document.querySelector('input[name="max_price"]');
+            if (minInput) minInput.value = '';
+            if (maxInput) maxInput.value = '';
+
+            if (window.priceSliderManager && typeof window.priceSliderManager.resetPriceRange === 'function') {
+                if (!this.resettingPrice) {
+                    this.resettingPrice = true;
+                    window.priceSliderManager.resetPriceRange();
+                    this.resettingPrice = false;
+                }
+            }
+        }
+        // else if (name === 'skills' || name === 'sSkillLevel') {
+        //     const choicesInstance = this.choicesInstances.get(name);
+        //     if (choicesInstance) {
+        //         choicesInstance.removeActiveItems();
+        //         // For single selection, also clear the selected value
+        //         choicesInstance.setChoiceByValue('');
+        //     } else {
+        //         const select = document.querySelector(`select[name="${name}"]`);
+        //         if (select) {
+        //             select.value = ''; // Simply set to empty for single selection
+        //             select.dispatchEvent(new Event('change', { bubbles: true }));
+        //         }
+        //     }
+        // }
+        else {
             const element = document.querySelector(`[name="${name}"]`);
             if (element) {
                 element.value = '';
@@ -577,58 +455,20 @@ class FilterManager {
         }, 100);
     }
 
-    clearAllFilters1() {
+    clearAllFilters_ForMultipleChoices() {
         const form = document.getElementById(this.formId);
         if (!form) return;
 
-        // Reset all single selects and inputs
-        form.querySelectorAll('select:not(.js-choice), input[type="text"], input[type="number"], input[type="search"]').forEach(element => {
+        form.querySelectorAll('.js-choice, input[type="text"], input[type="number"], input[type="search"]').forEach(element => {
             if (element.name && element.name !== 'page') {
                 element.value = '';
+                element.dispatchEvent(new Event('change', {bubbles: true}));
             }
         });
 
-        // Reset multi-select fields using Choices.js
-        this.choicesInstances.forEach((choicesInstance, name) => {
-            choicesInstance.removeActiveItems();
-        });
-
-        // Reset price inputs
-        const minPriceElement = document.querySelector('input[name="min_price"]');
-        const maxPriceElement = document.querySelector('input[name="max_price"]');
-        if (minPriceElement) minPriceElement.value = '';
-        if (maxPriceElement) maxPriceElement.value = '';
-
-        // Reset slider
-        if (window.priceSliderManager && typeof window.priceSliderManager.resetPriceRange === 'function') {
-            window.priceSliderManager.resetPriceRange();
-        }
-
-        this.updateActiveFiltersDisplay();
-
-        setTimeout(() => {
-            this.submitForm();
-        }, 100);
-    }
-
-    clearAllFilters() {
-        const form = document.getElementById(this.formId);
-        if (!form) return;
-
-        // Reset all single selects and inputs
-        form.querySelectorAll('select:not(.js-choice), input[type="text"], input[type="number"], input[type="search"]').forEach(element => {
-            if (element.name && element.name !== 'page') {
-                element.value = '';
-                // Trigger change event to update form state
-                element.dispatchEvent(new Event('change', { bubbles: true }));
-            }
-        });
-
-        // Reset multi-select fields using Choices.js
         this.choicesInstances.forEach((choicesInstance, name) => {
             try {
                 choicesInstance.removeActiveItems();
-                // Also clear the underlying select element
                 const select = document.querySelector(`select[name="${name}"]`);
                 if (select) {
                     Array.from(select.selectedOptions).forEach(option => {
@@ -640,7 +480,6 @@ class FilterManager {
             }
         });
 
-        // Reset price inputs - IMPORTANT: Clear both hidden and visible inputs
         const minPriceInput = document.querySelector('input[name="min_price"]');
         const maxPriceInput = document.querySelector('input[name="max_price"]');
         const minPriceEdit = document.getElementById('minPriceEdit');
@@ -651,38 +490,79 @@ class FilterManager {
         if (minPriceEdit) minPriceEdit.value = '';
         if (maxPriceEdit) maxPriceEdit.value = '';
 
-        // Reset slider to default values
         if (window.priceSliderManager && typeof window.priceSliderManager.resetPriceRange === 'function') {
             window.priceSliderManager.resetPriceRange();
         } else {
-            // Fallback: manually reset the slider display
             const priceRangeDropdown = document.getElementById('priceRangeDropdown');
             if (priceRangeDropdown) {
                 priceRangeDropdown.textContent = 'Price Range';
             }
         }
 
-        // Force update the active filters display
         this.updateActiveFiltersDisplay();
+        this.submitForm();
 
-        // Submit form after a short delay to ensure everything is cleared
         setTimeout(() => {
             this.submitForm();
         }, 150);
     }
 
+    clearAllFilters() {
+        const form = document.getElementById(this.formId);
+        if (!form) return;
+
+        // Clear all inputs and selects
+        form.querySelectorAll('.js-choice, input[type="text"], input[type="number"], input[type="search"], select').forEach(element => {
+            if (element.name && element.name !== 'page') {
+                element.value = '';
+                element.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+
+        // Reset Choices.js instances for single selects
+        this.choicesInstances.forEach((choicesInstance, name) => {
+            try {
+                choicesInstance.removeActiveItems();
+                // For single selection, set to empty value
+                choicesInstance.setChoiceByValue('');
+            } catch (error) {
+                console.error('Error clearing choices instance:', name, error);
+            }
+        });
+
+        // Clear price inputs
+        const minPriceInput = document.querySelector('input[name="min_price"]');
+        const maxPriceInput = document.querySelector('input[name="max_price"]');
+        const minPriceEdit = document.getElementById('minPriceEdit');
+        const maxPriceEdit = document.getElementById('maxPriceEdit');
+
+        if (minPriceInput) minPriceInput.value = '';
+        if (maxPriceInput) maxPriceInput.value = '';
+        if (minPriceEdit) minPriceEdit.value = '';
+        if (maxPriceEdit) maxPriceEdit.value = '';
+
+        // Reset slider
+        if (window.priceSliderManager && typeof window.priceSliderManager.resetPriceRange === 'function') {
+            window.priceSliderManager.resetPriceRange();
+        } else {
+            const priceRangeDropdown = document.getElementById('priceRangeDropdown');
+            if (priceRangeDropdown) {
+                priceRangeDropdown.textContent = 'Price Range';
+            }
+        }
+
+        this.updateActiveFiltersDisplay();
+        this.submitForm();
+    }
 
     submitForm() {
-        // Reset to page 1 when filters change
         const pageInput = document.querySelector('input[name="page"]');
         if (pageInput) {
             pageInput.value = '1';
         }
 
-        // Submit the form
         const form = document.getElementById(this.formId);
         if (form) {
-            console.log('Submitting form...');
             form.submit();
         }
     }
@@ -746,7 +626,6 @@ class FilterManager {
     }
 }
 
-// Price Slider Manager
 class PriceSliderManager {
     constructor() {
         this.sliderInitialized = false;
@@ -758,35 +637,53 @@ class PriceSliderManager {
 
     getPriceValues() {
         try {
+            const minPriceElem = document.getElementById('minPrice');
+            const maxPriceElem = document.getElementById('maxPrice');
+            const currentMinElem = document.getElementById('currentMin');
+            const currentMaxElem = document.getElementById('currentMax');
+
+            const minPrice = minPriceElem && minPriceElem.value ? parseFloat(minPriceElem.value) : 0;
+            const maxPrice = maxPriceElem && maxPriceElem.value ? parseFloat(maxPriceElem.value) : 100;
+
+            let currentMin = minPrice;
+            let currentMax = maxPrice;
+
+            if (currentMinElem && currentMinElem.value !== '') {
+                currentMin = parseFloat(currentMinElem.value);
+            }
+            if (currentMaxElem && currentMaxElem.value !== '') {
+                currentMax = parseFloat(currentMaxElem.value);
+            }
+
             return {
-                minPrice: parseInt(document.getElementById('minPrice').value) || 0,
-                maxPrice: parseInt(document.getElementById('maxPrice').value) || 100,
-                currentMin: parseInt(document.getElementById('currentMin').value) || 0,
-                currentMax: parseInt(document.getElementById('currentMax').value) || 100
+                minPrice,
+                maxPrice,
+                currentMin,
+                currentMax
             };
         } catch (e) {
-            return { minPrice: 0, maxPrice: 100, currentMin: 0, currentMax: 100 };
+            return {minPrice: 0, maxPrice: 100, currentMin: 0, currentMax: 100};
         }
     }
 
-    initializePriceSlider() {
-        const { minPrice, maxPrice, currentMin, currentMax } = this.getPriceValues();
+    initializePriceSlider1() {
+        const {minPrice, maxPrice, currentMin, currentMax} = this.getPriceValues();
         const priceSlider = document.getElementById('priceSlider');
 
         if (!priceSlider || typeof noUiSlider === 'undefined') {
-            console.log('Price slider or noUiSlider not available yet');
             return;
         }
 
         try {
-            // Destroy existing slider if any
             if (priceSlider.noUiSlider) {
                 priceSlider.noUiSlider.destroy();
             }
 
-            // Initialize noUiSlider
+            const startMin = isNaN(currentMin) ? minPrice : currentMin;
+            const startMax = isNaN(currentMax) ? maxPrice : currentMax;
+
             noUiSlider.create(priceSlider, {
-                start: [currentMin, currentMax],
+                start: [startMin, startMax],
                 connect: true,
                 range: {
                     'min': minPrice,
@@ -802,7 +699,6 @@ class PriceSliderManager {
             const minPriceInput = document.getElementById('minPriceInput');
             const maxPriceInput = document.getElementById('maxPriceInput');
 
-            // Update inputs when slider changes
             priceSlider.noUiSlider.on('update', (values) => {
                 const minVal = Math.round(values[0]);
                 const maxVal = Math.round(values[1]);
@@ -813,7 +709,6 @@ class PriceSliderManager {
                 if (maxPriceInput) maxPriceInput.value = maxVal;
             });
 
-            // Update slider when inputs change
             if (minPriceEdit) {
                 minPriceEdit.addEventListener('change', () => {
                     this.handlePriceInputChange('min');
@@ -827,10 +722,101 @@ class PriceSliderManager {
             }
 
             this.sliderInitialized = true;
-            console.log('Price slider initialized successfully');
         } catch (error) {
             console.error('Error initializing price slider:', error);
         }
+    }
+
+    initializePriceSlider() {
+        const {minPrice, maxPrice, currentMin, currentMax} = this.getPriceValues();
+        const priceSlider = document.getElementById('priceSlider');
+
+        if (!priceSlider || typeof noUiSlider === 'undefined') {
+            return;
+        }
+
+        try {
+            if (priceSlider.noUiSlider) {
+                priceSlider.noUiSlider.destroy();
+            }
+
+            const startMin = isNaN(currentMin) ? minPrice : currentMin;
+            const startMax = isNaN(currentMax) ? maxPrice : currentMax;
+
+            noUiSlider.create(priceSlider, {
+                start: [startMin, startMax],
+                connect: true,
+                range: {
+                    'min': minPrice,
+                    'max': maxPrice
+                },
+                step: 1, // Change this to 0.5 for decimal steps
+                behaviour: 'drag-tap',
+                tooltips: false,
+                format: {
+                    to: function (value) {
+                        return value % 1 === 0 ? value.toFixed(0) : value.toFixed(1); // Keep decimal if needed
+                    },
+                    from: function (value) {
+                        return parseFloat(value);
+                    }
+                }
+            });
+
+            const minPriceEdit = document.getElementById('minPriceEdit');
+            const maxPriceEdit = document.getElementById('maxPriceEdit');
+            const minPriceInput = document.getElementById('minPriceInput');
+            const maxPriceInput = document.getElementById('maxPriceInput');
+
+            // FIX: Remove rounding to keep decimal values
+            priceSlider.noUiSlider.on('update', (values) => {
+                const minVal = parseFloat(values[0]); // Remove Math.round
+                const maxVal = parseFloat(values[1]); // Remove Math.round
+
+                if (minPriceEdit) minPriceEdit.value = minVal;
+                if (maxPriceEdit) maxPriceEdit.value = maxVal;
+                if (minPriceInput) minPriceInput.value = minVal;
+                if (maxPriceInput) maxPriceInput.value = maxVal;
+            });
+
+            // ... rest of the code
+
+            if (minPriceEdit) {
+                minPriceEdit.addEventListener('change', () => {
+                    this.handlePriceInputChange('min');
+                });
+            }
+
+            if (maxPriceEdit) {
+                maxPriceEdit.addEventListener('change', () => {
+                    this.handlePriceInputChange('max');
+                });
+            }
+
+            this.sliderInitialized = true;
+        } catch (error) {
+            console.error('Error initializing price slider:', error);
+        }
+    }
+
+    handlePriceInputChange1(type) {
+        const {minPrice, maxPrice} = this.getPriceValues();
+        const priceSlider = document.getElementById('priceSlider');
+        const minPriceEdit = document.getElementById('minPriceEdit');
+        const maxPriceEdit = document.getElementById('maxPriceEdit');
+
+        if (!priceSlider || !minPriceEdit || !maxPriceEdit) return;
+
+        let minVal = parseInt(minPriceEdit.value) || minPrice;
+        let maxVal = parseInt(maxPriceEdit.value) || maxPrice;
+
+        minVal = Math.max(minPrice, Math.min(maxPrice, minVal));
+        maxVal = Math.max(minVal, Math.min(maxPrice, maxVal));
+
+        minPriceEdit.value = minVal;
+        maxPriceEdit.value = maxVal;
+
+        priceSlider.noUiSlider.set([minVal, maxVal]);
     }
 
     handlePriceInputChange(type) {
@@ -841,8 +827,8 @@ class PriceSliderManager {
 
         if (!priceSlider || !minPriceEdit || !maxPriceEdit) return;
 
-        let minVal = parseInt(minPriceEdit.value) || minPrice;
-        let maxVal = parseInt(maxPriceEdit.value) || maxPrice;
+        let minVal = parseFloat(minPriceEdit.value) || minPrice; // Use parseFloat instead of parseInt
+        let maxVal = parseFloat(maxPriceEdit.value) || maxPrice; // Use parseFloat instead of parseInt
 
         // Validate and constrain values
         minVal = Math.max(minPrice, Math.min(maxPrice, minVal));
@@ -854,8 +840,8 @@ class PriceSliderManager {
         priceSlider.noUiSlider.set([minVal, maxVal]);
     }
 
-    applyPriceRange() {
-        const { minPrice, maxPrice } = this.getPriceValues();
+    applyPriceRange1() {
+        const {minPrice, maxPrice} = this.getPriceValues();
         const minPriceEdit = document.getElementById('minPriceEdit');
         const maxPriceEdit = document.getElementById('maxPriceEdit');
         const priceRangeDropdown = document.getElementById('priceRangeDropdown');
@@ -865,14 +851,12 @@ class PriceSliderManager {
         const minVal = minPriceEdit.value;
         const maxVal = maxPriceEdit.value;
 
-        // Update dropdown button text
         if (minVal == minPrice && maxVal == maxPrice) {
             priceRangeDropdown.textContent = 'Price Range';
         } else {
             priceRangeDropdown.textContent = `Price: $${minVal} - $${maxVal}`;
         }
 
-        // Close dropdown
         const dropdownElement = priceRangeDropdown.closest('.dropdown');
         if (dropdownElement) {
             const dropdown = bootstrap.Dropdown.getInstance(dropdownElement.querySelector('.dropdown-toggle'));
@@ -881,14 +865,46 @@ class PriceSliderManager {
             }
         }
 
-        // Submit form
+        if (window.filterManager) {
+            window.filterManager.submitForm();
+        }
+    }
+
+    applyPriceRange() {
+        const { minPrice, maxPrice } = this.getPriceValues();
+        const minPriceEdit = document.getElementById('minPriceEdit');
+        const maxPriceEdit = document.getElementById('maxPriceEdit');
+        const priceRangeDropdown = document.getElementById('priceRangeDropdown');
+
+        if (!minPriceEdit || !maxPriceEdit || !priceRangeDropdown) return;
+
+        const minVal = parseFloat(minPriceEdit.value);
+        const maxVal = parseFloat(maxPriceEdit.value);
+
+        // Update dropdown button text with proper formatting
+        if (minVal === minPrice && maxVal === maxPrice) {
+            priceRangeDropdown.textContent = 'Price Range';
+        } else {
+            // Format to show decimals only if needed
+            const formatPrice = (price) => price % 1 === 0 ? price.toFixed(0) : price.toFixed(1);
+            priceRangeDropdown.textContent = `Price: $${formatPrice(minVal)} - $${formatPrice(maxVal)}`;
+        }
+
+        const dropdownElement = priceRangeDropdown.closest('.dropdown');
+        if (dropdownElement) {
+            const dropdown = bootstrap.Dropdown.getInstance(dropdownElement.querySelector('.dropdown-toggle'));
+            if (dropdown) {
+                dropdown.hide();
+            }
+        }
+
         if (window.filterManager) {
             window.filterManager.submitForm();
         }
     }
 
     resetPriceRange() {
-        const { minPrice, maxPrice } = this.getPriceValues();
+        const {minPrice, maxPrice} = this.getPriceValues();
         const priceSlider = document.getElementById('priceSlider');
         const minPriceEdit = document.getElementById('minPriceEdit');
         const maxPriceEdit = document.getElementById('maxPriceEdit');
@@ -905,7 +921,6 @@ class PriceSliderManager {
             priceRangeDropdown.textContent = 'Price Range';
         }
 
-        // Close dropdown
         const dropdownElement = priceRangeDropdown?.closest('.dropdown');
         if (dropdownElement) {
             const dropdown = bootstrap.Dropdown.getInstance(dropdownElement.querySelector('.dropdown-toggle'));
@@ -914,33 +929,31 @@ class PriceSliderManager {
             }
         }
 
-        // Remove price filters and submit
+        const minPriceInput = document.querySelector('input[name="min_price"]');
+        const maxPriceInput = document.querySelector('input[name="max_price"]');
+
+        if (minPriceInput) minPriceInput.value = '';
+        if (maxPriceInput) maxPriceInput.value = '';
+
         if (window.filterManager) {
-            window.filterManager.removeFilter('min_price');
+            window.filterManager.updateActiveFiltersDisplay();
         }
     }
 }
 
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Filter Manager
+document.addEventListener('DOMContentLoaded', function () {
     window.filterManager = new FilterManager();
     window.filterManager.init();
 
-    // Initialize Price Slider Manager
     window.priceSliderManager = new PriceSliderManager();
 
-    // Wait a bit for noUiSlider to load, then initialize
     setTimeout(() => {
         window.priceSliderManager.init();
     }, 100);
-
-    console.log('Filter managers initialized');
 });
 
-// Fallback initialization for turbolinks or similar
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         if (!window.filterManager) {
             window.filterManager = new FilterManager();
             window.filterManager.init();
@@ -953,7 +966,6 @@ if (document.readyState === 'loading') {
         }
     });
 } else {
-    // DOM already loaded
     if (!window.filterManager) {
         window.filterManager = new FilterManager();
         window.filterManager.init();
@@ -966,5 +978,5 @@ if (document.readyState === 'loading') {
     }
 }
 
-
-//###############################################
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+// static/ap2_tutor/assets/js/filter_options.js

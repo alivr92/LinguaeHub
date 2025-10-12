@@ -70,9 +70,13 @@
                 <!-- Hidden inputs for JavaScript -->
                 <input type="hidden" id="minPrice" value="{{ min_price }}">
                 <input type="hidden" id="maxPrice" value="{{ max_price }}">
-                <input type="hidden" id="currentMin" value="{{ request.GET.min_price|default:min_price }}">
-                <input type="hidden" id="currentMax" value="{{ request.GET.max_price|default:max_price }}">
-
+                <input type="hidden" id="currentMin" value="{{ request.GET.min_price|default:'' }}">
+                <input type="hidden" id="currentMax" value="{{ request.GET.max_price|default:'' }}">
+                <!-- Make sure these hidden inputs use the context values for the slider range: -->
+{#                <input type="hidden" id="minPrice" value="{{ min_price }}">#}
+{#                <input type="hidden" id="maxPrice" value="{{ max_price }}">#}
+{#                <input type="hidden" id="currentMin" value="{{ request.GET.min_price|default:min_price }}">#}
+{#                <input type="hidden" id="currentMax" value="{{ request.GET.max_price|default:max_price }}">#}
 {#                {% include 'ap2_tutor/filters1.html' %}#}
                 {% include 'ap2_tutor/tutor_list/filter_options.html' %}
 

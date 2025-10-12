@@ -60,7 +60,8 @@
                     <div class="col-12 col-sm-12 col-md-3 col-lg-2 mb-1">
                         <!-- Sort by Status -->
                         <select name="status" class="form-select js-choice border-0 z-index-9 bg-transparent"
-                                aria-label=".form-select-sm">
+                                aria-label=".form-select-sm"
+                        data-search-enabled="false">
                             <option value="">Status</option>
                             <option value="all">All Statuses</option>
                             {% for value, label in status_choices %}
@@ -74,7 +75,8 @@
                     <!-- Ordering option -->
                     <div class="col-12 col-sm-12 col-md-3 col-lg-2 mb-1">
                         <select name="order" class="form-select js-choice border-0 z-index-9 bg-transparent"
-                                aria-label=".form-select-sm">
+                                aria-label=".form-select-sm"
+                                data-search-enabled="false">
                             <option value="">Order by</option>
                             <option value="newest" {% if current_order == value %}selected{% endif %}>Newest
                             </option>
