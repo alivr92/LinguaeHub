@@ -453,6 +453,7 @@ class SignUpTutor(RegistrationMixin, CreateView):
 
     def form_invalid(self, form):
         logger.error(f"Tutor signup form errors: {form.errors.as_json()}")
+        messages.error(self.request, f"Registration failed. due to: {form.errors.as_p()}")
         return super().form_invalid(form)
 
 
