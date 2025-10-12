@@ -47,12 +47,6 @@
     background: rgb(255, 1, 86);
 }
 
-/*.form-select:focus, .form-control:focus {*/
-/*    border-color: #3b82f6;*/
-/*    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);*/
-/*}*/
-
-
 /*    FOR LAST FILTER DESIGN    */
 
 /* Custom styles for better visual hierarchy */
@@ -61,14 +55,8 @@
     border: 1px solid #dee2e6 !important;
 }
 
-/*.border-primary {*/
-/*    border-color: #0d6efd !important;*/
-/*}*/
 
 /* Ensure consistent heights */
-.form-select, .btn, .input-group {
-    min-height: 40px;
-}
 
 /* Better spacing for mobile */
 @media (max-width: 768px) {
@@ -76,6 +64,3 @@
         margin-bottom: 1rem;
     }
 }
-
-
-/* *************** for search panel sort panel and buttons *************** */
