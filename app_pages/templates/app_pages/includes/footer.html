@@ -19,8 +19,9 @@ Footer START -->
                                 <img class="dark-mode-item protected-image" src="{{ CFImage.site_logo_dark.url }}" alt="logo"
                                      style="height: 2.5rem;">
                             </a>
-                            <h2 class="mb-0 fw-bold text-uppercase text-justify"
-                                style="font-size: 1.75rem;">{{ CFChar.site_name }}</h2>
+                            <a class="me-3" href="{% url 'app_pages:home' %}">
+                            <h2 class="mb-0 fw-bold text-uppercase text-justify" style="font-size: 1.75rem;">{{ CFChar.site_name }}</h2>
+                            </a>
                         </div>
                         <div></div> <!-- Empty flex item for spacing -->
                     </div>
