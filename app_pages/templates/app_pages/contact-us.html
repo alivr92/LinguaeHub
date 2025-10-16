@@ -2,6 +2,21 @@
 {% load static %}
 {% load CF_filters %}
 {% block head_title %}Contact Us{% endblock %}
+{% block og_meta_tags %}
+    <!-- Essential Open Graph Tags for Lingocept -->
+    <meta property="og:title" content="{{ CFChar.site_name }} - {{ CFText.og_site_title }}" />
+    <meta property="og:description" content="{{ CFChar.site_name }} {{ CFText.og_site_description }}" />
+    <meta property="og:image" content="https://{{ request.get_host }}{% static 'assets/images/element/contact.svg' %}?v={% now 'U' %}" />
+    <meta property="og:url" content="{{ CFURL.site_address }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ CFChar.site_name }}" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ CFChar.site_name }} - {{ CFText.og_site_title }}">
+    <meta name="twitter:description" content="{{ CFChar.site_name }} {{ CFText.og_site_description }}">
+    <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'assets/images/element/contact.svg' %}?v={% now 'U' %}" />
+{% endblock %}
 {% block head_style_plugins %}
     <!-- Plugins CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
