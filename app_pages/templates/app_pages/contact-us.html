@@ -41,11 +41,11 @@
                                 {#                        <a href="#" class="text-white"><i class="fas fa-fw fa-map-marker-alt me-2 mt-1"></i>{{ CFChar.address1 }}</a>#}
                                 {#                    </li>#}
                                 <li class="list-item mb-3">
-                                    <a href="#" class="text-dark"><i
+                                    <a href="tel:{{ CFChar.phone }}" class="text-dark"><i
                                             class="fas fa-fw fa-phone-alt me-2"></i>{{ CFChar.phone }}</a>
                                 </li>
                                 <li class="list-item mb-0">
-                                    <a href="#" class="text-dark"><i
+                                    <a href="mailto:{{ CFEmail.support }}" class="text-dark"><i
                                             class="far fa-fw fa-envelope me-2"></i>{{ CFEmail.support }}</a>
                                 </li>
                             </ul>
@@ -61,10 +61,10 @@
                                 {#                        <a href="#"><i class="fas fa-fw fa-map-marker-alt me-2 mt-1"></i>{{ CFChar.address2 }}</a>#}
                                 {#                    </li>#}
                                 <li class="list-item mb-3 h6 fw-light">
-                                    <a href="#"><i class="fas fa-fw fa-phone-alt me-2"></i>{{ CFChar.mobile }}</a>
+                                    <a href="tel:{{ CFChar.mobile }}"><i class="fas fa-fw fa-phone-alt me-2"></i>{{ CFChar.mobile }}</a>
                                 </li>
                                 <li class="list-item mb-0 h6 fw-light">
-                                    <a href="#"><i class="far fa-fw fa-envelope me-2"></i>{{ CFEmail.info }}</a>
+                                    <a href="mailto:{{ CFEmail.info }}"><i class="far fa-fw fa-envelope me-2"></i>{{ CFEmail.info }}</a>
                                 </li>
                             </ul>
                         </div>
