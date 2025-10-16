@@ -1,0 +1,128 @@
+<!-- templates/wallet/deposit.html -->
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+
+{% block head_style_plugins %}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+    <div class="col-xl-9">
+        <div class="card border rounded-3">
+            <div class="card-header border-bottom">
+                <h3 class="mb-0">Add Funds to Wallet</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h5>Deposit Amount</h5>
+                        <form id="deposit-form">
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <label class="form-label">Amount (USD)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" name="amount"
+                                           min="1" step="0.01" placeholder="Enter amount" required>
+                                </div>
+                                <div class="form-text">Minimum deposit: $1.00</div>
+                            </div>
+
+                            <!-- Quick Amount Buttons -->
+                            <div class="mb-4">
+                                <label class="form-label">Quick Select</label>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="10">$10</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="25">$25</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="50">$50</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="100">$100</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="500">$500</button>
+                                </div>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <h6><i class="bi bi-info-circle-fill me-2"></i>Secure Payment</h6>
+                                <p class="mb-0">Your payment is processed securely by Stripe. We never store your card details.</p>
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg w-100" id="deposit-button">
+                                <i class="bi bi-credit-card me-2"></i>Proceed to Payment
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded-3 p-4">
+                            <h6>Wallet Summary</h6>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Current Balance:</span>
+                                <strong>${{ wallet.balance|floatformat:2 }}</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Pending Deposits:</span>
+                                <strong>$0.00</strong>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <span>Available Balance:</span>
+                                <strong>${{ wallet.balance|floatformat:2 }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripe = Stripe('{{ STRIPE_PUBLISHABLE_KEY }}');
+
+        // Quick amount buttons
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelector('input[name="amount"]').value = this.dataset.amount;
+            });
+        });
+
+        // Deposit form submission
+        document.getElementById('deposit-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('deposit-button');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>Processing...`;
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(e.target);
+                const response = await fetch('{% url "payment3:wallet_deposit" %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.sessionId) {
+                    const result = await stripe.redirectToCheckout({ sessionId: data.sessionId });
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                } else {
+                    alert(data.error || 'Something went wrong');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+{% endblock %}

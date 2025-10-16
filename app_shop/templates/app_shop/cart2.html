@@ -1,0 +1,108 @@
+{% extends 'app_pages/base.html' %}
+{% load static %}
+
+{% block head_title %}Shopping Cart{% endblock %}
+
+{% block body_content %}
+    <main>
+        <section class="py-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="m-0">Shopping Cart</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-body shadow p-4">
+                            {% if cart.items.all %}
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Book</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for item in cart.items.all %}
+                                            <tr>
+                                                <td>{{ item.book.title }}</td>
+                                                <td>${{ item.book.price }}</td>
+                                                <td>{{ item.quantity }}</td>
+                                                <td>${{ item.total_price }}</td>
+                                                <td>
+                                                    <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-sm btn-danger">Remove</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mt-4">
+                                    <h4>Total: ${{ total }}</h4>
+                                    <button id="checkout-button" class="btn btn-primary btn-lg">Proceed to Checkout</button>
+                                </div>
+                            {% else %}
+                                <p>Your cart is empty.</p>
+                                <a href="{% url 'book_list' %}" class="btn btn-primary">Continue Shopping</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('{{ stripe_public_key }}');
+        var checkoutButton = document.getElementById('checkout-button');
+
+        checkoutButton.addEventListener('click', function() {
+            checkoutButton.innerHTML = `Processing <i class='fas fa-spinner fa-spin ms-2'></i>`;
+            checkoutButton.disabled = true;
+
+            fetch("{% url 'create_checkout_session' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(session) {
+                    if (session.error) {
+                        alert(session.error);
+                        checkoutButton.innerHTML = 'Proceed to Checkout';
+                        checkoutButton.disabled = false;
+                    } else {
+                        return stripe.redirectToCheckout({ sessionId: session.sessionId });
+                    }
+                })
+                .then(function(result) {
+                    if (result && result.error) {
+                        alert(result.error.message);
+                        checkoutButton.innerHTML = 'Proceed to Checkout';
+                        checkoutButton.disabled = false;
+                    }
+                })
+                .catch(function(error) {
+                    console.log('Error:', error);
+                    checkoutButton.innerHTML = 'Proceed to Checkout';
+                    checkoutButton.disabled = false;
+                });
+        });
+    </script>
+{% endblock %}

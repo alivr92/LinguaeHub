@@ -1,0 +1,281 @@
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+    <!-- Main content START -->
+    <div class="col-xl-9">
+
+        <!-- Page header START -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="h3 mb-0">Withdraw Funds</h1>
+                <p class="text-muted mb-0">Transfer money from your wallet to your bank account</p>
+            </div>
+        </div>
+        <!-- Page header END -->
+
+        <div class="row g-4">
+            <!-- Withdrawal Form START -->
+            <div class="col-lg-8">
+                <div class="card border rounded-3">
+                    <div class="card-header border-bottom">
+                        <h5 class="mb-0">Withdrawal Request</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="withdrawal-form" method="POST">
+                            {% csrf_token %}
+
+                            <!-- Amount -->
+                            <div class="mb-4">
+                                <label class="form-label">Amount to Withdraw (USD)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" name="amount"
+                                           min="1" step="0.01" placeholder="Enter amount" required
+                                           id="withdrawal-amount">
+                                </div>
+                                <div class="form-text">
+                                    Available balance: <strong>${{ wallet.balance|floatformat:2|intcomma }}</strong>
+                                    • Minimum withdrawal: $10.00
+                                </div>
+                            </div>
+
+                            <!-- Quick Amount Buttons -->
+                            <div class="mb-4">
+                                <label class="form-label">Quick Select</label>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="50">$50</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="100">$100</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="250">$250</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="500">$500</button>
+                                    <button type="button" class="btn btn-outline-primary amount-btn" data-amount="{{ wallet.balance }}">All</button>
+                                </div>
+                            </div>
+
+                            <!-- Withdrawal Method -->
+                            <div class="mb-4">
+                                <label class="form-label">Withdrawal Method</label>
+                                <select class="form-select" name="method" id="withdrawal-method" required>
+                                    <option value="">Select method</option>
+                                    <option value="bank_transfer">Bank Transfer</option>
+                                    <option value="paypal">PayPal</option>
+                                    <option value="stripe">Stripe Connect</option>
+                                </select>
+                            </div>
+
+                            <!-- Bank Details (shown when bank transfer selected) -->
+                            <div id="bank-details" class="mb-4" style="display: none;">
+                                <h6 class="mb-3">Bank Account Details</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Bank Name</label>
+                                        <input type="text" class="form-control" name="bank_name" placeholder="e.g., Chase Bank">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Account Holder Name</label>
+                                        <input type="text" class="form-control" name="account_holder" placeholder="Your full name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Account Number</label>
+                                        <input type="text" class="form-control" name="account_number" placeholder="123456789">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Routing Number</label>
+                                        <input type="text" class="form-control" name="routing_number" placeholder="021000021">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PayPal Details (shown when PayPal selected) -->
+                            <div id="paypal-details" class="mb-4" style="display: none;">
+                                <h6 class="mb-3">PayPal Details</h6>
+                                <div class="mb-3">
+                                    <label class="form-label">PayPal Email</label>
+                                    <input type="email" class="form-control" name="paypal_email" placeholder="your-email@paypal.com">
+                                </div>
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="mb-4">
+                                <label class="form-label">Notes (Optional)</label>
+                                <textarea class="form-control" name="notes" rows="3" placeholder="Any additional information..."></textarea>
+                            </div>
+
+                            <!-- Terms -->
+                            <div class="alert alert-light border">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms-accept" required>
+                                    <label class="form-check-label small" for="terms-accept">
+                                        I understand that withdrawals take 3-5 business days to process and may be subject to verification. A $2.50 processing fee applies to all withdrawals.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100" id="withdrawal-button">
+                                <i class="bi bi-arrow-up-circle me-2"></i>Submit Withdrawal Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Withdrawal Form END -->
+
+            <!-- Sidebar START -->
+            <div class="col-lg-4">
+                <!-- Balance Summary -->
+                <div class="card border rounded-3 mb-4">
+                    <div class="card-body">
+                        <h6 class="mb-3">Wallet Summary</h6>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Available Balance:</span>
+                            <strong class="text-success">${{ wallet.balance|floatformat:2|intcomma }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Pending Withdrawals:</span>
+                            <strong class="text-warning">${{ pending_withdrawals.total|default:0|floatformat:2 }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Withdrawable:</span>
+                            <strong class="text-primary">${{ withdrawable_balance|floatformat:2|intcomma }}</strong>
+                        </div>
+                        <hr>
+                        <small class="text-muted">Last withdrawal: {{ last_withdrawal_date|default:"Never" }}</small>
+                    </div>
+                </div>
+
+                <!-- Processing Info -->
+                <div class="card border rounded-3">
+                    <div class="card-body">
+                        <h6 class="mb-3"><i class="bi bi-info-circle me-2"></i>Processing Information</h6>
+                        <ul class="list-unstyled small">
+                            <li class="mb-2"><i class="bi bi-clock text-primary me-2"></i>Processing: 3-5 business days</li>
+                            <li class="mb-2"><i class="bi bi-currency-dollar text-primary me-2"></i>Fee: $2.50 per withdrawal</li>
+                            <li class="mb-2"><i class="bi bi-shield-check text-primary me-2"></i>Secure & encrypted</li>
+                            <li><i class="bi bi-telephone text-primary me-2"></i>Support: 24/7 available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar END -->
+        </div>
+
+        <!-- Pending Withdrawals START -->
+        {% if pending_withdrawals.requests %}
+            <div class="card border rounded-3 mt-5">
+                <div class="card-header border-bottom">
+                    <h5 class="mb-0">Pending Withdrawal Requests</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-dark-gray align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Date Requested</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for withdrawal in pending_withdrawals.requests %}
+                                <tr>
+                                    <td>#{{ withdrawal.id }}</td>
+                                    <td class="fw-bold">${{ withdrawal.amount|floatformat:2 }}</td>
+                                    <td>{{ withdrawal.get_method_display }}</td>
+                                    <td>
+                                <span class="badge bg-warning bg-opacity-10 text-warning">
+                                    {{ withdrawal.get_status_display }}
+                                </span>
+                                    </td>
+                                    <td>{{ withdrawal.created_at|date:"M d, Y" }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <!-- Pending Withdrawals END -->
+
+    </div>
+    <!-- Main content END -->
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Quick amount buttons
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const amount = this.dataset.amount;
+                document.getElementById('withdrawal-amount').value = amount;
+            });
+        });
+
+        // Show/hide method-specific details
+        document.getElementById('withdrawal-method').addEventListener('change', function() {
+            const method = this.value;
+
+            // Hide all detail sections
+            document.getElementById('bank-details').style.display = 'none';
+            document.getElementById('paypal-details').style.display = 'none';
+
+            // Show relevant section
+            if (method === 'bank_transfer') {
+                document.getElementById('bank-details').style.display = 'block';
+            } else if (method === 'paypal') {
+                document.getElementById('paypal-details').style.display = 'block';
+            }
+        });
+
+        // Form submission
+        document.getElementById('withdrawal-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('withdrawal-button');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>Processing...`;
+            submitBtn.disabled = true;
+
+            try {
+                const formData = new FormData(e.target);
+                const response = await fetch('{% url "wallet_withdraw" %}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = '{% url "wallet_dashboard" %}?withdrawal_success=true';
+                } else {
+                    alert(data.error || 'Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+{% endblock %}

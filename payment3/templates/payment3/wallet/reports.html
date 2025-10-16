@@ -1,0 +1,391 @@
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/apexcharts/css/apexcharts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/flatpickr/css/flatpickr.min.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+    <!-- Main content START -->
+    <div class="col-xl-9">
+
+        <!-- Page header START -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-sm-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h3 mb-0">Financial Reports</h1>
+                        <p class="text-muted mb-0">Detailed analytics and insights about your wallet activity</p>
+                    </div>
+                    <div class="mt-3 mt-sm-0">
+                        <button class="btn btn-success" id="generate-report">
+                            <i class="bi bi-file-earmark-pdf me-2"></i>Generate PDF Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page header END -->
+
+        <!-- Date Range Filter START -->
+        <div class="card bg-transparent border rounded-3 mb-4">
+            <div class="card-body">
+                <form method="GET" id="report-form">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label">Date Range</label>
+                            <select class="form-select" name="period" id="period-select">
+                                <option value="7days" {% if period == '7days' %}selected{% endif %}>Last 7 Days</option>
+                                <option value="30days" {% if period == '30days' %}selected{% endif %}>Last 30 Days</option>
+                                <option value="90days" {% if period == '90days' %}selected{% endif %}>Last 90 Days</option>
+                                <option value="1year" {% if period == '1year' %}selected{% endif %}>Last 1 Year</option>
+                                <option value="custom" {% if period == 'custom' %}selected{% endif %}>Custom Range</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4" id="custom-dates" style="display: {% if period == 'custom' %}block{% else %}none{% endif %};">
+                            <label class="form-label">Custom Date Range</label>
+                            <input type="text" class="form-control flatpickr-range" name="custom_range"
+                                   value="{{ custom_range }}" placeholder="Select date range">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-filter me-2"></i>Apply Filters
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Date Range Filter END -->
+
+        <!-- Summary Cards START -->
+        <div class="row g-4 mb-5">
+            <div class="col-sm-6 col-lg-3">
+                <div class="text-center p-4 bg-primary bg-opacity-10 rounded-3">
+                    <h6 class="text-body">Total Income</h6>
+                    <h2 class="mb-0 fs-1 text-primary">${{ report_data.total_income|floatformat:2|intcomma }}</h2>
+                    <p class="mt-2 mb-0 small text-success">
+                        <i class="bi bi-arrow-up me-1"></i>{{ report_data.income_growth|floatformat:1 }}% from previous period
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="text-center p-4 bg-success bg-opacity-10 rounded-3">
+                    <h6 class="text-body">Total Expenses</h6>
+                    <h2 class="mb-0 fs-1 text-success">${{ report_data.total_expenses|floatformat:2|intcomma }}</h2>
+                    <p class="mt-2 mb-0 small text-danger">
+                        <i class="bi bi-arrow-up me-1"></i>{{ report_data.expenses_growth|floatformat:1 }}% from previous period
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="text-center p-4 bg-info bg-opacity-10 rounded-3">
+                    <h6 class="text-body">Net Profit</h6>
+                    <h2 class="mb-0 fs-1 text-info">${{ report_data.net_profit|floatformat:2|intcomma }}</h2>
+                    <p class="mt-2 mb-0 small {% if report_data.profit_growth >= 0 %}text-success{% else %}text-danger{% endif %}">
+                        <i class="bi bi-{% if report_data.profit_growth >= 0 %}arrow-up{% else %}arrow-down{% endif %} me-1"></i>
+                        {{ report_data.profit_growth|floatformat:1 }}% from previous period
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="text-center p-4 bg-warning bg-opacity-10 rounded-3">
+                    <h6 class="text-body">Transactions</h6>
+                    <h2 class="mb-0 fs-1 text-warning">{{ report_data.total_transactions }}</h2>
+                    <p class="mt-2 mb-0 small text-primary">
+                        {{ report_data.avg_daily_transactions|floatformat:1 }} avg/day
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Summary Cards END -->
+
+        <!-- Charts Row START -->
+        <div class="row g-4 mb-5">
+            <!-- Income vs Expenses Chart -->
+            <div class="col-lg-8">
+                <div class="card bg-transparent border rounded-3 h-100">
+                    <div class="card-header bg-transparent border-bottom">
+                        <h5 class="mb-0">Income vs Expenses</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="incomeExpensesChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Types Chart -->
+            <div class="col-lg-4">
+                <div class="card bg-transparent border rounded-3 h-100">
+                    <div class="card-header bg-transparent border-bottom">
+                        <h5 class="mb-0">Transaction Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="transactionTypesChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Charts Row END -->
+
+        <!-- Detailed Breakdown START -->
+        <div class="row g-4">
+            <!-- Income Breakdown -->
+            <div class="col-lg-6">
+                <div class="card bg-transparent border rounded-3">
+                    <div class="card-header bg-transparent border-bottom">
+                        <h5 class="mb-0">Income Breakdown</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="text-end">Amount</th>
+                                    <th class="text-end">Percentage</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in report_data.income_breakdown %}
+                                    <tr>
+                                        <td>
+                                            <i class="bi bi-circle-fill text-{{ item.color }} me-2"></i>
+                                            {{ item.type }}
+                                        </td>
+                                        <td class="text-end">${{ item.amount|floatformat:2|intcomma }}</td>
+                                        <td class="text-end">{{ item.percentage|floatformat:1 }}%</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot class="border-top">
+                                <tr>
+                                    <th>Total Income</th>
+                                    <th class="text-end">${{ report_data.total_income|floatformat:2|intcomma }}</th>
+                                    <th class="text-end">100%</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expenses Breakdown -->
+            <div class="col-lg-6">
+                <div class="card bg-transparent border rounded-3">
+                    <div class="card-header bg-transparent border-bottom">
+                        <h5 class="mb-0">Expenses Breakdown</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th class="text-end">Amount</th>
+                                    <th class="text-end">Percentage</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in report_data.expenses_breakdown %}
+                                    <tr>
+                                        <td>
+                                            <i class="bi bi-circle-fill text-{{ item.color }} me-2"></i>
+                                            {{ item.type }}
+                                        </td>
+                                        <td class="text-end">${{ item.amount|floatformat:2|intcomma }}</td>
+                                        <td class="text-end">{{ item.percentage|floatformat:1 }}%</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                                <tfoot class="border-top">
+                                <tr>
+                                    <th>Total Expenses</th>
+                                    <th class="text-end">${{ report_data.total_expenses|floatformat:2|intcomma }}</th>
+                                    <th class="text-end">100%</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Detailed Breakdown END -->
+
+        <!-- Monthly Trends START -->
+        <div class="card bg-transparent border rounded-3 mt-5">
+            <div class="card-header bg-transparent border-bottom">
+                <h5 class="mb-0">Monthly Trends</h5>
+            </div>
+            <div class="card-body">
+                <div id="monthlyTrendsChart" style="min-height: 300px;"></div>
+            </div>
+        </div>
+        <!-- Monthly Trends END -->
+
+    </div>
+    <!-- Main content END -->
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/apexcharts/js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/flatpickr/js/flatpickr.min.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        // Date range picker
+        flatpickr('.flatpickr-range', {
+            mode: 'range',
+            dateFormat: 'Y-m-d',
+        });
+
+        // Show/hide custom date range
+        document.getElementById('period-select').addEventListener('change', function() {
+            const customDates = document.getElementById('custom-dates');
+            customDates.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        // Generate PDF report
+        document.getElementById('generate-report').addEventListener('click', function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>Generating...`;
+            btn.disabled = true;
+
+            // Simulate PDF generation
+            setTimeout(() => {
+                alert('PDF report generated successfully!');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 2000);
+        });
+
+        // Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Income vs Expenses Chart
+            var incomeExpensesOptions = {
+                series: [{
+                    name: 'Income',
+                    data: {{ report_data.income_series|safe }}
+                }, {
+                    name: 'Expenses',
+                    data: {{ report_data.expenses_series|safe }}
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                    toolbar: { show: false }
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        borderRadius: 5
+                    },
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: {{ report_data.categories|safe }},
+                },
+                yaxis: {
+                    title: {
+                        text: 'Amount ($)'
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                colors: ['#00B69B', '#F93C65'],
+                legend: {
+                    position: 'top'
+                }
+            };
+
+            var incomeExpensesChart = new ApexCharts(document.querySelector("#incomeExpensesChart"), incomeExpensesOptions);
+            incomeExpensesChart.render();
+
+            // Transaction Types Chart
+            var transactionTypesOptions = {
+                series: {{ report_data.transaction_distribution.values|safe }},
+                chart: {
+                    type: 'donut',
+                    height: 350
+                },
+                labels: {{ report_data.transaction_distribution.labels|safe }},
+                colors: ['#00B69B', '#F93C65', '#5D69F2', '#FFB648', '#2DB6F5'],
+                legend: {
+                    position: 'bottom'
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var transactionTypesChart = new ApexCharts(document.querySelector("#transactionTypesChart"), transactionTypesOptions);
+            transactionTypesChart.render();
+
+            // Monthly Trends Chart
+            var monthlyTrendsOptions = {
+                series: [{
+                    name: 'Net Flow',
+                    data: {{ report_data.monthly_trends|safe }}
+                }],
+                chart: {
+                    height: 350,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: { show: false }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 3
+                },
+                colors: ['#5D69F2'],
+                xaxis: {
+                    categories: {{ report_data.months|safe }},
+                },
+                yaxis: {
+                    title: {
+                        text: 'Net Amount ($)'
+                    }
+                },
+                grid: {
+                    borderColor: '#f1f1f1',
+                }
+            };
+
+            var monthlyTrendsChart = new ApexCharts(document.querySelector("#monthlyTrendsChart"), monthlyTrendsOptions);
+            monthlyTrendsChart.render();
+        });
+    </script>
+{% endblock %}

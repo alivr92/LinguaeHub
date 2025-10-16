@@ -1,0 +1,211 @@
+<!-- templates/wallet/dashboard.html -->
+{% extends 'ap2_tutor/dashboard/dp_base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block head_style_plugins %}
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/font-awesome/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/apexcharts/css/apexcharts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/choices/css/choices.min.css' %}">
+{% endblock %}
+
+{% block dashboard_main_content %}
+    <!-- Main content START -->
+    <div class="col-xl-9">
+
+        <!-- Wallet Overview START -->
+        <div class="row g-4 mb-5">
+            <!-- Main Balance -->
+            <div class="col-md-4">
+                <div class="text-center p-4 bg-primary bg-opacity-10 rounded-3 h-100">
+                    <h6 class="text-body">Available Balance</h6>
+                    <h2 class="mb-3 text-primary">${{ wallet.balance|floatformat:2|intcomma }}</h2>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'payment3:wallet_deposit' %}" class="btn btn-primary btn-sm">Add Funds</a>
+                        <a href="{% url 'payment3:wallet_withdraw' %}" class="btn btn-outline-primary btn-sm">Withdraw</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Income -->
+            <div class="col-md-4">
+                <div class="text-center p-4 bg-success bg-opacity-10 rounded-3 h-100">
+                    <h6 class="text-body">This Month Income</h6>
+                    <h2 class="mb-0 fs-1 text-success">
+                        ${{ monthly_stats.total_income|default:0|floatformat:2|intcomma }}
+                    </h2>
+                    <p class="mt-2 mb-0 small">All incoming transactions</p>
+                </div>
+            </div>
+
+            <!-- Pending Withdrawals -->
+            <div class="col-md-4">
+                <div class="text-center p-4 bg-warning bg-opacity-10 rounded-3 h-100">
+                    <h6 class="text-body">Pending Withdrawals</h6>
+                    <h2 class="mb-0 fs-1 text-warning">
+                        ${{ pending_withdrawals.total|default:0|floatformat:2|intcomma }}
+                    </h2>
+                    <p class="mt-2 mb-0 small">
+                        {{ pending_withdrawals.count }} request{{ pending_withdrawals.count|pluralize }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Wallet Overview END -->
+
+        <!-- Quick Actions START -->
+        <div class="row g-4 mb-5">
+            <div class="col-12">
+                <div class="card bg-transparent border rounded-3">
+                    <div class="card-header bg-transparent border-bottom">
+                        <h5 class="mb-0">Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3 text-center">
+                            <div class="col-md-3">
+                                <a href="{% url 'payment3:wallet_deposit' %}" class="btn btn-success-soft w-100">
+                                    <i class="bi bi-plus-circle-fill fs-4 d-block mb-2"></i>
+                                    Add Funds
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{% url 'payment3:wallet_withdraw' %}" class="btn btn-primary-soft w-100">
+                                    <i class="bi bi-arrow-up-circle-fill fs-4 d-block mb-2"></i>
+                                    Withdraw
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{% url 'payment3:wallet_transactions' %}" class="btn btn-info-soft w-100">
+                                    <i class="bi bi-clock-history fs-4 d-block mb-2"></i>
+                                    Transaction History
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="{% url 'payment3:wallet_report' %}" class="btn btn-warning-soft w-100">
+                                    <i class="bi bi-graph-up fs-4 d-block mb-2"></i>
+                                    Reports
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Quick Actions END -->
+
+        <!-- Recent Transactions START -->
+        <div class="card bg-transparent border rounded-3">
+            <div class="card-header bg-transparent border-bottom d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Recent Transactions</h5>
+                <a href="{% url 'payment3:wallet_transactions' %}" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                {% if recent_transactions %}
+                    <div class="table-responsive">
+                        <table class="table table-dark-gray align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th class="border-0 rounded-start">Date & Time</th>
+                                <th class="border-0">Description</th>
+                                <th class="border-0">Type</th>
+                                <th class="border-0">Amount</th>
+                                <th class="border-0 rounded-end">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for transaction in recent_transactions %}
+                                <tr>
+                                    <td>
+                                        <small class="text-body">{{ transaction.created_at|date:"M d, Y" }}</small><br>
+                                        <small class="text-muted">{{ transaction.created_at|time:"H:i" }}</small>
+                                    </td>
+                                    <td>{{ transaction.description }}</td>
+                                    <td>
+                                <span class="badge
+                                    {% if transaction.transaction_type == 'deposit' %}bg-success
+                                    {% elif transaction.transaction_type == 'withdrawal' %}bg-primary
+                                    {% elif transaction.transaction_type == 'refund' %}bg-warning
+                                    {% else %}bg-secondary{% endif %}">
+                                    {{ transaction.transaction_type|title }}
+                                </span>
+                                    </td>
+                                    <td>
+                                <span class="fw-bold {% if transaction.transaction_type in 'deposit,refund,bonus' %}text-success{% else %}text-danger{% endif %}">
+                                    {% if transaction.transaction_type in 'deposit,refund,bonus' %}+{% else %}-{% endif %}
+                                    ${{ transaction.amount|floatformat:2 }}
+                                </span>
+                                    </td>
+                                    <td>
+                                <span class="badge
+                                    {% if transaction.status == 'completed' %}bg-success bg-opacity-10 text-success
+                                    {% elif transaction.status == 'pending' %}bg-warning bg-opacity-10 text-warning
+                                    {% elif transaction.status == 'failed' %}bg-danger bg-opacity-10 text-danger
+                                    {% else %}bg-secondary bg-opacity-10 text-secondary{% endif %}">
+                                    {{ transaction.status|title }}
+                                </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="bi bi-wallet2 fs-1 text-muted"></i>
+                        <p class="text-muted mt-3">No transactions yet</p>
+                        <a href="{% url 'payment3:wallet_deposit' %}" class="btn btn-primary">Make Your First Deposit</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Recent Transactions END -->
+
+        <!-- Statistics Chart START -->
+        <div class="card bg-transparent border rounded-3 mt-5">
+            <div class="card-header bg-transparent border-bottom">
+                <h5 class="mb-0">Monthly Overview - {{ today|date:"F Y" }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-md-3 text-center">
+                        <div class="border rounded-3 p-3">
+                            <h6 class="text-body">Total Deposits</h6>
+                            <h4 class="text-success mb-0">${{ monthly_stats.total_deposits|default:0|floatformat:2|intcomma }}</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 text-center">
+                        <div class="border rounded-3 p-3">
+                            <h6 class="text-body">Total Withdrawals</h6>
+                            <h4 class="text-primary mb-0">${{ monthly_stats.total_withdrawals|default:0|floatformat:2|intcomma }}</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 text-center">
+                        <div class="border rounded-3 p-3">
+                            <h6 class="text-body">Net Flow</h6>
+                            <h4 class="{% if monthly_stats.total_income|default:0 > monthly_stats.total_expenses|default:0 %}text-success{% else %}text-danger{% endif %} mb-0">
+                                ${{ monthly_stats.net_flow|default:0|floatformat:2|intcomma }}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 text-center">
+                        <div class="border rounded-3 p-3">
+                            <h6 class="text-body">Transactions</h6>
+                            <h4 class="text-info mb-0">{{ recent_transactions.count }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Statistics Chart END -->
+
+    </div>
+    <!-- Main content END -->
+{% endblock %}
+
+{% block scripts_vendors %}
+    <!-- Vendors -->
+    <script src="{% static 'assets/vendor/apexcharts/js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/choices/js/choices.min.js' %}"></script>
+{% endblock %}

@@ -122,6 +122,29 @@
                                 class="bi bi-pencil-square fa-fw me-2"></i>Edit Profile</a>
                         <a class="list-group-item {% if 'payout' in request.path %}active{% endif %}"
                            href="{% url 'provider:dp_payout' %}"><i class="bi bi-wallet2 fa-fw me-2"></i>Payouts</a>
+
+
+                        <!-- Wallet Collapse menu -->
+                        <a class="list-group-item  {% if 'wallet' in request.path %}active{% endif %}"
+                           data-bs-toggle="collapse" href="#collapseWallet" role="button" aria-expanded="false"
+                           aria-controls="collapseauthentication">
+                            <i class="bi bi-wallet2 fa-fw me-2"></i>Payments
+                        </a>
+                        <!-- Submenu -->
+                        <ul class="nav collapse flex-column pb-3 {% if 'wallet' in request.path %}show{% endif %}"
+                            id="collapseWallet" data-bs-parent="#navbar-sidebar">
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'main' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'payment3:wallet_dashboard' %}"><i class="far fa-fw fa-edit me-2"></i>
+                                Wallet</a></li>
+                            <li class="nav-item"><a
+                                    class="nav-link {% if 'report' in request.path %}text-warning{% endif %}"
+                                    href="{% url 'payment3:wallet_report' %}"><i
+                                    class="far fa-fw fa-edit me-2"></i>Report</a></li>
+                        </ul>
+
+
+
                         <a class="list-group-item {% if 'setting' in request.path %}active{% endif %}"
                            href="{% url 'provider:dp_setting' %}"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
                         <a class="list-group-item {% if 'in-person' in request.path %}active{% endif %}"

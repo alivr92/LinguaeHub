@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
+
 
 # from ap2_meeting.models import Session as Appointment
 # from ap2_tutor.models import Tutor as Provider
@@ -21,3 +23,4 @@ from django.utils import timezone
 #
 #     def __str__(self):
 #         return f'Billing for {self.client} - Total: {self.total}'
+
