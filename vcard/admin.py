@@ -38,6 +38,16 @@ class VCardPageAdmin(admin.ModelAdmin):
             'fields': ('qr_code_secret', 'qr_code_enabled'),
             'classes': ('collapse',)
         }),
+        ('QR Code Customization', {
+            'fields': (
+                'qr_logo',
+                'qr_style',
+                'qr_foreground_color',
+                'qr_background_color',
+                'qr_logo_size'
+            ),
+            'classes': ('collapse',)
+        }),
         ('Analytics', {
             'fields': ('total_views', 'total_qr_scans', 'last_accessed'),
             'classes': ('collapse',)

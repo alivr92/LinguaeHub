@@ -3,12 +3,29 @@ from django.http import Http404, JsonResponse, HttpResponseForbidden
 from django.conf import settings
 from django.utils import timezone
 from .models import VCardPage, VCardAnalytics, QRCodeScan
-import qrcode
 from io import BytesIO
 import base64
 import json
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db import models
+
+# --
+import vobject
+from django.http import HttpResponse
+from urllib.parse import quote
+import qrcode
+from qrcode.image.styledpil import StyledPilImage
+from qrcode.image.styles.moduledrawers import (
+    SquareModuleDrawer,
+    GappedSquareModuleDrawer,
+    CircleModuleDrawer,
+    RoundedModuleDrawer,
+    VerticalBarsDrawer,
+    HorizontalBarsDrawer
+)
+from qrcode.image.styles.colormasks import SolidFillColorMask
+from PIL import Image, ImageDraw
+
 
 
 def get_client_ip(request):
@@ -60,7 +77,7 @@ def vcard_page(request, slug):
     return render(request, 'vcard/vcard2.html', context)
 
 
-def generate_qr_code(request, slug):
+def generate_qr_code1(request, slug):
     vcard = get_object_or_404(VCardPage, slug=slug, is_active=True)
 
     # Generate QR code
@@ -111,36 +128,6 @@ def track_interaction(request, slug):
     return JsonResponse({'status': 'error'})
 
 
-def analytics_dashboard1(request, slug):
-    vcard = get_object_or_404(VCardPage, slug=slug)
-
-    # Basic stats
-    today = timezone.now().date()
-    last_7_days = today - timezone.timedelta(days=7)
-
-    recent_views = VCardAnalytics.objects.filter(
-        vcard=vcard,
-        timestamp__date__gte=last_7_days,
-        event_type='page_view'
-    ).count()
-
-    recent_qr_scans = VCardAnalytics.objects.filter(
-        vcard=vcard,
-        timestamp__date__gte=last_7_days,
-        event_type='qr_scan'
-    ).count()
-
-    context = {
-        'vcard': vcard,
-        'recent_views': recent_views,
-        'recent_qr_scans': recent_qr_scans,
-        'total_views': vcard.total_views,
-        'total_qr_scans': vcard.total_qr_scans,
-    }
-
-    return render(request, 'vcard/analytics_dashboard.html', context)
-
-
 @staff_member_required
 def analytics_dashboard(request, slug):
     """Admin-only analytics dashboard"""
@@ -188,3 +175,148 @@ def analytics_dashboard(request, slug):
     }
 
     return render(request, 'vcard/analytics_dashboard.html', context)
+
+
+def download_vcard(request, slug):
+    vcard_obj = get_object_or_404(VCardPage, slug=slug, is_active=True)
+
+    # Create vCard object
+    vcard = vobject.vCard()
+
+    # Add organization
+    org = vcard.add('org')
+    org.value = [vcard_obj.company_name]
+
+    # Add name
+    n = vcard.add('n')
+    n.value = vobject.vcard.Name(family='', given=vcard_obj.company_name)
+
+    # Add formatted name
+    fn = vcard.add('fn')
+    fn.value = vcard_obj.company_name
+
+    # Add phone numbers
+    if vcard_obj.phone_number:
+        tel_work = vcard.add('tel')
+        tel_work.value = vcard_obj.phone_number
+        tel_work.type_param = 'WORK'
+
+    if vcard_obj.mobile_number:
+        tel_cell = vcard.add('tel')
+        tel_cell.value = vcard_obj.mobile_number
+        tel_cell.type_param = 'CELL'
+
+    # Add email
+    if vcard_obj.email:
+        email = vcard.add('email')
+        email.value = vcard_obj.email
+        email.type_param = 'WORK'
+
+    # Add website
+    if vcard_obj.website:
+        url = vcard.add('url')
+        url.value = vcard_obj.website
+
+    # Add note with tagline
+    if vcard_obj.tagline:
+        note = vcard.add('note')
+        note.value = vcard_obj.tagline
+
+    # Add address if available
+    if vcard_obj.address:
+        adr = vcard.add('adr')
+        adr.value = vobject.vcard.Address(street=vcard_obj.address)
+        adr.type_param = 'WORK'
+
+    # Track the download
+    VCardAnalytics.objects.create(
+        vcard=vcard_obj,
+        event_type='vcard_download',
+        ip_address=get_client_ip(request),
+        user_agent=request.META.get('HTTP_USER_AGENT', ''),
+        referrer=request.META.get('HTTP_REFERER', '')
+    )
+
+    # Create response
+    filename = f"{vcard_obj.company_name.replace(' ', '_')}.vcf"
+    response = HttpResponse(vcard.serialize(), content_type='text/vcard')
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    response['X-Frame-Options'] = 'SAMEORIGIN'
+
+    return response
+
+
+def generate_qr_code(request, slug):
+    vcard = get_object_or_404(VCardPage, slug=slug, is_active=True)
+
+    # Generate QR code with customization
+    qr_data = vcard.get_qr_code_data()
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,  # High error correction for logo
+        box_size=20,
+        border=4,
+    )
+    qr.add_data(qr_data)
+    qr.make(fit=True)
+
+    # Choose module drawer based on style
+    module_drawers = {
+        'square': SquareModuleDrawer(),
+        'rounded': RoundedModuleDrawer(),
+        'circle': CircleModuleDrawer(),
+        'diamond': SquareModuleDrawer(),  # Custom implementation needed
+    }
+
+    module_drawer = module_drawers.get(vcard.qr_style, SquareModuleDrawer())
+
+    # Create QR code image
+    qr_img = qr.make_image(
+        image_factory=StyledPilImage,
+        module_drawer=module_drawer,
+        color_mask=SolidFillColorMask(
+            back_color=vcard.qr_background_color,
+            front_color=vcard.qr_foreground_color
+        )
+    )
+
+    # Add logo if exists
+    if vcard.qr_logo:
+        try:
+            logo = Image.open(vcard.qr_logo.path)
+
+            # Calculate logo size (percentage of QR code size)
+            qr_width, qr_height = qr_img.size
+            logo_size = min(qr_width, qr_height) * (vcard.qr_logo_size / 100)
+
+            # Resize logo maintaining aspect ratio
+            logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
+
+            # Create a white background for the logo
+            logo_bg_size = int(logo_size * 1.2)  # Slightly larger background
+            logo_bg = Image.new('RGB', (logo_bg_size, logo_bg_size), vcard.qr_background_color)
+
+            # Calculate position to center logo on background
+            logo_pos = ((logo_bg_size - logo.width) // 2, (logo_bg_size - logo.height) // 2)
+            logo_bg.paste(logo, logo_pos)
+
+            # Calculate position to center logo on QR code
+            qr_pos = ((qr_width - logo_bg_size) // 2, (qr_height - logo_bg_size) // 2)
+
+            # Paste logo on QR code
+            qr_img.paste(logo_bg, qr_pos)
+
+        except Exception as e:
+            print(f"Error adding logo to QR code: {e}")
+
+    # Convert to base64 for display
+    buffer = BytesIO()
+    qr_img.save(buffer, format="PNG", quality=95)
+    buffer.seek(0)
+    img_str = base64.b64encode(buffer.getvalue()).decode()
+
+    return render(request, 'vcard/qr_display.html', {
+        'vcard': vcard,
+        'qr_image': img_str,
+        'qr_data': qr_data
+    })

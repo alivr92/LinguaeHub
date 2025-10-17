@@ -7,5 +7,6 @@ urlpatterns = [
     path('<slug:slug>/', views.vcard_page, name='vcard_page'),
     path('<slug:slug>/qr/', views.generate_qr_code, name='generate_qr_code'),
     path('<slug:slug>/track/', views.track_interaction, name='track_interaction'),
+    path('<slug:slug>/download/', views.download_vcard, name='download_vcard'),
     path('<slug:slug>/analytics/', views.analytics_dashboard, name='analytics_dashboard'),
 ]
