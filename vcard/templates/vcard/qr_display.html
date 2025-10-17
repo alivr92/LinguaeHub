@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code - {{ vcard.company_name }}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .qr-image {
+            width: 256px;
+            height: 256px;
+            margin: 20px auto;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .qr-instructions {
+            color: #6b7280;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .back-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="qr-container">
+    <div class="company-name">{{ vcard.company_name }}</div>
+    <p class="qr-instructions">Scan this QR code to save contact information</p>
+
+    <div class="qr-image">
+        <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" style="width: 100%; height: auto;">
+    </div>
+
+    <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 20px;">
+        QR Code URL: {{ qr_data }}
+    </p>
+
+    <a href="{% url 'vcard:vcard_page' vcard.slug %}" class="back-button">
+        Back to vCard
+    </a>
+</div>
+</body>
+</html>

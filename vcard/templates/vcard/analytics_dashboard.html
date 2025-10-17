@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - {{ vcard.company_name }}</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f3f4f6;
+            padding: 20px;
+            color: #374151;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .back-button {
+            background: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Analytics Dashboard - {{ vcard.company_name }}</h1>
+        <p>Track your vCard performance and engagement metrics</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ total_views }}</div>
+            <div class="stat-label">Total Page Views</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number">{{ total_qr_scans }}</div>
+            <div class="stat-label">Total QR Scans</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number">{{ recent_views }}</div>
+            <div class="stat-label">Views (Last 7 Days)</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number">{{ recent_qr_scans }}</div>
+            <div class="stat-label">QR Scans (Last 7 Days)</div>
+        </div>
+    </div>
+
+    <a href="{% url 'vcard:vcard_page' vcard.slug %}" class="back-button">
+        Back to vCard
+    </a>
+</div>
+</body>
+</html>

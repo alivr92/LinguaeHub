@@ -3,6 +3,9 @@ from django_quill.fields import QuillField  # For rich text
 from django.contrib.auth import get_user_model
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
+from django.urls import reverse
+from django.utils.crypto import get_random_string
 
 # from ckeditor_uploader.fields import RichTextUploadingField
 
@@ -140,3 +143,4 @@ class ArticleFeedback(models.Model):
     comments = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     ip_address = models.GenericIPAddressField(blank=True, null=True)
+

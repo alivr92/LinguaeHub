@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ vcard.company_name }} - Digital Business Card</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        .vcard-wrapper {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        .vcard-container {
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .vcard-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin: 2rem 1rem;
+        }
+
+        .vcard-header {
+            position: relative;
+            padding: 0;
+            border-bottom: none;
+        }
+
+        .background-image {
+            height: 180px;
+            background: linear-gradient(45deg, {{ vcard.primary_color|default:'#2563eb' }}, {{ vcard.secondary_color|default:'#1e40af' }});
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-container {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .logo-placeholder {
+            font-size: 2rem;
+            color: {{ vcard.primary_color|default:'#2563eb' }};
+        }
+
+        .vcard-body {
+            padding: 70px 2rem 2rem;
+        }
+
+        .company-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .company-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-tagline {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-item:hover {
+            background: #f8fafc;
+            margin: 0 -1rem;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: {{ vcard.primary_color|default:'#2563eb' }};
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-content h6 {
+            font-size: 0.8rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-content p {
+            margin: 0;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .contact-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: {{ vcard.primary_color|default:'#2563eb' }};
+        }
+
+        .social-section {
+            margin: 2rem 0;
+        }
+
+        .social-title {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: {{ vcard.primary_color|default:'#2563eb' }};
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: {{ vcard.secondary_color|default:'#1e40af' }};
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .action-section {
+            background: #f8fafc;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .stats-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .btn-primary-custom {
+            background: {{ vcard.primary_color|default:'#2563eb' }};
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background: {{ vcard.secondary_color|default:'#1e40af' }};
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid {{ vcard.primary_color|default:'#2563eb' }};
+            color: {{ vcard.primary_color|default:'#2563eb' }};
+            background: transparent;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: {{ vcard.primary_color|default:'#2563eb' }};
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+<div class="vcard-wrapper">
+    <div class="vcard-container">
+        <div class="vcard-card">
+            <!-- Header with Background -->
+            <div class="vcard-header">
+                <div class="background-image">
+                    {% if vcard.background_photo %}
+                        <img src="{{ vcard.background_photo.url }}" alt="Background" class="img-fluid">
+                    {% endif %}
+
+                    <!-- Analytics Badge -->
+                    <div class="stats-badge">
+                        <i class="bi bi-eye me-1"></i>{{ vcard.total_views }}
+                        <i class="bi bi-qr-code ms-2 me-1"></i>{{ vcard.total_qr_scans }}
+                    </div>
+                </div>
+
+                <!-- Logo -->
+                <div class="logo-container">
+                    {% if vcard.logo %}
+                        <img src="{{ vcard.logo.url }}" alt="{{ vcard.company_name }} Logo" class="img-fluid">
+                    {% else %}
+                        <div class="logo-placeholder">
+                            <i class="bi bi-building"></i>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Body Content -->
+            <div class="vcard-body">
+                <!-- Company Info -->
+                <div class="company-info">
+                    <h1 class="company-name">{{ vcard.company_name }}</h1>
+                    <p class="company-tagline">Connecting students with expert tutors</p>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-list">
+                    <!-- Phone -->
+                    <div class="contact-item" onclick="trackInteraction('phone_click')">
+                        <div class="contact-icon">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h6>Phone</h6>
+                            <p>
+                                <a href="tel:{{ vcard.phone_number }}" class="contact-link">
+                                    {{ vcard.phone_number }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="contact-item" onclick="trackInteraction('email_click')">
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope-fill"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h6>Email</h6>
+                            <p>
+                                <a href="mailto:{{ vcard.email }}" class="contact-link">
+                                    {{ vcard.email }}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Website -->
+                    <div class="contact-item" onclick="trackInteraction('website_click')">
+                        <div class="contact-icon">
+                            <i class="bi bi-globe"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h6>Website</h6>
+                            <p>
+                                <a href="{{ vcard.website }}" target="_blank" class="contact-link">
+                                    Visit Website
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-item" onclick="trackInteraction('website_click')">
+                        <div class="contact-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <div class="contact-content">
+                            <h6>Website</h6>
+                            <p>
+                                <a href="{{ vcard.website }}/contact" target="_blank" class="contact-link">
+                                    Contact Form
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                {% if social_links %}
+                    <div class="social-section">
+                        <div class="social-title">Follow Us</div>
+                        <div class="social-links">
+                            {% for name, icon, url in social_links %}
+                                <a href="{{ url }}" target="_blank" class="social-link" onclick="trackInteraction('social_click')" title="{{ name }}">
+                                    <i class="bi bi-{{ icon }}"></i>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-section">
+                <div class="row g-2">
+                    <div class="col-6">
+                        <a href="{% url 'vcard:generate_qr_code' vcard.slug %}" class="btn btn-primary-custom w-100">
+                            <i class="bi bi-qr-code me-2"></i>QR Code
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        {% if request.user.is_staff %}
+                            <a href="{% url 'vcard:analytics_dashboard' vcard.slug %}" class="btn btn-outline-custom w-100">
+                                <i class="bi bi-graph-up me-2"></i>Analytics
+                            </a>
+                        {% else %}
+                            <button class="btn btn-outline-secondary w-100" disabled>
+                                <i class="bi bi-graph-up me-2"></i>Analytics
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Analytics Tracking -->
+<script>
+    function trackInteraction(eventType) {
+        fetch("{% url 'vcard:track_interaction' vcard.slug %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                event_type: eventType
+            })
+        }).catch(console.error);
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Track page load
+    document.addEventListener('DOMContentLoaded', function() {
+        {% if qr_token %}
+            trackInteraction('qr_scan');
+        {% else %}
+            trackInteraction('page_view');
+        {% endif %}
+    });
+</script>
+</body>
+</html>
