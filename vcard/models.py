@@ -77,10 +77,15 @@ class VCardPage(models.Model):
     def get_absolute_url(self):
         return reverse('vcard:vcard_page', kwargs={'slug': self.slug})
 
-    def get_qr_code_data(self):
+    def get_qr_code_data_by_token(self):
         from django.conf import settings
         domain = getattr(settings, 'SITE_DOMAIN', 'https://lingocept.com')
         return f"{domain}{self.get_absolute_url()}?token={self.qr_code_secret}"
+
+    def get_qr_code_data(self):
+        from django.conf import settings
+        domain = getattr(settings, 'SITE_DOMAIN', 'https://lingocept.com')
+        return f"{domain}{self.get_absolute_url()}"
 
     def record_view(self):
         self.total_views += 1

@@ -371,7 +371,7 @@
 
                 <!-- Company Info -->
                 <div class="company-info">
-                    <h1 class="company-name">{{ vcard.company_name }}</h1>
+                    <h1 class="company-name">{{ vcard.company_name|upper }}</h1>
                     <p class="company-tagline">{{ vcard.tagline|default:"Connecting students with expert tutors" }}</p>
                 </div>
             </div>
@@ -496,7 +496,7 @@
                                 <div class="contact-label">Contact Form</div>
                                 <p class="contact-value">
                                     <a href="{{ vcard.contact_form_link }}" target="_blank" class="contact-link">
-                                        {{ vcard.contact_form_link }}/#cForm
+                                        Get in Touch
                                     </a>
                                 </p>
                             </div>

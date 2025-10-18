@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code - {{ vcard.company_name }}</title>
+    <title>QR Code - {{ vcard.company_name|upper }}</title>
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -97,7 +97,7 @@
 <div class="qr-container">
     <div class="qr-card">
         <div class="qr-header">
-            <h2 class="h4 mb-2">{{ vcard.company_name }}</h2>
+            <h2 class="h4 mb-2">{{ vcard.company_name|upper }}</h2>
             <p class="mb-0 opacity-75">Scan to save contact information</p>
         </div>
 
@@ -138,7 +138,7 @@
                 </div>
                 <div class="col-6">
                     <a href="{% url 'vcard:vcard_page' vcard.slug %}" class="btn btn-outline-secondary w-100">
-                        <i class="bi bi-arrow-left me-2"></i>Back
+                        <i class="bi bi-arrow-left me-2"></i>Visit Card
                     </a>
                 </div>
             </div>
