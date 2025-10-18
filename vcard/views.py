@@ -103,6 +103,72 @@ def generate_qr_code1(request, slug):
         'qr_image': img_str,
         'qr_data': qr_data
     })
+def generate_qr_code(request, slug):
+    vcard = get_object_or_404(VCardPage, slug=slug, is_active=True)
+
+    # Generate QR code
+    qr_data = vcard.get_qr_code_data()
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=15,
+        border=4,
+    )
+    qr.add_data(qr_data)
+    qr.make(fit=True)
+
+    # Create QR code image with basic colors
+    qr_img = qr.make_image(
+        fill_color=vcard.qr_foreground_color if vcard.qr_foreground_color != '#000000' else 'black',
+        back_color=vcard.qr_background_color if vcard.qr_background_color != '#FFFFFF' else 'white'
+    )
+
+    # Convert to PIL Image for further processing
+    qr_img = qr_img.get_image()
+
+    # Add logo if exists
+    if vcard.qr_logo:
+        try:
+            logo = Image.open(vcard.qr_logo.path)
+
+            # Convert logo to RGB if necessary
+            if logo.mode != 'RGB':
+                logo = logo.convert('RGB')
+
+            # Calculate logo size (percentage of QR code size)
+            qr_width, qr_height = qr_img.size
+            logo_size = min(qr_width, qr_height) * (vcard.qr_logo_size / 100)
+
+            # Resize logo maintaining aspect ratio
+            logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
+
+            # Calculate position to center logo on QR code
+            pos = ((qr_width - logo.width) // 2, (qr_height - logo.height) // 2)
+
+            # Create a transparent background for the logo
+            logo_with_bg = Image.new('RGBA', qr_img.size, (0, 0, 0, 0))
+            logo_with_bg.paste(logo, pos)
+
+            # Convert QR code to RGBA
+            qr_img_rgba = qr_img.convert('RGBA')
+
+            # Composite the logo onto the QR code
+            qr_img = Image.alpha_composite(qr_img_rgba, logo_with_bg)
+
+        except Exception as e:
+            print(f"Error adding logo to QR code: {e}")
+
+    # Convert to base64 for display
+    buffer = BytesIO()
+    qr_img.save(buffer, format="PNG")
+    buffer.seek(0)
+    img_str = base64.b64encode(buffer.getvalue()).decode()
+
+    return render(request, 'vcard/qr_display.html', {
+        'vcard': vcard,
+        'qr_image': img_str,
+        'qr_data': qr_data
+    })
 
 
 def track_interaction(request, slug):
@@ -245,69 +311,3 @@ def download_vcard(request, slug):
     return response
 
 
-def generate_qr_code(request, slug):
-    vcard = get_object_or_404(VCardPage, slug=slug, is_active=True)
-
-    # Generate QR code
-    qr_data = vcard.get_qr_code_data()
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_H,
-        box_size=15,
-        border=4,
-    )
-    qr.add_data(qr_data)
-    qr.make(fit=True)
-
-    # Create QR code image with basic colors
-    qr_img = qr.make_image(
-        fill_color=vcard.qr_foreground_color if vcard.qr_foreground_color != '#000000' else 'black',
-        back_color=vcard.qr_background_color if vcard.qr_background_color != '#FFFFFF' else 'white'
-    )
-
-    # Convert to PIL Image for further processing
-    qr_img = qr_img.get_image()
-
-    # Add logo if exists
-    if vcard.qr_logo:
-        try:
-            logo = Image.open(vcard.qr_logo.path)
-
-            # Convert logo to RGB if necessary
-            if logo.mode != 'RGB':
-                logo = logo.convert('RGB')
-
-            # Calculate logo size (percentage of QR code size)
-            qr_width, qr_height = qr_img.size
-            logo_size = min(qr_width, qr_height) * (vcard.qr_logo_size / 100)
-
-            # Resize logo maintaining aspect ratio
-            logo.thumbnail((logo_size, logo_size), Image.Resampling.LANCZOS)
-
-            # Calculate position to center logo on QR code
-            pos = ((qr_width - logo.width) // 2, (qr_height - logo.height) // 2)
-
-            # Create a transparent background for the logo
-            logo_with_bg = Image.new('RGBA', qr_img.size, (0, 0, 0, 0))
-            logo_with_bg.paste(logo, pos)
-
-            # Convert QR code to RGBA
-            qr_img_rgba = qr_img.convert('RGBA')
-
-            # Composite the logo onto the QR code
-            qr_img = Image.alpha_composite(qr_img_rgba, logo_with_bg)
-
-        except Exception as e:
-            print(f"Error adding logo to QR code: {e}")
-
-    # Convert to base64 for display
-    buffer = BytesIO()
-    qr_img.save(buffer, format="PNG")
-    buffer.seek(0)
-    img_str = base64.b64encode(buffer.getvalue()).decode()
-
-    return render(request, 'vcard/qr_display.html', {
-        'vcard': vcard,
-        'qr_image': img_str,
-        'qr_data': qr_data
-    })

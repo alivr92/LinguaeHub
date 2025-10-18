@@ -79,7 +79,7 @@ class VCardPage(models.Model):
 
     def get_qr_code_data(self):
         from django.conf import settings
-        domain = getattr(settings, 'YOUR_DOMAIN', 'https://lingocept.com')
+        domain = getattr(settings, 'SITE_DOMAIN', 'https://lingocept.com')
         return f"{domain}{self.get_absolute_url()}?token={self.qr_code_secret}"
 
     def record_view(self):
